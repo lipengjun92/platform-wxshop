@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.platform.dao.ApiGoodsBargainMapper">
+
+    <resultMap type="com.platform.entity.GoodsBargainVo" id="goodsBargainMap">
+        <result property="id" column="id"/>
+        <result property="title" column="title"/>
+        <result property="item_pic_url" column="item_pic_url"/>
+        <result property="market_price" column="market_price"/>
+        <result property="goods_id" column="goods_id"/>
+        <result property="sort_order" column="sort_order"/>
+        <result property="subtitle" column="subtitle"/>
+        <result property="assist_count" column="assist_count"/>
+        <result property="retail_price" column="retail_price"/>
+    </resultMap>
+
+    <select id="queryObject" resultMap="goodsBargainMap">
+		select
+			a.`id`,
+			a.`title`,
+			a.`item_pic_url`,
+			b.`market_price`,
+			a.`goods_id`,
+			a.`sort_order`,
+			a.`subtitle`,
+			a.`assist_count`,
+            a.retail_price as retail_price
+		from nideshop_goods_bargain a
+		left join nideshop_goods b on b.id = a.goods_id
+		where a.id = #{id}
+	</select>
+
+    <select id="queryList" resultMap="goodsBargainMap">
+        select
+        a.`id`,
+        a.`title`,
+        a.`item_pic_url`,
+        b.`market_price`,
+        a.`goods_id`,
+        a.`sort_order`,
+        a.`subtitle`,
+        a.`assist_count`,
+        b.retail_price as retail_price
+        from nideshop_goods_bargain a
+        left join nideshop_goods b on b.id = a.goods_id
+        where 1 = 1
+        <if test="name != null and name.trim() != ''">
+            AND a.name LIKE concat('%',#{name},'%')
+        </if>
+        <choose>
+            <when test="sidx != null and sidx.trim() != ''">
+                order by ${sidx} ${order}
+            </when>
+            <otherwise>
+                order by a.id desc
+            </otherwise>
+        </choose>
+        <if test="offset != null and limit != null">
+            limit #{offset}, #{limit}
+        </if>
+    </select>
+
+    <select id="queryTotal" resultType="int">
+        select count(*) from nideshop_goods_bargain
+        WHERE 1=1
+        <if test="name != null and name.trim() != ''">
+            AND name LIKE concat('%',#{name},'%')
+        </if>
+    </select>
+</mapper>
