@@ -1,0 +1,1 @@
+export { default } from './src/category-box.vue';
