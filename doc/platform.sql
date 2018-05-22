@@ -3637,12 +3637,14 @@ INSERT INTO `sys_menu` VALUES ('27', '1', '系统参数', 'sys/config.html', 'sy
 INSERT INTO `sys_menu` VALUES ('28', '1', '代码生成器', 'sys/generator.html', 'sys:generator:list,sys:generator:code', '1', 'fa fa-rocket', '10', '0');
 INSERT INTO `sys_menu` VALUES ('29', '1', '系统日志', 'sys/log.html', 'sys:log:list', '1', 'fa fa-file-text-o', '8', '0');
 INSERT INTO `sys_menu` VALUES ('30', '1', '文件上传', 'sys/oss.html', 'sys:oss:all', '1', 'fa fa-file-image-o', '6', '0');
+INSERT INTO `sys_menu` VALUES ('31', '0', '功能测试', null, null, '0', 'fa fa-bug', '11', '0');
 INSERT INTO `sys_menu` VALUES ('200', '0', '会员管理', null, null, '0', 'fa fa-user-circle-o', '1', '0');
 INSERT INTO `sys_menu` VALUES ('201', '200', '会员管理', 'shop/shopuser.html', null, '1', 'fa fa-user-md', '1', '0');
 INSERT INTO `sys_menu` VALUES ('202', '201', '查看', null, 'user:list,user:info', '2', null, '0', '0');
 INSERT INTO `sys_menu` VALUES ('203', '201', '新增', null, 'user:save', '2', null, '0', '0');
 INSERT INTO `sys_menu` VALUES ('204', '201', '修改', null, 'user:update', '2', null, '0', '0');
 INSERT INTO `sys_menu` VALUES ('205', '201', '删除', null, 'user:delete', '2', null, '0', '0');
+INSERT INTO `sys_menu` VALUES ('206', '31', 'iviewDemo', 'test/iviewDemo.html', null, '1', 'fa fa-etsy', '0', '0');
 INSERT INTO `sys_menu` VALUES ('207', '200', '会员等级', 'shop/userlevel.html', null, '1', 'fa fa-star-o', '0', '1');
 INSERT INTO `sys_menu` VALUES ('208', '207', '查看', null, 'userlevel:list,userlevel:info', '2', null, '6', '0');
 INSERT INTO `sys_menu` VALUES ('209', '207', '新增', null, 'userlevel:save', '2', null, '6', '0');
@@ -3774,6 +3776,7 @@ INSERT INTO `sys_menu` VALUES ('357', '0', '编辑商品', null, null, '0', 'fa 
 INSERT INTO `sys_menu` VALUES ('358', '357', '商品回收站', 'shop/goodshistory.html', '', '1', 'fa fa-history', '12', '0');
 INSERT INTO `sys_menu` VALUES ('359', '358', '恢复', null, 'goods:back', '2', null, '0', '0');
 INSERT INTO `sys_menu` VALUES ('360', '294', '确认收货', null, 'order:confirm', '2', null, '0', '0');
+INSERT INTO `sys_menu` VALUES ('366', '0', 'CMS模块', null, null, '0', 'fa fa-leanpub', '6', '0');
 INSERT INTO `sys_menu` VALUES ('368', '1', '部门管理', 'sys/dept.html', null, '1', 'fa fa-sitemap', '3', '0');
 INSERT INTO `sys_menu` VALUES ('369', '368', '查看', null, 'sys:dept:list,sys:dept:info', '2', null, '0', '0');
 INSERT INTO `sys_menu` VALUES ('370', '368', '新增', null, 'sys:dept:save', '2', null, '0', '0');
@@ -3788,6 +3791,7 @@ INSERT INTO `sys_menu` VALUES ('378', '377', '删除', null, 'sys:region:delete'
 INSERT INTO `sys_menu` VALUES ('379', '377', '修改', '', 'sys:region:update', '2', null, '0', '0');
 INSERT INTO `sys_menu` VALUES ('380', '377', '新增', null, 'sys:region:save', '2', null, '0', '0');
 INSERT INTO `sys_menu` VALUES ('381', '377', '查看', null, 'sys:region:list,sys:region:info', '2', null, '0', '0');
+INSERT INTO `sys_menu` VALUES ('382', '31', 'swagger-ui.html', 'swagger-ui.html', '', '1', 'fa fa-code', '0', '0');
 -- ----------------------------
 -- Table structure for `sys_oss`
 -- ----------------------------

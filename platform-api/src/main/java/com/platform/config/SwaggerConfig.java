@@ -33,12 +33,12 @@ public class SwaggerConfig {
         @SuppressWarnings("deprecation")
         ApiInfo info=new ApiInfo(
                 "小程序接口文档",
-                "aaa",
-                "aa",
-                "a",
-                "cc",
-                "x",
-                "x");
+                "小程序接口文档",
+                "1.0",
+                "urn:tos",
+                "platform",
+                "Apache 2.0",
+                "http://www.apache.org/licenses/LICENSE-2.0");
         return info;
     }
 }
