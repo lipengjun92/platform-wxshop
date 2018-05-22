@@ -1,6 +1,6 @@
 package ${package}.entity;
 
-import java.com.Serializable;
+import java.io.Serializable;
 import java.util.Date;
 
 #if(${hasBigDecimal})
