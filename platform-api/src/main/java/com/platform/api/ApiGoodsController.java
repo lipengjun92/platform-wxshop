@@ -11,6 +11,10 @@ import com.platform.utils.Base64;
 import com.platform.utils.CharUtil;
 import com.platform.utils.DateUtils;
 import com.platform.utils.Query;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -23,6 +27,7 @@ import java.util.*;
  * 时间: 2017-08-11 08:32<br>
  * 描述: ApiIndexController <br>
  */
+@Api(tags = "商品管理")
 @RestController
 @RequestMapping("/api/goods")
 public class ApiGoodsController extends ApiBaseAction {
@@ -65,6 +70,7 @@ public class ApiGoodsController extends ApiBaseAction {
 
     /**
      */
+    @ApiOperation(value = "商品首页")
     @IgnoreAuth
     @RequestMapping("index")
     public Object index(@LoginUser UserVo loginUser) {
@@ -99,6 +105,9 @@ public class ApiGoodsController extends ApiBaseAction {
     /**
      * 商品详情页数据
      */
+    @ApiOperation(value = " 商品详情页数据")
+    @ApiImplicitParams({@ApiImplicitParam(name = "id",value = "商品id",paramType = "path",required = true),
+                        @ApiImplicitParam(name = "referrer",value = "商品referrer",paramType = "path",required = false)})
     @RequestMapping("detail")
     public Object detail(Integer id, Long referrer) {
         Map<String, Object> resultObj = new HashMap();

@@ -4,6 +4,8 @@ import com.platform.annotation.IgnoreAuth;
 import com.platform.entity.*;
 import com.platform.service.*;
 import com.platform.util.ApiBaseAction;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,6 +20,7 @@ import java.util.Map;
  * 时间: 2017-08-11 08:32<br>
  * 描述: ApiIndexController <br>
  */
+@Api(tags = "首页接口文档")
 @RestController
 @RequestMapping("/api/index")
 public class ApiIndexController extends ApiBaseAction {
@@ -39,6 +42,7 @@ public class ApiIndexController extends ApiBaseAction {
     /**
      * app首页
      */
+    @ApiOperation(value = "首页")
     @IgnoreAuth
     @RequestMapping("index")
     public Object index() {
