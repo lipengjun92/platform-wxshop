@@ -12,6 +12,7 @@ import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -35,11 +36,11 @@ public class ApiCatalogController extends ApiBaseAction {
      * 获取分类栏目数据
      */
     @ApiOperation(value = "获取分类栏目数据")
-    @ApiImplicitParams({@ApiImplicitParam(name="id",value = "id",paramType = "query",required = false),
-            @ApiImplicitParam(name="page",value = "page",paramType = "query",required = false),
-            @ApiImplicitParam(name="size",value = "size",paramType = "query",required = false)})
+    @ApiImplicitParams({@ApiImplicitParam(name = "id", value = "id", paramType = "query", required = false),
+            @ApiImplicitParam(name = "page", value = "page", paramType = "query", required = false),
+            @ApiImplicitParam(name = "size", value = "size", paramType = "query", required = false)})
     @IgnoreAuth
-    @RequestMapping("index")
+    @RequestMapping(value = "index", method = RequestMethod.GET)
     public Object index(@LoginUser UserVo loginUser, Integer id,
                         @RequestParam(value = "page", defaultValue = "1") Integer page,
                         @RequestParam(value = "size", defaultValue = "10") Integer size) {
@@ -57,7 +58,7 @@ public class ApiCatalogController extends ApiBaseAction {
         if (null != id) {
             currentCategory = categoryService.queryObject(id);
         }
-        if (null == currentCategory && null!= data && data.size() != 0) {
+        if (null == currentCategory && null != data && data.size() != 0) {
             currentCategory = data.get(0);
         } else {
             currentCategory = new CategoryVo();
@@ -77,9 +78,9 @@ public class ApiCatalogController extends ApiBaseAction {
     /**
      */
     @ApiOperation(value = "分类目录当前分类数据接口")
-    @ApiImplicitParams({@ApiImplicitParam(name = "id",value = "id",paramType = "query",required = false)})
+    @ApiImplicitParams({@ApiImplicitParam(name = "id", value = "id", paramType = "query", required = false)})
     @IgnoreAuth
-    @RequestMapping("current")
+    @RequestMapping(value = "current", method = RequestMethod.GET)
     public Object current(@LoginUser UserVo loginUser, Integer id) {
         Map<String, Object> resultObj = new HashMap();
         Map params = new HashMap();
