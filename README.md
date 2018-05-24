@@ -130,7 +130,7 @@
     
     如何交流、反馈、参与贡献？
     官方QQ群：66502035
-    git：https://github.com/lipengjun92/platform-wxshop
+    git：https://gitee.com/fuyang_lipengjun/platform
     如需获取项目最新源码，请Watch、Star项目，同时也是对项目最好的支持
     
 
