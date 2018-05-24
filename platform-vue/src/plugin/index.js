@@ -1,9 +1,5 @@
-import http from '../service/http'
-
 export default {
     install(Vue) {
-        Vue.prototype.$http = http;
-
         Vue.mixin({
             methods: {
                 goto(value) {
