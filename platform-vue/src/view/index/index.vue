@@ -14,28 +14,22 @@
           <img src="https://m.360buyimg.com/mobilecms/jfs/t15121/63/2237425096/226392/6edfe5f0/5a75436dN3b8b592d.gif">
         </div>
       </index-floor>
+      <index-floor title="人气推荐">
+        <special-cell
+        :data="item"
+        :key="key"
+        v-for="(item,key) in hotGoodsList"
+        ></special-cell>
+      </index-floor>
   </div>
 </template>
 
 <script>
-import { Swiper } from "vux";
+import { Swiper } from "vux"
+import {mapActions, mapGetters} from 'vuex'
 export default {
   data() {
     return {
-      swiperList: [
-        {
-          url: "javascript:",
-          img: "https://m.360buyimg.com/mobilecms/s720x352_jfs/t19276/304/389513185/183977/f36d6d4d/5a741970N23f736f7.jpg!q70.jpg.webp"
-        },
-        {
-          url: "javascript:",
-          img: "https://m.360buyimg.com/mobilecms/s1125x549_jfs/t17608/231/399707608/159479/4a4b1a18/5a741e56N7ce895e3.jpg!q70.jpg"
-        },
-        {
-          url: "javascript:",
-          img: "https://img1.360buyimg.com/da/jfs/t15598/303/1938712613/164594/35949b50/5a72d79aN022baba9.jpg"
-        }
-      ],
       fastNavList:[
         {
           name:'家居',
@@ -58,10 +52,24 @@ export default {
           icon:'&#xe605;'
         }
       ]
-    };
+    }
+  },
+  computed: {
+    ...mapGetters('home', [
+      'swiperList',
+      'hotGoodsList'
+    ])
   },
   components: {
     Swiper
+  },
+  methods: {
+    ...mapActions('home', [
+      'getHomeInfo'
+    ])
+  },
+  created () {
+    this.getHomeInfo()
   }
 };
 </script>

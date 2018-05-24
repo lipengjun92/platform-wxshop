@@ -1,12 +1,12 @@
 import axios from 'axios'
-import config from '../../../config'
+import conf from '../../config'
 import {requestInterceptor} from './request-interceptor'
 import {responseInterceptor} from './response-interceptor'
 
 
 axios.defaults.timeout = 10000;
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8';
-axios.defaults.baseURL = config.api();
+axios.defaults.baseURL = conf.api();
 
 
 axios.interceptors.request.use((req) => {
