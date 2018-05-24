@@ -11,6 +11,7 @@ import './assets/icon/index.css';
 import './assets/css/reset.css';
 import  { ToastPlugin } from 'vux'
 import './service/mock'
+import store from './vuex'
 
 Vue.use(components);
 Vue.use(plugin);
@@ -23,5 +24,6 @@ Vue.config.productionTip = false
 /* eslint-disable no-new */
 new Vue({
   router,
+  store,
   render: h => h(App)
 }).$mount('#app-box')
