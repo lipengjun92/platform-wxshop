@@ -152,3 +152,7 @@
 ![](https://meiping123.oss-cn-shenzhen.aliyuncs.com/upload/20180527/22444699ed154.png "美平超市")
 #### 便利主义超市
 ![](https://meiping123.oss-cn-shenzhen.aliyuncs.com/upload/20180527/224504351c5543.png "便利主义超市")
+#### 汽车人E车宝
+![](https://meiping123.oss-cn-shenzhen.aliyuncs.com/upload/20180527/2255451070f4e9.png "汽车人E车宝")
+#### 海数据在线
+![](https://meiping123.oss-cn-shenzhen.aliyuncs.com/upload/20180527/2258351416c462.jpg "海数据在线")
