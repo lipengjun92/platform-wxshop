@@ -61,7 +61,28 @@ page{
     font-size: 29rpx;
     color: #999;
 }
-
+.title-box{
+    width: 100%;
+    padding-top: 330rpx;
+    text-align: center;
+    font-size:28rpx;
+    color:#999;
+    background: url(http://image.meiping123.com/upload/20180104/1055343561cd30.png) no-repeat center 205rpx;
+    background-size: 100rpx auto;
+    margin-bottom: 50rpx;
+}
+.to-index-btn{
+    color:#fff;
+    background:#e64340;
+    border-radius:6px;
+    width:300rpx;
+    height: auto;
+    line-height: 70rpx;
+    text-align: center;
+    font-size:28rpx;
+    margin: 0 auto;
+    display: block;
+}
 
 .cart-view{
     width: 100%;
