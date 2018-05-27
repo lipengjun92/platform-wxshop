@@ -167,6 +167,11 @@ Page({
     }
 
   },
+  toIndexPage: function () {
+    wx.switchTab({
+      url: "/pages/index/index"
+    });
+  },
   updateCart: function (productId, goodsId, number, id) {
     let that = this;
 
