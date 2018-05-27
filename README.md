@@ -149,6 +149,6 @@
 
 ### 小程序客户案例
 #### 美平超市
-![](https://meiping123.oss-cn-shenzhen.aliyuncs.com/upload/20180527/22324382435684.jpg "美平超市")
+![](https://meiping123.oss-cn-shenzhen.aliyuncs.com/upload/20180527/22444699ed154.png "美平超市")
 #### 便利主义超市
-![](https://meiping123.oss-cn-shenzhen.aliyuncs.com/upload/20180527/2231283403399b.jpg "便利主义超市")
+![](https://meiping123.oss-cn-shenzhen.aliyuncs.com/upload/20180527/224504351c5543.png "便利主义超市")
