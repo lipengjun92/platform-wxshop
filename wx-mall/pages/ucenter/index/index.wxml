@@ -75,7 +75,7 @@
       </navigator>
     </view>
     <view class="item item-bottom">
-      <navigator url="/pages/auth/mobile" class="a">
+      <navigator url="/pages/auth/mobile/mobile" class="a">
         <text class="icon phone"></text>
         <text class="txt">绑定手机</text>
       </navigator>
