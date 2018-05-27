@@ -146,3 +146,9 @@
 ![](http://image.meiping123.com/upload/20180413/114828132c9d85.png "小程序首页")
 ### VUE页面
 ![](http://image.meiping123.com/upload/20180413/1148416407a795.png "VUE页面")
+
+### 小程序客户案例
+#### 美平超市
+![](https://meiping123.oss-cn-shenzhen.aliyuncs.com/upload/20180527/22324382435684.jpg "美平超市")
+#### 便利主义超市
+![](https://meiping123.oss-cn-shenzhen.aliyuncs.com/upload/20180527/2231283403399b.jpg "便利主义超市")
