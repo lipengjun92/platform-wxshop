@@ -9,13 +9,13 @@ const api = require('../config/api.js');
 /**
  * 调用微信登录
  */
-function loginByWeixin() {
+function loginByWeixin(userInfo) {
 
   let code = null;
   return new Promise(function (resolve, reject) {
     return util.login().then((res) => {
       code = res.code;
-      return util.getUserInfo();
+      return userInfo;
     }).then((userInfo) => {
       //登录远程服务器
       util.request(api.AuthLoginByWeixin, { code: code, userInfo: userInfo }, 'POST').then(res => {
