@@ -61,4 +61,6 @@ module.exports = {
     FootprintDelete: NewApiRootUrl + 'footprint/delete',  //删除足迹
     
     FeedbackAdd: NewApiRootUrl + 'feedback/save', //添加反馈
+    SmsCode: NewApiRootUrl + 'user/smscode', //发送短信
+    BindMobile: NewApiRootUrl + 'user/bindMobile', //绑定手机
 };

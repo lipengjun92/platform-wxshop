@@ -32,26 +32,6 @@ public class ApiUserController extends ApiBaseAction {
     private SysConfigService sysConfigService;
 
     /**
-     */
-    @IgnoreAuth
-    @RequestMapping("info")
-    public Object info(@LoginUser UserVo loginUser, String mobile) {
-        Map param = new HashMap();
-        param.put("mobile", mobile);
-        UserVo user = userService.queryByMobile(mobile);
-        user.setPassword("");
-        return user;
-    }
-
-    /**
-     * 保存用户头像
-     */
-    @RequestMapping("saveAvatar")
-    public Object saveAvatar(@LoginUser UserVo loginUser, String avatar) {
-        return null;
-    }
-
-    /**
      * 发送短信
      */
     @RequestMapping("smscode")
@@ -67,7 +47,6 @@ public class ApiUserController extends ApiBaseAction {
         String sms_code = CharUtil.getRandomNum(4);
         String msgContent = "您的验证码是：" + sms_code + "，请在页面中提交验证码完成验证。";
         // 发送短信
-//        String rpt = "0";
         String result = "";
         //获取云存储配置信息
         SmsConfig config = sysConfigService.getConfigObject(ConfigConstant.SMS_CONFIG_KEY, SmsConfig.class);
@@ -118,5 +97,20 @@ public class ApiUserController extends ApiBaseAction {
     public Object getUserLevel(@LoginUser UserVo loginUser) {
         String userLevel = userService.getUserLevel(loginUser);
         return toResponsSuccess(userLevel);
+    }
+
+    /**
+     * 绑定手机
+     */
+    @RequestMapping("bindMobile")
+    public Object bindMobile(@LoginUser UserVo loginUser) {
+        JSONObject jsonParams = getJsonRequest();
+        SmsLogVo smsLogVo = userService.querySmsCodeByUserId(loginUser.getUserId());
+
+        String mobile_code = jsonParams.getString("mobile_code");
+        if (!mobile_code.equals(smsLogVo.getSms_code())) {
+            return toResponsFail("手机绑定失败");
+        }
+        return toResponsSuccess("手机绑定成功");
     }
 }

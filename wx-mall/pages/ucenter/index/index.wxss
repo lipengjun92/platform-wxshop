@@ -130,6 +130,10 @@ page{
     background: url(http://yanxuan.nosdn.127.net/hxm/yanxuan-wap/p/20161201/style/img/sprites/ucenter-sdf6a55ee56-f2c2b9c2f0.png) 0 -125rpx no-repeat;
     background-size: 52.803rpx;
 }
+.user-menu .icon.phone{
+    background: url(http://meiping123.oss-cn-shenzhen.aliyuncs.com/upload/20180528/15080098639823.png) no-repeat;
+    background-size: 52.803rpx;
+}
 
 
 .user-menu .txt{
