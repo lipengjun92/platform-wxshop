@@ -38,29 +38,17 @@ function request(url, data = {}, method = "GET") {
 
           if (res.data.errno == 401) {
             //需要登录后才可以操作
-
-            let code = null;
-            return login().then((res) => {
-              code = res.code;
-              return getUserInfo();
-            }).then((userInfo) => {
-              //登录远程服务器
-              request(api.AuthLoginByWeixin, { code: code, userInfo: userInfo }, 'POST').then(res => {
-                if (res.errno === 0) {
-                  //存储用户信息
-                  wx.setStorageSync('userInfo', res.data.userInfo);
-                  wx.setStorageSync('token', res.data.token);
-                  
-                  resolve(res);
-                } else {
-                  reject(res);
+            wx.showModal({
+                title: '',
+                content: '请先登录',
+                success: function (res){
+                    if (res.confirm) {
+                        wx.switchTab({
+                            url: '/pages/ucenter/index/index'
+                        });
+                    }
                 }
-              }).catch((err) => {
-                reject(err);
-              });
-            }).catch((err) => {
-              reject(err);
-            })
+            });
           } else {
             resolve(res.data);
           }
@@ -115,21 +103,6 @@ function login() {
   });
 }
 
-function getUserInfo() {
-  return new Promise(function (resolve, reject) {
-    wx.getUserInfo({
-      withCredentials: true,
-      success: function (res) {
-        console.log(res)
-        resolve(res);
-      },
-      fail: function (err) {
-        reject(err);
-      }
-    })
-  });
-}
-
 function redirect(url) {
 
   //判断页面是否需要登录
@@ -159,7 +132,6 @@ module.exports = {
   showErrorToast,
   checkSession,
   login,
-  getUserInfo,
 }
 
 
