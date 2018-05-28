@@ -38,16 +38,21 @@ Page({
     onUnload: function () {
         // 页面关闭
     },
-    goLogin() {
-        user.loginByWeixin().then(res => {
-            this.setData({
-                userInfo: res.data.userInfo
+    bindGetUserInfo(e) {
+        if (e.detail.userInfo){
+            //用户按了允许授权按钮
+            user.loginByWeixin(e.detail).then(res => {
+                this.setData({
+                    userInfo: res.data.userInfo
+                });
+                app.globalData.userInfo = res.data.userInfo;
+                app.globalData.token = res.data.token;
+            }).catch((err) => {
+                console.log(err)
             });
-            app.globalData.userInfo = res.data.userInfo;
-            app.globalData.token = res.data.token;
-        }).catch((err) => {
-            console.log(err)
-        });
+        } else {
+            //用户按了拒绝按钮
+        }
     },
     exitLogin: function () {
         wx.showModal({
