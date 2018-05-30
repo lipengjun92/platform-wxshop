@@ -39,7 +39,7 @@ Page({
     }
 
     wx.request({
-      url: api.ApiRootUrl + 'auth/login',
+      url: api.Login,
       data: {
         username: that.data.username,
         password: that.data.password
