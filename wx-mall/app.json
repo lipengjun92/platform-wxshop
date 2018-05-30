@@ -33,7 +33,6 @@
     "pages/goods/goods",
     "pages/topicDetail/topicDetail",
     "pages/auth/mobile/mobile",
-    "pages/ucenter/coupon/coupon",
     "pages/ucenter/level/level"
   ],
   "window": {
