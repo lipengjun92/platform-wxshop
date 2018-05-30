@@ -50,7 +50,7 @@ Page({
     }
 
     wx.request({
-      url: api.ApiRootUrl + 'auth/register',
+      url: api.Register,
       data: {
         username: that.data.username,
         password: that.data.password

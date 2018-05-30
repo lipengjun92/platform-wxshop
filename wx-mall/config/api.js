@@ -1,5 +1,5 @@
-var NewApiRootUrl = 'http://fly2you.cn/admin/api/';
-// var NewApiRootUrl = 'http://localhost:8080/api/';
+// var NewApiRootUrl = 'https://47.100.0.48/admin/api/';
+var NewApiRootUrl = 'http://localhost:8180/api/';
 
 module.exports = {
     IndexUrl: NewApiRootUrl + 'index/index', //首页数据接口
@@ -63,4 +63,6 @@ module.exports = {
     FeedbackAdd: NewApiRootUrl + 'feedback/save', //添加反馈
     SmsCode: NewApiRootUrl + 'user/smscode', //发送短信
     BindMobile: NewApiRootUrl + 'user/bindMobile', //绑定手机
+    Login: NewApiRootUrl + 'auth/login', //账号登录
+    Register: NewApiRootUrl + 'auth/register', //注册
 };
