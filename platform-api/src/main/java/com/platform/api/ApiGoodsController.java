@@ -85,8 +85,10 @@ public class ApiGoodsController extends ApiBaseAction {
     }
 
     /**
-     * 获取sku信息，用于购物车编辑时选择规格
+     * 获取商品规格信息，用于购物车编辑时选择规格
      */
+    @ApiOperation(value = " 获取商品规格信息")
+    @ApiImplicitParams({@ApiImplicitParam(name = "id", value = "商品id", paramType = "path", required = true)})
     @IgnoreAuth
     @RequestMapping(value = "sku", method = RequestMethod.GET)
     public Object sku(@LoginUser UserVo loginUser, Integer id) {
@@ -270,6 +272,8 @@ public class ApiGoodsController extends ApiBaseAction {
     /**
      * 　获取分类下的商品
      */
+    @ApiOperation(value = " 获取分类下的商品")
+    @ApiImplicitParams({@ApiImplicitParam(name = "id", value = "分类id", paramType = "path", required = true)})
     @IgnoreAuth
     @RequestMapping(value = "category", method = RequestMethod.GET)
     public Object category(@LoginUser UserVo loginUser, Integer id) {
@@ -291,6 +295,11 @@ public class ApiGoodsController extends ApiBaseAction {
     /**
      * 　　获取商品列表
      */
+    @ApiOperation(value = "获取商品列表")
+    @ApiImplicitParams({@ApiImplicitParam(name = "categoryId", value = "分类id", paramType = "path", required = true),
+            @ApiImplicitParam(name = "brandId", value = "品牌Id", paramType = "path", required = true),
+            @ApiImplicitParam(name = "isNew", value = "新商品", paramType = "path", required = true),
+            @ApiImplicitParam(name = "isHot", value = "热卖商品", paramType = "path", required = true)})
     @IgnoreAuth
     @RequestMapping(value = "list", method = RequestMethod.GET)
     public Object list(@LoginUser UserVo loginUser, Integer categoryId,
