@@ -32,8 +32,7 @@
     "pages/shopping/addressAdd/addressAdd",
     "pages/goods/goods",
     "pages/topicDetail/topicDetail",
-    "pages/auth/mobile/mobile",
-    "pages/ucenter/level/level"
+    "pages/auth/mobile/mobile"
   ],
   "window": {
     "backgroundTextStyle": "dark",

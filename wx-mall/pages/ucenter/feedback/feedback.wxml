@@ -18,7 +18,7 @@
     <view class="mobile-box">
       <input class="mobile" maxlength="11" type="number" placeholder="方便我们与你联系" bindinput ="mobileInput" value="{{mobile}}"/>
       <!--
-      <image class="clear-icon" src="http://yanxuan.nosdn.127.net/hxm/yanxuan-wap/p/20161201/style/img/icon-normal/clear-fb-dd9d604f86.png" bindtap="cleanMobile"></image>
+      <image class="clear-icon" src="http://p9kyr79ne.bkt.clouddn.com/1/20180531/150647657fcdd0.png" bindtap="cleanMobile"></image>
       -->
     </view>
   </view>

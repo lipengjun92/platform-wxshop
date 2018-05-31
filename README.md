@@ -157,24 +157,26 @@
 
 
 ### 登录页面
-![](http://image.meiping123.com/upload/20180413/1146147845f6e4.png "登录")
+![](http://p9kyr79ne.bkt.clouddn.com/1/20180531/14570217019439.png "登录")
 ### 首页
-![](http://image.meiping123.com/upload/20180413/1147025253e40d.png "首页")
+![](http://p9kyr79ne.bkt.clouddn.com/1/20180531/1457352514f28b.png "首页")
 ### 发送短信
-![](http://image.meiping123.com/upload/20180413/1147169100e836.png "发送短信")
+![](http://p9kyr79ne.bkt.clouddn.com/1/20180531/145757629f5361.png "发送短信")
 ### 捐赠
-![](http://image.meiping123.com/upload/20180413/114740282ff88f.png "捐赠")
+![](http://p9kyr79ne.bkt.clouddn.com/1/20180531/145823816a2fe9.png "捐赠")
 ### 小程序首页
-![](http://image.meiping123.com/upload/20180413/114828132c9d85.png "小程序首页")
+![](http://p9kyr79ne.bkt.clouddn.com/1/20180531/145850738226e8.png "小程序首页")
+### 小程序并联手机
+![](http://p9kyr79ne.bkt.clouddn.com/1/20180531/145615428ad3f.png "并联手机")
 ### VUE页面
-![](http://image.meiping123.com/upload/20180413/1148416407a795.png "VUE页面")
+![](http://p9kyr79ne.bkt.clouddn.com/1/20180531/14592343205eec.png "VUE页面")
 
 ### 小程序客户案例
 #### 美平超市
-![](https://meiping123.oss-cn-shenzhen.aliyuncs.com/upload/20180527/22444699ed154.png "美平超市")
+![](http://p9kyr79ne.bkt.clouddn.com/1/20180531/145949515b6f7c.png "美平超市")
 #### 便利主义超市
-![](https://meiping123.oss-cn-shenzhen.aliyuncs.com/upload/20180527/224504351c5543.png "便利主义超市")
+![](http://p9kyr79ne.bkt.clouddn.com/1/20180531/150000826e2864.png "便利主义超市")
 #### 汽车人E车宝
-![](https://meiping123.oss-cn-shenzhen.aliyuncs.com/upload/20180527/2255451070f4e9.png "汽车人E车宝")
+![](http://p9kyr79ne.bkt.clouddn.com/1/20180531/15001446746217.png "汽车人E车宝")
 #### 海数据在线
-![](https://meiping123.oss-cn-shenzhen.aliyuncs.com/upload/20180527/2258351416c462.jpg "海数据在线")
+![](http://p9kyr79ne.bkt.clouddn.com/1/20180531/15002693223b35.jpg "海数据在线")
