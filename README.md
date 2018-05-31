@@ -1,4 +1,4 @@
-    致力打造通用综合管理平台
+    微信小程序商城（Java版）
 
     技术选型
     1、后端使用技术
@@ -14,6 +14,7 @@
         alisms1.0
         quartz2.2.3
         mysql5.1.39
+        swagger2.4
         
     前端使用技术
         Vue2.5.1
@@ -115,23 +116,45 @@
                 安全起见，需配置有效IP地址。platform.properties -> sms.validIp
 		
 
-
-    注意
-    若使用微信支付，请下载证书放入platform-shop/src/main/resources/cert/目录下
-    apiclient_cert.p12
-    apiclient_cert.pem
-    apiclient_key.pem
-    rootca.pem
-    
     后台管理项目演示
     演示地址：http://47.100.0.48
     账号密码：admin/admin
     
     如何交流、反馈、参与贡献？
     官方QQ群：66502035
-    git：https://github.com/lipengjun92/platform-wxshop
+    git：https://gitee.com/fuyang_lipengjun/platform
     如需获取项目最新源码，请Watch、Star项目，同时也是对项目最好的支持
     
+
+#### 安装教程
+
+1. 配置环境（推荐jdk1.8、maven3.3、tomcat8、mysql5.7）
+2. 创建数据库
+3. 初始化sql脚本 /doc/platform.sql
+4. 导入项目到IDE中
+5. 导入支付证书至/platform-shop/src/main/resources/cert/目录下
+5. 修改配置文件 /platform-admin/src/main/resources/dev/platform.properties
+
+        jdbc.url
+        jdbc.username
+        jdbc.password
+        小程序ID
+        wx.appId
+        小程序密钥
+        wx.secret
+        商户号
+        wx.mchId
+        支付签名
+        wx.paySignKey
+        支付回调地址
+        wx.notifyUrl
+        短信接口有效IP
+        sms.validIp
+6. 启动后台项目
+7. 打开微信开发者工具
+8. 导入 /wx-mall填写appId
+9. 修改 /wx-mall/config/app.js里NewApiRootUrl的值
+
 
 ### 登录页面
 ![](http://image.meiping123.com/upload/20180413/1146147845f6e4.png "登录")
@@ -145,3 +168,13 @@
 ![](http://image.meiping123.com/upload/20180413/114828132c9d85.png "小程序首页")
 ### VUE页面
 ![](http://image.meiping123.com/upload/20180413/1148416407a795.png "VUE页面")
+
+### 小程序客户案例
+#### 美平超市
+![](https://meiping123.oss-cn-shenzhen.aliyuncs.com/upload/20180527/22444699ed154.png "美平超市")
+#### 便利主义超市
+![](https://meiping123.oss-cn-shenzhen.aliyuncs.com/upload/20180527/224504351c5543.png "便利主义超市")
+#### 汽车人E车宝
+![](https://meiping123.oss-cn-shenzhen.aliyuncs.com/upload/20180527/2255451070f4e9.png "汽车人E车宝")
+#### 海数据在线
+![](https://meiping123.oss-cn-shenzhen.aliyuncs.com/upload/20180527/2258351416c462.jpg "海数据在线")

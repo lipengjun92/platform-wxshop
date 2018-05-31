@@ -11,8 +11,13 @@ import com.platform.utils.Base64;
 import com.platform.utils.CharUtil;
 import com.platform.utils.DateUtils;
 import com.platform.utils.Query;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -23,6 +28,7 @@ import java.util.*;
  * 时间: 2017-08-11 08:32<br>
  * 描述: ApiIndexController <br>
  */
+@Api(tags = "商品管理")
 @RestController
 @RequestMapping("/api/goods")
 public class ApiGoodsController extends ApiBaseAction {
@@ -65,8 +71,9 @@ public class ApiGoodsController extends ApiBaseAction {
 
     /**
      */
+    @ApiOperation(value = "商品首页")
     @IgnoreAuth
-    @RequestMapping("index")
+    @RequestMapping(value = "index", method = RequestMethod.GET)
     public Object index(@LoginUser UserVo loginUser) {
         //
         Map param = new HashMap();
@@ -81,7 +88,7 @@ public class ApiGoodsController extends ApiBaseAction {
      * 获取sku信息，用于购物车编辑时选择规格
      */
     @IgnoreAuth
-    @RequestMapping("sku")
+    @RequestMapping(value = "sku", method = RequestMethod.GET)
     public Object sku(@LoginUser UserVo loginUser, Integer id) {
         Map<String, Object> resultObj = new HashMap();
         //
@@ -99,7 +106,10 @@ public class ApiGoodsController extends ApiBaseAction {
     /**
      * 商品详情页数据
      */
-    @RequestMapping("detail")
+    @ApiOperation(value = " 商品详情页数据")
+    @ApiImplicitParams({@ApiImplicitParam(name = "id", value = "商品id", paramType = "path", required = true),
+            @ApiImplicitParam(name = "referrer", value = "商品referrer", paramType = "path", required = false)})
+    @RequestMapping(value = "detail", method = RequestMethod.GET)
     public Object detail(Integer id, Long referrer) {
         Map<String, Object> resultObj = new HashMap();
         //
@@ -261,7 +271,7 @@ public class ApiGoodsController extends ApiBaseAction {
      * 　获取分类下的商品
      */
     @IgnoreAuth
-    @RequestMapping("category")
+    @RequestMapping(value = "category", method = RequestMethod.GET)
     public Object category(@LoginUser UserVo loginUser, Integer id) {
         Map<String, Object> resultObj = new HashMap();
         //
@@ -282,7 +292,7 @@ public class ApiGoodsController extends ApiBaseAction {
      * 　　获取商品列表
      */
     @IgnoreAuth
-    @RequestMapping("list")
+    @RequestMapping(value = "list", method = RequestMethod.GET)
     public Object list(@LoginUser UserVo loginUser, Integer categoryId,
                        Integer brandId, String keyword, Integer isNew, Integer isHot,
                        @RequestParam(value = "page", defaultValue = "1") Integer page, @RequestParam(value = "size", defaultValue = "10") Integer size,
@@ -389,7 +399,7 @@ public class ApiGoodsController extends ApiBaseAction {
      * 　　商品列表筛选的分类列表
      */
     @IgnoreAuth
-    @RequestMapping("filter")
+    @RequestMapping(value = "filter", method = RequestMethod.GET)
     public Object filter(@LoginUser UserVo loginUser, Integer categoryId,
                          String keyword, Integer isNew, Integer isHot) {
         Map params = new HashMap();
@@ -444,7 +454,7 @@ public class ApiGoodsController extends ApiBaseAction {
      * 　　新品首发
      */
     @IgnoreAuth
-    @RequestMapping("new")
+    @RequestMapping(value = "new", method = RequestMethod.GET)
     public Object newAction(@LoginUser UserVo loginUser) {
         Map<String, Object> resultObj = new HashMap();
         Map bannerInfo = new HashMap();
@@ -459,7 +469,7 @@ public class ApiGoodsController extends ApiBaseAction {
      * 　　人气推荐
      */
     @IgnoreAuth
-    @RequestMapping("hot")
+    @RequestMapping(value = "hot", method = RequestMethod.GET)
     public Object hot(@LoginUser UserVo loginUser) {
         Map<String, Object> resultObj = new HashMap();
         Map bannerInfo = new HashMap();
@@ -474,7 +484,7 @@ public class ApiGoodsController extends ApiBaseAction {
      * 　　商品详情页的大家都在看的商品
      */
     @IgnoreAuth
-    @RequestMapping("related")
+    @RequestMapping(value = "related", method = RequestMethod.GET)
     public Object related(@LoginUser UserVo loginUser, Integer id) {
         Map<String, Object> resultObj = new HashMap();
         Map param = new HashMap();
@@ -510,7 +520,7 @@ public class ApiGoodsController extends ApiBaseAction {
      * 　　在售的商品总数
      */
     @IgnoreAuth
-    @RequestMapping("count")
+    @RequestMapping(value = "count", method = RequestMethod.GET)
     public Object count(@LoginUser UserVo loginUser) {
         Map<String, Object> resultObj = new HashMap();
         Map param = new HashMap();
@@ -525,7 +535,7 @@ public class ApiGoodsController extends ApiBaseAction {
      * 　　获取商品列表
      */
     @IgnoreAuth
-    @RequestMapping("productlist")
+    @RequestMapping(value = "productlist", method = RequestMethod.GET)
     public Object productlist(@LoginUser UserVo loginUser, Integer categoryId,
                               Integer isNew, Integer discount,
                               @RequestParam(value = "page", defaultValue = "1") Integer page, @RequestParam(value = "size", defaultValue = "10") Integer size,

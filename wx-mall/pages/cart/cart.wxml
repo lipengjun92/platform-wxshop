@@ -6,8 +6,12 @@
   </view>
   <view class="no-cart" wx:if="{{cartGoods.length <= 0}}">
     <view class="c">
-      <image src="http://nos.netease.com/mailpub/hxm/yanxuan-wap/p/20150730/style/img/icon-normal/noCart-a8fe3f12e5.png" />
-      <text>去添加点什么吧</text>
+      <view class="title-box">
+        购物车空空如也～
+      </view>
+      <view class="to-index-btn" bindtap="toIndexPage">
+        去逛逛
+      </view>
     </view>
   </view>
   <view class="cart-view" wx:if="{{cartGoods.length > 0}}">

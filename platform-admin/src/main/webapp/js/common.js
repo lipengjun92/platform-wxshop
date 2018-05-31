@@ -51,6 +51,10 @@ window.alert = function (msg, callback) {
 
 //重写confirm式样框
 window.confirm = function (msg, callback) {
+    //如果没有定义回调函数，直接返回true
+    if (!callback) {
+        return true;
+    }
     layer.confirm(msg, {
             skin: 'layui-layer-molv', btn: ['确定', '取消']
         },
