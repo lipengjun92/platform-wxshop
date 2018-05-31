@@ -8,7 +8,11 @@ import com.platform.util.ApiBaseAction;
 import com.platform.util.ApiPageUtils;
 import com.platform.utils.DateUtils;
 import com.platform.utils.Query;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -28,7 +32,9 @@ public class ApiFootprintController extends ApiBaseAction {
 
     /**
      */
-    @RequestMapping("delete")
+    @ApiOperation(value = "删除足迹")
+    @ApiImplicitParams({@ApiImplicitParam(name = "footprintId", value = "足迹id", paramType = "path", required = true)})
+    @GetMapping("delete")
     public Object delete(@LoginUser UserVo loginUser, Integer footprintId) {
         if (footprintId == null) {
             return toResponsFail("删除出错");
@@ -50,7 +56,8 @@ public class ApiFootprintController extends ApiBaseAction {
 
     /**
      */
-    @RequestMapping("list")
+    @ApiOperation(value = "获取足迹列表")
+    @GetMapping("list")
     public Object list(@LoginUser UserVo loginUser,
                        @RequestParam(value = "page", defaultValue = "1") Integer page,
                        @RequestParam(value = "size", defaultValue = "10") Integer size) {
@@ -76,6 +83,7 @@ public class ApiFootprintController extends ApiBaseAction {
              * 返回0 表示：o1和o2相等，
              * 返回正数表示：o1大于o2。
              */
+            @Override
             public int compare(String o1, String o2) {
 
                 //指定排序器按照降序排列
