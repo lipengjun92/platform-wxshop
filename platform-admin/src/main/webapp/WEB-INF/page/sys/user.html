@@ -11,6 +11,7 @@
             <i-col span="4">
                 <i-input v-model="q.username" @on-enter="query" placeholder="用户名"/>
             </i-col>
+            <div class="buttons-group">
             <i-button @click="query">查询</i-button>
             #if($shiro.hasPermission("sys:user:save"))
             <i-button type="info" @click="add"><i class="fa fa-plus"></i>&nbsp;新增</i-button>
@@ -21,6 +22,7 @@
             #if($shiro.hasPermission("sys:user:delete"))
             <i-button type="error" @click="del"><i class="fa fa-trash-o"></i>&nbsp;删除</i-button>
             #end
+                </div>
         </Row>
         <table id="jqGrid"></table>
         <div id="jqGridPager"></div>

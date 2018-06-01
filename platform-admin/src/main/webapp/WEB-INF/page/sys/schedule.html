@@ -11,6 +11,7 @@
             <i-col span="4">
                 <i-input v-model="q.beanName" @on-enter="query" placeholder="bean名称"/>
             </i-col>
+            <div class="buttons-group">
             <i-button @click="query">查询</i-button>
             #if($shiro.hasPermission("sys:schedule:save"))
             <i-button type="info" @click="add"><i class="fa fa-plus"></i>&nbsp;新增</i-button>
@@ -33,6 +34,7 @@
             #if($shiro.hasPermission("sys:schedule:log"))
             <a class="btn btn-primary" style="float:right;" href="schedule_log.html">日志列表</a>
             #end
+                </div>
         </Row>
         <table id="jqGrid"></table>
         <div id="jqGridPager"></div>

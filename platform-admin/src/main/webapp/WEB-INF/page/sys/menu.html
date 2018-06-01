@@ -8,6 +8,7 @@
 <div id="rrapp" v-cloak>
     <div v-show="showList">
         <Row :gutter="16">
+            <div class="buttons-group">
             &nbsp;&nbsp;
             <i-button type="ghost" @click="reload"><i class="fa fa-refresh"></i>&nbsp;刷新</i-button>
             #if($shiro.hasPermission("sys:menu:save"))
@@ -19,6 +20,7 @@
             #if($shiro.hasPermission("sys:menu:delete"))
             <i-button type="error" @click="del"><i class="fa fa-trash-o"></i>&nbsp;删除</i-button>
             #end
+                </div>
         </Row>
         <table id="jqGrid"></table>
         <div id="jqGridPager"></div>
