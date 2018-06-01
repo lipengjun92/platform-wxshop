@@ -12,9 +12,11 @@
                 <i-input v-model="q.name" @on-enter="query" placeholder="名称"/>
             </i-col>
             <i-button @click="query">查询</i-button>
-            #if($shiro.hasPermission("goods:back"))
-            <i-button type="warning" @click="back"><i class="fa fa-pencil-square-o"></i>&nbsp;恢复</i-button>
-            #end
+            <div class="buttons-group">
+                #if($shiro.hasPermission("goods:back"))
+                <i-button type="warning" @click="back"><i class="fa fa-pencil-square-o"></i>&nbsp;恢复</i-button>
+                #end
+            </div>
         </Row>
         <table id="jqGrid"></table>
         <div id="jqGridPager"></div>

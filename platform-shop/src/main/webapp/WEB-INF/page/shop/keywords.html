@@ -6,29 +6,31 @@
 </head>
 <body>
 <div id="rrapp" v-cloak>
-	<div v-show="showList">
+    <div v-show="showList">
         <Row :gutter="16">
             <i-col span="4">
                 <i-input v-model="q.keyword" @on-enter="query" placeholder="关键词"/>
             </i-col>
             <i-button @click="query">查询</i-button>
-			#if($shiro.hasPermission("keywords:save"))
-            <i-button type="info" @click="add"><i class="fa fa-plus"></i>&nbsp;新增</i-button>
-			#end
-			#if($shiro.hasPermission("keywords:update"))
-            <i-button type="warning" @click="update"><i class="fa fa-pencil-square-o"></i>&nbsp;修改</i-button>
-			#end
-			#if($shiro.hasPermission("keywords:delete"))
-            <i-button type="error" @click="del"><i class="fa fa-trash-o"></i>&nbsp;删除</i-button>
-			#end
+            <div class="buttons-group">
+                #if($shiro.hasPermission("keywords:save"))
+                <i-button type="info" @click="add"><i class="fa fa-plus"></i>&nbsp;新增</i-button>
+                #end
+                #if($shiro.hasPermission("keywords:update"))
+                <i-button type="warning" @click="update"><i class="fa fa-pencil-square-o"></i>&nbsp;修改</i-button>
+                #end
+                #if($shiro.hasPermission("keywords:delete"))
+                <i-button type="error" @click="del"><i class="fa fa-trash-o"></i>&nbsp;删除</i-button>
+                #end
+            </div>
         </Row>
-	    <table id="jqGrid"></table>
-	    <div id="jqGridPager"></div>
+        <table id="jqGrid"></table>
+        <div id="jqGridPager"></div>
     </div>
 
     <Card v-show="!showList">
         <p slot="title">{{title}}</p>
-		<i-form ref="formValidate" :model="keywords" :rules="ruleValidate" :label-width="80">
+        <i-form ref="formValidate" :model="keywords" :rules="ruleValidate" :label-width="80">
             <Form-item label="关键词" prop="keyword">
                 <i-input v-model="keywords.keyword" placeholder="关键词"/>
             </Form-item>
@@ -85,7 +87,7 @@
                 <i-button type="ghost" @click="handleReset('formValidate')" style="margin-left: 8px">重置</i-button>
             </Form-item>
         </i-form>
-	</Card>
+    </Card>
 </div>
 
 <script src="${rc.contextPath}/js/shop/keywords.js?_${date.systemTime}"></script>

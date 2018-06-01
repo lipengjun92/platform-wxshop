@@ -21,9 +21,11 @@
             <!--#if($shiro.hasPermission("usercoupon:update"))-->
             <!--<i-button type="warning" @click="update"><i class="fa fa-pencil-square-o"></i>&nbsp;修改</i-button>-->
             <!--#end-->
-            #if($shiro.hasPermission("usercoupon:delete"))
-            <i-button type="error" @click="del"><i class="fa fa-trash-o"></i>&nbsp;删除</i-button>
-            #end
+            <div class="buttons-group">
+                #if($shiro.hasPermission("usercoupon:delete"))
+                <i-button type="error" @click="del"><i class="fa fa-trash-o"></i>&nbsp;删除</i-button>
+                #end
+            </div>
         </Row>
         <table id="jqGrid"></table>
         <div id="jqGridPager"></div>
