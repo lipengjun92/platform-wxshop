@@ -50,10 +50,12 @@
 <div id="rrapp" v-cloak>
     <div v-show="showList">
         <Row :gutter="16">
-            <i-col span="4">
-                <i-input v-model="q.name" @on-enter="query" placeholder="名称"/>
-            </i-col>
-            <i-button @click="query">查询</i-button>
+            <div class="search-group">
+                <i-col span="4">
+                    <i-input v-model="q.name" @on-enter="query" placeholder="名称"/>
+                </i-col>
+                <i-button @click="query">查询</i-button>
+            </div>
             <div class="buttons-group">
                 #if($shiro.hasPermission("goods:save"))
                 <i-button type="info" @click="add"><i class="fa fa-plus"></i>&nbsp;新增</i-button>
