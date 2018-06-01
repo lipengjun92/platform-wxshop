@@ -8,13 +8,15 @@
 <div id="rrapp" v-cloak>
     <div v-show="showList">
         <Row :gutter="16">
-            <i-col span="4">
-                <i-input v-model="q.userName" @on-enter="query" placeholder="会员"/>
-            </i-col>
-            <i-col span="4">
-                <i-input v-model="q.couponName" @on-enter="query" placeholder="优惠劵"/>
-            </i-col>
-            <i-button @click="query">查询</i-button>
+            <div class="search-group">
+                <i-col span="4">
+                    <i-input v-model="q.userName" @on-enter="query" placeholder="会员"/>
+                </i-col>
+                <i-col span="4">
+                    <i-input v-model="q.couponName" @on-enter="query" placeholder="优惠劵"/>
+                </i-col>
+                <i-button @click="query">查询</i-button>
+            </div>
             <!--#if($shiro.hasPermission("usercoupon:save"))-->
             <!--<i-button type="info" @click="add"><i class="fa fa-plus"></i>&nbsp;新增</i-button>-->
             <!--#end-->

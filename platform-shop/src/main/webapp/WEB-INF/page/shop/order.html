@@ -8,29 +8,31 @@
 <div id="rrapp" v-cloak>
     <div v-show="!detail&&showList">
         <Row :gutter="16">
-            <i-col span="4">
-                <i-input v-model="q.orderSn" @on-enter="query" placeholder="订单号"/>
-            </i-col>
-            <i-col span="4">
-                <i-select v-model="q.orderStatus">
-                    <i-option value="0">待付款</i-option>
-                    <i-option value="101">订单已取消</i-option>
-                    <i-option value="102">订单已删除</i-option>
-                    <i-option value="201">订单已付款</i-option>
-                    <i-option value="300">订单已发货</i-option>
-                    <i-option value="301">用户确认收货</i-option>
-                    <i-option value="401">退款</i-option>
-                    <i-option value="402">完成</i-option>
-                </i-select>
-            </i-col>
-            <!--<i-col span="4">-->
-            <!--<i-select v-model="q.orderType">-->
-            <!--<i-option value="1">普通订单</i-option>-->
-            <!--<i-option value="2">团购订单</i-option>-->
-            <!--<i-option value="3">砍价订单</i-option>-->
-            <!--</i-select>-->
-            <!--</i-col>-->
-            <i-button @click="query">查询</i-button>
+            <div class="search-group">
+                <i-col span="4">
+                    <i-input v-model="q.orderSn" @on-enter="query" placeholder="订单号"/>
+                </i-col>
+                <i-col span="4">
+                    <i-select v-model="q.orderStatus">
+                        <i-option value="0">待付款</i-option>
+                        <i-option value="101">订单已取消</i-option>
+                        <i-option value="102">订单已删除</i-option>
+                        <i-option value="201">订单已付款</i-option>
+                        <i-option value="300">订单已发货</i-option>
+                        <i-option value="301">用户确认收货</i-option>
+                        <i-option value="401">退款</i-option>
+                        <i-option value="402">完成</i-option>
+                    </i-select>
+                </i-col>
+                <!--<i-col span="4">-->
+                <!--<i-select v-model="q.orderType">-->
+                <!--<i-option value="1">普通订单</i-option>-->
+                <!--<i-option value="2">团购订单</i-option>-->
+                <!--<i-option value="3">砍价订单</i-option>-->
+                <!--</i-select>-->
+                <!--</i-col>-->
+                <i-button @click="query">查询</i-button>
+            </div>
             <div class="buttons-group">
                 #if($shiro.hasPermission("order:sendGoods"))
                 <i-button type="warning" @click="sendGoods">发货</i-button>
