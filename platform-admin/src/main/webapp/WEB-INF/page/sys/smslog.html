@@ -12,8 +12,10 @@
                 <i-col span="4">
                     <i-input v-model="q.sendId" @on-enter="query" placeholder="发送编号"/>
                 </i-col>
+                <div class="buttons-group">
                 <i-button @click="query">查询</i-button>
                 <i-button @click="reloadSearch">重置</i-button>
+                    </div>
             </div>
             <div class="buttons-group">
                 <i-button type="success" @click="addConfig"><i class="fa fa-sun-o"></i>&nbsp;短信配置</i-button>

@@ -9,10 +9,12 @@
 <div id="rrapp" v-cloak>
     <div v-show="showList">
         <div class="grid-btn">
+            <div class="buttons-group">
             <i-button type="success" @click="addConfig"><i class="fa fa-sun-o"></i>&nbsp;云存储配置</i-button>
             <i-button type="primary" id="upload"><i class="fa fa-plus"></i>&nbsp;上传文件</i-button>
             <i-button type="error" @click="del"><i class="fa fa-trash-o"></i>&nbsp;删除</i-button>
             <i-button type="success" @click="lookImg"><i class="fa fa-eye"></i>&nbsp;预览</i-button>
+       </div>
         </div>
         <table id="jqGrid"></table>
         <div id="jqGridPager"></div>

@@ -5,9 +5,10 @@
     #parse("sys/header.html")
 </head>
 <body>
-<div id="rrapp" v-cloak>
-    <div v-show="showList">
-        <div class="grid-btn">
+<div id="rrapp" v-cloak  >
+    <div v-show="showList" >
+        <div class="grid-btn"  >
+            <div class="buttons-group">
             #if($shiro.hasPermission("sys:dept:save"))
             <i-button type="info" @click="add"><i class="fa fa-plus"></i>&nbsp;新增</i-button>
             #end
@@ -17,6 +18,7 @@
             #if($shiro.hasPermission("sys:dept:delete"))
             <i-button type="error" @click="del"><i class="fa fa-trash-o"></i>&nbsp;删除</i-button>
             #end
+            </div>
         </div>
         <table id="deptTable" data-mobile-responsive="true" data-click-to-select="true">
             <thead>
