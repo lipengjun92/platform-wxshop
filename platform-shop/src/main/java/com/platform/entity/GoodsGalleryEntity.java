@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 
 /**
- * 实体
+ * 商品顶部轮播图
  * 表名 nideshop_goods_gallery
  *
  * @author lipengjun

@@ -424,11 +424,6 @@ CREATE TABLE `nideshop_collect` (
 ) ENGINE=MyISAM AUTO_INCREMENT=75 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of nideshop_collect
--- ----------------------------
-INSERT INTO `nideshop_collect` VALUES ('65', '18', '1181000', '1505842517', '0', '0');
-
--- ----------------------------
 -- Table structure for `nideshop_comment`
 -- ----------------------------
 DROP TABLE IF EXISTS `nideshop_comment`;
@@ -490,7 +485,6 @@ CREATE TABLE `nideshop_coupon` (
 -- ----------------------------
 INSERT INTO `nideshop_coupon` VALUES ('1', '满100减10元', '10.00', '0', '100.00', '0.00', '2017-08-28 11:51:49', '2020-09-29 11:51:53', '2017-05-01 16:50:40', '2019-11-27 16:50:48', '500.00', null);
 INSERT INTO `nideshop_coupon` VALUES ('2', '用户红包', '10.00', '1', '50.00', '0.00', '2017-08-28 11:50:51', '2020-12-02 11:50:56', '2017-06-14 11:50:56', '2020-12-02 11:50:56', '500.00', null);
-INSERT INTO `nideshop_coupon` VALUES ('3', '满100减5元', '5.00', '2', '100.00', '0.00', '2017-08-28 11:50:51', '2020-12-02 11:50:56', '2017-06-14 11:50:56', '2020-12-02 11:50:56', '800.00', '1');
 INSERT INTO `nideshop_coupon` VALUES ('4', '新用户注册5元', '5.00', '4', '10.00', '0.00', '2017-08-28 11:50:51', '2020-12-02 11:50:56', '2017-06-14 11:50:56', '2020-12-02 11:50:56', '360.00', null);
 INSERT INTO `nideshop_coupon` VALUES ('7', '满88元包邮', '0.00', '7', '88.00', '0.00', '2017-08-28 11:50:51', '2020-12-02 11:50:56', '2017-05-01 16:50:40', '2019-11-27 16:50:48', '0.00', null);
 INSERT INTO `nideshop_coupon` VALUES ('8', '满1000减20元', '20.00', '0', '1000.00', '0.00', '2017-08-28 11:51:49', '2020-09-29 11:51:53', '2017-05-01 16:50:40', '2019-11-27 16:50:48', '500.00', null);
@@ -506,12 +500,6 @@ CREATE TABLE `nideshop_coupon_goods` (
   `goods_id` int(11) NOT NULL COMMENT '商品id',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='优惠券关联商品';
-
--- ----------------------------
--- Records of nideshop_coupon_goods
--- ----------------------------
-INSERT INTO `nideshop_coupon_goods` VALUES ('1', '4', '1181000');
-INSERT INTO `nideshop_coupon_goods` VALUES ('2', '4', '1155015');
 
 -- ----------------------------
 -- Table structure for `nideshop_feedback`
@@ -1734,30 +1722,6 @@ INSERT INTO `nideshop_goods_attribute` VALUES ('870', '1181000', '16', '组合�
 INSERT INTO `nideshop_goods_attribute` VALUES ('871', '1181000', '102', '活动时间：5月8日0点-5月14日24点。\n请在以上时间段内购买，其余时间均不可享受组合装优惠。');
 
 -- ----------------------------
--- Table structure for `nideshop_goods_bargain`
--- ----------------------------
-DROP TABLE IF EXISTS `nideshop_goods_bargain`;
-CREATE TABLE `nideshop_goods_bargain` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',
-  `title` varchar(255) NOT NULL DEFAULT '' COMMENT '砍价大图',
-  `item_pic_url` varchar(255) NOT NULL DEFAULT '' COMMENT '活动条例图片',
-  `goods_id` int(11) NOT NULL,
-  `sort_order` int(11) unsigned zerofill NOT NULL,
-  `subtitle` varchar(255) NOT NULL,
-  `assist_count` int(4) NOT NULL DEFAULT '0' COMMENT '最低拉取几人',
-  KEY `topic_id` (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=315 DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of nideshop_goods_bargain
--- ----------------------------
-INSERT INTO `nideshop_goods_bargain` VALUES ('314', '关爱他成长的每一个足迹', 'https://yanxuan.nosdn.127.net/14943267735961674.jpg', '1006013', '00000000000', '专业运动品牌同厂，毛毛虫鞋买二送一', '10');
-INSERT INTO `nideshop_goods_bargain` VALUES ('313', '一次解决5个节日送礼难题', 'https://yanxuan.nosdn.127.net/14942996754171334.jpg', '1006014', '00000000000', '这些就是他们想要的礼物清单', '5');
-INSERT INTO `nideshop_goods_bargain` VALUES ('300', '秒杀化学洗涤剂的纯天然皂', 'https://yanxuan.nosdn.127.net/14939843143621089.jpg', '1009009', '00000000000', '前段时间有朋友跟我抱怨，和婆婆住到一起才发现生活理念有太多不和。别的不提，光是洗...', '3');
-INSERT INTO `nideshop_goods_bargain` VALUES ('299', '买过的人都说它是差旅神器', 'https://yanxuan.nosdn.127.net/14938873919030679.jpg', '1010001', '00000000000', '许多人经历过旅途中内裤洗晾不便的烦恼，尤其与旅伴同居一室时，晾在卫生间里的内裤更...', '7');
-INSERT INTO `nideshop_goods_bargain` VALUES ('295', '他们在严选遇见的新生活', 'https://yanxuan.nosdn.127.net/14938092956370380.jpg', '1015007', '00000000000', '多款商品直减中，最高直减400元', '2');
-
--- ----------------------------
 -- Table structure for `nideshop_goods_gallery`
 -- ----------------------------
 DROP TABLE IF EXISTS `nideshop_goods_gallery`;
@@ -2905,17 +2869,6 @@ CREATE TABLE `nideshop_search_history` (
 ) ENGINE=InnoDB AUTO_INCREMENT=48 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of nideshop_search_history
--- ----------------------------
-INSERT INTO `nideshop_search_history` VALUES ('23', '母亲节', '', '1500564813', '1');
-INSERT INTO `nideshop_search_history` VALUES ('24', '日式', '', '1500564816', '1');
-INSERT INTO `nideshop_search_history` VALUES ('25', '日式', '', '1500564822', '1');
-INSERT INTO `nideshop_search_history` VALUES ('26', '清新', '', '1500564835', '1');
-INSERT INTO `nideshop_search_history` VALUES ('27', '日式', '', '1500638161', '1');
-INSERT INTO `nideshop_search_history` VALUES ('46', '母亲', '', '1505797824', '');
-INSERT INTO `nideshop_search_history` VALUES ('47', '123', '', '1507041253', '');
-
--- ----------------------------
 -- Table structure for `nideshop_shipping`
 -- ----------------------------
 DROP TABLE IF EXISTS `nideshop_shipping`;
@@ -3160,11 +3113,6 @@ CREATE TABLE `nideshop_user` (
 ) ENGINE=MyISAM AUTO_INCREMENT=24 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of nideshop_user
--- ----------------------------
-INSERT INTO `nideshop_user` VALUES ('15', '小明', 'oILjs0JEDIZzaWVc_sJW2k3fhp1k', '1', '2017-08-14 00:00:00', '2017-08-24 00:00:00', '2017-09-28 11:26:30', '36.7.136.174', '2', '天王盖地', '', '192.168.31.233', 'https://yanxuan.nosdn.127.net/80841d741d7fa3073e0ae27bf487339f.jpg?imageView&amp;quality=90&amp;thumbnail=64x64', 'o9nEe0dE37H7pFnCdSGgcX3TrFpc');
-
--- ----------------------------
 -- Table structure for `nideshop_user_coupon`
 -- ----------------------------
 DROP TABLE IF EXISTS `nideshop_user_coupon`;
@@ -3333,8 +3281,6 @@ CREATE TABLE `QRTZ_LOCKS` (
 -- ----------------------------
 INSERT INTO `QRTZ_LOCKS` VALUES ('PlatformScheduler', 'STATE_ACCESS');
 INSERT INTO `QRTZ_LOCKS` VALUES ('PlatformScheduler', 'TRIGGER_ACCESS');
-INSERT INTO `QRTZ_LOCKS` VALUES ('RenrenScheduler', 'STATE_ACCESS');
-INSERT INTO `QRTZ_LOCKS` VALUES ('RenrenScheduler', 'TRIGGER_ACCESS');
 
 -- ----------------------------
 -- Table structure for `QRTZ_PAUSED_TRIGGER_GRPS`
@@ -3366,7 +3312,6 @@ CREATE TABLE `QRTZ_SCHEDULER_STATE` (
 -- Records of QRTZ_SCHEDULER_STATE
 -- ----------------------------
 INSERT INTO `QRTZ_SCHEDULER_STATE` VALUES ('PlatformScheduler', 'Win_PC1508754695596', '1508756226419', '15000');
-INSERT INTO `QRTZ_SCHEDULER_STATE` VALUES ('RenrenScheduler', 'Win_PC1508917716466', '1508917902529', '15000');
 
 -- ----------------------------
 -- Table structure for `QRTZ_SIMPLE_TRIGGERS`
@@ -3456,8 +3401,6 @@ CREATE TABLE `QRTZ_TRIGGERS` (
 -- ----------------------------
 INSERT INTO `QRTZ_TRIGGERS` VALUES ('PlatformScheduler', 'TASK_1', 'DEFAULT', 'TASK_1', 'DEFAULT', null, '1507390200000', '-1', '5', 'PAUSED', 'CRON', '1507388787000', '0', null, '2', 0xACED0005737200156F72672E71756172747A2E4A6F62446174614D61709FB083E8BFA9B0CB020000787200266F72672E71756172747A2E7574696C732E537472696E674B65794469727479466C61674D61708208E8C3FBC55D280200015A0013616C6C6F77735472616E7369656E74446174617872001D6F72672E71756172747A2E7574696C732E4469727479466C61674D617013E62EAD28760ACE0200025A000564697274794C00036D617074000F4C6A6176612F7574696C2F4D61703B787001737200116A6176612E7574696C2E486173684D61700507DAC1C31660D103000246000A6C6F6164466163746F724900097468726573686F6C6478703F4000000000000C7708000000100000000174000D4A4F425F504152414D5F4B455973720025636F6D2E706C6174666F726D2E656E746974792E5363686564756C654A6F62456E7469747900000000000000010200084C00086265616E4E616D657400124C6A6176612F6C616E672F537472696E673B4C000A63726561746554696D657400104C6A6176612F7574696C2F446174653B4C000E63726F6E45787072657373696F6E71007E00094C00056A6F6249647400104C6A6176612F6C616E672F4C6F6E673B4C000A6D6574686F644E616D6571007E00094C0006706172616D7371007E00094C000672656D61726B71007E00094C00067374617475737400134C6A6176612F6C616E672F496E74656765723B7870740008746573745461736B7372000E6A6176612E7574696C2E44617465686A81014B5974190300007870770800000158BAF593307874000E3020302F3330202A202A202A203F7372000E6A6176612E6C616E672E4C6F6E673B8BE490CC8F23DF0200014A000576616C7565787200106A6176612E6C616E672E4E756D62657286AC951D0B94E08B0200007870000000000000000174000474657374740008706C6174666F726D74000FE69C89E58F82E695B0E6B58BE8AF95737200116A6176612E6C616E672E496E746567657212E2A0A4F781873802000149000576616C75657871007E0013000000017800);
 INSERT INTO `QRTZ_TRIGGERS` VALUES ('PlatformScheduler', 'TASK_2', 'DEFAULT', 'TASK_2', 'DEFAULT', null, '1507390200000', '-1', '5', 'PAUSED', 'CRON', '1507388787000', '0', null, '2', 0xACED0005737200156F72672E71756172747A2E4A6F62446174614D61709FB083E8BFA9B0CB020000787200266F72672E71756172747A2E7574696C732E537472696E674B65794469727479466C61674D61708208E8C3FBC55D280200015A0013616C6C6F77735472616E7369656E74446174617872001D6F72672E71756172747A2E7574696C732E4469727479466C61674D617013E62EAD28760ACE0200025A000564697274794C00036D617074000F4C6A6176612F7574696C2F4D61703B787001737200116A6176612E7574696C2E486173684D61700507DAC1C31660D103000246000A6C6F6164466163746F724900097468726573686F6C6478703F4000000000000C7708000000100000000174000D4A4F425F504152414D5F4B455973720025636F6D2E706C6174666F726D2E656E746974792E5363686564756C654A6F62456E7469747900000000000000010200084C00086265616E4E616D657400124C6A6176612F6C616E672F537472696E673B4C000A63726561746554696D657400104C6A6176612F7574696C2F446174653B4C000E63726F6E45787072657373696F6E71007E00094C00056A6F6249647400104C6A6176612F6C616E672F4C6F6E673B4C000A6D6574686F644E616D6571007E00094C0006706172616D7371007E00094C000672656D61726B71007E00094C00067374617475737400134C6A6176612F6C616E672F496E74656765723B7870740008746573745461736B7372000E6A6176612E7574696C2E44617465686A81014B5974190300007870770800000158C377C4607874000E3020302F3330202A202A202A203F7372000E6A6176612E6C616E672E4C6F6E673B8BE490CC8F23DF0200014A000576616C7565787200106A6176612E6C616E672E4E756D62657286AC951D0B94E08B0200007870000000000000000274000574657374327074000FE697A0E58F82E695B0E6B58BE8AF95737200116A6176612E6C616E672E496E746567657212E2A0A4F781873802000149000576616C75657871007E0013000000017800);
-INSERT INTO `QRTZ_TRIGGERS` VALUES ('RenrenScheduler', 'TASK_1', 'DEFAULT', 'TASK_1', 'DEFAULT', null, '1508918400000', '-1', '5', 'PAUSED', 'CRON', '1508917717000', '0', null, '2', '');
-INSERT INTO `QRTZ_TRIGGERS` VALUES ('RenrenScheduler', 'TASK_2', 'DEFAULT', 'TASK_2', 'DEFAULT', null, '1508918400000', '-1', '5', 'PAUSED', 'CRON', '1508917718000', '0', null, '2', '');
 
 -- ----------------------------
 -- Table structure for `schedule_job`
@@ -3520,7 +3463,7 @@ CREATE TABLE `sys_config` (
 -- ----------------------------
 -- Records of sys_config
 -- ----------------------------
-INSERT INTO `sys_config` VALUES ('3', 'CLOUD_STORAGE_CONFIG_KEY', '{\"qcloudBucketName\":\"\",\"qcloudDomain\":\"\",\"qcloudPrefix\":\"\",\"qcloudSecretId\":\"\",\"qcloudSecretKey\":\"\",\"qiniuAccessKey\":\"NrgMfABZxWLo5B-YYSjoE8-AZ1EISdi1Z3ubLOeZ\",\"qiniuBucketName\":\"ios-app\",\"qiniuDomain\":\"http://7xqbwh.dl1.z0.glb.clouddn.com\",\"qiniuPrefix\":\"upload\",\"qiniuSecretKey\":\"uIwJHevMRWU0VLxFvgy0tAcOdGqasdtVlJkdy6vV\",\"type\":1}', '0', '云存储配置信息');
+INSERT INTO `sys_config` VALUES ('3', 'CLOUD_STORAGE_CONFIG_KEY', '{"aliyunAccessKeyId":"1","aliyunAccessKeySecret":"1","aliyunBucketName":"1","aliyunDomain":"http://image.111.com","aliyunEndPoint":"1","aliyunPrefix":"1","qcloudBucketName":"","qcloudDomain":"","qcloudPrefix":"","qcloudSecretId":"","qcloudSecretKey":"","qiniuAccessKey":"IXYAaaAwc-ZSuInpEoEJq_CivmcAjWLq1HmpK9dr","qiniuBucketName":"wxmall","qiniuDomain":"http://p9kyr79ne.bkt.clouddn.com","qiniuPrefix":"upload","qiniuSecretKey":"dVlk3dhOAGubYdiCyybE13o5KpjyqGhqh428ufxP","type":1}', '0', '云存储配置信息');
 
 -- ----------------------------
 -- Table structure for `sys_dept`
@@ -3888,12 +3831,6 @@ CREATE TABLE `sys_user_role` (
   `role_id` bigint(20) DEFAULT NULL COMMENT '角色ID',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=60 DEFAULT CHARSET=utf8 COMMENT='用户与角色对应关系';
-
--- ----------------------------
--- Records of sys_user_role
--- ----------------------------
-INSERT INTO `sys_user_role` VALUES ('56', '1', '5');
-INSERT INTO `sys_user_role` VALUES ('59', '4', '6');
 
 -- ----------------------------
 -- Table structure for `tb_token`
