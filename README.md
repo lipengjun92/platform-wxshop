@@ -117,7 +117,7 @@
 		
 
     后台管理项目演示
-    演示地址：http://47.100.0.48
+    演示地址：https://fly2you.cn/platform
     账号密码：admin/admin
     
     如何交流、反馈、参与贡献？
