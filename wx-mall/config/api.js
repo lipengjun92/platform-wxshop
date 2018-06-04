@@ -1,5 +1,5 @@
-// var NewApiRootUrl = 'https://47.100.0.48/admin/api/';
-var NewApiRootUrl = 'http://localhost:8180/api/';
+var NewApiRootUrl = 'https://fly2you.cn/platform/api/';
+// var NewApiRootUrl = 'http://localhost:8180/api/';
 
 module.exports = {
     IndexUrl: NewApiRootUrl + 'index/index', //首页数据接口

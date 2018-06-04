@@ -5,9 +5,6 @@ if ($.jgrid) {
     $.jgrid.defaults.styleUI = 'Bootstrap';
 }
 
-//工具集合Tools
-window.T = {};
-
 //iframe自适应
 $(window).on('resize', function () {
     var $content = $('#mainApp');
@@ -19,24 +16,6 @@ $(window).on('resize', function () {
     $rrapp.height($(this).height());
     $(this).height($content.height());
 }).resize();
-
-// 获取请求参数
-// 使用示例
-// location.href = http://localhost:8080/index.html?id=123
-// T.p('id') --> 123;
-var url = function (name) {
-    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
-    var r = window.location.search.substr(1).match(reg);
-    if (r != null) return unescape(r[2]);
-    return null;
-};
-T.p = url;
-
-//全局配置
-$.ajaxSetup({
-    dataType: "json",
-    cache: false
-});
 
 //重写alert
 window.alert = function (msg, callback) {
