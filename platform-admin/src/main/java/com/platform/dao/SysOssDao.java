@@ -3,7 +3,7 @@ package com.platform.dao;
 import com.platform.entity.SysOssEntity;
 
 /**
- * 文件上传
+ * 文件上传Dao
  *
  * @author lipengjun
  * @email 939961241@qq.com

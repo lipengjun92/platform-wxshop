@@ -24,7 +24,7 @@ import ${package}.utils.R;
  * @email ${email}
  * @date ${datetime}
  */
-@Controller
+@RestController
 @RequestMapping("${pathName}")
 public class ${className}Controller {
     @Autowired
@@ -35,7 +35,6 @@ public class ${className}Controller {
      */
     @RequestMapping("/list")
     @RequiresPermissions("${pathName}:list")
-    @ResponseBody
     public R list(@RequestParam Map<String, Object> params) {
         //查询列表数据
         Query query = new Query(params);
@@ -53,7 +52,6 @@ public class ${className}Controller {
      */
     @RequestMapping("/info/{${pk.attrname}}")
     @RequiresPermissions("${pathName}:info")
-    @ResponseBody
     public R info(@PathVariable("${pk.attrname}") ${pk.attrType} ${pk.attrname}) {
         ${className}Entity ${classname} = ${classname}Service.queryObject(${pk.attrname});
 
@@ -65,7 +63,6 @@ public class ${className}Controller {
      */
     @RequestMapping("/save")
     @RequiresPermissions("${pathName}:save")
-    @ResponseBody
     public R save(@RequestBody ${className}Entity ${classname}) {
         ${classname}Service.save(${classname});
 
@@ -77,7 +74,6 @@ public class ${className}Controller {
      */
     @RequestMapping("/update")
     @RequiresPermissions("${pathName}:update")
-    @ResponseBody
     public R update(@RequestBody ${className}Entity ${classname}) {
         ${classname}Service.update(${classname});
 
@@ -89,7 +85,6 @@ public class ${className}Controller {
      */
     @RequestMapping("/delete")
     @RequiresPermissions("${pathName}:delete")
-    @ResponseBody
     public R delete(@RequestBody ${pk.attrType}[]${pk.attrname}s) {
         ${classname}Service.deleteBatch(${pk.attrname}s);
 
@@ -100,7 +95,6 @@ public class ${className}Controller {
      * 查看所有列表
      */
     @RequestMapping("/queryAll")
-    @ResponseBody
     public R queryAll(@RequestParam Map<String, Object> params) {
 
         List<${className}Entity> list = ${classname}Service.queryList(params);

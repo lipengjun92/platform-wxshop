@@ -20,7 +20,6 @@ import javax.servlet.http.HttpServletRequest;
 import java.lang.reflect.Method;
 import java.util.Date;
 
-
 /**
  * 系统日志，切面处理类
  *
@@ -34,11 +33,19 @@ public class SysLogAspect {
     @Autowired
     private SysLogService sysLogService;
 
+    /**
+     * 切点
+     */
     @Pointcut("@annotation(com.platform.annotation.SysLog)")
     public void logPointCut() {
 
     }
 
+    /**
+     * 前置通知
+     *
+     * @param joinPoint 连接点
+     */
     @Before("logPointCut()")
     public void saveSysLog(JoinPoint joinPoint) {
         MethodSignature signature = (MethodSignature) joinPoint.getSignature();
