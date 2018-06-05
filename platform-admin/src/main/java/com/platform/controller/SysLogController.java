@@ -15,9 +15,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import java.util.List;
 import java.util.Map;
 
-
 /**
- * 系统日志
+ * 系统日志Controller
  *
  * @author lipengjun
  * @email 939961241@qq.com
@@ -30,7 +29,10 @@ public class SysLogController {
     private SysLogService sysLogService;
 
     /**
-     * 列表
+     * 系统日志列表
+     *
+     * @param params 请求参数
+     * @return R
      */
     @ResponseBody
     @RequestMapping("/list")

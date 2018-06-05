@@ -1,5 +1,6 @@
 package com.platform.controller;
 
+import com.platform.annotation.SysLog;
 import com.platform.entity.SysDeptEntity;
 import com.platform.service.SysDeptService;
 import com.platform.utils.Constant;
@@ -15,9 +16,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-
 /**
- * 部门管理
+ * 部门管理Controller
  *
  * @author liepngjun
  * @email 939961241@qq.com
@@ -30,7 +30,9 @@ public class SysDeptController extends AbstractController {
     private SysDeptService sysDeptService;
 
     /**
-     * 列表
+     * 部门列表
+     *
+     * @return R
      */
     @RequestMapping("/list")
     @RequiresPermissions("sys:dept:list")
@@ -46,6 +48,8 @@ public class SysDeptController extends AbstractController {
 
     /**
      * 选择部门(添加、修改菜单)
+     *
+     * @return R
      */
     @RequestMapping("/select")
     @RequiresPermissions("sys:dept:select")
@@ -71,7 +75,9 @@ public class SysDeptController extends AbstractController {
     }
 
     /**
-     * 上级部门Id(管理员则为0)
+     * 获取用户部门Id(管理员则为0)
+     *
+     * @return
      */
     @RequestMapping("/info")
     @RequiresPermissions("sys:dept:list")
@@ -86,7 +92,10 @@ public class SysDeptController extends AbstractController {
     }
 
     /**
-     * 信息
+     * 根据主键获取部门信息
+     *
+     * @param deptId 主键
+     * @return R
      */
     @RequestMapping("/info/{deptId}")
     @RequiresPermissions("sys:dept:info")
@@ -97,8 +106,12 @@ public class SysDeptController extends AbstractController {
     }
 
     /**
-     * 保存
+     * 新增部门
+     *
+     * @param dept 部门
+     * @return R
      */
+    @SysLog("新增部门")
     @RequestMapping("/save")
     @RequiresPermissions("sys:dept:save")
     public R save(@RequestBody SysDeptEntity dept) {
@@ -108,8 +121,12 @@ public class SysDeptController extends AbstractController {
     }
 
     /**
-     * 修改
+     * 修改部门
+     *
+     * @param dept 部门
+     * @return R
      */
+    @SysLog("修改部门")
     @RequestMapping("/update")
     @RequiresPermissions("sys:dept:update")
     public R update(@RequestBody SysDeptEntity dept) {
@@ -119,8 +136,12 @@ public class SysDeptController extends AbstractController {
     }
 
     /**
-     * 删除
+     * 删除部门
+     *
+     * @param deptId 主键
+     * @return R
      */
+    @SysLog("删除部门")
     @RequestMapping("/delete")
     @RequiresPermissions("sys:dept:delete")
     public R delete(long deptId) {

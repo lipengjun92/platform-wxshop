@@ -3,9 +3,9 @@ package com.platform.entity;
 import java.io.Serializable;
 import java.util.Date;
 
-
 /**
  * 文件上传
+ * 表名 sys_oss
  *
  * @author lipengjun
  * @email 939961241@qq.com
@@ -14,11 +14,17 @@ import java.util.Date;
 public class SysOssEntity implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    //
+    /**
+     * 主键
+     */
     private Long id;
-    //URL地址
+    /**
+     * URL地址
+     */
     private String url;
-    //创建时间
+    /**
+     * 创建时间
+     */
     private Date createDate;
 
     /**

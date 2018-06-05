@@ -39,7 +39,6 @@ public class TestTask {
 
     }
 
-
     public void test2() {
         logger.info("我是不带参数的test2方法，正在被执行");
     }

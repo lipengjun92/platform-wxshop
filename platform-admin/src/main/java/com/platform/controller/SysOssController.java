@@ -1,6 +1,7 @@
 package com.platform.controller;
 
 import com.alibaba.fastjson.JSON;
+import com.platform.annotation.SysLog;
 import com.platform.entity.SysOssEntity;
 import com.platform.oss.CloudStorageConfig;
 import com.platform.oss.OSSFactory;
@@ -24,9 +25,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-
 /**
- * 文件上传
+ * 文件上传Controller
  *
  * @author lipengjun
  * @email 939961241@qq.com
@@ -44,6 +44,9 @@ public class SysOssController {
 
     /**
      * 列表
+     *
+     * @param params 请求参数
+     * @return R
      */
     @RequestMapping("/list")
     @RequiresPermissions("sys:oss:all")
@@ -60,7 +63,9 @@ public class SysOssController {
 
 
     /**
-     * 云存储配置信息
+     * 获取云存储配置信息
+     *
+     * @return R
      */
     @RequestMapping("/config")
     @RequiresPermissions("sys:oss:all")
@@ -73,7 +78,11 @@ public class SysOssController {
 
     /**
      * 保存云存储配置信息
+     *
+     * @param config 配置信息
+     * @return R
      */
+    @SysLog("保存云存储配置信息")
     @RequestMapping("/saveConfig")
     @RequiresPermissions("sys:oss:all")
     public R saveConfig(@RequestBody CloudStorageConfig config) {
@@ -91,18 +100,19 @@ public class SysOssController {
             ValidatorUtils.validateEntity(config, QcloudGroup.class);
         }
 
-
         sysConfigService.updateValueByKey(KEY, JSON.toJSONString(config));
 
         return R.ok();
     }
 
-
     /**
      * 上传文件
+     *
+     * @param file 文件
+     * @return R
+     * @throws Exception 异常
      */
     @RequestMapping("/upload")
-    @RequiresPermissions("sys:oss:all")
     public R upload(@RequestParam("file") MultipartFile file) throws Exception {
         if (file.isEmpty()) {
             throw new RRException("上传文件不能为空");
@@ -124,8 +134,12 @@ public class SysOssController {
 
 
     /**
-     * 删除
+     * 删除图片
+     *
+     * @param ids 主键集
+     * @return R
      */
+    @SysLog("删除图片")
     @RequestMapping("/delete")
     @RequiresPermissions("sys:oss:all")
     public R delete(@RequestBody Long[] ids) {
@@ -136,6 +150,9 @@ public class SysOssController {
 
     /**
      * 查询所有列表
+     *
+     * @param params 请求参数
+     * @return R
      */
     @RequestMapping("/queryAll")
     public List<String> queryAll(@RequestParam Map<String, Object> params) {

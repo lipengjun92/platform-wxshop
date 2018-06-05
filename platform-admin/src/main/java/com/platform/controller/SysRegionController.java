@@ -1,5 +1,6 @@
 package com.platform.controller;
 
+import com.platform.annotation.SysLog;
 import com.platform.cache.RegionCacheUtil;
 import com.platform.entity.SysRegionEntity;
 import com.platform.service.SysRegionService;
@@ -16,7 +17,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Controller
+ * 地址管理Controller
  *
  * @author lipengjun
  * @email 939961241@qq.com
@@ -30,6 +31,9 @@ public class SysRegionController {
 
     /**
      * 查看列表
+     *
+     * @param params 请求参数
+     * @return R
      */
     @RequestMapping("/list")
     @RequiresPermissions("sys:region:list")
@@ -45,9 +49,11 @@ public class SysRegionController {
         return R.ok().put("page", pageUtil);
     }
 
-
     /**
-     * 查看信息
+     * 根据主键获取信息
+     *
+     * @param id 主键
+     * @return R
      */
     @RequestMapping("/info/{id}")
     @RequiresPermissions("sys:region:info")
@@ -58,8 +64,12 @@ public class SysRegionController {
     }
 
     /**
-     * 保存
+     * 新增地址
+     *
+     * @param region 地址
+     * @return R
      */
+    @SysLog("新增地址")
     @RequestMapping("/save")
     @RequiresPermissions("sys:region:save")
     public R save(@RequestBody SysRegionEntity region) {
@@ -69,8 +79,12 @@ public class SysRegionController {
     }
 
     /**
-     * 修改
+     * 修改地址
+     *
+     * @param region 地址
+     * @return R
      */
+    @SysLog("修改地址")
     @RequestMapping("/update")
     @RequiresPermissions("sys:region:update")
     public R update(@RequestBody SysRegionEntity region) {
@@ -80,8 +94,12 @@ public class SysRegionController {
     }
 
     /**
-     * 删除
+     * 删除地址
+     *
+     * @param ids 主键集
+     * @return R
      */
+    @SysLog("删除地址")
     @RequestMapping("/delete")
     @RequiresPermissions("sys:region:delete")
     public R delete(@RequestBody Integer[] ids) {
@@ -93,7 +111,7 @@ public class SysRegionController {
     /**
      * 查询所有国家
      *
-     * @return
+     * @return R
      */
     @RequestMapping("/getAllCountry")
     public R getAllCountry() {
@@ -104,7 +122,7 @@ public class SysRegionController {
     /**
      * 查询所有省份
      *
-     * @return
+     * @return R
      */
     @RequestMapping("/getAllProvice")
     public R getAllProvice(@RequestParam(required = false) Integer areaId) {
@@ -115,7 +133,7 @@ public class SysRegionController {
     /**
      * 查询所有城市
      *
-     * @return
+     * @return R
      */
     @RequestMapping("/getAllCity")
     public R getAllCity(@RequestParam(required = false) Integer areaId) {
@@ -127,7 +145,7 @@ public class SysRegionController {
     /**
      * 查询所有区县
      *
-     * @return
+     * @return R
      */
     @RequestMapping("/getChildrenDistrict")
     public R getChildrenDistrict(@RequestParam(required = false) Integer areaId) {
@@ -137,6 +155,8 @@ public class SysRegionController {
 
     /**
      * 查看信息(全部加载页面渲染太慢！)
+     *
+     * @return R
      */
     @RequestMapping("/getAreaTree")
     public R getAreaTree() {
@@ -150,6 +170,12 @@ public class SysRegionController {
         return R.ok().put("node", node);
     }
 
+    /**
+     * 根据类型获取区域
+     *
+     * @param type 类型
+     * @return R
+     */
     @RequestMapping("/getAreaByType")
     public R getAreaByType(@RequestParam(required = false) Integer type) {
 

@@ -3,12 +3,7 @@ package com.platform.controller;
 import com.platform.annotation.IgnoreAuth;
 import com.platform.entity.SysSmsLogEntity;
 import com.platform.service.SysSmsLogService;
-import com.platform.utils.DateUtils;
-import com.platform.utils.R;
-import com.platform.utils.RRException;
-import com.platform.utils.RequestUtil;
-import com.platform.utils.ResourceUtil;
-import com.platform.utils.StringUtils;
+import com.platform.utils.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -18,12 +13,11 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 
 /**
- * 名称：ApiSmsController <br>
- * 描述：Api<br>
+ * 发送短信接口Controller
  *
- * @author 李鹏军
- * @version 1.0
- * @since 1.0.0
+ * @author liepngjun
+ * @email 939961241@qq.com
+ * @date 2018-06-05 13:58:47
  */
 @RestController
 @RequestMapping("api")
@@ -33,9 +27,10 @@ public class ApiSmsController {
 
     /**
      * 发送短信
-     * mobile：电话号码字符串，中间用英文逗号间隔
-     * content：内容字符串
-     * stime：追加发送时间，可为空，为空为及时发送
+     *
+     * @param request request
+     * @param params 请求参数{mobile：电话号码字符串，中间用英文逗号间隔,content：内容字符串,stime：追加发送时间，可为空，为空为及时发送}
+     * @return R
      */
     @IgnoreAuth
     @RequestMapping("/sendSms")
