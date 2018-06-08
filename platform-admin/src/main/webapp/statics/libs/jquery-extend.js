@@ -1,8 +1,40 @@
 (function ($) {
 
     /*********************************对jQuery类型原型扩展********************************************/
-    jQuery.extend({
+    jQuery.extend($.prototype, {
+        Grid: function (options) {
+            //分页Id
+            var pager = this.attr('id') + 'Pager';
+            this.after('<div id="' + pager + '"></div>');
 
+            this.defaults = {
+                width: 1000,
+                styleUI: 'Bootstrap',
+                datatype: "json",
+                viewrecords: true,
+                height: 385,
+                rowNum: 10,
+                rowList: [10, 30, 50],
+                rownumbers: true,
+                rownumWidth: 25,
+                autowidth: true,
+                multiselect: true,
+                jsonReader: {
+                    root: "page.list",
+                    page: "page.currPage",
+                    total: "page.totalPage",
+                    records: "page.totalCount"
+                },
+                prmNames: {
+                    page: "page",
+                    rows: "limit",
+                    order: "order"
+                },
+                pager: "#" + pager
+            };
+            var param = $.extend(this.defaults, options);
+            this.jqGrid(param);
+        }
     });
 
     /*********************************对Date类型原型扩展********************************************/

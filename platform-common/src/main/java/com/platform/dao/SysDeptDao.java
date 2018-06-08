@@ -26,6 +26,7 @@ public interface SysDeptDao extends BaseDao<SysDeptEntity> {
 
     /**
      * 根据实体条件查询
+     *
      * @return
      */
     List<UserWindowDto> queryPageByDto(UserWindowDto userWindowDto);
