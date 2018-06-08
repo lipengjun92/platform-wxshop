@@ -1,37 +1,12 @@
 $(function () {
-    $("#jqGrid").jqGrid({
+    $("#jqGrid").Grid({
         url: '../sys/config/list',
-        datatype: "json",
         colModel: [
             {label: 'ID', name: 'id', key: true, hidden: true},
-            {label: '参数名', name: 'key', width: 60},
-            {label: '参数值', name: 'value', width: 100},
-            {label: '备注', name: 'remark', width: 80}
-        ],
-        viewrecords: true,
-        height: 385,
-        rowNum: 10,
-        rowList: [10, 30, 50],
-        rownumbers: true,
-        rownumWidth: 25,
-        autowidth: true,
-        multiselect: true,
-        pager: "#jqGridPager",
-        jsonReader: {
-            root: "page.list",
-            page: "page.currPage",
-            total: "page.totalPage",
-            records: "page.totalCount"
-        },
-        prmNames: {
-            page: "page",
-            rows: "limit",
-            order: "order"
-        },
-        gridComplete: function () {
-            //隐藏grid底部滚动条
-            $("#jqGrid").closest(".ui-jqgrid-bdiv").css({"overflow-x": "hidden"});
-        }
+            {label: '参数名', name: 'key', index: 'key', width: 60},
+            {label: '参数值', name: 'value', index: 'value', width: 100},
+            {label: '备注', name: 'remark', index: 'remark', width: 80}
+        ]
     });
 });
 
@@ -45,7 +20,6 @@ var vm = new Vue({
         title: null,
         config: {},
         ruleValidate: {
-            //example
             key: [
                 {required: true, message: '参数名不能为空', trigger: 'blur'}
             ],
@@ -69,10 +43,14 @@ var vm = new Vue({
                 return;
             }
 
-            $.get("../sys/config/info/" + id, function (r) {
-                vm.showList = false;
-                vm.title = "修改";
-                vm.config = r.config;
+            Ajax.request({
+                url: "../sys/config/info/" + id,
+                async: true,
+                successCallback: function (r) {
+                    vm.showList = false;
+                    vm.title = "修改";
+                    vm.config = r.config;
+                }
             });
         },
         del: function (event) {
@@ -82,38 +60,30 @@ var vm = new Vue({
             }
 
             confirm('确定要删除选中的记录？', function () {
-                $.ajax({
-                    type: "POST",
+                Ajax.request({
                     url: "../sys/config/delete",
+                    params: JSON.stringify(ids),
                     contentType: "application/json",
-                    data: JSON.stringify(ids),
-                    success: function (r) {
-                        if (r.code == 0) {
-                            alert('操作成功', function (index) {
-                                vm.reload();
-                            });
-                        } else {
-                            alert(r.msg);
-                        }
+                    type: 'POST',
+                    successCallback: function () {
+                        alert('操作成功', function (index) {
+                            vm.reload();
+                        });
                     }
                 });
             });
         },
         saveOrUpdate: function (event) {
             var url = vm.config.id == null ? "../sys/config/save" : "../sys/config/update";
-            $.ajax({
-                type: "POST",
+            Ajax.request({
                 url: url,
+                params: JSON.stringify(vm.config),
                 contentType: "application/json",
-                data: JSON.stringify(vm.config),
-                success: function (r) {
-                    if (r.code === 0) {
-                        alert('操作成功', function (index) {
-                            vm.reload();
-                        });
-                    } else {
-                        alert(r.msg);
-                    }
+                type: 'POST',
+                successCallback: function () {
+                    alert('操作成功', function (index) {
+                        vm.reload();
+                    });
                 }
             });
         },
@@ -124,6 +94,12 @@ var vm = new Vue({
                 postData: {'key': vm.q.key},
                 page: page
             }).trigger("reloadGrid");
+        },
+        reloadSearch: function () {
+            vm.q = {
+                confKey: ''
+            }
+            vm.reload();
         },
         handleSubmit: function (name) {
             handleSubmitValidate(this, name, function () {
