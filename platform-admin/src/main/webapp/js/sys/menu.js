@@ -34,7 +34,7 @@ var TreeGrid = {
 TreeGrid.initColumn = function () {
     var columns = [
         {field: 'selectItem', radio: true},
-        {title: '编号', field: 'menuId', visitable: false, align: 'center', valign: 'middle', width: '50px'},
+        {title: '编号', field: 'menuId', visitable: false, align: 'center', valign: 'middle', width: '80px'},
         {title: '名称', field: 'name', align: 'center', valign: 'middle', width: '180px'},
         {title: '上级菜单', field: 'parentName', align: 'center', valign: 'middle', width: '100px'},
         {
@@ -135,18 +135,22 @@ var vm = new Vue({
         },
         getMenu: function (menuId) {
             //加载菜单树
-            $.get("../sys/menu/select", function (r) {
-                ztree = $.fn.zTree.init($("#menuTree"), setting, r.menuList);
-                var node = ztree.getNodeByParam("menuId", vm.menu.parentId);
-                if (node) {
-                    ztree.selectNode(node);
-                    vm.menu.parentName = node.name;
-                } else {
-                    node = ztree.getNodeByParam("menuId", 0);
-                    ztree.selectNode(node);
-                    vm.menu.parentName = node.name;
+            Ajax.request({
+                url: "../sys/menu/select",
+                async: true,
+                successCallback: function (r) {
+                    ztree = $.fn.zTree.init($("#menuTree"), setting, r.menuList);
+                    var node = ztree.getNodeByParam("menuId", vm.menu.parentId);
+                    if (node) {
+                        ztree.selectNode(node);
+                        vm.menu.parentName = node.name;
+                    } else {
+                        node = ztree.getNodeByParam("menuId", 0);
+                        ztree.selectNode(node);
+                        vm.menu.parentName = node.name;
+                    }
                 }
-            })
+            });
         },
         add: function () {
             vm.showList = false;
@@ -166,12 +170,16 @@ var vm = new Vue({
                 return;
             }
 
-            $.get("../sys/menu/info/" + menuId[0].id, function (r) {
-                vm.showList = false;
-                vm.title = "修改";
-                vm.menu = r.menu;
+            Ajax.request({
+                url: "../sys/menu/info/" + menuId[0].id,
+                async: true,
+                successCallback: function (r) {
+                    vm.showList = false;
+                    vm.title = "修改";
+                    vm.menu = r.menu;
 
-                vm.getMenu();
+                    vm.getMenu();
+                }
             });
         },
         del: function (event) {
@@ -185,38 +193,30 @@ var vm = new Vue({
                 $.each(menuIds, function (idx, item) {
                     ids[idx] = item.id;
                 });
-                $.ajax({
-                    type: "POST",
+                Ajax.request({
                     url: "../sys/menu/delete",
+                    params: JSON.stringify(ids),
                     contentType: "application/json",
-                    data: JSON.stringify(ids),
-                    success: function (r) {
-                        if (r.code === 0) {
-                            alert('操作成功', function (index) {
-                                vm.reload();
-                            });
-                        } else {
-                            alert(r.msg);
-                        }
+                    type: 'POST',
+                    successCallback: function () {
+                        alert('操作成功', function (index) {
+                            vm.reload();
+                        });
                     }
                 });
             });
         },
         saveOrUpdate: function (event) {
             var url = vm.menu.menuId == null ? "../sys/menu/save" : "../sys/menu/update";
-            $.ajax({
-                type: "POST",
+            Ajax.request({
                 url: url,
+                params: JSON.stringify(vm.menu),
                 contentType: "application/json",
-                data: JSON.stringify(vm.menu),
-                success: function (r) {
-                    if (r.code === 0) {
-                        alert('操作成功', function (index) {
-                            vm.reload();
-                        });
-                    } else {
-                        iview.Message.error(r.msg);
-                    }
+                type: 'POST',
+                successCallback: function () {
+                    alert('操作成功', function (index) {
+                        vm.reload();
+                    });
                 }
             });
         },
