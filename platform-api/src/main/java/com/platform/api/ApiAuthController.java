@@ -112,6 +112,9 @@ public class ApiAuthController extends ApiBaseAction {
             userService.update(userVo);
         }
 
+        //新用户第一次登陆时，虽然user表数据已经新增成功，但是此时userId还是null，从数据库再查一次就能取到了
+        userVo = userService.queryByOpenId(sessionData.getString("openid"));
+
         Map<String, Object> tokenMap = tokenService.createToken(userVo.getUserId());
         String token = MapUtils.getString(tokenMap, "token");
 
