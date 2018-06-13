@@ -66,8 +66,8 @@ public class ApiIndexController extends ApiBaseAction {
         param.put("limit", 4);
         param.put("is_delete", 0);
         param.put("fields", "id, name, list_pic_url, retail_price");
-//        List<GoodsVo> newGoods = goodsService.queryList(param);
-//        resultObj.put("newGoodsList", newGoods);
+        List<GoodsVo> newGoods = goodsService.queryList(param);
+        resultObj.put("newGoodsList", newGoods);
         //
         param = new HashMap();
         param.put("is_hot", "1");
@@ -93,60 +93,21 @@ public class ApiIndexController extends ApiBaseAction {
                 }
             }
         }
-        //
-//        param = new HashMap();
-//        param.put("is_new", 1);
-//        param.put("sidx", "new_sort_order ");
-//        param.put("order", "asc ");
-//        param.put("offset", 0);
-//        param.put("limit", 4);
-//        List<BrandVo> brandList = brandService.queryList(param);
-//        resultObj.put("brandList", brandList);
-        //
-//        param = new HashMap();
-//        param.put("offset", 0);
-//        param.put("limit", 3);
-//        List<TopicVo> topicList = topicService.queryList(param);
-//        resultObj.put("topicList", topicList);
-        // 团购
-//        param = new HashMap();
-//        param.put("offset", 0);
-//        param.put("limit", 3);
-//        List<GoodsGroupVo> goodsGroupVos = goodsGroupService.queryList(param);
-//        resultObj.put("topicList", goodsGroupVos);
-        // 砍价
-//        param = new HashMap();
-//        param.put("offset", 0);
-//        param.put("limit", 3);
-//        List<GoodsGroupVo> goodsGroupVos = goodsGroupService.queryList(param);
-//        resultObj.put("topicList", goodsGroupVos);
-        //
-//        param = new HashMap();
-//        param.put("parent_id", 0);
-//        param.put("notName", "推荐");//<>
-//        List<CategoryVo> categoryList = categoryService.queryList(param);
-//        List<Map> newCategoryList = new ArrayList<>();
-//
-//        for (CategoryVo categoryItem : categoryList) {
-//            param.remove("fields");
-//            param.put("parent_id", categoryItem.getId());
-//            List<CategoryVo> categoryEntityList = categoryService.queryList(param);
-//            List<Integer> childCategoryIds = new ArrayList<>();
-//            for (CategoryVo categoryEntity : categoryEntityList) {
-//                childCategoryIds.add(categoryEntity.getId());
-//            }
-//            //
-//            param = new HashMap();
-//            param.put("categoryIds", childCategoryIds);
-//            param.put("fields", "id as id, name as name, list_pic_url as list_pic_url, retail_price as retail_price");
-//            List<GoodsVo> categoryGoods = goodsService.queryList(param);
-//            Map newCategory = new HashMap();
-//            newCategory.put("id", categoryItem.getId());
-//            newCategory.put("name", categoryItem.getName());
-//            newCategory.put("goodsList", categoryGoods);
-//            newCategoryList.add(newCategory);
-//        }
-//        resultObj.put("categoryList", newCategoryList);
+
+        param = new HashMap();
+        param.put("is_new", 1);
+        param.put("sidx", "new_sort_order ");
+        param.put("order", "asc ");
+        param.put("offset", 0);
+        param.put("limit", 4);
+        List<BrandVo> brandList = brandService.queryList(param);
+        resultObj.put("brandList", brandList);
+
+        param = new HashMap();
+        param.put("offset", 0);
+        param.put("limit", 3);
+        List<TopicVo> topicList = topicService.queryList(param);
+        resultObj.put("topicList", topicList);
         return toResponsSuccess(resultObj);
     }
 }
