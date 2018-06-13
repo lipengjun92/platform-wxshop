@@ -7,6 +7,8 @@ import com.platform.entity.AddressVo;
 import com.platform.entity.UserVo;
 import com.platform.service.ApiAddressService;
 import com.platform.util.ApiBaseAction;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,6 +22,7 @@ import java.util.Map;
  * 时间: 2017-08-11 08:32<br>
  * 描述: ApiIndexController <br>
  */
+@Api(tags = "收货地址")
 @RestController
 @RequestMapping("/api/address")
 public class ApiAddressController extends ApiBaseAction {
@@ -29,6 +32,7 @@ public class ApiAddressController extends ApiBaseAction {
     /**
      * 获取用户的收货地址
      */
+    @ApiOperation(value = "获取用户的收货地址接口", response = Map.class)
     @RequestMapping("list")
     public Object list(@LoginUser UserVo loginUser) {
         Map param = new HashMap();
