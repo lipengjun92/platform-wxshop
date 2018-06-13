@@ -1,12 +1,11 @@
 <view class="container">
-  <button class="profile-info" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">
-    <image class="avatar" src="{{userInfo.avatarUrl}}"></image>
-    <view class="info">
-      <text class="name">{{userInfo.nickName}}</text>
-      <text class="level">{{userInfo.userName}}</text>
-    </view>
-  </button>
-
+  <button class="userinfo" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">
+		<image wx:if="{{userInfo && userInfo.avatarUrl}}" class="userinfo-avatar" src="{{ userInfo.avatarUrl }}" background-size="cover"></image>
+		<text class="userinfo-nickname">{{ userInfo.nickName }}</text>
+	</button>
+  <view style="height:20rpx;background: #eee;width:100%;"></view>
+  <view class="my-item" style='background:none;display:flex;flex-direction:column;height:auto;'></view>
+  
   <view class="user-menu">
     <view class="item">
       <navigator url="/pages/ucenter/order/order" class="a">
