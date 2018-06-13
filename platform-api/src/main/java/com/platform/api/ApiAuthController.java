@@ -14,6 +14,8 @@ import com.platform.util.CommonUtil;
 import com.platform.utils.CharUtil;
 import com.platform.utils.R;
 import com.platform.validator.Assert;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.apache.commons.collections.MapUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +33,7 @@ import java.util.Map;
  * @email 939961241@qq.com
  * @date 2017-03-23 15:31
  */
+@Api(tags = "API登录授权接口")
 @RestController
 @RequestMapping("/api/auth")
 public class ApiAuthController extends ApiBaseAction {
@@ -45,6 +48,7 @@ public class ApiAuthController extends ApiBaseAction {
      */
     @IgnoreAuth
     @RequestMapping("login")
+    @ApiOperation(value = "登录接口")
     public R login(String mobile, String password) {
         Assert.isBlank(mobile, "手机号不能为空");
         Assert.isBlank(password, "密码不能为空");
@@ -106,14 +110,14 @@ public class ApiAuthController extends ApiBaseAction {
             userVo.setGender(userInfo.getGender()); // //性别 0：未知、1：男、2：女
             userVo.setNickname(userInfo.getNickName());
             userService.save(userVo);
+
+            //新用户第一次登陆时，虽然user表数据已经新增成功，但是此时userId还是null，从数据库再查一次就能取到了
+            userVo = userService.queryByOpenId(sessionData.getString("openid"));
         } else {
             userVo.setLast_login_ip(this.getClientIp());
             userVo.setLast_login_time(nowTime);
             userService.update(userVo);
         }
-
-        //新用户第一次登陆时，虽然user表数据已经新增成功，但是此时userId还是null，从数据库再查一次就能取到了
-        userVo = userService.queryByOpenId(sessionData.getString("openid"));
 
         Map<String, Object> tokenMap = tokenService.createToken(userVo.getUserId());
         String token = MapUtils.getString(tokenMap, "token");
