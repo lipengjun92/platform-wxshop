@@ -1,38 +1,13 @@
 $(function () {
-    $("#jqGrid").jqGrid({
+    $("#jqGrid").Grid({
         url: '../attribute/list',
-        datatype: "json",
         colModel: [
             {label: 'id', name: 'id', index: 'id', key: true, hidden: true},
             {label: '所属种类', name: 'categoryName', index: 'attribute_category_id', width: 80},
             {label: '名称', name: 'name', index: 'name', width: 80},
             // {label: '类型', name: 'inputType', index: 'input_type', width: 80},
             // {label: '值', name: 'value', index: 'value', width: 80},
-            {label: '排序', name: 'sortOrder', index: 'sort_order', width: 80}],
-        viewrecords: true,
-        height: 385,
-        rowNum: 10,
-        rowList: [10, 30, 50],
-        rownumbers: true,
-        rownumWidth: 25,
-        autowidth: true,
-        multiselect: true,
-        pager: "#jqGridPager",
-        jsonReader: {
-            root: "page.list",
-            page: "page.currPage",
-            total: "page.totalPage",
-            records: "page.totalCount"
-        },
-        prmNames: {
-            page: "page",
-            rows: "limit",
-            order: "order"
-        },
-        gridComplete: function () {
-            //隐藏grid底部滚动条
-            $("#jqGrid").closest(".ui-jqgrid-bdiv").css({"overflow-x": "hidden"});
-        }
+            {label: '排序', name: 'sortOrder', index: 'sort_order', width: 80}]
     });
 });
 
@@ -65,7 +40,7 @@ var vm = new Vue({
             this.getCategories();
         },
         update: function (event) {
-            var id = getSelectedRow();
+            var id = getSelectedRow("#jqGrid");
             if (id == null) {
                 return;
             }
@@ -94,7 +69,7 @@ var vm = new Vue({
             });
         },
         del: function (event) {
-            var ids = getSelectedRows();
+            var ids = getSelectedRows("#jqGrid");
             if (ids == null) {
                 return;
             }

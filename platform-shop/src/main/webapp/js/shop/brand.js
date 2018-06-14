@@ -1,7 +1,6 @@
 $(function () {
-    $("#jqGrid").jqGrid({
+    $("#jqGrid").Grid({
         url: '../brand/list',
-        datatype: "json",
         colModel: [{
             label: 'id', name: 'id', index: 'id', key: true, hidden: true
         }, {
@@ -38,30 +37,7 @@ $(function () {
             }
         }, {
             label: '新品牌排序', name: 'newSortOrder', index: 'new_sort_order', width: 80
-        }],
-        viewrecords: true,
-        height: 385,
-        rowNum: 10,
-        rowList: [10, 30, 50],
-        rownumbers: true,
-        rownumWidth: 25,
-        autowidth: true,
-        multiselect: true,
-        pager: "#jqGridPager",
-        jsonReader: {
-            root: "page.list",
-            page: "page.currPage",
-            total: "page.totalPage",
-            records: "page.totalCount"
-        },
-        prmNames: {
-            page: "page",
-            rows: "limit",
-            order: "order"
-        },
-        gridComplete: function () {
-            $("#jqGrid").closest(".ui-jqgrid-bdiv").css({"overflow-x": "hidden"});
-        }
+        }]
     });
 });
 
@@ -90,7 +66,7 @@ var vm = new Vue({
             vm.brand = {listPicUrl: '', picUrl: '', appListPicUrl: '', newPicUrl: '', isShow: 1, isNew: 0};
         },
         update: function (event) {
-            var id = getSelectedRow();
+            var id = getSelectedRow("#jqGrid");
             if (id == null) {
                 return;
             }
@@ -118,7 +94,7 @@ var vm = new Vue({
             });
         },
         del: function (event) {
-            var ids = getSelectedRows();
+            var ids = getSelectedRows("#jqGrid");
             if (ids == null) {
                 return;
             }

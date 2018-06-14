@@ -1,7 +1,6 @@
 $(function () {
-    $("#jqGrid").jqGrid({
+    $("#jqGrid").Grid({
         url: '../${pathName}/list',
-        datatype: "json",
         colModel: [
 #foreach($column in $columns)
 #if($column.columnName == $pk.columnName)
@@ -9,30 +8,7 @@ $(function () {
 #else
 			{label: '${column.comments}', name: '${column.attrname}', index: '${column.columnName}', width: 80}#if($velocityCount != $columns.size()),
 #end#end#end
-],
-		viewrecords: true,
-        height: 385,
-        rowNum: 10,
-        rowList: [10, 30, 50],
-        rownumbers: true,
-        rownumWidth: 25,
-        autowidth: true,
-        multiselect: true,
-        pager: "#jqGridPager",
-        jsonReader: {
-            root: "page.list",
-            page: "page.currPage",
-            total: "page.totalPage",
-            records: "page.totalCount"
-        },
-        prmNames: {
-            page: "page",
-            rows: "limit",
-            order: "order"
-        },
-        gridComplete: function () {
-            $("#jqGrid").closest(".ui-jqgrid-bdiv").css({"overflow-x": "hidden"});
-        }
+]
     });
 });
 
@@ -61,7 +37,7 @@ let vm = new Vue({
 			vm.${classname} = {};
 		},
 		update: function (event) {
-            let $pk.attrname = getSelectedRow();
+            let $pk.attrname = getSelectedRow("#jqGrid");
 			if ($pk.attrname == null) {
 				return;
 			}
@@ -72,49 +48,45 @@ let vm = new Vue({
 		},
 		saveOrUpdate: function (event) {
             let url = vm.${classname}.${pk.attrname} == null ? "../${pathName}/save" : "../${pathName}/update";
-			$.ajax({
-				type: "POST",
+            Ajax.request({
 			    url: url,
+                params: JSON.stringify(vm.${classname}),
+                type: "POST",
 			    contentType: "application/json",
-			    data: JSON.stringify(vm.${classname}),
-                success: function (r) {
-                    if (r.code === 0) {
-                        alert('操作成功', function (index) {
-                            vm.reload();
-                        });
-                    } else {
-                        alert(r.msg);
-                    }
+                successCallback: function (r) {
+                    alert('操作成功', function (index) {
+                        vm.reload();
+                    });
                 }
 			});
 		},
 		del: function (event) {
-            let ${pk.attrname}s = getSelectedRows();
+            let ${pk.attrname}s = getSelectedRows("#jqGrid");
 			if (${pk.attrname}s == null){
 				return;
 			}
 
 			confirm('确定要删除选中的记录？', function () {
-				$.ajax({
-					type: "POST",
+                Ajax.request({
 				    url: "../${pathName}/delete",
+                    params: JSON.stringify(${pk.attrname}s),
+                    type: "POST",
 				    contentType: "application/json",
-				    data: JSON.stringify(${pk.attrname}s),
-				    success: function (r) {
-						if (r.code == 0) {
-							alert('操作成功', function (index) {
-								$("#jqGrid").trigger("reloadGrid");
-							});
-						} else {
-							alert(r.msg);
-						}
+                    successCallback: function () {
+                        alert('操作成功', function (index) {
+                            vm.reload();
+                        });
 					}
 				});
 			});
 		},
 		getInfo: function(${pk.attrname}){
-			$.get("../${pathName}/info/"+${pk.attrname}, function (r) {
-                vm.${classname} = r.${classname};
+            Ajax.request({
+                url: "../${pathName}/info/"+${pk.attrname},
+                async: true,
+                successCallback: function (r) {
+                    vm.${classname} = r.${classname};
+                }
             });
 		},
 		reload: function (event) {
@@ -126,6 +98,12 @@ let vm = new Vue({
             }).trigger("reloadGrid");
             vm.handleReset('formValidate');
 		},
+        reloadSearch: function() {
+            vm.q = {
+                name: ''
+            }
+            vm.reload();
+        },
         handleSubmit: function (name) {
             handleSubmitValidate(this, name, function () {
                 vm.saveOrUpdate()

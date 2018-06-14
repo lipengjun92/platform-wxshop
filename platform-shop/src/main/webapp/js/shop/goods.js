@@ -1,7 +1,6 @@
 $(function () {
-    $("#jqGrid").jqGrid({
+    $("#jqGrid").Grid({
         url: '../goods/list',
-        datatype: "json",
         colModel: [
             {label: 'id', name: 'id', index: 'id', key: true, hidden: true},
             {label: '商品类型', name: 'categoryName', index: 'category_id', width: 80},
@@ -15,8 +14,8 @@ $(function () {
             },
             {
                 label: '录入日期', name: 'addTime', index: 'add_time', width: 80, formatter: function (value) {
-                return transDate(value, 'yyyy-MM-dd');
-            }
+                    return transDate(value, 'yyyy-MM-dd');
+                }
             },
             {label: '属性类别', name: 'attributeCategoryName', index: 'attribute_category', width: 80},
             {label: '零售价格', name: 'retailPrice', index: 'retail_price', width: 80},
@@ -25,32 +24,9 @@ $(function () {
             {label: '市场价', name: 'marketPrice', index: 'market_price', width: 80},
             {
                 label: '热销', name: 'isHot', index: 'is_hot', width: 80, formatter: function (value) {
-                return transIsNot(value);
-            }
-            }],
-        viewrecords: true,
-        height: 385,
-        rowNum: 10,
-        rowList: [10, 30, 50],
-        rownumbers: true,
-        rownumWidth: 25,
-        autowidth: true,
-        multiselect: true,
-        pager: "#jqGridPager",
-        jsonReader: {
-            root: "page.list",
-            page: "page.currPage",
-            total: "page.totalPage",
-            records: "page.totalCount"
-        },
-        prmNames: {
-            page: "page",
-            rows: "limit",
-            order: "order"
-        },
-        gridComplete: function () {
-            $("#jqGrid").closest(".ui-jqgrid-bdiv").css({"overflow-x": "hidden"});
-        }
+                    return transIsNot(value);
+                }
+            }]
     });
     $('#goodsDesc').editable({
         inlineMode: false,
@@ -146,7 +122,7 @@ var vm = new Vue({
             // vm.getAttributes('');
         },
         update: function (event) {
-            var id = getSelectedRow();
+            var id = getSelectedRow("#jqGrid");
             if (id == null) {
                 return;
             }
@@ -206,7 +182,7 @@ var vm = new Vue({
             });
         },
         enSale: function () {
-            var id = getSelectedRow();
+            var id = getSelectedRow("#jqGrid");
             if (id == null) {
                 return;
             }
@@ -229,7 +205,7 @@ var vm = new Vue({
             });
         },
         openSpe: function () {
-            var id = getSelectedRow();
+            var id = getSelectedRow("#jqGrid");
             if (id == null) {
                 return;
             }
@@ -240,7 +216,7 @@ var vm = new Vue({
             })
         },
         openPro: function () {
-            var id = getSelectedRow();
+            var id = getSelectedRow("#jqGrid");
             if (id == null) {
                 return;
             }
@@ -251,7 +227,7 @@ var vm = new Vue({
             });
         },
         unSale: function () {
-            var id = getSelectedRow();
+            var id = getSelectedRow("#jqGrid");
             if (id == null) {
                 return;
             }
@@ -274,7 +250,7 @@ var vm = new Vue({
             });
         },
         del: function (event) {
-            var ids = getSelectedRows();
+            var ids = getSelectedRows("#jqGrid");
             if (ids == null) {
                 return;
             }

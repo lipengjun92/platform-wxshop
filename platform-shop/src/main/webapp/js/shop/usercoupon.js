@@ -4,9 +4,8 @@ $(function () {
     if (userId) {
         url += '?userId=' + userId;
     }
-    $("#jqGrid").jqGrid({
+    $("#jqGrid").Grid({
         url: url,
-        datatype: "json",
         colModel: [
             {label: 'id', name: 'id', index: 'id', key: true, hidden: true},
             {label: '会员', name: 'userName', index: 'user_id', width: 80},
@@ -14,38 +13,15 @@ $(function () {
             {label: '优惠券序号', name: 'couponNumber', index: 'coupon_number', width: 80},
             {
                 label: '下发时间', name: 'addTime', index: 'add_time', width: 80, formatter: function (value) {
-                return transDate(value);
-            }
+                    return transDate(value);
+                }
             },
             {
                 label: '使用时间', name: 'usedTime', index: 'used_time', width: 80, formatter: function (value) {
-                return transDate(value);
-            }
+                    return transDate(value);
+                }
             },
-            {label: '订单Id', name: 'orderId', index: 'order_id', width: 80}],
-        viewrecords: true,
-        height: 385,
-        rowNum: 10,
-        rowList: [10, 30, 50],
-        rownumbers: true,
-        rownumWidth: 25,
-        autowidth: true,
-        multiselect: true,
-        pager: "#jqGridPager",
-        jsonReader: {
-            root: "page.list",
-            page: "page.currPage",
-            total: "page.totalPage",
-            records: "page.totalCount"
-        },
-        prmNames: {
-            page: "page",
-            rows: "limit",
-            order: "order"
-        },
-        gridComplete: function () {
-            $("#jqGrid").closest(".ui-jqgrid-bdiv").css({"overflow-x": "hidden"});
-        }
+            {label: '订单Id', name: 'orderId', index: 'order_id', width: 80}]
     });
 });
 
@@ -70,7 +46,7 @@ var vm = new Vue({
             vm.userCoupon = {};
         },
         update: function (event) {
-            var id = getSelectedRow();
+            var id = getSelectedRow("#jqGrid");
             if (id == null) {
                 return;
             }
@@ -98,7 +74,7 @@ var vm = new Vue({
             });
         },
         del: function (event) {
-            var ids = getSelectedRows();
+            var ids = getSelectedRows("#jqGrid");
             if (ids == null) {
                 return;
             }

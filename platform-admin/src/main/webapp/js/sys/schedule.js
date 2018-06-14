@@ -1,7 +1,6 @@
 $(function () {
-    $("#jqGrid").jqGrid({
+    $("#jqGrid").Grid({
         url: '../sys/schedule/list',
-        datatype: "json",
         colModel: [
             {label: '任务ID', name: 'jobId', width: 60, key: true},
             {label: 'bean名称', name: 'beanName', width: 100},
@@ -11,36 +10,12 @@ $(function () {
             {label: '备注 ', name: 'remark', width: 100},
             {
                 label: '状态', name: 'status', width: 60, formatter: function (value, options, row) {
-                return value === 0 ?
-                    '<span class="label label-success">正常</span>' :
-                    '<span class="label label-danger">暂停</span>';
+                    return value === 0 ?
+                        '<span class="label label-success">正常</span>' :
+                        '<span class="label label-danger">暂停</span>';
+                }
             }
-            }
-        ],
-        viewrecords: true,
-        height: 385,
-        rowNum: 10,
-        rowList: [10, 30, 50],
-        rownumbers: true,
-        rownumWidth: 25,
-        autowidth: true,
-        multiselect: true,
-        pager: "#jqGridPager",
-        jsonReader: {
-            root: "page.list",
-            page: "page.currPage",
-            total: "page.totalPage",
-            records: "page.totalCount"
-        },
-        prmNames: {
-            page: "page",
-            rows: "limit",
-            order: "order"
-        },
-        gridComplete: function () {
-            //隐藏grid底部滚动条
-            $("#jqGrid").closest(".ui-jqgrid-bdiv").css({"overflow-x": "hidden"});
-        }
+        ]
     });
 });
 
@@ -75,7 +50,7 @@ var vm = new Vue({
             vm.schedule = {};
         },
         update: function () {
-            var jobId = getSelectedRow();
+            var jobId = getSelectedRow("#jqGrid");
             if (jobId == null) {
                 return;
             }
@@ -105,7 +80,7 @@ var vm = new Vue({
             });
         },
         del: function (event) {
-            var jobIds = getSelectedRows();
+            var jobIds = getSelectedRows("#jqGrid");
             if (jobIds == null) {
                 return;
             }
@@ -129,7 +104,7 @@ var vm = new Vue({
             });
         },
         pause: function (event) {
-            var jobIds = getSelectedRows();
+            var jobIds = getSelectedRows("#jqGrid");
             if (jobIds == null) {
                 return;
             }
@@ -153,7 +128,7 @@ var vm = new Vue({
             });
         },
         resume: function (event) {
-            var jobIds = getSelectedRows();
+            var jobIds = getSelectedRows("#jqGrid");
             if (jobIds == null) {
                 return;
             }
@@ -177,7 +152,7 @@ var vm = new Vue({
             });
         },
         runOnce: function (event) {
-            var jobIds = getSelectedRows();
+            var jobIds = getSelectedRows("#jqGrid");
             if (jobIds == null) {
                 return;
             }
