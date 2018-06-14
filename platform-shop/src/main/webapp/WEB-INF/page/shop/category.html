@@ -8,9 +8,10 @@
 <div id="rrapp" v-cloak>
     <div v-show="showList">
         <Row :gutter="16">
-            <div class="buttons-group">
-                &nbsp;&nbsp;
+            <div class="search-group">
                 <i-button type="ghost" @click="reload"><i class="fa fa-refresh"></i>&nbsp;刷新</i-button>
+            </div>
+            <div class="buttons-group">
                 #if($shiro.hasPermission("category:save"))
                 <i-button type="info" @click="add"><i class="fa fa-plus"></i>&nbsp;新增</i-button>
                 #end
