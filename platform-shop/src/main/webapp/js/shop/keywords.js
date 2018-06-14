@@ -1,7 +1,6 @@
 $(function () {
-    $("#jqGrid").jqGrid({
+    $("#jqGrid").Grid({
         url: '../keywords/list',
-        datatype: "json",
         colModel: [
             {label: 'id', name: 'id', index: 'id', key: true, hidden: true},
             {label: '关键词', name: 'keyword', index: 'keyword', width: 80},
@@ -10,30 +9,7 @@ $(function () {
             {label: '显示', name: 'isShow', index: 'is_show', width: 80},
             {label: '排序', name: 'sortOrder', index: 'sort_order', width: 80},
             {label: '跳转链接', name: 'schemeUrl', index: 'scheme_url', width: 80},
-            {label: '类型', name: 'type', index: 'type', width: 80}],
-        viewrecords: true,
-        height: 385,
-        rowNum: 10,
-        rowList: [10, 30, 50],
-        rownumbers: true,
-        rownumWidth: 25,
-        autowidth: true,
-        multiselect: true,
-        pager: "#jqGridPager",
-        jsonReader: {
-            root: "page.list",
-            page: "page.currPage",
-            total: "page.totalPage",
-            records: "page.totalCount"
-        },
-        prmNames: {
-            page: "page",
-            rows: "limit",
-            order: "order"
-        },
-        gridComplete: function () {
-            $("#jqGrid").closest(".ui-jqgrid-bdiv").css({"overflow-x": "hidden"});
-        }
+            {label: '类型', name: 'type', index: 'type', width: 80}]
     });
 });
 
@@ -62,7 +38,7 @@ var vm = new Vue({
             vm.keywords = {isHot: 0, isDefault: 0, isShow: 1, type: 0};
         },
         update: function (event) {
-            var id = getSelectedRow();
+            var id = getSelectedRow("#jqGrid");
             if (id == null) {
                 return;
             }
@@ -90,7 +66,7 @@ var vm = new Vue({
             });
         },
         del: function (event) {
-            var ids = getSelectedRows();
+            var ids = getSelectedRows("#jqGrid");
             if (ids == null) {
                 return;
             }

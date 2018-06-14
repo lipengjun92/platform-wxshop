@@ -1,30 +1,29 @@
 $(function () {
-    $("#jqGrid").jqGrid({
+    $("#jqGrid").Grid({
         url: '../coupon/list',
-        datatype: "json",
         colModel: [
             {label: 'id', name: 'id', index: 'id', key: true, hidden: true},
             {label: '优惠券名称', name: 'name', index: 'name', width: 120},
             {label: '金额', name: 'typeMoney', index: 'type_money', width: 80},
             {
                 label: '发放方式', name: 'sendType', index: 'send_type', width: 80, formatter: function (value) {
-                if (value == 0) {
-                    return '按订单发放';
-                } else if (value == 1) {
-                    return '按用户发放';
-                } else if (value == 2) {
-                    return '商品转发送券';
-                } else if (value == 3) {
-                    return '按商品发放';
-                } else if (value == 4) {
-                    return '新用户注册';
-                } else if (value == 5) {
-                    return '线下发放';
-                } else if (value == 7) {
-                    return '包邮优惠';
+                    if (value == 0) {
+                        return '按订单发放';
+                    } else if (value == 1) {
+                        return '按用户发放';
+                    } else if (value == 2) {
+                        return '商品转发送券';
+                    } else if (value == 3) {
+                        return '按商品发放';
+                    } else if (value == 4) {
+                        return '新用户注册';
+                    } else if (value == 5) {
+                        return '线下发放';
+                    } else if (value == 7) {
+                        return '包邮优惠';
+                    }
+                    return '-';
                 }
-                return '-';
-            }
             },
             {label: '最小金额', name: 'minAmount', index: 'min_amount', width: 80},
             {label: '最大金额', name: 'maxAmount', index: 'max_amount', width: 80},
@@ -39,8 +38,8 @@ $(function () {
             },
             {
                 label: '发放结束时间', name: 'sendEndDate', index: 'send_end_date', width: 120, formatter: function (value) {
-                return transDate(value);
-            }
+                    return transDate(value);
+                }
             },
             {
                 label: '使用开始时间',
@@ -53,42 +52,18 @@ $(function () {
             },
             {
                 label: '使用结束时间', name: 'useEndDate', index: 'use_end_date', width: 120, formatter: function (value) {
-                return transDate(value);
-            }
+                    return transDate(value);
+                }
             },
             {label: '最小商品金额', name: 'minGoodsAmount', index: 'min_goods_amount', width: 80},
             {
                 label: '操作', width: 70, sortable: false, formatter: function (value, col, row) {
-                if (row.sendType == 1 || row.sendType == 3) {
-                    return '<button class="ivu-btn ivu-btn-primary ivu-btn-circle ivu-btn-small" onclick="vm.publish(' + row.id + ',' + row.sendType + ')"><i class="ivu-icon ivu-icon-android-send"></i>发放</button>';
+                    if (row.sendType == 1 || row.sendType == 3) {
+                        return '<button class="ivu-btn ivu-btn-primary ivu-btn-circle ivu-btn-small" onclick="vm.publish(' + row.id + ',' + row.sendType + ')"><i class="ivu-icon ivu-icon-android-send"></i>发放</button>';
+                    }
+                    return '';
                 }
-                return '';
-            }
-            }],
-        viewrecords: true,
-        height: 385,
-        rowNum: 10,
-        rowList: [10, 30, 50],
-        rownumbers: true,
-        rownumWidth: 25,
-        autowidth: true,
-        multiselect: true,
-        pager: "#jqGridPager",
-        jsonReader: {
-            root: "page.list",
-            page: "page.currPage",
-            total: "page.totalPage",
-            records: "page.totalCount"
-        },
-        prmNames: {
-            page: "page",
-            rows: "limit",
-            order: "order"
-        },
-        gridComplete: function () {
-            //隐藏grid底部滚动条
-            $("#jqGrid").closest(".ui-jqgrid-bdiv").css({"overflow-x": "hidden"});
-        }
+            }]
     });
 });
 
@@ -127,7 +102,7 @@ var vm = new Vue({
             vm.coupon = {sendType: 0};
         },
         update: function (event) {
-            var id = getSelectedRow();
+            var id = getSelectedRow("#jqGrid");
             if (id == null) {
                 return;
             }
@@ -157,7 +132,7 @@ var vm = new Vue({
             });
         },
         del: function (event) {
-            var ids = getSelectedRows();
+            var ids = getSelectedRows("#jqGrid");
             if (ids == null) {
                 return;
             }

@@ -35,7 +35,7 @@ var vm = new Vue({
             vm.query();
         },
         generator: function () {
-            var tableNames = getSelectedRows();
+            var tableNames = getSelectedRows("#jqGrid");
             if (tableNames == null) {
                 return;
             }

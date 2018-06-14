@@ -1,20 +1,19 @@
 $(function () {
-    $("#jqGrid").jqGrid({
+    $("#jqGrid").Grid({
         url: '../topic/list',
-        datatype: "json",
         colModel: [
             {label: 'id', name: 'id', index: 'id', key: true, hidden: true},
             {label: '活动主题', name: 'title', index: 'title', width: 80},
             {label: '活动内容', name: 'content', index: 'content', width: 80, hidden: true},
             {
                 label: '图像', name: 'avatar', index: 'avatar', width: 80, formatter: function (value) {
-                return transImg(value);
-            }
+                    return transImg(value);
+                }
             },
             {
                 label: '活动条例图片', name: 'itemPicUrl', index: 'item_pic_url', width: 80, formatter: function (value) {
-                return transImg(value);
-            }
+                    return transImg(value);
+                }
             },
             {label: '子标题', name: 'subtitle', index: 'subtitle', width: 80},
             {label: '活动类别', name: 'topicCategoryId', index: 'topic_category_id', width: 80},
@@ -22,34 +21,11 @@ $(function () {
             {label: 'readCount', name: 'readCount', index: 'read_count', width: 80},
             {
                 label: '场景图片', name: 'scenePicUrl', index: 'scene_pic_url', width: 80, formatter: function (value) {
-                return transImg(value);
-            }
+                    return transImg(value);
+                }
             },
             {label: '活动模板Id', name: 'topicTemplateId', index: 'topic_template_id', width: 80},
-            {label: '活动标签Id', name: 'topicTagId', index: 'topic_tag_id', width: 80}],
-        viewrecords: true,
-        height: 385,
-        rowNum: 10,
-        rowList: [10, 30, 50],
-        rownumbers: true,
-        rownumWidth: 25,
-        autowidth: true,
-        multiselect: true,
-        pager: "#jqGridPager",
-        jsonReader: {
-            root: "page.list",
-            page: "page.currPage",
-            total: "page.totalPage",
-            records: "page.totalCount"
-        },
-        prmNames: {
-            page: "page",
-            rows: "limit",
-            order: "order"
-        },
-        gridComplete: function () {
-            $("#jqGrid").closest(".ui-jqgrid-bdiv").css({"overflow-x": "hidden"});
-        }
+            {label: '活动标签Id', name: 'topicTagId', index: 'topic_tag_id', width: 80}]
     });
     $('#content').editable({
         inlineMode: false,
@@ -95,7 +71,7 @@ var vm = new Vue({
             $('#content').editable('setHTML', '');
         },
         update: function (event) {
-            var id = getSelectedRow();
+            var id = getSelectedRow("#jqGrid");
             if (id == null) {
                 return;
             }
@@ -126,7 +102,7 @@ var vm = new Vue({
             });
         },
         del: function (event) {
-            var ids = getSelectedRows();
+            var ids = getSelectedRows("#jqGrid");
             if (ids == null) {
                 return;
             }

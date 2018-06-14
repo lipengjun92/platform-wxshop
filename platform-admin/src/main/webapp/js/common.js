@@ -71,14 +71,14 @@ window.openWindow = function (options) {
 };
 
 //获取选中的数据
-function getSelectedRowData() {
-    var id = getSelectedRow();
-    return $("#jqGrid").jqGrid('getRowData', id);
+function getSelectedRowData(gridId) {
+    var id = getSelectedRow(gridId);
+    return $(gridId).jqGrid('getRowData', id);
 }
 
 //选择一条记录
-function getSelectedRow() {
-    var grid = $("#jqGrid");
+function getSelectedRow(gridId) {
+    var grid = $(gridId);
     var rowKey = grid.getGridParam("selrow");
     if (!rowKey) {
         iview.Message.error("请选择一条记录");
@@ -95,8 +95,8 @@ function getSelectedRow() {
 };
 
 //选择多条记录
-function getSelectedRows() {
-    var grid = $("#jqGrid");
+function getSelectedRows(gridId) {
+    var grid = $(gridId);
     var rowKey = grid.getGridParam("selrow");
     if (!rowKey) {
         iview.Message.error("请选择一条记录");

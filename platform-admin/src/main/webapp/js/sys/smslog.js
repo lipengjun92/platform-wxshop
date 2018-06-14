@@ -1,7 +1,6 @@
 $(function () {
-    $("#jqGrid").jqGrid({
+    $("#jqGrid").Grid({
         url: '../sys/smslog/list',
-        datatype: "json",
         colModel: [
             {label: 'id', name: 'id', index: 'id', key: true, hidden: true},
             {label: '操作人', name: 'userName', index: 'user_id', width: 80},
@@ -9,45 +8,22 @@ $(function () {
             {label: '发送内容', name: 'content', index: 'content', width: 80},
             {
                 label: '发送时间', name: 'stime', index: 'stime', width: 100, formatter: function (value) {
-                return transDate(value, 'yyyy-MM-dd hh:mm:ss');
-            }
+                    return transDate(value, 'yyyy-MM-dd hh:mm:ss');
+                }
             },
             {label: '用户签名', name: 'sign', index: 'sign', width: 80},
             {
                 label: '发送状态', name: 'sendStatus', index: 'send_status', width: 80, formatter: function (value) {
-                if (value === 0) {
-                    return '<span class="label label-success">成功</span>';
+                    if (value === 0) {
+                        return '<span class="label label-success">成功</span>';
+                    }
+                    return '<span class="label label-danger">失败</span>';
                 }
-                return '<span class="label label-danger">失败</span>';
-            }
             },
             {label: '无效号码数', name: 'invalidNum', index: 'invalid_num', width: 80},
             {label: '成功提交数', name: 'successNum', index: 'success_num', width: 80},
             {label: '黑名单数', name: 'blackNum', index: 'black_num', width: 80},
-            {label: '返回消息', name: 'returnMsg', index: 'return_msg', width: 100}],
-        viewrecords: true,
-        height: 385,
-        rowNum: 10,
-        rowList: [10, 30, 50],
-        rownumbers: true,
-        rownumWidth: 25,
-        autowidth: true,
-        multiselect: true,
-        pager: "#jqGridPager",
-        jsonReader: {
-            root: "page.list",
-            page: "page.currPage",
-            total: "page.totalPage",
-            records: "page.totalCount"
-        },
-        prmNames: {
-            page: "page",
-            rows: "limit",
-            order: "order"
-        },
-        gridComplete: function () {
-            $("#jqGrid").closest(".ui-jqgrid-bdiv").css({"overflow-x": "hidden"});
-        }
+            {label: '返回消息', name: 'returnMsg', index: 'return_msg', width: 100}]
     });
 });
 
