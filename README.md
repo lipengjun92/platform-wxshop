@@ -122,6 +122,7 @@
     
     如何交流、反馈、参与贡献？
     官方QQ群：66502035
+    博客：https://fly2you.cn/mblog
     git：https://gitee.com/fuyang_lipengjun/platform
     如需获取项目最新源码，请Watch、Star项目，同时也是对项目最好的支持
     
@@ -154,6 +155,14 @@
 7. 打开微信开发者工具
 8. 导入 /wx-mall填写appId
 9. 修改 /wx-mall/config/app.js里NewApiRootUrl的值
+10.使用eclipse启动项目后默认访问路径
+
+        http://localhost:8080/platform-framework
+        
+11.使用idea启动项目后默认访问路径
+
+        http://localhost:8080/
+
 
 
 ### 登录页面
@@ -165,9 +174,19 @@
 ### 捐赠
 ![](http://p9kyr79ne.bkt.clouddn.com/1/20180531/145823816a2fe9.png "捐赠")
 ### 小程序首页
-![](http://p9kyr79ne.bkt.clouddn.com/1/20180531/145850738226e8.png "小程序首页")
+![](http://p9kyr79ne.bkt.clouddn.com/1/20180614/102947584b7f1f.png "小程序首页")
+### 专题
+![](http://p9kyr79ne.bkt.clouddn.com/1/20180614/103157121abad8.png "专题")
+### 分类
+![](http://p9kyr79ne.bkt.clouddn.com/1/20180614/103238930383af.png "分类")
+### 购物车
+![](http://p9kyr79ne.bkt.clouddn.com/1/20180614/103319500ba517.png "购物车")
+### 登录授权
+![](http://p9kyr79ne.bkt.clouddn.com/1/20180614/103355172c1903.png "登录授权")
+### 优惠券
+![](http://p9kyr79ne.bkt.clouddn.com/1/20180614/1034519508712e.png "优惠券")
 ### 小程序并联手机
-![](http://p9kyr79ne.bkt.clouddn.com/1/20180531/145615428ad3f.png "并联手机")
+![](http://p9kyr79ne.bkt.clouddn.com/1/20180614/1030474135e131.png "并联手机")
 ### VUE页面
 ![](http://p9kyr79ne.bkt.clouddn.com/1/20180531/14592343205eec.png "VUE页面")
 
@@ -179,4 +198,4 @@
 #### 汽车人E车宝
 ![](http://p9kyr79ne.bkt.clouddn.com/1/20180531/15001446746217.png "汽车人E车宝")
 #### 海数据在线
-![](http://p9kyr79ne.bkt.clouddn.com/1/20180531/15002693223b35.jpg "海数据在线")
+![](http://p9kyr79ne.bkt.clouddn.com/1/20180614/103939911f7e76.png "海数据在线")
