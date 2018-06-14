@@ -187,19 +187,16 @@ var vm = new Vue({
                 return;
             }
             confirm('确定要上架选中的商品？', function () {
-                $.ajax({
+                Ajax.request({
                     type: "POST",
                     url: "../goods/enSale",
+                    params: JSON.stringify(id),
                     contentType: "application/json",
-                    data: JSON.stringify(id),
-                    success: function (r) {
-                        if (r.code == 0) {
-                            alert('操作成功', function (index) {
-                                $("#jqGrid").trigger("reloadGrid");
-                            });
-                        } else {
-                            alert(r.msg);
-                        }
+                    type: 'POST',
+                    successCallback: function () {
+                        alert('提交成功', function (index) {
+                            vm.reload();
+                        });
                     }
                 });
             });
