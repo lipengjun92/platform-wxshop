@@ -1,10 +1,10 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : 120.79.130.222
+Source Server         : localhost
 Source Server Version : 50617
-Source Host           : 120.79.130.222:13306
-Source Database       : platform
+Source Host           : localhost:3306
+Source Database       : platform-shop
 
 Target Server Type    : MYSQL
 Target Server Version : 50617
