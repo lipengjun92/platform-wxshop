@@ -25,7 +25,6 @@
         jqgrid5.1.1
         ztreev3.5.26
         froala_editor1.2.2
-        iNotify
 
     platform-admin 
     后台管理
@@ -55,7 +54,7 @@
     微信小程序商城
 
     platform-vue 
-    H5商城
+    微信公众号商城（待开发）
 
     实现功能
 
@@ -118,6 +117,7 @@
 
     后台管理项目演示
     演示地址：https://fly2you.cn/platform
+    基础架构版演示地址：https://fly2you.cn/platform-framework
     账号密码：admin/admin
     
     如何交流、反馈、参与贡献？
@@ -133,8 +133,8 @@
 2. 创建数据库
 3. 初始化sql脚本 /doc/platform.sql
 4. 导入项目到IDE中
-5. 导入支付证书至/platform-shop/src/main/resources/cert/目录下
-5. 修改配置文件 /platform-admin/src/main/resources/dev/platform.properties
+5. 导入支付证书至/platform-shop/src/main/resources/cert/目录下（申请商户号、开通微信支付、下载支付证书）
+6. 修改配置文件 /platform-admin/src/main/resources/dev/platform.properties
 
         jdbc.url
         jdbc.username
@@ -151,15 +151,15 @@
         wx.notifyUrl
         短信接口有效IP
         sms.validIp
-6. 启动后台项目
-7. 打开微信开发者工具
-8. 导入 /wx-mall填写appId
-9. 修改 /wx-mall/config/app.js里NewApiRootUrl的值
-10.使用eclipse启动项目后默认访问路径
+7. 启动后台项目
+8. 打开微信开发者工具
+9. 导入 /wx-mall填写appId
+10. 修改 /wx-mall/config/app.js里NewApiRootUrl的值
+11.使用eclipse启动项目后默认访问路径
 
         http://localhost:8080/platform-framework
         
-11.使用idea启动项目后默认访问路径
+12.使用idea启动项目后默认访问路径
 
         http://localhost:8080/
 
