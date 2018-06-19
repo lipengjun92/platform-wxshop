@@ -117,13 +117,15 @@
 
     后台管理项目演示
     演示地址：https://fly2you.cn/platform
-    基础架构版演示地址：https://fly2you.cn/platform-framework
     账号密码：admin/admin
     
     如何交流、反馈、参与贡献？
     官方QQ群：66502035
     博客：https://fly2you.cn/mblog
     git：https://gitee.com/fuyang_lipengjun/platform
+    基础架构版
+        git：https://gitee.com/fuyang_lipengjun/platform-framework
+        演示地址：https://fly2you.cn/platform-framework
     如需获取项目最新源码，请Watch、Star项目，同时也是对项目最好的支持
     
 
