@@ -69,10 +69,8 @@ platform-wechat-mall
     * a 所有商品
     * b 用户评论
     * c 产品设置
-    * d 商品满减搭配
-    * e 商品规格
-    * f 商品回收站
-    * g 团购设置
+    * d 商品规格
+    * e 商品回收站
 
 * 四：推广管理
     * a 广告列表
@@ -98,15 +96,15 @@ platform-wechat-mall
     * a 配置短信平台账户信息
     * b 向外提供发送短信接口：
     ```
-    * http://域名:端口/api/sendSms?mobile=13000000000,15209831990&content=发送的短信内容
-    * 安全起见，需配置有效IP地址。platform.properties -> sms.validIp
+    http://域名:端口/api/sendSms?mobile=13000000000,15209831990&content=发送的短信内容  
+    安全起见，需配置有效IP地址。platform.properties -> sms.validIp
     ```
 
 ## 后台管理项目演示
 * 演示地址：[https://fly2you.cn/platform](https://fly2you.cn/platform)  `账号密码：admin/admin`
 
 * 如何交流、反馈、参与贡献？
-    * 官方QQ群：66502035
+    * 官方QQ群：<a href="mqqapi://card/show_pslcard?src_type=internal&version=1&uin=66502035&card_type=group&source=external">66502035</a>
     * 博客：[https://fly2you.cn/mblog](https://fly2you.cn/mblog)
     * git：[https://gitee.com/fuyang_lipengjun/platform](https://gitee.com/fuyang_lipengjun/platform)
     * 基础架构版
