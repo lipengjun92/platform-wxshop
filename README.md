@@ -97,9 +97,10 @@ platform-wechat-mall
     * **需要短信验证码、短信通知、短信营销的客户进群私聊我**
     * a 配置短信平台账户信息
     * b 向外提供发送短信接口：
-        * http://域名:端口/api/sendSms?mobile=13000000000,15209831990&content=发送的短信内容
-        * 安全起见，需配置有效IP地址。platform.properties -> sms.validIp
-		
+    ```
+    * http://域名:端口/api/sendSms?mobile=13000000000,15209831990&content=发送的短信内容
+    * 安全起见，需配置有效IP地址。platform.properties -> sms.validIp
+    ```
 
 ## 后台管理项目演示
 * 演示地址：[https://fly2you.cn/platform](https://fly2you.cn/platform)  `账号密码：admin/admin`
@@ -141,7 +142,7 @@ platform-wechat-mall
     * [http://localhost:8080](http://localhost:8080)
 
 ***
-##页面展示
+## 页面展示
 ### 登录页面
 ![](http://p9kyr79ne.bkt.clouddn.com/1/20180531/14570217019439.png "登录")
 ### 首页
