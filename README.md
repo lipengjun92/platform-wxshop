@@ -104,7 +104,7 @@ platform-wechat-mall
 * 演示地址：[https://fly2you.cn/platform](https://fly2you.cn/platform)  `账号密码：admin/admin`
 
 * 如何交流、反馈、参与贡献？
-    * 官方QQ群：<a href="mqqapi://card/show_pslcard?src_type=internal&version=1&uin=66502035&card_type=group&source=external">66502035</a>
+    * 官方QQ群：<a target="_blank" href="//shang.qq.com/wpa/qunwpa?idkey=75689ba2797dd88a208446088b029fbdeba87a29315ff2a021a6731f22ef5052"><img border="0" src="//pub.idqqimg.com/wpa/images/group.png" alt="大平台系统开发" title="大平台系统开发"></a>
     * 博客：[https://fly2you.cn/mblog](https://fly2you.cn/mblog)
     * git：[https://gitee.com/fuyang_lipengjun/platform](https://gitee.com/fuyang_lipengjun/platform)
     * 基础架构版
