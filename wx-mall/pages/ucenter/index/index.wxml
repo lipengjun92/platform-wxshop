@@ -55,12 +55,14 @@
         <text class="txt">账号安全</text>
       </navigator>
     </view>
-    <view class="item no-border">
-      <navigator url="url" class="a">
-        <text class="icon kefu"></text>
-        <text class="txt">联系客服</text>
-      </navigator>
-    </view>
+    <button open-type="contact">
+      <view class="item no-border">
+        <navigator url="url" class="a">
+          <text class="icon kefu"></text>
+          <text class="txt">联系客服</text>
+        </navigator>
+      </view>
+    </button>
     <view class="item item-bottom">
       <navigator url="url" class="a">
         <text class="icon help"></text>

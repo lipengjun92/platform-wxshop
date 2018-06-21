@@ -14,6 +14,7 @@ Page({
       orderId: options.orderId || 24,
       status: options.status
     })
+    this.updateSuccess()
   },
   onReady: function () {
 
@@ -30,6 +31,13 @@ Page({
     // 页面关闭
 
   },
+  
+  updateSuccess: function () {
+    let that = this
+    util.request(api.OrderQuery, { orderId: this.data.orderId}).then(function (res) {
+    })
+  },
+
   payOrder() {
     pay.payOrder(parseInt(this.data.orderId)).then(res => {
       this.setData({

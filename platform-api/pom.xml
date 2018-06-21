@@ -29,6 +29,12 @@
             <artifactId>springfox-swagger-ui</artifactId>
             <version>2.4.0</version>
         </dependency>
+
+        <dependency>
+            <groupId>com.github.pagehelper</groupId>
+            <artifactId>pagehelper</artifactId>
+            <version>5.1.4</version>
+        </dependency>
     </dependencies>
 
 </project>

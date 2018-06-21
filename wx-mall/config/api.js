@@ -1,5 +1,4 @@
-var NewApiRootUrl = 'https://fly2you.cn/platform/api/';
-// var NewApiRootUrl = 'http://localhost:8180/api/';
+var NewApiRootUrl = 'http://localhost:8080/api/';
 
 module.exports = {
     IndexUrl: NewApiRootUrl + 'index/index', //首页数据接口
@@ -21,11 +20,14 @@ module.exports = {
 
     CartList: NewApiRootUrl + 'cart/index', //获取购物车的数据
     CartAdd: NewApiRootUrl + 'cart/add', // 添加商品到购物车
+    BuyAdd: NewApiRootUrl + 'buy/add', // 直接购买    
     CartUpdate: NewApiRootUrl + 'cart/update', // 更新购物车的商品
     CartDelete: NewApiRootUrl + 'cart/delete', // 删除购物车的商品
     CartChecked: NewApiRootUrl + 'cart/checked', // 选择或取消选择商品
     CartGoodsCount: NewApiRootUrl + 'cart/goodscount', // 获取购物车商品件数
     CartCheckout: NewApiRootUrl + 'cart/checkout', // 下单前信息确认
+
+    BuyCheckout: NewApiRootUrl + 'buy/checkout', // 下单前信息确认
 
     OrderSubmit: NewApiRootUrl + 'order/submit', // 提交订单
     PayPrepayId: NewApiRootUrl + 'pay/prepay', //获取微信统一下单prepay_id
@@ -65,4 +67,8 @@ module.exports = {
     BindMobile: NewApiRootUrl + 'user/bindMobile', //绑定手机
     Login: NewApiRootUrl + 'auth/login', //账号登录
     Register: NewApiRootUrl + 'auth/register', //注册
+    CouponList: NewApiRootUrl + 'coupon/list', // 优惠券列表
+    OrderQuery: NewApiRootUrl + 'pay/query',
+    OrderSuccess: NewApiRootUrl + 'order/updateSuccess',
+    
 };

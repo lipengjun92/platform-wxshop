@@ -1,5 +1,7 @@
 package com.platform.api;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.qiniu.util.StringUtils;
 import com.platform.annotation.IgnoreAuth;
 import com.platform.annotation.LoginUser;
@@ -388,9 +390,9 @@ public class ApiGoodsController extends ApiBaseAction {
         //查询列表数据
         params.put("fields", "id, name, list_pic_url, market_price, retail_price, goods_brief");
         Query query = new Query(params);
+        PageHelper.startPage(query.getPage(), query.getLimit());
         List<GoodsVo> goodsList = goodsService.queryList(query);
-        int total = goodsService.queryTotal(query);
-        ApiPageUtils goodsData = new ApiPageUtils(goodsList, total, query.getLimit(), query.getPage());
+        ApiPageUtils goodsData = new ApiPageUtils(new PageInfo(goodsList));
         //搜索到的商品
         for (CategoryVo categoryEntity : filterCategory) {
             if (null != categoryId && categoryEntity.getId() == 0 || categoryEntity.getId() == categoryId) {
@@ -400,7 +402,7 @@ public class ApiGoodsController extends ApiBaseAction {
             }
         }
         goodsData.setFilterCategory(filterCategory);
-        goodsData.setGoodsList(goodsData.getData());
+        goodsData.setGoodsList(goodsList);
         return toResponsSuccess(goodsData);
     }
 

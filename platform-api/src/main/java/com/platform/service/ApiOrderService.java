@@ -2,9 +2,13 @@ package com.platform.service;
 
 import com.alibaba.fastjson.JSONObject;
 import com.platform.dao.*;
+import com.platform.dto.BuyGoodsDTO;
 import com.platform.entity.*;
+import com.platform.redis.ApiBuyKey;
+import com.platform.redis.RedisService;
 import com.platform.util.CommonUtil;
 import org.apache.commons.lang.StringUtils;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -29,6 +33,10 @@ public class ApiOrderService {
     private ApiOrderGoodsMapper apiOrderGoodsMapper;
     @Autowired
     private ApiUserCouponMapper apiUserCouponMapper;
+    @Autowired
+    private RedisService redisService;
+    @Autowired
+    private ApiProductService productService;
 
 
     public OrderVo queryObject(Integer id) {
@@ -51,8 +59,8 @@ public class ApiOrderService {
     }
 
 
-    public void update(OrderVo order) {
-        orderDao.update(order);
+    public int update(OrderVo order) {
+        return orderDao.update(order);
     }
 
 
@@ -73,6 +81,7 @@ public class ApiOrderService {
         Integer couponId = jsonParam.getInteger("couponId");
         String couponNumber = jsonParam.getString("couponNumber");
         BigDecimal fullCutCouponDec = jsonParam.getBigDecimal("fullCutCouponDec");
+        String type = jsonParam.getString("type");
         if(fullCutCouponDec == null ){
             fullCutCouponDec = BigDecimal.valueOf(0);
         }
@@ -80,23 +89,42 @@ public class ApiOrderService {
 //        AddressVo addressVo = jsonParam.getObject("checkedAddress",AddressVo.class);
         AddressVo addressVo = apiAddressMapper.queryObject(jsonParam.getInteger("addressId"));
 
-        Integer freightPrice = 10;
-        //获取要购买的商品
-        Map param = new HashMap();
-        param.put("user_id", loginUser.getUserId());
-        param.put("session_id", 1);
-        param.put("checked", 1);
-        List<CartVo> checkedGoodsList = apiCartMapper.queryList(param);
-        if (null == checkedGoodsList) {
-            resultObj.put("errno", 400);
-            resultObj.put("errmsg", "请选择商品");
-            return resultObj;
+
+        Integer freightPrice = 0;
+
+        // * 获取要购买的商品
+        List<CartVo> checkedGoodsList = new ArrayList<>();
+        BigDecimal goodsTotalPrice;
+        if (type.equals("cart")) {
+            Map param = new HashMap();
+            param.put("user_id", loginUser.getUserId());
+            param.put("session_id", 1);
+            param.put("checked", 1);
+            checkedGoodsList = apiCartMapper.queryList(param);
+            if (null == checkedGoodsList) {
+                resultObj.put("errno", 400);
+                resultObj.put("errmsg", "请选择商品");
+                return resultObj;
+            }
+            //统计商品总价
+            goodsTotalPrice = new BigDecimal(0.00);
+            for (CartVo cartItem : checkedGoodsList) {
+                goodsTotalPrice = goodsTotalPrice.add(cartItem.getRetail_price().multiply(new BigDecimal(cartItem.getNumber())));
+            }
+        } else {
+            BuyGoodsDTO goodsDTO = redisService.get(ApiBuyKey.goods(), loginUser.getUserId()+"", BuyGoodsDTO.class);
+            ProductVo productInfo = productService.queryObject(goodsDTO.getProductId());
+            //计算订单的费用
+            //商品总价
+            goodsTotalPrice = productInfo.getRetail_price().multiply(new BigDecimal(goodsDTO.getNumber()));
+
+            CartVo cartVo = new CartVo();
+            BeanUtils.copyProperties(productInfo, cartVo);
+            cartVo.setNumber(goodsDTO.getNumber());
+            cartVo.setProduct_id(goodsDTO.getProductId());
+            checkedGoodsList.add(cartVo);
         }
-        //统计商品总价
-        BigDecimal goodsTotalPrice = new BigDecimal(0.00);
-        for (CartVo cartItem : checkedGoodsList) {
-            goodsTotalPrice = goodsTotalPrice.add(cartItem.getRetail_price().multiply(new BigDecimal(cartItem.getNumber())));
-        }
+
 
         //获取订单使用的优惠券
         BigDecimal couponPrice = new BigDecimal(0.00);
@@ -159,6 +187,11 @@ public class ApiOrderService {
         orderInfo.setShipping_fee(new BigDecimal(0));
         orderInfo.setIntegral(0);
         orderInfo.setIntegral_money(new BigDecimal(0));
+        if (type.equals("cart")) {
+            orderInfo.setOrder_type("1");
+        } else {
+            orderInfo.setOrder_type("4");
+        }
 
         //开启事务，插入订单信息和订单商品
         apiOrderMapper.save(orderInfo);

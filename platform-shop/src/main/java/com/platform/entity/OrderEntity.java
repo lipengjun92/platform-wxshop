@@ -85,7 +85,7 @@ public class OrderEntity implements Serializable {
     //
     private String callbackStatus;
 
-    //订单类型 1：普通订单 2：团购订单 3：砍价订单
+    //订单类型 1：普通订单 2：团购订单 3：砍价订单 4: 直接购买
     private String orderType;
 
     //

@@ -7,10 +7,24 @@ var app = getApp();
 
 Page({
   data: {
-
+    couponList: null
   },
   onLoad: function (options) {
+    this.loadListData()
   },
+
+  loadListData: function () {
+    let that = this;
+
+    util.request(api.CouponList).then(function (res) {
+      if (res.errno === 0) {
+        that.setData({
+          couponList: res.data
+        });
+      }
+    });
+  },
+
   onReady: function () {
 
   },

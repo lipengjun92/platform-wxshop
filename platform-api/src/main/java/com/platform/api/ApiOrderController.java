@@ -121,6 +121,28 @@ public class ApiOrderController extends ApiBaseAction {
         return toResponsSuccess(resultObj);
     }
 
+    @RequestMapping("updateSuccess")
+    public Object updateSuccess(@LoginUser UserVo loginUser, Integer orderId) {
+        OrderVo orderInfo = orderService.queryObject(orderId);
+        if (orderInfo==null) {
+            return toResponsFail("订单不存在");
+        } else if (orderInfo.getOrder_status()!=0) {
+            return toResponsFail("订单状态不正确orderStatus" + orderInfo.getOrder_status() + "payStatus" + orderInfo.getPay_status());
+        }
+
+        orderInfo.setId(orderId);
+        orderInfo.setPay_status(2);
+        orderInfo.setOrder_status(201);
+        orderInfo.setShipping_status(0);
+        orderInfo.setPay_time(new Date());
+        int num = orderService.update(orderInfo);
+        if (num>0) {
+            return toResponsMsgSuccess("修改订单成功");
+        } else {
+            return toResponsFail("修改订单失败");
+        }
+    }
+
     /**
      * 获取订单列表
      */

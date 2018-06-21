@@ -17,6 +17,8 @@ public class ProductVo implements Serializable {
     private Integer id;
     //商品Id
     private Integer goods_id;
+    //产品Id
+    private Integer product_id;
     //商品规格ids
     private String goods_specification_ids;
     //商品序列号
@@ -27,7 +29,34 @@ public class ProductVo implements Serializable {
     private BigDecimal market_price;
     //时长价
     private BigDecimal retail_price;
+    //商品名称
+    private String goods_name;
+    //商品图片
+    private String list_pic_url;
 
+    public String getGoods_name() {
+        return goods_name;
+    }
+
+    public Integer getProduct_id() {
+        return product_id;
+    }
+
+    public void setProduct_id(Integer product_id) {
+        this.product_id = product_id;
+    }
+
+    public void setGoods_name(String goods_name) {
+        this.goods_name = goods_name;
+    }
+
+    public String getList_pic_url() {
+        return list_pic_url;
+    }
+
+    public void setList_pic_url(String list_pic_url) {
+        this.list_pic_url = list_pic_url;
+    }
 
     public Integer getId() {
         return id;
