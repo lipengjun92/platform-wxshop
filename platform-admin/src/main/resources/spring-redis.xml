@@ -10,7 +10,7 @@
         http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
 
     <!-- 载入redis.properties,这里要特别注意，如果有多个properties文件，必须用逗号分开，不能写成两个 <context:property-placeholder/> -->
-    <context:property-placeholder location="classpath:platform.properties" />
+    <context:property-placeholder location="classpath*:platform.properties" />
 
     <!-- 配置JedisPoolConfig连接池-->
     <bean id="poolConfig" class="redis.clients.jedis.JedisPoolConfig">
