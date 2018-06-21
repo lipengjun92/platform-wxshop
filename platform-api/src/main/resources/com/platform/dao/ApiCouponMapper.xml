@@ -47,14 +47,7 @@
                 order by a.id desc
             </otherwise>
         </choose>
-        <if test="offset != null and limit != null">
-            limit #{offset}, #{limit}
-        </if>
     </select>
-
-    <select id="queryTotal" resultType="int">
-		select count(*) from nideshop_coupon 
-	</select>
 
     <insert id="save" parameterType="com.platform.entity.CouponVo" useGeneratedKeys="true" keyProperty="id">
 		insert into nideshop_coupon
@@ -98,8 +91,17 @@
             <if test="use_start_date != null">`use_start_date` = #{use_start_date},</if>
             <if test="use_end_date != null">`use_end_date` = #{use_end_date},</if>
             <if test="min_goods_amount != null">`min_goods_amount` = #{min_goods_amount}</if>
+            <if test="coupon_status != null">`coupon_status` = #{coupon_status}</if>
         </set>
         where id = #{id}
+    </update>
+
+    <update id="updateUserCoupon" parameterType="com.platform.entity.CouponVo">
+        update nideshop_user_coupon
+        <set>
+            <if test="coupon_status != null">`coupon_status` = #{coupon_status}</if>
+        </set>
+        where coupon_id = #{id}
     </update>
 
     <delete id="delete">
@@ -114,7 +116,7 @@
     </delete>
 
     <select id="queryUserCoupons" resultMap="couponMap">
-        select a.*,b.coupon_number,b.user_id
+        select a.*,b.coupon_number,b.user_id,b.coupon_status
         from nideshop_coupon a
         left join nideshop_user_coupon b on a.id = b.coupon_id
         where 1 = 1
@@ -123,6 +125,9 @@
         </if>
         <if test="send_type != null">
             and a.send_type = #{send_type}
+        </if>
+        <if test="coupon_status != null">
+            and b.coupon_status = #{coupon_status}
         </if>
         <if test="coupon_number != null">
             and b.coupon_number = #{coupon_number}
@@ -138,12 +143,9 @@
                 order by ${sidx} ${order}
             </when>
             <otherwise>
-                order by a.id desc
+                order by b.coupon_status asc
             </otherwise>
         </choose>
-        <if test="offset != null and limit != null">
-            limit #{offset}, #{limit}
-        </if>
     </select>
 
     <select id="queryMaxUserEnableCoupon" resultMap="couponMap">

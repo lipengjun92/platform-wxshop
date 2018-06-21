@@ -9,6 +9,7 @@
         <param-value>
             classpath:spring-mvc.xml
             classpath:spring-jdbc.xml
+            classpath:spring-redis.xml
             classpath*:platform-*.xml
         </param-value>
     </context-param>

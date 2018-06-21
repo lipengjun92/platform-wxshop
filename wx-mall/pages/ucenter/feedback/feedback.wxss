@@ -104,6 +104,9 @@ page{
 }
 
 .fb-btn{
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 100%;
   height: 98rpx;
   line-height: 98rpx;

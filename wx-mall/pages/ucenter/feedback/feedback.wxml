@@ -23,5 +23,5 @@
     </view>
   </view>
 
-  <button class="fb-btn" bindtap="sbmitFeedback">提交</button>
+  <view class="fb-btn" bindtap="sbmitFeedback">提交</view>
 </view>
