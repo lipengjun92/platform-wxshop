@@ -120,19 +120,7 @@ public class ApiIndexController extends ApiBaseAction {
         param.put("limit", 3);
         List<TopicVo> topicList = topicService.queryList(param);
         resultObj.put("topicList", topicList);
-//        // 团购
-//        param = new HashMap();
-//        param.put("offset", 0);
-//        param.put("limit", 3);
-//        List<GoodsGroupVo> goodsGroupVos = goodsGroupService.queryList(param);
-//        resultObj.put("topicList", goodsGroupVos);
-//        // 砍价
-//        param = new HashMap();
-//        param.put("offset", 0);
-//        param.put("limit", 3);
-//        List<GoodsGroupVo> goodsGroupVos = goodsGroupService.queryList(param);
-//        resultObj.put("topicList", goodsGroupVos);
-//
+
         param = new HashMap();
         param.put("parent_id", 0);
         param.put("notName", "推荐");//<>
