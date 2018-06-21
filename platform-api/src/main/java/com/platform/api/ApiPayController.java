@@ -4,22 +4,17 @@ import com.platform.annotation.LoginUser;
 import com.platform.entity.OrderGoodsVo;
 import com.platform.entity.OrderVo;
 import com.platform.entity.UserVo;
+import com.platform.redis.OrderKey;
+import com.platform.redis.RedisService;
 import com.platform.service.ApiOrderGoodsService;
 import com.platform.service.ApiOrderService;
 import com.platform.util.ApiBaseAction;
 import com.platform.util.wechat.WechatRefundApiResult;
 import com.platform.util.wechat.WechatUtil;
-import com.platform.utils.CharUtil;
-import com.platform.utils.DateUtils;
-import com.platform.utils.MapUtils;
-import com.platform.utils.ResourceUtil;
-import com.platform.utils.XmlUtil;
+import com.platform.utils.*;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -45,6 +40,8 @@ public class ApiPayController extends ApiBaseAction {
     private ApiOrderService orderService;
     @Autowired
     private ApiOrderGoodsService orderGoodsService;
+    @Autowired
+    private RedisService redisService;
 
     /**
      */
@@ -155,6 +152,83 @@ public class ApiPayController extends ApiBaseAction {
     }
 
     /**
+     * 微信查询订单状态
+     */
+    @RequestMapping("query")
+    public Object orderQuery(@LoginUser UserVo loginUser, Integer orderId) {
+        if (orderId==null) {
+            return toResponsFail("订单不存在");
+        }
+
+        Map<Object, Object> parame = new TreeMap<Object, Object>();
+        parame.put("appid", ResourceUtil.getConfigByName("wx.appId"));
+        // 商家账号。
+        parame.put("mch_id", ResourceUtil.getConfigByName("wx.mchId"));
+        String randomStr = CharUtil.getRandomNum(18).toUpperCase();
+        // 随机字符串
+        parame.put("nonce_str", randomStr);
+        // 商户订单编号
+        parame.put("out_trade_no", orderId);
+
+        String sign = WechatUtil.arraySign(parame, ResourceUtil.getConfigByName("wx.paySignKey"));
+        // 数字签证
+        parame.put("sign", sign);
+
+        String xml = MapUtils.convertMap2Xml(parame);
+        logger.info("xml:" + xml);
+        Map<String, Object> resultUn = null;
+        try {
+            resultUn = XmlUtil.xmlStrToMap(WechatUtil.requestOnce(ResourceUtil.getConfigByName("wx.orderquery"), xml));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return toResponsFail("查询失败,error=" + e.getMessage());
+        }
+        // 响应报文
+        String return_code = MapUtils.getString("return_code", resultUn);
+        String return_msg = MapUtils.getString("return_msg", resultUn);
+
+        if (return_code.equals("SUCCESS")) {
+            String trade_state = MapUtils.getString("trade_state", resultUn);
+            if (trade_state.equals("SUCCESS")) {
+                // 更改订单状态
+                // 业务处理
+                OrderVo orderInfo = new OrderVo();
+                orderInfo.setId(orderId);
+                orderInfo.setPay_status(2);
+                orderInfo.setOrder_status(201);
+                orderInfo.setShipping_status(0);
+                orderInfo.setPay_time(new Date());
+                orderService.update(orderInfo);
+                return toResponsMsgSuccess("支付成功");
+            } else if (trade_state.equals("USERPAYING")) {
+                // 重新查询 正在支付中
+                Integer num = redisService.get(OrderKey.queryRepeatNum(), orderId+"", Integer.class);
+                if (num==null) {
+                    redisService.set(OrderKey.queryRepeatNum(), orderId+"", 1);
+                    this.orderQuery(loginUser, orderId);
+                } else if (num <=3) {
+                    redisService.incr(OrderKey.queryRepeatNum(), orderId+"");
+                    try {
+                        Thread.sleep(1); // 睡眠一秒
+                    } catch (InterruptedException e) {
+                        throw new RRException(e.getMessage());
+                    }
+                    this.orderQuery(loginUser, orderId);
+                } else {
+                    return toResponsFail("查询失败,error=" + trade_state);
+                }
+
+            } else  {
+                // 失败
+                return toResponsFail("查询失败,error=" + trade_state);
+            }
+        } else {
+            return toResponsFail("查询失败,error=" + return_msg);
+        }
+        return toResponsFail("查询失败，未知错误");
+    }
+
+    /**
      * 微信订单回调接口
      *
      * @return
@@ -221,14 +295,14 @@ public class ApiPayController extends ApiBaseAction {
             return toResponsObject(400, "订单已退款", "");
         }
 
-        if (orderInfo.getPay_status() != 2) {
-            return toResponsObject(400, "订单未付款，不能退款", "");
-        }
+//        if (orderInfo.getPay_status() != 2) {
+//            return toResponsObject(400, "订单未付款，不能退款", "");
+//        }
 
 //        WechatRefundApiResult result = WechatUtil.wxRefund(orderInfo.getId().toString(),
 //                orderInfo.getActual_price().doubleValue(), orderInfo.getActual_price().doubleValue());
         WechatRefundApiResult result = WechatUtil.wxRefund(orderInfo.getId().toString(),
-                0.01, 0.01);
+                10.01, 10.01);
         if (result.getResult_code().equals("SUCCESS")) {
             if (orderInfo.getOrder_status() == 201) {
                 orderInfo.setOrder_status(401);

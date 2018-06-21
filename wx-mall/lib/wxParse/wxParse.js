@@ -96,12 +96,9 @@ function wxAutoImageCal(originalWidth, originalHeight,that,bindName) {
       windowWidth = res.windowWidth-2*padding;
       windowHeight = res.windowHeight;
       //判断按照那种方式进行缩放
-      console.log("windowWidth" + windowWidth);
       if (originalWidth > windowWidth) {//在图片width大于手机屏幕width时候
         autoWidth = windowWidth;
-        console.log("autoWidth" + autoWidth);
         autoHeight = (autoWidth * originalHeight) / originalWidth;
-        console.log("autoHeight" + autoHeight);
         results.imageWidth = autoWidth;
         results.imageheight = autoHeight;
       } else {//否则展示原来的数据

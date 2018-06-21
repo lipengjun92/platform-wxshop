@@ -16,35 +16,21 @@ Page({
     orderTotalPrice: 0.00,  //订单总价
     actualPrice: 0.00,     //实际需要支付的总价
     addressId: 0,
-    couponId: 0
+    couponId: 0,
+    isBuy: false
   },
   onLoad: function (options) {
 
+    console.log(options.isBuy)
     // 页面初始化 options为页面跳转所带来的参数
-
-    try {
-      var addressId = wx.getStorageSync('addressId');
-      if (addressId) {
-        this.setData({
-          'addressId': addressId
-        });
-      }
-
-      var couponId = wx.getStorageSync('couponId');
-      if (couponId) {
-        this.setData({
-          'couponId': couponId
-        });
-      }
-    } catch (e) {
-      // Do something when catch error
-    }
-
-
+    this.data.isBuy = options.isBuy
   },
+  
   getCheckoutInfo: function () {
     let that = this;
-    util.request(api.CartCheckout, { addressId: that.data.addressId, couponId: that.data.couponId }).then(function (res) {
+    var url = api.CartCheckout
+    let buyType = this.data.isBuy ? 'buy' : 'cart'
+    util.request(url, { addressId: that.data.addressId, couponId: that.data.couponId, type: buyType }).then(function (res) {
       if (res.errno === 0) {
         console.log(res.data);
         that.setData({
@@ -82,6 +68,24 @@ Page({
       title: '加载中...',
     })
     this.getCheckoutInfo();
+    
+    try {
+      var addressId = wx.getStorageSync('addressId');
+      if (addressId) {
+        this.setData({
+          'addressId': addressId
+        });
+      }
+
+      var couponId = wx.getStorageSync('couponId');
+      if (couponId) {
+        this.setData({
+          'couponId': couponId
+        });
+      }
+    } catch (e) {
+      // Do something when catch error
+    }
 
   },
   onHide: function () {
@@ -97,7 +101,8 @@ Page({
       util.showErrorToast('请选择收货地址');
       return false;
     }
-    util.request(api.OrderSubmit, { addressId: this.data.addressId, couponId: this.data.couponId }, 'POST').then(res => {
+    let buyType = this.data.isBuy ? 'buy' : 'cart'    
+    util.request(api.OrderSubmit, { addressId: this.data.addressId, couponId: this.data.couponId, type: buyType }, 'POST').then(res => {
       if (res.errno === 0) {
         const orderId = res.data.orderInfo.id;
         pay.payOrder(parseInt(orderId)).then(res => {

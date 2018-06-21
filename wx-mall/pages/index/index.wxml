@@ -14,6 +14,7 @@
       <text>{{item.name}}</text>
     </navigator>
   </view>
+
   <view class="a-section a-brand">
     <view class="h">
       <navigator url="../brand/brand">
@@ -35,47 +36,7 @@
       </view>
     </view>
   </view>
-  <view class="a-section a-new" wx:if="{{newGoods.length > 0}}">
-    <view class="h">
-      <view>
-        <navigator url="../newGoods/newGoods">
-          <text class="txt">周一周四 · 新品首发</text>
-        </navigator>
-      </view>
-    </view>
-    <view class="b">
-      <view class="item" wx:for="{{newGoods}}" wx:for-index="index" wx:for-item="item" wx:key="{{item.id}}">
-        <navigator url="../goods/goods?id={{item.id}}">
-          <image class="img" src="{{item.list_pic_url}}" background-size="cover"></image>
-          <text class="name">{{item.name}}</text>
-          <text class="price">￥{{item.retail_price}}</text>
-        </navigator>
-      </view>
-    </view>
-  </view>
-  <view class="a-section a-popular" wx:if="{{hotGoods.length > 0}}">
-    <view class="h">
-      <view>
-        <navigator url="../hotGoods/hotGoods">
-          <text class="txt">人气推荐</text>
-        </navigator>
-      </view>
-    </view>
-    <view class="b">
-      <view class="item" wx:for="{{hotGoods}}" wx:for-index="index" wx:for-item="item" wx:key="{{item.id}}">
-        <navigator url="/pages/goods/goods?id={{item.id}}">
-          <image class="img" src="{{item.list_pic_url}}" background-size="cover"></image>
-          <view class="right">
-            <view class="text">
-              <text class="name">{{item.name}}</text>
-              <text class="desc">{{item.goods_brief}}</text>
-              <text class="price">￥{{item.retail_price}}</text>
-            </view>
-          </view>
-        </navigator>
-      </view>
-    </view>
-  </view>
+
   <view class="a-section a-topic" wx:if="topics.length > 0">
     <view class="h">
       <view>
@@ -99,6 +60,50 @@
       </scroll-view>
     </view>
   </view>
+
+  <view class="a-section a-new" wx:if="{{newGoods.length > 0}}">
+    <view class="h">
+      <view>
+        <navigator url="../newGoods/newGoods">
+          <text class="txt">周一周四 · 新品首发</text>
+        </navigator>
+      </view>
+    </view>
+    <view class="b">
+      <view class="item" wx:for="{{newGoods}}" wx:for-index="index" wx:for-item="item" wx:key="{{item.id}}">
+        <navigator url="../goods/goods?id={{item.id}}">
+          <image class="img" src="{{item.list_pic_url}}" background-size="cover"></image>
+          <text class="name">{{item.name}}</text>
+          <text class="price">￥{{item.retail_price}}</text>
+        </navigator>
+      </view>
+    </view>
+  </view>
+
+  <view class="a-section a-popular" wx:if="{{hotGoods.length > 0}}">
+    <view class="h">
+      <view>
+        <navigator url="../hotGoods/hotGoods">
+          <text class="txt">人气推荐</text>
+        </navigator>
+      </view>
+    </view>
+    <view class="b">
+      <view class="item" wx:for="{{hotGoods}}" wx:for-index="index" wx:for-item="item" wx:key="{{item.id}}">
+        <navigator url="/pages/goods/goods?id={{item.id}}">
+          <image class="img" src="{{item.list_pic_url}}" background-size="cover"></image>
+          <view class="right">
+            <view class="text">
+              <text class="name">{{item.name}}</text>
+              <text class="desc">{{item.goods_brief}}</text>
+              <text class="price">￥{{item.retail_price}}</text>
+            </view>
+          </view>
+        </navigator>
+      </view>
+    </view>
+  </view>
+
   <view class="good-grid" wx:for="{{floorGoods}}" wx:key="{{item.id}}">
     <view class="h">
       <view>
@@ -123,4 +128,5 @@
       </view>
     </view>
   </view>
+
 </view>

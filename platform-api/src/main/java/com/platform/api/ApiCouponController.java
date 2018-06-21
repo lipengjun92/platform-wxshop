@@ -38,7 +38,7 @@ public class ApiCouponController extends ApiBaseAction {
     /**
      * 获取优惠券列表
      */
-    @RequestMapping("list")
+    @RequestMapping("/list")
     public Object list(@LoginUser UserVo loginUser) {
 
         Map param = new HashMap();

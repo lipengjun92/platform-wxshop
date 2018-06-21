@@ -125,11 +125,18 @@ function showErrorToast(msg) {
   })
 }
 
+function showSuccessToast(msg) {
+  wx.showToast({
+    title: msg,
+  })
+}
+
 module.exports = {
   formatTime,
   request,
   redirect,
   showErrorToast,
+  showSuccessToast,
   checkSession,
   login,
 }

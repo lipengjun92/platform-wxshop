@@ -1,5 +1,7 @@
 package com.platform.util;
 
+import com.github.pagehelper.PageInfo;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -41,6 +43,13 @@ public class ApiPageUtils implements Serializable {
         this.numsPerPage = numsPerPage;
         this.currentPage = currentPage;
         this.totalPages = (int) Math.ceil((double) count / numsPerPage);
+    }
+
+    public ApiPageUtils(PageInfo pageInfo) {
+        this.count = (int) pageInfo.getTotal();
+        this.numsPerPage = pageInfo.getPageSize();
+        this.currentPage = pageInfo.getPageNum();
+        this.totalPages = pageInfo.getPages();
     }
 
     public int getCount() {

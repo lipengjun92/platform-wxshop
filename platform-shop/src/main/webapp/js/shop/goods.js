@@ -176,7 +176,7 @@ var vm = new Vue({
                             vm.reload();
                         });
                     } else {
-                        alert(r.msg);
+                        alert('操作失败');
                     }
                 }
             });

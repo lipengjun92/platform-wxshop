@@ -12,7 +12,11 @@ Page({
     scrollTop: 0,
     scrollHeight: 0,
     page: 1,
-    size: 10000
+    size: 10,
+    loadmoreText: '正在加载更多数据',
+    nomoreText: '全部加载完成',
+    nomore: false,
+    totalPages: 1
   },
   onLoad: function (options) {
     // 页面初始化 options为页面跳转所带来的参数
@@ -78,13 +82,31 @@ Page({
   onHide: function () {
     // 页面隐藏
   },
+
+  /**
+     * 页面上拉触底事件的处理函数
+     */
+  onReachBottom: function () {
+    console.log("下一页")
+    this.getGoodsList()
+  },
+
   getGoodsList: function () {
     var that = this;
+
+    if (that.data.totalPages <= that.data.page-1) {
+      that.setData({
+        nomore: true
+      })
+      return;
+    }
 
     util.request(api.GoodsList, {categoryId: that.data.id, page: that.data.page, size: that.data.size})
       .then(function (res) {
         that.setData({
-          goodsList: res.data.goodsList,
+          goodsList: that.data.goodsList.concat(res.data.goodsList),        
+          page: res.data.currentPage+1,
+          totalPages: res.data.totalPages
         });
       });
   },
@@ -108,9 +130,13 @@ Page({
       });
     }
     this.setData({
-      id: event.currentTarget.dataset.id
+      id: event.currentTarget.dataset.id,
+      page:1,
+      totalPages: 1,
+      goodsList: [],
+      nomore: false
     });
-
+    
     this.getCategoryInfo();
   }
 })

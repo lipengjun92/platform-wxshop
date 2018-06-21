@@ -1,5 +1,7 @@
 package com.platform.utils;
 
+import com.github.pagehelper.PageInfo;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -37,6 +39,14 @@ public class PageUtils implements Serializable {
         this.pageSize = pageSize;
         this.currPage = currPage;
         this.totalPage = (int) Math.ceil((double) totalCount / pageSize);
+    }
+
+    public PageUtils(PageInfo pageInfo) {
+        this.list = pageInfo.getList();
+        this.totalCount = (int) pageInfo.getTotal();
+        this.pageSize = pageInfo.getPageSize();
+        this.currPage = pageInfo.getPageNum();
+        this.totalPage = pageInfo.getPages();
     }
 
     public int getTotalCount() {

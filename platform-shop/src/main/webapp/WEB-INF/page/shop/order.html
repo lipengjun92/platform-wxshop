@@ -24,13 +24,14 @@
                         <i-option value="402">完成</i-option>
                     </i-select>
                 </i-col>
-                <!--<i-col span="4">-->
-                <!--<i-select v-model="q.orderType">-->
-                <!--<i-option value="1">普通订单</i-option>-->
-                <!--<i-option value="2">团购订单</i-option>-->
-                <!--<i-option value="3">砍价订单</i-option>-->
-                <!--</i-select>-->
-                <!--</i-col>-->
+                <i-col span="4">
+                    <i-select v-model="q.orderType">
+                        <i-option value="1">普通订单</i-option>
+                        <i-option value="2">团购订单</i-option>
+                        <i-option value="3">砍价订单</i-option>
+                        <i-option value="4">立即购买</i-option>
+                    </i-select>
+                </i-col>
                 <i-button @click="query">查询</i-button>
             </div>
             <div class="buttons-group">
@@ -82,6 +83,7 @@
                     <i-option value="1">普通订单</i-option>
                     <i-option value="2">团购订单</i-option>
                     <i-option value="3">砍价订单</i-option>
+                    <i-option value="4">立即购买</i-option>
                 </i-select>
             </Form-item>
             <Form-item label="订单状态" prop="orderStatus" readonly>

@@ -107,7 +107,7 @@ page{
     text-align: center;
     padding: 0 20rpx;
     border-radius: 5rpx;
-    font-size: 28rpx;
+    font-size: 26rpx;
     color: #fff;
     background: #b4282d;
 }

@@ -1,6 +1,9 @@
 package com.platform.api;
 
 import com.alibaba.fastjson.JSONObject;
+import com.platform.dto.BuyGoodsDTO;
+import com.platform.redis.ApiBuyKey;
+import com.platform.redis.RedisService;
 import com.qiniu.util.StringUtils;
 import com.platform.annotation.LoginUser;
 import com.platform.dto.CouponInfoVo;
@@ -9,6 +12,7 @@ import com.platform.service.*;
 import com.platform.util.ApiBaseAction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.math.BigDecimal;
@@ -37,6 +41,8 @@ public class ApiCartController extends ApiBaseAction {
     private ApiAddressService addressService;
     @Autowired
     private ApiCouponService apiCouponService;
+    @Autowired
+    private RedisService redisService;
     /**
      * 获取购物车中的数据
      */
@@ -379,28 +385,45 @@ public class ApiCartController extends ApiBaseAction {
      * 订单提交前的检验和填写相关订单信息
      */
     @RequestMapping("checkout")
-    public Object checkout(@LoginUser UserVo loginUser, Integer couponId) {
+    public Object checkout(@LoginUser UserVo loginUser, Integer couponId, @RequestParam(defaultValue = "cart") String type) {
         Map<String, Object> resultObj = new HashMap();
         //根据收货地址计算运费
-        BigDecimal freightPrice = new BigDecimal(10.00);
+
+        BigDecimal freightPrice = new BigDecimal(0.00);
         //默认收货地址
         Map param = new HashMap();
         param.put("user_id", loginUser.getUserId());
-        List<AddressVo> addressEntities = addressService.queryList(param);
+        List addressEntities = addressService.queryList(param);
 
         resultObj.put("checkedAddress", addressEntities.get(0));
-        //获取要购买的商品
-        Map<String, Object> cartData = (Map<String, Object>) this.getCart(loginUser);
 
-        List<CartVo> checkedGoodsList = new ArrayList();
-        for (CartVo cartEntity : (List<CartVo>) cartData.get("cartList")) {
-            if (cartEntity.getChecked() == 1) {
-                checkedGoodsList.add(cartEntity);
+        // * 获取要购买的商品和总价
+        ArrayList checkedGoodsList = new ArrayList();
+        BigDecimal goodsTotalPrice;
+        if (type.equals("cart")) {
+            Map<String, Object> cartData = (Map<String, Object>) this.getCart(loginUser);
+
+            for (CartVo cartEntity : (List<CartVo>) cartData.get("cartList")) {
+                if (cartEntity.getChecked() == 1) {
+                    checkedGoodsList.add(cartEntity);
+                }
             }
+            goodsTotalPrice = (BigDecimal) ((HashMap) cartData.get("cartTotal")).get("checkedGoodsAmount");
+        } else { // 是直接购买的
+            BuyGoodsDTO goodsDTO = redisService.get(ApiBuyKey.goods(), loginUser.getUserId()+"", BuyGoodsDTO.class);
+            ProductVo productInfo = productService.queryObject(goodsDTO.getProductId());
+            //计算订单的费用
+            //商品总价
+            goodsTotalPrice = productInfo.getRetail_price().multiply(new BigDecimal(goodsDTO.getNumber()));
+
+            CartVo cartVo = new CartVo();
+            cartVo.setGoods_name(productInfo.getGoods_name());
+            cartVo.setNumber(goodsDTO.getNumber());
+            cartVo.setRetail_price(productInfo.getRetail_price());
+            cartVo.setList_pic_url(productInfo.getList_pic_url());
+            checkedGoodsList.add(cartVo);
         }
-        //计算订单的费用
-        //商品总价
-        BigDecimal goodsTotalPrice = (BigDecimal) ((HashMap) cartData.get("cartTotal")).get("checkedGoodsAmount");
+
 
         //获取可用的优惠券信息
         Map usercouponMap = new HashMap();

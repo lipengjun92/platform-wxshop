@@ -126,7 +126,7 @@ public class ApiBaseAction {
     public String getClientIp() {
         String xff = request.getHeader("x-forwarded-for");
         if (xff == null) {
-            return request.getRemoteAddr();
+            return "8.8.8.8";
         }
         return xff;
     }

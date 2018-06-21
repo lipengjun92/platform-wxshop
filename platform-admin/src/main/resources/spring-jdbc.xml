@@ -40,6 +40,7 @@
                 <ref bean="wall-filter"/>
             </list>
         </property>
+        <property name="connectionInitSqls" value="set names utf8mb4;"/>
     </bean>
 
     <bean id="stat-filter" class="com.alibaba.druid.filter.stat.StatFilter">

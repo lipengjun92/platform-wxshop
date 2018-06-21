@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import redis.clients.jedis.Jedis;
+import redis.clients.jedis.JedisPool;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -39,6 +41,16 @@ public class ApiIndexController extends ApiBaseAction {
     private ApiCategoryService categoryService;
     @Autowired
     private ApiCartService cartService;
+    @Autowired
+    private JedisPool redisService;
+    /**
+     * 测试
+     */
+    @IgnoreAuth
+    @RequestMapping(value = "test", method = RequestMethod.GET)
+    public Object test() {
+        return toResponsMsgSuccess("请求成功yyy");
+    }
 
     /**
      * app首页
@@ -93,7 +105,7 @@ public class ApiIndexController extends ApiBaseAction {
                 }
             }
         }
-
+        //
         param = new HashMap();
         param.put("is_new", 1);
         param.put("sidx", "new_sort_order ");
@@ -108,6 +120,47 @@ public class ApiIndexController extends ApiBaseAction {
         param.put("limit", 3);
         List<TopicVo> topicList = topicService.queryList(param);
         resultObj.put("topicList", topicList);
+//        // 团购
+//        param = new HashMap();
+//        param.put("offset", 0);
+//        param.put("limit", 3);
+//        List<GoodsGroupVo> goodsGroupVos = goodsGroupService.queryList(param);
+//        resultObj.put("topicList", goodsGroupVos);
+//        // 砍价
+//        param = new HashMap();
+//        param.put("offset", 0);
+//        param.put("limit", 3);
+//        List<GoodsGroupVo> goodsGroupVos = goodsGroupService.queryList(param);
+//        resultObj.put("topicList", goodsGroupVos);
+//
+        param = new HashMap();
+        param.put("parent_id", 0);
+        param.put("notName", "推荐");//<>
+        List<CategoryVo> categoryList = categoryService.queryList(param);
+        List<Map> newCategoryList = new ArrayList<>();
+
+        for (CategoryVo categoryItem : categoryList) {
+            param.remove("fields");
+            param.put("parent_id", categoryItem.getId());
+            List<CategoryVo> categoryEntityList = categoryService.queryList(param);
+            List<Integer> childCategoryIds = new ArrayList<>();
+            for (CategoryVo categoryEntity : categoryEntityList) {
+                childCategoryIds.add(categoryEntity.getId());
+            }
+            //
+            param = new HashMap();
+            param.put("categoryIds", childCategoryIds);
+            param.put("offset", 0);
+            param.put("limit", 7);
+            param.put("fields", "id as id, name as name, list_pic_url as list_pic_url, retail_price as retail_price");
+            List<GoodsVo> categoryGoods = goodsService.queryList(param);
+            Map newCategory = new HashMap();
+            newCategory.put("id", categoryItem.getId());
+            newCategory.put("name", categoryItem.getName());
+            newCategory.put("goodsList", categoryGoods);
+            newCategoryList.add(newCategory);
+        }
+        resultObj.put("categoryList", newCategoryList);
         return toResponsSuccess(resultObj);
     }
 }
