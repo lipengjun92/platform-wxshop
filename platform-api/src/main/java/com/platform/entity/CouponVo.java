@@ -39,7 +39,7 @@ public class CouponVo implements Serializable {
     @JsonFormat(pattern = "yyyy.MM.dd")
     private Date use_start_date;
     //使用结束时间
-    @JsonFormat(pattern = "yyyy.MM.dd")
+    @JsonFormat(pattern = "yyyy年MM月dd日")
     private Date use_end_date;
     //最小商品金额
     private BigDecimal min_goods_amount;
@@ -53,6 +53,16 @@ public class CouponVo implements Serializable {
     private Integer enabled = 0;
     //转发次数
     private Integer min_transmit_num;
+    //优惠券状态 1 可用 2 已用 3 过期
+    private Integer coupon_status = 1;
+
+    public Integer getCoupon_status() {
+        return coupon_status;
+    }
+
+    public void setCoupon_status(Integer coupon_status) {
+        this.coupon_status = coupon_status;
+    }
 
     public Integer getId() {
         return id;

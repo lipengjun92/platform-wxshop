@@ -5,6 +5,7 @@ import com.platform.entity.CouponVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -44,7 +45,19 @@ public class ApiCouponService {
     }
 
     public List<CouponVo> queryUserCoupons(Map<String, Object> map) {
-        return apiCouponMapper.queryUserCoupons(map);
+        // 检查优惠券是否过期
+        List<CouponVo> couponVos = apiCouponMapper.queryUserCoupons(map);
+        for (CouponVo couponVo : couponVos) {
+            if (couponVo.getCoupon_status()==1) {
+                // 检查是否过期
+                if(couponVo.getUse_end_date().before(new Date())) {
+                    couponVo.setCoupon_status(3);
+                    apiCouponMapper.updateUserCoupon(couponVo);
+                }
+            }
+        }
+
+        return couponVos;
     }
 
     public CouponVo queryMaxUserEnableCoupon(Map<String, Object> map) {

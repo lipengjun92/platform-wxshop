@@ -40,7 +40,6 @@ public class ApiCouponController extends ApiBaseAction {
      */
     @RequestMapping("/list")
     public Object list(@LoginUser UserVo loginUser) {
-
         Map param = new HashMap();
         param.put("user_id", loginUser.getUserId());
         List<CouponVo> couponVos = apiCouponService.queryUserCoupons(param);

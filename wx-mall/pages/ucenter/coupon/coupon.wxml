@@ -1,28 +1,30 @@
 <view class="container">
-  <view class="coupon-form">
+  <!-- <view class="coupon-form">
     <view class="input-box">
       <input class="coupon-sn" placeholder="请输入优惠码" />
       <image class="clear-icon" src="http://p9kyr79ne.bkt.clouddn.com/1/20180531/150647657fcdd0.png"></image>
     </view>
-    <button class="add-btn disabled">兑换</button>
-  </view>
+    <view class="add-btn disabled">兑换</view>
+  </view> -->
   <view class="help">使用说明</view>
-  <view class="coupon-list">
-
+  <show-empty-data wx:if="{{couponList.length<=0}}" showType="NO_COUPON"></show-empty-data>
+  <view wx:else class="coupon-list">
     <block wx:for="{{couponList}}" wx:for-index="index" wx:for-item="item" wx:key="{{item.id}}">
-      <view class="item">
-        <!-- <view class="tag">新人专享</view> -->
+      <view class="item" style="background: {{item.coupon_status==1?'linear-gradient(to right,#cfa568,#e3bf79)':'linear-gradient(to right,#999,#DDDDDD)'}}">
+         <!-- <view class="tag">新人专享</view>  -->
         <view class="content">
           <view class="left">
             <view class="name">{{item.name}}</view>
-            <view class="time">{{item.use_start_date}}-{{item.use_end_date}}</view>
+            <view class="time">有效期至{{item.use_end_date}}</view>
           </view>
           <view class="right">
-            <button class="go">{{item.enabled?'可使用':'不可使用'}}</button>
+            <image wx:if="{{item.coupon_status==1}}" class='mid-img' src='../../../static/images/coupon_ksy.png'></image>
+    <image wx:if="{{item.coupon_status==2}}" class='mid-img' src='../../../static/images/coupon_ysy.png'></image>
+    <image wx:if="{{item.coupon_status==3}}" class='mid-img' src='../../../static/images/coupon_gq.png'></image>
           </view>
         </view>
         <view class="condition">
-          <text class="txt">最小使用金额 ￥{{item.min_goods_amount}}</text>
+          <text class="txt">满￥{{item.min_goods_amount}} 减￥{{item.type_money}}</text>
         </view>
       </view>
     </block>
