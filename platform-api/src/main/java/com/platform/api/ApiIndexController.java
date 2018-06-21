@@ -1,5 +1,7 @@
 package com.platform.api;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.platform.annotation.IgnoreAuth;
 import com.platform.entity.*;
 import com.platform.service.*;
@@ -74,18 +76,16 @@ public class ApiIndexController extends ApiBaseAction {
         //
         param = new HashMap();
         param.put("is_new", 1);
-        param.put("offset", 0);
-        param.put("limit", 4);
         param.put("is_delete", 0);
         param.put("fields", "id, name, list_pic_url, retail_price");
+        PageHelper.startPage(0, 4);
         List<GoodsVo> newGoods = goodsService.queryList(param);
         resultObj.put("newGoodsList", newGoods);
         //
         param = new HashMap();
         param.put("is_hot", "1");
-        param.put("offset", 0);
-        param.put("limit", 3);
         param.put("is_delete", 0);
+        PageHelper.startPage(0, 3);
         List<GoodsVo> hotGoods = goodsService.queryHotGoodsList(param);
         resultObj.put("hotGoodsList", hotGoods);
         // 当前购物车中
@@ -150,9 +150,8 @@ public class ApiIndexController extends ApiBaseAction {
             //
             param = new HashMap();
             param.put("categoryIds", childCategoryIds);
-            param.put("offset", 0);
-            param.put("limit", 7);
             param.put("fields", "id as id, name as name, list_pic_url as list_pic_url, retail_price as retail_price");
+            PageHelper.startPage(0, 7);
             List<GoodsVo> categoryGoods = goodsService.queryList(param);
             Map newCategory = new HashMap();
             newCategory.put("id", categoryItem.getId());
