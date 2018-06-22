@@ -208,11 +208,6 @@ public class ApiPayController extends ApiBaseAction {
                     this.orderQuery(loginUser, orderId);
                 } else if (num <=3) {
                     redisService.incr(OrderKey.queryRepeatNum(), orderId+"");
-                    try {
-                        Thread.sleep(1); // 睡眠一秒
-                    } catch (InterruptedException e) {
-                        throw new RRException(e.getMessage());
-                    }
                     this.orderQuery(loginUser, orderId);
                 } else {
                     return toResponsFail("查询失败,error=" + trade_state);
