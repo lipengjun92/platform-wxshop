@@ -17,8 +17,10 @@ import java.util.Date;
 public class CouponVo implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    //主键
+    // 优惠券主键
     private Integer id;
+    // 用户优惠券主键
+    private Integer user_coupon_id;
     //优惠券名称
     private String name;
     //金额
@@ -55,6 +57,14 @@ public class CouponVo implements Serializable {
     private Integer min_transmit_num;
     //优惠券状态 1 可用 2 已用 3 过期
     private Integer coupon_status = 1;
+
+    public Integer getUser_coupon_id() {
+        return user_coupon_id;
+    }
+
+    public void setUser_coupon_id(Integer user_coupon_id) {
+        this.user_coupon_id = user_coupon_id;
+    }
 
     public Integer getCoupon_status() {
         return coupon_status;

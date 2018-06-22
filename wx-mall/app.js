@@ -21,5 +21,7 @@ App({
       avatarUrl: 'http://p9kyr79ne.bkt.clouddn.com/1/20180531/150547696d798c.png'
     },
     token: '',
+    userCoupon: 'NO_USE_COUPON',//默认不适用优惠券
+    courseCouponCode: {},//购买课程的时候优惠券信息
   }
 })

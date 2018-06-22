@@ -7,6 +7,7 @@ import com.platform.entity.*;
 import com.platform.redis.ApiBuyKey;
 import com.platform.redis.RedisService;
 import com.platform.util.CommonUtil;
+import com.platform.utils.RRException;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -79,12 +80,7 @@ public class ApiOrderService {
         Map resultObj = new HashMap();
 
         Integer couponId = jsonParam.getInteger("couponId");
-        String couponNumber = jsonParam.getString("couponNumber");
-        BigDecimal fullCutCouponDec = jsonParam.getBigDecimal("fullCutCouponDec");
         String type = jsonParam.getString("type");
-        if(fullCutCouponDec == null ){
-            fullCutCouponDec = BigDecimal.valueOf(0);
-        }
         String postscript = jsonParam.getString("postscript");
 //        AddressVo addressVo = jsonParam.getObject("checkedAddress",AddressVo.class);
         AddressVo addressVo = apiAddressMapper.queryObject(jsonParam.getInteger("addressId"));
@@ -128,30 +124,18 @@ public class ApiOrderService {
 
         //获取订单使用的优惠券
         BigDecimal couponPrice = new BigDecimal(0.00);
-        if (null != couponId && 0 != couponId) {
-            CouponVo couponVo = apiCouponMapper.queryObject(couponId);
-            if (null != couponVo && null != couponVo.getType_money()) {
+        CouponVo couponVo = null;
+        if (couponId!=0 && couponId != null) {
+            couponVo = apiCouponMapper.getUserCoupon(couponId);
+            if (couponVo!=null&&couponVo.getCoupon_status()==1) {
                 couponPrice = couponVo.getType_money();
             }
         }
-        // 获取优惠信息提示
-        Map couponParam = new HashMap();
-        couponParam.put("enabled", true);
-        Integer[] send_types = new Integer[]{7};
-        couponParam.put("send_types", send_types);
-        List<CouponVo> couponVos = apiCouponMapper.queryList(couponParam);
-        if (null != couponVos && couponVos.size() > 0) {
-            for (CouponVo couponVo : couponVos) {
-                // 是否免运费
-                if (couponVo.getSend_type() == 7 && couponVo.getMin_amount().compareTo(goodsTotalPrice) <= 0) {
-                    freightPrice = 0;
-                }
-            }
-        }
+
         //订单价格计算
         BigDecimal orderTotalPrice = goodsTotalPrice.add(new BigDecimal(freightPrice)); //订单的总价
 
-        BigDecimal actualPrice = orderTotalPrice.subtract(fullCutCouponDec).subtract(couponPrice);  //减去其它支付的金额后，要实际支付的金额
+        BigDecimal actualPrice = orderTotalPrice.subtract(couponPrice);  //减去其它支付的金额后，要实际支付的金额
 
         Long currentTime = System.currentTimeMillis() / 1000;
 
@@ -172,7 +156,6 @@ public class ApiOrderService {
         //留言
         orderInfo.setPostscript(postscript);
         //使用的优惠券
-        orderInfo.setFull_cut_price(fullCutCouponDec);
         orderInfo.setCoupon_id(couponId);
         orderInfo.setCoupon_price(couponPrice);
         orderInfo.setAdd_time(new Date());
@@ -229,14 +212,11 @@ public class ApiOrderService {
         //
         resultObj.put("data", orderInfoMap);
         // 优惠券标记已用
-        if (!StringUtils.isEmpty(couponNumber)) {
-            UserCouponVo userCouponVo = apiUserCouponMapper.queryByCouponNumber(couponNumber);
-            if (null != userCouponVo && null == userCouponVo.getOrder_id()) {
-                userCouponVo.setUsed_time(new Date());
-                userCouponVo.setOrder_id(orderInfo.getId());
-                apiUserCouponMapper.update(userCouponVo);
-            }
+        if (couponVo!=null&&couponVo.getCoupon_status()==1) {
+            couponVo.setCoupon_status(2);
+            apiCouponMapper.updateUserCoupon(couponVo);
         }
+
         return resultObj;
     }
 

@@ -55,6 +55,13 @@ public class ApiCouponService {
                     apiCouponMapper.updateUserCoupon(couponVo);
                 }
             }
+            if (couponVo.getCoupon_status()==3) {
+                // 检查是否不过期
+                if(couponVo.getUse_end_date().after(new Date())) {
+                    couponVo.setCoupon_status(1);
+                    apiCouponMapper.updateUserCoupon(couponVo);
+                }
+            }
         }
 
         return couponVos;

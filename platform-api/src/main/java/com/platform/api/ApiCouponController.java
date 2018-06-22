@@ -2,20 +2,20 @@ package com.platform.api;
 
 import com.alibaba.fastjson.JSONObject;
 import com.platform.annotation.LoginUser;
-import com.platform.entity.CouponVo;
-import com.platform.entity.SmsLogVo;
-import com.platform.entity.UserCouponVo;
-import com.platform.entity.UserVo;
-import com.platform.service.ApiCouponService;
-import com.platform.service.ApiUserCouponService;
-import com.platform.service.ApiUserService;
+import com.platform.dto.BuyGoodsDTO;
+import com.platform.entity.*;
+import com.platform.redis.ApiBuyKey;
+import com.platform.redis.RedisService;
+import com.platform.service.*;
 import com.platform.util.ApiBaseAction;
 import com.platform.utils.CharUtil;
 import com.platform.utils.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.math.BigDecimal;
 import java.util.*;
 
 /**
@@ -34,6 +34,14 @@ public class ApiCouponController extends ApiBaseAction {
     private ApiCouponService apiCouponService;
     @Autowired
     private ApiUserCouponService apiUserCouponService;
+    @Autowired
+    private ApiGoodsService apiGoodsService;
+    @Autowired
+    private RedisService redisService;
+    @Autowired
+    private ApiProductService apiProductService;
+    @Autowired
+    private ApiCartService apiCartService;
 
     /**
      * 获取优惠券列表
@@ -44,6 +52,51 @@ public class ApiCouponController extends ApiBaseAction {
         param.put("user_id", loginUser.getUserId());
         List<CouponVo> couponVos = apiCouponService.queryUserCoupons(param);
         return toResponsSuccess(couponVos);
+    }
+
+    /**
+     * 根据商品获取可用优惠券列表
+     */
+    @RequestMapping("/listByGoods")
+    public Object listByGoods(@RequestParam(defaultValue = "cart") String type, @LoginUser UserVo loginUser) {
+        //  获取要购买的商品和总价
+        ArrayList checkedGoodsList = new ArrayList();
+        BigDecimal goodsTotalPrice = new BigDecimal(0.00);
+        if (type.equals("cart")) {
+            Map param = new HashMap();
+            param.put("user_id", loginUser.getUserId());
+            List<CartVo> cartList = apiCartService.queryList(param);
+            //获取购物车统计信息
+            for (CartVo cartItem : cartList) {
+                if (null != cartItem.getChecked() && 1 == cartItem.getChecked()) {
+                    goodsTotalPrice = goodsTotalPrice.add(cartItem.getRetail_price().multiply(new BigDecimal(cartItem.getNumber())));
+                }
+            }
+        } else { // 是直接购买的
+            BuyGoodsDTO goodsDTO = redisService.get(ApiBuyKey.goods(), loginUser.getUserId()+"", BuyGoodsDTO.class);
+            ProductVo productInfo = apiProductService.queryObject(goodsDTO.getProductId());
+            //商品总价
+            goodsTotalPrice = productInfo.getRetail_price().multiply(new BigDecimal(goodsDTO.getNumber()));
+        }
+
+        // 获取可用优惠券
+        Map param = new HashMap();
+        param.put("user_id", loginUser.getUserId());
+        param.put("coupon_status", 1);
+        List<CouponVo> couponVos = apiCouponService.queryUserCoupons(param);
+        List<CouponVo> useCoupons = new ArrayList<>();
+        List<CouponVo> notUseCoupons = new ArrayList<>();
+        for (CouponVo couponVo : couponVos) {
+            if (goodsTotalPrice.compareTo(couponVo.getMin_goods_amount())>=0) { // 可用优惠券
+                couponVo.setEnabled(1);
+                useCoupons.add(couponVo);
+            } else {
+                couponVo.setEnabled(0);
+                notUseCoupons.add(couponVo);
+            }
+        }
+        useCoupons.addAll(notUseCoupons);
+        return toResponsSuccess(useCoupons);
     }
 
     /**

@@ -68,6 +68,7 @@ module.exports = {
     Login: NewApiRootUrl + 'auth/login', //账号登录
     Register: NewApiRootUrl + 'auth/register', //注册
     CouponList: NewApiRootUrl + 'coupon/list', // 优惠券列表
+    GoodsCouponList: NewApiRootUrl + 'coupon/listByGoods', // 商品优惠券列表   
     OrderQuery: NewApiRootUrl + 'pay/query',
     OrderSuccess: NewApiRootUrl + 'order/updateSuccess',
     

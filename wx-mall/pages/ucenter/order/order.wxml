@@ -23,4 +23,14 @@
             </view>
         </navigator>
     </view>
+
+    <view wx:if="{{orderList.length>6}}" class="loadmore">
+      <block wx:if="{{nomore}}">
+        <text>{{nomoreText}}</text>
+      </block>
+      <block wx:else>
+        <text class="iconfont icon-loading loading" space="nbsp"></text>
+        <text> {{loadmoreText}}</text>
+      </block>
+    </view>
 </view>
