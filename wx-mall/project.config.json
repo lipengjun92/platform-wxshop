@@ -8,7 +8,7 @@
 		"newFeature": true
 	},
 	"compileType": "miniprogram",
-	"libVersion": "1.6.4",
+	"libVersion": "1.9.0",
 	"appid": "wx11ed3e37387289b8",
 	"projectname": "wxshop",
 	"condition": {
