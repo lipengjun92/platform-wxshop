@@ -1,5 +1,5 @@
 .container{
-    margin-bottom: 100rpx;
+    /* margin-bottom: 100rpx; */
 }
 .goodsimgs{
   width: 750rpx;

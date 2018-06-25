@@ -5,6 +5,7 @@ var api = require('../../config/api.js');
 
 Page({
   data: {
+    winHeight: "",
     id: 0,
     goods: {},
     gallery: [],
@@ -190,6 +191,21 @@ Page({
           cartGoodsCount: res.data.cartTotal.goodsCount
         });
 
+      }
+    });
+
+    var that = this
+    //  高度自适应
+    wx.getSystemInfo({
+      success: function (res) {
+        var clientHeight = res.windowHeight,
+          clientWidth = res.windowWidth,
+          rpxR = 750 / clientWidth;
+        var calc = clientHeight * rpxR - 100;
+        console.log(calc)
+        that.setData({
+          winHeight: calc
+        });
       }
     });
   },
