@@ -55,7 +55,7 @@
         <text class="txt">账号安全</text>
       </navigator>
     </view>
-    <button open-type="contact">
+    <button class='service' open-type="contact">
       <view class="item no-border">
         <navigator url="url" class="a">
           <text class="icon kefu"></text>
