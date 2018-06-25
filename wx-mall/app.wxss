@@ -18,18 +18,6 @@ view,text{
   color: #333;
 }
 
-button {
-  position: static;
-  background-color: transparent;
-  color: transparent;
-  margin: 0;
-  padding: 0;
-  border: none;
-  text-align: left;
-  line-height: normal;
-  display: inline;
-}
-
 button::after {
   display: none;
 }

@@ -174,3 +174,15 @@ page{
     color: #333;
     font-size: 30rpx;
 }
+
+.service {
+  position: static;
+  background-color: transparent;
+  color: transparent;
+  margin: 0;
+  padding: 0;
+  border: none;
+  text-align: left;
+  line-height: normal;
+  display: inline;
+}
