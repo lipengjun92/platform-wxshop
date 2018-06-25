@@ -16,7 +16,7 @@ $(function () {
     if (orderType) {
         url += '?orderType=' + orderType;
     }
-    $("#jqGrid").jqGrid({
+    $("#jqGrid").Grid({
         url: url,
         datatype: "json",
         colModel: [
@@ -165,7 +165,7 @@ let vm = new Vue({
             vm.reload();
         },
         sendGoods: function (event) {
-            let id = getSelectedRow();
+            let id = getSelectedRow("#jqGrid");
             if (id == null) {
                 return;
             }
@@ -176,7 +176,7 @@ let vm = new Vue({
             });
         },
         confirm: function (event) {
-            let id = getSelectedRow();
+            let id = getSelectedRow("#jqGrid");
             if (id == null) {
                 return;
             }
