@@ -25,3 +25,11 @@ button::after {
 .display-none {
   display: none !important;
 }
+::-webkit-scrollbar {
+  width: 5px;
+  background-color: #f5f5f5;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #999;
+}
