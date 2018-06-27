@@ -15,6 +15,7 @@
     * 1.11 quartz2.2.3
     * 1.12 mysql5.1.39
     * 1.13 swagger2.4
+    * 1.14 redis1.7.2.RELEASE
         
 * 2 前端使用技术
     * 2.1 Vue2.5.1
@@ -79,7 +80,10 @@ platform-wechat-mall
     * d 专题管理
     * e 专题分类
 
-* 五：系统管理
+* 五：订单管理
+    * a 所有订单管理
+
+* 六：系统管理
     * a 管理员列表
     * b 角色管理
     * c 菜单管理
@@ -101,7 +105,7 @@ platform-wechat-mall
     ```
 
 ## 后台管理项目演示
-* 演示地址：[https://fly2you.cn/platform](https://fly2you.cn/platform)  `账号密码：admin/admin`
+* 演示地址：[https://fly2you.cn](https://fly2you.cn)  `账号密码：admin/admin`
 
 * 如何交流、反馈、参与贡献？
     * 官方QQ群：<a target="_blank" href="//shang.qq.com/wpa/qunwpa?idkey=75689ba2797dd88a208446088b029fbdeba87a29315ff2a021a6731f22ef5052"><img border="0" src="//pub.idqqimg.com/wpa/images/group.png" alt="大平台系统开发" title="大平台系统开发"></a>
@@ -168,14 +172,15 @@ platform-wechat-mall
 
 ***
 ## 小程序客户案例
+
 ### 美平超市
-<img src="http://p9kyr79ne.bkt.clouddn.com/1/20180531/145949515b6f7c.png" width="300px" height="300px" title="美平超市"></img>
+![](http://p9kyr79ne.bkt.clouddn.com/1/20180531/145949515b6f7c.png "美平超市")
 ### 便利主义超市
-<img src="http://p9kyr79ne.bkt.clouddn.com/1/20180531/150000826e2864.png" width="300px" height="300px" title="便利主义超市"></img>
+![](http://p9kyr79ne.bkt.clouddn.com/1/20180531/150000826e2864.png "便利主义超市")
 ### 汽车人E车宝
-<img src="http://p9kyr79ne.bkt.clouddn.com/1/20180531/15001446746217.png" width="300px" height="300px" title="汽车人E车宝"></img>
+![](http://p9kyr79ne.bkt.clouddn.com/1/20180531/15001446746217.png "汽车人E车宝")
 ### 海数据在线
-<img src="http://p9kyr79ne.bkt.clouddn.com/1/20180614/103939911f7e76.png" width="300px" height="300px" title="海数据在线"></img>
+![](http://p9kyr79ne.bkt.clouddn.com/1/20180614/103939911f7e76.png "海数据在线")
 
 ***
 ## ◆免责条款:
