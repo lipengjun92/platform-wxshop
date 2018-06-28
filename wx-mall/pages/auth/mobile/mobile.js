@@ -97,7 +97,8 @@ Page({
     },
 
     bindLoginMobilecode: function (e) {
-        if (!this.bindCheckMobile(this.data.mobile)) {
+        var mobile = this.data.mobile;
+        if (!this.bindCheckMobile(mobile)) {
             return
         }
         if (!(e.detail.value.code && e.detail.value.code.length === 4)) {
@@ -108,7 +109,7 @@ Page({
             icon: 'loading',
             duration: 5000
         })
-        util.request(api.BindMobile, {mobile_code: e.detail.value.code}, 'POST')
+        util.request(api.BindMobile, {mobile_code: e.detail.value.code,mobile:mobile}, 'POST')
             .then(function (res) {
                 if (res.data.code == 200) {
                     wx.showModal({
@@ -119,6 +120,12 @@ Page({
                     wx.switchTab({
                         url: '/pages/ucenter/index/index'
                     });
+                } else {
+                    wx.showModal({
+                        title: '提示',
+                        content: '验证码错误',
+                        showCancel: false
+                    })
                 }
             })
     }
