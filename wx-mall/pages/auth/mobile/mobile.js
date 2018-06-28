@@ -31,7 +31,7 @@ Page({
     },
 
     bindCheckMobile: function (mobile) {
-        if(!mobile){
+        if (!mobile) {
             wx.showModal({
                 title: '错误',
                 content: '请输入手机号码'
@@ -63,16 +63,8 @@ Page({
         if (!this.bindCheckMobile(this.data.mobile)) {
             return
         }
-        wx.request({
-            url: api.SmsCode,
-            data: {
-                phone: this.data.mobile
-            },
-            method: 'POST',
-            header: {
-                'content-type': 'application/json'
-            },
-            success: function (res) {
+        util.request(api.SmsCode, {phone: this.data.mobile}, 'POST')
+            .then(function (res) {
                 if (res.data.code == 200) {
                     wx.showToast({
                         title: '发送成功',
@@ -99,8 +91,7 @@ Page({
                         }
                     }, 1000);
                 }
-            }
-        });
+            });
 
     },
 
