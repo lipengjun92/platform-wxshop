@@ -1,4 +1,5 @@
 var api = require('../../../config/api.js');
+var util = require('../../utils/util.js');
 var app = getApp()
 
 Page({
@@ -107,16 +108,8 @@ Page({
             icon: 'loading',
             duration: 5000
         })
-        wx.request({
-            url: api.BindMobile,
-            data: {
-                mobile_code: e.detail.value.code
-            },
-            method: 'POST',
-            header: {
-                'content-type': 'application/json'
-            },
-            success: function (res) {
+        util.request(api.BindMobile, {mobile_code: e.detail.value.code}, 'POST')
+            .then(function (res) {
                 if (res.data.code == 200) {
                     wx.showModal({
                         title: '提示',
@@ -127,7 +120,6 @@ Page({
                         url: '/pages/ucenter/index/index'
                     });
                 }
-            }
-        });
+            })
     }
 })
