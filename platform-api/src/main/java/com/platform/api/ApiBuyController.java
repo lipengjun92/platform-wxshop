@@ -2,7 +2,7 @@ package com.platform.api;
 
 import com.alibaba.fastjson.JSONObject;
 import com.platform.annotation.LoginUser;
-import com.platform.dto.BuyGoodsDTO;
+import com.platform.entity.BuyGoodsVo;
 import com.platform.entity.*;
 import com.platform.redis.ApiBuyKey;
 import com.platform.redis.RedisService;
@@ -32,11 +32,11 @@ public class ApiBuyController extends ApiBaseAction {
         Integer goodsId = jsonParam.getInteger("goodsId");
         Integer productId = jsonParam.getInteger("productId");
         Integer number = jsonParam.getInteger("number");
-        BuyGoodsDTO goodsDTO = new BuyGoodsDTO();
-        goodsDTO.setGoodsId(goodsId);
-        goodsDTO.setProductId(productId);
-        goodsDTO.setNumber(number);
-        this.redisService.set(ApiBuyKey.goods(), loginUser.getUserId()+"", goodsDTO);
+        BuyGoodsVo goodsVo = new BuyGoodsVo();
+        goodsVo.setGoodsId(goodsId);
+        goodsVo.setProductId(productId);
+        goodsVo.setNumber(number);
+        this.redisService.set(ApiBuyKey.goods(), loginUser.getUserId()+"", goodsVo);
         return toResponsMsgSuccess("添加成功");
     }
 

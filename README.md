@@ -36,7 +36,6 @@ platform-wechat-mall
 |--platform-framework 系统WEB合并
 |--platform-gen 代码生成
 |--platform-schedule 定时任务
-|--platform-shiro 登陆权限相关
 |--platform-shop 商城后台管理
 |--wx-mall 微信小程序商城
 |--platform-vue 微信公众号商城（待开发）

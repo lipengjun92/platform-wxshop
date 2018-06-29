@@ -2,12 +2,12 @@ package com.platform.api;
 
 import com.alibaba.fastjson.JSONObject;
 import com.platform.dao.ApiCouponMapper;
-import com.platform.dto.BuyGoodsDTO;
+import com.platform.entity.BuyGoodsVo;
 import com.platform.redis.ApiBuyKey;
 import com.platform.redis.RedisService;
 import com.qiniu.util.StringUtils;
 import com.platform.annotation.LoginUser;
-import com.platform.dto.CouponInfoVo;
+import com.platform.entity.CouponInfoVo;
 import com.platform.entity.*;
 import com.platform.service.*;
 import com.platform.util.ApiBaseAction;
@@ -413,15 +413,15 @@ public class ApiCartController extends ApiBaseAction {
             }
             goodsTotalPrice = (BigDecimal) ((HashMap) cartData.get("cartTotal")).get("checkedGoodsAmount");
         } else { // 是直接购买的
-            BuyGoodsDTO goodsDTO = redisService.get(ApiBuyKey.goods(), loginUser.getUserId()+"", BuyGoodsDTO.class);
-            ProductVo productInfo = productService.queryObject(goodsDTO.getProductId());
+            BuyGoodsVo goodsVO = redisService.get(ApiBuyKey.goods(), loginUser.getUserId()+"", BuyGoodsVo.class);
+            ProductVo productInfo = productService.queryObject(goodsVO.getProductId());
             //计算订单的费用
             //商品总价
-            goodsTotalPrice = productInfo.getRetail_price().multiply(new BigDecimal(goodsDTO.getNumber()));
+            goodsTotalPrice = productInfo.getRetail_price().multiply(new BigDecimal(goodsVO.getNumber()));
 
             CartVo cartVo = new CartVo();
             cartVo.setGoods_name(productInfo.getGoods_name());
-            cartVo.setNumber(goodsDTO.getNumber());
+            cartVo.setNumber(goodsVO.getNumber());
             cartVo.setRetail_price(productInfo.getRetail_price());
             cartVo.setList_pic_url(productInfo.getList_pic_url());
             checkedGoodsList.add(cartVo);

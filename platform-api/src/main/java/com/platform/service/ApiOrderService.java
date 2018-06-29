@@ -2,13 +2,11 @@ package com.platform.service;
 
 import com.alibaba.fastjson.JSONObject;
 import com.platform.dao.*;
-import com.platform.dto.BuyGoodsDTO;
+import com.platform.entity.BuyGoodsVo;
 import com.platform.entity.*;
 import com.platform.redis.ApiBuyKey;
 import com.platform.redis.RedisService;
 import com.platform.util.CommonUtil;
-import com.platform.utils.RRException;
-import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -108,16 +106,16 @@ public class ApiOrderService {
                 goodsTotalPrice = goodsTotalPrice.add(cartItem.getRetail_price().multiply(new BigDecimal(cartItem.getNumber())));
             }
         } else {
-            BuyGoodsDTO goodsDTO = redisService.get(ApiBuyKey.goods(), loginUser.getUserId()+"", BuyGoodsDTO.class);
-            ProductVo productInfo = productService.queryObject(goodsDTO.getProductId());
+            BuyGoodsVo goodsVo = redisService.get(ApiBuyKey.goods(), loginUser.getUserId()+"", BuyGoodsVo.class);
+            ProductVo productInfo = productService.queryObject(goodsVo.getProductId());
             //计算订单的费用
             //商品总价
-            goodsTotalPrice = productInfo.getRetail_price().multiply(new BigDecimal(goodsDTO.getNumber()));
+            goodsTotalPrice = productInfo.getRetail_price().multiply(new BigDecimal(goodsVo.getNumber()));
 
             CartVo cartVo = new CartVo();
             BeanUtils.copyProperties(productInfo, cartVo);
-            cartVo.setNumber(goodsDTO.getNumber());
-            cartVo.setProduct_id(goodsDTO.getProductId());
+            cartVo.setNumber(goodsVo.getNumber());
+            cartVo.setProduct_id(goodsVo.getProductId());
             checkedGoodsList.add(cartVo);
         }
 
