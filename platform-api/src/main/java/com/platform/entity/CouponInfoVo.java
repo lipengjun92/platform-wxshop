@@ -1,4 +1,4 @@
-package com.platform.dto;
+package com.platform.entity;
 
 /**
  * 作者: @author Harmon <br>

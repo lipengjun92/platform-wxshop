@@ -2,7 +2,7 @@ package com.platform.api;
 
 import com.alibaba.fastjson.JSONObject;
 import com.platform.annotation.LoginUser;
-import com.platform.dto.BuyGoodsDTO;
+import com.platform.entity.BuyGoodsVo;
 import com.platform.entity.*;
 import com.platform.redis.ApiBuyKey;
 import com.platform.redis.RedisService;
@@ -73,10 +73,10 @@ public class ApiCouponController extends ApiBaseAction {
                 }
             }
         } else { // 是直接购买的
-            BuyGoodsDTO goodsDTO = redisService.get(ApiBuyKey.goods(), loginUser.getUserId()+"", BuyGoodsDTO.class);
-            ProductVo productInfo = apiProductService.queryObject(goodsDTO.getProductId());
+            BuyGoodsVo goodsVo = redisService.get(ApiBuyKey.goods(), loginUser.getUserId()+"", BuyGoodsVo.class);
+            ProductVo productInfo = apiProductService.queryObject(goodsVo.getProductId());
             //商品总价
-            goodsTotalPrice = productInfo.getRetail_price().multiply(new BigDecimal(goodsDTO.getNumber()));
+            goodsTotalPrice = productInfo.getRetail_price().multiply(new BigDecimal(goodsVo.getNumber()));
         }
 
         // 获取可用优惠券

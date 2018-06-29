@@ -9,7 +9,6 @@
 
     <modules>
         <module>platform-common</module> <!-- 公共模块 -->
-        <module>platform-shiro</module> <!-- 权限系统模块 -->
         <module>platform-schedule</module> <!-- 定时任务模块 -->
         <module>platform-gen</module> <!-- 代码生成器模块 -->
         <module>platform-api</module> <!-- API模块 -->
@@ -45,7 +44,6 @@
         <taglibs-version>1.1.2</taglibs-version>
         <freemarker-version>2.3.23</freemarker-version>
         <kaptcha.version>0.0.9</kaptcha.version>
-        <lombok.version>1.16.18</lombok.version>
     </properties>
 
     <!-- 阿里云maven仓库 -->
@@ -206,11 +204,6 @@
             <groupId>redis.clients</groupId>
             <artifactId>jedis</artifactId>
             <version>${jedis-version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <version>${lombok.version}</version>
         </dependency>
         <!-- Velocity视图所需jar -->
         <dependency>
