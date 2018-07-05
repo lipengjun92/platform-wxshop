@@ -1,8 +1,13 @@
 var NewApiRootUrl = 'http://fly2you.cn/platform/api/';
 // var NewApiRootUrl = 'http://localhost:8080/api/';
-
 module.exports = {
-    IndexUrl: NewApiRootUrl + 'index/index', //首页数据接口
+  IndexUrlNewGoods: NewApiRootUrl + 'index/newGoods', //
+  IndexUrlHotGoods: NewApiRootUrl + 'index/hotGoods', //首页数据接口
+  IndexUrlTopic: NewApiRootUrl + 'index/topic', //首页数据接口
+  IndexUrlBrand: NewApiRootUrl + 'index/brand', //首页数据接口IndexUrlChannel
+  IndexUrlCategory: NewApiRootUrl + 'index/category', //首页数据接口IndexUrlChannel
+  IndexUrlBanner: NewApiRootUrl + 'index/banner', //首页数据接口IndexUrlChannel
+  IndexUrlChannel: NewApiRootUrl + 'index/channel', //首页数据接口IndexUrlChannel
     CatalogList: NewApiRootUrl + 'catalog/index',  //分类目录全部分类数据接口
     CatalogCurrent: NewApiRootUrl + 'catalog/current',  //分类目录当前分类数据接口
 
