@@ -1,5 +1,7 @@
 # 微信小程序商城（Java版）
 
+[![Fork me on Gitee](https://gitee.com/fuyang_lipengjun/platform/widgets/widget_3.svg?color=C71D24)](https://gitee.com/fuyang_lipengjun/platform)
+
 ## 技术选型
 * 1 后端使用技术
     * 1.1 springframework4.3.7.RELEASE

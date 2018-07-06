@@ -27,7 +27,7 @@ public class AdVo implements Serializable {
     //内容
     private String content;
     //结束时间
-    private Integer end_time;
+    private Date end_time;
     //状态
     private Integer enabled;
 
@@ -87,11 +87,11 @@ public class AdVo implements Serializable {
         this.content = content;
     }
 
-    public Integer getEnd_time() {
+    public Date getEnd_time() {
         return end_time;
     }
 
-    public void setEnd_time(Integer end_time) {
+    public void setEnd_time(Date end_time) {
         this.end_time = end_time;
     }
 

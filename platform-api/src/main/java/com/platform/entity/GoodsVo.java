@@ -34,7 +34,7 @@ public class GoodsVo implements Serializable {
     //上架
     private Integer is_on_sale;
     //添加时间
-    private Integer add_time;
+    private Date add_time;
     //排序
     private Integer sort_order;
     //删除状态
@@ -161,11 +161,11 @@ public class GoodsVo implements Serializable {
         this.is_on_sale = is_on_sale;
     }
 
-    public Integer getAdd_time() {
+    public Date getAdd_time() {
         return add_time;
     }
 
-    public void setAdd_time(Integer add_time) {
+    public void setAdd_time(Date add_time) {
         this.add_time = add_time;
     }
 
