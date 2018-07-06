@@ -1,7 +1,17 @@
 package com.platform.api;
 
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+
+import org.apache.commons.collections.MapUtils;
+import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
+
 import com.alibaba.fastjson.JSONObject;
-import com.qiniu.util.StringUtils;
 import com.platform.annotation.IgnoreAuth;
 import com.platform.entity.FullUserInfo;
 import com.platform.entity.UserInfo;
@@ -14,17 +24,10 @@ import com.platform.util.CommonUtil;
 import com.platform.utils.CharUtil;
 import com.platform.utils.R;
 import com.platform.validator.Assert;
+import com.qiniu.util.StringUtils;
+
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.apache.commons.collections.MapUtils;
-import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * API登录授权
@@ -42,6 +45,8 @@ public class ApiAuthController extends ApiBaseAction {
     private ApiUserService userService;
     @Autowired
     private TokenService tokenService;
+    @Autowired
+    private RestTemplate restTemplate;
 
     /**
      * 登录
@@ -78,14 +83,14 @@ public class ApiAuthController extends ApiBaseAction {
             fullUserInfo = jsonParam.getObject("userInfo", FullUserInfo.class);
         }
 
-        Map<String, Object> resultObj = new HashMap();
+        Map<String, Object> resultObj = new HashMap<String, Object>();
         //
         UserInfo userInfo = fullUserInfo.getUserInfo();
 
         //获取openid
         String requestUrl = ApiUserUtils.getWebAccess(code);//通过自定义工具类组合出小程序需要的登录凭证 code
         logger.info("》》》组合token为：" + requestUrl);
-        JSONObject sessionData = CommonUtil.httpsRequest(requestUrl, "GET", null);
+        JSONObject sessionData = restTemplate.getForObject(requestUrl, JSONObject.class);
 
         if (null == sessionData || StringUtils.isNullOrEmpty(sessionData.getString("openid"))) {
             return toResponsFail("登录失败");
