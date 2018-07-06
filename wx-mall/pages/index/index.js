@@ -20,20 +20,11 @@ Page({
       desc: '仿网易严选微信小程序商城',
       path: '/pages/index/index'
     }
-  },
-   setDatas: function (data) {
-
-    if(data.channel
-    	&& data.banner 
-    	&& data.floorGoods
-       && data.topics
-       && data.hotGoods
-       && data.newGoods
-    
-    ){
-      that.setData(data);
-    }
-  },
+  },onPullDownRefresh(){
+	  	// 增加下拉刷新数据的功能
+	    var self = this;
+	    this.getIndexData();
+ },
   getIndexData: function () {
     let that = this;
     var data = new Object();
