@@ -46,7 +46,7 @@ public class ApiFootprintController extends ApiBaseAction {
             return toResponsFail("删除出错");
         }
 
-        Map param = new HashMap();
+        Map<String, Object> param = new HashMap<String, Object>();
         param.put("userId", loginUser.getUserId());
         param.put("goodsId", footprintEntity.getGoods_id());
         footprintService.deleteByParam(param);
@@ -61,10 +61,10 @@ public class ApiFootprintController extends ApiBaseAction {
     public Object list(@LoginUser UserVo loginUser,
                        @RequestParam(value = "page", defaultValue = "1") Integer page,
                        @RequestParam(value = "size", defaultValue = "10") Integer size) {
-        Map resultObj = new HashMap();
+        Map<String, Object> resultObj = new HashMap<String, Object>();
 
         //查询列表数据
-        Map params = new HashMap();
+        Map<String, Object> params = new HashMap<String, Object>();
         params.put("user_id", loginUser.getUserId());
         params.put("page", page);
         params.put("limit", size);
@@ -96,7 +96,7 @@ public class ApiFootprintController extends ApiBaseAction {
                 String addTime = DateUtils.timeToStr(footprintVo.getAdd_time(), DateUtils.DATE_PATTERN);
                 List<FootprintVo> tmpList = footPrintMap.get(addTime);
                 if (null == footPrintMap.get(addTime)) {
-                    tmpList = new ArrayList();
+                    tmpList = new ArrayList<FootprintVo>();
                 }
                 tmpList.add(footprintVo);
                 footPrintMap.put(addTime, tmpList);

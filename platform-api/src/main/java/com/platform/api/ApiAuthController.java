@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.platform.annotation.IgnoreAuth;
 import com.platform.entity.FullUserInfo;
@@ -90,7 +91,8 @@ public class ApiAuthController extends ApiBaseAction {
         //获取openid
         String requestUrl = ApiUserUtils.getWebAccess(code);//通过自定义工具类组合出小程序需要的登录凭证 code
         logger.info("》》》组合token为：" + requestUrl);
-        JSONObject sessionData = restTemplate.getForObject(requestUrl, JSONObject.class);
+        String res =restTemplate.getForObject(requestUrl, String.class);
+        JSONObject sessionData = JSON.parseObject(res);
 
         if (null == sessionData || StringUtils.isNullOrEmpty(sessionData.getString("openid"))) {
             return toResponsFail("登录失败");

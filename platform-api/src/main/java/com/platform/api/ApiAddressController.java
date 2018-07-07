@@ -35,7 +35,7 @@ public class ApiAddressController extends ApiBaseAction {
     @ApiOperation(value = "获取用户的收货地址接口", response = Map.class)
     @RequestMapping("list")
     public Object list(@LoginUser UserVo loginUser) {
-        Map param = new HashMap();
+        Map<String, Object> param = new HashMap<String, Object>();
         param.put("user_id", loginUser.getUserId());
         List<AddressVo> addressEntities = addressService.queryList(param);
         return toResponsSuccess(addressEntities);
