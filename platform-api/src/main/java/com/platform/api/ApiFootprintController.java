@@ -1,5 +1,19 @@
 package com.platform.api;
 
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.github.pagehelper.PageHelper;
 import com.platform.annotation.LoginUser;
 import com.platform.entity.FootprintVo;
 import com.platform.entity.UserVo;
@@ -7,17 +21,10 @@ import com.platform.service.ApiFootprintService;
 import com.platform.util.ApiBaseAction;
 import com.platform.util.ApiPageUtils;
 import com.platform.utils.DateUtils;
-import com.platform.utils.Query;
+
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-
-import java.util.*;
 
 /**
  * 作者: @author Harmon <br>
@@ -64,17 +71,10 @@ public class ApiFootprintController extends ApiBaseAction {
         Map<String, Object> resultObj = new HashMap<String, Object>();
 
         //查询列表数据
-        Map<String, Object> params = new HashMap<String, Object>();
-        params.put("user_id", loginUser.getUserId());
-        params.put("page", page);
-        params.put("limit", size);
-        params.put("sidx", "f.id");
-        params.put("maxFoot", true);
-        params.put("order", "desc");
-        Query query = new Query(params);
-        List<FootprintVo> footprintVos = footprintService.queryList(query);
-        int total = footprintService.queryTotal(query);
-        ApiPageUtils pageUtil = new ApiPageUtils(footprintVos, total, query.getLimit(), query.getPage());
+        PageHelper.startPage(0, 10, false);
+        List<FootprintVo> footprintVos = footprintService.queryListFootprint(loginUser.getUserId()+"");
+      
+        ApiPageUtils pageUtil = new ApiPageUtils(footprintVos, 0, size, page);
         //
         Map<String, List<FootprintVo>> footPrintMap = new TreeMap<String, List<FootprintVo>>(new Comparator<String>() {
             /*
@@ -101,11 +101,9 @@ public class ApiFootprintController extends ApiBaseAction {
                 tmpList.add(footprintVo);
                 footPrintMap.put(addTime, tmpList);
             }
-            List<FootprintVo>[] footprintVoList = new List[footPrintMap.size()];
-            int i = 0;
+            List<FootprintVo>  footprintVoList = new ArrayList<FootprintVo>();
             for (Map.Entry<String, List<FootprintVo>> entry : footPrintMap.entrySet()) {
-                footprintVoList[i] = entry.getValue();
-                i++;
+            	footprintVoList.add((FootprintVo) entry.getValue());
             }
             resultObj.put("count", pageUtil.getCount());
             resultObj.put("totalPages", pageUtil.getTotalPages());
@@ -116,6 +114,8 @@ public class ApiFootprintController extends ApiBaseAction {
 
         return this.toResponsSuccess(resultObj);
     }
+    
+
 
     /**
      */
@@ -123,10 +123,10 @@ public class ApiFootprintController extends ApiBaseAction {
     public Object sharelist(@LoginUser UserVo loginUser,
                             @RequestParam(value = "page", defaultValue = "1") Integer page,
                             @RequestParam(value = "size", defaultValue = "10") Integer size) {
-        Map resultObj = new HashMap();
+        Map<String, List<FootprintVo>> resultObj = new HashMap<String, List<FootprintVo>>();
 
         //查询列表数据
-        Map params = new HashMap();
+        Map<String, Object> params = new HashMap<String, Object>();
         params.put("sidx", "f.id");
         params.put("order", "desc");
         params.put("referrer", loginUser.getUserId());
