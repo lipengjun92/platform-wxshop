@@ -101,9 +101,9 @@ public class ApiFootprintController extends ApiBaseAction {
                 tmpList.add(footprintVo);
                 footPrintMap.put(addTime, tmpList);
             }
-            List<FootprintVo>  footprintVoList = new ArrayList<FootprintVo>();
+            List<List<FootprintVo>>  footprintVoList = new ArrayList<List<FootprintVo>>();
             for (Map.Entry<String, List<FootprintVo>> entry : footPrintMap.entrySet()) {
-            	footprintVoList.add((FootprintVo) entry.getValue());
+            	footprintVoList.add(entry.getValue());
             }
             resultObj.put("count", pageUtil.getCount());
             resultObj.put("totalPages", pageUtil.getTotalPages());

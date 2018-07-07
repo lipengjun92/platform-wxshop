@@ -39,6 +39,11 @@ Page({
         // 页面关闭
     },
     bindGetUserInfo(e) {
+      let userInfo = wx.getStorageSync('userInfo');
+      let token = wx.getStorageSync('token');
+      if (userInfo && token) {
+        return;
+      }
         if (e.detail.userInfo){
             //用户按了允许授权按钮
             user.loginByWeixin(e.detail).then(res => {

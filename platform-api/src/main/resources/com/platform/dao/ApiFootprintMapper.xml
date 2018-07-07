@@ -54,7 +54,7 @@
     </select>
     <select id="queryListFootprint" resultMap="footprintMap">
 			         SELECT
-				f.id,
+				MAX(f.id) id,
 				f.user_id,
 				f.goods_id,
 				f.add_time add_time,
@@ -69,7 +69,7 @@
 			WHERE
 				f.user_id = #{0} GROUP BY goods_id
 			 ORDER BY
-				f.id DESC
+				 id DESC
     </select>
 
     <select id="queryTotal" resultType="int">
