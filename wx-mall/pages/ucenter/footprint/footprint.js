@@ -9,6 +9,11 @@ Page({
   data: {
     footprintList: [],
   },
+  onPullDownRefresh(){
+    // 增加下拉刷新数据的功能
+    var self = this;
+    this.getFootprintList();
+  },
   getFootprintList() {
     let that = this;
     var tmpFootPrint;
