@@ -22,7 +22,7 @@ public class ApiRegionController extends ApiBaseAction {
     @RequestMapping("list")
     public Object list(Integer parentId) {
         List<SysRegionEntity> regionEntityList = RegionCacheUtil.getChildrenByParentId(parentId);
-        List<RegionVo> regionVoList = new ArrayList();
+        List<RegionVo> regionVoList = new ArrayList<RegionVo>();
         if (null != regionEntityList && regionEntityList.size() > 0) {
             for (SysRegionEntity sysRegionEntity : regionEntityList) {
                 regionVoList.add(new RegionVo(sysRegionEntity));
@@ -35,7 +35,7 @@ public class ApiRegionController extends ApiBaseAction {
     @RequestMapping("provinceList")
     public Object provinceList() {
         List<SysRegionEntity> regionEntityList = RegionCacheUtil.getAllProvice();
-        List<RegionVo> regionVoList = new ArrayList();
+        List<RegionVo> regionVoList = new ArrayList<RegionVo>();
         if (null != regionEntityList && regionEntityList.size() > 0) {
             for (SysRegionEntity sysRegionEntity : regionEntityList) {
                 regionVoList.add(new RegionVo(sysRegionEntity));
@@ -48,7 +48,7 @@ public class ApiRegionController extends ApiBaseAction {
     @RequestMapping("cityList")
     public Object provinceList(String proviceName) {
         List<SysRegionEntity> regionEntityList = RegionCacheUtil.getChildrenCity(proviceName);
-        List<RegionVo> regionVoList = new ArrayList();
+        List<RegionVo> regionVoList = new ArrayList<RegionVo>();
         if (null != regionEntityList && regionEntityList.size() > 0) {
             for (SysRegionEntity sysRegionEntity : regionEntityList) {
                 regionVoList.add(new RegionVo(sysRegionEntity));
@@ -61,7 +61,7 @@ public class ApiRegionController extends ApiBaseAction {
     @RequestMapping("distinctList")
     public Object distinctList(String proviceName, String cityName) {
         List<SysRegionEntity> regionEntityList = RegionCacheUtil.getChildrenDistrict(proviceName, cityName);
-        List<RegionVo> regionVoList = new ArrayList();
+        List<RegionVo> regionVoList = new ArrayList<RegionVo>();
         if (null != regionEntityList && regionEntityList.size() > 0) {
             for (SysRegionEntity sysRegionEntity : regionEntityList) {
                 regionVoList.add(new RegionVo(sysRegionEntity));
@@ -80,7 +80,7 @@ public class ApiRegionController extends ApiBaseAction {
     @IgnoreAuth
     @RequestMapping("regionIdsByNames")
     public Object regionIdsByNames(String provinceName, String cityName, String districtName) {
-        Map resultObj = new HashMap();
+        Map<String, Integer> resultObj = new HashMap<String, Integer>();
         Integer provinceId = 0;
         Integer cityId = 0;
         Integer districtId = 0;
