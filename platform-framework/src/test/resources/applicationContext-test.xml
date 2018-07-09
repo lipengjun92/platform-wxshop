@@ -12,7 +12,7 @@
      	http://www.springframework.org/schema/tx/spring-tx-4.2.xsd
 		http://www.springframework.org/schema/aop
 		http://www.springframework.org/schema/aop/spring-aop-2.5.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
-    <context:component-scan base-package="com.platform.dao,com.platform.service,com.platform.redis">
+    <context:component-scan base-package="com.platform.dao,com.platform.service">
         <!--过滤定时任务service-->
         <context:exclude-filter type="regex" expression="com.platform.service.impl.ScheduleJobServiceImpl"/>
     </context:component-scan>
@@ -126,19 +126,4 @@
         <property name="basePackage" value="com.platform.dao,com.platform.*.dao"/>
     </bean>
 
-    <!-- 配置JedisPoolConfig连接池-->
-    <bean id="poolConfig" class="redis.clients.jedis.JedisPoolConfig">
-        <property name="maxIdle" value="${redis.pool.maxIdle}"></property>
-        <property name="minIdle" value="${redis.pool.minIdle}"></property>
-        <property name="maxWaitMillis" value="${redis.pool.maxWaitMillis}"></property>
-    </bean>
-
-    <bean id="jedisPool" class="redis.clients.jedis.JedisPool">
-        <constructor-arg name="poolConfig" ref="poolConfig"/>
-        <constructor-arg name="host" value="${redis.host}"/>
-        <constructor-arg name="port" value="${redis.port}" type="int"/>
-        <constructor-arg name="timeout" value="${redis.timeout}" type="int"/>
-        <constructor-arg name="password" value="${redis.password}"/>
-        <constructor-arg name="database" value="${redis.database}" type="int"/>
-    </bean>
 </beans>

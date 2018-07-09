@@ -1,11 +1,9 @@
 package com.platform.service;
 
 import com.alibaba.fastjson.JSONObject;
+import com.platform.cache.J2CacheUtils;
 import com.platform.dao.*;
-import com.platform.entity.BuyGoodsVo;
 import com.platform.entity.*;
-import com.platform.redis.ApiBuyKey;
-import com.platform.redis.RedisService;
 import com.platform.util.CommonUtil;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,10 +28,6 @@ public class ApiOrderService {
     private ApiOrderMapper apiOrderMapper;
     @Autowired
     private ApiOrderGoodsMapper apiOrderGoodsMapper;
-    @Autowired
-    private ApiUserCouponMapper apiUserCouponMapper;
-    @Autowired
-    private RedisService redisService;
     @Autowired
     private ApiProductService productService;
 
@@ -106,7 +100,7 @@ public class ApiOrderService {
                 goodsTotalPrice = goodsTotalPrice.add(cartItem.getRetail_price().multiply(new BigDecimal(cartItem.getNumber())));
             }
         } else {
-            BuyGoodsVo goodsVo = redisService.get(ApiBuyKey.goods(), loginUser.getUserId()+"", BuyGoodsVo.class);
+            BuyGoodsVo goodsVo = (BuyGoodsVo) J2CacheUtils.get("goods" + loginUser.getUserId());
             ProductVo productInfo = productService.queryObject(goodsVo.getProductId());
             //计算订单的费用
             //商品总价
@@ -123,9 +117,9 @@ public class ApiOrderService {
         //获取订单使用的优惠券
         BigDecimal couponPrice = new BigDecimal(0.00);
         CouponVo couponVo = null;
-        if (couponId!=0 && couponId != null) {
+        if (couponId != 0 && couponId != null) {
             couponVo = apiCouponMapper.getUserCoupon(couponId);
-            if (couponVo!=null&&couponVo.getCoupon_status()==1) {
+            if (couponVo != null && couponVo.getCoupon_status() == 1) {
                 couponPrice = couponVo.getType_money();
             }
         }
@@ -210,7 +204,7 @@ public class ApiOrderService {
         //
         resultObj.put("data", orderInfoMap);
         // 优惠券标记已用
-        if (couponVo!=null&&couponVo.getCoupon_status()==1) {
+        if (couponVo != null && couponVo.getCoupon_status() == 1) {
             couponVo.setCoupon_status(2);
             apiCouponMapper.updateUserCoupon(couponVo);
         }

@@ -17,7 +17,7 @@
     * 1.11 quartz2.2.3
     * 1.12 mysql5.1.39
     * 1.13 swagger2.4
-    * 1.14 redis1.7.2.RELEASE
+    * 1.14 j2cache2.3.22-release
         
 * 2 前端使用技术
     * 2.1 Vue2.5.1
