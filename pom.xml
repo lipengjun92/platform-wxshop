@@ -36,14 +36,13 @@
         <log4j-version>1.2.17</log4j-version>
         <fastjson-version>1.2.30</fastjson-version>
         <shiro-version>1.3.2</shiro-version>
-        <redis-version>1.7.2.RELEASE</redis-version>
-        <jedis-version>2.9.0</jedis-version>
         <velocity-version>1.7</velocity-version>
         <velocity-tools-version>2.0</velocity-tools-version>
         <jstl-version>1.2</jstl-version>
         <taglibs-version>1.1.2</taglibs-version>
         <freemarker-version>2.3.23</freemarker-version>
         <kaptcha.version>0.0.9</kaptcha.version>
+        <j2cache.version>2.3.22-release</j2cache.version>
     </properties>
 
     <!-- 阿里云maven仓库 -->
@@ -195,16 +194,6 @@
             <artifactId>shiro-spring</artifactId>
             <version>${shiro-version}</version>
         </dependency>
-        <dependency>
-            <groupId>org.springframework.data</groupId>
-            <artifactId>spring-data-redis</artifactId>
-            <version>${redis-version}</version>
-        </dependency>
-        <dependency>
-            <groupId>redis.clients</groupId>
-            <artifactId>jedis</artifactId>
-            <version>${jedis-version}</version>
-        </dependency>
         <!-- Velocity视图所需jar -->
         <dependency>
             <artifactId>velocity</artifactId>
@@ -276,6 +265,11 @@
             <groupId>com.github.axet</groupId>
             <artifactId>kaptcha</artifactId>
             <version>${kaptcha.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>net.oschina.j2cache</groupId>
+            <artifactId>j2cache-core</artifactId>
+            <version>${j2cache.version}</version>
         </dependency>
     </dependencies>
     <build>

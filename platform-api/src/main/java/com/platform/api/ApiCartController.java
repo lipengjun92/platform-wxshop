@@ -1,10 +1,9 @@
 package com.platform.api;
 
 import com.alibaba.fastjson.JSONObject;
+import com.platform.cache.J2CacheUtils;
 import com.platform.dao.ApiCouponMapper;
 import com.platform.entity.BuyGoodsVo;
-import com.platform.redis.ApiBuyKey;
-import com.platform.redis.RedisService;
 import com.qiniu.util.StringUtils;
 import com.platform.annotation.LoginUser;
 import com.platform.entity.CouponInfoVo;
@@ -44,8 +43,7 @@ public class ApiCartController extends ApiBaseAction {
     private ApiCouponService apiCouponService;
     @Autowired
     private ApiCouponMapper apiCouponMapper;
-    @Autowired
-    private RedisService redisService;
+
     /**
      * 获取购物车中的数据
      */
@@ -129,16 +127,17 @@ public class ApiCartController extends ApiBaseAction {
         return toResponsSuccess(getCart(loginUser));
     }
 
-    private String[] getSpecificationIdsArray(String ids){
+    private String[] getSpecificationIdsArray(String ids) {
         String[] idsArray = null;
-        if (org.apache.commons.lang.StringUtils.isNotEmpty(ids)){
+        if (org.apache.commons.lang.StringUtils.isNotEmpty(ids)) {
             String[] tempArray = ids.split("_");
-            if (null != tempArray && tempArray.length > 0){
+            if (null != tempArray && tempArray.length > 0) {
                 idsArray = tempArray;
             }
         }
         return idsArray;
     }
+
     /**
      * 添加商品到购物车
      */
@@ -413,7 +412,7 @@ public class ApiCartController extends ApiBaseAction {
             }
             goodsTotalPrice = (BigDecimal) ((HashMap) cartData.get("cartTotal")).get("checkedGoodsAmount");
         } else { // 是直接购买的
-            BuyGoodsVo goodsVO = redisService.get(ApiBuyKey.goods(), loginUser.getUserId()+"", BuyGoodsVo.class);
+            BuyGoodsVo goodsVO = (BuyGoodsVo) J2CacheUtils.get("goods" + loginUser.getUserId() + "");
             ProductVo productInfo = productService.queryObject(goodsVO.getProductId());
             //计算订单的费用
             //商品总价
@@ -430,9 +429,9 @@ public class ApiCartController extends ApiBaseAction {
 
         //获取可用的优惠券信息
         BigDecimal couponPrice = new BigDecimal(0.00);
-        if (couponId != null && couponId!=0) {
+        if (couponId != null && couponId != 0) {
             CouponVo couponVo = apiCouponMapper.getUserCoupon(couponId);
-            if (couponVo!=null) {
+            if (couponVo != null) {
                 couponPrice = couponVo.getType_money();
             }
         }

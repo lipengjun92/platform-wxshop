@@ -1,11 +1,10 @@
 package com.platform.api;
 
 import com.platform.annotation.LoginUser;
+import com.platform.cache.J2CacheUtils;
 import com.platform.entity.OrderGoodsVo;
 import com.platform.entity.OrderVo;
 import com.platform.entity.UserVo;
-import com.platform.redis.OrderKey;
-import com.platform.redis.RedisService;
 import com.platform.service.ApiOrderGoodsService;
 import com.platform.service.ApiOrderService;
 import com.platform.util.ApiBaseAction;
@@ -14,18 +13,17 @@ import com.platform.util.wechat.WechatUtil;
 import com.platform.utils.*;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.math.BigDecimal;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
 
 /**
  * 作者: @author Harmon <br>
@@ -40,8 +38,6 @@ public class ApiPayController extends ApiBaseAction {
     private ApiOrderService orderService;
     @Autowired
     private ApiOrderGoodsService orderGoodsService;
-    @Autowired
-    private RedisService redisService;
 
     /**
      */
@@ -156,7 +152,7 @@ public class ApiPayController extends ApiBaseAction {
      */
     @RequestMapping("query")
     public Object orderQuery(@LoginUser UserVo loginUser, Integer orderId) {
-        if (orderId==null) {
+        if (orderId == null) {
             return toResponsFail("订单不存在");
         }
 
@@ -202,18 +198,18 @@ public class ApiPayController extends ApiBaseAction {
                 return toResponsMsgSuccess("支付成功");
             } else if (trade_state.equals("USERPAYING")) {
                 // 重新查询 正在支付中
-                Integer num = redisService.get(OrderKey.queryRepeatNum(), orderId+"", Integer.class);
-                if (num==null) {
-                    redisService.set(OrderKey.queryRepeatNum(), orderId+"", 1);
+                Integer num = (Integer) J2CacheUtils.get("queryRepeatNum" + orderId + "");
+                if (num == null) {
+                    J2CacheUtils.put("queryRepeatNum" + orderId + "", 1);
                     this.orderQuery(loginUser, orderId);
-                } else if (num <=3) {
-                    redisService.incr(OrderKey.queryRepeatNum(), orderId+"");
+                } else if (num <= 3) {
+                    J2CacheUtils.remove("queryRepeatNum" + orderId);
                     this.orderQuery(loginUser, orderId);
                 } else {
                     return toResponsFail("查询失败,error=" + trade_state);
                 }
 
-            } else  {
+            } else {
                 // 失败
                 return toResponsFail("查询失败,error=" + trade_state);
             }
