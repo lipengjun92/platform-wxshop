@@ -85,6 +85,14 @@ public class J2CacheUtils {
     }
 
     /**
+     * 获取SYS_CACHE缓存的所有key
+     *
+     * @return
+     */
+    public static Collection<String> keys() {
+        return cache.keys(SYS_CACHE_NAME);
+    }
+    /**
      * 获取缓存的所有key
      *
      * @param cacheName
