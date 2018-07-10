@@ -13,11 +13,10 @@
     * 1.7 fastjson1.2.30
     * 1.8 poi3.15
     * 1.9 velocity1.7
-    * 1.10 alisms1.0
-    * 1.11 quartz2.2.3
-    * 1.12 mysql5.1.39
-    * 1.13 swagger2.4
-    * 1.14 j2cache2.3.22-release
+    * 1.10 quartz2.2.3
+    * 1.11 mysql5.1.39
+    * 1.12 swagger2.4
+    * 1.13 j2cache2.3.22-release
         
 * 2 前端使用技术
     * 2.1 Vue2.5.1
@@ -105,16 +104,16 @@ platform-wechat-mall
     安全起见，需配置有效IP地址。platform.properties -> sms.validIp
     ```
 
-## 后台管理项目演示
-* 演示地址：[https://fly2you.cn](https://fly2you.cn)  `账号密码：admin/admin`
+## 官方首页
+* [http://fly2you.cn](https://fly2you.cn)
 
 * 如何交流、反馈、参与贡献？
     * 官方QQ群：<a target="_blank" href="//shang.qq.com/wpa/qunwpa?idkey=75689ba2797dd88a208446088b029fbdeba87a29315ff2a021a6731f22ef5052"><img border="0" src="//pub.idqqimg.com/wpa/images/group.png" alt="大平台系统开发" title="大平台系统开发"></a>
-    * 博客：[https://fly2you.cn/mblog](https://fly2you.cn/mblog)
+    * 演示地址：[http://fly2you.cn/platform](https://fly2you.cn/platform)  `账号密码：admin/admin`
     * git：[https://gitee.com/fuyang_lipengjun/platform](https://gitee.com/fuyang_lipengjun/platform)
     * 基础架构版
         * git：[https://gitee.com/fuyang_lipengjun/platform-framework](https://gitee.com/fuyang_lipengjun/platform-framework)
-        * 演示地址：[https://fly2you.cn/platform-framework](https://fly2you.cn/platform-framework)
+        * 演示地址：[http://fly2you.cn/platform-framework](http://fly2you.cn/platform-framework)
     * 如需获取项目最新源码，请Watch、Star项目，同时也是对项目最好的支持
     
 
@@ -188,4 +187,4 @@ platform-wechat-mall
 
 ***
 ## ◆免责条款:
-**_感谢您的支持，此系统仅供个人学习、研究之用，请勿用于商业及非法用途。如因使用本系统引起的相关法律法规责任，由使用者自行负责。_**
+**_感谢您的支持，此系统供个人学习、研究之用。如因使用本系统引起的相关法律法规责任，由使用者自行负责。_**
