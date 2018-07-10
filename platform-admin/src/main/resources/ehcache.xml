@@ -48,7 +48,7 @@
 
         -->
 
-    <cache name="system"
+    <cache name="sysCache"
            maxElementsInMemory="5000"
            eternal="false"
            timeToIdleSeconds="3000"
@@ -56,7 +56,7 @@
            overflowToDisk="false">
     </cache>
 
-    <cache name="shop"
+    <cache name="shopCache"
            maxElementsInMemory="5000"
            eternal="false"
            timeToIdleSeconds="3000"
