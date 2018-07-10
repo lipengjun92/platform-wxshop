@@ -21,6 +21,10 @@ public class Constant {
      * 分页条数
      */
     public static final int pageSize=10;
+    /**
+     * 权限前缀
+     */
+    public static final String PERMS_LIST = "permsList";
 
     /**
      * 菜单类型
