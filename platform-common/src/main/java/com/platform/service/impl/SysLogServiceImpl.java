@@ -1,33 +1,25 @@
 package com.platform.service.impl;
 
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestClientException;
+import org.springframework.web.client.RestTemplate;
+
 import com.alibaba.fastjson.JSONObject;
 import com.platform.dao.SysLogDao;
 import com.platform.entity.SysLogEntity;
 import com.platform.service.SysLogService;
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpException;
-import org.apache.http.HttpResponse;
-import org.apache.http.StatusLine;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.util.EntityUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.net.URL;
-import java.net.URLConnection;
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
 
 
 @Service("sysLogService")
 public class SysLogServiceImpl implements SysLogService {
     @Autowired
     private SysLogDao sysLogDao;
+    @Autowired
+    private RestTemplate restTemplate;
 
     @Override
     public SysLogEntity queryObject(Long id) {
@@ -39,15 +31,7 @@ public class SysLogServiceImpl implements SysLogService {
         List<SysLogEntity> list = sysLogDao.queryList(map);
 
         for (SysLogEntity sysLogEntity : list) {
-            String str = getIpDetails(sysLogEntity.getIp());
-            JSONObject jsonObject = null;
-            try {
-                jsonObject = JSONObject.parseObject(str.toString());
-                sysLogEntity.setIp(sysLogEntity.getIp() + ":" + jsonObject.getString("country") + " " + jsonObject.getString("province") + " "
-                        + jsonObject.getString("city") + " " + jsonObject.getString("district") + " " + jsonObject.getString("isp"));
-            } catch (Exception e) {
-            }
-
+        	sysLogEntity.setIp(getIpDetails(sysLogEntity.getIp()));
         }
         return list;
     }
@@ -80,39 +64,24 @@ public class SysLogServiceImpl implements SysLogService {
     /**
      * 向指定URL发送GET方法的请求
      */
-    public static String getIpDetails(String ip) {
-        BufferedReader in = null;
-        try {
-            URL realUrl = new URL("http://int.dpool.sina.com.cn/iplookup/iplookup.php?format=json&ip=" + ip);
-            // 打开和URL之间的连接
-            URLConnection connection = realUrl.openConnection();
-            // 设置通用的请求属性
-            connection.setRequestProperty("accept", "*/*");
-            connection.setRequestProperty("connection", "Keep-Alive");
-            connection.setRequestProperty("user-agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1;SV1)");
-            connection.setConnectTimeout(5000);
-            connection.setReadTimeout(5000);
-            // 建立实际的连接
-            connection.connect();
-            // 定义 BufferedReader输入流来读取URL的响应
-            in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-            StringBuffer sb = new StringBuffer();
-            String line;
-            while ((line = in.readLine()) != null) {
-                sb.append(line);
-            }
-            return sb.toString();
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                if (in != null) {
-                    in.close();
-                }
-            } catch (Exception e2) {
-                e2.printStackTrace();
-            }
-        }
-        return null;
+    public  String getIpDetails(String ip) {
+    	String str=null;
+    	
+    	if(ip.startsWith("0:") ||ip.startsWith("0.") || ip.startsWith("127.") ){
+    		return str;
+    	}
+		try {
+			str = restTemplate.getForObject("http://ip.taobao.com/service/getIpInfo.php?ip="+ip, String.class);
+	    	JSONObject jsonObject = JSONObject.parseObject(str.toString());
+	    	
+	    	//{"code":0,"data":{"ip":"1.1.1.1","country":"澳大利亚","area":"","region":"XX","city":"XX","county":"XX","isp":"XX","country_id":"AU","area_id":"","region_id":"xx","city_id":"xx","county_id":"xx","isp_id":"xx"}}
+	    	jsonObject =(JSONObject) jsonObject.get("data");
+	    	
+	    	str =ip + ":" + jsonObject.getString("country") + " " + jsonObject.getString("region") + " "
+            + jsonObject.getString("city") + " " + jsonObject.getString("county") + " " + jsonObject.getString("isp");
+		} catch (RestClientException e) {
+			str=ip;
+  		}
+    	return str;   
     }
 }
