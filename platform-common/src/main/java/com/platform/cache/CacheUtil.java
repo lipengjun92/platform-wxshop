@@ -1,13 +1,14 @@
 package com.platform.cache;
 
+import java.util.HashMap;
+import java.util.List;
+
+import org.springframework.beans.factory.InitializingBean;
+
 import com.platform.dao.SysMacroDao;
 import com.platform.entity.SysMacroEntity;
 import com.platform.utils.SpringContextUtils;
 import com.platform.utils.StringUtils;
-import org.springframework.beans.factory.InitializingBean;
-
-import java.util.HashMap;
-import java.util.List;
 
 /**
  * 作者: @author Harmon <br>
@@ -16,7 +17,7 @@ import java.util.List;
  */
 public class CacheUtil implements InitializingBean {
 
-    public static void init() {
+    public  void init() {
         SysMacroDao macroDao = SpringContextUtils.getBean(SysMacroDao.class);
         if (null != macroDao) {
             J2CacheUtils.put("macroList", macroDao.queryList(new HashMap<String, Object>()));
