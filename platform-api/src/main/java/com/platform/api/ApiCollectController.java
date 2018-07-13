@@ -6,6 +6,10 @@ import com.platform.entity.CollectVo;
 import com.platform.entity.UserVo;
 import com.platform.service.ApiCollectService;
 import com.platform.util.ApiBaseAction;
+
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,6 +23,7 @@ import java.util.Map;
  * 时间: 2017-08-11 08:32<br>
  * 描述: ApiIndexController <br>
  */
+@Api(tags = "用户收藏")
 @RestController
 @RequestMapping("/api/collect")
 public class ApiCollectController extends ApiBaseAction {
@@ -28,6 +33,7 @@ public class ApiCollectController extends ApiBaseAction {
     /**
      * 获取用户收藏
      */
+    @ApiOperation(value = "获取用户收藏")
     @RequestMapping("list")
     public Object list(@LoginUser UserVo loginUser, Integer typeId) {
 
@@ -45,6 +51,7 @@ public class ApiCollectController extends ApiBaseAction {
     /**
      * 获取用户收藏
      */
+    @ApiOperation(value = "添加取消收藏")
     @RequestMapping("addordelete")
     public Object addordelete(@LoginUser UserVo loginUser) {
         JSONObject jsonParam = getJsonRequest();

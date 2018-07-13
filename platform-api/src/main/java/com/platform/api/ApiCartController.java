@@ -5,6 +5,10 @@ import com.platform.cache.J2CacheUtils;
 import com.platform.dao.ApiCouponMapper;
 import com.platform.entity.BuyGoodsVo;
 import com.qiniu.util.StringUtils;
+
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+
 import com.platform.annotation.LoginUser;
 import com.platform.entity.CouponInfoVo;
 import com.platform.entity.*;
@@ -26,6 +30,7 @@ import java.util.Map;
  * 时间: 2017-08-11 08:32<br>
  * 描述: ApiIndexController <br>
  */
+@Api(tags = "购物车")
 @RestController
 @RequestMapping("/api/cart")
 public class ApiCartController extends ApiBaseAction {
@@ -47,6 +52,7 @@ public class ApiCartController extends ApiBaseAction {
     /**
      * 获取购物车中的数据
      */
+    @ApiOperation(value = "获取购物车中的数据")
     @RequestMapping("getCart")
     public Object getCart(@LoginUser UserVo loginUser) {
         Map<String, Object> resultObj = new HashMap();
@@ -122,6 +128,7 @@ public class ApiCartController extends ApiBaseAction {
     /**
      * 获取购物车信息，所有对购物车的增删改操作，都要重新返回购物车的信息
      */
+    @ApiOperation(value = "获取购物车信息")
     @RequestMapping("index")
     public Object index(@LoginUser UserVo loginUser) {
         return toResponsSuccess(getCart(loginUser));
@@ -141,6 +148,7 @@ public class ApiCartController extends ApiBaseAction {
     /**
      * 添加商品到购物车
      */
+    @ApiOperation(value = "添加商品到购物车")
     @RequestMapping("add")
     public Object add(@LoginUser UserVo loginUser) {
         JSONObject jsonParam = getJsonRequest();
@@ -212,6 +220,7 @@ public class ApiCartController extends ApiBaseAction {
     /**
      * 减少商品到购物车
      */
+    @ApiOperation(value = "减少商品到购物车")
     @RequestMapping("minus")
     public Object minus(@LoginUser UserVo loginUser) {
         JSONObject jsonParam = getJsonRequest();
@@ -242,6 +251,7 @@ public class ApiCartController extends ApiBaseAction {
     /**
      * 更新指定的购物车信息
      */
+    @ApiOperation(value = "更新指定的购物车信息")
     @RequestMapping("update")
     public Object update(@LoginUser UserVo loginUser) {
         JSONObject jsonParam = getJsonRequest();
@@ -328,6 +338,7 @@ public class ApiCartController extends ApiBaseAction {
     /**
      * 是否选择商品，如果已经选择，则取消选择，批量操作
      */
+    @ApiOperation(value = "是否选择商品")
     @RequestMapping("checked")
     public Object checked(@LoginUser UserVo loginUser) {
         JSONObject jsonParam = getJsonRequest();
@@ -342,6 +353,7 @@ public class ApiCartController extends ApiBaseAction {
     }
 
     //删除选中的购物车商品，批量删除
+    @ApiOperation(value = "删除商品")
     @RequestMapping("delete")
     public Object delete(@LoginUser UserVo loginUser) {
         Long userId = loginUser.getUserId();
@@ -359,6 +371,7 @@ public class ApiCartController extends ApiBaseAction {
     }
 
     //  获取购物车商品的总件件数
+    @ApiOperation(value = "获取购物车商品的总件件数")
     @RequestMapping("goodscount")
     public Object goodscount(@LoginUser UserVo loginUser) {
         if (null == loginUser || null == loginUser.getUserId()) {
@@ -386,6 +399,7 @@ public class ApiCartController extends ApiBaseAction {
     /**
      * 订单提交前的检验和填写相关订单信息
      */
+    @ApiOperation(value = "订单提交前的检验和填写相关订单信息")
     @RequestMapping("checkout")
     public Object checkout(@LoginUser UserVo loginUser, Integer couponId, @RequestParam(defaultValue = "cart") String type) {
         Map<String, Object> resultObj = new HashMap();
@@ -455,6 +469,7 @@ public class ApiCartController extends ApiBaseAction {
     /**
      * 选择优惠券列表
      */
+    @ApiOperation(value = "选择优惠券列表")
     @RequestMapping("checkedCouponList")
     public Object checkedCouponList(@LoginUser UserVo loginUser) {
         //

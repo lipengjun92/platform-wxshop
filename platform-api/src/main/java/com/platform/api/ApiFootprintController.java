@@ -22,6 +22,7 @@ import com.platform.util.ApiBaseAction;
 import com.platform.util.ApiPageUtils;
 import com.platform.utils.DateUtils;
 
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
@@ -31,6 +32,7 @@ import io.swagger.annotations.ApiOperation;
  * 时间: 2017-08-11 08:32<br>
  * 描述: ApiIndexController <br>
  */
+@Api(tags = "足迹")
 @RestController
 @RequestMapping("/api/footprint")
 public class ApiFootprintController extends ApiBaseAction {
@@ -119,6 +121,7 @@ public class ApiFootprintController extends ApiBaseAction {
 
     /**
      */
+    @ApiOperation(value = "分享足迹")
     @RequestMapping("sharelist")
     public Object sharelist(@LoginUser UserVo loginUser,
                             @RequestParam(value = "page", defaultValue = "1") Integer page,

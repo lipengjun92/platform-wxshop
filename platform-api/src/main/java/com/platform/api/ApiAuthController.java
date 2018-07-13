@@ -71,6 +71,7 @@ public class ApiAuthController extends ApiBaseAction {
     /**
      * 登录
      */
+    @ApiOperation(value = "登录")
     @IgnoreAuth
     @RequestMapping("login_by_weixin")
     public Object loginByWeixin() {

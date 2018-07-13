@@ -409,6 +409,7 @@ public class ApiGoodsController extends ApiBaseAction {
     /**
      * 　　商品列表筛选的分类列表
      */
+    @ApiOperation(value = "商品列表筛选的分类列表")
     @IgnoreAuth
     @RequestMapping(value = "filter", method = RequestMethod.GET)
     public Object filter(@LoginUser UserVo loginUser, Integer categoryId,
@@ -464,6 +465,7 @@ public class ApiGoodsController extends ApiBaseAction {
     /**
      * 　　新品首发
      */
+    @ApiOperation(value = "新品首发")
     @IgnoreAuth
     @RequestMapping(value = "new", method = RequestMethod.GET)
     public Object newAction(@LoginUser UserVo loginUser) {
@@ -479,6 +481,7 @@ public class ApiGoodsController extends ApiBaseAction {
     /**
      * 　　人气推荐
      */
+    @ApiOperation(value = "人气推荐")
     @IgnoreAuth
     @RequestMapping(value = "hot", method = RequestMethod.GET)
     public Object hot(@LoginUser UserVo loginUser) {
@@ -494,6 +497,7 @@ public class ApiGoodsController extends ApiBaseAction {
     /**
      * 　　商品详情页的大家都在看的商品
      */
+    @ApiOperation(value = "商品详情页")
     @IgnoreAuth
     @RequestMapping(value = "related", method = RequestMethod.GET)
     public Object related(@LoginUser UserVo loginUser, Integer id) {
@@ -530,6 +534,7 @@ public class ApiGoodsController extends ApiBaseAction {
     /**
      * 　　在售的商品总数
      */
+    @ApiOperation(value = "在售的商品总数")
     @IgnoreAuth
     @RequestMapping(value = "count", method = RequestMethod.GET)
     public Object count(@LoginUser UserVo loginUser) {
@@ -545,6 +550,7 @@ public class ApiGoodsController extends ApiBaseAction {
     /**
      * 　　获取商品列表
      */
+    @ApiOperation(value = "获取商品列表")
     @IgnoreAuth
     @RequestMapping(value = "productlist", method = RequestMethod.GET)
     public Object productlist(@LoginUser UserVo loginUser, Integer categoryId,

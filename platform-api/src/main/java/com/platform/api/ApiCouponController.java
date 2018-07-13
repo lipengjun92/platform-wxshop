@@ -9,6 +9,10 @@ import com.platform.service.*;
 import com.platform.util.ApiBaseAction;
 import com.platform.utils.CharUtil;
 import com.platform.utils.StringUtils;
+
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -24,6 +28,7 @@ import java.util.*;
  * @email 939961241@qq.com
  * @date 2017-03-23 15:31
  */
+@Api(tags = "优惠券")
 @RestController
 @RequestMapping("/api/coupon")
 public class ApiCouponController extends ApiBaseAction {
@@ -41,6 +46,7 @@ public class ApiCouponController extends ApiBaseAction {
     /**
      * 获取优惠券列表
      */
+    @ApiOperation(value = "获取优惠券列表")
     @RequestMapping("/list")
     public Object list(@LoginUser UserVo loginUser) {
         Map param = new HashMap();
@@ -52,6 +58,7 @@ public class ApiCouponController extends ApiBaseAction {
     /**
      * 根据商品获取可用优惠券列表
      */
+    @ApiOperation(value = "根据商品获取可用优惠券列表")
     @RequestMapping("/listByGoods")
     public Object listByGoods(@RequestParam(defaultValue = "cart") String type, @LoginUser UserVo loginUser) {
         //  获取要购买的商品和总价
@@ -97,6 +104,7 @@ public class ApiCouponController extends ApiBaseAction {
     /**
      * 兑换优惠券
      */
+    @ApiOperation(value = "领券优惠券")
     @RequestMapping("exchange")
     public Object exchange(@LoginUser UserVo loginUser) {
         JSONObject jsonParam = getJsonRequest();
@@ -129,6 +137,7 @@ public class ApiCouponController extends ApiBaseAction {
     /**
      * 　　填写手机号码，领券
      */
+    @ApiOperation(value = "领券优惠券")
     @RequestMapping("newuser")
     public Object newuser(@LoginUser UserVo loginUser) {
         JSONObject jsonParam = getJsonRequest();
@@ -179,6 +188,7 @@ public class ApiCouponController extends ApiBaseAction {
     /**
      * 　　转发领取红包
      */
+    @ApiOperation(value = "转发领取红包")
     @RequestMapping("transActivit")
     public Object transActivit(@LoginUser UserVo loginUser, String sourceKey, Long referrer) {
         JSONObject jsonParam = getJsonRequest();

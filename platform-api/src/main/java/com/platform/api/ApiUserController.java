@@ -10,6 +10,9 @@ import com.platform.service.ApiUserService;
 import com.platform.service.SysConfigService;
 import com.platform.util.ApiBaseAction;
 import com.platform.utils.*;
+
+import io.swagger.annotations.Api;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -23,6 +26,7 @@ import java.util.Map;
  * 时间: 2017-08-11 08:32<br>
  * 描述: ApiIndexController <br>
  */
+@Api(tags = "会员验证")
 @RestController
 @RequestMapping("/api/user")
 public class ApiUserController extends ApiBaseAction {

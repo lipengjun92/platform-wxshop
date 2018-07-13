@@ -4,6 +4,9 @@ import com.platform.annotation.IgnoreAuth;
 import com.platform.oss.OSSFactory;
 import com.platform.util.ApiBaseAction;
 import com.platform.utils.RRException;
+
+import io.swagger.annotations.Api;
+
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -14,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
  * 时间: 2017-09-08 13:20<br>
  * 描述: ApiUploadController <br>
  */
+@Api(tags = "上传")
 @RestController
 @RequestMapping("/api/upload")
 public class ApiUploadController extends ApiBaseAction {
