@@ -85,21 +85,18 @@ var vm = new Vue({
 
             //编辑器内容
             vm.topic.content = $('#content').editable('getHTML');
-            $.ajax({
-                type: "POST",
-                url: url,
-                contentType: "application/json",
-                data: JSON.stringify(vm.topic),
-                success: function (r) {
-                    if (r.code === 0) {
-                        alert('操作成功', function (index) {
-                            vm.reload();
-                        });
-                    } else {
-                        alert(r.msg);
-                    }
-                }
+            Ajax.request({
+            	type: "POST",
+            	url: url,
+            	contentType: "application/json",
+            	params: JSON.stringify(vm.topic),
+            	successCallback: function (r) {
+            		alert('操作成功', function (index) {
+            			vm.reload();
+            		});
+            	}
             });
+
         },
         del: function (event) {
             var ids = getSelectedRows("#jqGrid");
@@ -108,21 +105,19 @@ var vm = new Vue({
             }
 
             confirm('确定要删除选中的记录？', function () {
-                $.ajax({
-                    type: "POST",
-                    url: "../topic/delete",
-                    contentType: "application/json",
-                    data: JSON.stringify(ids),
-                    success: function (r) {
-                        if (r.code == 0) {
-                            alert('操作成功', function (index) {
-                                $("#jqGrid").trigger("reloadGrid");
-                            });
-                        } else {
-                            alert(r.msg);
-                        }
-                    }
-                });
+            	Ajax.request({
+            		type: "POST",
+            		url: "../topic/delete",
+            		contentType: "application/json",
+            		params: JSON.stringify(ids),
+            		successCallback: function (r) {
+            			alert('操作成功', function (index) {
+            				$("#jqGrid").trigger("reloadGrid");
+            			});
+            		}
+            	});
+
+                 
             });
         },
         getInfo: function (id) {

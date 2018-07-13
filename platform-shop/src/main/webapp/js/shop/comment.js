@@ -53,21 +53,18 @@ var vm = new Vue({
             vm.comment.id = id;
 
             confirm('确定要切换状态？', function () {
-                $.ajax({
-                    type: "POST",
-                    url: "../comment/toggleStatus",
-                    contentType: "application/json",
-                    data: JSON.stringify(vm.comment),
-                    success: function (r) {
-                        if (r.code === 0) {
-                            alert('操作成功', function (index) {
-                                $("#jqGrid").trigger("reloadGrid");
-                            });
-                        } else {
-                            alert(r.msg);
-                        }
-                    }
-                });
+            	Ajax.request({
+            		type: "POST",
+            		url: "../comment/toggleStatus",
+            		contentType: "application/json",
+            		params: JSON.stringify(vm.comment),
+             		successCallback: function (r) {
+            			alert('操作成功', function (index) {
+            				$("#jqGrid").trigger("reloadGrid");
+            			});
+            		}
+            	});
+               
             });
 
         },
@@ -77,21 +74,18 @@ var vm = new Vue({
                 return;
             }
             confirm('确定要删除选中的记录？', function () {
-                $.ajax({
-                    type: "POST",
+            	Ajax.request({
+            		type: "POST",
                     url: "../comment/delete",
                     contentType: "application/json",
-                    data: JSON.stringify(ids),
-                    success: function (r) {
-                        if (r.code == 0) {
-                            alert('操作成功', function (index) {
-                                $("#jqGrid").trigger("reloadGrid");
-                            });
-                        } else {
-                            alert(r.msg);
-                        }
-                    }
-                });
+                    params: JSON.stringify(ids),
+             		successCallback: function (r) {
+            			alert('操作成功', function (index) {
+            				$("#jqGrid").trigger("reloadGrid");
+            			});
+            		}
+            	});
+                
             });
         },
         seePic: function () {

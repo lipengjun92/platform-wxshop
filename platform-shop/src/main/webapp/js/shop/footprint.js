@@ -40,21 +40,19 @@ var vm = new Vue({
         },
         saveOrUpdate: function (event) {
             var url = vm.footprint.id == null ? "../footprint/save" : "../footprint/update";
-            $.ajax({
-                type: "POST",
-                url: url,
-                contentType: "application/json",
-                data: JSON.stringify(vm.footprint),
-                success: function (r) {
-                    if (r.code === 0) {
-                        alert('操作成功', function (index) {
-                            vm.reload();
-                        });
-                    } else {
-                        alert(r.msg);
-                    }
-                }
+           
+            Ajax.request({
+            	type: "POST",
+            	url: url,
+            	contentType: "application/json",
+            	params: JSON.stringify(vm.footprint),
+             	successCallback: function (r) {
+            		alert('操作成功', function (index) {
+            			vm.reload();
+            		});
+            	}
             });
+            
         },
         del: function (event) {
             var ids = getSelectedRows("#jqGrid");
