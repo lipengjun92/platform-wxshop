@@ -20,7 +20,21 @@ $(function () {
                     return transDate(value);
                 }
             }
-        ]
+        ],
+        footerrow: true,
+        gridComplete: function () {
+            var rowNum = parseInt($(this).getGridParam('records'), 10);
+            if (rowNum > 0) {
+                $(".ui-jqgrid-sdiv").show();
+                var times = jQuery(this).getCol('times', false, 'sum');
+                $(this).footerData("set", {
+                    "jobId": "<font color='red'>合计<font>",
+                    "times": "<font color='red'>" + times + "<font>"
+                });
+            } else {
+                $(".ui-jqgrid-sdiv").hide();
+            }
+        }
     });
 });
 
@@ -39,12 +53,16 @@ var vm = new Vue({
             }).trigger("reloadGrid");
         },
         showError: function (logId) {
-            $.get("../sys/scheduleLog/info/" + logId, function (r) {
-                openWindow({
-                    title: '失败信息',
-                    closeBtn: 0,
-                    content: r.log.error
-                });
+            Ajax.request({
+                url: "../sys/scheduleLog/info/" + logId,
+                successCallback: function (r) {
+                    openWindow({
+                        title: '失败信息',
+                        area: ['600px', '400px'],
+                        shadeClose: true,
+                        content: r.log.error
+                    });
+                }
             });
         },
         back: function (event) {

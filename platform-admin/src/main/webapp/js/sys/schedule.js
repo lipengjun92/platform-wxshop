@@ -55,27 +55,27 @@ var vm = new Vue({
                 return;
             }
 
-            $.get("../sys/schedule/info/" + jobId, function (r) {
-                vm.showList = false;
-                vm.title = "修改";
-                vm.schedule = r.schedule;
+            Ajax.request({
+                url: "../sys/schedule/info/" + jobId,
+                async: true,
+                successCallback: function (r) {
+                    vm.showList = false;
+                    vm.title = "修改";
+                    vm.schedule = r.schedule;
+                }
             });
         },
         saveOrUpdate: function (event) {
             var url = vm.schedule.jobId == null ? "../sys/schedule/save" : "../sys/schedule/update";
-            $.ajax({
-                type: "POST",
+            Ajax.request({
                 url: url,
+                params: JSON.stringify(vm.schedule),
                 contentType: "application/json",
-                data: JSON.stringify(vm.schedule),
-                success: function (r) {
-                    if (r.code === 0) {
-                        alert('操作成功', function (index) {
-                            vm.reload();
-                        });
-                    } else {
-                        alert(r.msg);
-                    }
+                type: 'POST',
+                successCallback: function () {
+                    alert('操作成功', function (index) {
+                        vm.reload();
+                    });
                 }
             });
         },
@@ -86,19 +86,15 @@ var vm = new Vue({
             }
 
             confirm('确定要删除选中的记录？', function () {
-                $.ajax({
-                    type: "POST",
+                Ajax.request({
                     url: "../sys/schedule/delete",
+                    params: JSON.stringify(jobIds),
                     contentType: "application/json",
-                    data: JSON.stringify(jobIds),
-                    success: function (r) {
-                        if (r.code == 0) {
-                            alert('操作成功', function (index) {
-                                vm.reload();
-                            });
-                        } else {
-                            alert(r.msg);
-                        }
+                    type: 'POST',
+                    successCallback: function () {
+                        alert('操作成功', function (index) {
+                            vm.reload();
+                        });
                     }
                 });
             });
@@ -110,19 +106,15 @@ var vm = new Vue({
             }
 
             confirm('确定要暂停选中的记录？', function () {
-                $.ajax({
-                    type: "POST",
+                Ajax.request({
                     url: "../sys/schedule/pause",
+                    params: JSON.stringify(jobIds),
                     contentType: "application/json",
-                    data: JSON.stringify(jobIds),
-                    success: function (r) {
-                        if (r.code == 0) {
-                            alert('操作成功', function (index) {
-                                vm.reload();
-                            });
-                        } else {
-                            alert(r.msg);
-                        }
+                    type: 'POST',
+                    successCallback: function () {
+                        alert('操作成功', function (index) {
+                            vm.reload();
+                        });
                     }
                 });
             });
@@ -134,19 +126,15 @@ var vm = new Vue({
             }
 
             confirm('确定要恢复选中的记录？', function () {
-                $.ajax({
-                    type: "POST",
+                Ajax.request({
                     url: "../sys/schedule/resume",
+                    params: JSON.stringify(jobIds),
                     contentType: "application/json",
-                    data: JSON.stringify(jobIds),
-                    success: function (r) {
-                        if (r.code == 0) {
-                            alert('操作成功', function (index) {
-                                vm.reload();
-                            });
-                        } else {
-                            alert(r.msg);
-                        }
+                    type: 'POST',
+                    successCallback: function () {
+                        alert('操作成功', function (index) {
+                            vm.reload();
+                        });
                     }
                 });
             });
@@ -158,19 +146,15 @@ var vm = new Vue({
             }
 
             confirm('确定要立即执行选中的记录？', function () {
-                $.ajax({
-                    type: "POST",
+                Ajax.request({
                     url: "../sys/schedule/run",
+                    params: JSON.stringify(jobIds),
                     contentType: "application/json",
-                    data: JSON.stringify(jobIds),
-                    success: function (r) {
-                        if (r.code == 0) {
-                            alert('操作成功', function (index) {
-                                vm.reload();
-                            });
-                        } else {
-                            alert(r.msg);
-                        }
+                    type: 'POST',
+                    successCallback: function () {
+                        alert('操作成功', function (index) {
+                            vm.reload();
+                        });
                     }
                 });
             });

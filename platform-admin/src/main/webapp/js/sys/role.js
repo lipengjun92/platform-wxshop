@@ -118,43 +118,41 @@ var vm = new Vue({
             }
 
             confirm('确定要删除选中的记录？', function () {
-                $.ajax({
-                    type: "POST",
+                Ajax.request({
                     url: "../sys/role/delete",
+                    params: JSON.stringify(roleIds),
                     contentType: "application/json",
-                    data: JSON.stringify(roleIds),
-                    success: function (r) {
-                        if (r.code == 0) {
-                            alert('操作成功', function (index) {
-                                vm.reload();
-                            });
-                        } else {
-                            alert(r.msg);
-                        }
+                    type: 'POST',
+                    successCallback: function () {
+                        alert('操作成功', function (index) {
+                            vm.reload();
+                        });
                     }
                 });
             });
         },
         getRole: function (roleId) {
-            $.get("../sys/role/info/" + roleId, function (r) {
-                vm.role = r.role;
+            Ajax.request({
+                url: "../sys/role/info/" + roleId,
+                async: true,
+                successCallback: function (r) {
+                    vm.role = r.role;
+                    vm.getDept();
 
-                //勾选角色所拥有的菜单
-                var menuIds = vm.role.menuIdList;
-                for (var i = 0; i < menuIds.length; i++) {
-                    var node = menu_ztree.getNodeByParam("menuId", menuIds[i]);
-                    menu_ztree.checkNode(node, true, false);
+                    //勾选角色所拥有的菜单
+                    var menuIds = vm.role.menuIdList;
+                    for (var i = 0; i < menuIds.length; i++) {
+                        var node = menu_ztree.getNodeByParam("menuId", menuIds[i]);
+                        menu_ztree.checkNode(node, true, false);
+                    }
+
+                    //勾选角色所拥有的部门数据权限
+                    var deptIds = vm.role.deptIdList;
+                    for (var i = 0; i < deptIds.length; i++) {
+                        var node = data_ztree.getNodeByParam("deptId", deptIds[i]);
+                        data_ztree.checkNode(node, true, false);
+                    }
                 }
-
-                //勾选角色所拥有的部门数据权限
-                var deptIds = vm.role.deptIdList;
-                debugger;
-                for (var i = 0; i < deptIds.length; i++) {
-                    var node = data_ztree.getNodeByParam("deptId", deptIds[i]);
-                    data_ztree.checkNode(node, true, false);
-                }
-
-                vm.getDept();
             });
         },
         saveOrUpdate: function (event) {
@@ -175,53 +173,60 @@ var vm = new Vue({
             vm.role.deptIdList = deptIdList;
 
             var url = vm.role.roleId == null ? "../sys/role/save" : "../sys/role/update";
-            $.ajax({
-                type: "POST",
+            Ajax.request({
                 url: url,
+                params: JSON.stringify(vm.role),
                 contentType: "application/json",
-                data: JSON.stringify(vm.role),
-                success: function (r) {
-                    if (r.code === 0) {
-                        alert('操作成功', function (index) {
-                            vm.reload();
-                        });
-                    } else {
-                        alert(r.msg);
-                    }
+                type: 'POST',
+                successCallback: function () {
+                    alert('操作成功', function (index) {
+                        vm.reload();
+                    });
                 }
             });
         },
         getMenuTree: function (roleId) {
             //加载菜单树
-            $.get("../sys/menu/perms", function (r) {
-                menu_ztree = $.fn.zTree.init($("#menuTree"), menu_setting, r.menuList);
-                //展开所有节点
-                menu_ztree.expandAll(true);
+            Ajax.request({
+                url: "../sys/menu/perms",
+                async: true,
+                successCallback: function (r) {
+                    menu_ztree = $.fn.zTree.init($("#menuTree"), menu_setting, r.menuList);
+                    //展开所有节点
+                    menu_ztree.expandAll(true);
 
-                if (roleId != null) {
-                    vm.getRole(roleId);
+                    if (roleId != null) {
+                        vm.getRole(roleId);
+                    }
                 }
             });
         },
         getDataTree: function (roleId) {
             //加载菜单树
-            $.get("../sys/dept/list", function (r) {
-                data_ztree = $.fn.zTree.init($("#dataTree"), data_setting, r.list);
-                //展开所有节点
-                data_ztree.expandAll(true);
+            Ajax.request({
+                url: "../sys/dept/list",
+                async: true,
+                successCallback: function (r) {
+                    data_ztree = $.fn.zTree.init($("#dataTree"), data_setting, r.list);
+                    //展开所有节点
+                    data_ztree.expandAll(true);
+                }
             });
         },
         getDept: function () {
             //加载部门树
-            $.get("../sys/dept/list", function (r) {
-                dept_ztree = $.fn.zTree.init($("#deptTree"), dept_setting, r.list);
-                var node = dept_ztree.getNodeByParam("deptId", vm.role.deptId);
-                if (node != null) {
-                    dept_ztree.selectNode(node);
-
-                    vm.role.deptName = node.name;
+            Ajax.request({
+                url: "../sys/dept/list",
+                async: true,
+                successCallback: function (r) {
+                    dept_ztree = $.fn.zTree.init($("#deptTree"), dept_setting, r.list);
+                    var node = dept_ztree.getNodeByParam("deptId", vm.role.deptId);
+                    if (node != null) {
+                        dept_ztree.selectNode(node);
+                        vm.role.deptName = node.name;
+                    }
                 }
-            })
+            });
         },
         deptTree: function () {
             openWindow({

@@ -143,10 +143,13 @@ platform-wechat-mall
 * 使用idea启动项目后默认访问路径
     * [http://localhost:8080](http://localhost:8080)
 
-##生产环境打包
+## 生产环境打包
     platform-wechat-mall>mvn package -P prod
 
 ***
+### 关注微信公众号，第一时间获取项目最新动向，即将推出视频教程
+![](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/upload/20180708/qr.jpg "微信公众号")
+
 ## 页面展示
 ### 登录页面
 ![](http://p9kyr79ne.bkt.clouddn.com/1/20180531/14570217019439.png "登录")

@@ -65,19 +65,15 @@ var vm = new Vue({
         },
         saveOrUpdate: function (event) {
             var url = vm.region.id == null ? "../sys/region/save" : "../sys/region/update";
-            $.ajax({
-                type: "POST",
+            Ajax.request({
+                type: 'POST',
                 url: url,
+                params: JSON.stringify(vm.region),
                 contentType: "application/json",
-                data: JSON.stringify(vm.region),
-                success: function (r) {
-                    if (r.code === 0) {
-                        alert('操作成功', function (index) {
-                            vm.reload();
-                        });
-                    } else {
-                        alert(r.msg);
-                    }
+                successCallback: function () {
+                    alert('操作成功', function (index) {
+                        vm.reload();
+                    });
                 }
             });
         },
@@ -88,32 +84,36 @@ var vm = new Vue({
             }
 
             confirm('确定要删除选中的记录？', function () {
-                $.ajax({
-                    type: "POST",
+                Ajax.request({
                     url: "../sys/region/delete",
+                    params: JSON.stringify(ids),
                     contentType: "application/json",
-                    data: JSON.stringify(ids),
-                    success: function (r) {
-                        if (r.code == 0) {
-                            alert('操作成功', function (index) {
-                                $("#jqGrid").trigger("reloadGrid");
-                            });
-                        } else {
-                            alert(r.msg);
-                        }
+                    type: 'POST',
+                    successCallback: function () {
+                        alert('操作成功', function (index) {
+                            vm.reload();
+                        });
                     }
                 });
             });
         },
         getInfo: function (id) {
-            $.get("../sys/region/info/" + id, function (r) {
-                vm.region = r.region;
-                vm.changeType(vm.region.type);
+            Ajax.request({
+                url: "../sys/region/info/" + id,
+                async: true,
+                successCallback: function (r) {
+                    vm.region = r.region;
+                    vm.changeType(vm.region.type);
+                }
             });
         },
         changeType: function (type) {
-            $.get("../sys/region/getAreaByType?type=" + type, function (r) {
-                vm.regionList = r.list;
+            Ajax.request({
+                url: "../sys/region/getAreaByType?type=" + type,
+                async: true,
+                successCallback: function (r) {
+                    vm.regionList = r.list;
+                }
             });
         },
         reload: function (event) {
