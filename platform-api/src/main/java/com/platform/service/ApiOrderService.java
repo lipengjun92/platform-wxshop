@@ -1,17 +1,33 @@
 package com.platform.service;
 
-import com.alibaba.fastjson.JSONObject;
-import com.platform.cache.J2CacheUtils;
-import com.platform.dao.*;
-import com.platform.entity.*;
-import com.platform.util.CommonUtil;
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.math.BigDecimal;
-import java.util.*;
+import com.alibaba.fastjson.JSONObject;
+import com.platform.cache.J2CacheUtils;
+import com.platform.dao.ApiAddressMapper;
+import com.platform.dao.ApiCartMapper;
+import com.platform.dao.ApiCouponMapper;
+import com.platform.dao.ApiOrderGoodsMapper;
+import com.platform.dao.ApiOrderMapper;
+import com.platform.entity.AddressVo;
+import com.platform.entity.BuyGoodsVo;
+import com.platform.entity.CartVo;
+import com.platform.entity.CouponVo;
+import com.platform.entity.OrderGoodsVo;
+import com.platform.entity.OrderVo;
+import com.platform.entity.ProductVo;
+import com.platform.entity.UserVo;
+import com.platform.util.CommonUtil;
 
 
 @Service
@@ -68,8 +84,8 @@ public class ApiOrderService {
 
 
     @Transactional
-    public Map submit(JSONObject jsonParam, UserVo loginUser) {
-        Map resultObj = new HashMap();
+    public Map<String, Object> submit(JSONObject jsonParam, UserVo loginUser) {
+        Map<String, Object> resultObj = new HashMap<String, Object>();
 
         Integer couponId = jsonParam.getInteger("couponId");
         String type = jsonParam.getString("type");
@@ -84,7 +100,7 @@ public class ApiOrderService {
         List<CartVo> checkedGoodsList = new ArrayList<>();
         BigDecimal goodsTotalPrice;
         if (type.equals("cart")) {
-            Map param = new HashMap();
+            Map<String, Object> param = new HashMap<String, Object>();
             param.put("user_id", loginUser.getUserId());
             param.put("session_id", 1);
             param.put("checked", 1);
@@ -117,7 +133,7 @@ public class ApiOrderService {
         //获取订单使用的优惠券
         BigDecimal couponPrice = new BigDecimal(0.00);
         CouponVo couponVo = null;
-        if (couponId != 0 && couponId != null) {
+        if (couponId != null && couponId != 0 ) {
             couponVo = apiCouponMapper.getUserCoupon(couponId);
             if (couponVo != null && couponVo.getCoupon_status() == 1) {
                 couponPrice = couponVo.getType_money();
@@ -176,7 +192,7 @@ public class ApiOrderService {
             return resultObj;
         }
         //统计商品总价
-        List<OrderGoodsVo> orderGoodsData = new ArrayList();
+        List<OrderGoodsVo> orderGoodsData = new ArrayList<OrderGoodsVo>();
         for (CartVo goodsItem : checkedGoodsList) {
             OrderGoodsVo orderGoodsVo = new OrderGoodsVo();
             orderGoodsVo.setOrder_id(orderInfo.getId());
@@ -199,7 +215,7 @@ public class ApiOrderService {
         resultObj.put("errno", 0);
         resultObj.put("errmsg", "订单提交成功");
         //
-        Map orderInfoMap = new HashMap();
+        Map<String, OrderVo> orderInfoMap = new HashMap<String, OrderVo>();
         orderInfoMap.put("orderInfo", orderInfo);
         //
         resultObj.put("data", orderInfoMap);
