@@ -12,6 +12,7 @@ import com.platform.util.ApiBaseAction;
 import com.platform.utils.*;
 
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -38,6 +39,7 @@ public class ApiUserController extends ApiBaseAction {
     /**
      * 发送短信
      */
+    @ApiOperation(value = "发送短信")
     @RequestMapping("smscode")
     public Object smscode(@LoginUser UserVo loginUser) {
         JSONObject jsonParams = getJsonRequest();
@@ -97,6 +99,7 @@ public class ApiUserController extends ApiBaseAction {
      * @param loginUser
      * @return
      */
+    @ApiOperation(value = "获取当前会员等级")
     @RequestMapping("getUserLevel")
     public Object getUserLevel(@LoginUser UserVo loginUser) {
         String userLevel = userService.getUserLevel(loginUser);
@@ -106,6 +109,7 @@ public class ApiUserController extends ApiBaseAction {
     /**
      * 绑定手机
      */
+    @ApiOperation(value = "绑定手机")
     @RequestMapping("bindMobile")
     public Object bindMobile(@LoginUser UserVo loginUser) {
         JSONObject jsonParams = getJsonRequest();
