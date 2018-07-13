@@ -104,8 +104,12 @@ var vm = new Vue({
             vm.reload();
         },
         getMacros: function () {
-            $.get("../sys/macro/queryAll?type=0", function (r) {
-                vm.macros = r.list;
+            Ajax.request({
+                url: "../sys/macro/queryAll?type=0",
+                async: true,
+                successCallback: function (r) {
+                    vm.macros = r.list;
+                }
             });
         },
         add: function () {
@@ -123,26 +127,26 @@ var vm = new Vue({
             }
             vm.showList = false;
             vm.title = "修改";
-            $.get("../sys/macro/info/" + id[0].id, function (r) {
-                vm.macro = r.macro;
+            Ajax.request({
+                url: "../sys/macro/info/" + id[0].id,
+                async: true,
+                successCallback: function (r) {
+                    vm.macro = r.macro;
+                }
             });
             vm.getMacros();
         },
         saveOrUpdate: function (event) {
             var url = vm.macro.id == null ? "../sys/macro/save" : "../sys/macro/update";
-            $.ajax({
-                type: "POST",
+            Ajax.request({
+                type: 'POST',
                 url: url,
+                params: JSON.stringify(vm.macro),
                 contentType: "application/json",
-                data: JSON.stringify(vm.macro),
-                success: function (r) {
-                    if (r.code === 0) {
-                        alert('操作成功', function (index) {
-                            vm.reload();
-                        });
-                    } else {
-                        alert(r.msg);
-                    }
+                successCallback: function () {
+                    alert('操作成功', function (index) {
+                        vm.reload();
+                    });
                 }
             });
         },

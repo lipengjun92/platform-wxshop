@@ -88,8 +88,12 @@ var vm = new Vue({
             vm.reload();
         },
         getConfig: function () {
-            $.getJSON("../sys/oss/config", function (r) {
-                vm.config = r.config;
+            Ajax.request({
+                url: "../sys/oss/config",
+                async: true,
+                successCallback: function (r) {
+                    vm.config = r.config;
+                }
             });
         },
         addConfig: function () {
@@ -98,19 +102,15 @@ var vm = new Vue({
         },
         saveOrUpdate: function () {
             var url = "../sys/oss/saveConfig";
-            $.ajax({
-                type: "POST",
+            Ajax.request({
                 url: url,
+                params: JSON.stringify(vm.config),
                 contentType: "application/json",
-                data: JSON.stringify(vm.config),
-                success: function (r) {
-                    if (r.code === 0) {
-                        alert('操作成功', function () {
-                            vm.reload();
-                        });
-                    } else {
-                        alert(r.msg);
-                    }
+                type: 'POST',
+                successCallback: function () {
+                    alert('操作成功', function (index) {
+                        vm.reload();
+                    });
                 }
             });
         },
@@ -121,19 +121,15 @@ var vm = new Vue({
             }
 
             confirm('确定要删除选中的记录？', function () {
-                $.ajax({
-                    type: "POST",
+                Ajax.request({
                     url: "../sys/oss/delete",
+                    params: JSON.stringify(ossIds),
                     contentType: "application/json",
-                    data: JSON.stringify(ossIds),
-                    success: function (r) {
-                        if (r.code === 0) {
-                            alert('操作成功', function () {
-                                vm.reload();
-                            });
-                        } else {
-                            alert(r.msg);
-                        }
+                    type: 'POST',
+                    successCallback: function () {
+                        alert('操作成功', function (index) {
+                            vm.reload();
+                        });
                     }
                 });
             });
