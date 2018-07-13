@@ -51,18 +51,17 @@ var vm = new Vue({
             }
 
             confirm('确定要删除选中的记录？', function () {
-            	  Ajax.request({
-            		  type: "POST",
-                      url: "../address/delete",
-                      contentType: "application/json",
-                      params: JSON.stringify(ids),
-                       successCallback: function () {
-                    	  alert('操作成功', function (index) {
-                              $("#jqGrid").trigger("reloadGrid");
-                          });
+                Ajax.request({
+                    type: "POST",
+                    url: "../address/delete",
+                    contentType: "application/json",
+                    params: JSON.stringify(ids),
+                    successCallback: function () {
+                        alert('操作成功', function (index) {
+                            vm.reload();
+                        });
                     }
                 });
-                
             });
         }
     }

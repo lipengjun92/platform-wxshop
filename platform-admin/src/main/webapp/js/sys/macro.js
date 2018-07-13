@@ -161,19 +161,15 @@ var vm = new Vue({
                 $.each(id, function (idx, item) {
                     ids[idx] = item.id;
                 });
-                $.ajax({
-                    type: "POST",
+                Ajax.request({
                     url: "../sys/macro/delete",
+                    params: JSON.stringify(ids),
                     contentType: "application/json",
-                    data: JSON.stringify(ids),
-                    success: function (r) {
-                        if (r.code == 0) {
-                            alert('操作成功', function (index) {
-                                vm.reload();
-                            });
-                        } else {
-                            alert(r.msg);
-                        }
+                    type: 'POST',
+                    successCallback: function () {
+                        alert('操作成功', function (index) {
+                            vm.reload();
+                        });
                     }
                 });
             });

@@ -71,41 +71,57 @@ let vm = new Vue({
         },
         changeGoods: function (opt) {
             let goodsId = opt.value;
-            $.get("../goods/info/" + goodsId, function (r) {
-                if (vm.type == 'add') {
-                    vm.product.goodsSn = r.goods.goodsSn;
-                    vm.product.goodsNumber = r.goods.goodsNumber;
-                    vm.product.retailPrice = r.goods.retailPrice;
-                    vm.product.marketPrice = r.goods.marketPrice;
+            Ajax.request({
+                url: "../goods/info/" + goodsId,
+                async: true,
+                successCallback: function (r) {
+                    if (vm.type == 'add') {
+                        vm.product.goodsSn = r.goods.goodsSn;
+                        vm.product.goodsNumber = r.goods.goodsNumber;
+                        vm.product.retailPrice = r.goods.retailPrice;
+                        vm.product.marketPrice = r.goods.marketPrice;
+                    }
+                    Ajax.request({
+                        url: "../goodsspecification/queryAll?goodsId=" + goodsId + "&specificationId=1",
+                        async: true,
+                        successCallback: function (r) {
+                            vm.colors = r.list;
+                        }
+                    });
+                    Ajax.request({
+                        url: "../goodsspecification/queryAll?goodsId=" + goodsId + "&specificationId=2",
+                        async: true,
+                        successCallback: function (r) {
+                            vm.guiges = r.list;
+                        }
+                    });
+                    Ajax.request({
+                        url: "../goodsspecification/queryAll?goodsId=" + goodsId + "&specificationId=4",
+                        async: true,
+                        successCallback: function (r) {
+                            vm.weights = r.list;
+                        }
+                    });
                 }
-                $.get("../goodsspecification/queryAll?goodsId=" + goodsId + "&specificationId=1", function (r) {
-                    vm.colors = r.list;
-                });
-                $.get("../goodsspecification/queryAll?goodsId=" + goodsId + "&specificationId=2", function (r) {
-                    vm.guiges = r.list;
-                });
-                $.get("../goodsspecification/queryAll?goodsId=" + goodsId + "&specificationId=4", function (r) {
-                    vm.weights = r.list;
-                });
             });
         },
         saveOrUpdate: function (event) {
             let url = vm.product.id == null ? "../product/save" : "../product/update";
             vm.product.goodsSpecificationIds = vm.color + '_' + vm.guige + '_' + vm.weight;
-            
+
             Ajax.request({
-            	type: "POST",
-            	url: url,
-            	contentType: "application/json",
-            	params: JSON.stringify(vm.product),
-            	successCallback: function (r) {
-            		alert('操作成功', function (index) {
-            			vm.reload();
-            		});
-            	}
+                type: "POST",
+                url: url,
+                contentType: "application/json",
+                params: JSON.stringify(vm.product),
+                successCallback: function (r) {
+                    alert('操作成功', function (index) {
+                        vm.reload();
+                    });
+                }
             });
-            
-             
+
+
         },
         del: function (event) {
             let ids = getSelectedRows("#jqGrid");
@@ -114,25 +130,29 @@ let vm = new Vue({
             }
 
             confirm('确定要删除选中的记录？', function () {
-            	Ajax.request({
-            		type: "POST",
+                Ajax.request({
+                    type: "POST",
                     url: "../product/delete",
                     contentType: "application/json",
                     params: JSON.stringify(ids),
-             		successCallback: function (r) {
-            			alert('操作成功', function (index) {
-            				$("#jqGrid").trigger("reloadGrid");
-            			});
-            		}
-            	});
-                
-                
+                    successCallback: function (r) {
+                        alert('操作成功', function (index) {
+                            vm.reload();
+                        });
+                    }
+                });
+
+
             });
         },
         getInfo: function (id) {
-            $.get("../product/info/" + id, function (r) {
-                vm.product = r.product;
-                vm.getGoodss();
+            Ajax.request({
+                url: "../product/info/" + id,
+                async: true,
+                successCallback: function (r) {
+                    vm.product = r.product;
+                    vm.getGoodss();
+                }
             });
         },
         reload: function (event) {
@@ -153,8 +173,12 @@ let vm = new Vue({
             handleResetForm(this, name);
         },
         getGoodss: function () {
-            $.get("../goods/queryAll/", function (r) {
-                vm.goodss = r.list;
+            Ajax.request({
+                url: "../goods/queryAll/",
+                async: true,
+                successCallback: function (r) {
+                    vm.goodss = r.list;
+                }
             });
         }
     }

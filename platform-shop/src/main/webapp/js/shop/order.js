@@ -156,7 +156,7 @@ let vm = new Vue({
                     contentType: "application/json",
                     params: JSON.stringify(id),
                     successCallback: function (r) {
-                        $("#jqGrid").trigger("reloadGrid");
+                        vm.reload();
                     }
                 });
             });

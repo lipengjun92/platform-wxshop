@@ -57,19 +57,18 @@ var vm = new Vue({
         },
         saveOrUpdate: function (event) {
             var url = vm.userCoupon.id == null ? "../usercoupon/save" : "../usercoupon/update";
-            
+
             Ajax.request({
-            	type: "POST",
+                type: "POST",
                 url: url,
                 contentType: "application/json",
                 params: JSON.stringify(vm.userCoupon),
-           		successCallback: function (r) {
-        			alert('操作成功', function (index) {
-        				  vm.reload();
-        			});
-        		}
-        	});
-             
+                successCallback: function (r) {
+                    alert('操作成功', function (index) {
+                        vm.reload();
+                    });
+                }
+            });
         },
         del: function (event) {
             var ids = getSelectedRows("#jqGrid");
@@ -80,22 +79,25 @@ var vm = new Vue({
             confirm('确定要删除选中的记录？', function () {
 
                 Ajax.request({
-                	type: "POST",
+                    type: "POST",
                     url: "../usercoupon/delete",
                     contentType: "application/json",
                     params: JSON.stringify(ids),
-                		successCallback: function (r) {
-            			alert('操作成功', function (index) {
-            				 $("#jqGrid").trigger("reloadGrid");
-            			});
-            		}
-            	});
-                
+                    successCallback: function (r) {
+                        alert('操作成功', function (index) {
+                            vm.reload();
+                        });
+                    }
+                });
             });
         },
         getInfo: function (id) {
-            $.get("../usercoupon/info/" + id, function (r) {
-                vm.userCoupon = r.userCoupon;
+            Ajax.request({
+                url: "../usercoupon/info/" + id,
+                async: true,
+                successCallback: function (r) {
+                    vm.userCoupon = r.userCoupon;
+                }
             });
         },
         reload: function (event) {

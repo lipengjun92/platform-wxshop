@@ -40,19 +40,18 @@ var vm = new Vue({
         },
         saveOrUpdate: function (event) {
             var url = vm.footprint.id == null ? "../footprint/save" : "../footprint/update";
-           
+
             Ajax.request({
-            	type: "POST",
-            	url: url,
-            	contentType: "application/json",
-            	params: JSON.stringify(vm.footprint),
-             	successCallback: function (r) {
-            		alert('操作成功', function (index) {
-            			vm.reload();
-            		});
-            	}
+                type: "POST",
+                url: url,
+                contentType: "application/json",
+                params: JSON.stringify(vm.footprint),
+                successCallback: function (r) {
+                    alert('操作成功', function (index) {
+                        vm.reload();
+                    });
+                }
             });
-            
         },
         del: function (event) {
             var ids = getSelectedRows("#jqGrid");
@@ -61,26 +60,33 @@ var vm = new Vue({
             }
 
             confirm('确定要删除选中的记录？', function () {
-                $.ajax({
+                Ajax.request({
                     type: "POST",
-                    url: "../footprint/delete",
+                    dataType: 'json',
+                    url: "../coupon/publish",
                     contentType: "application/json",
-                    data: JSON.stringify(ids),
-                    success: function (r) {
-                        if (r.code == 0) {
-                            alert('操作成功', function (index) {
-                                $("#jqGrid").trigger("reloadGrid");
-                            });
-                        } else {
-                            alert(r.msg);
-                        }
+                    params: JSON.stringify({
+                        sendType: vm.selectData.sendType,
+                        couponId: vm.selectData.id,
+                        goodsIds: vm.goods.toString(),
+                        userIds: vm.user.toString(),
+                        sendSms: vm.sendSms
+                    }),
+                    successCallback: function (r) {
+                        alert('操作成功', function (index) {
+                            vm.reload();
+                        });
                     }
                 });
             });
         },
         getInfo: function (id) {
-            $.get("../footprint/info/" + id, function (r) {
-                vm.footprint = r.footprint;
+            Ajax.request({
+                url: "../footprint/info/" + id,
+                async: true,
+                successCallback: function (r) {
+                    vm.footprint = r.footprint;
+                }
             });
         },
         reload: function (event) {

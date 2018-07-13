@@ -91,24 +91,27 @@ var vm = new Vue({
             this.getParentCategory();
         },
         getParentCategory: function () {
-            $.get("../category/getCategorySelect", function (r) {
-                vm.categoryList = r.list;
+            Ajax.request({
+                url: "../category/getCategorySelect",
+                async: true,
+                successCallback: function (r) {
+                    vm.categoryList = r.list;
+                }
             });
         },
         saveOrUpdate: function (event) {
             var url = vm.category.id == null ? "../category/save" : "../category/update";
             Ajax.request({
-            	type: "POST",
+                type: "POST",
                 url: url,
                 contentType: "application/json",
                 params: JSON.stringify(vm.category),
-         		successCallback: function (r) {
-        			alert('操作成功', function (index) {
-        				$("#jqGrid").trigger("reloadGrid");
-        			});
-        		}
-        	});
-             
+                successCallback: function (r) {
+                    alert('操作成功', function (index) {
+                        vm.reload();
+                    });
+                }
+            });
         },
         del: function (event) {
             var id = TreeGrid.table.getSelectedRow(), ids = [];
@@ -119,25 +122,28 @@ var vm = new Vue({
             $.each(id, function (idx, item) {
                 ids[idx] = item.id;
             });
-          
+
             confirm('确定要删除选中的记录？', function () {
-            	  Ajax.request({
-                  	type: "POST",
-                      url: "../category/delete",
-                      contentType: "application/json",
-                      params: JSON.stringify(ids),
-                		successCallback: function (r) {
-              			alert('操作成功', function (index) {
-              				$("#jqGrid").trigger("reloadGrid");
-              			});
-              		}
-              	});
-                 
+                Ajax.request({
+                    type: "POST",
+                    url: "../category/delete",
+                    contentType: "application/json",
+                    params: JSON.stringify(ids),
+                    successCallback: function (r) {
+                        alert('操作成功', function (index) {
+                            vm.reload();
+                        });
+                    }
+                });
             });
         },
         getInfo: function (id) {
-            $.get("../category/info/" + id, function (r) {
-                vm.category = r.category;
+            Ajax.request({
+                url: "../category/info/" + id,
+                async: true,
+                successCallback: function (r) {
+                    vm.category = r.category;
+                }
             });
         },
         reload: function (event) {

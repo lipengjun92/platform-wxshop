@@ -86,17 +86,16 @@ var vm = new Vue({
             //编辑器内容
             vm.topic.content = $('#content').editable('getHTML');
             Ajax.request({
-            	type: "POST",
-            	url: url,
-            	contentType: "application/json",
-            	params: JSON.stringify(vm.topic),
-            	successCallback: function (r) {
-            		alert('操作成功', function (index) {
-            			vm.reload();
-            		});
-            	}
+                type: "POST",
+                url: url,
+                contentType: "application/json",
+                params: JSON.stringify(vm.topic),
+                successCallback: function (r) {
+                    alert('操作成功', function (index) {
+                        vm.reload();
+                    });
+                }
             });
-
         },
         del: function (event) {
             var ids = getSelectedRows("#jqGrid");
@@ -105,25 +104,29 @@ var vm = new Vue({
             }
 
             confirm('确定要删除选中的记录？', function () {
-            	Ajax.request({
-            		type: "POST",
-            		url: "../topic/delete",
-            		contentType: "application/json",
-            		params: JSON.stringify(ids),
-            		successCallback: function (r) {
-            			alert('操作成功', function (index) {
-            				$("#jqGrid").trigger("reloadGrid");
-            			});
-            		}
-            	});
+                Ajax.request({
+                    type: "POST",
+                    url: "../topic/delete",
+                    contentType: "application/json",
+                    params: JSON.stringify(ids),
+                    successCallback: function (r) {
+                        alert('操作成功', function (index) {
+                            vm.reload();
+                        });
+                    }
+                });
 
-                 
+
             });
         },
         getInfo: function (id) {
-            $.get("../topic/info/" + id, function (r) {
-                vm.topic = r.topic;
-                $('#content').editable('setHTML', vm.topic.content);
+            Ajax.request({
+                url: "../topic/info/" + id,
+                async: true,
+                successCallback: function (r) {
+                    vm.topic = r.topic;
+                    $('#content').editable('setHTML', vm.topic.content);
+                }
             });
         },
         reload: function (event) {

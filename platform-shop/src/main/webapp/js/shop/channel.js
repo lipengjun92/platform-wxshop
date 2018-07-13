@@ -47,8 +47,12 @@ var vm = new Vue({
             vm.getParentCategory();
         },
         getParentCategory: function () {
-            $.get("../category/getCategorySelect", function (r) {
-                vm.categoryList = r.list;
+            Ajax.request({
+                url: "../category/getCategorySelect",
+                async: true,
+                successCallback: function (r) {
+                    vm.categoryList = r.list;
+                }
             });
         },
         update: function (event) {
@@ -65,17 +69,16 @@ var vm = new Vue({
         saveOrUpdate: function (event) {
             var url = vm.channel.id == null ? "../channel/save" : "../channel/update";
             Ajax.request({
-            	type: "POST",
-            	url: url,
-            	contentType: "application/json",
-            	params: JSON.stringify(vm.channel),
-            	successCallback: function (r) {
-            		alert('操作成功', function (index) {
-            			$("#jqGrid").trigger("reloadGrid");
-            		});
-            	}
+                type: "POST",
+                url: url,
+                contentType: "application/json",
+                params: JSON.stringify(vm.channel),
+                successCallback: function (r) {
+                    alert('操作成功', function (index) {
+                        vm.reload();
+                    });
+                }
             });
-            
         },
         del: function (event) {
             var ids = getSelectedRows("#jqGrid");
@@ -84,23 +87,27 @@ var vm = new Vue({
             }
 
             confirm('确定要删除选中的记录？', function () {
-            	Ajax.request({
-            		type: "POST",
-            		url: "../channel/delete",
-            		contentType: "application/json",
-            		params: JSON.stringify(ids),
-            		successCallback: function (r) {
-            			alert('操作成功', function (index) {
-            				$("#jqGrid").trigger("reloadGrid");
-            			});
-            		}
-            	});
-                
+                Ajax.request({
+                    type: "POST",
+                    url: "../channel/delete",
+                    contentType: "application/json",
+                    params: JSON.stringify(ids),
+                    successCallback: function (r) {
+                        alert('操作成功', function (index) {
+                            vm.reload();
+                        });
+                    }
+                });
+
             });
         },
         getInfo: function (id) {
-            $.get("../channel/info/" + id, function (r) {
-                vm.channel = r.channel;
+            Ajax.request({
+                url: "../channel/info/" + id,
+                async: true,
+                successCallback: function (r) {
+                    vm.channel = r.channel;
+                }
             });
         },
         reload: function (event) {

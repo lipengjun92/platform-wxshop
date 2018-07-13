@@ -115,19 +115,18 @@ var vm = new Vue({
         },
         saveOrUpdate: function (event) {
             var url = vm.coupon.id == null ? "../coupon/save" : "../coupon/update";
-           
+
             Ajax.request({
-            	type: "POST",
-            	url: url,
-            	contentType: "application/json",
-            	params: JSON.stringify(vm.coupon),
-            	successCallback: function (r) {
-            		alert('操作成功', function (index) {
-            			$("#jqGrid").trigger("reloadGrid");
-            		});
-            	}
+                type: "POST",
+                url: url,
+                contentType: "application/json",
+                params: JSON.stringify(vm.coupon),
+                successCallback: function (r) {
+                    alert('操作成功', function (index) {
+                        vm.reload();
+                    });
+                }
             });
-            
         },
         del: function (event) {
             var ids = getSelectedRows("#jqGrid");
@@ -136,23 +135,26 @@ var vm = new Vue({
             }
 
             confirm('确定要删除选中的记录？', function () {
-            	Ajax.request({
-            		type: "POST",
-            		url: "../coupon/delete",
-            		contentType: "application/json",
-            		params: JSON.stringify(ids),
-             		successCallback: function (r) {
-            			alert('操作成功', function (index) {
-            				$("#jqGrid").trigger("reloadGrid");
-            			});
-            		}
-            	});
-                
+                Ajax.request({
+                    type: "POST",
+                    url: "../coupon/delete",
+                    contentType: "application/json",
+                    params: JSON.stringify(ids),
+                    successCallback: function (r) {
+                        alert('操作成功', function (index) {
+                            vm.reload();
+                        });
+                    }
+                });
             });
         },
         getInfo: function (id) {
-            $.get("../coupon/info/" + id, function (r) {
-                vm.coupon = r.coupon;
+            Ajax.request({
+                url: "../coupon/info/" + id,
+                async: true,
+                successCallback: function (r) {
+                    vm.coupon = r.coupon;
+                }
             });
         },
         reload: function (event) {
@@ -189,8 +191,12 @@ var vm = new Vue({
             })
         },
         getUsers: function () {
-            $.get("../user/queryAll", function (r) {
-                vm.users = r.list;
+            Ajax.request({
+                url: "../user/queryAll",
+                async: true,
+                successCallback: function (r) {
+                    vm.users = r.list;
+                }
             });
         },
         publishSubmit: function () {
@@ -205,35 +211,35 @@ var vm = new Vue({
                 return;
             }
             confirm('确定下发优惠券？', function () {
-            	Ajax.request({
-            		 type: "POST",
-                     dataType: 'json',
-                     url: "../coupon/publish",
-                     contentType: "application/json",
-                     params: JSON.stringify({
-                         sendType: vm.selectData.sendType,
-                         couponId: vm.selectData.id,
-                         goodsIds: vm.goods.toString(),
-                         userIds: vm.user.toString(),
-                         sendSms: vm.sendSms
-                     })
-            		 ,
-            		successCallback: function (r) {
-            			alert('操作成功', function (index) {
-            				alert('操作成功', function (index) {
-                                $("#jqGrid").trigger("reloadGrid");
-                                vm.showGoods = false;
-                                vm.showList = true;
-                            });
-            			});
-            		}
-            	});
-                 
+                Ajax.request({
+                    type: "POST",
+                    dataType: 'json',
+                    url: "../coupon/publish",
+                    contentType: "application/json",
+                    params: JSON.stringify({
+                        sendType: vm.selectData.sendType,
+                        couponId: vm.selectData.id,
+                        goodsIds: vm.goods.toString(),
+                        userIds: vm.user.toString(),
+                        sendSms: vm.sendSms
+                    }),
+                    successCallback: function (r) {
+                        alert('操作成功', function (index) {
+                            vm.reload();
+                            vm.showGoods = false;
+                            vm.showList = true;
+                        });
+                    }
+                });
             });
         },
         getGoodss: function () {
-            $.get("../goods/queryAll/", function (r) {
-                vm.goodss = r.list;
+            Ajax.request({
+                url: "../goods/queryAll/",
+                async: true,
+                successCallback: function (r) {
+                    vm.goodss = r.list;
+                }
             });
         }
     }

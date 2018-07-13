@@ -57,17 +57,16 @@ var vm = new Vue({
         saveOrUpdate: function (event) {
             var url = vm.cart.id == null ? "../cart/save" : "../cart/update";
             Ajax.request({
-            	type: "POST",
-            	url: url,
-            	contentType: "application/json",
-            	params: JSON.stringify(vm.cart),
-            	successCallback: function (r) {
-            		alert('操作成功', function (index) {
-            			$("#jqGrid").trigger("reloadGrid");
-            		});
-            	}
+                type: "POST",
+                url: url,
+                contentType: "application/json",
+                params: JSON.stringify(vm.cart),
+                successCallback: function (r) {
+                    alert('操作成功', function (index) {
+                        vm.reload();
+                    });
+                }
             });
-            
         },
         del: function (event) {
             var ids = getSelectedRows("#jqGrid");
@@ -76,23 +75,26 @@ var vm = new Vue({
             }
 
             confirm('确定要删除选中的记录？', function () {
-            	Ajax.request({
-            		type: "POST",
-            		url: "../cart/delete",
-            		contentType: "application/json",
-            		params: JSON.stringify(ids),
-            		successCallback: function (r) {
-            			alert('操作成功', function (index) {
-            				$("#jqGrid").trigger("reloadGrid");
-            			});
-            		}
-            	});
-                
+                Ajax.request({
+                    type: "POST",
+                    url: "../cart/delete",
+                    contentType: "application/json",
+                    params: JSON.stringify(ids),
+                    successCallback: function (r) {
+                        alert('操作成功', function (index) {
+                            vm.reload();
+                        });
+                    }
+                });
             });
         },
         getInfo: function (id) {
-            $.get("../cart/info/" + id, function (r) {
-                vm.cart = r.cart;
+            Ajax.request({
+                url: "../cart/info/" + id,
+                async: true,
+                successCallback: function (r) {
+                    vm.cart = r.cart;
+                }
             });
         },
         reload: function (event) {

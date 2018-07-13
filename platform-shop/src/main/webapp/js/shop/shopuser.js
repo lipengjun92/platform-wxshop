@@ -86,19 +86,18 @@ var vm = new Vue({
         },
         saveOrUpdate: function (event) {
             var url = vm.user.id == null ? "../user/save" : "../user/update";
-           
+
             Ajax.request({
-            	type: "POST",
-            	url: url,
-            	contentType: "application/json",
-            	params: JSON.stringify(vm.user),
-            	successCallback: function (r) {
-            		alert('操作成功', function (index) {
-            			vm.reload();
-            		});
-            	}
+                type: "POST",
+                url: url,
+                contentType: "application/json",
+                params: JSON.stringify(vm.user),
+                successCallback: function (r) {
+                    alert('操作成功', function (index) {
+                        vm.reload();
+                    });
+                }
             });
-            
         },
         del: function (event) {
             var ids = getSelectedRows("#jqGrid");
@@ -107,18 +106,18 @@ var vm = new Vue({
             }
 
             confirm('确定要删除选中的记录？', function () {
-            	Ajax.request({
-            		 type: "POST",
-                     url: "../user/delete",
-                     contentType: "application/json",
-                     params: JSON.stringify(ids),
-             		successCallback: function (r) {
-            			alert('操作成功', function (index) {
-            				$("#jqGrid").trigger("reloadGrid");
-            			});
-            		}
-            	});
-                
+                Ajax.request({
+                    type: "POST",
+                    url: "../user/delete",
+                    contentType: "application/json",
+                    params: JSON.stringify(ids),
+                    successCallback: function (r) {
+                        alert('操作成功', function (index) {
+                            vm.reload();
+                        });
+                    }
+                });
+
             });
         },
         exportUser: function () {
@@ -158,16 +157,24 @@ var vm = new Vue({
             })
         },
         getInfo: function (id) {
-            $.get("../user/info/" + id, function (r) {
-                vm.user = r.user;
+            Ajax.request({
+                url: "../user/info/" + id,
+                async: true,
+                successCallback: function (r) {
+                    vm.user = r.user;
+                }
             });
         },
         /**
          * 获取会员级别
          */
         getUserLevels: function () {
-            $.get("../userlevel/queryAll", function (r) {
-                vm.userLevels = r.list;
+            Ajax.request({
+                url: "../userlevel/queryAll",
+                async: true,
+                successCallback: function (r) {
+                    vm.userLevels = r.list;
+                }
             });
         },
         reload: function (event) {

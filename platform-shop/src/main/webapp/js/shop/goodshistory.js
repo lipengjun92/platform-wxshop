@@ -67,27 +67,30 @@ var vm = new Vue({
             }
 
             confirm('确定要恢复选中的记录？', function () {
-            	
-            	Ajax.request({
-            		type: "POST",
+
+                Ajax.request({
+                    type: "POST",
                     url: "../goods/back",
                     contentType: "application/json",
                     params: JSON.stringify(ids),
-                 	successCallback: function (r) {
-                		alert('操作成功', function (index) {
-                			 $("#jqGrid").trigger("reloadGrid");
-                		});
-                	}
+                    successCallback: function (r) {
+                        alert('操作成功', function (index) {
+                            vm.reload();
+                        });
+                    }
                 });
-                
             });
         },
         getInfo: function (id) {
-            $.get("../goods/info/" + id, function (r) {
-                vm.goods = r.goods;
-                $('#goodsDesc').editable('setHTML', vm.goods.goodsDesc);
-                vm.getCategory();
-                vm.getAttributes(vm.goods.attributeCategory);
+            Ajax.request({
+                url: "../goods/info/" + id,
+                async: true,
+                successCallback: function (r) {
+                    vm.goods = r.goods;
+                    $('#goodsDesc').editable('setHTML', vm.goods.goodsDesc);
+                    vm.getCategory();
+                    vm.getAttributes(vm.goods.attributeCategory);
+                }
             });
         },
         reload: function (event) {
