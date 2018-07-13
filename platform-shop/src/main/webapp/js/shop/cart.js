@@ -81,7 +81,6 @@ var vm = new Vue({
             		url: "../cart/delete",
             		contentType: "application/json",
             		params: JSON.stringify(ids),
-            		params: JSON.stringify(vm.cart),
             		successCallback: function (r) {
             			alert('操作成功', function (index) {
             				$("#jqGrid").trigger("reloadGrid");

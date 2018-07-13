@@ -97,21 +97,18 @@ var vm = new Vue({
         },
         saveOrUpdate: function (event) {
             var url = vm.category.id == null ? "../category/save" : "../category/update";
-            $.ajax({
-                type: "POST",
+            Ajax.request({
+            	type: "POST",
                 url: url,
                 contentType: "application/json",
-                data: JSON.stringify(vm.category),
-                success: function (r) {
-                    if (r.code === 0) {
-                        alert('操作成功', function (index) {
-                            vm.reload();
-                        });
-                    } else {
-                        alert(r.msg);
-                    }
-                }
-            });
+                params: JSON.stringify(vm.category),
+         		successCallback: function (r) {
+        			alert('操作成功', function (index) {
+        				$("#jqGrid").trigger("reloadGrid");
+        			});
+        		}
+        	});
+             
         },
         del: function (event) {
             var id = TreeGrid.table.getSelectedRow(), ids = [];
@@ -122,22 +119,20 @@ var vm = new Vue({
             $.each(id, function (idx, item) {
                 ids[idx] = item.id;
             });
+          
             confirm('确定要删除选中的记录？', function () {
-                $.ajax({
-                    type: "POST",
-                    url: "../category/delete",
-                    contentType: "application/json",
-                    data: JSON.stringify(ids),
-                    success: function (r) {
-                        if (r.code == 0) {
-                            alert('操作成功', function (index) {
-                                vm.reload();
-                            });
-                        } else {
-                            alert(r.msg);
-                        }
-                    }
-                });
+            	  Ajax.request({
+                  	type: "POST",
+                      url: "../category/delete",
+                      contentType: "application/json",
+                      params: JSON.stringify(ids),
+                		successCallback: function (r) {
+              			alert('操作成功', function (index) {
+              				$("#jqGrid").trigger("reloadGrid");
+              			});
+              		}
+              	});
+                 
             });
         },
         getInfo: function (id) {
