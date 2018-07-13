@@ -3,6 +3,10 @@ package com.platform.api;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.platform.utils.StringUtils;
+
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+
 import com.platform.annotation.IgnoreAuth;
 import com.platform.annotation.LoginUser;
 import com.platform.entity.*;
@@ -24,6 +28,7 @@ import java.util.*;
  * 时间: 2017-08-11 08:32<br>
  * 描述: ApiIndexController <br>
  */
+@Api(tags = "评论")
 @RestController
 @RequestMapping("/api/comment")
 public class ApiCommentController extends ApiBaseAction {
@@ -41,6 +46,7 @@ public class ApiCommentController extends ApiBaseAction {
     /**
      * 发表评论
      */
+    @ApiOperation(value = "发表评论")
     @RequestMapping("post")
     public Object post(@LoginUser UserVo loginUser) {
         Map resultObj = new HashMap();
@@ -110,6 +116,7 @@ public class ApiCommentController extends ApiBaseAction {
 
     /**
      */
+    @ApiOperation(value = "评论数量")
     @RequestMapping("count")
     public Object count(@LoginUser UserVo loginUser, Integer typeId, Integer valueId) {
         Map<String, Object> resultObj = new HashMap();
@@ -133,6 +140,7 @@ public class ApiCommentController extends ApiBaseAction {
      * @param size
      * @return
      */
+    @ApiOperation(value = "选择评论类型")
     @IgnoreAuth
     @RequestMapping("list")
     public Object list(Integer typeId, Integer valueId, Integer showType,

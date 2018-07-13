@@ -9,6 +9,8 @@ import com.platform.service.ApiKeywordsService;
 import com.platform.service.ApiSearchHistoryService;
 import com.platform.util.ApiBaseAction;
 import com.platform.utils.Query;
+
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
@@ -28,6 +30,7 @@ import java.util.Map;
  * @email 939961241@qq.com
  * @date 2017-03-23 15:31
  */
+@Api(tags = "商品搜索")
 @RestController
 @RequestMapping("/api/search")
 public class ApiSearchController extends ApiBaseAction {

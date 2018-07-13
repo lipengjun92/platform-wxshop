@@ -6,6 +6,10 @@ import com.platform.entity.RegionVo;
 import com.platform.entity.SysRegionEntity;
 import com.platform.util.ApiBaseAction;
 import com.platform.utils.StringUtils;
+
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -14,10 +18,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@Api(tags = "评论")
 @RestController
 @RequestMapping("/api/region")
 public class ApiRegionController extends ApiBaseAction {
 
+	@ApiOperation(value = "评论列表")
     @IgnoreAuth
     @RequestMapping("list")
     public Object list(Integer parentId) {

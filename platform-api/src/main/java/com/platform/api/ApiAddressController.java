@@ -44,6 +44,7 @@ public class ApiAddressController extends ApiBaseAction {
     /**
      * 获取收货地址的详情
      */
+    @ApiOperation(value = "获取收货地址的详情", response = Map.class)
     @IgnoreAuth
     @RequestMapping("detail")
     public Object detail(Integer id) {
@@ -54,6 +55,7 @@ public class ApiAddressController extends ApiBaseAction {
     /**
      * 添加或更新收货地址
      */
+    @ApiOperation(value = "添加或更新收货地址", response = Map.class)
     @RequestMapping("save")
     public Object save(@LoginUser UserVo loginUser) {
         JSONObject addressJson = this.getJsonRequest();
@@ -83,6 +85,7 @@ public class ApiAddressController extends ApiBaseAction {
     /**
      * 删除指定的收货地址
      */
+    @ApiOperation(value = "删除指定的收货地址", response = Map.class)
     @IgnoreAuth
     @RequestMapping("delete")
     public Object delete() {

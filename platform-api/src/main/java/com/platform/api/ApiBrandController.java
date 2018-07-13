@@ -6,6 +6,10 @@ import com.platform.service.ApiBrandService;
 import com.platform.util.ApiBaseAction;
 import com.platform.util.ApiPageUtils;
 import com.platform.utils.Query;
+
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -20,6 +24,7 @@ import java.util.Map;
  * 时间: 2017-08-11 08:32<br>
  * 描述: ApiIndexController <br>
  */
+@Api(tags = "品牌")
 @RestController
 @RequestMapping("/api/brand")
 public class ApiBrandController extends ApiBaseAction {
@@ -29,6 +34,7 @@ public class ApiBrandController extends ApiBaseAction {
     /**
      * 品牌首页
      */
+    @ApiOperation(value = "品牌首页")
     @IgnoreAuth
     @RequestMapping("index")
     public Object index() {
@@ -40,6 +46,7 @@ public class ApiBrandController extends ApiBaseAction {
     /**
      * 分页获取品牌
      */
+    @ApiOperation(value = "分页获取品牌")
     @IgnoreAuth
     @RequestMapping("list")
     public Object list(@RequestParam(value = "page", defaultValue = "1") Integer page,
@@ -63,6 +70,7 @@ public class ApiBrandController extends ApiBaseAction {
     /**
      * 品牌详情
      */
+    @ApiOperation(value = "品牌详情")
     @IgnoreAuth
     @RequestMapping("detail")
     public Object detail(@RequestParam Integer id) {

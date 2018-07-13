@@ -11,6 +11,10 @@ import com.platform.util.ApiBaseAction;
 import com.platform.util.wechat.WechatRefundApiResult;
 import com.platform.util.wechat.WechatUtil;
 import com.platform.utils.*;
+
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,6 +34,7 @@ import java.util.*;
  * 时间: 2017-08-11 08:32<br>
  * 描述: ApiIndexController <br>
  */
+@Api(tags = "商户支付")
 @RestController
 @RequestMapping("/api/pay")
 public class ApiPayController extends ApiBaseAction {
@@ -41,6 +46,7 @@ public class ApiPayController extends ApiBaseAction {
 
     /**
      */
+    @ApiOperation(value = "跳转")
     @RequestMapping("index")
     public Object index(@LoginUser UserVo loginUser) {
         //
@@ -50,6 +56,7 @@ public class ApiPayController extends ApiBaseAction {
     /**
      * 获取支付的请求参数
      */
+    @ApiOperation(value = "获取支付的请求参数")
     @RequestMapping("prepay")
     public Object payPrepay(@LoginUser UserVo loginUser, Integer orderId) {
         //
@@ -150,6 +157,7 @@ public class ApiPayController extends ApiBaseAction {
     /**
      * 微信查询订单状态
      */
+    @ApiOperation(value = "查询订单状态")
     @RequestMapping("query")
     public Object orderQuery(@LoginUser UserVo loginUser, Integer orderId) {
         if (orderId == null) {
@@ -224,6 +232,7 @@ public class ApiPayController extends ApiBaseAction {
      *
      * @return
      */
+    @ApiOperation(value = "微信订单回调接口")
     @RequestMapping(value = "/notify", method = RequestMethod.POST, produces = "text/html;charset=UTF-8")
     @ResponseBody
     public void notify(HttpServletRequest request, HttpServletResponse response) {
@@ -273,6 +282,7 @@ public class ApiPayController extends ApiBaseAction {
     /**
      * 订单退款请求
      */
+    @ApiOperation(value = "订单退款请求")
     @RequestMapping("refund")
     public Object refund(@LoginUser UserVo loginUser, Integer orderId) {
         //
