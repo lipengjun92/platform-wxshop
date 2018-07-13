@@ -47,20 +47,18 @@ var vm = new Vue({
         },
         saveOrUpdate: function (event) {
             var url = vm.userLevel.id == null ? "../userlevel/save" : "../userlevel/update";
-           
+
             Ajax.request({
-            	type: "POST",
+                type: "POST",
                 url: url,
                 contentType: "application/json",
                 params: JSON.stringify(vm.userLevel),
-         		successCallback: function (r) {
-        			alert('操作成功', function (index) {
-        				vm.reload();
-        			});
-        		}
-        	});
-            
-            
+                successCallback: function (r) {
+                    alert('操作成功', function (index) {
+                        vm.reload();
+                    });
+                }
+            });
         },
         del: function (event) {
             var ids = getSelectedRows("#jqGrid");
@@ -70,24 +68,26 @@ var vm = new Vue({
 
             confirm('确定要删除选中的记录？', function () {
 
-            	Ajax.request({
-            		type: "POST",
-            		url: "../userlevel/delete",
-            		contentType: "application/json",
-            		params: JSON.stringify(ids),
-            		successCallback: function (r) {
-            			alert('操作成功', function (index) {
-            				$("#jqGrid").trigger("reloadGrid");
-            			});
-            		}
-            	});
-                
-               
+                Ajax.request({
+                    type: "POST",
+                    url: "../userlevel/delete",
+                    contentType: "application/json",
+                    params: JSON.stringify(ids),
+                    successCallback: function (r) {
+                        alert('操作成功', function (index) {
+                            vm.reload();
+                        });
+                    }
+                });
             });
         },
         getInfo: function (id) {
-            $.get("../userlevel/info/" + id, function (r) {
-                vm.userLevel = r.userLevel;
+            Ajax.request({
+                url: "../userlevel/info/" + id,
+                async: true,
+                successCallback: function (r) {
+                    vm.userLevel = r.userLevel;
+                }
             });
         },
         reload: function (event) {

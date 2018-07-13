@@ -52,19 +52,18 @@ var vm = new Vue({
         },
         saveOrUpdate: function (event) {
             var url = vm.attribute.id == null ? "../attribute/save" : "../attribute/update";
-           
+
             Ajax.request({
-            	type: "POST",
+                type: "POST",
                 url: url,
                 contentType: "application/json",
                 params: JSON.stringify(vm.attribute),
-               successCallback: function () {
-            	   alert('操作成功', function (index) {
-                       vm.reload();
-                   });
-               }
-           });
-             
+                successCallback: function () {
+                    alert('操作成功', function (index) {
+                        vm.reload();
+                    });
+                }
+            });
         },
         del: function (event) {
             var ids = getSelectedRows("#jqGrid");
@@ -73,37 +72,26 @@ var vm = new Vue({
             }
 
             confirm('确定要删除选中的记录？', function () {
-            	  Ajax.request({
-            		  type: "POST",
-                      url: "../attribute/delete",
-                      contentType: "application/json",
-                      params: JSON.stringify(ids),
-                     successCallback: function () {
-                    	 alert('操作成功', function (index) {
-                             $("#jqGrid").trigger("reloadGrid");
-                         });
-                     }
-                 });
-                $.ajax({
+                Ajax.request({
                     type: "POST",
                     url: "../attribute/delete",
                     contentType: "application/json",
-                    data: JSON.stringify(ids),
-                    success: function (r) {
-                        if (r.code == 0) {
-                            alert('操作成功', function (index) {
-                                $("#jqGrid").trigger("reloadGrid");
-                            });
-                        } else {
-                            alert(r.msg);
-                        }
+                    params: JSON.stringify(ids),
+                    successCallback: function () {
+                        alert('操作成功', function (index) {
+                            vm.reload();
+                        });
                     }
                 });
             });
         },
         getInfo: function (id) {
-            $.get("../attribute/info/" + id, function (r) {
-                vm.attribute = r.attribute;
+            Ajax.request({
+                url: "../attribute/info/" + id,
+                async: true,
+                successCallback: function (r) {
+                    vm.attribute = r.attribute;
+                }
             });
         },
         reload: function (event) {
@@ -116,8 +104,12 @@ var vm = new Vue({
             vm.handleReset('formValidate');
         },
         getCategories: function () {
-            $.get("../attributecategory/queryAll", function (r) {
-                vm.categories = r.list;
+            Ajax.request({
+                url: "../attributecategory/queryAll",
+                async: true,
+                successCallback: function (r) {
+                    vm.categories = r.list;
+                }
             });
         },
         handleSubmit: function (name) {

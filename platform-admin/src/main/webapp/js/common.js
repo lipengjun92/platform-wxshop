@@ -1,10 +1,3 @@
-//jqGrid的配置信息
-if ($.jgrid) {
-    $.jgrid.defaults.width = 1000;
-    $.jgrid.defaults.responsive = true;
-    $.jgrid.defaults.styleUI = 'Bootstrap';
-}
-
 //iframe自适应
 $(window).on('resize', function () {
     var $content = $('#mainApp');
@@ -235,16 +228,12 @@ function toUrl(href) {
     window.location.href = href;
 }
 
-function dialogClose() {
-    var index = top.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
-    top.layer.close(index); //再执行关闭
-}
-
 function dialogLoading(flag) {
     if (flag) {
         top.layer.load(0, {
-            shade: [0.1, '#fff'],
-            time: 2000
+            shade: [0.5, '#fff'],
+            time: 5000,
+            content: '处理中...'
         });
     } else {
         top.layer.closeAll('loading');
@@ -253,6 +242,8 @@ function dialogLoading(flag) {
 
 /**
  * 用JS获取地址栏参数的方法
+ * 使用示例 location.href = http://localhost:8080/index.html?id=123
+ *          getQueryString('id') --> 123;
  * @param name
  * @returns {null}
  * @constructor
@@ -312,11 +303,7 @@ function getJson(form) {
             o[$this.attr("name")] = $("input[name='" + $this.attr("name") + "']:checked").val();
             return true;
         }
-        if ($this.hasClass("rate")) {
-            o[$this.attr("name")] = parseFloat($this.val().toString().replace(/\$|\,/g, '')) * parseFloat($this.attr("unit"));
-        } else {
-            o[$this.attr("name")] = $this.val();
-        }
+        o[$this.attr("name")] = $this.val();
     })
     return o;
 }
@@ -337,6 +324,9 @@ Ajax = function () {
 
     //var opt = { type:'GET',dataType:'json',resultMsg:true };
     function request(opt) {
+
+        //添加遮罩层
+        dialogLoading(true);
 
         if (typeof opt.cache == 'undefined') {
             opt.cache = false;
@@ -383,6 +373,9 @@ Ajax = function () {
             type: opt.type,
             cache: opt.cache,
             success: function (data) {
+                //关闭遮罩
+                dialogLoading(false);
+
                 if (typeof data == 'string' && data.indexOf("exception") > 0 || typeof data.code != 'undefined' && data.code != '0') {
                     var result = {code: null};
                     if (typeof data == 'string') {
@@ -410,6 +403,9 @@ Ajax = function () {
                 }
             },
             error: function () {
+                //关闭遮罩
+                dialogLoading(false);
+
                 layer.alert("此页面发生未知异常,请联系管理员", {icon: 5});
             }
         });
@@ -420,5 +416,32 @@ Ajax = function () {
          * Ajax调用request
          */
         request: request
+    };
+}();
+
+/**
+ * 缓存字典数据
+ * 使用方法：字典 调用方式为在table的列或者columns 的列中 formatter:function(value){ return Dict.getDictValue(groupCode,value);}
+ * 其中value为类型code  返回值为类型名称
+ */
+Dict = function () {
+    return {
+        getDictValue: function (groupCode, dictKey) {
+            var dictValue = '-';
+            Ajax.request({
+                url: '/sys/dict/getDictValue',
+                dataType: 'json',
+                params: {
+                    groupCode: groupCode, dictKey: dictKey
+                },
+                cache: true,
+                async: false,
+                type: 'GET',
+                successCallback: function (data) {
+                    dictValue = data.dictValue;
+                }
+            });
+            return dictValue;
+        }
     };
 }();

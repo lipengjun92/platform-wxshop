@@ -43,19 +43,18 @@ var vm = new Vue({
         },
         saveOrUpdate: function (event) {
             var url = vm.collect.id == null ? "../collect/save" : "../collect/update";
-            
+
             Ajax.request({
-            	type: "POST",
+                type: "POST",
                 url: url,
                 contentType: "application/json",
                 params: JSON.stringify(vm.collect),
-           		successCallback: function (r) {
-        			alert('操作成功', function (index) {
-        				$("#jqGrid").trigger("reloadGrid");
-        			});
-        		}
-        	});
-            
+                successCallback: function (r) {
+                    alert('操作成功', function (index) {
+                        vm.reload();
+                    });
+                }
+            });
         },
         del: function (event) {
             var ids = getSelectedRows("#jqGrid");
@@ -64,24 +63,27 @@ var vm = new Vue({
             }
 
             confirm('确定要删除选中的记录？', function () {
-            	
-            	Ajax.request({
-            		type: "POST",
-            		url: "../collect/delete",
-            		contentType: "application/json",
-            		params: JSON.stringify(ids),
-            		successCallback: function (r) {
-            			alert('操作成功', function (index) {
-            				$("#jqGrid").trigger("reloadGrid");
-            			});
-            		}
-            	});
-                
+
+                Ajax.request({
+                    type: "POST",
+                    url: "../collect/delete",
+                    contentType: "application/json",
+                    params: JSON.stringify(ids),
+                    successCallback: function (r) {
+                        alert('操作成功', function (index) {
+                            vm.reload();
+                        });
+                    }
+                });
             });
         },
         getInfo: function (id) {
-            $.get("../collect/info/" + id, function (r) {
-                vm.collect = r.collect;
+            Ajax.request({
+                url: "../collect/info/" + id,
+                async: true,
+                successCallback: function (r) {
+                    vm.collect = r.collect;
+                }
             });
         },
         reload: function (event) {

@@ -53,20 +53,18 @@ var vm = new Vue({
             vm.comment.id = id;
 
             confirm('确定要切换状态？', function () {
-            	Ajax.request({
-            		type: "POST",
-            		url: "../comment/toggleStatus",
-            		contentType: "application/json",
-            		params: JSON.stringify(vm.comment),
-             		successCallback: function (r) {
-            			alert('操作成功', function (index) {
-            				$("#jqGrid").trigger("reloadGrid");
-            			});
-            		}
-            	});
-               
+                Ajax.request({
+                    type: "POST",
+                    url: "../comment/toggleStatus",
+                    contentType: "application/json",
+                    params: JSON.stringify(vm.comment),
+                    successCallback: function (r) {
+                        alert('操作成功', function (index) {
+                            vm.reload();
+                        });
+                    }
+                });
             });
-
         },
         del: function (event) {
             var ids = getSelectedRows("#jqGrid");
@@ -74,18 +72,17 @@ var vm = new Vue({
                 return;
             }
             confirm('确定要删除选中的记录？', function () {
-            	Ajax.request({
-            		type: "POST",
+                Ajax.request({
+                    type: "POST",
                     url: "../comment/delete",
                     contentType: "application/json",
                     params: JSON.stringify(ids),
-             		successCallback: function (r) {
-            			alert('操作成功', function (index) {
-            				$("#jqGrid").trigger("reloadGrid");
-            			});
-            		}
-            	});
-                
+                    successCallback: function (r) {
+                        alert('操作成功', function (index) {
+                            vm.reload();
+                        });
+                    }
+                });
             });
         },
         seePic: function () {
@@ -93,13 +90,17 @@ var vm = new Vue({
             if (id == null) {
                 return;
             }
-            $.get("../commentpicture/queryAll?commentId=" + id, function (r) {
-                var data = [];
-                for (var i = 0; i < r.list.length; i++) {
-                    var picUrl = r.list[i].picUrl;
-                    data.push({"src": picUrl});
+            Ajax.request({
+                url: "../commentpicture/queryAll?commentId=" + id,
+                async: true,
+                successCallback: function (r) {
+                    var data = [];
+                    for (var i = 0; i < r.list.length; i++) {
+                        var picUrl = r.list[i].picUrl;
+                        data.push({"src": picUrl});
+                    }
+                    eyeImages(data);
                 }
-                eyeImages(data);
             });
         },
         reload: function (event) {

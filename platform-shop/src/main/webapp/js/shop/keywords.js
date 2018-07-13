@@ -49,20 +49,20 @@ var vm = new Vue({
         },
         saveOrUpdate: function (event) {
             var url = vm.keywords.id == null ? "../keywords/save" : "../keywords/update";
-           
+
             confirm('确定要删除选中的记录？', function () {
-            	Ajax.request({
-            		 type: "POST",
-                     url: url,
-                     contentType: "application/json",
-                     params: JSON.stringify(vm.keywords),
-               		successCallback: function (r) {
-            			alert('操作成功', function (index) {
-            				vm.reload();
-            			});
-            		}
-            	});
-           
+                Ajax.request({
+                    type: "POST",
+                    url: url,
+                    contentType: "application/json",
+                    params: JSON.stringify(vm.keywords),
+                    successCallback: function (r) {
+                        alert('操作成功', function (index) {
+                            vm.reload();
+                        });
+                    }
+                });
+
             });
         },
         del: function (event) {
@@ -72,23 +72,26 @@ var vm = new Vue({
             }
 
             confirm('确定要删除选中的记录？', function () {
-            	Ajax.request({
-            		type: "POST",
-            		url: "../keywords/delete",
-            		contentType: "application/json",
-            		params: JSON.stringify(ids),
-            		successCallback: function (r) {
-            			alert('操作成功', function (index) {
-            				$("#jqGrid").trigger("reloadGrid");
-            			});
-            		}
-            	});
-                
+                Ajax.request({
+                    type: "POST",
+                    url: "../keywords/delete",
+                    contentType: "application/json",
+                    params: JSON.stringify(ids),
+                    successCallback: function (r) {
+                        alert('操作成功', function (index) {
+                            vm.reload();
+                        });
+                    }
+                });
             });
         },
         getInfo: function (id) {
-            $.get("../keywords/info/" + id, function (r) {
-                vm.keywords = r.keywords;
+            Ajax.request({
+                url: "../keywords/info/" + id,
+                async: true,
+                successCallback: function (r) {
+                    vm.keywords = r.keywords;
+                }
             });
         },
         reload: function (event) {

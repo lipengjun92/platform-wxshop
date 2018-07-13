@@ -92,14 +92,21 @@
             }
         },
         created: function () {
-            $.get("../order/info/" + orderId, function (r) {
-                vm.order = r.order;
+            Ajax.request({
+                url: "../order/info/" + orderId,
+                async: true,
+                successCallback: function (r) {
+                    vm.order = r.order;
+                }
             });
-            $.get("../ordergoods/queryAll?orderId=" + orderId, function (r) {
-                vm.orderGoods = r.list;
-                debugger;
-                for (let i = 0; i < r.list.length; i++) {
-                    vm.sumRetailPrice += r.list[i].retailPrice * r.list[i].number
+            Ajax.request({
+                url: "../ordergoods/queryAll?orderId=" + orderId,
+                async: true,
+                successCallback: function (r) {
+                    vm.orderGoods = r.list;
+                    for (let i = 0; i < r.list.length; i++) {
+                        vm.sumRetailPrice += r.list[i].retailPrice * r.list[i].number
+                    }
                 }
             });
         }

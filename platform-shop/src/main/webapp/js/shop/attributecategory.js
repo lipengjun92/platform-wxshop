@@ -59,17 +59,16 @@ var vm = new Vue({
                 vm.attributeCategory.enabled = '0';
             }
             Ajax.request({
-            	type: "POST",
-            	url: url,
-            	contentType: "application/json",
-            	params: JSON.stringify(vm.attributeCategory),
-            	successCallback: function () {
-            		alert('操作成功', function (index) {
-            			$("#jqGrid").trigger("reloadGrid");
-            		});
-            	}
+                type: "POST",
+                url: url,
+                contentType: "application/json",
+                params: JSON.stringify(vm.attributeCategory),
+                successCallback: function () {
+                    alert('操作成功', function (index) {
+                        vm.reload();
+                    });
+                }
             });
-           
         },
         del: function (event) {
             var ids = getSelectedRows("#jqGrid");
@@ -78,27 +77,31 @@ var vm = new Vue({
             }
 
             confirm('确定要删除选中的记录？', function () {
-            	Ajax.request({
-            		type: "POST",
-            		url: "../attributecategory/delete",
-            		contentType: "application/json",
-            		params: JSON.stringify(ids),
-            		successCallback: function () {
-            			alert('操作成功', function (index) {
-            				$("#jqGrid").trigger("reloadGrid");
-            			});
-            		}
-            	});
-                 
+                Ajax.request({
+                    type: "POST",
+                    url: "../attributecategory/delete",
+                    contentType: "application/json",
+                    params: JSON.stringify(ids),
+                    successCallback: function () {
+                        alert('操作成功', function (index) {
+                            vm.reload();
+                        });
+                    }
+                });
+
             });
         },
         getInfo: function (id) {
-            $.get("../attributecategory/info/" + id, function (r) {
-                vm.attributeCategory = r.attributeCategory;
-                if (vm.attributeCategory.enabled == 1) {
-                    vm.status = true;
-                } else {
-                    vm.status = false;
+            Ajax.request({
+                url: "../attributecategory/info/" + id,
+                async: true,
+                successCallback: function (r) {
+                    vm.attributeCategory = r.attributeCategory;
+                    if (vm.attributeCategory.enabled == 1) {
+                        vm.status = true;
+                    } else {
+                        vm.status = false;
+                    }
                 }
             });
         },

@@ -70,19 +70,18 @@ let vm = new Vue({
         },
         saveOrUpdate: function (event) {
             let url = vm.feedback.msgId == null ? "../feedback/save" : "../feedback/update";
-           
+
             Ajax.request({
-            	 type: "POST",
-                 url: url,
-                 contentType: "application/json",
-                 params: JSON.stringify(vm.feedback),
-                  successCallback: function (r) {
-                         alert('操作成功', function (index) {
-                        	 vm.reload();
-                         });
-                 }
-             });
-             
+                type: "POST",
+                url: url,
+                contentType: "application/json",
+                params: JSON.stringify(vm.feedback),
+                successCallback: function (r) {
+                    alert('操作成功', function (index) {
+                        vm.reload();
+                    });
+                }
+            });
         },
         del: function (event) {
             let msgIds = getSelectedRows("#jqGrid");
@@ -93,22 +92,25 @@ let vm = new Vue({
             confirm('确定要删除选中的记录？', function () {
 
                 Ajax.request({
-                	type: "POST",
+                    type: "POST",
                     url: "../feedback/delete",
                     contentType: "application/json",
                     params: JSON.stringify(msgIds),
-                       successCallback: function (r) {
-                             alert('操作成功', function (index) {
-                                 $("#jqGrid").trigger("reloadGrid");
-                             });
-                     }
-                 });
-                 
+                    successCallback: function (r) {
+                        alert('操作成功', function (index) {
+                            vm.reload();
+                        });
+                    }
+                });
             });
         },
         getInfo: function (msgId) {
-            $.get("../feedback/info/" + msgId, function (r) {
-                vm.feedback = r.feedback;
+            Ajax.request({
+                url: "../feedback/info/" + msgId,
+                async: true,
+                successCallback: function (r) {
+                    vm.feedback = r.feedback;
+                }
             });
         },
         reload: function (event) {
