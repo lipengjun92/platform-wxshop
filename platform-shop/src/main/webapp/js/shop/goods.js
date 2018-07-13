@@ -165,21 +165,19 @@ var vm = new Vue({
             var url = vm.goods.id == null ? "../goods/save" : "../goods/update";
             vm.goods.goodsDesc = $('#goodsDesc').editable('getHTML');
             vm.goods.goodsImgList = vm.uploadList;
-            $.ajax({
-                type: "POST",
+            
+            Ajax.request({
+            	type: "POST",
                 url: url,
                 contentType: "application/json",
-                data: JSON.stringify(vm.goods),
-                success: function (r) {
-                    if (r.code === 0) {
-                        alert('操作成功', function (index) {
-                            vm.reload();
-                        });
-                    } else {
-                        alert('操作失败');
-                    }
-                }
-            });
+                params: JSON.stringify(vm.goods),
+                  successCallback: function (r) {
+                         alert('操作成功', function (index) {
+                             $("#jqGrid").trigger("reloadGrid");
+                         });
+                 }
+             });
+           
         },
         enSale: function () {
             var id = getSelectedRow("#jqGrid");
@@ -228,22 +226,20 @@ var vm = new Vue({
             if (id == null) {
                 return;
             }
-            confirm('确定要上架选中的商品？', function () {
-                $.ajax({
-                    type: "POST",
-                    url: "../goods/unSale",
-                    contentType: "application/json",
-                    data: JSON.stringify(id),
-                    success: function (r) {
-                        if (r.code == 0) {
-                            alert('操作成功', function (index) {
-                                $("#jqGrid").trigger("reloadGrid");
-                            });
-                        } else {
-                            alert(r.msg);
-                        }
-                    }
-                });
+            confirm('确定要下架选中的商品？', function () {
+            	 
+            	 Ajax.request({
+            		 type: "POST",
+                     url: "../goods/unSale",
+                     contentType: "application/json",
+                     params: JSON.stringify(id),
+                      successCallback: function (r) {
+                              alert('操作成功', function (index) {
+                                  $("#jqGrid").trigger("reloadGrid");
+                              });
+                      }
+                  });
+                 
             });
         },
         del: function (event) {
@@ -253,21 +249,18 @@ var vm = new Vue({
             }
 
             confirm('确定要删除选中的记录？', function () {
-                $.ajax({
-                    type: "POST",
-                    url: "../goods/delete",
-                    contentType: "application/json",
-                    data: JSON.stringify(ids),
-                    success: function (r) {
-                        if (r.code == 0) {
-                            alert('操作成功', function (index) {
-                                $("#jqGrid").trigger("reloadGrid");
-                            });
-                        } else {
-                            alert(r.msg);
-                        }
-                    }
-                });
+            	 Ajax.request({
+            		 type: "POST",
+                     url: "../goods/delete",
+                     contentType: "application/json",
+                     params: SON.stringify(ids),
+                      successCallback: function (r) {
+                              alert('操作成功', function (index) {
+                                  $("#jqGrid").trigger("reloadGrid");
+                              });
+                      }
+                  });
+                 
             });
         },
         getInfo: function (id) {
