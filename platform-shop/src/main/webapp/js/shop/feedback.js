@@ -70,21 +70,19 @@ let vm = new Vue({
         },
         saveOrUpdate: function (event) {
             let url = vm.feedback.msgId == null ? "../feedback/save" : "../feedback/update";
-            $.ajax({
-                type: "POST",
-                url: url,
-                contentType: "application/json",
-                data: JSON.stringify(vm.feedback),
-                success: function (r) {
-                    if (r.code === 0) {
-                        alert('操作成功', function (index) {
-                            vm.reload();
-                        });
-                    } else {
-                        alert(r.msg);
-                    }
-                }
-            });
+           
+            Ajax.request({
+            	 type: "POST",
+                 url: url,
+                 contentType: "application/json",
+                 params: JSON.stringify(vm.feedback),
+                  successCallback: function (r) {
+                         alert('操作成功', function (index) {
+                        	 vm.reload();
+                         });
+                 }
+             });
+             
         },
         del: function (event) {
             let msgIds = getSelectedRows("#jqGrid");
@@ -93,21 +91,19 @@ let vm = new Vue({
             }
 
             confirm('确定要删除选中的记录？', function () {
-                $.ajax({
-                    type: "POST",
+
+                Ajax.request({
+                	type: "POST",
                     url: "../feedback/delete",
                     contentType: "application/json",
-                    data: JSON.stringify(msgIds),
-                    success: function (r) {
-                        if (r.code == 0) {
-                            alert('操作成功', function (index) {
-                                $("#jqGrid").trigger("reloadGrid");
-                            });
-                        } else {
-                            alert(r.msg);
-                        }
-                    }
-                });
+                    params: JSON.stringify(msgIds),
+                       successCallback: function (r) {
+                             alert('操作成功', function (index) {
+                                 $("#jqGrid").trigger("reloadGrid");
+                             });
+                     }
+                 });
+                 
             });
         },
         getInfo: function (msgId) {

@@ -115,21 +115,19 @@ var vm = new Vue({
         },
         saveOrUpdate: function (event) {
             var url = vm.coupon.id == null ? "../coupon/save" : "../coupon/update";
-            $.ajax({
-                type: "POST",
-                url: url,
-                contentType: "application/json",
-                data: JSON.stringify(vm.coupon),
-                success: function (r) {
-                    if (r.code === 0) {
-                        alert('操作成功', function (index) {
-                            vm.reload();
-                        });
-                    } else {
-                        alert(r.msg);
-                    }
-                }
+           
+            Ajax.request({
+            	type: "POST",
+            	url: url,
+            	contentType: "application/json",
+            	params: JSON.stringify(vm.coupon),
+            	successCallback: function (r) {
+            		alert('操作成功', function (index) {
+            			$("#jqGrid").trigger("reloadGrid");
+            		});
+            	}
             });
+            
         },
         del: function (event) {
             var ids = getSelectedRows("#jqGrid");
@@ -138,21 +136,18 @@ var vm = new Vue({
             }
 
             confirm('确定要删除选中的记录？', function () {
-                $.ajax({
-                    type: "POST",
-                    url: "../coupon/delete",
-                    contentType: "application/json",
-                    data: JSON.stringify(ids),
-                    success: function (r) {
-                        if (r.code == 0) {
-                            alert('操作成功', function (index) {
-                                $("#jqGrid").trigger("reloadGrid");
-                            });
-                        } else {
-                            alert(r.msg);
-                        }
-                    }
-                });
+            	Ajax.request({
+            		type: "POST",
+            		url: "../coupon/delete",
+            		contentType: "application/json",
+            		params: JSON.stringify(ids),
+             		successCallback: function (r) {
+            			alert('操作成功', function (index) {
+            				$("#jqGrid").trigger("reloadGrid");
+            			});
+            		}
+            	});
+                
             });
         },
         getInfo: function (id) {
@@ -210,30 +205,30 @@ var vm = new Vue({
                 return;
             }
             confirm('确定下发优惠券？', function () {
-                $.ajax({
-                    type: "POST",
-                    dataType: 'json',
-                    url: "../coupon/publish",
-                    contentType: "application/json",
-                    data: JSON.stringify({
-                        sendType: vm.selectData.sendType,
-                        couponId: vm.selectData.id,
-                        goodsIds: vm.goods.toString(),
-                        userIds: vm.user.toString(),
-                        sendSms: vm.sendSms
-                    }),
-                    success: function (r) {
-                        if (r.code == 0) {
-                            alert('操作成功', function (index) {
+            	Ajax.request({
+            		 type: "POST",
+                     dataType: 'json',
+                     url: "../coupon/publish",
+                     contentType: "application/json",
+                     params: JSON.stringify({
+                         sendType: vm.selectData.sendType,
+                         couponId: vm.selectData.id,
+                         goodsIds: vm.goods.toString(),
+                         userIds: vm.user.toString(),
+                         sendSms: vm.sendSms
+                     })
+            		 ,
+            		successCallback: function (r) {
+            			alert('操作成功', function (index) {
+            				alert('操作成功', function (index) {
                                 $("#jqGrid").trigger("reloadGrid");
                                 vm.showGoods = false;
                                 vm.showList = true;
                             });
-                        } else {
-                            alert(r.msg);
-                        }
-                    }
-                });
+            			});
+            		}
+            	});
+                 
             });
         },
         getGoodss: function () {
