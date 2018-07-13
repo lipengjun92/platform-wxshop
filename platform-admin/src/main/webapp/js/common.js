@@ -383,7 +383,7 @@ Ajax = function () {
             type: opt.type,
             cache: opt.cache,
             success: function (data) {
-                if (typeof data == 'string' && data.indexOf("") > 0 || typeof data.code != 'undefined' && data.code != '0') {
+                if (typeof data == 'string' && data.indexOf("exception") > 0 || typeof data.code != 'undefined' && data.code != '0') {
                     var result = {code: null};
                     if (typeof data == 'string') {
                         result = eval('(' + data + ')')
