@@ -8,8 +8,12 @@ import com.platform.entity.UserVo;
 import com.platform.service.ApiAddressService;
 import com.platform.util.ApiBaseAction;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -33,7 +37,7 @@ public class ApiAddressController extends ApiBaseAction {
      * 获取用户的收货地址
      */
     @ApiOperation(value = "获取用户的收货地址接口", response = Map.class)
-    @RequestMapping("list")
+    @GetMapping("list")
     public Object list(@LoginUser UserVo loginUser) {
         Map<String, Object> param = new HashMap<String, Object>();
         param.put("user_id", loginUser.getUserId());
@@ -45,10 +49,14 @@ public class ApiAddressController extends ApiBaseAction {
      * 获取收货地址的详情
      */
     @ApiOperation(value = "获取收货地址的详情", response = Map.class)
-    @IgnoreAuth
-    @RequestMapping("detail")
-    public Object detail(Integer id) {
+    @ApiImplicitParams({@ApiImplicitParam(name = "id", value = "收获地址ID", required = true, dataType = "Integer")})
+    @GetMapping("detail")
+    public Object detail(Integer id, @LoginUser UserVo loginUser) {
         AddressVo entity = addressService.queryObject(id);
+        //判断越权行为
+        if (!entity.getUserId().equals(loginUser.getUserId())) {
+            return toResponsObject(403, "您无权查看", "");
+        }
         return toResponsSuccess(entity);
     }
 
@@ -56,7 +64,7 @@ public class ApiAddressController extends ApiBaseAction {
      * 添加或更新收货地址
      */
     @ApiOperation(value = "添加或更新收货地址", response = Map.class)
-    @RequestMapping("save")
+    @PostMapping("save")
     public Object save(@LoginUser UserVo loginUser) {
         JSONObject addressJson = this.getJsonRequest();
         AddressVo entity = new AddressVo();
@@ -87,7 +95,7 @@ public class ApiAddressController extends ApiBaseAction {
      */
     @ApiOperation(value = "删除指定的收货地址", response = Map.class)
     @IgnoreAuth
-    @RequestMapping("delete")
+    @PostMapping("delete")
     public Object delete() {
         JSONObject jsonParam = this.getJsonRequest();
         addressService.delete(jsonParam.getIntValue("id"));
