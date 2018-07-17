@@ -94,11 +94,17 @@ public class ApiAddressController extends ApiBaseAction {
      * 删除指定的收货地址
      */
     @ApiOperation(value = "删除指定的收货地址", response = Map.class)
-    @IgnoreAuth
     @PostMapping("delete")
-    public Object delete() {
+    public Object delete(@LoginUser UserVo loginUser) {
         JSONObject jsonParam = this.getJsonRequest();
-        addressService.delete(jsonParam.getIntValue("id"));
+        Integer id = jsonParam.getIntValue("id");
+
+        AddressVo entity = addressService.queryObject(id);
+        //判断越权行为
+        if (!entity.getUserId().equals(loginUser.getUserId())) {
+            return toResponsObject(403, "您无权删除", "");
+        }
+        addressService.delete(id);
         return toResponsSuccess("");
     }
 }
