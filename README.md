@@ -105,7 +105,7 @@ platform-wechat-mall
     ```
 
 ## 官方首页
-* [http://fly2you.cn](http://fly2you.cn)
+* [合肥微同软件工作室](http://fly2you.cn)
 
 * 如何交流、反馈、参与贡献？
     * 官方QQ群：<a target="_blank" href="//shang.qq.com/wpa/qunwpa?idkey=75689ba2797dd88a208446088b029fbdeba87a29315ff2a021a6731f22ef5052"><img border="0" src="//pub.idqqimg.com/wpa/images/group.png" alt="大平台系统开发" title="大平台系统开发"></a>
@@ -119,7 +119,7 @@ platform-wechat-mall
 
 ## 安装教程
 
-* 配置环境（推荐jdk1.8、maven3.3、tomcat8、mysql5.7）
+* 配置环境（推荐jdk1.8、maven3.3、tomcat8、mysql5.7、redis4.0.1）
 * 创建数据库
 * 初始化sql脚本 /doc/platform.sql
 * 导入项目到IDE中
@@ -134,6 +134,9 @@ platform-wechat-mall
     * wx.paySignKey
     * wx.notifyUrl
     * sms.validIp
+* 修改配置文件 /platform-admin/src/main/resources/dev/platform.properties
+    * redis.hosts
+    * redis.password
 * 启动后台项目（参照启动手册）
 * 打开微信开发者工具
 * 导入 /wx-mall填写appId
@@ -152,9 +155,9 @@ platform-wechat-mall
 
 ## 页面展示
 ### 登录页面
-![](http://p9kyr79ne.bkt.clouddn.com/1/20180531/14570217019439.png "登录")
+![](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/upload/20180708/login.png "登录")
 ### 首页
-![](http://p9kyr79ne.bkt.clouddn.com/1/20180531/1457352514f28b.png "首页")
+![](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/upload/20180708/index.png "首页")
 ### 发送短信
 ![](http://p9kyr79ne.bkt.clouddn.com/1/20180531/145757629f5361.png "发送短信")
 ### 捐赠
