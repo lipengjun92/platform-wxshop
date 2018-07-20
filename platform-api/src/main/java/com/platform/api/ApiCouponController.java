@@ -3,20 +3,15 @@ package com.platform.api;
 import com.alibaba.fastjson.JSONObject;
 import com.platform.annotation.LoginUser;
 import com.platform.cache.J2CacheUtils;
-import com.platform.entity.BuyGoodsVo;
 import com.platform.entity.*;
 import com.platform.service.*;
 import com.platform.util.ApiBaseAction;
 import com.platform.utils.CharUtil;
 import com.platform.utils.StringUtils;
-
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
 import java.util.*;
@@ -47,7 +42,7 @@ public class ApiCouponController extends ApiBaseAction {
      * 获取优惠券列表
      */
     @ApiOperation(value = "获取优惠券列表")
-    @RequestMapping("/list")
+    @GetMapping("/list")
     public Object list(@LoginUser UserVo loginUser) {
         Map param = new HashMap();
         param.put("user_id", loginUser.getUserId());
@@ -59,10 +54,8 @@ public class ApiCouponController extends ApiBaseAction {
      * 根据商品获取可用优惠券列表
      */
     @ApiOperation(value = "根据商品获取可用优惠券列表")
-    @RequestMapping("/listByGoods")
+    @GetMapping("/listByGoods")
     public Object listByGoods(@RequestParam(defaultValue = "cart") String type, @LoginUser UserVo loginUser) {
-        //  获取要购买的商品和总价
-        ArrayList checkedGoodsList = new ArrayList();
         BigDecimal goodsTotalPrice = new BigDecimal(0.00);
         if (type.equals("cart")) {
             Map param = new HashMap();
@@ -105,7 +98,7 @@ public class ApiCouponController extends ApiBaseAction {
      * 兑换优惠券
      */
     @ApiOperation(value = "领券优惠券")
-    @RequestMapping("exchange")
+    @PostMapping("exchange")
     public Object exchange(@LoginUser UserVo loginUser) {
         JSONObject jsonParam = getJsonRequest();
         String coupon_number = jsonParam.getString("coupon_number");
@@ -138,7 +131,7 @@ public class ApiCouponController extends ApiBaseAction {
      * 　　填写手机号码，领券
      */
     @ApiOperation(value = "领券优惠券")
-    @RequestMapping("newuser")
+    @PostMapping("newuser")
     public Object newuser(@LoginUser UserVo loginUser) {
         JSONObject jsonParam = getJsonRequest();
         //
@@ -189,7 +182,7 @@ public class ApiCouponController extends ApiBaseAction {
      * 　　转发领取红包
      */
     @ApiOperation(value = "转发领取红包")
-    @RequestMapping("transActivit")
+    @PostMapping("transActivit")
     public Object transActivit(@LoginUser UserVo loginUser, String sourceKey, Long referrer) {
         JSONObject jsonParam = getJsonRequest();
         // 是否领取过了

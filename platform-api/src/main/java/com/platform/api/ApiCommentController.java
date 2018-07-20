@@ -2,11 +2,6 @@ package com.platform.api;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.platform.utils.StringUtils;
-
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-
 import com.platform.annotation.IgnoreAuth;
 import com.platform.annotation.LoginUser;
 import com.platform.entity.*;
@@ -16,10 +11,11 @@ import com.platform.util.ApiPageUtils;
 import com.platform.utils.Base64;
 import com.platform.utils.CharUtil;
 import com.platform.utils.Query;
+import com.platform.utils.StringUtils;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
 
@@ -47,7 +43,7 @@ public class ApiCommentController extends ApiBaseAction {
      * 发表评论
      */
     @ApiOperation(value = "发表评论")
-    @RequestMapping("post")
+    @PostMapping("post")
     public Object post(@LoginUser UserVo loginUser) {
         Map resultObj = new HashMap();
         //
@@ -117,8 +113,8 @@ public class ApiCommentController extends ApiBaseAction {
     /**
      */
     @ApiOperation(value = "评论数量")
-    @RequestMapping("count")
-    public Object count(@LoginUser UserVo loginUser, Integer typeId, Integer valueId) {
+    @GetMapping("count")
+    public Object count(Integer typeId, Integer valueId) {
         Map<String, Object> resultObj = new HashMap();
         //
         Map param = new HashMap();
@@ -142,7 +138,7 @@ public class ApiCommentController extends ApiBaseAction {
      */
     @ApiOperation(value = "选择评论类型")
     @IgnoreAuth
-    @RequestMapping("list")
+    @GetMapping("list")
     public Object list(Integer typeId, Integer valueId, Integer showType,
                        @RequestParam(value = "page", defaultValue = "1") Integer page, @RequestParam(value = "size", defaultValue = "10") Integer size,
                        String sort, String order) {

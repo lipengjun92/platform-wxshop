@@ -8,6 +8,7 @@ import com.platform.utils.RRException;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -28,7 +29,7 @@ public class ApiUploadController extends ApiBaseAction {
      */
 	@ApiOperation(value = "上传文件")
     @IgnoreAuth
-    @RequestMapping("/upload")
+    @PostMapping("/upload")
     public Object upload(@RequestParam("file") MultipartFile file) throws Exception {
         if (file.isEmpty()) {
             throw new RRException("上传文件不能为空");
