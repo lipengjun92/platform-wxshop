@@ -6,11 +6,11 @@ import com.platform.entity.CollectVo;
 import com.platform.entity.UserVo;
 import com.platform.service.ApiCollectService;
 import com.platform.util.ApiBaseAction;
-
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -34,7 +34,7 @@ public class ApiCollectController extends ApiBaseAction {
      * 获取用户收藏
      */
     @ApiOperation(value = "获取用户收藏")
-    @RequestMapping("list")
+    @GetMapping("list")
     public Object list(@LoginUser UserVo loginUser, Integer typeId) {
 
         Map param = new HashMap();
@@ -52,7 +52,7 @@ public class ApiCollectController extends ApiBaseAction {
      * 获取用户收藏
      */
     @ApiOperation(value = "添加取消收藏")
-    @RequestMapping("addordelete")
+    @PostMapping("addordelete")
     public Object addordelete(@LoginUser UserVo loginUser) {
         JSONObject jsonParam = getJsonRequest();
         Integer typeId = jsonParam.getInteger("typeId");

@@ -1,7 +1,6 @@
 package com.platform.api;
 
 import com.alibaba.fastjson.JSONObject;
-import com.platform.annotation.IgnoreAuth;
 import com.platform.annotation.LoginUser;
 import com.platform.entity.SmsConfig;
 import com.platform.entity.SmsLogVo;
@@ -10,17 +9,15 @@ import com.platform.service.ApiUserService;
 import com.platform.service.SysConfigService;
 import com.platform.util.ApiBaseAction;
 import com.platform.utils.*;
-
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * 作者: @author Harmon <br>
@@ -40,7 +37,7 @@ public class ApiUserController extends ApiBaseAction {
      * 发送短信
      */
     @ApiOperation(value = "发送短信")
-    @RequestMapping("smscode")
+    @PostMapping("smscode")
     public Object smscode(@LoginUser UserVo loginUser) {
         JSONObject jsonParams = getJsonRequest();
         String phone = jsonParams.getString("phone");
@@ -100,7 +97,7 @@ public class ApiUserController extends ApiBaseAction {
      * @return
      */
     @ApiOperation(value = "获取当前会员等级")
-    @RequestMapping("getUserLevel")
+    @GetMapping("getUserLevel")
     public Object getUserLevel(@LoginUser UserVo loginUser) {
         String userLevel = userService.getUserLevel(loginUser);
         return toResponsSuccess(userLevel);
@@ -110,7 +107,7 @@ public class ApiUserController extends ApiBaseAction {
      * 绑定手机
      */
     @ApiOperation(value = "绑定手机")
-    @RequestMapping("bindMobile")
+    @PostMapping("bindMobile")
     public Object bindMobile(@LoginUser UserVo loginUser) {
         JSONObject jsonParams = getJsonRequest();
         SmsLogVo smsLogVo = userService.querySmsCodeByUserId(loginUser.getUserId());

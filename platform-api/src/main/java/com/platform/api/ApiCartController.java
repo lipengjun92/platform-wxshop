@@ -1,23 +1,17 @@
 package com.platform.api;
 
 import com.alibaba.fastjson.JSONObject;
+import com.platform.annotation.LoginUser;
 import com.platform.cache.J2CacheUtils;
 import com.platform.dao.ApiCouponMapper;
-import com.platform.entity.BuyGoodsVo;
-import com.qiniu.util.StringUtils;
-
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-
-import com.platform.annotation.LoginUser;
-import com.platform.entity.CouponInfoVo;
 import com.platform.entity.*;
 import com.platform.service.*;
 import com.platform.util.ApiBaseAction;
+import com.qiniu.util.StringUtils;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -53,7 +47,7 @@ public class ApiCartController extends ApiBaseAction {
      * 获取购物车中的数据
      */
     @ApiOperation(value = "获取购物车中的数据")
-    @RequestMapping("getCart")
+    @GetMapping("getCart")
     public Object getCart(@LoginUser UserVo loginUser) {
         Map<String, Object> resultObj = new HashMap();
         //查询列表数据
@@ -129,7 +123,7 @@ public class ApiCartController extends ApiBaseAction {
      * 获取购物车信息，所有对购物车的增删改操作，都要重新返回购物车的信息
      */
     @ApiOperation(value = "获取购物车信息")
-    @RequestMapping("index")
+    @GetMapping("index")
     public Object index(@LoginUser UserVo loginUser) {
         return toResponsSuccess(getCart(loginUser));
     }
@@ -149,7 +143,7 @@ public class ApiCartController extends ApiBaseAction {
      * 添加商品到购物车
      */
     @ApiOperation(value = "添加商品到购物车")
-    @RequestMapping("add")
+    @PostMapping("add")
     public Object add(@LoginUser UserVo loginUser) {
         JSONObject jsonParam = getJsonRequest();
         Integer goodsId = jsonParam.getInteger("goodsId");
@@ -221,7 +215,7 @@ public class ApiCartController extends ApiBaseAction {
      * 减少商品到购物车
      */
     @ApiOperation(value = "减少商品到购物车")
-    @RequestMapping("minus")
+    @PostMapping("minus")
     public Object minus(@LoginUser UserVo loginUser) {
         JSONObject jsonParam = getJsonRequest();
         Integer goodsId = jsonParam.getInteger("goodsId");
@@ -252,7 +246,7 @@ public class ApiCartController extends ApiBaseAction {
      * 更新指定的购物车信息
      */
     @ApiOperation(value = "更新指定的购物车信息")
-    @RequestMapping("update")
+    @PostMapping("update")
     public Object update(@LoginUser UserVo loginUser) {
         JSONObject jsonParam = getJsonRequest();
         Integer goodsId = jsonParam.getInteger("goodsId");
@@ -339,7 +333,7 @@ public class ApiCartController extends ApiBaseAction {
      * 是否选择商品，如果已经选择，则取消选择，批量操作
      */
     @ApiOperation(value = "是否选择商品")
-    @RequestMapping("checked")
+    @PostMapping("checked")
     public Object checked(@LoginUser UserVo loginUser) {
         JSONObject jsonParam = getJsonRequest();
         String productIds = jsonParam.getString("productIds");
@@ -354,7 +348,7 @@ public class ApiCartController extends ApiBaseAction {
 
     //删除选中的购物车商品，批量删除
     @ApiOperation(value = "删除商品")
-    @RequestMapping("delete")
+    @PostMapping("delete")
     public Object delete(@LoginUser UserVo loginUser) {
         Long userId = loginUser.getUserId();
 
@@ -372,7 +366,7 @@ public class ApiCartController extends ApiBaseAction {
 
     //  获取购物车商品的总件件数
     @ApiOperation(value = "获取购物车商品的总件件数")
-    @RequestMapping("goodscount")
+    @GetMapping("goodscount")
     public Object goodscount(@LoginUser UserVo loginUser) {
         if (null == loginUser || null == loginUser.getUserId()) {
             return toResponsFail("未登录");
@@ -400,7 +394,7 @@ public class ApiCartController extends ApiBaseAction {
      * 订单提交前的检验和填写相关订单信息
      */
     @ApiOperation(value = "订单提交前的检验和填写相关订单信息")
-    @RequestMapping("checkout")
+    @PostMapping("checkout")
     public Object checkout(@LoginUser UserVo loginUser, Integer couponId, @RequestParam(defaultValue = "cart") String type) {
         Map<String, Object> resultObj = new HashMap();
         //根据收货地址计算运费
@@ -470,7 +464,7 @@ public class ApiCartController extends ApiBaseAction {
      * 选择优惠券列表
      */
     @ApiOperation(value = "选择优惠券列表")
-    @RequestMapping("checkedCouponList")
+    @PostMapping("checkedCouponList")
     public Object checkedCouponList(@LoginUser UserVo loginUser) {
         //
         Map param = new HashMap();

@@ -11,16 +11,11 @@ import com.platform.util.ApiBaseAction;
 import com.platform.util.wechat.WechatRefundApiResult;
 import com.platform.util.wechat.WechatUtil;
 import com.platform.utils.*;
-
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -47,8 +42,8 @@ public class ApiPayController extends ApiBaseAction {
     /**
      */
     @ApiOperation(value = "跳转")
-    @RequestMapping("index")
-    public Object index(@LoginUser UserVo loginUser) {
+    @GetMapping("index")
+    public Object index() {
         //
         return toResponsSuccess("");
     }
@@ -57,7 +52,7 @@ public class ApiPayController extends ApiBaseAction {
      * 获取支付的请求参数
      */
     @ApiOperation(value = "获取支付的请求参数")
-    @RequestMapping("prepay")
+    @GetMapping("prepay")
     public Object payPrepay(@LoginUser UserVo loginUser, Integer orderId) {
         //
         OrderVo orderInfo = orderService.queryObject(orderId);
@@ -158,7 +153,7 @@ public class ApiPayController extends ApiBaseAction {
      * 微信查询订单状态
      */
     @ApiOperation(value = "查询订单状态")
-    @RequestMapping("query")
+    @GetMapping("query")
     public Object orderQuery(@LoginUser UserVo loginUser, Integer orderId) {
         if (orderId == null) {
             return toResponsFail("订单不存在");
@@ -283,8 +278,8 @@ public class ApiPayController extends ApiBaseAction {
      * 订单退款请求
      */
     @ApiOperation(value = "订单退款请求")
-    @RequestMapping("refund")
-    public Object refund(@LoginUser UserVo loginUser, Integer orderId) {
+    @PostMapping("refund")
+    public Object refund(Integer orderId) {
         //
         OrderVo orderInfo = orderService.queryObject(orderId);
 
