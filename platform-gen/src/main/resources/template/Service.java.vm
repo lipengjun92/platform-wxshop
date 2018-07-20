@@ -68,5 +68,5 @@ public interface ${className}Service {
      * @param ${pk.attrname}s
      * @return 删除条数
      */
-    int deleteBatch(${pk.attrType}[]${pk.attrname}s);
+    int deleteBatch(${pk.attrType}[] ${pk.attrname}s);
 }
