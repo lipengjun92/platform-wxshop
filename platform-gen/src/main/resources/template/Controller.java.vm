@@ -85,7 +85,7 @@ public class ${className}Controller {
      */
     @RequestMapping("/delete")
     @RequiresPermissions("${pathName}:delete")
-    public R delete(@RequestBody ${pk.attrType}[]${pk.attrname}s) {
+    public R delete(@RequestBody ${pk.attrType}[] ${pk.attrname}s) {
         ${classname}Service.deleteBatch(${pk.attrname}s);
 
         return R.ok();
