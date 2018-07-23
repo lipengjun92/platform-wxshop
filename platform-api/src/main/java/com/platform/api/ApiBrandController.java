@@ -31,18 +31,6 @@ public class ApiBrandController extends ApiBaseAction {
     private ApiBrandService brandService;
 
     /**
-     * 品牌首页
-     */
-    @ApiOperation(value = "品牌首页")
-    @IgnoreAuth
-    @GetMapping("index")
-    public Object index() {
-        Map param = new HashMap();
-        List<BrandVo> entityList = brandService.queryList(param);
-        return toResponsSuccess(entityList);
-    }
-
-    /**
      * 分页获取品牌
      */
     @ApiOperation(value = "分页获取品牌")

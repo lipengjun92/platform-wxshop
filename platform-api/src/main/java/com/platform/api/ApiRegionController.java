@@ -24,7 +24,7 @@ import java.util.Map;
 @RequestMapping("/api/region")
 public class ApiRegionController extends ApiBaseAction {
 
-	@ApiOperation(value = "评论列表")
+	@ApiOperation(value = "地区列表")
     @IgnoreAuth
     @GetMapping("list")
     public Object list(Integer parentId) {
