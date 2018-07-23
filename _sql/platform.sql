@@ -32,7 +32,7 @@ CREATE TABLE `nideshop_ad` (
   PRIMARY KEY (`id`),
   KEY `position_id` (`ad_position_id`),
   KEY `enabled` (`enabled`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of nideshop_ad
@@ -76,7 +76,7 @@ CREATE TABLE `nideshop_ad_position` (
   `height` smallint(5) unsigned NOT NULL DEFAULT '0',
   `desc` varchar(255) NOT NULL DEFAULT '',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of nideshop_ad_position
@@ -96,7 +96,7 @@ CREATE TABLE `nideshop_attribute` (
   `sort_order` tinyint(3) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `cat_id` (`attribute_category_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=103 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=103 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of nideshop_attribute
@@ -147,7 +147,7 @@ CREATE TABLE `nideshop_attribute_category` (
   `name` varchar(60) NOT NULL DEFAULT '',
   `enabled` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '1开启; 0关闭;',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=1036002 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1036002 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of nideshop_attribute_category
@@ -180,7 +180,7 @@ CREATE TABLE `nideshop_brand` (
   `new_sort_order` tinyint(2) unsigned NOT NULL DEFAULT '10' COMMENT '排序',
   PRIMARY KEY (`id`),
   KEY `is_show` (`is_show`)
-) ENGINE=MyISAM AUTO_INCREMENT=1046011 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1046011 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of nideshop_brand
@@ -256,7 +256,7 @@ CREATE TABLE `nideshop_cart` (
   `list_pic_url` varchar(255) NOT NULL DEFAULT '' COMMENT '商品图片',
   PRIMARY KEY (`id`),
   KEY `session_id` (`session_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=154 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=154 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of nideshop_cart
@@ -285,7 +285,7 @@ CREATE TABLE `nideshop_category` (
   `front_name` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `parent_id` (`parent_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=1036007 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1036007 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of nideshop_category
@@ -421,7 +421,7 @@ CREATE TABLE `nideshop_collect` (
   KEY `user_id` (`user_id`),
   KEY `goods_id` (`value_id`),
   KEY `is_attention` (`is_attention`)
-) ENGINE=MyISAM AUTO_INCREMENT=75 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=75 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for `nideshop_comment`
@@ -478,7 +478,7 @@ CREATE TABLE `nideshop_coupon` (
   `min_goods_amount` decimal(10,2) unsigned DEFAULT '0.00',
   `min_transmit_num` int(4) DEFAULT NULL COMMENT '转发次数',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of nideshop_coupon
@@ -587,7 +587,7 @@ CREATE TABLE `nideshop_goods` (
   KEY `brand_id` (`brand_id`),
   KEY `goods_number` (`goods_number`),
   KEY `sort_order` (`sort_order`)
-) ENGINE=MyISAM AUTO_INCREMENT=1181001 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1181001 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of nideshop_goods
@@ -844,7 +844,7 @@ CREATE TABLE `nideshop_goods_attribute` (
   PRIMARY KEY (`id`),
   KEY `goods_id` (`goods_id`),
   KEY `attr_id` (`attribute_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=872 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=872 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of nideshop_goods_attribute
@@ -2451,7 +2451,7 @@ CREATE TABLE `nideshop_goods_specification` (
   PRIMARY KEY (`id`),
   KEY `goods_id` (`goods_id`),
   KEY `specification_id` (`specification_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COMMENT='商品对应规格表值表';
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COMMENT='商品对应规格表值表';
 
 -- ----------------------------
 -- Records of nideshop_goods_specification
@@ -2530,7 +2530,7 @@ CREATE TABLE `nideshop_order` (
   KEY `pay_status` (`pay_status`),
   KEY `shipping_id` (`shipping_id`),
   KEY `pay_id` (`pay_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=21 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of nideshop_order
@@ -2558,7 +2558,7 @@ CREATE TABLE `nideshop_order_goods` (
   PRIMARY KEY (`id`),
   KEY `order_id` (`order_id`),
   KEY `goods_id` (`goods_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=28 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of nideshop_order_goods
@@ -2588,7 +2588,7 @@ CREATE TABLE `nideshop_product` (
   `retail_price` decimal(10,2) unsigned DEFAULT '0.00' COMMENT '零售价格',
   `market_price` decimal(10,2) unsigned DEFAULT '0.00' COMMENT '价格',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=247 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=247 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of nideshop_product
@@ -2849,7 +2849,7 @@ CREATE TABLE `nideshop_related_goods` (
   `goods_id` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '商品Id',
   `related_goods_id` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '关联商品id',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of nideshop_related_goods
@@ -3016,7 +3016,7 @@ CREATE TABLE `nideshop_specification` (
   `name` varchar(60) NOT NULL DEFAULT '' COMMENT '规范名称',
   `sort_order` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '排序',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COMMENT='规格表';
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COMMENT='规格表';
 
 -- ----------------------------
 -- Records of nideshop_specification
@@ -3043,7 +3043,7 @@ CREATE TABLE `nideshop_topic` (
   `topic_template_id` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '活动模板Id',
   `topic_tag_id` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '活动标签Id',
   KEY `topic_id` (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=315 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=315 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of nideshop_topic
@@ -3110,7 +3110,7 @@ CREATE TABLE `nideshop_user` (
   `weixin_openid` varchar(50) DEFAULT '',
   PRIMARY KEY (`id`),
   UNIQUE KEY `user_name` (`username`)
-) ENGINE=MyISAM AUTO_INCREMENT=24 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for `nideshop_user_coupon`
@@ -3128,7 +3128,7 @@ CREATE TABLE `nideshop_user_coupon` (
   `referrer` int(32) DEFAULT NULL COMMENT '发券人',
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=68 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=68 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of nideshop_user_coupon
@@ -3143,7 +3143,7 @@ CREATE TABLE `nideshop_user_level` (
   `name` varchar(30) NOT NULL DEFAULT '',
   `description` varchar(255) NOT NULL DEFAULT '',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of nideshop_user_level
@@ -3520,7 +3520,7 @@ CREATE TABLE `sys_macro` (
   `gmt_create` date DEFAULT NULL COMMENT '创建时间',
   `gmt_modified` date DEFAULT NULL COMMENT '修改时间',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=gbk COMMENT='通用字典表';
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=gbk COMMENT='通用字典表';
 
 -- ----------------------------
 -- Records of sys_macro
