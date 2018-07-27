@@ -37,9 +37,9 @@ CREATE TABLE `nideshop_ad` (
 -- ----------------------------
 -- Records of nideshop_ad
 -- ----------------------------
-INSERT INTO `nideshop_ad` VALUES ('1', '1', '1', '合作 谁是你的菜', '', 'http://yanxuan.nosdn.127.net/65091eebc48899298171c2eb6696fe27.jpg', '合作 谁是你的菜', '2017-09-07 21:48:34', '0');
-INSERT INTO `nideshop_ad` VALUES ('2', '1', '1', '活动 美食节', '/pages/activity/activity?referrer=1&sourceKey=abcdefg', 'http://yanxuan.nosdn.127.net/bff2e49136fcef1fd829f5036e07f116.jpg', '活动 美食节', '2017-09-07 21:48:34', '1');
-INSERT INTO `nideshop_ad` VALUES ('3', '1', '1', '新用户注册', '/pages/auth/newuser/newuser', 'http://www.yofus.com/usrdata/images/upload/Image/xinhuiyuan(4).jpg', '新用户注册', '2017-09-07 21:48:34', '1');
+INSERT INTO `nideshop_ad` VALUES ('1', '1', '1', '合作 谁是你的菜', '', 'https://platform-wxmall.oss-cn-beijing.aliyuncs.com/upload/20180727/65091eebc48899298171c2eb6696fe27.jpg', '合作 谁是你的菜', '2017-09-07 21:48:34', '0');
+INSERT INTO `nideshop_ad` VALUES ('2', '1', '1', '活动 美食节', '/pages/activity/activity?referrer=1&sourceKey=abcdefg', 'https://platform-wxmall.oss-cn-beijing.aliyuncs.com/upload/20180727/bff2e49136fcef1fd829f5036e07f116.jpg', '活动 美食节', '2017-09-07 21:48:34', '1');
+INSERT INTO `nideshop_ad` VALUES ('3', '1', '1', '新用户注册', '/pages/auth/newuser/newuser', 'https://platform-wxmall.oss-cn-beijing.aliyuncs.com/upload/20180727/xinhuiyuan.jpg', '新用户注册', '2017-09-07 21:48:34', '1');
 
 -- ----------------------------
 -- Table structure for `nideshop_address`
@@ -400,11 +400,11 @@ CREATE TABLE `nideshop_channel` (
 -- ----------------------------
 -- Records of nideshop_channel
 -- ----------------------------
-INSERT INTO `nideshop_channel` VALUES (1, '居家', '/pages/category/category?id=1005000', 'http://p9kyr79ne.bkt.clouddn.com/1/20180531/1508205806587c.png', 1);
-INSERT INTO `nideshop_channel` VALUES (2, '餐厨', '/pages/category/category?id=1005001', 'http://p9kyr79ne.bkt.clouddn.com/1/20180531/1509505811a78d.png', 2);
-INSERT INTO `nideshop_channel` VALUES (3, '配件', '/pages/category/category?id=1008000', 'http://p9kyr79ne.bkt.clouddn.com/1/20180531/1512165188bbba.png', 3);
-INSERT INTO `nideshop_channel` VALUES (4, '服装', '/pages/category/category?id=1005002', 'http://p9kyr79ne.bkt.clouddn.com/1/20180531/151537891573ed.png', 4);
-INSERT INTO `nideshop_channel` VALUES (5, '志趣', '/pages/category/category?id=1019000', 'http://p9kyr79ne.bkt.clouddn.com/1/20180531/151514826f7581.png', 5);
+INSERT INTO `nideshop_channel` VALUES (1, '居家', '/pages/category/category?id=1005000', 'https://platform-wxmall.oss-cn-beijing.aliyuncs.com/upload/20180727/1508205806587c.png', 1);
+INSERT INTO `nideshop_channel` VALUES (2, '餐厨', '/pages/category/category?id=1005001', 'https://platform-wxmall.oss-cn-beijing.aliyuncs.com/upload/20180727/1509505811a78d.png', 2);
+INSERT INTO `nideshop_channel` VALUES (3, '配件', '/pages/category/category?id=1008000', 'https://platform-wxmall.oss-cn-beijing.aliyuncs.com/upload/20180727/1512165188bbba.png', 3);
+INSERT INTO `nideshop_channel` VALUES (4, '服装', '/pages/category/category?id=1005002', 'https://platform-wxmall.oss-cn-beijing.aliyuncs.com/upload/20180727/151537891573ed.png', 4);
+INSERT INTO `nideshop_channel` VALUES (5, '志趣', '/pages/category/category?id=1019000', 'https://platform-wxmall.oss-cn-beijing.aliyuncs.com/upload/20180727/151514826f7581.png', 5);
 
 -- ----------------------------
 -- Table structure for `nideshop_collect`

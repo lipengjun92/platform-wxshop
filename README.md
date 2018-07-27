@@ -159,39 +159,39 @@ platform-wechat-mall
 ### 首页
 ![](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/upload/20180708/index.png "首页")
 ### 发送短信
-![](http://p9kyr79ne.bkt.clouddn.com/1/20180531/145757629f5361.png "发送短信")
+![](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/upload/20180727/3.png "发送短信")
 ### 捐赠
-![](http://p9kyr79ne.bkt.clouddn.com/1/20180531/145823816a2fe9.png "捐赠")
+![](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/upload/20180727/4.png "捐赠")
 ### 小程序首页
-![](http://p9kyr79ne.bkt.clouddn.com/1/20180614/102947584b7f1f.png "小程序首页")
+![](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/upload/20180727/5.png "小程序首页")
 ### 专题
-![](http://p9kyr79ne.bkt.clouddn.com/1/20180614/103157121abad8.png "专题")
+![](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/upload/20180727/6.png "专题")
 ### 分类
-![](http://p9kyr79ne.bkt.clouddn.com/1/20180614/103238930383af.png "分类")
+![](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/upload/20180727/7.png "分类")
 ### 购物车
-![](http://p9kyr79ne.bkt.clouddn.com/1/20180614/103319500ba517.png "购物车")
+![](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/upload/20180727/8.png "购物车")
 ### 登录授权
-![](http://p9kyr79ne.bkt.clouddn.com/1/20180614/103355172c1903.png "登录授权")
+![](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/upload/20180727/9.png "登录授权")
 ### 优惠券
-![](http://p9kyr79ne.bkt.clouddn.com/1/20180614/1034519508712e.png "优惠券")
+![](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/upload/20180727/10.png "优惠券")
 ### 小程序并联手机
-![](http://p9kyr79ne.bkt.clouddn.com/1/20180614/1030474135e131.png "并联手机")
+![](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/upload/20180727/11.png "并联手机")
 ### VUE页面
-![](http://p9kyr79ne.bkt.clouddn.com/1/20180531/14592343205eec.png "VUE页面")
+![](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/upload/20180727/12.png "VUE页面")
 
 ***
 ## 小程序客户案例
 
 ### 美平超市
-![](http://p9kyr79ne.bkt.clouddn.com/1/20180531/145949515b6f7c.png "美平超市")
+![](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/upload/case/1.png "美平超市")
 ### 便利主义超市
-![](http://p9kyr79ne.bkt.clouddn.com/1/20180531/150000826e2864.png "便利主义超市")
+![](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/upload/case/2.png "便利主义超市")
 ### 汽车人E车宝
-![](http://p9kyr79ne.bkt.clouddn.com/1/20180531/15001446746217.png "汽车人E车宝")
+![](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/upload/case/3.png "汽车人E车宝")
 ### 海数据在线
-![](http://p9kyr79ne.bkt.clouddn.com/1/20180614/103939911f7e76.png "海数据在线")
+![](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/upload/case/4.jpg "海数据在线")
 ### T客定制
-![](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/upload/20180708/2018070801.jpg "T客定制")
+![](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/upload/case/2018070801.jpg "T客定制")
 
 
 ***

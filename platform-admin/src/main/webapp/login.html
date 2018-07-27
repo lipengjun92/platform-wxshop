@@ -6,18 +6,27 @@
     <title>统一登录页面</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-    <link rel="stylesheet" href="statics/css/bootstrap.min.css">
-    <link rel="stylesheet" href="statics/css/font-awesome.min.css">
-    <link rel="stylesheet" href="statics/css/style.css">
-    <link rel="stylesheet" href="statics/css/login.css">
-    <link rel="stylesheet" href="statics/css/main.css">
-    <link rel="stylesheet" href="statics/css/iview.css">
+    <link rel="stylesheet" href="https://platform-wxmall.oss-cn-beijing.aliyuncs.com/statics/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://platform-wxmall.oss-cn-beijing.aliyuncs.com/statics/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://platform-wxmall.oss-cn-beijing.aliyuncs.com/statics/css/style.css">
+    <link rel="stylesheet" href="https://platform-wxmall.oss-cn-beijing.aliyuncs.com/statics/css/login.css">
+    <link rel="stylesheet" href="https://platform-wxmall.oss-cn-beijing.aliyuncs.com/statics/css/main.css">
+    <link rel="stylesheet" href="https://platform-wxmall.oss-cn-beijing.aliyuncs.com/statics/css/iview.css">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
     <script src="statics/libs/html5shiv.min.js"></script>
     <script src="statics/libs/respond.min.js"></script>
     <![endif]-->
+    <script>
+        var _hmt = _hmt || [];
+        (function () {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?4656e49e8efa9f2ad6868ea26fb8984c";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
 </head>
 <body class="signin hold-transition login-page">
 <div class="loginscreen animated fadeInDown signinpanel" id="loginBox" v-cloak>
@@ -79,18 +88,18 @@
     </div>
 </div>
 <!-- /.login-box -->
-<script src="statics/libs/jquery.min.js"></script>
-<script src="statics/libs/vue.min.js"></script>
-<script src="statics/libs/iview.min.js"></script>
-<script src="statics/libs/bootstrap.min.js"></script>
-<script src="statics/plugins/slimscroll/jquery.slimscroll.min.js"></script>
-<script src="statics/libs/fastclick.min.js"></script>
+<script src="https://platform-wxmall.oss-cn-beijing.aliyuncs.com/statics/libs/jquery.min.js"></script>
+<script src="https://platform-wxmall.oss-cn-beijing.aliyuncs.com/statics/libs/vue.min.js"></script>
+<script src="https://platform-wxmall.oss-cn-beijing.aliyuncs.com/statics/libs/iview.min.js"></script>
+<script src="https://platform-wxmall.oss-cn-beijing.aliyuncs.com/statics/libs/bootstrap.min.js"></script>
+<script src="https://platform-wxmall.oss-cn-beijing.aliyuncs.com/statics/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+<script src="https://platform-wxmall.oss-cn-beijing.aliyuncs.com/statics/libs/fastclick.min.js"></script>
 <script type="text/javascript">
     var vm = new Vue({
         el: '#loginBox',
         data: {
-            username: '',
-            password: '',
+            username: 'admin',
+            password: 'admin',
             captcha: '',
             src: 'captcha.jpg'
         },
@@ -132,6 +141,13 @@
                     }
                 });
             }
+        },
+        created: function () {
+            iview.Notice.success({
+                title: '阿里云幸运券',
+                desc: '阿里云服务器现在买1年享受85折 2年7折 3年5折的优惠  首购云服务器ECS满1000元用幸运券下单还可以抽奖IPAD哦  <a target="_blank" href="https://promotion.aliyun.com/ntms/yunparter/invite.html?userCode=i8s6n64p">点我领取</a>',
+                duration: 0
+            });
         }
     });
 </script>
