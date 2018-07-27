@@ -18,7 +18,7 @@ App({
     userInfo: {
       nickName: 'Hi,游客',
       userName: '点击去登录',
-      avatarUrl: 'http://p9kyr79ne.bkt.clouddn.com/1/20180531/150547696d798c.png'
+      avatarUrl: 'https://platform-wxmall.oss-cn-beijing.aliyuncs.com/upload/20180727/150547696d798c.png'
     },
     token: '',
     userCoupon: 'NO_USE_COUPON',//默认不适用优惠券
