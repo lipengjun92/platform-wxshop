@@ -133,5 +133,15 @@
             <artifactId>j2cache-core</artifactId>
             <version>${j2cache.version}</version>
         </dependency>
+        <dependency><!-- Ehcache 2.x //-->
+            <groupId>net.sf.ehcache</groupId>
+            <artifactId>ehcache</artifactId>
+            <version>${ehcache.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jgroups</groupId>
+            <artifactId>jgroups</artifactId>
+            <version>${jgroups.version}</version>
+        </dependency>
     </dependencies>
 </project>

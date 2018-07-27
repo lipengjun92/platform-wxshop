@@ -43,6 +43,8 @@
         <freemarker-version>2.3.23</freemarker-version>
         <kaptcha.version>0.0.9</kaptcha.version>
         <j2cache.version>2.3.22-release</j2cache.version>
+        <ehcache.version>2.10.4</ehcache.version>
+        <jgroups.version>3.6.13.Final</jgroups.version>
     </properties>
 
     <!-- 阿里云maven仓库 -->
@@ -270,6 +272,16 @@
             <groupId>net.oschina.j2cache</groupId>
             <artifactId>j2cache-core</artifactId>
             <version>${j2cache.version}</version>
+        </dependency>
+        <dependency><!-- Ehcache 2.x //-->
+            <groupId>net.sf.ehcache</groupId>
+            <artifactId>ehcache</artifactId>
+            <version>${ehcache.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jgroups</groupId>
+            <artifactId>jgroups</artifactId>
+            <version>${jgroups.version}</version>
         </dependency>
     </dependencies>
     <build>
