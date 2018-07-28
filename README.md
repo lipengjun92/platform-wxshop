@@ -112,7 +112,6 @@ platform-wechat-mall
     * git：[https://gitee.com/fuyang_lipengjun/platform](https://gitee.com/fuyang_lipengjun/platform)
     * 基础架构版
         * git：[https://gitee.com/fuyang_lipengjun/platform-framework](https://gitee.com/fuyang_lipengjun/platform-framework)
-        * 演示地址：[http://fly2you.cn/platform-framework](http://fly2you.cn/platform-framework)
     * 如需获取项目最新源码，请Watch、Star项目，同时也是对项目最好的支持
     
 
