@@ -105,13 +105,14 @@ platform-wechat-mall
     ```
 
 ## 官方首页
-* [合肥微同软件工作室](http://fly2you.cn)
+* [合肥微同软件工作室](http://fly2you.cn)(演示地址)
 
 * 如何交流、反馈、参与贡献？
     * 官方QQ群：<a target="_blank" href="//shang.qq.com/wpa/qunwpa?idkey=75689ba2797dd88a208446088b029fbdeba87a29315ff2a021a6731f22ef5052"><img border="0" src="//pub.idqqimg.com/wpa/images/group.png" alt="大平台系统开发" title="大平台系统开发"></a>
     * git：[https://gitee.com/fuyang_lipengjun/platform](https://gitee.com/fuyang_lipengjun/platform)
     * 基础架构版
         * git：[https://gitee.com/fuyang_lipengjun/platform-framework](https://gitee.com/fuyang_lipengjun/platform-framework)
+        * 演示地址：[http://fly2you.cn/platform-framework](http://fly2you.cn/platform-framework)
     * 如需获取项目最新源码，请Watch、Star项目，同时也是对项目最好的支持
     
 
