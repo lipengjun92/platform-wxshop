@@ -42,6 +42,28 @@ platform-wechat-mall
 |--platform-vue 微信公众号商城（待开发）
 ~~~
 
+## 自动代码生成结构
+~~~
+AutoCode
+├─menu.sql                      创建菜单的sql
+│ 
+└─main    
+     ├─java                     生成的java代码
+     │    └─com
+     │       └─platform
+     │            ├─controller
+     │            ├─dao
+     │            ├─entity
+     │            └─service
+     │                └─impl
+     └─webapp                   生成的页面文件
+         ├─js   
+         │  └─shop   
+         └─WEB-INF 
+             └─page  
+                └─shop  
+
+~~~
 ## 实现功能
 
 * 一：会员管理
