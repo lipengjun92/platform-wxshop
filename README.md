@@ -2,6 +2,17 @@
 
 [![Fork me on Gitee](https://gitee.com/fuyang_lipengjun/platform/widgets/widget_3.svg?color=C71D24)](https://gitee.com/fuyang_lipengjun/platform)
 
+## 官方首页
+* [演示地址](http://fly2you.cn)
+* [最新开发文档](http://fly2you.cn/guide/index)
+
+* 官方QQ群：<a target="_blank" href="//shang.qq.com/wpa/qunwpa?idkey=75689ba2797dd88a208446088b029fbdeba87a29315ff2a021a6731f22ef5052"><img border="0" src="//pub.idqqimg.com/wpa/images/group.png" alt="大平台系统开发" title="大平台系统开发"></a>
+* git：[https://gitee.com/fuyang_lipengjun/platform](https://gitee.com/fuyang_lipengjun/platform)
+* 基础架构版
+    * git：[https://gitee.com/fuyang_lipengjun/platform-framework](https://gitee.com/fuyang_lipengjun/platform-framework)
+* 代码生成工具IDEA插件
+    * git：[https://gitee.com/fuyang_lipengjun/platform-gen](https://gitee.com/fuyang_lipengjun/platform-gen)
+     
 ## 技术选型
 * 1 后端使用技术
     * 1.1 springframework4.3.7.RELEASE
@@ -125,17 +136,6 @@ AutoCode
     http://域名:端口/api/sendSms?mobile=13000000000,15209831990&content=发送的短信内容  
     安全起见，需配置有效IP地址。platform.properties -> sms.validIp
     ```
-
-## 官方首页
-* [合肥微同软件工作室](http://fly2you.cn)(演示地址)
-
-* 如何交流、反馈、参与贡献？
-    * 官方QQ群：<a target="_blank" href="//shang.qq.com/wpa/qunwpa?idkey=75689ba2797dd88a208446088b029fbdeba87a29315ff2a021a6731f22ef5052"><img border="0" src="//pub.idqqimg.com/wpa/images/group.png" alt="大平台系统开发" title="大平台系统开发"></a>
-    * git：[https://gitee.com/fuyang_lipengjun/platform](https://gitee.com/fuyang_lipengjun/platform)
-    * 基础架构版
-        * git：[https://gitee.com/fuyang_lipengjun/platform-framework](https://gitee.com/fuyang_lipengjun/platform-framework)
-    * 如需获取项目最新源码，请Watch、Star项目，同时也是对项目最好的支持
-    
 
 ## 安装教程
 
