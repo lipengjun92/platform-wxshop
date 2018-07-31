@@ -420,7 +420,7 @@ public class ApiCartController extends ApiBaseAction {
             }
             goodsTotalPrice = (BigDecimal) ((HashMap) cartData.get("cartTotal")).get("checkedGoodsAmount");
         } else { // 是直接购买的
-            BuyGoodsVo goodsVO = (BuyGoodsVo) J2CacheUtils.get("goods" + loginUser.getUserId() + "");
+            BuyGoodsVo goodsVO = (BuyGoodsVo) J2CacheUtils.get(J2CacheUtils.SHOP_CACHE_NAME, "goods" + loginUser.getUserId() + "");
             ProductVo productInfo = productService.queryObject(goodsVO.getProductId());
             //计算订单的费用
             //商品总价

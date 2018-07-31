@@ -201,12 +201,12 @@ public class ApiPayController extends ApiBaseAction {
                 return toResponsMsgSuccess("支付成功");
             } else if (trade_state.equals("USERPAYING")) {
                 // 重新查询 正在支付中
-                Integer num = (Integer) J2CacheUtils.get("queryRepeatNum" + orderId + "");
+                Integer num = (Integer) J2CacheUtils.get(J2CacheUtils.SHOP_CACHE_NAME, "queryRepeatNum" + orderId + "");
                 if (num == null) {
-                    J2CacheUtils.put("queryRepeatNum" + orderId + "", 1);
+                    J2CacheUtils.put(J2CacheUtils.SHOP_CACHE_NAME, "queryRepeatNum" + orderId + "", 1);
                     this.orderQuery(loginUser, orderId);
                 } else if (num <= 3) {
-                    J2CacheUtils.remove("queryRepeatNum" + orderId);
+                    J2CacheUtils.remove(J2CacheUtils.SHOP_CACHE_NAME, "queryRepeatNum" + orderId);
                     this.orderQuery(loginUser, orderId);
                 } else {
                     return toResponsFail("查询失败,error=" + trade_state);

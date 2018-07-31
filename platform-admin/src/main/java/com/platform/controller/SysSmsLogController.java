@@ -6,7 +6,7 @@ import com.platform.entity.SmsConfig;
 import com.platform.entity.SysSmsLogEntity;
 import com.platform.service.SysConfigService;
 import com.platform.service.SysSmsLogService;
-import com.platform.utils.ConfigConstant;
+import com.platform.utils.Constant;
 import com.platform.utils.PageUtils;
 import com.platform.utils.Query;
 import com.platform.utils.R;
@@ -33,7 +33,7 @@ public class SysSmsLogController {
     /**
      * 短信配置KEY
      */
-    private final static String KEY = ConfigConstant.SMS_CONFIG_KEY;
+    private final static String KEY = Constant.SMS_CONFIG_KEY;
 
     /**
      * 所有日志列表

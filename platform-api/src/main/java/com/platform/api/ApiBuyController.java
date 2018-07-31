@@ -28,7 +28,7 @@ public class ApiBuyController extends ApiBaseAction {
         goodsVo.setGoodsId(goodsId);
         goodsVo.setProductId(productId);
         goodsVo.setNumber(number);
-        J2CacheUtils.put("goods" + loginUser.getUserId() + "", goodsVo);
+        J2CacheUtils.put(J2CacheUtils.SHOP_CACHE_NAME, "goods" + loginUser.getUserId() + "", goodsVo);
         return toResponsMsgSuccess("添加成功");
     }
 }
