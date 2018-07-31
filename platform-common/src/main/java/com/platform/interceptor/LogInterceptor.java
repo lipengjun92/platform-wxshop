@@ -1,7 +1,7 @@
 package com.platform.interceptor;
 
-import com.platform.Global;
 import com.platform.entity.SysUserEntity;
+import com.platform.utils.Constant;
 import com.platform.utils.RequestUtil;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -96,7 +96,7 @@ public class LogInterceptor extends HandlerInterceptorAdapter {
 
         String userName = "";
         try {
-            SysUserEntity sysUser = (SysUserEntity) SecurityUtils.getSubject().getSession().getAttribute(Global.CURRENT_USER);
+            SysUserEntity sysUser = (SysUserEntity) SecurityUtils.getSubject().getSession().getAttribute(Constant.CURRENT_USER);
             if (sysUser != null) {
                 userName = (sysUser.getUsername());
             }

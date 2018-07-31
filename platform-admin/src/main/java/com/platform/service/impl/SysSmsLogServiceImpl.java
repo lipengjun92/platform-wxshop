@@ -60,7 +60,7 @@ public class SysSmsLogServiceImpl implements SysSmsLogService {
     public SysSmsLogEntity sendSms(SysSmsLogEntity smsLog) {
         String result = "";
         //获取云存储配置信息
-        SmsConfig config = sysConfigService.getConfigObject(ConfigConstant.SMS_CONFIG_KEY, SmsConfig.class);
+        SmsConfig config = sysConfigService.getConfigObject(Constant.SMS_CONFIG_KEY, SmsConfig.class);
         if (StringUtils.isNullOrEmpty(config)) {
             throw new RRException("请先配置短信平台信息");
         }

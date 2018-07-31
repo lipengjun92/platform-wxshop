@@ -1,6 +1,5 @@
 package com.platform.service.impl;
 
-import com.platform.Global;
 import com.platform.dao.SysUserDao;
 import com.platform.entity.SysUserEntity;
 import com.platform.entity.UserWindowDto;
@@ -75,7 +74,7 @@ public class SysUserServiceImpl implements SysUserService {
     public void save(SysUserEntity user) {
         user.setCreateTime(new Date());
         //sha256加密
-        user.setPassword(new Sha256Hash(Global.DEFAULT_PASS_WORD).toHex());
+        user.setPassword(new Sha256Hash(Constant.DEFAULT_PASS_WORD).toHex());
         sysUserDao.save(user);
 
         //检查角色是否越权
@@ -89,7 +88,7 @@ public class SysUserServiceImpl implements SysUserService {
     @Transactional
     public void update(SysUserEntity user) {
         if (StringUtils.isBlank(user.getPassword())) {
-            user.setPassword(new Sha256Hash(Global.DEFAULT_PASS_WORD).toHex());
+            user.setPassword(new Sha256Hash(Constant.DEFAULT_PASS_WORD).toHex());
         } else {
             user.setPassword(new Sha256Hash(user.getPassword()).toHex());
         }

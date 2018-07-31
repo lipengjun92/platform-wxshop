@@ -1,7 +1,6 @@
 package com.platform.oss;
 
 import com.platform.service.SysConfigService;
-import com.platform.utils.ConfigConstant;
 import com.platform.utils.Constant;
 import com.platform.utils.SpringContextUtils;
 
@@ -21,7 +20,7 @@ public final class OSSFactory {
 
     public static CloudStorageService build() {
         //获取云存储配置信息
-        CloudStorageConfig config = sysConfigService.getConfigObject(ConfigConstant.CLOUD_STORAGE_CONFIG_KEY, CloudStorageConfig.class);
+        CloudStorageConfig config = sysConfigService.getConfigObject(Constant.CLOUD_STORAGE_CONFIG_KEY, CloudStorageConfig.class);
 
         if (config.getType() == Constant.CloudService.QINIU.getValue()) {
             return new QiniuCloudStorageService(config);

@@ -116,7 +116,7 @@ public class ApiOrderService {
                 goodsTotalPrice = goodsTotalPrice.add(cartItem.getRetail_price().multiply(new BigDecimal(cartItem.getNumber())));
             }
         } else {
-            BuyGoodsVo goodsVo = (BuyGoodsVo) J2CacheUtils.get("goods" + loginUser.getUserId());
+            BuyGoodsVo goodsVo = (BuyGoodsVo) J2CacheUtils.get(J2CacheUtils.SHOP_CACHE_NAME, "goods" + loginUser.getUserId());
             ProductVo productInfo = productService.queryObject(goodsVo.getProductId());
             //计算订单的费用
             //商品总价
@@ -133,7 +133,7 @@ public class ApiOrderService {
         //获取订单使用的优惠券
         BigDecimal couponPrice = new BigDecimal(0.00);
         CouponVo couponVo = null;
-        if (couponId != null && couponId != 0 ) {
+        if (couponId != null && couponId != 0) {
             couponVo = apiCouponMapper.getUserCoupon(couponId);
             if (couponVo != null && couponVo.getCoupon_status() == 1) {
                 couponPrice = couponVo.getType_money();

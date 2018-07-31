@@ -1,6 +1,5 @@
 package com.platform.shiro;
 
-import com.platform.Global;
 import com.platform.cache.J2CacheUtils;
 import com.platform.dao.SysMenuDao;
 import com.platform.dao.SysUserDao;
@@ -88,7 +87,7 @@ public class UserRealm extends AuthorizingRealm {
         // 把当前用户放入到session中
         Subject subject = SecurityUtils.getSubject();
         Session session = subject.getSession(true);
-        session.setAttribute(Global.CURRENT_USER, user);
+        session.setAttribute(Constant.CURRENT_USER, user);
 
         List<String> permsList;
 
