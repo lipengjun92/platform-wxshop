@@ -40,7 +40,7 @@ public class QiniuCloudStorageService extends CloudStorageService {
     public String upload(MultipartFile file) throws Exception {
         String fileName = file.getOriginalFilename();
         String prefix = fileName.substring(fileName.lastIndexOf(".") + 1);
-        return upload(file.getBytes(), getPath(config.getAliyunPrefix()) + "." + prefix);
+        return upload(file.getBytes(), getPath(config.getQiniuPrefix()) + "." + prefix);
     }
 
     @Override
