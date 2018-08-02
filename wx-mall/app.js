@@ -10,7 +10,8 @@ App({
       this.globalData.userInfo = wx.getStorageSync('userInfo');
       this.globalData.token = wx.getStorageSync('token');
     }).catch(() => {
-      
+       wx.removeStorageSync('userInfo');
+       wx.removeStorageSync('token');
     });
   },
   

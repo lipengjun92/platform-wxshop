@@ -63,15 +63,9 @@ var vm = new Vue({
                 Ajax.request({
                     type: "POST",
                     dataType: 'json',
-                    url: "../coupon/publish",
+                    url: "../footprint/delete",
                     contentType: "application/json",
-                    params: JSON.stringify({
-                        sendType: vm.selectData.sendType,
-                        couponId: vm.selectData.id,
-                        goodsIds: vm.goods.toString(),
-                        userIds: vm.user.toString(),
-                        sendSms: vm.sendSms
-                    }),
+                    params: JSON.stringify(ids),
                     successCallback: function (r) {
                         alert('操作成功', function (index) {
                             vm.reload();
