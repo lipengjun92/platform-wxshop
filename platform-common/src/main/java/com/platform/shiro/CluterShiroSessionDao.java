@@ -17,7 +17,7 @@ public class CluterShiroSessionDao extends EnterpriseCacheSessionDAO {
 
     @Override
     protected Serializable doCreate(Session session) {
-        Serializable sessionId = super.generateSessionId(session);
+        Serializable sessionId = super.doCreate(session);
 
         final String key = Constant.SESSION_KEY + sessionId.toString();
         setShiroSession(key, session);
