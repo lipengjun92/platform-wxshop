@@ -39,11 +39,17 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public int save(CategoryEntity category) {
+        if ("L1".equals(category.getLevel())) {
+            category.setParentId(0);
+        }
         return categoryDao.save(category);
     }
 
     @Override
     public int update(CategoryEntity category) {
+        if ("L1".equals(category.getLevel())) {
+            category.setParentId(0);
+        }
         return categoryDao.update(category);
     }
 
@@ -54,7 +60,7 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     @Transactional
-    public int deleteBatch(Integer[]ids) {
+    public int deleteBatch(Integer[] ids) {
         categoryDao.deleteByParentBatch(ids);
         return categoryDao.deleteBatch(ids);
     }
