@@ -117,9 +117,6 @@ public class ApiAuthController extends ApiBaseAction {
             userVo.setGender(userInfo.getGender()); // //性别 0：未知、1：男、2：女
             userVo.setNickname(userInfo.getNickName());
             userService.save(userVo);
-
-            //新用户第一次登陆时，虽然user表数据已经新增成功，但是此时userId还是null，从数据库再查一次就能取到了
-            userVo = userService.queryByOpenId(sessionData.getString("openid"));
         } else {
             userVo.setLast_login_ip(this.getClientIp());
             userVo.setLast_login_time(nowTime);
