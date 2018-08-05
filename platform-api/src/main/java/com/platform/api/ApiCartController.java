@@ -405,8 +405,11 @@ public class ApiCartController extends ApiBaseAction {
         param.put("user_id", loginUser.getUserId());
         List addressEntities = addressService.queryList(param);
 
-        resultObj.put("checkedAddress", addressEntities.get(0));
-
+        if (null == addressEntities || addressEntities.size() == 0) {
+            resultObj.put("checkedAddress", new AddressVo());
+        } else {
+            resultObj.put("checkedAddress", addressEntities.get(0));
+        }
         // * 获取要购买的商品和总价
         ArrayList checkedGoodsList = new ArrayList();
         BigDecimal goodsTotalPrice;
