@@ -18,7 +18,7 @@ import java.util.Date;
  * @version 1.0.0
  */
 public class JsonTimeSerializer extends JsonSerializer<Long> {  
-	   private SimpleDateFormat dateFormat=new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+	   private SimpleDateFormat dateFormat=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	   @Override  
 	   public void serialize(Long datel, JsonGenerator gen, SerializerProvider provider)  throws IOException, JsonProcessingException {  
 		   if(datel.toString().length()<13){
