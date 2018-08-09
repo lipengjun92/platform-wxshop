@@ -21,7 +21,7 @@
     <![endif]-->
     <script>
         var _hmt = _hmt || [];
-        (function() {
+        (function () {
             var hm = document.createElement("script");
             hm.src = "https://hm.baidu.com/hm.js?4656e49e8efa9f2ad6868ea26fb8984c";
             var s = document.getElementsByTagName("script")[0];
@@ -407,13 +407,14 @@
                 });
             },
             love: function () {
-                openWindow({
-                    type: 2,
-                    title: '支持开源',
-                    area: ['806px', '467px'],
-                    closeBtn: 2,
-                    content: ['statics/img/love.jpg', 'no']
-                });
+                setTimeout(function () {
+                    openWindow({
+                        type: 2,
+                        title: '腾讯云为数百万企业和开发者提供安全、稳定的云服务器、云数据库、CDN等云服务',
+                        closeBtn: 2,
+                        content: ['https://cloud.tencent.com/redirect.php?redirect=1005&cps_key=30280f92fc381dfc9e1d9e0e23d25a18']
+                    });
+                }, 3000)
             }
         },
         created: function () {
