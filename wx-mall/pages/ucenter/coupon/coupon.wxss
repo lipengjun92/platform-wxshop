@@ -51,6 +51,9 @@ page{
 }
 
 .add-btn{
+  display: flex;
+  justify-content: center;
+  align-items: center;
   height: 70rpx;
   border:none;
   width: 168rpx;
@@ -70,7 +73,7 @@ page{
   line-height: 72rpx;
   text-align: right;
   padding-right: 30rpx;
-  background: url(https://yanxuan.nosdn.127.net/hxm/yanxuan-wap/p/20161201/style/img/icon-normal/couponHelp-4768607555.png) 590rpx center no-repeat;
+  background: url(https://platform-wxmall.oss-cn-beijing.aliyuncs.com/upload/20180727/15032866437ca8.png) 590rpx center no-repeat;
   background-size: 28rpx;
   color: #999;
   font-size: 24rpx;
@@ -88,7 +91,7 @@ page{
   position: relative;
   height: 290rpx;
   width: 100%;
-  background: linear-gradient(to right,#cfa568,#e3bf79);
+  border-radius: 8rpx;
   margin-bottom: 30rpx;
   padding-top: 52rpx;
 }
@@ -135,17 +138,14 @@ page{
 
 .content .right{
   width: 162rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.go{
-  height: 48rpx;
-  border:none;
-  width: 162rpx;
-  background: rgba(255,255,255, 0.8);
-  border-radius: 4rpx;
-  line-height: 48rpx;
-  color: #b69150;
-  font-size: 24rpx;
+.content .right  .mid-img {
+  width: 100rpx;
+  height: 100rpx;
 }
 
 .condition{

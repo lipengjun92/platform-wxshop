@@ -6,7 +6,6 @@ import java.util.Date;
 #if(${hasBigDecimal})
 import java.math.BigDecimal;
 #end
-
 /**
  * ${comments}实体
  * 表名 ${tableName}

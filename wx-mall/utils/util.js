@@ -43,6 +43,9 @@ function request(url, data = {}, method = "GET") {
                 content: '请先登录',
                 success: function (res){
                     if (res.confirm) {
+                        wx.removeStorageSync("userInfo");
+                        wx.removeStorageSync("token");
+                        
                         wx.switchTab({
                             url: '/pages/ucenter/index/index'
                         });
@@ -125,11 +128,18 @@ function showErrorToast(msg) {
   })
 }
 
+function showSuccessToast(msg) {
+  wx.showToast({
+    title: msg,
+  })
+}
+
 module.exports = {
   formatTime,
   request,
   redirect,
   showErrorToast,
+  showSuccessToast,
   checkSession,
   login,
 }

@@ -5,9 +5,8 @@ $(function () {
         url += '?status=' + status;
     }
     debugger
-    $("#jqGrid").jqGrid({
+    $("#jqGrid").Grid({
         url: url,
-        datatype: "json",
         colModel: [
             {label: 'id', name: 'id', index: 'id', key: true, hidden: true},
             {label: '类型', name: 'typeId', index: 'type_id', width: 80},
@@ -15,41 +14,18 @@ $(function () {
             {label: '评价', name: 'content', index: 'content', width: 80},
             {
                 label: '评论时间', name: 'addTime', index: 'add_time', width: 80, formatter: function (value) {
-                return transDate(value);
-            }
+                    return transDate(value);
+                }
             },
             {
                 label: '状态', name: 'status', index: 'status', width: 80, formatter: function (value) {
-                if (value === 0) {
-                    return '<span class="label label-success">显示</span>';
+                    if (value === 0) {
+                        return '<span class="label label-success">显示</span>';
+                    }
+                    return '<span class="label label-danger">隐藏</span>';
                 }
-                return '<span class="label label-danger">隐藏</span>';
-            }
             },
-            {label: '会员', name: 'userName', index: 'user_id', width: 80}],
-        viewrecords: true,
-        height: 385,
-        rowNum: 10,
-        rowList: [10, 30, 50],
-        rownumbers: true,
-        rownumWidth: 25,
-        autowidth: true,
-        multiselect: true,
-        pager: "#jqGridPager",
-        jsonReader: {
-            root: "page.list",
-            page: "page.currPage",
-            total: "page.totalPage",
-            records: "page.totalCount"
-        },
-        prmNames: {
-            page: "page",
-            rows: "limit",
-            order: "order"
-        },
-        gridComplete: function () {
-            $("#jqGrid").closest(".ui-jqgrid-bdiv").css({"overflow-x": "hidden"});
-        }
+            {label: '会员', name: 'userName', index: 'user_id', width: 80}]
     });
 });
 
@@ -70,66 +46,61 @@ var vm = new Vue({
             vm.reload();
         },
         toggleStatus: function (event) {
-            var id = getSelectedRow();
+            var id = getSelectedRow("#jqGrid");
             if (id == null) {
                 return;
             }
             vm.comment.id = id;
 
             confirm('确定要切换状态？', function () {
-                $.ajax({
+                Ajax.request({
                     type: "POST",
                     url: "../comment/toggleStatus",
                     contentType: "application/json",
-                    data: JSON.stringify(vm.comment),
-                    success: function (r) {
-                        if (r.code === 0) {
-                            alert('操作成功', function (index) {
-                                $("#jqGrid").trigger("reloadGrid");
-                            });
-                        } else {
-                            alert(r.msg);
-                        }
+                    params: JSON.stringify(vm.comment),
+                    successCallback: function (r) {
+                        alert('操作成功', function (index) {
+                            vm.reload();
+                        });
                     }
                 });
             });
-
         },
         del: function (event) {
-            var ids = getSelectedRows();
+            var ids = getSelectedRows("#jqGrid");
             if (ids == null) {
                 return;
             }
             confirm('确定要删除选中的记录？', function () {
-                $.ajax({
+                Ajax.request({
                     type: "POST",
                     url: "../comment/delete",
                     contentType: "application/json",
-                    data: JSON.stringify(ids),
-                    success: function (r) {
-                        if (r.code == 0) {
-                            alert('操作成功', function (index) {
-                                $("#jqGrid").trigger("reloadGrid");
-                            });
-                        } else {
-                            alert(r.msg);
-                        }
+                    params: JSON.stringify(ids),
+                    successCallback: function (r) {
+                        alert('操作成功', function (index) {
+                            vm.reload();
+                        });
                     }
                 });
             });
         },
         seePic: function () {
-            var id = getSelectedRow();
+            var id = getSelectedRow("#jqGrid");
             if (id == null) {
                 return;
             }
-            $.get("../commentpicture/queryAll?commentId=" + id, function (r) {
-                var data = [];
-                for (var i = 0; i < r.list.length; i++) {
-                    var picUrl = r.list[i].picUrl;
-                    data.push({"src": picUrl});
+            Ajax.request({
+                url: "../commentpicture/queryAll?commentId=" + id,
+                async: true,
+                successCallback: function (r) {
+                    var data = [];
+                    for (var i = 0; i < r.list.length; i++) {
+                        var picUrl = r.list[i].picUrl;
+                        data.push({"src": picUrl});
+                    }
+                    eyeImages(data);
                 }
-                eyeImages(data);
             });
         },
         reload: function (event) {

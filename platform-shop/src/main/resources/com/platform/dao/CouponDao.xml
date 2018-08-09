@@ -60,15 +60,7 @@
                 order by id desc
             </otherwise>
         </choose>
-        <if test="offset != null and limit != null">
-            limit #{offset}, #{limit}
-        </if>
     </select>
-
-    <select id="queryTotal" resultType="int">
-		select count(*) from nideshop_coupon
-		WHERE 1=1
-	</select>
 
     <insert id="save" parameterType="com.platform.entity.CouponEntity" useGeneratedKeys="true" keyProperty="id">
 		insert into nideshop_coupon(

@@ -1,7 +1,6 @@
 $(function () {
-    $("#jqGrid").jqGrid({
+    $("#jqGrid").Grid({
         url: '../sys/user/list',
-        datatype: "json",
         colModel: [
             {label: '用户ID', name: 'userId', index: "user_id", key: true, hidden: true},
             {label: '用户名', name: 'username', width: 75},
@@ -10,40 +9,16 @@ $(function () {
             {label: '手机号', name: 'mobile', width: 100},
             {
                 label: '状态', name: 'status', width: 80, formatter: function (value) {
-                return value === 0 ?
-                    '<span class="label label-danger">禁用</span>' :
-                    '<span class="label label-success">正常</span>';
-            }
+                    return value === 0 ?
+                        '<span class="label label-danger">禁用</span>' :
+                        '<span class="label label-success">正常</span>';
+                }
             },
             {
                 label: '创建时间', name: 'createTime', index: "create_time", width: 80, formatter: function (value) {
-                return transDate(value);
-            }
-            }],
-        viewrecords: true,
-        height: 385,
-        rowNum: 10,
-        rowList: [10, 30, 50],
-        rownumbers: true,
-        rownumWidth: 25,
-        autowidth: true,
-        multiselect: true,
-        pager: "#jqGridPager",
-        jsonReader: {
-            root: "page.list",
-            page: "page.currPage",
-            total: "page.totalPage",
-            records: "page.totalCount"
-        },
-        prmNames: {
-            page: "page",
-            rows: "limit",
-            order: "order"
-        },
-        gridComplete: function () {
-            //隐藏grid底部滚动条
-            $("#jqGrid").closest(".ui-jqgrid-bdiv").css({"overflow-x": "hidden"});
-        }
+                    return transDate(value);
+                }
+            }]
     });
 });
 
@@ -105,18 +80,22 @@ var vm = new Vue({
         },
         getDept: function () {
             //加载部门树
-            $.get("../sys/dept/list", function (r) {
-                ztree = $.fn.zTree.init($("#deptTree"), setting, r.list);
-                var node = ztree.getNodeByParam("deptId", vm.user.deptId);
-                if (node != null) {
-                    ztree.selectNode(node);
+            Ajax.request({
+                url: '../sys/dept/list',
+                async: true,
+                successCallback: function (r) {
+                    ztree = $.fn.zTree.init($("#deptTree"), setting, r.list);
+                    var node = ztree.getNodeByParam("deptId", vm.user.deptId);
+                    if (node != null) {
+                        ztree.selectNode(node);
 
-                    vm.user.deptName = node.name;
+                        vm.user.deptName = node.name;
+                    }
                 }
-            })
+            });
         },
         update: function () {
-            var userId = getSelectedRow();
+            var userId = getSelectedRow("#jqGrid");
             if (userId == null) {
                 return;
             }
@@ -124,59 +103,59 @@ var vm = new Vue({
             vm.showList = false;
             vm.title = "修改";
 
-            $.get("../sys/user/info/" + userId, function (r) {
-                vm.user = r.user;
-                //获取角色信息
-                vm.getRoleList();
-                vm.getDept();
+            Ajax.request({
+                url: "../sys/user/info/" + userId,
+                async: true,
+                successCallback: function (r) {
+                    vm.user = r.user;
+                    //获取角色信息
+                    vm.getRoleList();
+                    vm.getDept();
+                }
             });
 
         },
         del: function () {
-            var userIds = getSelectedRows();
+            var userIds = getSelectedRows("#jqGrid");
             if (userIds == null) {
                 return;
             }
 
             confirm('确定要删除选中的记录？', function () {
-                $.ajax({
-                    type: "POST",
+                Ajax.request({
                     url: "../sys/user/delete",
+                    params: JSON.stringify(userIds),
                     contentType: "application/json",
-                    data: JSON.stringify(userIds),
-                    success: function (r) {
-                        if (r.code == 0) {
-                            alert('操作成功', function (index) {
-                                vm.reload();
-                            });
-                        } else {
-                            alert(r.msg);
-                        }
+                    type: 'POST',
+                    successCallback: function () {
+                        alert('操作成功', function (index) {
+                            vm.reload();
+                        });
                     }
                 });
             });
         },
         saveOrUpdate: function (event) {
             var url = vm.user.userId == null ? "../sys/user/save" : "../sys/user/update";
-            $.ajax({
-                type: "POST",
+            Ajax.request({
                 url: url,
+                params: JSON.stringify(vm.user),
                 contentType: "application/json",
-                data: JSON.stringify(vm.user),
-                success: function (r) {
-                    if (r.code === 0) {
-                        alert('操作成功', function (index) {
-                            vm.reload();
-                        });
-                    } else {
-                        alert(r.msg);
-                    }
+                type: 'POST',
+                successCallback: function () {
+                    alert('操作成功', function (index) {
+                        vm.reload();
+                    });
                 }
             });
         },
         getRoleList: function () {
-            $.get("../sys/role/select", function (r) {
-                vm.roleList = r.list;
+            Ajax.request({
+                url: '../sys/role/select',
+                async: true,
+                successCallback: function (r) {
+                    vm.roleList = r.list;
+                }
             });
         },
         reload: function (event) {

@@ -1,40 +1,16 @@
 $(function () {
-    $("#jqGrid").jqGrid({
+    $("#jqGrid").Grid({
         url: '../channel/list',
-        datatype: "json",
         colModel: [
             {label: 'id', name: 'id', index: 'id', key: true, hidden: true},
             {label: '名称', name: 'name', index: 'name', width: 80},
             {label: 'url', name: 'url', index: 'url', width: 80},
             {
                 label: 'iconUrl', name: 'iconUrl', index: 'icon_url', width: 80, formatter: function (value) {
-                return transImg(value);
-            }
+                    return transImg(value);
+                }
             },
-            {label: '排序', name: 'sortOrder', index: 'sort_order', width: 80}],
-        viewrecords: true,
-        height: 385,
-        rowNum: 10,
-        rowList: [10, 30, 50],
-        rownumbers: true,
-        rownumWidth: 25,
-        autowidth: true,
-        multiselect: true,
-        pager: "#jqGridPager",
-        jsonReader: {
-            root: "page.list",
-            page: "page.currPage",
-            total: "page.totalPage",
-            records: "page.totalCount"
-        },
-        prmNames: {
-            page: "page",
-            rows: "limit",
-            order: "order"
-        },
-        gridComplete: function () {
-            $("#jqGrid").closest(".ui-jqgrid-bdiv").css({"overflow-x": "hidden"});
-        }
+            {label: '排序', name: 'sortOrder', index: 'sort_order', width: 80}]
     });
 });
 
@@ -71,12 +47,16 @@ var vm = new Vue({
             vm.getParentCategory();
         },
         getParentCategory: function () {
-            $.get("../category/getCategorySelect", function (r) {
-                vm.categoryList = r.list;
+            Ajax.request({
+                url: "../category/getCategorySelect",
+                async: true,
+                successCallback: function (r) {
+                    vm.categoryList = r.list;
+                }
             });
         },
         update: function (event) {
-            var id = getSelectedRow();
+            var id = getSelectedRow("#jqGrid");
             if (id == null) {
                 return;
             }
@@ -88,49 +68,46 @@ var vm = new Vue({
         },
         saveOrUpdate: function (event) {
             var url = vm.channel.id == null ? "../channel/save" : "../channel/update";
-            $.ajax({
+            Ajax.request({
                 type: "POST",
                 url: url,
                 contentType: "application/json",
-                data: JSON.stringify(vm.channel),
-                success: function (r) {
-                    if (r.code === 0) {
-                        alert('操作成功', function (index) {
-                            vm.reload();
-                        });
-                    } else {
-                        alert(r.msg);
-                    }
+                params: JSON.stringify(vm.channel),
+                successCallback: function (r) {
+                    alert('操作成功', function (index) {
+                        vm.reload();
+                    });
                 }
             });
         },
         del: function (event) {
-            var ids = getSelectedRows();
+            var ids = getSelectedRows("#jqGrid");
             if (ids == null) {
                 return;
             }
 
             confirm('确定要删除选中的记录？', function () {
-                $.ajax({
+                Ajax.request({
                     type: "POST",
                     url: "../channel/delete",
                     contentType: "application/json",
-                    data: JSON.stringify(ids),
-                    success: function (r) {
-                        if (r.code == 0) {
-                            alert('操作成功', function (index) {
-                                $("#jqGrid").trigger("reloadGrid");
-                            });
-                        } else {
-                            alert(r.msg);
-                        }
+                    params: JSON.stringify(ids),
+                    successCallback: function (r) {
+                        alert('操作成功', function (index) {
+                            vm.reload();
+                        });
                     }
                 });
+
             });
         },
         getInfo: function (id) {
-            $.get("../channel/info/" + id, function (r) {
-                vm.channel = r.channel;
+            Ajax.request({
+                url: "../channel/info/" + id,
+                async: true,
+                successCallback: function (r) {
+                    vm.channel = r.channel;
+                }
             });
         },
         reload: function (event) {

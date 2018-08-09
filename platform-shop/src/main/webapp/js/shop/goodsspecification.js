@@ -4,9 +4,8 @@ $(function () {
     if (goodsId) {
         url += '?goodsId=' + goodsId;
     }
-    $("#jqGrid").jqGrid({
+    $("#jqGrid").Grid({
         url: url,
-        datatype: "json",
         colModel: [
             {label: 'id', name: 'id', index: 'id', key: true, hidden: true},
             {label: '商品', name: 'goodsName', index: 'goods_id', width: 80},
@@ -14,32 +13,9 @@ $(function () {
             {label: '规格说明', name: 'value', index: 'value', width: 80},
             {
                 label: '规格图片', name: 'picUrl', index: 'pic_url', width: 80, formatter: function (value) {
-                return transImg(value);
-            }
-            }],
-        viewrecords: true,
-        height: 385,
-        rowNum: 10,
-        rowList: [10, 30, 50],
-        rownumbers: true,
-        rownumWidth: 25,
-        autowidth: true,
-        multiselect: true,
-        pager: "#jqGridPager",
-        jsonReader: {
-            root: "page.list",
-            page: "page.currPage",
-            total: "page.totalPage",
-            records: "page.totalCount"
-        },
-        prmNames: {
-            page: "page",
-            rows: "limit",
-            order: "order"
-        },
-        gridComplete: function () {
-            $("#jqGrid").closest(".ui-jqgrid-bdiv").css({"overflow-x": "hidden"});
-        }
+                    return transImg(value);
+                }
+            }]
     });
 });
 
@@ -62,13 +38,21 @@ var vm = new Vue({
     },
     methods: {
         getSpecification: function () {
-            $.get("../specification/queryAll", function (r) {
-                vm.specifications = r.list;
+            Ajax.request({
+                url: "../specification/queryAll",
+                async: true,
+                successCallback: function (r) {
+                    vm.specifications = r.list;
+                }
             });
         },
         getGoodss: function () {
-            $.get("../goods/queryAll/", function (r) {
-                vm.goodss = r.list;
+            Ajax.request({
+                url: "../goods/queryAll/",
+                async: true,
+                successCallback: function (r) {
+                    vm.goodss = r.list;
+                }
             });
         },
         query: function () {
@@ -82,7 +66,7 @@ var vm = new Vue({
             vm.getGoodss();
         },
         update: function (event) {
-            var id = getSelectedRow();
+            var id = getSelectedRow("#jqGrid");
             if (id == null) {
                 return;
             }
@@ -93,51 +77,49 @@ var vm = new Vue({
         },
         saveOrUpdate: function (event) {
             var url = vm.goodsSpecification.id == null ? "../goodsspecification/save" : "../goodsspecification/update";
-            $.ajax({
+
+            Ajax.request({
                 type: "POST",
                 url: url,
                 contentType: "application/json",
-                data: JSON.stringify(vm.goodsSpecification),
-                success: function (r) {
-                    if (r.code === 0) {
-                        alert('操作成功', function (index) {
-                            vm.reload();
-                        });
-                    } else {
-                        alert(r.msg);
-                    }
+                params: JSON.stringify(vm.goodsSpecification),
+                successCallback: function (r) {
+                    alert('操作成功', function (index) {
+                        vm.reload();
+                    });
                 }
             });
         },
         del: function (event) {
-            var ids = getSelectedRows();
+            var ids = getSelectedRows("#jqGrid");
             if (ids == null) {
                 return;
             }
 
             confirm('确定要删除选中的记录？', function () {
-                $.ajax({
+                Ajax.request({
                     type: "POST",
                     url: "../goodsspecification/delete",
                     contentType: "application/json",
-                    data: JSON.stringify(ids),
-                    success: function (r) {
-                        if (r.code == 0) {
-                            alert('操作成功', function (index) {
-                                $("#jqGrid").trigger("reloadGrid");
-                            });
-                        } else {
-                            alert(r.msg);
-                        }
+                    params: JSON.stringify(ids),
+                    successCallback: function (r) {
+                        alert('操作成功', function (index) {
+                            vm.reload();
+                        });
                     }
                 });
+
             });
         },
         getInfo: function (id) {
-            $.get("../goodsspecification/info/" + id, function (r) {
-                vm.goodsSpecification = r.goodsSpecification;
-                vm.getSpecification();
-                vm.getGoodss();
+            Ajax.request({
+                url: "../goodsspecification/info/" + id,
+                async: true,
+                successCallback: function (r) {
+                    vm.goodsSpecification = r.goodsSpecification;
+                    vm.getSpecification();
+                    vm.getGoodss();
+                }
             });
         },
         reload: function (event) {

@@ -23,11 +23,11 @@
         </view>
     </view>
 
-    <view class="coupon-box">
+    <view class="coupon-box" bindtap='tapCoupon'>
         <view class="coupon-item">
             <view class="l">
                 <text class="name">请选择优惠券</text>
-                <text class="txt">{{couponList.length}}张</text>
+                <text class="txt">{{couponDesc}}</text>
             </view>
             <view class="r">
                 <image src="/static/images/address_right.png"></image>

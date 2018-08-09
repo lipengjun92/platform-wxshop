@@ -8,17 +8,20 @@
 <div id="rrapp" v-cloak>
     <div v-show="showList">
         <Row :gutter="16">
-            &nbsp;&nbsp;
-            <i-button type="ghost" @click="reload"><i class="fa fa-refresh"></i>&nbsp;刷新</i-button>
-            #if($shiro.hasPermission("category:save"))
-            <i-button type="info" @click="add"><i class="fa fa-plus"></i>&nbsp;新增</i-button>
-            #end
-            #if($shiro.hasPermission("category:update"))
-            <i-button type="warning" @click="update"><i class="fa fa-pencil-square-o"></i>&nbsp;修改</i-button>
-            #end
-            #if($shiro.hasPermission("category:delete"))
-            <i-button type="error" @click="del"><i class="fa fa-trash-o"></i>&nbsp;删除</i-button>
-            #end
+            <div class="search-group">
+                <i-button type="ghost" @click="reload"><i class="fa fa-refresh"></i>&nbsp;刷新</i-button>
+            </div>
+            <div class="buttons-group">
+                #if($shiro.hasPermission("category:save"))
+                <i-button type="info" @click="add"><i class="fa fa-plus"></i>&nbsp;新增</i-button>
+                #end
+                #if($shiro.hasPermission("category:update"))
+                <i-button type="warning" @click="update"><i class="fa fa-pencil-square-o"></i>&nbsp;修改</i-button>
+                #end
+                #if($shiro.hasPermission("category:delete"))
+                <i-button type="error" @click="del"><i class="fa fa-trash-o"></i>&nbsp;删除</i-button>
+                #end
+            </div>
         </Row>
         <table id="jqGrid"></table>
         <div id="jqGridPager"></div>
@@ -164,14 +167,14 @@
                 </i-col>
             </Row>
             <!--<Form-item label="类型" prop="type">-->
-                <!--<Radio-group v-model="category.type">-->
-                    <!--<Radio label="0">-->
-                        <!--<span>0</span>-->
-                    <!--</Radio>-->
-                    <!--<Radio label="1">-->
-                        <!--<span>1</span>-->
-                    <!--</Radio>-->
-                <!--</Radio-group>-->
+            <!--<Radio-group v-model="category.type">-->
+            <!--<Radio label="0">-->
+            <!--<span>0</span>-->
+            <!--</Radio>-->
+            <!--<Radio label="1">-->
+            <!--<span>1</span>-->
+            <!--</Radio>-->
+            <!--</Radio-group>-->
             <!--</Form-item>-->
             <Form-item label="frontName" prop="frontName">
                 <i-input type="textarea" v-model="category.frontName" placeholder="frontName"/>

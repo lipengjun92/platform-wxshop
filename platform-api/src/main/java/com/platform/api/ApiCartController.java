@@ -1,15 +1,17 @@
 package com.platform.api;
 
 import com.alibaba.fastjson.JSONObject;
-import com.qiniu.util.StringUtils;
 import com.platform.annotation.LoginUser;
-import com.platform.dto.CouponInfoVo;
+import com.platform.cache.J2CacheUtils;
+import com.platform.dao.ApiCouponMapper;
 import com.platform.entity.*;
 import com.platform.service.*;
 import com.platform.util.ApiBaseAction;
+import com.qiniu.util.StringUtils;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -22,6 +24,7 @@ import java.util.Map;
  * 时间: 2017-08-11 08:32<br>
  * 描述: ApiIndexController <br>
  */
+@Api(tags = "购物车")
 @RestController
 @RequestMapping("/api/cart")
 public class ApiCartController extends ApiBaseAction {
@@ -37,10 +40,14 @@ public class ApiCartController extends ApiBaseAction {
     private ApiAddressService addressService;
     @Autowired
     private ApiCouponService apiCouponService;
+    @Autowired
+    private ApiCouponMapper apiCouponMapper;
+
     /**
      * 获取购物车中的数据
      */
-    @RequestMapping("getCart")
+    @ApiOperation(value = "获取购物车中的数据")
+    @GetMapping("getCart")
     public Object getCart(@LoginUser UserVo loginUser) {
         Map<String, Object> resultObj = new HashMap();
         //查询列表数据
@@ -115,25 +122,28 @@ public class ApiCartController extends ApiBaseAction {
     /**
      * 获取购物车信息，所有对购物车的增删改操作，都要重新返回购物车的信息
      */
-    @RequestMapping("index")
+    @ApiOperation(value = "获取购物车信息")
+    @GetMapping("index")
     public Object index(@LoginUser UserVo loginUser) {
         return toResponsSuccess(getCart(loginUser));
     }
 
-    private String[] getSpecificationIdsArray(String ids){
+    private String[] getSpecificationIdsArray(String ids) {
         String[] idsArray = null;
-        if (org.apache.commons.lang.StringUtils.isNotEmpty(ids)){
+        if (org.apache.commons.lang.StringUtils.isNotEmpty(ids)) {
             String[] tempArray = ids.split("_");
-            if (null != tempArray && tempArray.length > 0){
+            if (null != tempArray && tempArray.length > 0) {
                 idsArray = tempArray;
             }
         }
         return idsArray;
     }
+
     /**
      * 添加商品到购物车
      */
-    @RequestMapping("add")
+    @ApiOperation(value = "添加商品到购物车")
+    @PostMapping("add")
     public Object add(@LoginUser UserVo loginUser) {
         JSONObject jsonParam = getJsonRequest();
         Integer goodsId = jsonParam.getInteger("goodsId");
@@ -204,7 +214,8 @@ public class ApiCartController extends ApiBaseAction {
     /**
      * 减少商品到购物车
      */
-    @RequestMapping("minus")
+    @ApiOperation(value = "减少商品到购物车")
+    @PostMapping("minus")
     public Object minus(@LoginUser UserVo loginUser) {
         JSONObject jsonParam = getJsonRequest();
         Integer goodsId = jsonParam.getInteger("goodsId");
@@ -234,7 +245,8 @@ public class ApiCartController extends ApiBaseAction {
     /**
      * 更新指定的购物车信息
      */
-    @RequestMapping("update")
+    @ApiOperation(value = "更新指定的购物车信息")
+    @PostMapping("update")
     public Object update(@LoginUser UserVo loginUser) {
         JSONObject jsonParam = getJsonRequest();
         Integer goodsId = jsonParam.getInteger("goodsId");
@@ -320,7 +332,8 @@ public class ApiCartController extends ApiBaseAction {
     /**
      * 是否选择商品，如果已经选择，则取消选择，批量操作
      */
-    @RequestMapping("checked")
+    @ApiOperation(value = "是否选择商品")
+    @PostMapping("checked")
     public Object checked(@LoginUser UserVo loginUser) {
         JSONObject jsonParam = getJsonRequest();
         String productIds = jsonParam.getString("productIds");
@@ -334,7 +347,8 @@ public class ApiCartController extends ApiBaseAction {
     }
 
     //删除选中的购物车商品，批量删除
-    @RequestMapping("delete")
+    @ApiOperation(value = "删除商品")
+    @PostMapping("delete")
     public Object delete(@LoginUser UserVo loginUser) {
         Long userId = loginUser.getUserId();
 
@@ -351,7 +365,8 @@ public class ApiCartController extends ApiBaseAction {
     }
 
     //  获取购物车商品的总件件数
-    @RequestMapping("goodscount")
+    @ApiOperation(value = "获取购物车商品的总件件数")
+    @GetMapping("goodscount")
     public Object goodscount(@LoginUser UserVo loginUser) {
         if (null == loginUser || null == loginUser.getUserId()) {
             return toResponsFail("未登录");
@@ -378,73 +393,67 @@ public class ApiCartController extends ApiBaseAction {
     /**
      * 订单提交前的检验和填写相关订单信息
      */
-    @RequestMapping("checkout")
-    public Object checkout(@LoginUser UserVo loginUser, Integer couponId) {
+    @ApiOperation(value = "订单提交前的检验和填写相关订单信息")
+    @GetMapping("checkout")
+    public Object checkout(@LoginUser UserVo loginUser, Integer couponId, @RequestParam(defaultValue = "cart") String type) {
         Map<String, Object> resultObj = new HashMap();
         //根据收货地址计算运费
-        BigDecimal freightPrice = new BigDecimal(10.00);
+
+        BigDecimal freightPrice = new BigDecimal(0.00);
         //默认收货地址
         Map param = new HashMap();
         param.put("user_id", loginUser.getUserId());
-        List<AddressVo> addressEntities = addressService.queryList(param);
+        List addressEntities = addressService.queryList(param);
 
-        resultObj.put("checkedAddress", addressEntities.get(0));
-        //获取要购买的商品
-        Map<String, Object> cartData = (Map<String, Object>) this.getCart(loginUser);
-
-        List<CartVo> checkedGoodsList = new ArrayList();
-        for (CartVo cartEntity : (List<CartVo>) cartData.get("cartList")) {
-            if (cartEntity.getChecked() == 1) {
-                checkedGoodsList.add(cartEntity);
-            }
+        if (null == addressEntities || addressEntities.size() == 0) {
+            resultObj.put("checkedAddress", new AddressVo());
+        } else {
+            resultObj.put("checkedAddress", addressEntities.get(0));
         }
-        //计算订单的费用
-        //商品总价
-        BigDecimal goodsTotalPrice = (BigDecimal) ((HashMap) cartData.get("cartTotal")).get("checkedGoodsAmount");
+        // * 获取要购买的商品和总价
+        ArrayList checkedGoodsList = new ArrayList();
+        BigDecimal goodsTotalPrice;
+        if (type.equals("cart")) {
+            Map<String, Object> cartData = (Map<String, Object>) this.getCart(loginUser);
+
+            for (CartVo cartEntity : (List<CartVo>) cartData.get("cartList")) {
+                if (cartEntity.getChecked() == 1) {
+                    checkedGoodsList.add(cartEntity);
+                }
+            }
+            goodsTotalPrice = (BigDecimal) ((HashMap) cartData.get("cartTotal")).get("checkedGoodsAmount");
+        } else { // 是直接购买的
+            BuyGoodsVo goodsVO = (BuyGoodsVo) J2CacheUtils.get(J2CacheUtils.SHOP_CACHE_NAME, "goods" + loginUser.getUserId() + "");
+            ProductVo productInfo = productService.queryObject(goodsVO.getProductId());
+            //计算订单的费用
+            //商品总价
+            goodsTotalPrice = productInfo.getRetail_price().multiply(new BigDecimal(goodsVO.getNumber()));
+
+            CartVo cartVo = new CartVo();
+            cartVo.setGoods_name(productInfo.getGoods_name());
+            cartVo.setNumber(goodsVO.getNumber());
+            cartVo.setRetail_price(productInfo.getRetail_price());
+            cartVo.setList_pic_url(productInfo.getList_pic_url());
+            checkedGoodsList.add(cartVo);
+        }
+
 
         //获取可用的优惠券信息
-        Map usercouponMap = new HashMap();
-        usercouponMap.put("user_id", loginUser.getUserId());
-        List<CouponVo> couponList = apiCouponService.queryUserCouponList(usercouponMap);
-        CouponVo checkedCoupon = null;
-        BigDecimal couponPrice = new BigDecimal(0.00);  //使用优惠券减免的金额
-        if (null != couponList && couponList.size() > 0) {
-            for (CouponVo couponVo : couponList) {
-                if (null != couponId && couponId.equals(couponVo.getId())) {
-                    couponPrice = couponVo.getType_money();
-                    checkedCoupon = couponVo;
-                }
+        BigDecimal couponPrice = new BigDecimal(0.00);
+        if (couponId != null && couponId != 0) {
+            CouponVo couponVo = apiCouponMapper.getUserCoupon(couponId);
+            if (couponVo != null) {
+                couponPrice = couponVo.getType_money();
             }
         }
-        // 获取优惠信息提示
-        Map couponParam = new HashMap();
-        couponParam.put("enabled", true);
-        Integer[] send_types = new Integer[]{0, 7};
-        couponParam.put("send_types", send_types);
-        List<CouponVo> couponVos = apiCouponService.queryList(couponParam);
-        BigDecimal fullCutCouponDec = new BigDecimal(0);
-        if (null != couponVos && couponVos.size() > 0) {
-            for (CouponVo couponVo : couponVos) {
-                if (couponVo.getSend_type() == 0 && couponVo.getMin_amount().compareTo(goodsTotalPrice) <= 0
-                        && fullCutCouponDec.compareTo(couponVo.getType_money()) < 0) {
-                    fullCutCouponDec = couponVo.getType_money();
-                }
-                // 是否免运费
-                if (couponVo.getSend_type() == 7 && couponVo.getMin_amount().compareTo(goodsTotalPrice) <= 0) {
-                    freightPrice = new BigDecimal(0);
-                }
-            }
-        }
-        resultObj.put("fullCutCouponDec", fullCutCouponDec);
+
         //订单的总价
         BigDecimal orderTotalPrice = goodsTotalPrice.add(freightPrice);
 
         //
-        BigDecimal actualPrice = orderTotalPrice.subtract(fullCutCouponDec).subtract(couponPrice);  //减去其它支付的金额后，要实际支付的金额
+        BigDecimal actualPrice = orderTotalPrice.subtract(couponPrice);  //减去其它支付的金额后，要实际支付的金额
 
         resultObj.put("freightPrice", freightPrice);
-        resultObj.put("checkedCoupon", checkedCoupon);
-        resultObj.put("couponList", couponList);
 
         resultObj.put("couponPrice", couponPrice);
         resultObj.put("checkedGoodsList", checkedGoodsList);
@@ -457,7 +466,8 @@ public class ApiCartController extends ApiBaseAction {
     /**
      * 选择优惠券列表
      */
-    @RequestMapping("checkedCouponList")
+    @ApiOperation(value = "选择优惠券列表")
+    @PostMapping("checkedCouponList")
     public Object checkedCouponList(@LoginUser UserVo loginUser) {
         //
         Map param = new HashMap();

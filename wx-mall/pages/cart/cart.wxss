@@ -67,7 +67,7 @@ page{
     text-align: center;
     font-size:28rpx;
     color:#999;
-    background: url(http://image.meiping123.com/upload/20180104/1055343561cd30.png) no-repeat center 205rpx;
+    background: url(https://platform-wxmall.oss-cn-beijing.aliyuncs.com/upload/20180727/15015039793f4e.png) no-repeat center 205rpx;
     background-size: 100rpx auto;
     margin-bottom: 50rpx;
 }

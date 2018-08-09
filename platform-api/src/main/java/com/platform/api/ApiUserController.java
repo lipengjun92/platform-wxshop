@@ -1,7 +1,6 @@
 package com.platform.api;
 
 import com.alibaba.fastjson.JSONObject;
-import com.platform.annotation.IgnoreAuth;
 import com.platform.annotation.LoginUser;
 import com.platform.entity.SmsConfig;
 import com.platform.entity.SmsLogVo;
@@ -10,19 +9,22 @@ import com.platform.service.ApiUserService;
 import com.platform.service.SysConfigService;
 import com.platform.util.ApiBaseAction;
 import com.platform.utils.*;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * 作者: @author Harmon <br>
  * 时间: 2017-08-11 08:32<br>
  * 描述: ApiIndexController <br>
  */
+@Api(tags = "会员验证")
 @RestController
 @RequestMapping("/api/user")
 public class ApiUserController extends ApiBaseAction {
@@ -34,7 +36,8 @@ public class ApiUserController extends ApiBaseAction {
     /**
      * 发送短信
      */
-    @RequestMapping("smscode")
+    @ApiOperation(value = "发送短信")
+    @PostMapping("smscode")
     public Object smscode(@LoginUser UserVo loginUser) {
         JSONObject jsonParams = getJsonRequest();
         String phone = jsonParams.getString("phone");
@@ -49,7 +52,7 @@ public class ApiUserController extends ApiBaseAction {
         // 发送短信
         String result = "";
         //获取云存储配置信息
-        SmsConfig config = sysConfigService.getConfigObject(ConfigConstant.SMS_CONFIG_KEY, SmsConfig.class);
+        SmsConfig config = sysConfigService.getConfigObject(Constant.SMS_CONFIG_KEY, SmsConfig.class);
         if (StringUtils.isNullOrEmpty(config)) {
             throw new RRException("请先配置短信平台信息");
         }
@@ -93,7 +96,8 @@ public class ApiUserController extends ApiBaseAction {
      * @param loginUser
      * @return
      */
-    @RequestMapping("getUserLevel")
+    @ApiOperation(value = "获取当前会员等级")
+    @GetMapping("getUserLevel")
     public Object getUserLevel(@LoginUser UserVo loginUser) {
         String userLevel = userService.getUserLevel(loginUser);
         return toResponsSuccess(userLevel);
@@ -102,15 +106,21 @@ public class ApiUserController extends ApiBaseAction {
     /**
      * 绑定手机
      */
-    @RequestMapping("bindMobile")
+    @ApiOperation(value = "绑定手机")
+    @PostMapping("bindMobile")
     public Object bindMobile(@LoginUser UserVo loginUser) {
         JSONObject jsonParams = getJsonRequest();
         SmsLogVo smsLogVo = userService.querySmsCodeByUserId(loginUser.getUserId());
 
         String mobile_code = jsonParams.getString("mobile_code");
+        String mobile = jsonParams.getString("mobile");
+
         if (!mobile_code.equals(smsLogVo.getSms_code())) {
-            return toResponsFail("手机绑定失败");
+            return toResponsFail("验证码错误");
         }
+        UserVo userVo = userService.queryObject(loginUser.getUserId());
+        userVo.setMobile(mobile);
+        userService.update(userVo);
         return toResponsSuccess("手机绑定成功");
     }
 }

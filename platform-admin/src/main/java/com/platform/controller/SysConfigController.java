@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 系统配置信息
+ * 系统配置信息Controller
  *
  * @author lipengjun
  * @email 939961241@qq.com
@@ -29,6 +29,9 @@ public class SysConfigController extends AbstractController {
 
     /**
      * 所有配置列表
+     *
+     * @param params 请求参数
+     * @return R
      */
     @RequestMapping("/list")
     @RequiresPermissions("sys:config:list")
@@ -45,7 +48,10 @@ public class SysConfigController extends AbstractController {
 
 
     /**
-     * 配置信息
+     * 根据主键获取配置信息
+     *
+     * @param id 主键
+     * @return R
      */
     @RequestMapping("/info/{id}")
     @RequiresPermissions("sys:config:info")
@@ -56,9 +62,12 @@ public class SysConfigController extends AbstractController {
     }
 
     /**
-     * 保存配置
+     * 新增配置
+     *
+     * @param config 配置
+     * @return R
      */
-    @SysLog("保存配置")
+    @SysLog("新增配置")
     @RequestMapping("/save")
     @RequiresPermissions("sys:config:save")
     public R save(@RequestBody SysConfigEntity config) {
@@ -71,6 +80,9 @@ public class SysConfigController extends AbstractController {
 
     /**
      * 修改配置
+     *
+     * @param config 配置
+     * @return R
      */
     @SysLog("修改配置")
     @RequestMapping("/update")
@@ -85,6 +97,9 @@ public class SysConfigController extends AbstractController {
 
     /**
      * 删除配置
+     *
+     * @param ids 主键集
+     * @return R
      */
     @SysLog("删除配置")
     @RequestMapping("/delete")

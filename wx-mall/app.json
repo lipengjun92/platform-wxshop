@@ -33,7 +33,7 @@
     "pages/goods/goods",
     "pages/topicDetail/topicDetail",
     "pages/auth/mobile/mobile",
-    "pages/ucenter/level/level"
+    "pages/shopping/selCoupon/selCoupon"
   ],
   "window": {
     "backgroundTextStyle": "dark",

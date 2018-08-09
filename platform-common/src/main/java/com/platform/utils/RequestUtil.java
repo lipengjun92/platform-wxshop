@@ -1,6 +1,5 @@
 package com.platform.utils;
 
-import com.platform.Global;
 import org.json.JSONObject;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
@@ -46,8 +45,8 @@ public class RequestUtil {
                 LOGGER.info(key + "==>" + value);
             }
         }
-        if (map.get(Global.SORT_ORDER) != null) {
-            map.put(Global.SORT_ORDER, "asc");
+        if (map.get(Constant.SORT_ORDER) != null) {
+            map.put(Constant.SORT_ORDER, "asc");
         }
         return map;
     }

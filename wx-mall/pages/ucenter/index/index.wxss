@@ -9,6 +9,26 @@ page{
     overflow: hidden;
     width: 100%;
 }
+.userinfo {
+	display: flex;
+	flex-direction: column;
+	padding: 50rpx 0;
+	align-items: center;
+	background: #333;
+  width: 750rpx;
+}
+
+.userinfo-avatar {
+	width: 160rpx;
+	height: 160rpx;
+	margin: 20rpx;
+	border-radius: 50%;
+}
+
+.userinfo-nickname {
+  margin-top: 20rpx;
+  color: #FFF;
+}
 .profile-info{
     width: 100%;
     height: 280rpx;
@@ -131,7 +151,7 @@ page{
     background-size: 52.803rpx;
 }
 .user-menu .icon.phone{
-    background: url(http://meiping123.oss-cn-shenzhen.aliyuncs.com/upload/20180528/15080098639823.png) no-repeat;
+    background: url(https://platform-wxmall.oss-cn-beijing.aliyuncs.com/upload/20180727/15011540ebe21.png) no-repeat;
     background-size: 52.803rpx;
 }
 
@@ -153,4 +173,16 @@ page{
     background: #fff;
     color: #333;
     font-size: 30rpx;
+}
+
+.service {
+  position: static;
+  background-color: transparent;
+  color: transparent;
+  margin: 0;
+  padding: 0;
+  border: none;
+  text-align: left;
+  line-height: normal;
+  display: inline;
 }

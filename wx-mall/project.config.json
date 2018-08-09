@@ -8,9 +8,9 @@
 		"newFeature": true
 	},
 	"compileType": "miniprogram",
-	"libVersion": "1.6.4",
-	"appid": "wx151ddf2d4e3d3b4f",
-	"projectname": "wxshop",
+	"libVersion": "1.9.0",
+	"appid": "wx11ed3e37387289b8",
+	"projectname": "pwm",
 	"condition": {
 		"search": {
 			"current": -1,
@@ -20,9 +20,41 @@
 			"current": -1,
 			"list": []
 		},
-		"miniprogram": {
+		"plugin": {
 			"current": -1,
 			"list": []
+		},
+		"game": {
+			"list": []
+		},
+		"miniprogram": {
+			"current": -1,
+			"list": [
+				{
+					"id": 0,
+					"name": "选择优惠券",
+					"pathName": "pages/shopping/selCoupon/selCoupon",
+					"query": "isBuy=false"
+				},
+				{
+					"id": -1,
+					"name": "订单界面",
+					"pathName": "pages/shopping/checkout/checkout",
+					"query": "isBuy=true"
+				},
+				{
+					"id": -1,
+					"name": "我的优惠券",
+					"pathName": "pages/ucenter/coupon/coupon",
+					"query": "isBuy=true"
+				},
+				{
+					"id": -1,
+					"name": "我的订单",
+					"pathName": "pages/ucenter/order/order",
+					"query": ""
+				}
+			]
 		}
 	}
 }

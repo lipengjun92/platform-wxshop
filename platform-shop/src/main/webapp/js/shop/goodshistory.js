@@ -1,7 +1,6 @@
 $(function () {
-    $("#jqGrid").jqGrid({
+    $("#jqGrid").Grid({
         url: '../goods/historyList',
-        datatype: "json",
         colModel: [
             {label: 'id', name: 'id', index: 'id', key: true, hidden: true},
             {label: '商品类型', name: 'categoryName', index: 'category_id', width: 80},
@@ -19,8 +18,8 @@ $(function () {
             },
             {
                 label: '添加时间', name: 'addTime', index: 'add_time', width: 80, formatter: function (value) {
-                return transDate(value);
-            }
+                    return transDate(value);
+                }
             },
             {label: '删除状态', name: 'isDelete', index: 'is_delete', width: 80, hidden: true},
             {label: '属性类别', name: 'attributeCategoryName', index: 'attribute_category', width: 80},
@@ -37,37 +36,14 @@ $(function () {
             {label: '推广标签', name: 'promotionTag', index: 'promotion_tag', width: 80, hidden: true},
             {
                 label: '限购', name: 'isLimited', index: 'is_limited', width: 80, formatter: function (value) {
-                return transIsNot(value);
-            }
+                    return transIsNot(value);
+                }
             },
             {
                 label: '热销', name: 'isHot', index: 'is_hot', width: 80, formatter: function (value) {
-                return transIsNot(value);
-            }
-            }],
-        viewrecords: true,
-        height: 385,
-        rowNum: 10,
-        rowList: [10, 30, 50],
-        rownumbers: true,
-        rownumWidth: 25,
-        autowidth: true,
-        multiselect: true,
-        pager: "#jqGridPager",
-        jsonReader: {
-            root: "page.list",
-            page: "page.currPage",
-            total: "page.totalPage",
-            records: "page.totalCount"
-        },
-        prmNames: {
-            page: "page",
-            rows: "limit",
-            order: "order"
-        },
-        gridComplete: function () {
-            $("#jqGrid").closest(".ui-jqgrid-bdiv").css({"overflow-x": "hidden"});
-        }
+                    return transIsNot(value);
+                }
+            }]
     });
 });
 
@@ -85,35 +61,36 @@ var vm = new Vue({
             vm.reload();
         },
         back: function (event) {
-            var ids = getSelectedRows();
+            var ids = getSelectedRows("#jqGrid");
             if (ids == null) {
                 return;
             }
 
             confirm('确定要恢复选中的记录？', function () {
-                $.ajax({
+
+                Ajax.request({
                     type: "POST",
                     url: "../goods/back",
                     contentType: "application/json",
-                    data: JSON.stringify(ids),
-                    success: function (r) {
-                        if (r.code == 0) {
-                            alert('操作成功', function (index) {
-                                $("#jqGrid").trigger("reloadGrid");
-                            });
-                        } else {
-                            alert(r.msg);
-                        }
+                    params: JSON.stringify(ids),
+                    successCallback: function (r) {
+                        alert('操作成功', function (index) {
+                            vm.reload();
+                        });
                     }
                 });
             });
         },
         getInfo: function (id) {
-            $.get("../goods/info/" + id, function (r) {
-                vm.goods = r.goods;
-                $('#goodsDesc').editable('setHTML', vm.goods.goodsDesc);
-                vm.getCategory();
-                vm.getAttributes(vm.goods.attributeCategory);
+            Ajax.request({
+                url: "../goods/info/" + id,
+                async: true,
+                successCallback: function (r) {
+                    vm.goods = r.goods;
+                    $('#goodsDesc').editable('setHTML', vm.goods.goodsDesc);
+                    vm.getCategory();
+                    vm.getAttributes(vm.goods.attributeCategory);
+                }
             });
         },
         reload: function (event) {

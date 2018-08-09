@@ -1,4 +1,5 @@
 var api = require('../../../config/api.js');
+var util = require('../../../utils/util.js');
 var app = getApp()
 
 Page({
@@ -31,7 +32,7 @@ Page({
     },
 
     bindCheckMobile: function (mobile) {
-        if(!mobile){
+        if (!mobile) {
             wx.showModal({
                 title: '错误',
                 content: '请输入手机号码'
@@ -63,16 +64,8 @@ Page({
         if (!this.bindCheckMobile(this.data.mobile)) {
             return
         }
-        wx.request({
-            url: api.SmsCode,
-            data: {
-                phone: this.data.mobile
-            },
-            method: 'POST',
-            header: {
-                'content-type': 'application/json'
-            },
-            success: function (res) {
+        util.request(api.SmsCode, {phone: this.data.mobile}, 'POST')
+            .then(function (res) {
                 if (res.data.code == 200) {
                     wx.showToast({
                         title: '发送成功',
@@ -99,13 +92,13 @@ Page({
                         }
                     }, 1000);
                 }
-            }
-        });
+            });
 
     },
 
     bindLoginMobilecode: function (e) {
-        if (!this.bindCheckMobile(this.data.mobile)) {
+        var mobile = this.data.mobile;
+        if (!this.bindCheckMobile(mobile)) {
             return
         }
         if (!(e.detail.value.code && e.detail.value.code.length === 4)) {
@@ -116,16 +109,8 @@ Page({
             icon: 'loading',
             duration: 5000
         })
-        wx.request({
-            url: api.BindMobile,
-            data: {
-                mobile_code: e.detail.value.code
-            },
-            method: 'POST',
-            header: {
-                'content-type': 'application/json'
-            },
-            success: function (res) {
+        util.request(api.BindMobile, {mobile_code: e.detail.value.code,mobile:mobile}, 'POST')
+            .then(function (res) {
                 if (res.data.code == 200) {
                     wx.showModal({
                         title: '提示',
@@ -135,8 +120,13 @@ Page({
                     wx.switchTab({
                         url: '/pages/ucenter/index/index'
                     });
+                } else {
+                    wx.showModal({
+                        title: '提示',
+                        content: '验证码错误',
+                        showCancel: false
+                    })
                 }
-            }
-        });
+            })
     }
 })

@@ -52,7 +52,7 @@
 		select count(*) from nideshop_user 
 	</select>
 
-    <insert id="save" parameterType="com.platform.entity.UserVo" useGeneratedKeys="true" keyProperty="id">
+    <insert id="save" parameterType="com.platform.entity.UserVo" useGeneratedKeys="true" keyProperty="userId">
 		insert into nideshop_user
 		(
 			`username`, 

@@ -8,31 +8,35 @@
 <div id="rrapp" v-cloak>
     <div v-show="showList">
         <Row :gutter="16">
-            <i-col span="4">
-                <i-input v-model="q.beanName" @on-enter="query" placeholder="bean名称"/>
-            </i-col>
-            <i-button @click="query">查询</i-button>
-            #if($shiro.hasPermission("sys:schedule:save"))
-            <i-button type="info" @click="add"><i class="fa fa-plus"></i>&nbsp;新增</i-button>
-            #end
-            #if($shiro.hasPermission("sys:schedule:update"))
-            <i-button type="warning" @click="update"><i class="fa fa-pencil-square-o"></i>&nbsp;修改</i-button>
-            #end
-            #if($shiro.hasPermission("sys:schedule:delete"))
-            <i-button type="error" @click="del"><i class="fa fa-trash-o"></i>&nbsp;删除</i-button>
-            #end
-            #if($shiro.hasPermission("sys:schedule:pause"))
-            <i-button type="dashed" @click="pause"><i class="fa fa-pause"></i>&nbsp;暂停</i-button>
-            #end
-            #if($shiro.hasPermission("sys:schedule:resume"))
-            <i-button type="primary" @click="resume"><i class="fa fa-play"></i>&nbsp;恢复</i-button>
-            #end
-            #if($shiro.hasPermission("sys:schedule:run"))
-            <i-button type="warning" @click="runOnce"><i class="fa fa-arrow-circle-right"></i>&nbsp;立即执行</i-button>
-            #end
-            #if($shiro.hasPermission("sys:schedule:log"))
-            <a class="btn btn-primary" style="float:right;" href="schedule_log.html">日志列表</a>
-            #end
+            <div class="search-group">
+                <i-col span="4">
+                    <i-input v-model="q.beanName" @on-enter="query" placeholder="bean名称"/>
+                </i-col>
+                <i-button @click="query">查询</i-button>
+            </div>
+            <div class="buttons-group">
+                #if($shiro.hasPermission("sys:schedule:save"))
+                <i-button type="info" @click="add"><i class="fa fa-plus"></i>&nbsp;新增</i-button>
+                #end
+                #if($shiro.hasPermission("sys:schedule:update"))
+                <i-button type="warning" @click="update"><i class="fa fa-pencil-square-o"></i>&nbsp;修改</i-button>
+                #end
+                #if($shiro.hasPermission("sys:schedule:delete"))
+                <i-button type="error" @click="del"><i class="fa fa-trash-o"></i>&nbsp;删除</i-button>
+                #end
+                #if($shiro.hasPermission("sys:schedule:pause"))
+                <i-button type="dashed" @click="pause"><i class="fa fa-pause"></i>&nbsp;暂停</i-button>
+                #end
+                #if($shiro.hasPermission("sys:schedule:resume"))
+                <i-button type="primary" @click="resume"><i class="fa fa-play"></i>&nbsp;恢复</i-button>
+                #end
+                #if($shiro.hasPermission("sys:schedule:run"))
+                <i-button type="warning" @click="runOnce"><i class="fa fa-arrow-circle-right"></i>&nbsp;立即执行</i-button>
+                #end
+                #if($shiro.hasPermission("sys:schedule:log"))
+                <a class="btn btn-primary" style="float:right;" href="schedule_log.html">日志列表</a>
+                #end
+            </div>
         </Row>
         <table id="jqGrid"></table>
         <div id="jqGridPager"></div>

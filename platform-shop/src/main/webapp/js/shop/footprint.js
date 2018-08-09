@@ -1,35 +1,11 @@
 $(function () {
-    $("#jqGrid").jqGrid({
+    $("#jqGrid").Grid({
         url: '../footprint/list',
-        datatype: "json",
         colModel: [
             {label: 'id', name: 'id', index: 'id', key: true, hidden: true},
             {label: '会员', name: 'userName', index: 'user_name', width: 80},
             {label: '商品', name: 'goodsName', index: 'goods_name', width: 80},
-            {label: '记录时间', name: 'addTime', index: 'add_time', width: 80}],
-        viewrecords: true,
-        height: 385,
-        rowNum: 10,
-        rowList: [10, 30, 50],
-        rownumbers: true,
-        rownumWidth: 25,
-        autowidth: true,
-        multiselect: true,
-        pager: "#jqGridPager",
-        jsonReader: {
-            root: "page.list",
-            page: "page.currPage",
-            total: "page.totalPage",
-            records: "page.totalCount"
-        },
-        prmNames: {
-            page: "page",
-            rows: "limit",
-            order: "order"
-        },
-        gridComplete: function () {
-            $("#jqGrid").closest(".ui-jqgrid-bdiv").css({"overflow-x": "hidden"});
-        }
+            {label: '记录时间', name: 'addTime', index: 'add_time', width: 80}]
     });
 });
 
@@ -53,7 +29,7 @@ var vm = new Vue({
             vm.footprint = {};
         },
         update: function (event) {
-            var id = getSelectedRow();
+            var id = getSelectedRow("#jqGrid");
             if (id == null) {
                 return;
             }
@@ -64,49 +40,47 @@ var vm = new Vue({
         },
         saveOrUpdate: function (event) {
             var url = vm.footprint.id == null ? "../footprint/save" : "../footprint/update";
-            $.ajax({
+
+            Ajax.request({
                 type: "POST",
                 url: url,
                 contentType: "application/json",
-                data: JSON.stringify(vm.footprint),
-                success: function (r) {
-                    if (r.code === 0) {
-                        alert('操作成功', function (index) {
-                            vm.reload();
-                        });
-                    } else {
-                        alert(r.msg);
-                    }
+                params: JSON.stringify(vm.footprint),
+                successCallback: function (r) {
+                    alert('操作成功', function (index) {
+                        vm.reload();
+                    });
                 }
             });
         },
         del: function (event) {
-            var ids = getSelectedRows();
+            var ids = getSelectedRows("#jqGrid");
             if (ids == null) {
                 return;
             }
 
             confirm('确定要删除选中的记录？', function () {
-                $.ajax({
+                Ajax.request({
                     type: "POST",
+                    dataType: 'json',
                     url: "../footprint/delete",
                     contentType: "application/json",
-                    data: JSON.stringify(ids),
-                    success: function (r) {
-                        if (r.code == 0) {
-                            alert('操作成功', function (index) {
-                                $("#jqGrid").trigger("reloadGrid");
-                            });
-                        } else {
-                            alert(r.msg);
-                        }
+                    params: JSON.stringify(ids),
+                    successCallback: function (r) {
+                        alert('操作成功', function (index) {
+                            vm.reload();
+                        });
                     }
                 });
             });
         },
         getInfo: function (id) {
-            $.get("../footprint/info/" + id, function (r) {
-                vm.footprint = r.footprint;
+            Ajax.request({
+                url: "../footprint/info/" + id,
+                async: true,
+                successCallback: function (r) {
+                    vm.footprint = r.footprint;
+                }
             });
         },
         reload: function (event) {

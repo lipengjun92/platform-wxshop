@@ -9,7 +9,13 @@ import com.platform.service.ApiKeywordsService;
 import com.platform.service.ApiSearchHistoryService;
 import com.platform.util.ApiBaseAction;
 import com.platform.utils.Query;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -24,6 +30,7 @@ import java.util.Map;
  * @email 939961241@qq.com
  * @date 2017-03-23 15:31
  */
+@Api(tags = "商品搜索")
 @RestController
 @RequestMapping("/api/search")
 public class ApiSearchController extends ApiBaseAction {
@@ -35,7 +42,8 @@ public class ApiSearchController extends ApiBaseAction {
     /**
      * 　　index
      */
-    @RequestMapping("index")
+    @ApiOperation(value = "搜索商品列表")
+    @GetMapping("index")
     public Object index(@LoginUser UserVo loginUser) {
         Map<String, Object> resultObj = new HashMap();
         Map param = new HashMap();
@@ -83,8 +91,10 @@ public class ApiSearchController extends ApiBaseAction {
     /**
      * 　　helper
      */
+    @ApiOperation(value = "搜索商品")
+    @ApiImplicitParams({@ApiImplicitParam(name = "keyword", value = "关键字", paramType = "path", required = true)})
     @IgnoreAuth
-    @RequestMapping("helper")
+    @GetMapping("helper")
     public Object helper(@LoginUser UserVo loginUser, String keyword) {
         Map param = new HashMap();
         param.put("fields", "distinct keyword");
@@ -107,7 +117,7 @@ public class ApiSearchController extends ApiBaseAction {
     /**
      * 　　clearhistory
      */
-    @RequestMapping("clearhistory")
+    @PostMapping("clearhistory")
     public Object clearhistory(@LoginUser UserVo loginUser) {
         searchHistoryService.deleteByUserId(loginUser.getUserId());
         //

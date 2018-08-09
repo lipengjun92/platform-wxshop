@@ -5,13 +5,7 @@ import com.platform.entity.SmsConfig;
 import com.platform.entity.SysSmsLogEntity;
 import com.platform.service.SysConfigService;
 import com.platform.service.SysSmsLogService;
-import com.platform.utils.ConfigConstant;
-import com.platform.utils.DateUtils;
-import com.platform.utils.IdUtil;
-import com.platform.utils.RRException;
-import com.platform.utils.ShiroUtils;
-import com.platform.utils.SmsUtil;
-import com.platform.utils.StringUtils;
+import com.platform.utils.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,12 +13,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Service实现类
- *
- * @author lipengjun
- * @date 2017-12-16 23:38:05
- */
 @Service("smsLogService")
 public class SysSmsLogServiceImpl implements SysSmsLogService {
     @Autowired
@@ -72,7 +60,7 @@ public class SysSmsLogServiceImpl implements SysSmsLogService {
     public SysSmsLogEntity sendSms(SysSmsLogEntity smsLog) {
         String result = "";
         //获取云存储配置信息
-        SmsConfig config = sysConfigService.getConfigObject(ConfigConstant.SMS_CONFIG_KEY, SmsConfig.class);
+        SmsConfig config = sysConfigService.getConfigObject(Constant.SMS_CONFIG_KEY, SmsConfig.class);
         if (StringUtils.isNullOrEmpty(config)) {
             throw new RRException("请先配置短信平台信息");
         }

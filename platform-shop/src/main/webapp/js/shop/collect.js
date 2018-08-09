@@ -1,7 +1,6 @@
 $(function () {
-    $("#jqGrid").jqGrid({
+    $("#jqGrid").Grid({
         url: '../collect/list',
-        datatype: "json",
         colModel: [
             {label: 'id', name: 'id', index: 'id', key: true, hidden: true},
             {label: '用户', name: 'userName', index: 'user_name', width: 80},
@@ -9,30 +8,7 @@ $(function () {
             {label: '添加时间', name: 'addTime', index: 'add_time', width: 80}
             // {label: '提醒', name: 'isAttention', index: 'is_attention', width: 80}
             // {label: '类型', name: 'typeId', index: 'type_id', width: 80}
-            ],
-        viewrecords: true,
-        height: 385,
-        rowNum: 10,
-        rowList: [10, 30, 50],
-        rownumbers: true,
-        rownumWidth: 25,
-        autowidth: true,
-        multiselect: true,
-        pager: "#jqGridPager",
-        jsonReader: {
-            root: "page.list",
-            page: "page.currPage",
-            total: "page.totalPage",
-            records: "page.totalCount"
-        },
-        prmNames: {
-            page: "page",
-            rows: "limit",
-            order: "order"
-        },
-        gridComplete: function () {
-            $("#jqGrid").closest(".ui-jqgrid-bdiv").css({"overflow-x": "hidden"});
-        }
+        ]
     });
 });
 
@@ -56,7 +32,7 @@ var vm = new Vue({
             vm.collect = {};
         },
         update: function (event) {
-            var id = getSelectedRow();
+            var id = getSelectedRow("#jqGrid");
             if (id == null) {
                 return;
             }
@@ -67,49 +43,47 @@ var vm = new Vue({
         },
         saveOrUpdate: function (event) {
             var url = vm.collect.id == null ? "../collect/save" : "../collect/update";
-            $.ajax({
+
+            Ajax.request({
                 type: "POST",
                 url: url,
                 contentType: "application/json",
-                data: JSON.stringify(vm.collect),
-                success: function (r) {
-                    if (r.code === 0) {
-                        alert('操作成功', function (index) {
-                            vm.reload();
-                        });
-                    } else {
-                        alert(r.msg);
-                    }
+                params: JSON.stringify(vm.collect),
+                successCallback: function (r) {
+                    alert('操作成功', function (index) {
+                        vm.reload();
+                    });
                 }
             });
         },
         del: function (event) {
-            var ids = getSelectedRows();
+            var ids = getSelectedRows("#jqGrid");
             if (ids == null) {
                 return;
             }
 
             confirm('确定要删除选中的记录？', function () {
-                $.ajax({
+
+                Ajax.request({
                     type: "POST",
                     url: "../collect/delete",
                     contentType: "application/json",
-                    data: JSON.stringify(ids),
-                    success: function (r) {
-                        if (r.code == 0) {
-                            alert('操作成功', function (index) {
-                                $("#jqGrid").trigger("reloadGrid");
-                            });
-                        } else {
-                            alert(r.msg);
-                        }
+                    params: JSON.stringify(ids),
+                    successCallback: function (r) {
+                        alert('操作成功', function (index) {
+                            vm.reload();
+                        });
                     }
                 });
             });
         },
         getInfo: function (id) {
-            $.get("../collect/info/" + id, function (r) {
-                vm.collect = r.collect;
+            Ajax.request({
+                url: "../collect/info/" + id,
+                async: true,
+                successCallback: function (r) {
+                    vm.collect = r.collect;
+                }
             });
         },
         reload: function (event) {

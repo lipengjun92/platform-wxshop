@@ -8,12 +8,16 @@
 <body>
 <div id="rrapp" v-cloak>
     <div v-show="showList">
-        <div class="grid-btn">
-            <i-button type="success" @click="addConfig"><i class="fa fa-sun-o"></i>&nbsp;云存储配置</i-button>
-            <i-button type="primary" id="upload"><i class="fa fa-plus"></i>&nbsp;上传文件</i-button>
-            <i-button type="error" @click="del"><i class="fa fa-trash-o"></i>&nbsp;删除</i-button>
-            <i-button type="success" @click="lookImg"><i class="fa fa-eye"></i>&nbsp;预览</i-button>
-        </div>
+        <Row :gutter="16">
+            <div class="search-group">
+                <i-button type="success" @click="addConfig"><i class="fa fa-sun-o"></i>&nbsp;云存储配置</i-button>
+            </div>
+            <div class="buttons-group">
+                <i-button type="primary" id="upload"><i class="fa fa-plus"></i>&nbsp;上传文件</i-button>
+                <i-button type="error" @click="del"><i class="fa fa-trash-o"></i>&nbsp;删除</i-button>
+                <i-button type="success" @click="lookImg"><i class="fa fa-eye"></i>&nbsp;预览</i-button>
+            </div>
+        </Row>
         <table id="jqGrid"></table>
         <div id="jqGridPager"></div>
     </div>
@@ -35,11 +39,6 @@
                 </Radio-group>
             </Form-item>
             <i-form v-if="config.type == 1" ref="formValidate" :label-width="130">
-                <Form-item>
-                    <Alert type="info" show-icon>
-                        <a href="http://www.renren.io/open/qiniu.html" target="_blank">免费申请(七牛)10GB储存空间</a>
-                    </Alert>
-                </Form-item>
                 <Form-item label="域名" prop="qiniuDomain">
                     <i-input v-model="config.qiniuDomain" placeholder="七牛绑定的域名"/>
                 </Form-item>
@@ -56,7 +55,8 @@
                     <i-input v-model="config.qiniuBucketName" placeholder="七牛存储空间名"/>
                 </Form-item>
             </i-form>
-            <i-form v-if="config.type == 2" ref="formValidate" :model="config" :rules="aliRuleValidate" :label-width="130">
+            <i-form v-if="config.type == 2" ref="formValidate" :model="config" :rules="aliRuleValidate"
+                    :label-width="130">
                 <Form-item label="域名" prop="aliyunDomain">
                     <i-input v-model="config.aliyunDomain" placeholder="阿里云绑定的域名"/>
                 </Form-item>
@@ -76,7 +76,8 @@
                     <i-input v-model="config.aliyunBucketName" placeholder="阿里云BucketName"/>
                 </Form-item>
             </i-form>
-            <i-form ref="formValidate" :model="config" :rules="qcloudRuleValidate" v-if="config.type == 3" :label-width="130">
+            <i-form ref="formValidate" :model="config" :rules="qcloudRuleValidate" v-if="config.type == 3"
+                    :label-width="130">
                 <Form-item label="域名" prop="qcloudDomain">
                     <i-input v-model="config.qcloudDomain" placeholder="腾讯云绑定的域名"/>
                 </Form-item>

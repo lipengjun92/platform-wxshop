@@ -16,6 +16,7 @@ public interface SysMacroDao extends BaseDao<SysMacroEntity> {
 
     /**
      * 查询数据字段
+     *
      * @param value
      * @return
      */

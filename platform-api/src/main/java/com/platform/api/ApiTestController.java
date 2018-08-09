@@ -5,6 +5,9 @@ import com.platform.annotation.LoginUser;
 import com.platform.entity.UserVo;
 import com.platform.service.ApiUserService;
 import com.platform.utils.R;
+
+import io.swagger.annotations.Api;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @email 939961241@qq.com
  * @date 2017-03-23 15:47
  */
+@Api(tags = "测试接口")
 @RestController
 @RequestMapping("/api/test")
 public class ApiTestController {

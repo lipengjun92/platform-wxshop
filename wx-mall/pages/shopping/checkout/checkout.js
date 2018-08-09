@@ -16,35 +16,30 @@ Page({
     orderTotalPrice: 0.00,  //订单总价
     actualPrice: 0.00,     //实际需要支付的总价
     addressId: 0,
-    couponId: 0
+    couponId: 0,
+    isBuy: false,
+    couponDesc: '',
+    couponCode: '',
+    buyType: ''
   },
   onLoad: function (options) {
 
+    console.log(options.isBuy)
     // 页面初始化 options为页面跳转所带来的参数
-
-    try {
-      var addressId = wx.getStorageSync('addressId');
-      if (addressId) {
-        this.setData({
-          'addressId': addressId
-        });
-      }
-
-      var couponId = wx.getStorageSync('couponId');
-      if (couponId) {
-        this.setData({
-          'couponId': couponId
-        });
-      }
-    } catch (e) {
-      // Do something when catch error
+    if (options.isBuy!=null) {
+      this.data.isBuy = options.isBuy
     }
-
-
+    this.data.buyType = this.data.isBuy?'buy':'cart'
+    //每次重新加载界面，清空数据
+    app.globalData.userCoupon = 'NO_USE_COUPON'
+    app.globalData.courseCouponCode = {}
   },
+  
   getCheckoutInfo: function () {
     let that = this;
-    util.request(api.CartCheckout, { addressId: that.data.addressId, couponId: that.data.couponId }).then(function (res) {
+    var url = api.CartCheckout
+    let buyType = this.data.isBuy ? 'buy' : 'cart'
+    util.request(url, { addressId: that.data.addressId, couponId: that.data.couponId, type: buyType }).then(function (res) {
       if (res.errno === 0) {
         console.log(res.data);
         that.setData({
@@ -77,13 +72,42 @@ Page({
 
   },
   onShow: function () {
+    this.getCouponData()
     // 页面显示
     wx.showLoading({
       title: '加载中...',
     })
     this.getCheckoutInfo();
-
+    
+    try {
+      var addressId = wx.getStorageSync('addressId');
+      if (addressId) {
+        this.setData({
+          'addressId': addressId
+        });
+      }
+    } catch (e) {
+      // Do something when catch error
+    }
   },
+
+  /**
+   * 获取优惠券
+   */
+  getCouponData: function () {
+    if (app.globalData.userCoupon == 'USE_COUPON') {
+      this.setData({
+        couponDesc: app.globalData.courseCouponCode.name,
+        couponId: app.globalData.courseCouponCode.user_coupon_id,
+      })
+    } else if (app.globalData.userCoupon == 'NO_USE_COUPON') {
+      this.setData({
+        couponDesc: "不使用优惠券",
+        couponId: '',
+      })
+    }
+  },
+
   onHide: function () {
     // 页面隐藏
 
@@ -92,12 +116,24 @@ Page({
     // 页面关闭
 
   },
+
+  /**
+   * 选择可用优惠券
+   */
+  tapCoupon: function () {
+    let that = this
+  
+      wx.navigateTo({
+        url: '../selCoupon/selCoupon?buyType=' + that.data.buyType,
+      })
+  },
+
   submitOrder: function () {
     if (this.data.addressId <= 0) {
       util.showErrorToast('请选择收货地址');
       return false;
     }
-    util.request(api.OrderSubmit, { addressId: this.data.addressId, couponId: this.data.couponId }, 'POST').then(res => {
+    util.request(api.OrderSubmit, { addressId: this.data.addressId, couponId: this.data.couponId, type: this.data.buyType }, 'POST').then(res => {
       if (res.errno === 0) {
         const orderId = res.data.orderInfo.id;
         pay.payOrder(parseInt(orderId)).then(res => {

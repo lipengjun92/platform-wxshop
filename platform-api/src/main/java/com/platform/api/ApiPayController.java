@@ -1,6 +1,7 @@
 package com.platform.api;
 
 import com.platform.annotation.LoginUser;
+import com.platform.cache.J2CacheUtils;
 import com.platform.entity.OrderGoodsVo;
 import com.platform.entity.OrderVo;
 import com.platform.entity.UserVo;
@@ -9,34 +10,26 @@ import com.platform.service.ApiOrderService;
 import com.platform.util.ApiBaseAction;
 import com.platform.util.wechat.WechatRefundApiResult;
 import com.platform.util.wechat.WechatUtil;
-import com.platform.utils.CharUtil;
-import com.platform.utils.DateUtils;
-import com.platform.utils.MapUtils;
-import com.platform.utils.ResourceUtil;
-import com.platform.utils.XmlUtil;
+import com.platform.utils.*;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.math.BigDecimal;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
 
 /**
  * 作者: @author Harmon <br>
  * 时间: 2017-08-11 08:32<br>
  * 描述: ApiIndexController <br>
  */
+@Api(tags = "商户支付")
 @RestController
 @RequestMapping("/api/pay")
 public class ApiPayController extends ApiBaseAction {
@@ -48,8 +41,9 @@ public class ApiPayController extends ApiBaseAction {
 
     /**
      */
-    @RequestMapping("index")
-    public Object index(@LoginUser UserVo loginUser) {
+    @ApiOperation(value = "跳转")
+    @GetMapping("index")
+    public Object index() {
         //
         return toResponsSuccess("");
     }
@@ -57,7 +51,8 @@ public class ApiPayController extends ApiBaseAction {
     /**
      * 获取支付的请求参数
      */
-    @RequestMapping("prepay")
+    @ApiOperation(value = "获取支付的请求参数")
+    @GetMapping("prepay")
     public Object payPrepay(@LoginUser UserVo loginUser, Integer orderId) {
         //
         OrderVo orderInfo = orderService.queryObject(orderId);
@@ -155,10 +150,84 @@ public class ApiPayController extends ApiBaseAction {
     }
 
     /**
+     * 微信查询订单状态
+     */
+    @ApiOperation(value = "查询订单状态")
+    @GetMapping("query")
+    public Object orderQuery(@LoginUser UserVo loginUser, Integer orderId) {
+        if (orderId == null) {
+            return toResponsFail("订单不存在");
+        }
+
+        Map<Object, Object> parame = new TreeMap<Object, Object>();
+        parame.put("appid", ResourceUtil.getConfigByName("wx.appId"));
+        // 商家账号。
+        parame.put("mch_id", ResourceUtil.getConfigByName("wx.mchId"));
+        String randomStr = CharUtil.getRandomNum(18).toUpperCase();
+        // 随机字符串
+        parame.put("nonce_str", randomStr);
+        // 商户订单编号
+        parame.put("out_trade_no", orderId);
+
+        String sign = WechatUtil.arraySign(parame, ResourceUtil.getConfigByName("wx.paySignKey"));
+        // 数字签证
+        parame.put("sign", sign);
+
+        String xml = MapUtils.convertMap2Xml(parame);
+        logger.info("xml:" + xml);
+        Map<String, Object> resultUn = null;
+        try {
+            resultUn = XmlUtil.xmlStrToMap(WechatUtil.requestOnce(ResourceUtil.getConfigByName("wx.orderquery"), xml));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return toResponsFail("查询失败,error=" + e.getMessage());
+        }
+        // 响应报文
+        String return_code = MapUtils.getString("return_code", resultUn);
+        String return_msg = MapUtils.getString("return_msg", resultUn);
+
+        if (return_code.equals("SUCCESS")) {
+            String trade_state = MapUtils.getString("trade_state", resultUn);
+            if (trade_state.equals("SUCCESS")) {
+                // 更改订单状态
+                // 业务处理
+                OrderVo orderInfo = new OrderVo();
+                orderInfo.setId(orderId);
+                orderInfo.setPay_status(2);
+                orderInfo.setOrder_status(201);
+                orderInfo.setShipping_status(0);
+                orderInfo.setPay_time(new Date());
+                orderService.update(orderInfo);
+                return toResponsMsgSuccess("支付成功");
+            } else if (trade_state.equals("USERPAYING")) {
+                // 重新查询 正在支付中
+                Integer num = (Integer) J2CacheUtils.get(J2CacheUtils.SHOP_CACHE_NAME, "queryRepeatNum" + orderId + "");
+                if (num == null) {
+                    J2CacheUtils.put(J2CacheUtils.SHOP_CACHE_NAME, "queryRepeatNum" + orderId + "", 1);
+                    this.orderQuery(loginUser, orderId);
+                } else if (num <= 3) {
+                    J2CacheUtils.remove(J2CacheUtils.SHOP_CACHE_NAME, "queryRepeatNum" + orderId);
+                    this.orderQuery(loginUser, orderId);
+                } else {
+                    return toResponsFail("查询失败,error=" + trade_state);
+                }
+
+            } else {
+                // 失败
+                return toResponsFail("查询失败,error=" + trade_state);
+            }
+        } else {
+            return toResponsFail("查询失败,error=" + return_msg);
+        }
+        return toResponsFail("查询失败，未知错误");
+    }
+
+    /**
      * 微信订单回调接口
      *
      * @return
      */
+    @ApiOperation(value = "微信订单回调接口")
     @RequestMapping(value = "/notify", method = RequestMethod.POST, produces = "text/html;charset=UTF-8")
     @ResponseBody
     public void notify(HttpServletRequest request, HttpServletResponse response) {
@@ -208,8 +277,9 @@ public class ApiPayController extends ApiBaseAction {
     /**
      * 订单退款请求
      */
-    @RequestMapping("refund")
-    public Object refund(@LoginUser UserVo loginUser, Integer orderId) {
+    @ApiOperation(value = "订单退款请求")
+    @PostMapping("refund")
+    public Object refund(Integer orderId) {
         //
         OrderVo orderInfo = orderService.queryObject(orderId);
 
@@ -221,14 +291,14 @@ public class ApiPayController extends ApiBaseAction {
             return toResponsObject(400, "订单已退款", "");
         }
 
-        if (orderInfo.getPay_status() != 2) {
-            return toResponsObject(400, "订单未付款，不能退款", "");
-        }
+//        if (orderInfo.getPay_status() != 2) {
+//            return toResponsObject(400, "订单未付款，不能退款", "");
+//        }
 
 //        WechatRefundApiResult result = WechatUtil.wxRefund(orderInfo.getId().toString(),
 //                orderInfo.getActual_price().doubleValue(), orderInfo.getActual_price().doubleValue());
         WechatRefundApiResult result = WechatUtil.wxRefund(orderInfo.getId().toString(),
-                0.01, 0.01);
+                10.01, 10.01);
         if (result.getResult_code().equals("SUCCESS")) {
             if (orderInfo.getOrder_status() == 201) {
                 orderInfo.setOrder_status(401);

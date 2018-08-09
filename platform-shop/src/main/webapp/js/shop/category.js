@@ -91,25 +91,25 @@ var vm = new Vue({
             this.getParentCategory();
         },
         getParentCategory: function () {
-            $.get("../category/getCategorySelect", function (r) {
-                vm.categoryList = r.list;
+            Ajax.request({
+                url: "../category/getCategorySelect",
+                async: true,
+                successCallback: function (r) {
+                    vm.categoryList = r.list;
+                }
             });
         },
         saveOrUpdate: function (event) {
             var url = vm.category.id == null ? "../category/save" : "../category/update";
-            $.ajax({
+            Ajax.request({
                 type: "POST",
                 url: url,
                 contentType: "application/json",
-                data: JSON.stringify(vm.category),
-                success: function (r) {
-                    if (r.code === 0) {
-                        alert('操作成功', function (index) {
-                            vm.reload();
-                        });
-                    } else {
-                        alert(r.msg);
-                    }
+                params: JSON.stringify(vm.category),
+                successCallback: function (r) {
+                    alert('操作成功', function (index) {
+                        vm.reload();
+                    });
                 }
             });
         },
@@ -122,27 +122,28 @@ var vm = new Vue({
             $.each(id, function (idx, item) {
                 ids[idx] = item.id;
             });
+
             confirm('确定要删除选中的记录？', function () {
-                $.ajax({
+                Ajax.request({
                     type: "POST",
                     url: "../category/delete",
                     contentType: "application/json",
-                    data: JSON.stringify(ids),
-                    success: function (r) {
-                        if (r.code == 0) {
-                            alert('操作成功', function (index) {
-                                vm.reload();
-                            });
-                        } else {
-                            alert(r.msg);
-                        }
+                    params: JSON.stringify(ids),
+                    successCallback: function (r) {
+                        alert('操作成功', function (index) {
+                            vm.reload();
+                        });
                     }
                 });
             });
         },
         getInfo: function (id) {
-            $.get("../category/info/" + id, function (r) {
-                vm.category = r.category;
+            Ajax.request({
+                url: "../category/info/" + id,
+                async: true,
+                successCallback: function (r) {
+                    vm.category = r.category;
+                }
             });
         },
         reload: function (event) {

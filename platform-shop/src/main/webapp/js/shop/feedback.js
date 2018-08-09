@@ -1,58 +1,36 @@
 $(function () {
-    $("#jqGrid").jqGrid({
+    $("#jqGrid").Grid({
         url: '../feedback/list',
-        datatype: "json",
         colModel: [
             {label: 'msgId', name: 'msgId', index: 'msg_id', key: true, hidden: true},
             {label: '会员名称', name: 'userName', index: 'user_name', width: 80},
             {label: '手机', name: 'mobile', index: 'mobile', width: 80},
             {
                 label: '反馈类型', name: 'feedType', index: 'feed_Type', width: 80, formatter: function (value) {
-                if (value == 1) {
-                    return '商品相关';
-                } else if (value == 2) {
-                    return '物流状况';
-                } else if (value == 3) {
-                    return '客户服务';
-                } else if (value == 4) {
-                    return '优惠活动';
-                } else if (value == 5) {
-                    return '功能异常';
-                } else if (value == 6) {
-                    return '产品建议';
-                } else if (value == 7) {
-                    return '其他';
+                    if (value == 1) {
+                        return '商品相关';
+                    } else if (value == 2) {
+                        return '物流状况';
+                    } else if (value == 3) {
+                        return '客户服务';
+                    } else if (value == 4) {
+                        return '优惠活动';
+                    } else if (value == 5) {
+                        return '功能异常';
+                    } else if (value == 6) {
+                        return '产品建议';
+                    } else if (value == 7) {
+                        return '其他';
+                    }
+                    return '';
                 }
-                return '';
-            }
             },
             {label: '详细内容', name: 'content', index: 'content', width: 80},
-            {label: '反馈时间', name: 'addTime', index: 'add_time', width: 80,formatter:function (value) {
-                return transDate(value);
-            }}],
-        viewrecords: true,
-        height: 385,
-        rowNum: 10,
-        rowList: [10, 30, 50],
-        rownumbers: true,
-        rownumWidth: 25,
-        autowidth: true,
-        multiselect: true,
-        pager: "#jqGridPager",
-        jsonReader: {
-            root: "page.list",
-            page: "page.currPage",
-            total: "page.totalPage",
-            records: "page.totalCount"
-        },
-        prmNames: {
-            page: "page",
-            rows: "limit",
-            order: "order"
-        },
-        gridComplete: function () {
-            $("#jqGrid").closest(".ui-jqgrid-bdiv").css({"overflow-x": "hidden"});
-        }
+            {
+                label: '反馈时间', name: 'addTime', index: 'add_time', width: 80, formatter: function (value) {
+                    return transDate(value);
+                }
+            }]
     });
 });
 
@@ -81,7 +59,7 @@ let vm = new Vue({
             vm.feedback = {};
         },
         update: function (event) {
-            let msgId = getSelectedRow();
+            let msgId = getSelectedRow("#jqGrid");
             if (msgId == null) {
                 return;
             }
@@ -92,49 +70,47 @@ let vm = new Vue({
         },
         saveOrUpdate: function (event) {
             let url = vm.feedback.msgId == null ? "../feedback/save" : "../feedback/update";
-            $.ajax({
+
+            Ajax.request({
                 type: "POST",
                 url: url,
                 contentType: "application/json",
-                data: JSON.stringify(vm.feedback),
-                success: function (r) {
-                    if (r.code === 0) {
-                        alert('操作成功', function (index) {
-                            vm.reload();
-                        });
-                    } else {
-                        alert(r.msg);
-                    }
+                params: JSON.stringify(vm.feedback),
+                successCallback: function (r) {
+                    alert('操作成功', function (index) {
+                        vm.reload();
+                    });
                 }
             });
         },
         del: function (event) {
-            let msgIds = getSelectedRows();
+            let msgIds = getSelectedRows("#jqGrid");
             if (msgIds == null) {
                 return;
             }
 
             confirm('确定要删除选中的记录？', function () {
-                $.ajax({
+
+                Ajax.request({
                     type: "POST",
                     url: "../feedback/delete",
                     contentType: "application/json",
-                    data: JSON.stringify(msgIds),
-                    success: function (r) {
-                        if (r.code == 0) {
-                            alert('操作成功', function (index) {
-                                $("#jqGrid").trigger("reloadGrid");
-                            });
-                        } else {
-                            alert(r.msg);
-                        }
+                    params: JSON.stringify(msgIds),
+                    successCallback: function (r) {
+                        alert('操作成功', function (index) {
+                            vm.reload();
+                        });
                     }
                 });
             });
         },
         getInfo: function (msgId) {
-            $.get("../feedback/info/" + msgId, function (r) {
-                vm.feedback = r.feedback;
+            Ajax.request({
+                url: "../feedback/info/" + msgId,
+                async: true,
+                successCallback: function (r) {
+                    vm.feedback = r.feedback;
+                }
             });
         },
         reload: function (event) {

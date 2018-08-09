@@ -1,5 +1,7 @@
 package com.platform.controller;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.platform.entity.CouponEntity;
 import com.platform.service.CouponService;
 import com.platform.utils.PageUtils;
@@ -33,11 +35,9 @@ public class CouponController {
     public R list(@RequestParam Map<String, Object> params) {
         //查询列表数据
         Query query = new Query(params);
-
+        PageHelper.startPage(query.getPage(), query.getLimit());
         List<CouponEntity> couponList = couponService.queryList(query);
-        int total = couponService.queryTotal(query);
-
-        PageUtils pageUtil = new PageUtils(couponList, total, query.getLimit(), query.getPage());
+        PageUtils pageUtil = new PageUtils(new PageInfo(couponList));
 
         return R.ok().put("page", pageUtil);
     }

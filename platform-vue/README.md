@@ -12,17 +12,20 @@
 ## Build Setup
 
 ``` bash
+# install yarn
+platform-vue> npm install -g yarn
+
 # install dependencies
-yarn install
+platform-vue> yarn install
 
 # serve with hot reload at localhost:8080
-yarn run dev
+platform-vue> yarn run dev
 
 # build for production with minification
-yarn run build
+platform-vue> yarn run build
 
 # build for production and view the bundle analyzer report
-yarn run build --report
+platform-vue> yarn run build --report
 ```
 
 For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).

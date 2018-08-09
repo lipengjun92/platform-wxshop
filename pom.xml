@@ -9,7 +9,6 @@
 
     <modules>
         <module>platform-common</module> <!-- 公共模块 -->
-        <module>platform-shiro</module> <!-- 权限系统模块 -->
         <module>platform-schedule</module> <!-- 定时任务模块 -->
         <module>platform-gen</module> <!-- 代码生成器模块 -->
         <module>platform-api</module> <!-- API模块 -->
@@ -43,6 +42,9 @@
         <taglibs-version>1.1.2</taglibs-version>
         <freemarker-version>2.3.23</freemarker-version>
         <kaptcha.version>0.0.9</kaptcha.version>
+        <j2cache.version>2.3.22-release</j2cache.version>
+        <ehcache.version>2.10.4</ehcache.version>
+        <jgroups.version>3.6.13.Final</jgroups.version>
     </properties>
 
     <!-- 阿里云maven仓库 -->
@@ -266,6 +268,21 @@
             <artifactId>kaptcha</artifactId>
             <version>${kaptcha.version}</version>
         </dependency>
+        <dependency>
+            <groupId>net.oschina.j2cache</groupId>
+            <artifactId>j2cache-core</artifactId>
+            <version>${j2cache.version}</version>
+        </dependency>
+        <dependency><!-- Ehcache 2.x //-->
+            <groupId>net.sf.ehcache</groupId>
+            <artifactId>ehcache</artifactId>
+            <version>${ehcache.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jgroups</groupId>
+            <artifactId>jgroups</artifactId>
+            <version>${jgroups.version}</version>
+        </dependency>
     </dependencies>
     <build>
         <plugins>
@@ -293,6 +310,11 @@
                 <configuration>
                     <encoding>UTF-8</encoding>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>3.0.0</version>
             </plugin>
         </plugins>
     </build>

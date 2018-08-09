@@ -98,6 +98,7 @@ public class OrderVo implements Serializable {
     private Map handleOption; //可操作的选项
     private BigDecimal full_cut_price; //订单满减
     private String full_region;//区县
+    private String order_type; // 订单状态
 
     public String getFull_region() {
     //    return full_region;
@@ -120,6 +121,14 @@ public class OrderVo implements Serializable {
             this.full_region = strBuff.toString();
             return this.full_region;
         }
+    }
+
+    public String getOrder_type() {
+        return order_type;
+    }
+
+    public void setOrder_type(String order_type) {
+        this.order_type = order_type;
     }
 
     public void setFull_region(String full_region) {

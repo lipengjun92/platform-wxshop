@@ -1,37 +1,12 @@
 $(function () {
-    $("#jqGrid").jqGrid({
+    $("#jqGrid").Grid({
         url: '../adposition/list',
-        datatype: "json",
         colModel: [
             {label: 'id', name: 'id', index: 'id', key: true, hidden: true},
             {label: '位置名称', name: 'name', index: 'name', width: 80},
             {label: '宽度', name: 'width', index: 'width', width: 80},
             {label: '高度', name: 'height', index: 'height', width: 80},
-            {label: '描述', name: 'desc', index: 'desc', width: 80}],
-        viewrecords: true,
-        height: 385,
-        rowNum: 10,
-        rowList: [10, 30, 50],
-        rownumbers: true,
-        rownumWidth: 25,
-        autowidth: true,
-        multiselect: true,
-        pager: "#jqGridPager",
-        jsonReader: {
-            root: "page.list",
-            page: "page.currPage",
-            total: "page.totalPage",
-            records: "page.totalCount"
-        },
-        prmNames: {
-            page: "page",
-            rows: "limit",
-            order: "order"
-        },
-        gridComplete: function () {
-            //隐藏grid底部滚动条
-            $("#jqGrid").closest(".ui-jqgrid-bdiv").css({"overflow-x": "hidden"});
-        }
+            {label: '描述', name: 'desc', index: 'desc', width: 80}]
     });
 });
 
@@ -60,7 +35,7 @@ var vm = new Vue({
             vm.adPosition = {width: 200, height: 750};
         },
         update: function (event) {
-            var id = getSelectedRow();
+            var id = getSelectedRow("#jqGrid");
             if (id == null) {
                 return;
             }
@@ -71,49 +46,48 @@ var vm = new Vue({
         },
         saveOrUpdate: function (event) {
             var url = vm.adPosition.id == null ? "../adposition/save" : "../adposition/update";
-            $.ajax({
+
+            Ajax.request({
                 type: "POST",
                 url: url,
                 contentType: "application/json",
-                data: JSON.stringify(vm.adPosition),
-                success: function (r) {
-                    if (r.code === 0) {
-                        alert('操作成功', function (index) {
-                            vm.reload();
-                        });
-                    } else {
-                        alert(r.msg);
-                    }
+                params: JSON.stringify(vm.adPosition),
+                successCallback: function () {
+                    alert('操作成功', function (index) {
+                        vm.reload();
+                    });
                 }
             });
+
+
         },
         del: function (event) {
-            var ids = getSelectedRows();
+            var ids = getSelectedRows("#jqGrid");
             if (ids == null) {
                 return;
             }
 
             confirm('确定要删除选中的记录？', function () {
-                $.ajax({
+                Ajax.request({
                     type: "POST",
                     url: "../adposition/delete",
                     contentType: "application/json",
-                    data: JSON.stringify(ids),
-                    success: function (r) {
-                        if (r.code == 0) {
-                            alert('操作成功', function (index) {
-                                $("#jqGrid").trigger("reloadGrid");
-                            });
-                        } else {
-                            alert(r.msg);
-                        }
+                    params: JSON.stringify(ids),
+                    successCallback: function () {
+                        alert('操作成功', function (index) {
+                            vm.reload();
+                        });
                     }
                 });
             });
         },
         getInfo: function (id) {
-            $.get("../adposition/info/" + id, function (r) {
-                vm.adPosition = r.adPosition;
+            Ajax.request({
+                url: "../adposition/info/" + id,
+                async: true,
+                successCallback: function (r) {
+                    vm.adPosition = r.adPosition;
+                }
             });
         },
         reload: function (event) {

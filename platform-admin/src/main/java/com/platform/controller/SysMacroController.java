@@ -1,5 +1,6 @@
 package com.platform.controller;
 
+import com.platform.annotation.SysLog;
 import com.platform.entity.SysMacroEntity;
 import com.platform.service.SysMacroService;
 import com.platform.utils.PageUtils;
@@ -26,7 +27,10 @@ public class SysMacroController {
     private SysMacroService sysMacroService;
 
     /**
-     * 查看列表
+     * 所有字典列表
+     *
+     * @param params 请求参数
+     * @return R
      */
     @RequestMapping("/list")
     @RequiresPermissions("sys:macro:list")
@@ -43,7 +47,10 @@ public class SysMacroController {
     }
 
     /**
-     * 查看信息
+     * 根据主键获取字典信息
+     *
+     * @param macroId 主键
+     * @return R
      */
     @RequestMapping("/info/{macroId}")
     @RequiresPermissions("sys:macro:info")
@@ -54,8 +61,12 @@ public class SysMacroController {
     }
 
     /**
-     * 保存
+     * 新增字典
+     *
+     * @param sysMacro 字典
+     * @return R
      */
+    @SysLog("新增字典")
     @RequestMapping("/save")
     @RequiresPermissions("sys:macro:save")
     public R save(@RequestBody SysMacroEntity sysMacro) {
@@ -65,8 +76,12 @@ public class SysMacroController {
     }
 
     /**
-     * 修改
+     * 修改字典
+     *
+     * @param sysMacro 字典
+     * @return R
      */
+    @SysLog("修改字典")
     @RequestMapping("/update")
     @RequiresPermissions("sys:macro:update")
     public R update(@RequestBody SysMacroEntity sysMacro) {
@@ -76,8 +91,12 @@ public class SysMacroController {
     }
 
     /**
-     * 删除
+     * 删除字典
+     *
+     * @param macroIds 主键集
+     * @return R
      */
+    @SysLog("删除字典")
     @RequestMapping("/delete")
     @RequiresPermissions("sys:macro:delete")
     public R delete(@RequestBody Long[] macroIds) {
@@ -87,7 +106,10 @@ public class SysMacroController {
     }
 
     /**
-     * 查看所有列表
+     * 查看字典列表
+     *
+     * @param params 请求参数
+     * @return R
      */
     @RequestMapping("/queryAll")
     public R queryAll(@RequestParam Map<String, Object> params) {
@@ -98,10 +120,10 @@ public class SysMacroController {
     }
 
     /**
-     * 查询数据字典
+     * 根据value查询数据字典
      *
-     * @param value
-     * @return
+     * @param value value
+     * @return R
      */
     @RequestMapping("/queryMacrosByValue")
     public R queryMacrosByValue(@RequestParam String value) {

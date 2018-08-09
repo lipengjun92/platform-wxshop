@@ -1,7 +1,6 @@
 $(function () {
-    $("#jqGrid").jqGrid({
+    $("#jqGrid").Grid({
         url: '../user/list',
-        datatype: "json",
         colModel: [{
             label: 'id', name: 'id', index: 'id', key: true, hidden: true
         }, {
@@ -40,31 +39,7 @@ $(function () {
             }
         }, {
             label: '微信Id', name: 'weixinOpenid', index: 'weixin_openid', width: 80, hidden: true
-        }],
-        viewrecords: true,
-        height: 385,
-        rowNum: 10,
-        rowList: [10, 30, 50],
-        rownumbers: true,
-        rownumWidth: 25,
-        autowidth: true,
-        multiselect: true,
-        pager: "#jqGridPager",
-        jsonReader: {
-            root: "page.list",
-            page: "page.currPage",
-            total: "page.totalPage",
-            records: "page.totalCount"
-        },
-        prmNames: {
-            page: "page",
-            rows: "limit",
-            order: "order"
-        },
-        gridComplete: function () {
-            //隐藏grid底部滚动条
-            $("#jqGrid").closest(".ui-jqgrid-bdiv").css({"overflow-x": "hidden"});
-        }
+        }]
     });
 });
 
@@ -99,7 +74,7 @@ var vm = new Vue({
             this.getUserLevels();
         },
         update: function (event) {
-            var id = getSelectedRow();
+            var id = getSelectedRow("#jqGrid");
             if (id == null) {
                 return;
             }
@@ -111,51 +86,45 @@ var vm = new Vue({
         },
         saveOrUpdate: function (event) {
             var url = vm.user.id == null ? "../user/save" : "../user/update";
-            $.ajax({
+
+            Ajax.request({
                 type: "POST",
                 url: url,
                 contentType: "application/json",
-                data: JSON.stringify(vm.user),
-                success: function (r) {
-                    if (r.code === 0) {
-                        alert('操作成功', function (index) {
-                            vm.reload();
-                        });
-                    } else {
-                        alert(r.msg);
-                    }
+                params: JSON.stringify(vm.user),
+                successCallback: function (r) {
+                    alert('操作成功', function (index) {
+                        vm.reload();
+                    });
                 }
             });
         },
         del: function (event) {
-            var ids = getSelectedRows();
+            var ids = getSelectedRows("#jqGrid");
             if (ids == null) {
                 return;
             }
 
             confirm('确定要删除选中的记录？', function () {
-                $.ajax({
+                Ajax.request({
                     type: "POST",
                     url: "../user/delete",
                     contentType: "application/json",
-                    data: JSON.stringify(ids),
-                    success: function (r) {
-                        if (r.code == 0) {
-                            alert('操作成功', function (index) {
-                                $("#jqGrid").trigger("reloadGrid");
-                            });
-                        } else {
-                            alert(r.msg);
-                        }
+                    params: JSON.stringify(ids),
+                    successCallback: function (r) {
+                        alert('操作成功', function (index) {
+                            vm.reload();
+                        });
                     }
                 });
+
             });
         },
         exportUser: function () {
             exportFile('#rrapp', '../user/export', {'username': vm.q.username});
         },
         coupon: function () {
-            var id = getSelectedRow();
+            var id = getSelectedRow("#jqGrid");
             if (id == null) {
                 return;
             }
@@ -166,7 +135,7 @@ var vm = new Vue({
             })
         },
         address: function () {
-            var id = getSelectedRow();
+            var id = getSelectedRow("#jqGrid");
             if (id == null) {
                 return;
             }
@@ -177,7 +146,7 @@ var vm = new Vue({
             })
         },
         shopCart: function () {
-            var id = getSelectedRow();
+            var id = getSelectedRow("#jqGrid");
             if (id == null) {
                 return;
             }
@@ -188,16 +157,24 @@ var vm = new Vue({
             })
         },
         getInfo: function (id) {
-            $.get("../user/info/" + id, function (r) {
-                vm.user = r.user;
+            Ajax.request({
+                url: "../user/info/" + id,
+                async: true,
+                successCallback: function (r) {
+                    vm.user = r.user;
+                }
             });
         },
         /**
          * 获取会员级别
          */
         getUserLevels: function () {
-            $.get("../userlevel/queryAll", function (r) {
-                vm.userLevels = r.list;
+            Ajax.request({
+                url: "../userlevel/queryAll",
+                async: true,
+                successCallback: function (r) {
+                    vm.userLevels = r.list;
+                }
             });
         },
         reload: function (event) {

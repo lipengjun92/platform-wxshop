@@ -26,6 +26,7 @@ function loginByWeixin(userInfo) {
 
           resolve(res);
         } else {
+          util.showErrorToast(res.errmsg)
           reject(res);
         }
       }).catch((err) => {

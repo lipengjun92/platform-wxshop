@@ -31,13 +31,21 @@ public class DataFilterAspect {
     @Autowired
     private SysRoleDeptService sysRoleDeptService;
 
+    /**
+     * 切点
+     */
     @Pointcut("@annotation(com.platform.annotation.DataFilter)")
     public void dataFilterCut() {
 
     }
 
+    /**
+     * 前置通知
+     *
+     * @param point 连接点
+     */
     @Before("dataFilterCut()")
-    public void dataFilter(JoinPoint point) throws Throwable {
+    public void dataFilter(JoinPoint point) {
         //获取参数
         Object params = point.getArgs()[0];
         if (params != null && params instanceof Map) {
@@ -57,6 +65,10 @@ public class DataFilterAspect {
 
     /**
      * 获取数据过滤的SQL
+     *
+     * @param user  登录用户
+     * @param point 连接点
+     * @return sql
      */
     private String getFilterSQL(SysUserEntity user, JoinPoint point) {
         MethodSignature signature = (MethodSignature) point.getSignature();
@@ -67,12 +79,10 @@ public class DataFilterAspect {
 
         StringBuilder filterSql = new StringBuilder();
         filterSql.append(" and ( ");
-        if (StringUtils.isNotEmpty(deptAlias) || StringUtils.isNotBlank(userAlias)){
-        //    filterSql.append(" 1 = 1 ");
+        if (StringUtils.isNotEmpty(deptAlias) || StringUtils.isNotBlank(userAlias)) {
             if (StringUtils.isNotEmpty(deptAlias)) {
                 //取出登录用户部门权限
                 String alias = getAliasByUser(user.getUserId());
-            //    filterSql.append(" and ");
                 filterSql.append(deptAlias);
                 filterSql.append(" in ");
                 filterSql.append(" ( ");
@@ -94,7 +104,7 @@ public class DataFilterAspect {
                 filterSql.append(user.getUserId());
                 filterSql.append(" ");
             }
-        }  else {
+        } else {
             return "";
         }
         filterSql.append(" ) ");
