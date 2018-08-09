@@ -39,11 +39,6 @@
                 </Radio-group>
             </Form-item>
             <i-form v-if="config.type == 1" ref="formValidate" :label-width="130">
-                <Form-item>
-                    <Alert type="info" show-icon>
-                        <a href="http://www.renren.io/open/qiniu.html" target="_blank">免费申请(七牛)10GB储存空间</a>
-                    </Alert>
-                </Form-item>
                 <Form-item label="域名" prop="qiniuDomain">
                     <i-input v-model="config.qiniuDomain" placeholder="七牛绑定的域名"/>
                 </Form-item>
