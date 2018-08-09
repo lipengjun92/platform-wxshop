@@ -394,7 +394,7 @@ public class ApiCartController extends ApiBaseAction {
      * 订单提交前的检验和填写相关订单信息
      */
     @ApiOperation(value = "订单提交前的检验和填写相关订单信息")
-    @PostMapping("checkout")
+    @GetMapping("checkout")
     public Object checkout(@LoginUser UserVo loginUser, Integer couponId, @RequestParam(defaultValue = "cart") String type) {
         Map<String, Object> resultObj = new HashMap();
         //根据收货地址计算运费
