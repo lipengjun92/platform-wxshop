@@ -10,6 +10,11 @@ $(window).on('resize', function () {
     $(this).height($content.height());
 }).resize();
 
+$.ajaxSetup({
+    dataType: "json",
+    cache: false
+});
+
 //重写alert
 window.alert = function (msg, callback) {
     // parent.layer.alert 弹出在iframe外的页面。

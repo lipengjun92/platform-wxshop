@@ -58,12 +58,12 @@ CREATE TABLE `nideshop_address` (
   `detail_Info` varchar(120) COLLATE utf8_unicode_ci DEFAULT '' COMMENT '详细收货地址信息',
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of nideshop_address
 -- ----------------------------
-INSERT INTO `nideshop_address` VALUES ('6', '23', '李鹏军', '15209831990', '230031', '340104', '安徽省', '合肥市', '蜀山区', '黄山路598号合肥皇冠假日酒店');
+INSERT INTO `nideshop_address` VALUES ('1', '23', '李鹏军', '15209831990', '230000', '340104', '安徽省', '合肥市', '蜀山区', '汽修小区29栋');
 
 -- ----------------------------
 -- Table structure for `nideshop_ad_position`
@@ -3886,5 +3886,10 @@ CREATE TABLE `sys_sms_log` (
 
 INSERT INTO sys_config VALUES ('2', 'SMS_CONFIG_KEY', '{"domain":"http://web.cr6868.com/asmx/smsservice.aspx?","name":"","pwd":"","sign":"","type":1}', 0, '短信配置');
 
--- 20180123
+/** 2018-01-23 **/
 ALTER TABLE nideshop_address ADD is_default INT(1) DEFAULT 0 NULL;
+/** 2018-06-21 会员优惠券添加状态字段 **/
+ALTER TABLE `nideshop_user_coupon` ADD COLUMN `coupon_status` TINYINT (3) UNSIGNED DEFAULT '1' COMMENT '状态 1. 可用 2. 已用 3. 过期';
+/** 2019-07-07 给足迹表添加索引字段 **/
+ALTER TABLE `nideshop_footprint`
+ADD INDEX `index_nideshop_footprint_user_id_goods_id` (`user_id`, `goods_id`) USING BTREE ;
