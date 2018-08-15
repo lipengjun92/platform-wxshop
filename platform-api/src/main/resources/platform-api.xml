@@ -13,6 +13,17 @@
                 <property name="userService" ref="apiUserService"></property>
             </bean>
         </mvc:argument-resolvers>
+
+
+        <mvc:message-converters register-defaults="true">
+            <!-- 此处会导致对结果进行两次转义，所以注释掉 -->
+            <bean
+                    class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+                <property name="objectMapper">
+                    <bean class="com.github.miemiedev.mybatis.paginator.jackson2.PageListJsonMapper"/>
+                </property>
+            </bean>
+        </mvc:message-converters>
     </mvc:annotation-driven>
 
     <mvc:interceptors>
