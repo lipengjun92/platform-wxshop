@@ -1,4 +1,4 @@
-package com.platform.controller;
+package com.platform.api;
 
 import com.platform.annotation.IgnoreAuth;
 import com.platform.entity.SysSmsLogEntity;
