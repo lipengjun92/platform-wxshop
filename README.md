@@ -154,7 +154,7 @@ AutoCode
     * wx.paySignKey
     * wx.notifyUrl
     * sms.validIp
-* 修改配置文件 /platform-admin/src/main/resources/dev/platform.properties
+* 修改配置文件 /platform-admin/src/main/resources/j2cache.properties
     * redis.hosts
     * redis.password
 * 启动后台项目（参照启动手册）
