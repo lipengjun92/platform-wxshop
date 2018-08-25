@@ -186,39 +186,40 @@ public class ApiPayController extends ApiBaseAction {
         String return_code = MapUtils.getString("return_code", resultUn);
         String return_msg = MapUtils.getString("return_msg", resultUn);
 
-        if (return_code.equals("SUCCESS")) {
-            String trade_state = MapUtils.getString("trade_state", resultUn);
-            if (trade_state.equals("SUCCESS")) {
-                // 更改订单状态
-                // 业务处理
-                OrderVo orderInfo = new OrderVo();
-                orderInfo.setId(orderId);
-                orderInfo.setPay_status(2);
-                orderInfo.setOrder_status(201);
-                orderInfo.setShipping_status(0);
-                orderInfo.setPay_time(new Date());
-                orderService.update(orderInfo);
-                return toResponsMsgSuccess("支付成功");
-            } else if (trade_state.equals("USERPAYING")) {
-                // 重新查询 正在支付中
-                Integer num = (Integer) J2CacheUtils.get(J2CacheUtils.SHOP_CACHE_NAME, "queryRepeatNum" + orderId + "");
-                if (num == null) {
-                    J2CacheUtils.put(J2CacheUtils.SHOP_CACHE_NAME, "queryRepeatNum" + orderId + "", 1);
-                    this.orderQuery(loginUser, orderId);
-                } else if (num <= 3) {
-                    J2CacheUtils.remove(J2CacheUtils.SHOP_CACHE_NAME, "queryRepeatNum" + orderId);
-                    this.orderQuery(loginUser, orderId);
-                } else {
-                    return toResponsFail("查询失败,error=" + trade_state);
-                }
-
-            } else {
-                // 失败
-                return toResponsFail("查询失败,error=" + trade_state);
-            }
-        } else {
+        if (!"SUCCESS".equals(return_code)) {
             return toResponsFail("查询失败,error=" + return_msg);
         }
+
+        String trade_state = MapUtils.getString("trade_state", resultUn);
+        if ("SUCCESS".equals(trade_state)) {
+            // 更改订单状态
+            // 业务处理
+            OrderVo orderInfo = new OrderVo();
+            orderInfo.setId(orderId);
+            orderInfo.setPay_status(2);
+            orderInfo.setOrder_status(201);
+            orderInfo.setShipping_status(0);
+            orderInfo.setPay_time(new Date());
+            orderService.update(orderInfo);
+            return toResponsMsgSuccess("支付成功");
+        } else if ("USERPAYING".equals(trade_state)) {
+            // 重新查询 正在支付中
+            Integer num = (Integer) J2CacheUtils.get(J2CacheUtils.SHOP_CACHE_NAME, "queryRepeatNum" + orderId + "");
+            if (num == null) {
+                J2CacheUtils.put(J2CacheUtils.SHOP_CACHE_NAME, "queryRepeatNum" + orderId + "", 1);
+                this.orderQuery(loginUser, orderId);
+            } else if (num <= 3) {
+                J2CacheUtils.remove(J2CacheUtils.SHOP_CACHE_NAME, "queryRepeatNum" + orderId);
+                this.orderQuery(loginUser, orderId);
+            } else {
+                return toResponsFail("查询失败,error=" + trade_state);
+            }
+
+        } else {
+            // 失败
+            return toResponsFail("查询失败,error=" + trade_state);
+        }
+
         return toResponsFail("查询失败，未知错误");
     }
 
