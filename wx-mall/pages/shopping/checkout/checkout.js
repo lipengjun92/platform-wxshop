@@ -53,6 +53,24 @@ Page({
           goodsTotalPrice: res.data.goodsTotalPrice,
           orderTotalPrice: res.data.orderTotalPrice
         });
+        //设置默认收获地址
+        if (that.data.checkedAddress){
+            let addressId = that.data.checkedAddress.id;
+            if (addressId) {
+                that.setData({ addressId: addressId });
+            }
+        }else{
+            wx.showModal({
+                title: '',
+                content: '请添加默认收货地址!',
+                success: function (res) {
+                    if (res.confirm) {
+                        that.selectAddress();
+                        console.log('用户点击确定')
+                    }
+                }
+            })
+        }
       }
       wx.hideLoading();
     });
