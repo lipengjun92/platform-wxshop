@@ -70,7 +70,8 @@ public class OrderServiceImpl implements OrderService {
             throw new RRException("此订单未发货，不能确认收货！");
         }
         orderEntity.setShippingStatus(2);
-        return 0;
+        orderEntity.setOrderStatus(301);
+        return orderDao.update(orderEntity);
     }
 
     @Override
