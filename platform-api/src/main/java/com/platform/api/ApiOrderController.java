@@ -218,7 +218,7 @@ public class ApiOrderController extends ApiBaseAction {
             orderVo.setShipping_status(2);
             orderVo.setConfirm_time(new Date());
             orderService.update(orderVo);
-            return toResponsSuccess("取消成功");
+            return toResponsSuccess("确认收货成功");
         } catch (Exception e) {
             e.printStackTrace();
         }

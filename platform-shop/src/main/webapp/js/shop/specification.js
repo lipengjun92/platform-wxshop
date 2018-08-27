@@ -20,7 +20,8 @@ var vm = new Vue({
             ]
         },
         q: {
-            name: ''
+            name: '',
+            sortOrder:''
         }
     },
     methods: {
