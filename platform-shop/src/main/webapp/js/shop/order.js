@@ -156,7 +156,13 @@ let vm = new Vue({
                     contentType: "application/json",
                     params: JSON.stringify(id),
                     successCallback: function (r) {
-                        vm.reload();
+                        if (r.code == 0) {
+                            alert('操作成功', function (index) {
+                                vm.reload();
+                            });
+                        } else {
+                            alert(r.msg);
+                        }
                     }
                 });
             });

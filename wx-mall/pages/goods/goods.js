@@ -40,7 +40,8 @@ Page({
           productList: res.data.productList,
           userHasCollect: res.data.userHasCollect
         });
-
+          //设置默认值
+          that.setDefSpecInfo(that.data.specificationList);
         if (res.data.userHasCollect == 1) {
           that.setData({
             'collectBackImage': that.data.hasCollectImage
@@ -352,6 +353,9 @@ Page({
 
       //提示选择完整规格
       if (!this.isCheckedAllSpec()) {
+          wx.showToast({
+              title: '请选择完整规格'
+          });
         return false;
       }
 
@@ -410,5 +414,23 @@ Page({
     this.setData({
       number: this.data.number + 1
     });
-  }
+  },
+    setDefSpecInfo: function (specificationList) {
+        //未考虑规格联动情况
+        let that = this;
+        if (!specificationList)return;
+        for (let i = 0; i < specificationList.length;i++){
+            let specification = specificationList[i];
+            let specNameId = specification.specification_id;
+            //规格只有一个时自动选择规格
+            if (specification.valueList && specification.valueList.length == 1){
+                let specValueId = specification.valueList[0].id;
+                that.clickSkuValue({ currentTarget: { dataset: { "nameId": specNameId, "valueId": specValueId } } });
+            }
+        }
+        specificationList.map(function(item){
+
+        });
+
+    }
 })
