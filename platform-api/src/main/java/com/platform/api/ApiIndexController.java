@@ -238,9 +238,12 @@ public class ApiIndexController extends ApiBaseAction {
             param.remove("fields");
             param.put("parent_id", categoryItem.getId());
             List<CategoryVo> categoryEntityList = categoryService.queryList(param);
-            List<Integer> childCategoryIds = new ArrayList<>();
-            for (CategoryVo categoryEntity : categoryEntityList) {
-                childCategoryIds.add(categoryEntity.getId());
+            List<Integer> childCategoryIds = null;
+            if (categoryEntityList != null && categoryEntityList.size() > 0) {
+                childCategoryIds = new ArrayList<>();
+                for (CategoryVo categoryEntity : categoryEntityList) {
+                    childCategoryIds.add(categoryEntity.getId());
+                }
             }
             //
             param = new HashMap<String, Object>();

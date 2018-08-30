@@ -22,10 +22,10 @@
 
         -->
     <defaultCache
-            maxElementsInMemory="1000"
+            maxElementsInMemory="50000"
             eternal="false"
-            timeToIdleSeconds="1800"
-            timeToLiveSeconds="1800"
+            timeToIdleSeconds="3600000"
+            timeToLiveSeconds="3600000"
             overflowToDisk="true">
     </defaultCache>
 
@@ -49,18 +49,18 @@
         -->
 
     <cache name="sysCache"
-           maxElementsInMemory="5000"
+           maxElementsInMemory="50000"
            eternal="false"
-           timeToIdleSeconds="3000"
-           timeToLiveSeconds="3000"
+           timeToIdleSeconds="3600000"
+           timeToLiveSeconds="3600000"
            overflowToDisk="false">
     </cache>
 
     <cache name="shopCache"
-           maxElementsInMemory="5000"
+           maxElementsInMemory="50000"
            eternal="false"
-           timeToIdleSeconds="3000"
-           timeToLiveSeconds="3000"
+           timeToIdleSeconds="3600000"
+           timeToLiveSeconds="3600000"
            overflowToDisk="false">
     </cache>
 
