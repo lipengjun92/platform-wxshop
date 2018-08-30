@@ -101,7 +101,7 @@ public class CategoryController {
         root.setName("一级分类");
         root.setParentId(-1);
         root.setOpen(true);
-        list.add(root);
+        list.add(0,root);
         return R.ok().put("list", list);
     }
 
