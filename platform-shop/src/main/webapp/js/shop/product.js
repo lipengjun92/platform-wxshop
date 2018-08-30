@@ -71,6 +71,8 @@ let vm = new Vue({
         },
         changeGoods: function (opt) {
             let goodsId = opt.value;
+            if(!goodsId)return;
+
             Ajax.request({
                 url: "../goods/info/" + goodsId,
                 async: true,
@@ -107,6 +109,10 @@ let vm = new Vue({
         },
         saveOrUpdate: function (event) {
             let url = vm.product.id == null ? "../product/save" : "../product/update";
+
+            if(vm.attribute.indexOf(1) == -1)vm.color = [];
+            if(vm.attribute.indexOf(2) == -1)vm.guige = [];
+            if(vm.attribute.indexOf(4) == -1)vm.weight = [];
             vm.product.goodsSpecificationIds = vm.color + '_' + vm.guige + '_' + vm.weight;
 
             Ajax.request({
@@ -146,11 +152,34 @@ let vm = new Vue({
             });
         },
         getInfo: function (id) {
+            vm.attribute = [];
             Ajax.request({
                 url: "../product/info/" + id,
                 async: true,
                 successCallback: function (r) {
                     vm.product = r.product;
+                    let goodsSpecificationIds = vm.product.goodsSpecificationIds.split("_");
+                    goodsSpecificationIds.forEach((goodsSpecificationId, index) => {
+                        let specificationIds = goodsSpecificationId.split(",").filter(id => !!id).map(id => Number(id));
+
+                        if (index == 0) {
+                            vm.color = specificationIds;
+                            if (specificationIds.length > 0) {
+                                vm.attribute.push(1);
+                            }
+                        } else if (index == 1) {
+                            vm.guige = specificationIds;
+                            if (specificationIds.length > 0) {
+                                vm.attribute.push(2);
+                            }
+                        } else if (index == 2) {
+                            vm.weight = specificationIds;
+                            if (specificationIds.length > 0) {
+                                vm.attribute.push(4);
+                            }
+                        }
+                    });
+
                     vm.getGoodss();
                 }
             });

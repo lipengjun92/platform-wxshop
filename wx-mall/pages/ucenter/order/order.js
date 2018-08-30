@@ -54,10 +54,13 @@ Page({
       }
     });
   },
-  payOrder(){
-    wx.redirectTo({
-      url: '/pages/pay/pay',
-    })
+  payOrder(event){
+      let that = this;
+      let orderIndex = event.currentTarget.dataset.orderIndex;
+      let order = that.data.orderList[orderIndex];
+      wx.redirectTo({
+          url: '/pages/pay/pay?orderId=' + order.id + '&actualPrice=' + order.actual_price,
+      })
   },
   onReady:function(){
     // 页面渲染完成
