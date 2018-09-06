@@ -1,1 +1,0 @@
-export { default } from './src/special-cell.vue';
