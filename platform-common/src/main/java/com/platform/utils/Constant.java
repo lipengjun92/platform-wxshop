@@ -20,7 +20,7 @@ public class Constant {
     /**
      * 分页条数
      */
-    public static final int pageSize=10;
+    public static final int pageSize = 10;
     /**
      * 权限前缀
      */
@@ -50,6 +50,7 @@ public class Constant {
      * 默认密码
      */
     public static final String DEFAULT_PASS_WORD = "888888";
+
     /**
      * 菜单类型
      *
@@ -141,7 +142,7 @@ public class Constant {
     /**
      * 是否类型
      */
-    public enum YESNO{
+    public enum YESNO {
         /**
          * 是
          */
@@ -152,10 +153,11 @@ public class Constant {
         NO("1");
         private String value;
 
-        private YESNO(String value){
-            this.value=value;
+        private YESNO(String value) {
+            this.value = value;
         }
-        public String getValue(){
+
+        public String getValue() {
             return value;
         }
     }
