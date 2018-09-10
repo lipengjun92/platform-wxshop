@@ -168,6 +168,12 @@ AutoCode
 
 ## 生产环境打包
     platform-wechat-mall>mvn package -P prod
+    
+## platform-vue启动
+* npm install -g yarn
+* yarn install
+* yarn run dev
+* 浏览器输入[http://127.0.0.1:8001](http://127.0.0.1:8001)
 
 ***
 ### 关注微信公众号，第一时间获取项目最新动向，即将推出视频教程
@@ -202,16 +208,12 @@ AutoCode
 ***
 ## 小程序客户案例
 
-### 美平超市
-![](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/upload/case/1.png "美平超市")
 ### 便利主义超市
 ![](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/upload/case/2.png "便利主义超市")
-### 汽车人E车宝
-![](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/upload/case/3.png "汽车人E车宝")
 ### 海数据在线
 ![](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/upload/case/4.jpg "海数据在线")
-### T客定制
-![](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/upload/case/2018070801.jpg "T客定制")
+### 美平超市
+![](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/upload/case/1.png "美平超市")
 ### 开发文档目录
 ![](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/catalog.png "开发文档目录")
 
