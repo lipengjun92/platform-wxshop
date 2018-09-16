@@ -2,6 +2,7 @@ package com.platform.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.platform.service.SysGeneratorService;
+import com.platform.utils.DateUtils;
 import com.platform.utils.PageUtils;
 import com.platform.utils.Query;
 import com.platform.utils.R;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -65,7 +67,8 @@ public class SysGeneratorController {
         byte[] data = sysGeneratorService.generatorCode(tableNames);
 
         response.reset();
-        response.setHeader("Content-Disposition", "attachment; filename=\"AutoCode.zip\"");
+        response.setHeader("Content-Disposition", "attachment; filename=\"AutoCode"
+                + DateUtils.format(new Date(), DateUtils.DATE_TIME_PATTERN_YYYY_MM_DD_HH_MM_SS_SSS) + ".zip\"");
         response.addHeader("Content-Length", "" + data.length);
         response.setContentType("application/octet-stream; charset=UTF-8");
 
