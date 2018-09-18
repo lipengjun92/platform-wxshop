@@ -168,7 +168,7 @@ public class Excel2Html {
      * @return
      */
     private static String getCellValue(Cell cell) {
-        String result = new String();
+        String result = "";
         switch (cell.getCellType()) {
             // 数字类型
             case Cell.CELL_TYPE_NUMERIC:

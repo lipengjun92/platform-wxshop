@@ -121,6 +121,10 @@ public class Excel2007Reader extends DefaultHandler {
         this.sharedStringsTable = strings;
         InputSource sheetSource = new InputSource(sheetInputStream);
         SAXParserFactory saxFactory = SAXParserFactory.newInstance();
+        //防止外部实体注入
+        saxFactory.setFeature("http://xml.org/sax/features/external-general-entities", false);
+        saxFactory.setFeature("http://xml.org/sax/features/external-parameter-entities", false);
+        saxFactory.setFeature("http://apache.org/xml/features/nonvalidating/load-external-dtd", false);
         SAXParser saxParser = saxFactory.newSAXParser();
         XMLReader sheetParser = saxParser.getXMLReader();
         sheetParser.setContentHandler(this);
