@@ -41,7 +41,7 @@
         <jstl-version>1.2</jstl-version>
         <taglibs-version>1.1.2</taglibs-version>
         <freemarker-version>2.3.23</freemarker-version>
-        <kaptcha.version>0.0.9</kaptcha.version>
+        <kaptcha.version>2.3.2</kaptcha.version>
         <j2cache.version>2.3.22-release</j2cache.version>
         <ehcache.version>2.10.4</ehcache.version>
         <jgroups.version>3.6.13.Final</jgroups.version>
@@ -265,7 +265,7 @@
         </dependency>
         <!--验证码生成工具-->
         <dependency>
-            <groupId>com.github.axet</groupId>
+            <groupId>com.github.penggle</groupId>
             <artifactId>kaptcha</artifactId>
             <version>${kaptcha.version}</version>
         </dependency>
