@@ -20,7 +20,7 @@
         </dependency>
         <!--验证码生成工具-->
         <dependency>
-            <groupId>com.github.axet</groupId>
+            <groupId>com.github.penggle</groupId>
             <artifactId>kaptcha</artifactId>
             <version>${kaptcha.version}</version>
         </dependency>
