@@ -79,7 +79,7 @@ public class ApiPayController extends ApiBaseAction {
             // 随机字符串
             parame.put("nonce_str", randomStr);
             // 商户订单编号
-            parame.put("out_trade_no", orderId);
+            parame.put("out_trade_no", orderInfo.getOrder_sn());
             Map orderGoodsParam = new HashMap();
             orderGoodsParam.put("order_id", orderId);
             // 商品描述
