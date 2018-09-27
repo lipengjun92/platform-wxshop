@@ -303,7 +303,7 @@ Page({
       cityName: address.city_name,
       countyName: address.district_name,
       detailInfo: address.detailInfo,
-    }, 'POST').then(function (res) {
+    }).then(function (res) {
       if (res.errno === 0) {
         wx.navigateBack({
           url: '/pages/ucenter/address/address',

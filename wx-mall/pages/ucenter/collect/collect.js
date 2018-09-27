@@ -52,7 +52,7 @@ Page({
         success: function (res) {
           if (res.confirm) {
             console.log('用户点击确认');
-            util.request(api.CollectAddOrDelete, { typeId: that.data.typeId, valueId: goodsId}, 'POST').then(function (res) {
+            util.request(api.CollectAddOrDelete, { typeId: that.data.typeId, valueId: goodsId}).then(function (res) {
               if (res.errno === 0) {
                 console.log(res.data);
                 wx.showToast({

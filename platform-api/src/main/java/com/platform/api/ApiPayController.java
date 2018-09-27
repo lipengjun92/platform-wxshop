@@ -42,7 +42,7 @@ public class ApiPayController extends ApiBaseAction {
     /**
      */
     @ApiOperation(value = "跳转")
-    @GetMapping("index")
+    @PostMapping("index")
     public Object index() {
         //
         return toResponsSuccess("");
@@ -52,7 +52,7 @@ public class ApiPayController extends ApiBaseAction {
      * 获取支付的请求参数
      */
     @ApiOperation(value = "获取支付的请求参数")
-    @GetMapping("prepay")
+    @PostMapping("prepay")
     public Object payPrepay(@LoginUser UserVo loginUser, Integer orderId) {
         //
         OrderVo orderInfo = orderService.queryObject(orderId);
@@ -153,7 +153,7 @@ public class ApiPayController extends ApiBaseAction {
      * 微信查询订单状态
      */
     @ApiOperation(value = "查询订单状态")
-    @GetMapping("query")
+    @PostMapping("query")
     public Object orderQuery(@LoginUser UserVo loginUser, Integer orderId) {
         if (orderId == null) {
             return toResponsFail("订单不存在");
