@@ -6,11 +6,9 @@ import com.platform.entity.RegionVo;
 import com.platform.entity.SysRegionEntity;
 import com.platform.util.ApiBaseAction;
 import com.platform.utils.StringUtils;
-
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -24,9 +22,9 @@ import java.util.Map;
 @RequestMapping("/api/region")
 public class ApiRegionController extends ApiBaseAction {
 
-	@ApiOperation(value = "地区列表")
+    @ApiOperation(value = "地区列表")
     @IgnoreAuth
-    @GetMapping("list")
+    @PostMapping("list")
     public Object list(Integer parentId) {
         List<SysRegionEntity> regionEntityList = RegionCacheUtil.getChildrenByParentId(parentId);
         List<RegionVo> regionVoList = new ArrayList<RegionVo>();
@@ -39,7 +37,7 @@ public class ApiRegionController extends ApiBaseAction {
     }
 
     @IgnoreAuth
-    @GetMapping("provinceList")
+    @PostMapping("provinceList")
     public Object provinceList() {
         List<SysRegionEntity> regionEntityList = RegionCacheUtil.getAllProvice();
         List<RegionVo> regionVoList = new ArrayList<RegionVo>();
@@ -52,7 +50,7 @@ public class ApiRegionController extends ApiBaseAction {
     }
 
     @IgnoreAuth
-    @GetMapping("cityList")
+    @PostMapping("cityList")
     public Object provinceList(String proviceName) {
         List<SysRegionEntity> regionEntityList = RegionCacheUtil.getChildrenCity(proviceName);
         List<RegionVo> regionVoList = new ArrayList<RegionVo>();
@@ -65,7 +63,7 @@ public class ApiRegionController extends ApiBaseAction {
     }
 
     @IgnoreAuth
-    @GetMapping("distinctList")
+    @PostMapping("distinctList")
     public Object distinctList(String proviceName, String cityName) {
         List<SysRegionEntity> regionEntityList = RegionCacheUtil.getChildrenDistrict(proviceName, cityName);
         List<RegionVo> regionVoList = new ArrayList<RegionVo>();
@@ -78,14 +76,14 @@ public class ApiRegionController extends ApiBaseAction {
     }
 
     @IgnoreAuth
-    @GetMapping("info")
+    @PostMapping("info")
     public Object info(Integer regionId) {
         SysRegionEntity regionEntity = RegionCacheUtil.getAreaByAreaId(regionId);
         return toResponsSuccess(new RegionVo(regionEntity));
     }
 
     @IgnoreAuth
-    @GetMapping("regionIdsByNames")
+    @PostMapping("regionIdsByNames")
     public Object regionIdsByNames(String provinceName, String cityName, String districtName) {
         Map<String, Integer> resultObj = new HashMap<String, Integer>();
         Integer provinceId = 0;

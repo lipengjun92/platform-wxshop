@@ -9,7 +9,7 @@ import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -38,7 +38,7 @@ public class ApiCatalogController extends ApiBaseAction {
             @ApiImplicitParam(name = "page", value = "page", paramType = "query", required = false),
             @ApiImplicitParam(name = "size", value = "size", paramType = "query", required = false)})
     @IgnoreAuth
-    @GetMapping(value = "index")
+    @PostMapping(value = "index")
     public Object index(Integer id,
                         @RequestParam(value = "page", defaultValue = "1") Integer page,
                         @RequestParam(value = "size", defaultValue = "10") Integer size) {
@@ -78,7 +78,7 @@ public class ApiCatalogController extends ApiBaseAction {
     @ApiOperation(value = "分类目录当前分类数据接口")
     @ApiImplicitParams({@ApiImplicitParam(name = "id", value = "id", paramType = "query", required = false)})
     @IgnoreAuth
-    @GetMapping(value = "current")
+    @PostMapping(value = "current")
     public Object current(Integer id) {
         Map<String, Object> resultObj = new HashMap();
         Map params = new HashMap();

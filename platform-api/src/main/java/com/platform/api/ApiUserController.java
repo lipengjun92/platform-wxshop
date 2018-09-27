@@ -12,7 +12,6 @@ import com.platform.utils.*;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -97,7 +96,7 @@ public class ApiUserController extends ApiBaseAction {
      * @return
      */
     @ApiOperation(value = "获取当前会员等级")
-    @GetMapping("getUserLevel")
+    @PostMapping("getUserLevel")
     public Object getUserLevel(@LoginUser UserVo loginUser) {
         String userLevel = userService.getUserLevel(loginUser);
         return toResponsSuccess(userLevel);

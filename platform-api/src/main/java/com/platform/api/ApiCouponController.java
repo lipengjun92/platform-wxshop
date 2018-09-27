@@ -42,7 +42,7 @@ public class ApiCouponController extends ApiBaseAction {
      * 获取优惠券列表
      */
     @ApiOperation(value = "获取优惠券列表")
-    @GetMapping("/list")
+    @PostMapping("/list")
     public Object list(@LoginUser UserVo loginUser) {
         Map param = new HashMap();
         param.put("user_id", loginUser.getUserId());
@@ -54,7 +54,7 @@ public class ApiCouponController extends ApiBaseAction {
      * 根据商品获取可用优惠券列表
      */
     @ApiOperation(value = "根据商品获取可用优惠券列表")
-    @GetMapping("/listByGoods")
+    @PostMapping("/listByGoods")
     public Object listByGoods(@RequestParam(defaultValue = "cart") String type, @LoginUser UserVo loginUser) {
         BigDecimal goodsTotalPrice = new BigDecimal(0.00);
         if (type.equals("cart")) {

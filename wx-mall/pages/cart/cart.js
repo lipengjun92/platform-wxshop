@@ -68,7 +68,7 @@ Page({
     let that = this;
 
     if (!this.data.isEditCart) {
-      util.request(api.CartChecked, { productIds: that.data.cartGoods[itemIndex].product_id, isChecked: that.data.cartGoods[itemIndex].checked ? 0 : 1 }, 'POST').then(function (res) {
+      util.request(api.CartChecked, { productIds: that.data.cartGoods[itemIndex].product_id, isChecked: that.data.cartGoods[itemIndex].checked ? 0 : 1 }).then(function (res) {
         if (res.errno === 0) {
           console.log(res.data);
           that.setData({
@@ -115,7 +115,7 @@ Page({
       var productIds = this.data.cartGoods.map(function (v) {
         return v.product_id;
       });
-      util.request(api.CartChecked, { productIds: productIds.join(','), isChecked: that.isCheckedAll() ? 0 : 1 }, 'POST').then(function (res) {
+      util.request(api.CartChecked, { productIds: productIds.join(','), isChecked: that.isCheckedAll() ? 0 : 1 }).then(function (res) {
         if (res.errno === 0) {
           console.log(res.data);
           that.setData({
@@ -180,7 +180,7 @@ Page({
       goodsId: goodsId,
       number: number,
       id: id
-    }, 'POST').then(function (res) {
+    }).then(function (res) {
       if (res.errno === 0) {
         console.log(res.data);
         that.setData({
@@ -263,7 +263,7 @@ Page({
 
     util.request(api.CartDelete, {
       productIds: productIds.join(',')
-    }, 'POST').then(function (res) {
+    }).then(function (res) {
       if (res.errno === 0) {
         console.log(res.data);
         let cartList = res.data.cartList.map(v => {

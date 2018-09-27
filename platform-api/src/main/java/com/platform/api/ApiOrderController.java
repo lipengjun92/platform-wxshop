@@ -45,7 +45,7 @@ public class ApiOrderController extends ApiBaseAction {
      */
     @ApiOperation(value = "订单首页")
     @IgnoreAuth
-    @GetMapping("index")
+    @PostMapping("index")
     public Object index() {
         //
         return toResponsSuccess("");
@@ -55,7 +55,7 @@ public class ApiOrderController extends ApiBaseAction {
      * 获取订单列表
      */
     @ApiOperation(value = "获取订单列表")
-    @GetMapping("list")
+    @PostMapping("list")
     public Object list(@LoginUser UserVo loginUser,
                        @RequestParam(value = "page", defaultValue = "1") Integer page,
                        @RequestParam(value = "size", defaultValue = "10") Integer size) {
@@ -90,7 +90,7 @@ public class ApiOrderController extends ApiBaseAction {
      * 获取订单详情
      */
     @ApiOperation(value = "获取订单详情")
-    @GetMapping("detail")
+    @PostMapping("detail")
     public Object detail(Integer orderId) {
         Map resultObj = new HashMap();
         //

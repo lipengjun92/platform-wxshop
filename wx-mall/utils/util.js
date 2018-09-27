@@ -21,14 +21,14 @@ function formatNumber(n) {
 /**
  * 封封微信的的request
  */
-function request(url, data = {}, method = "GET") {
+function request(url, data = {}, method = "POST", header = "application/x-www-form-urlencoded") {
   return new Promise(function (resolve, reject) {
     wx.request({
       url: url,
       data: data,
       method: method,
       header: {
-        'Content-Type': 'application/json',
+        'Content-Type': header,
         'X-Nideshop-Token': wx.getStorageSync('token')
       },
       success: function (res) {
