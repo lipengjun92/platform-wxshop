@@ -54,7 +54,7 @@
 
     <build>
         <sourceDirectory>src/main/java</sourceDirectory>
-        <finalName>platform-framework</finalName>
+        <finalName>platform</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
