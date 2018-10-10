@@ -64,7 +64,7 @@ Page({
         if (!this.bindCheckMobile(this.data.mobile)) {
             return
         }
-        util.request(api.SmsCode, {phone: this.data.mobile})
+        util.request(api.SmsCode, {phone: this.data.mobile}, 'POST', 'application/json')
             .then(function (res) {
                 if (res.data.code == 200) {
                     wx.showToast({
