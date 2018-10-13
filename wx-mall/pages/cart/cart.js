@@ -263,7 +263,7 @@ Page({
 
     util.request(api.CartDelete, {
       productIds: productIds.join(',')
-    }).then(function (res) {
+    }, 'POST', 'application/json').then(function (res) {
       if (res.errno === 0) {
         console.log(res.data);
         let cartList = res.data.cartList.map(v => {
