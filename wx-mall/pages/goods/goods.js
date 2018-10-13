@@ -171,7 +171,7 @@ Page({
   },
   getCheckedProductItem: function (key) {
     return this.data.productList.filter(function (v) {
-      if (v.goods_specification_ids == key) {
+      if (v.goods_specification_ids.indexOf(key) > -1) {
         return true;
       } else {
         return false;
