@@ -1,6 +1,6 @@
 <view class="container">
     <view class="address-box">
-        <view class="address-item" bindtap="selectAddress" wx:if="{{1 > 0}}">
+        <view class="address-item" bindtap="selectAddress" wx:if="{{checkedAddress.id > 0}}">
             <view class="l">
                 <text class="name">{{checkedAddress.userName}}</text>
                 <text class="default" wx:if="{{checkedAddress.is_default === 1}}">默认</text>
