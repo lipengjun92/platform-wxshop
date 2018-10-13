@@ -54,7 +54,7 @@ Page({
           orderTotalPrice: res.data.orderTotalPrice
         });
         //设置默认收获地址
-        if (that.data.checkedAddress){
+        if (that.data.checkedAddress.id){
             let addressId = that.data.checkedAddress.id;
             if (addressId) {
                 that.setData({ addressId: addressId });
