@@ -42,7 +42,7 @@ Page({
       success: function (res) {
         if (res.confirm) {
           let addressId = event.target.dataset.addressId;
-          util.request(api.AddressDelete, { id: addressId }).then(function (res) {
+          util.request(api.AddressDelete, { id: addressId },'POST', 'application/json').then(function (res) {
             if (res.errno === 0) {
               that.getAddressList();
             }
