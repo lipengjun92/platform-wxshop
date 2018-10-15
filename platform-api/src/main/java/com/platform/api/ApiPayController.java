@@ -159,6 +159,7 @@ public class ApiPayController extends ApiBaseAction {
             return toResponsFail("订单不存在");
         }
 
+        OrderVo orderDetail = orderService.queryObject(orderId);
         Map<Object, Object> parame = new TreeMap<Object, Object>();
         parame.put("appid", ResourceUtil.getConfigByName("wx.appId"));
         // 商家账号。
@@ -167,7 +168,7 @@ public class ApiPayController extends ApiBaseAction {
         // 随机字符串
         parame.put("nonce_str", randomStr);
         // 商户订单编号
-        parame.put("out_trade_no", orderId);
+        parame.put("out_trade_no", orderDetail.getOrder_sn());
 
         String sign = WechatUtil.arraySign(parame, ResourceUtil.getConfigByName("wx.paySignKey"));
         // 数字签证
