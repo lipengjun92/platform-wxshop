@@ -48,6 +48,10 @@
         <scriptSourceDirectory>src/main/java</scriptSourceDirectory>
         <resources>
             <resource>
+                <directory>src/main/resources/${env}</directory>
+                <filtering>true</filtering>
+            </resource>
+            <resource>
                 <directory>src/main/resources</directory>
                 <filtering>true</filtering>
                 <excludes>
