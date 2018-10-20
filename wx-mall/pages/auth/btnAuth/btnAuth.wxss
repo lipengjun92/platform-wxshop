@@ -1,0 +1,95 @@
+view, text {
+  font-family: PingFangSC-Light, helvetica, 'Heiti SC';
+  font-size: 29rpx;
+  color: #333;
+}
+
+.hd {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.hd .logo {
+  width: 260rpx;
+  height: 260rpx;
+  margin-top: 40rpx;
+}
+
+.hd .title {
+  text-align: center;
+  font-size: 36rpx;
+  color: #000;
+}
+
+.bd {
+  width: 100%;
+  padding: 50rpx;
+}
+
+.bd .top_line {
+  width: 100%;
+  height: 1rpx;
+  background: #ccc;
+  margin-top: 20rpx;
+  margin-bottom: 50rpx;
+}
+
+.bd .m_name {
+  display: block;
+  font-size: 36rpx;
+  color: #000;
+}
+
+.bd .s_name {
+  margin-top: 25rpx;
+  display: block;
+  font-size: 34rpx;
+  color: #8a8a8a;
+}
+
+.btn {
+  padding: 120rpx 50rpx 0;
+}
+
+.weui_btn_primary {
+  background-color: #04be02;
+}
+
+.weui_btn {
+  position: relative;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 14px;
+  padding-right: 14px;
+  box-sizing: border-box;
+  font-size: 18px;
+  text-align: center;
+  text-decoration: none;
+  color: #fff;
+  line-height: 2.33333333;
+  border-radius: 5px;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  overflow: hidden;
+}
+
+.weui_btn:after {
+  content: " ";
+  width: 200%;
+  height: 200%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  -webkit-transform: scale(0.5);
+  -ms-transform: scale(0.5);
+  transform: scale(0.5);
+  -webkit-transform-origin: 0 0;
+  -ms-transform-origin: 0 0;
+  transform-origin: 0 0;
+  box-sizing: border-box;
+  border-radius: 10px;
+}
