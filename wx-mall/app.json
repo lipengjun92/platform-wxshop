@@ -33,7 +33,8 @@
     "pages/goods/goods",
     "pages/topicDetail/topicDetail",
     "pages/auth/mobile/mobile",
-    "pages/shopping/selCoupon/selCoupon"
+    "pages/shopping/selCoupon/selCoupon",
+    "pages/auth/btnAuth/btnAuth"
   ],
   "window": {
     "backgroundTextStyle": "dark",

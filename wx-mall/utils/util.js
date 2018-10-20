@@ -40,21 +40,9 @@ function request(url, data = {}, method = "POST", header = "application/x-www-fo
                 if (res.statusCode == 200) {
 
                     if (res.data.errno == 401) {
-                        //需要登录后才可以操作
-                        wx.showModal({
-                            title: '',
-                            content: '请先登录',
-                            success: function (res) {
-                                if (res.confirm) {
-                                    wx.removeStorageSync("userInfo");
-                                    wx.removeStorageSync("token");
-
-                                    wx.switchTab({
-                                        url: '/pages/ucenter/index/index'
-                                    });
-                                }
-                            }
-                        });
+                        wx.navigateTo({
+                            url: '/pages/auth/btnAuth/btnAuth',
+                        })
                     } else {
                         resolve(res.data);
                     }
