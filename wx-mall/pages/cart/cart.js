@@ -41,7 +41,6 @@ Page({
     let that = this;
     util.request(api.CartList).then(function (res) {
       if (res.errno === 0) {
-        console.log(res.data);
         that.setData({
           cartGoods: res.data.cartList,
           cartTotal: res.data.cartTotal
@@ -70,7 +69,6 @@ Page({
     if (!this.data.isEditCart) {
       util.request(api.CartChecked, { productIds: that.data.cartGoods[itemIndex].product_id, isChecked: that.data.cartGoods[itemIndex].checked ? 0 : 1 }).then(function (res) {
         if (res.errno === 0) {
-          console.log(res.data);
           that.setData({
             cartGoods: res.data.cartList,
             cartTotal: res.data.cartTotal
@@ -105,7 +103,6 @@ Page({
         checkedGoodsCount += v.number;
       }
     });
-    console.log(checkedGoodsCount);
     return checkedGoodsCount;
   },
   checkedAll: function () {
@@ -117,7 +114,6 @@ Page({
       });
       util.request(api.CartChecked, { productIds: productIds.join(','), isChecked: that.isCheckedAll() ? 0 : 1 }).then(function (res) {
         if (res.errno === 0) {
-          console.log(res.data);
           that.setData({
             cartGoods: res.data.cartList,
             cartTotal: res.data.cartTotal
@@ -182,7 +178,6 @@ Page({
       id: id
     }).then(function (res) {
       if (res.errno === 0) {
-        console.log(res.data);
         that.setData({
           //cartGoods: res.data.cartList,
           //cartTotal: res.data.cartTotal
@@ -265,9 +260,7 @@ Page({
       productIds: productIds.join(',')
     }, 'POST', 'application/json').then(function (res) {
       if (res.errno === 0) {
-        console.log(res.data);
         let cartList = res.data.cartList.map(v => {
-          console.log(v);
           v.checked = false;
           return v;
         });

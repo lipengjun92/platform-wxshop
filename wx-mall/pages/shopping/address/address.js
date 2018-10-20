@@ -28,13 +28,11 @@ Page({
     });
   },
   addressAddOrUpdate (event) {
-    console.log(event)
     wx.navigateTo({
       url: '/pages/shopping/addressAdd/addressAdd?id=' + event.currentTarget.dataset.addressId
     });
   },
   selectAddress(event){
-    console.log(event.currentTarget.dataset.addressId);
 
     try {
       wx.setStorageSync('addressId', event.currentTarget.dataset.addressId);
