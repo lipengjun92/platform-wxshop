@@ -19,7 +19,8 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <java-version>1.7</java-version>
+        <server.port>8080</server.port>
+        <java-version>1.8</java-version>
         <servlet-version>3.1.0</servlet-version>
         <junit-version>4.12</junit-version>
         <springframework-version>4.3.7.RELEASE</springframework-version>
@@ -325,9 +326,9 @@
                 <version>2.2</version>
                 <configuration>
                     <path>/platform</path>
-                    <charset>UTF-8</charset>
-                    <port>8080</port>
-                    <uriEncoding>UTF-8</uriEncoding>
+                    <charset>${project.build.sourceEncoding}</charset>
+                    <port>${server.port}</port>
+                    <uriEncoding>${project.build.sourceEncoding}</uriEncoding>
                 </configuration>
             </plugin>
         </plugins>
