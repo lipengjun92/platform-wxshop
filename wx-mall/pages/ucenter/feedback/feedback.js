@@ -14,7 +14,6 @@ Page({
     mobile:''
   },
   bindPickerChange: function (e) {
-    console.log('picker发送选择改变，携带值为', e.detail.value);
     this.setData({
       index: e.detail.value
     });
@@ -24,7 +23,6 @@ Page({
     this.setData({
       mobile: e.detail.value,
     });
-    console.log(that.data.mobile);
   },
   contentInput: function (e) {
    
@@ -33,7 +31,6 @@ Page({
       contentLength: e.detail.cursor,
       content: e.detail.value,
     });
-    console.log(that.data.content);
   },
   cleanMobile:function(){
     let that = this;
@@ -63,12 +60,9 @@ Page({
       }
     });
 
-    console.log(that.data);
-
     util.request(api.FeedbackAdd, { mobile: that.data.mobile, index: that.data.index, content: that.data.content}).then(function (res) {
       if (res.errno === 0) {
-        console.log(res.data);
-      
+
         wx.hideLoading();
 
         wx.showToast({
@@ -76,7 +70,6 @@ Page({
           icon: 'success',
           duration: 2000,
           complete: function () {
-            console.log('重新加载');
             that.setData({
               index: 0,
               content: '',

@@ -29,7 +29,6 @@ Page({
         // 页面关闭
     },
     nextPage: function (event) {
-      console.log();
         var that = this;
         if (this.data.page+1 > that.data.count / that.data.size) {
             return true;

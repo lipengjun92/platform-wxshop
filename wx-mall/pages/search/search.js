@@ -84,7 +84,6 @@ Page({
 
     util.request(api.SearchClearHistory, {})
       .then(function (res) {
-        console.log('清除成功');
       });
   },
   getGoodsList: function () {

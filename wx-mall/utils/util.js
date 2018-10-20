@@ -35,7 +35,6 @@ function request(url, data = {}, method = "POST", header = "application/x-www-fo
                 'X-Nideshop-Token': wx.getStorageSync('token')
             },
             success: function (res) {
-                console.log("success");
                 wx.hideLoading();
                 if (res.statusCode == 200) {
 
@@ -53,7 +52,6 @@ function request(url, data = {}, method = "POST", header = "application/x-www-fo
             },
             fail: function (err) {
                 reject(err)
-                console.log("failed")
             }
         })
     });
@@ -83,8 +81,6 @@ function login() {
         wx.login({
             success: function (res) {
                 if (res.code) {
-                    //登录远程服务器
-                    console.log(res)
                     resolve(res);
                 } else {
                     reject(res);
