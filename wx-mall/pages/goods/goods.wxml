@@ -16,7 +16,7 @@
         <text class="desc">{{goods.goods_brief}}</text>
         <text class="price">￥{{goods.retail_price}}</text>
         <view class="brand" wx:if="{{brand.name}}">
-          <navigator url="../brandDetail/brandDetail?id={{brand.brandId}}">
+          <navigator url="../brandDetail/brandDetail?id={{brand.id}}">
             <text>{{brand.name}}</text>
           </navigator>
         </view>
