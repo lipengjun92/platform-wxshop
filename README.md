@@ -1,3 +1,7 @@
+#### [双十一全球狂欢节](https://m.aliyun.com/act/team1111/#/share?params=N.ETYW5TntYS.i8s6n64p)：
+一年一度的双十一又来了，云主机仅99.5元，双11拼团低至1折，赢300万现金，错过再等一年！点击标题进入活动页开团或参团！
+![](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/11.jpg "全球狂欢节")
+
 # 微信小程序商城（Java版）
 
 [![Fork me on Gitee](https://gitee.com/fuyang_lipengjun/platform/widgets/widget_3.svg?color=C71D24)](https://gitee.com/fuyang_lipengjun/platform)
