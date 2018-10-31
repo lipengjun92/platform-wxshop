@@ -1,6 +1,5 @@
 package com.platform.api;
 
-import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.platform.annotation.IgnoreAuth;
 import com.platform.entity.FullUserInfo;
@@ -23,7 +22,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.client.RestTemplate;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -45,8 +43,6 @@ public class ApiAuthController extends ApiBaseAction {
     private ApiUserService userService;
     @Autowired
     private TokenService tokenService;
-    @Autowired
-    private RestTemplate restTemplate;
 
     /**
      * 登录
@@ -83,6 +79,9 @@ public class ApiAuthController extends ApiBaseAction {
         if (null != jsonParam.get("userInfo")) {
             fullUserInfo = jsonParam.getObject("userInfo", FullUserInfo.class);
         }
+        if (null == fullUserInfo) {
+            return toResponsFail("登录失败");
+        }
 
         Map<String, Object> resultObj = new HashMap<String, Object>();
         //
@@ -91,8 +90,7 @@ public class ApiAuthController extends ApiBaseAction {
         //获取openid
         String requestUrl = ApiUserUtils.getWebAccess(code);//通过自定义工具类组合出小程序需要的登录凭证 code
         logger.info("》》》组合token为：" + requestUrl);
-        String res = restTemplate.getForObject(requestUrl, String.class);
-        JSONObject sessionData = JSON.parseObject(res);
+        JSONObject sessionData = CommonUtil.httpsRequest(requestUrl, "GET", null);
 
         if (null == sessionData || StringUtils.isNullOrEmpty(sessionData.getString("openid"))) {
             return toResponsFail("登录失败");
