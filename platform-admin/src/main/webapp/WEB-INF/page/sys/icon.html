@@ -39,18 +39,32 @@
             font-size: 28px;
             vertical-align: -6px;
         }
+        .bgColor{
+            background-color: #286090;
+            color: #fff;
+        }
     </style>
 </head>
 <body>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $("#icons div .fa-hover.col-md-3.col-sm-4").click(function(){
+            $("#icons div .fa-hover.col-md-3.col-sm-4 a").removeClass("bgColor");
+            $(this).children("a").addClass("bgColor");
+            $("#icon").val($(this).find('i').attr('class').split(" ")[0]+' '+$(this).find('i').attr('class').split(" ")[1]);
+        });
+    });
+</script>
+<input type="hidden" id="icon" value="${value}" />
 <div id="icons">
     <div id="new" class="mainParts">
         <h2 class="page-header">4.7.0版新增41个全新的图标</h2>
 
-        <div class="row fontawesome-icon-list">
+        <ul class="row fontawesome-icon-list">
 
-            <div class="fa-hover col-md-3 col-sm-4">
+            <li class="fa-hover col-md-3 col-sm-4">
                 <a class="col-xs-11"><i class="fa fa-address-book"></i>address-book</a>
-            </div>
+            </li>
 
             <div class="fa-hover col-md-3 col-sm-4">
                 <a class="col-xs-11"><i class="fa fa-address-book-o"></i>address-book-o</a>
@@ -270,7 +284,7 @@
                 <a class="col-xs-11"><i class="fa fa-wpexplorer"></i>wpexplorer</a>
             </div>
 
-        </div>
+        </ul>
 
     </div>
     <div>
