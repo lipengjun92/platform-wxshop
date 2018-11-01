@@ -45,7 +45,7 @@
         <taglibs-version>1.1.2</taglibs-version>
         <freemarker-version>2.3.23</freemarker-version>
         <kaptcha.version>2.3.2</kaptcha.version>
-        <j2cache.version>2.3.22-release</j2cache.version>
+        <j2cache.version>2.7.2-release</j2cache.version>
         <ehcache.version>2.10.4</ehcache.version>
         <jgroups.version>3.6.13.Final</jgroups.version>
         <mybatis.paginator.version>1.2.10</mybatis.paginator.version>
