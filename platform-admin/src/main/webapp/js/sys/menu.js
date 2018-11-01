@@ -130,7 +130,13 @@ var vm = new Vue({
                 title: '选取图标',
                 area: ['1030px', '500px'],
                 content: ['icon.html'],
-                btn: false
+                btn: ['确定', '取消'],
+                btn1: function (index,layero) {
+                    var icon = layero.find("iframe")[0].contentWindow.$("#icon").val();
+                    vm.menu.icon = icon;
+                    top.layer.close(index);
+                layer.close(index);
+            }
             });
         },
         getMenu: function (menuId) {
