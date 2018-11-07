@@ -34,6 +34,24 @@ public class MpMenuController {
         mainBtn1.setType("view");
         mainBtn1.setUrl("http://fly2you.cn");
 
+        ViewButton viewButton1 = new ViewButton();
+        viewButton1.setName("便利主义超市");
+        viewButton1.setType("miniprogram");
+        viewButton1.setUrl("http://mp.weixin.qq.com");
+        viewButton1.setAppId("");
+        viewButton1.setPagePath("/pages/index/index");
+
+        ViewButton viewButton2 = new ViewButton();
+        viewButton2.setName("海数据在线");
+        viewButton2.setType("miniprogram");
+        viewButton2.setUrl("http://mp.weixin.qq.com");
+        viewButton2.setAppId("");
+        viewButton2.setPagePath("/pages/index/index");
+
+        ComplexButton mainBtn2 = new ComplexButton();
+        mainBtn2.setName("客户案例");
+        mainBtn2.setSub_button(new Button[]{viewButton1, viewButton2});
+
         ViewButton btn30 = new ViewButton();
         btn30.setName("历史消息");
         btn30.setType("view");
@@ -59,7 +77,7 @@ public class MpMenuController {
         mainBtn3.setSub_button(new Button[]{btn30, btn31, btn32, btn33});
 
         Menu menu = new Menu();
-        menu.setButton(new Button[]{mainBtn1, mainBtn3});
+        menu.setButton(new Button[]{mainBtn1, mainBtn2, mainBtn3});
         return R.ok().put("menu", menu);
     }
 }

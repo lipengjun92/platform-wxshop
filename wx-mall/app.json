@@ -34,6 +34,8 @@
     "pages/topicDetail/topicDetail",
     "pages/auth/mobile/mobile",
     "pages/shopping/selCoupon/selCoupon",
+    "pages/ucenter/help/help",
+    "pages/ucenter/helpInfo/helpInfo",
     "pages/auth/btnAuth/btnAuth"
   ],
   "window": {
