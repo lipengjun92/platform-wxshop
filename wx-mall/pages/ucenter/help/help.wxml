@@ -1,0 +1,11 @@
+<view class="container">
+<view class="help-head">常见问题</view>
+  <view class="list-group" style="margin-top: 0;">
+    <navigator url="../helpInfo/helpInfo?id={{item.id}}" class="list-cell" wx:for="{{helpList}}" wx:key="{{index}}">
+      <view class="list-cell-bd">
+        <view class="list-label">{{item.typeName}}</view>
+      </view>
+      <view class="list-cell-ft router"></view>
+    </navigator>
+  </view>
+</view>

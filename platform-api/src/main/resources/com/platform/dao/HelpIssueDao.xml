@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.platform.dao.HelpIssueDao">
+
+    <resultMap type="com.platform.entity.HelpIssueEntity" id="helpIssueMap">
+        <result property="id" column="id"/>
+        <result property="typeId" column="type_id"/>
+        <result property="question" column="question"/>
+        <result property="answer" column="answer"/>
+        <result property="sort" column="sort"/>
+    </resultMap>
+
+	<select id="queryObject" resultType="com.platform.entity.HelpIssueEntity">
+		select
+			`id`,
+			`type_id`,
+			`question`,
+			`answer`,
+			`sort`
+		from nideshop_help_issue
+		where id = #{id}
+	</select>
+
+	<select id="queryList" resultType="com.platform.entity.HelpIssueEntity">
+		select
+		nideshop_help_issue.id,
+		nideshop_help_issue.type_id,
+		nideshop_help_issue.question,
+		nideshop_help_issue.answer,
+		nideshop_help_issue.sort,
+		nideshop_help_type.type_name
+		from nideshop_help_issue
+		LEFT JOIN nideshop_help_type ON nideshop_help_issue.type_id = nideshop_help_type.id
+		WHERE 1=1
+		<if test="typeName != null and typeName.trim() != ''">
+			AND nideshop_help_type.type_name LIKE concat('%',#{typeName},'%')
+		</if>
+        <choose>
+            <when test="sidx != null and sidx.trim() != ''">
+                order by ${sidx} ${order}
+            </when>
+			<otherwise>
+                order by type_id desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="queryTotal" resultType="int">
+		select count(*) from nideshop_help_issue
+		LEFT JOIN nideshop_help_type on nideshop_help_issue.type_id = nideshop_help_type.id
+		WHERE 1=1
+		<if test="typeName != null and typeName.trim() != ''">
+			AND nideshop_help_type.type_name LIKE concat('%',#{typeName},'%')
+		</if>
+	</select>
+	 
+	<insert id="save" parameterType="com.platform.entity.HelpIssueEntity" useGeneratedKeys="true" keyProperty="id">
+		insert into nideshop_help_issue(
+			`type_id`,
+			`question`,
+			`answer`,
+			`sort`)
+		values(
+			#{typeId},
+			#{question},
+			#{answer},
+			#{sort})
+	</insert>
+	 
+	<update id="update" parameterType="com.platform.entity.HelpIssueEntity">
+		update nideshop_help_issue
+		<set>
+			<if test="typeId != null">`type_id` = #{typeId}, </if>
+			<if test="question != null">`question` = #{question}, </if>
+			<if test="answer != null">`answer` = #{answer}, </if>
+			<if test="sort != null">`sort` = #{sort}</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="delete">
+		delete from nideshop_help_issue where id = #{value}
+	</delete>
+	
+	<delete id="deleteBatch">
+		delete from nideshop_help_issue where id in
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>

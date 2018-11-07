@@ -1,0 +1,14 @@
+page ,.container{
+   width: 750rpx;
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+    background: #f4f4f4;
+    position: relative;
+}
+.help-head{
+  background-color: #fff;
+  padding: 30rpx;
+  font-size: 35rpx;
+  color: #009944;
+}

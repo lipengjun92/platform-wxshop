@@ -19,12 +19,6 @@
         <text class="txt">优惠券</text>
       </navigator>
     </view>
-    <view class="item no-border">
-      <navigator url="url" class="a">
-        <text class="icon gift"></text>
-        <text class="txt">礼品卡</text>
-      </navigator>
-    </view>
     <view class="item">
       <navigator url="/pages/ucenter/collect/collect" class="a">
         <text class="icon address"></text>
@@ -37,22 +31,10 @@
         <text class="txt">我的足迹</text>
       </navigator>
     </view>
-    <view class="item no-border">
-      <navigator url="url" class="a">
-        <text class="icon kefu"></text>
-        <text class="txt">会员福利</text>
-      </navigator>
-    </view>
     <view class="item">
       <navigator url="../address/address" class="a">
         <text class="icon address"></text>
         <text class="txt">地址管理</text>
-      </navigator>
-    </view>
-    <view class="item">
-      <navigator url="url" class="a">
-        <text class="icon security"></text>
-        <text class="txt">账号安全</text>
       </navigator>
     </view>
     <button class='service' open-type="contact">
@@ -64,7 +46,7 @@
       </view>
     </button>
     <view class="item item-bottom">
-      <navigator url="url" class="a">
+      <navigator url="/pages/ucenter/help/help" class="a">
         <text class="icon help"></text>
         <text class="txt">帮助中心</text>
       </navigator>
@@ -82,6 +64,6 @@
       </navigator>
     </view>
   </view>
-
+  <view class='company'>由合肥微同软件工作室提供技术支持</view>
   <!--<view class="logout" bindtap="exitLogin">退出登录</view>-->
 </view>
