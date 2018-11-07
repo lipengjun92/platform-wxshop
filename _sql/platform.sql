@@ -3894,3 +3894,20 @@ ALTER TABLE `nideshop_user_coupon` ADD COLUMN `coupon_status` TINYINT (3) UNSIGN
 ALTER TABLE `nideshop_footprint` ADD INDEX `index_nideshop_footprint_user_id_goods_id` (`user_id`, `goods_id`) USING BTREE ;
 /** 2018-09-29 解决微信名存在特殊字符导致的无法登陆问题 **/
 ALTER TABLE nideshop_user CHANGE nickname nickname VARCHAR (60) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+
+
+/** 2018-11-07 添加帮助中心 **/
+CREATE TABLE `nideshop_help_issue` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `type_id` int(11) DEFAULT NULL COMMENT '问题分类',
+  `question` varchar(500) DEFAULT NULL,
+  `answer` varchar(500) DEFAULT NULL,
+  `sort` int(4) DEFAULT NULL COMMENT '排序',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8;
+CREATE TABLE `nideshop_help_type` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `type_name` varchar(50) DEFAULT NULL COMMENT '问题分类',
+  `sort` int(4) DEFAULT NULL COMMENT '排序',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
