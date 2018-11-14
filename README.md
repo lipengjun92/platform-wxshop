@@ -1,10 +1,8 @@
 #### [腾讯云双十一秒杀](https://cloud.tencent.com/redirect.php?redirect=10172&cps_key=30280f92fc381dfc9e1d9e0e23d25a18&from=activity)：
-每日5场秒杀，分别于 9:00 / 11:00 / 14:00 / 16:00 / 19:00 开抢。热门云产品1折起，送13000元续费/升级大礼包
+活动时间（10.29-11.30）：每日5场秒杀，分别于 9:00 / 11:00 / 14:00 / 16:00 / 19:00 开抢。热门云产品1折起，送13000元续费/升级大礼包
 [![腾讯云双十一](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/tx11.jpg)](https://cloud.tencent.com/redirect.php?redirect=10172&cps_key=30280f92fc381dfc9e1d9e0e23d25a18&from=activity)
 
 # 微信小程序商城（Java版）
-
-[![Fork me on Gitee](https://gitee.com/fuyang_lipengjun/platform/widgets/widget_3.svg?color=C71D24)](https://gitee.com/fuyang_lipengjun/platform)
 
 ## 官方首页
 * [演示地址](http://fly2you.cn)
@@ -51,34 +49,13 @@ platform-wechat-mall
 |--platform-common 公共模块
 |--platform-framework 系统WEB合并
 |--platform-gen 代码生成
+|--platform-mp 微信公众号模块
 |--platform-schedule 定时任务
 |--platform-shop 商城后台管理
 |--wx-mall 微信小程序商城
 |--platform-vue 微信公众号商城（待开发）
 ~~~
 
-## 自动代码生成结构
-~~~
-AutoCode
-├─menu.sql                      创建菜单的sql
-│ 
-└─main    
-     ├─java                     生成的java代码
-     │    └─com
-     │       └─platform
-     │            ├─controller
-     │            ├─dao
-     │            ├─entity
-     │            └─service
-     │                └─impl
-     └─webapp                   生成的页面文件
-         ├─js   
-         │  └─shop   
-         └─WEB-INF 
-             └─page  
-                └─shop  
-
-~~~
 ## 实现功能
 
 * 一：会员管理
@@ -161,7 +138,7 @@ AutoCode
 * 修改配置文件 /platform-admin/src/main/resources/j2cache.properties
     * redis.hosts
     * redis.password
-* 启动后台项目（参照启动手册）
+* 启动后台项目（参照<a href="#doc">开发文档</a>）
 * 打开微信开发者工具
 * 导入 /wx-mall填写appId
 * 修改 /wx-mall/config/app.js里NewApiRootUrl的值
@@ -218,3 +195,6 @@ AutoCode
 ![](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/upload/case/4.jpg "海数据在线")
 ### 美平超市
 ![](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/upload/case/1.png "美平超市")
+
+### <a name="doc">开发文档目录</a>
+![](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/catalog.png "开发文档目录")
