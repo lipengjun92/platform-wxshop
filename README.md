@@ -1,6 +1,6 @@
-#### [腾讯云双十一秒杀](https://cloud.tencent.com/redirect.php?redirect=10172&cps_key=30280f92fc381dfc9e1d9e0e23d25a18&from=activity)：
-活动时间（10.29-11.30）：每日5场秒杀，分别于 9:00 / 11:00 / 14:00 / 16:00 / 19:00 开抢。热门云产品1折起，送13000元续费/升级大礼包
-[![腾讯云双十一](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/tx11.jpg)](https://cloud.tencent.com/redirect.php?redirect=10172&cps_key=30280f92fc381dfc9e1d9e0e23d25a18&from=activity)
+#### [腾讯云新客专属福利](https://cloud.tencent.com/redirect.php?redirect=1025&cps_key=30280f92fc381dfc9e1d9e0e23d25a18&from=console)：
+新客户无门槛领取总价值高达2775元代金券，每种代金券限量500张，先到先得。
+[![腾讯云双十一](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/txnew.jpg)](https://cloud.tencent.com/redirect.php?redirect=1025&cps_key=30280f92fc381dfc9e1d9e0e23d25a18&from=console)
 
 # 微信小程序商城（Java版）
 
