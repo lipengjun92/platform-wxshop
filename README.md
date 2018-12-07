@@ -4,6 +4,14 @@
 
 # 微信小程序商城（Java版）
 
+## 获得荣誉
+### 1000+stars
+![](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/1000stars.jpg "1000+stars")
+
+### GVP
+![](
+https://platform-wxmall.oss-cn-beijing.aliyuncs.com/GVP.jpg "GVP")
+
 ## 官方首页
 * [演示地址](http://fly2you.cn)
 * [最新开发文档](http://fly2you.cn/guide/index)
