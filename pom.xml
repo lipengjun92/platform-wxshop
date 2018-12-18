@@ -321,18 +321,6 @@
                 <artifactId>maven-javadoc-plugin</artifactId>
                 <version>3.0.0</version>
             </plugin>
-            <!--tomcat7-plugin-->
-            <plugin>
-                <groupId>org.apache.tomcat.maven</groupId>
-                <artifactId>tomcat7-maven-plugin</artifactId>
-                <version>2.2</version>
-                <configuration>
-                    <path>/platform</path>
-                    <charset>${project.build.sourceEncoding}</charset>
-                    <port>${server.port}</port>
-                    <uriEncoding>${project.build.sourceEncoding}</uriEncoding>
-                </configuration>
-            </plugin>
         </plugins>
     </build>
 </project>
