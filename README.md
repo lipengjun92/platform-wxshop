@@ -2,6 +2,9 @@
 新客户无门槛领取总价值高达2775元代金券，每种代金券限量500张，先到先得。
 [![腾讯云双十一](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/txnew.jpg)](https://cloud.tencent.com/redirect.php?redirect=1025&cps_key=30280f92fc381dfc9e1d9e0e23d25a18&from=console)
 
+#### [阿里云限量红包](https://promotion.aliyun.com/ntms/yunparter/invite.html?userCode=i8s6n64p)：
+即日起至12月31日，本站推荐的用户，限时领 “最高1888元红包” 。云产品通用红包，可叠加官网常规优惠使用。
+
 # 微信小程序商城（Java版）
 
 ## 获得荣誉
@@ -38,6 +41,7 @@ https://platform-wxmall.oss-cn-beijing.aliyuncs.com/GVP.jpg "GVP")
     * 1.11 mysql5.1.39
     * 1.12 swagger2.4
     * 1.13 j2cache2.3.22-release
+    * 1.14 weixin-java-mp3.2.0
         
 * 2 前端使用技术
     * 2.1 Vue2.5.1
@@ -55,7 +59,7 @@ platform-wechat-mall
 |--platform-admin 后台管理
 |--platform-api 微信小程序商城api接口
 |--platform-common 公共模块
-|--platform-framework 系统WEB合并
+|--platform-framework 系统WEB合并，请打包发布此项目
 |--platform-gen 代码生成
 |--platform-mp 微信公众号模块
 |--platform-schedule 定时任务
@@ -130,7 +134,9 @@ platform-wechat-mall
 
 * 配置环境（推荐jdk1.8、maven3.3、tomcat8、mysql5.7、redis4.0.1）
 * 创建数据库
-* 初始化sql脚本 /doc/platform.sql
+* 依次初始化sql脚本 
+    * /_sql/platform.sql
+    * /_sql/sys_region.sql
 * 导入项目到IDE中
 * 导入支付证书至/platform-shop/src/main/resources/cert/目录下（申请商户号、开通微信支付、下载支付证书）
 * 修改配置文件 /platform-admin/src/main/resources/dev/platform.properties
@@ -143,6 +149,10 @@ platform-wechat-mall
     * wx.paySignKey
     * wx.notifyUrl
     * sms.validIp
+    * mp.appId
+    * mp.secret
+    * mp.token
+    * mp.aesKey
 * 修改配置文件 /platform-admin/src/main/resources/j2cache.properties
     * redis.hosts
     * redis.password
@@ -197,12 +207,10 @@ platform-wechat-mall
 ***
 ## 小程序客户案例
 
-### 便利主义超市
-![](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/upload/case/2.png "便利主义超市")
-### 海数据在线
-![](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/upload/case/4.jpg "海数据在线")
 ### 美平超市
 ![](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/upload/case/1.png "美平超市")
+### 便利主义超市
+![](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/upload/case/2.png "便利主义超市")
 
 ### <a name="doc">开发文档目录</a>
 ![](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/catalog.png "开发文档目录")
