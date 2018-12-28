@@ -207,6 +207,8 @@ platform-wechat-mall
 ***
 ## 小程序客户案例
 
+### PWM商业版
+![](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/grocery/20181228/1114545734c867.jpg "PWM商业版")
 ### 美平超市
 ![](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/upload/case/1.png "美平超市")
 ### 便利主义超市
