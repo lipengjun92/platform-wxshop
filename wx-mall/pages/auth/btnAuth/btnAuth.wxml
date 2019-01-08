@@ -1,0 +1,17 @@
+<!--index.wxml-->
+<view class="page">
+  <view class="hd">
+    <image class="logo" src="/static/images/logo.png"></image>
+    <view class="title">合肥微同软件工作室欢迎您!</view>
+  </view>
+  <view class="bd">
+    <view class="top_line"></view>
+    <text class="m_name">合肥微同软件工作室申请获得以下权限</text>
+    <text class="s_name">· 获得你的公开信息（昵称、头像等）</text>
+  </view>
+  <view class="btn spacing">
+    <!-- 需要使用 button 来授权登录 -->
+    <button wx:if="{{canIUse}}" open-type="getUserInfo" class="weui_btn weui_btn_primary" bindgetuserinfo="bindGetUserInfo">授权登录</button>
+    <!-- <view wx:else>请升级微信版本</view> -->
+  </view>
+</view>

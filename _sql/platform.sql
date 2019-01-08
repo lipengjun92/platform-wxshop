@@ -58,12 +58,12 @@ CREATE TABLE `nideshop_address` (
   `detail_Info` varchar(120) COLLATE utf8_unicode_ci DEFAULT '' COMMENT '详细收货地址信息',
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of nideshop_address
 -- ----------------------------
-INSERT INTO `nideshop_address` VALUES ('6', '23', '李鹏军', '15209831990', '230031', '340104', '安徽省', '合肥市', '蜀山区', '黄山路598号合肥皇冠假日酒店');
+INSERT INTO `nideshop_address` VALUES ('1', '23', '李鹏军', '15209831990', '230000', '340104', '安徽省', '合肥市', '蜀山区', '汽修小区29栋');
 
 -- ----------------------------
 -- Table structure for `nideshop_ad_position`
@@ -3886,5 +3886,78 @@ CREATE TABLE `sys_sms_log` (
 
 INSERT INTO sys_config VALUES ('2', 'SMS_CONFIG_KEY', '{"domain":"http://web.cr6868.com/asmx/smsservice.aspx?","name":"","pwd":"","sign":"","type":1}', 0, '短信配置');
 
--- 20180123
+/** 2018-01-23 **/
 ALTER TABLE nideshop_address ADD is_default INT(1) DEFAULT 0 NULL;
+/** 2018-06-21 会员优惠券添加状态字段 **/
+ALTER TABLE `nideshop_user_coupon` ADD COLUMN `coupon_status` TINYINT (3) UNSIGNED DEFAULT '1' COMMENT '状态 1. 可用 2. 已用 3. 过期';
+/** 2019-07-07 给足迹表添加索引字段 **/
+ALTER TABLE `nideshop_footprint` ADD INDEX `index_nideshop_footprint_user_id_goods_id` (`user_id`, `goods_id`) USING BTREE ;
+/** 2018-09-29 解决微信名存在特殊字符导致的无法登陆问题 **/
+ALTER TABLE nideshop_user CHANGE nickname nickname VARCHAR (60) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+
+/** 2018-11-07 添加帮助中心 **/
+DROP TABLE IF EXISTS `nideshop_help_issue`;
+CREATE TABLE `nideshop_help_issue` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `type_id` int(11) DEFAULT NULL COMMENT '问题分类',
+  `question` varchar(500) DEFAULT NULL,
+  `answer` varchar(500) DEFAULT NULL,
+  `sort` int(4) DEFAULT NULL COMMENT '排序',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of nideshop_help_issue
+-- ----------------------------
+INSERT INTO `nideshop_help_issue` VALUES ('1', '1', 'Q1: 24小时配送吗？', '商品配送到户时间为：7:30-21:00。晚上20:30后下单，次日指定时间送达。', '1');
+INSERT INTO `nideshop_help_issue` VALUES ('2', '1', 'Q2: 活虾送到家还能活吗？', '我们采用特殊保温装置确保经短途运输虾能保持最大活度，保证商品的新鲜度，力争做到虾称量时100%是活的，但受商品自身特性影响，我们并不保证送达时每只虾都是活的。', '2');
+INSERT INTO `nideshop_help_issue` VALUES ('3', '1', 'Q3: 我提交订单后想更换地址可以吗？', '如您的新地址在同一站点的配送范围，您可以致电客服热线申请更改地址，但配送时间需要相应调整；如您的新地址不在同一站点配送范围，则您的订单将被取消。', '3');
+INSERT INTO `nideshop_help_issue` VALUES ('4', '1', 'Q4: 你们30分钟一定会送到吗？', '致力为您提供最佳购物体验，绝大部分订单将在您完成支付后30分钟左右送达您府上；高峰期或者恶劣天气等特殊情况配送时间可能需要延长一些，程序平台上会有相应提示，您可以根据个人需要进行选择。因配送时间受同一时间订单数量、订单商品数量、距离、交通、天气及车辆故障等意外事件影响，有时配送时间会超过您选择的送达时间，对此将尽可能提前告知，但目前暂时无法实现所有订单30分钟必达，也暂不能做到每个订单都提前告知送达时间延后。', '4');
+INSERT INTO `nideshop_help_issue` VALUES ('5', '1', 'Q5: 几分钟可以送达？', '一般30分钟送达。如遇天气、高峰时段等特殊情况，会另做通知。', '5');
+INSERT INTO `nideshop_help_issue` VALUES ('6', '1', 'Q6: 冰淇淋是不是也能送？', '可以，采用特殊保温装置确保冰淇淋极速送达您府上时仍保持最佳商品品质，请您放心。', '6');
+INSERT INTO `nideshop_help_issue` VALUES ('7', '1', 'Q7: 需要配送费吗？', '订单金额满88元人民币免配送费，订单金额不足88元人民币，则需要支付相应配送费。', '7');
+INSERT INTO `nideshop_help_issue` VALUES ('8', '1', 'Q8: 是不是所有地方都有送啊？', '非常抱歉，目前我们是根据城市的注册用户数逐步开放配送服务，非常感谢您的支持，也欢迎您帮我们多多宣传，争取早日开始为大家提供配送服务，谢谢您！', '8');
+INSERT INTO `nideshop_help_issue` VALUES ('9', '2', 'Q1: 你们的鱼新鲜吗？', '保证所有活鲜商品在称量时是鲜活的，您可以根据需求处理或无需预处理。', null);
+INSERT INTO `nideshop_help_issue` VALUES ('10', '2', 'Q2: 果蔬是不是会有农药超标？', '会对农产品进行严格的检测，确保果蔬的质量安全。', null);
+INSERT INTO `nideshop_help_issue` VALUES ('11', '2', 'Q3: 你们的产品新鲜吗？', '严格管理商品采购源头、严格管理商品保质期、水果、蔬菜均在冷库保存，配送采用特殊保温设备等确保商品质量，您可以放心选购。', null);
+INSERT INTO `nideshop_help_issue` VALUES ('12', '2', 'Q4:有发票吗？', '我们是正规的公司行为，可以给您开正式发票的，不过需要您下单的时候，留言给我们，不要忘记哦。', null);
+INSERT INTO `nideshop_help_issue` VALUES ('13', '2', 'Q5: 你们的产品会有假货吗？', '商品均是直接由生产厂家、有资质及良好声誉的供应商提供，或由直接从原产地采购。保证所有商品品质优良、保证所有商品均是正品，假一罚十，欢迎监督。', null);
+INSERT INTO `nideshop_help_issue` VALUES ('14', '3', 'Q1: 优惠券怎么使用？', '优惠券设有消费限额，下单时满足使用条件即可抵扣商品金额。优惠券不能抵配送费，一个订单只能使用一张优惠券。不同方式获得的优惠券有指定的使用规则，使用过程中请仔细阅读优惠券使用说明。', null);
+INSERT INTO `nideshop_help_issue` VALUES ('15', '3', 'Q2: 退货时优惠券可以退吗？', '优惠券一旦使用成功将无法退回，且不找零、不兑现；使用优惠券支付的订单，如发生退货，退款按照实际结算金额退款，优惠券不予兑现且不返还。', null);
+INSERT INTO `nideshop_help_issue` VALUES ('16', '3', 'Q3: 优惠券可以开发票吗？', '优惠券中的优惠金额不开具发票。', null);
+INSERT INTO `nideshop_help_issue` VALUES ('17', '3', 'Q4: 我忘了支付了，可以重新支付吗？', '您可以在提交订单后15分钟内前往“我的”账户中“待付款”栏选择需要付款的订单进行支付，预期订单将自动作废，如有需要商品则需重新提交订单。', null);
+INSERT INTO `nideshop_help_issue` VALUES ('18', '3', 'Q5: 怎么领取优惠券？', '成功注册超市用户账号即可领取新人专享优惠券；领取成功的优惠券可在【我的—优惠券】查看。', null);
+INSERT INTO `nideshop_help_issue` VALUES ('19', '3', 'Q6: 可以货到付款吗，可以用微信支付吗？', '目前暂不支持货到付款方式，您可以使用微信支付。', null);
+INSERT INTO `nideshop_help_issue` VALUES ('20', '4', 'Q1: 发票可以累计开吗？', '发票可以累计开，您可以申请开票的时候选择您要开的多个订单即可，一般可以开2个月内的发票。', null);
+INSERT INTO `nideshop_help_issue` VALUES ('21', '4', 'Q2: 购买的是食品，可以开日用品发票吗？', '发票开具的明细必须与您订单购买的商品一致，按实际购买商品种类开具发票。', null);
+INSERT INTO `nideshop_help_issue` VALUES ('22', '4', 'Q3：为什么申请不了发票？', '请刷新一下你的程序，在您的订单签收成功后，可以申请开具电子发票。', null);
+INSERT INTO `nideshop_help_issue` VALUES ('23', '4', 'Q4: 可以提供纸质发票吗？', '目前只支持开具电子发票，电子发票与纸质发票具有相同法律效力，如需报销，可将电子文档进行打印。', null);
+INSERT INTO `nideshop_help_issue` VALUES ('24', '4', 'Q5: 如何申请开发票？', '可以在订单签收后进入小程序【我的】—【发票与报销】—【开具电子发票】，然后选择您要申请开发票订单，填写发票抬头与查收电子发票的邮箱即可，可多个订单合并开具发票。', null);
+INSERT INTO `nideshop_help_issue` VALUES ('25', '5', 'Q1: 为什么我找不到我的小区？', '为保证商品品质并避免您长时间等候，目前配送范围仅限配送点半径2公里左右范围，我们将加紧站点建设，不断扩大服务范围。', null);
+INSERT INTO `nideshop_help_issue` VALUES ('26', '5', 'Q2: 需要设置密码吗？', '目前无需设置密码，但您必须输入手机验证码。', null);
+INSERT INTO `nideshop_help_issue` VALUES ('27', '6', 'Q1: 退款需要多久到账？', '符合退款条件的申请，将在1个工作日内完成操作，实际到款时间为1-3个工作日，具体视不同银行规定实行。', null);
+INSERT INTO `nideshop_help_issue` VALUES ('28', '6', 'Q2: 配送员走了才发现东西少了能不能补啊？', '商品一旦完成交接，恕不受理事后数量短少问题，请务必与配送员当场核对所订购商品。', null);
+INSERT INTO `nideshop_help_issue` VALUES ('29', '6', 'Q3: 付款后我不要了可以吗？', '非定制或预售商品在商品送出前您可以致电客服热线要求取消，商品送出后非商品质量问题由顾客发起的退换货行为，需要由顾客自行承担退换货运费；定制或预售商品非质量问题恕不接受退换货。水果、蔬菜、肉制品、饮料等食品、个人洗护计生用品、贴身用品不享受7天无理由退换货，具体见退换货政策。', null);
+INSERT INTO `nideshop_help_issue` VALUES ('30', '6', 'Q4: 接收时发现东西破损、短少、错误或者有质量问题怎么办？', '您可以当场向配送员或拨打客服热线提出拒绝接收商品、补足商品、更换或退款。Q5: 退换货需要支付配送费吗？因非商品质量问题由顾客发起的退换货行为，需由顾客自行承担退换货运费。', null);
+INSERT INTO `nideshop_help_issue` VALUES ('31', '6', 'Q7: 退款是退到哪个账户？', '一般是原路返回。', null);
+
+-- ----------------------------
+-- Table structure for `nideshop_help_type`
+-- ----------------------------
+DROP TABLE IF EXISTS `nideshop_help_type`;
+CREATE TABLE `nideshop_help_type` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `type_name` varchar(50) DEFAULT NULL COMMENT '问题分类',
+  `sort` int(4) DEFAULT NULL COMMENT '排序',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of nideshop_help_type
+-- ----------------------------
+INSERT INTO `nideshop_help_type` VALUES ('1', '配送问题', '1');
+INSERT INTO `nideshop_help_type` VALUES ('2', '商品问题', '2');
+INSERT INTO `nideshop_help_type` VALUES ('3', '支付问题', '3');
+INSERT INTO `nideshop_help_type` VALUES ('4', '发票问题', '4');
+INSERT INTO `nideshop_help_type` VALUES ('5', '账户问题', '5');
+INSERT INTO `nideshop_help_type` VALUES ('6', '售后问题', '6');

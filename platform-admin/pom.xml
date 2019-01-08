@@ -18,30 +18,9 @@
             <artifactId>platform-common</artifactId>
             <version>1.0.0</version>
         </dependency>
-        <dependency>
-            <groupId>com.platform</groupId>
-            <artifactId>platform-gen</artifactId>
-            <version>1.0.0</version>
-        </dependency>
-        <dependency>
-            <groupId>com.platform</groupId>
-            <artifactId>platform-schedule</artifactId>
-            <version>1.0.0</version>
-        </dependency>
-        <dependency>
-            <groupId>com.platform</groupId>
-            <artifactId>platform-api</artifactId>
-            <version>1.0.0</version>
-        </dependency>
-        <dependency>
-            <groupId>com.platform</groupId>
-            <artifactId>platform-shop</artifactId>
-            <version>1.0.0</version>
-            <type>war</type>
-        </dependency>
         <!--验证码生成工具-->
         <dependency>
-            <groupId>com.github.axet</groupId>
+            <groupId>com.github.penggle</groupId>
             <artifactId>kaptcha</artifactId>
             <version>${kaptcha.version}</version>
         </dependency>
@@ -68,6 +47,10 @@
     <build>
         <scriptSourceDirectory>src/main/java</scriptSourceDirectory>
         <resources>
+            <resource>
+                <directory>src/main/resources/${env}</directory>
+                <filtering>true</filtering>
+            </resource>
             <resource>
                 <directory>src/main/resources</directory>
                 <filtering>true</filtering>

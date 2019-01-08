@@ -5,11 +5,9 @@ import com.platform.annotation.LoginUser;
 import com.platform.entity.UserVo;
 import com.platform.service.ApiUserService;
 import com.platform.utils.R;
-
 import io.swagger.annotations.Api;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -31,7 +29,7 @@ public class ApiTestController {
     /**
      * 获取用户信息
      */
-    @GetMapping("userInfo")
+    @PostMapping("userInfo")
     public R userInfo(@LoginUser UserVo user) {
         return R.ok().put("user", user);
     }
@@ -40,7 +38,7 @@ public class ApiTestController {
      * 忽略Token验证测试
      */
     @IgnoreAuth
-    @GetMapping("notToken")
+    @PostMapping("notToken")
     public R notToken() {
         return R.ok().put("msg", "无需token也能访问。。。");
     }
@@ -52,7 +50,7 @@ public class ApiTestController {
      * @return
      */
     @IgnoreAuth
-    @GetMapping("userListByMobile")
+    @PostMapping("userListByMobile")
     public R userList(String mobile) {
         UserVo userEntity = userService.queryByMobile(mobile);
         return R.ok().put("dto", userEntity);

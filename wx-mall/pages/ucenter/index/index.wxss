@@ -186,3 +186,10 @@ page{
   line-height: normal;
   display: inline;
 }
+
+.company {
+  font-family: STXingkai;
+  font-size:20rpx;
+  text-align:center;
+  margin-top:50px;
+}

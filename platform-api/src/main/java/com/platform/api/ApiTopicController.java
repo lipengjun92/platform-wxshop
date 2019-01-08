@@ -9,7 +9,7 @@ import com.platform.util.ApiBaseAction;
 import com.platform.util.ApiPageUtils;
 import com.platform.utils.Query;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -32,7 +32,7 @@ public class ApiTopicController extends ApiBaseAction {
     /**
      */
     @IgnoreAuth
-    @GetMapping("list")
+    @PostMapping("list")
     public Object list(@RequestParam(value = "page", defaultValue = "1") Integer page,
                        @RequestParam(value = "size", defaultValue = "10") Integer size) {
         Map param = new HashMap();
@@ -52,7 +52,7 @@ public class ApiTopicController extends ApiBaseAction {
     /**
      */
     @IgnoreAuth
-    @GetMapping("detail")
+    @PostMapping("detail")
     public Object detail(@LoginUser UserVo loginUser, Integer id) {
         TopicVo topicEntity = topicService.queryObject(id);
         return toResponsSuccess(topicEntity);
@@ -61,7 +61,7 @@ public class ApiTopicController extends ApiBaseAction {
     /**
      */
     @IgnoreAuth
-    @GetMapping("related")
+    @PostMapping("related")
     public Object related(@LoginUser UserVo loginUser, Integer id) {
         Map param = new HashMap();
         param.put("limit", 4);

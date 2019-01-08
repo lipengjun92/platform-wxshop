@@ -28,13 +28,11 @@ Page({
     });
   },
   addressAddOrUpdate (event) {
-    console.log(event)
     wx.navigateTo({
       url: '/pages/ucenter/addressAdd/addressAdd?id=' + event.currentTarget.dataset.addressId
     })
   },
   deleteAddress(event){
-    console.log(event.target)
     let that = this;
     wx.showModal({
       title: '',
@@ -42,12 +40,11 @@ Page({
       success: function (res) {
         if (res.confirm) {
           let addressId = event.target.dataset.addressId;
-          util.request(api.AddressDelete, { id: addressId }, 'POST').then(function (res) {
+          util.request(api.AddressDelete, { id: addressId },'POST', 'application/json').then(function (res) {
             if (res.errno === 0) {
               that.getAddressList();
             }
           });
-          console.log('用户点击确定')
         }
       }
     })

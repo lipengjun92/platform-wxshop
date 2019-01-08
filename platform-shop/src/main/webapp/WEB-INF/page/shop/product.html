@@ -38,24 +38,24 @@
                     <i-option v-for="goods in goodss" :value="goods.id" :key="goods.id">{{goods.name}}</i-option>
                 </i-select>
             </Form-item>
-            <Form-item v-if="type == 'add'" label="商品规格" prop="goodsSpecificationIds">
+            <Form-item label="商品规格" prop="goodsSpecificationIds">
                 <Checkbox-group v-model="attribute">
                     <Checkbox :label="1">颜色</Checkbox>
                     <Checkbox :label="2">规格</Checkbox>
                     <Checkbox :label="4">重量</Checkbox>
                 </Checkbox-group>
             </Form-item>
-            <Form-item v-if="type == 'add'" label="颜色" v-if="attribute.indexOf(1)>-1" prop="color">
+            <Form-item label="颜色" v-if="attribute.indexOf(1)>-1" prop="color">
                 <i-select v-model="color" filterable multiple>
                     <i-option v-for="color in colors" :value="color.id" :key="color.id">{{color.value}}</i-option>
                 </i-select>
             </Form-item>
-            <Form-item v-if="type == 'add'" label="规格" v-if="attribute.indexOf(2)>-1" prop="color">
+            <Form-item label="规格" v-if="attribute.indexOf(2)>-1" prop="guige">
                 <i-select v-model="guige" filterable multiple>
                     <i-option v-for="guige in guiges" :value="guige.id" :key="guige.id">{{guige.value}}</i-option>
                 </i-select>
             </Form-item>
-            <Form-item v-if="type == 'add'" label="重量" v-if="attribute.indexOf(4)>-1" prop="color">
+            <Form-item label="重量" v-if="attribute.indexOf(4)>-1" prop="weight">
                 <i-select v-model="weight" filterable multiple>
                     <i-option v-for="weight in weights" :value="weight.id" :key="weight.id">{{weight.value}}</i-option>
                 </i-select>

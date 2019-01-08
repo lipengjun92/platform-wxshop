@@ -1,10 +1,10 @@
-import {get} from '../../common/axios'
-
+import axios from '@/libs/api.request'
 export const home = {
-	getHomeInfo (val) {
-		return get({
-			url: 'api/index/index',
-			params: val
-		})
-	}
+  getHomeInfo: (params) => {
+    return axios.request({
+      url: 'home/getHomeInfo',
+      data: params,
+      method: 'post'
+    })
+  }
 }

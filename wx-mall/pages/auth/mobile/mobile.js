@@ -64,9 +64,9 @@ Page({
         if (!this.bindCheckMobile(this.data.mobile)) {
             return
         }
-        util.request(api.SmsCode, {phone: this.data.mobile}, 'POST')
+        util.request(api.SmsCode, {phone: this.data.mobile}, 'POST', 'application/json')
             .then(function (res) {
-                if (res.data.code == 200) {
+                if (res.errno == 0) {
                     wx.showToast({
                         title: '发送成功',
                         icon: 'success',
@@ -91,6 +91,12 @@ Page({
                             })
                         }
                     }, 1000);
+                } else {
+                    wx.showToast({
+                        title: '发送失败',
+                        icon: 'none',
+                        duration: 1000
+                    })
                 }
             });
 
@@ -109,7 +115,7 @@ Page({
             icon: 'loading',
             duration: 5000
         })
-        util.request(api.BindMobile, {mobile_code: e.detail.value.code,mobile:mobile}, 'POST')
+        util.request(api.BindMobile, {mobile_code: e.detail.value.code, mobile: mobile})
             .then(function (res) {
                 if (res.data.code == 200) {
                     wx.showModal({

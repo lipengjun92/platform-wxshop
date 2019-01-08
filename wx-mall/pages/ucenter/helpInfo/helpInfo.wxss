@@ -1,0 +1,41 @@
+page, .container {
+  width: 750rpx;
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  background: #f4f4f4;
+  position: relative;
+}
+
+.help-container {
+  background-color: #fff;
+  padding: 0 30rpx;
+}
+
+.help-box {
+  position: relative;
+}
+
+.help-box::after {
+  content: " ";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  height: 1px;
+  border-bottom: 1px solid #d9d9d9;
+  color: #d9d9d9;
+  -webkit-transform-origin: 0 100%;
+  transform-origin: 0 100%;
+  -webkit-transform: scaleY(0.5);
+  transform: scaleY(0.5);
+}
+
+.help-box .help-title{
+  padding-top: 30rpx;
+  font-weight: bold;
+}
+
+.help-box .help-content{
+  padding: 30rpx 0;
+}

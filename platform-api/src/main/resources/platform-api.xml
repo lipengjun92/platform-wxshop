@@ -13,6 +13,7 @@
                 <property name="userService" ref="apiUserService"></property>
             </bean>
         </mvc:argument-resolvers>
+
     </mvc:annotation-driven>
 
     <mvc:interceptors>
@@ -21,6 +22,8 @@
             <ref bean="authorizationInterceptor"/>
         </mvc:interceptor>
     </mvc:interceptors>
+
+    <bean id="apiUserService" class="com.platform.service.ApiUserService"/>
 
     <bean id="authorizationInterceptor" class="com.platform.interceptor.AuthorizationInterceptor"/>
 </beans>

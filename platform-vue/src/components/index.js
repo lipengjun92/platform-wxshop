@@ -1,33 +1,33 @@
-import appShell from './packages/app-shell/index.js'
-import indexFloor from './packages/index-floor/index.js'
-import categoryBox from './packages/category-box/index.js'
-import cartCell from './packages/cart-cell/index.js'
-import number from './packages/number/index.js'
-import selector from './packages/selector/index.js'
-import specialCell from './packages/special-cell/index.js'
-import goodsBox from './packages/goods-box/index.js'
-import cell from './packages/cell/index.js'
-import cellGroup from './packages/cell-group/index.js'
-import goodsCell from './packages/goods-cell/index.js'
+import Vue from 'vue'
+
+import mDemo from './packages/m-demo'
+import mButton from './packages/m-button'
+import mFloor from './packages/m-floor'
+import mBannerFloor from './packages/m-banner-floor'
+import mGoods from './packages/m-goods'
+import mNumber from './packages/m-number'
+import mCell from './packages/m-cell'
+import mCellGroup from './packages/m-cell-group'
+import mInput from './packages/m-input'
+import mPopup from './packages/m-popup'
 
 const version = '1.0.0'
 
 const install = function (Vue, config = {}) {
-    if (install.installed) return
-    Vue.component(appShell.name, appShell)
-    Vue.component(indexFloor.name, indexFloor)
-    Vue.component(categoryBox.name, categoryBox)
-    Vue.component(cartCell.name, cartCell)
-    Vue.component(number.name, number)
-    Vue.component(selector.name, selector)
-    Vue.component(specialCell.name, specialCell)
-    Vue.component(goodsBox.name, goodsBox)
-    Vue.component(cell.name, cell)
-    Vue.component(cellGroup.name, cellGroup)
-    Vue.component(goodsCell.name, goodsCell)
-};
+  if (install.installed) return
 
-export default {
-    version,
-    install
+  Vue.component(mDemo.name, mDemo)
+  Vue.component(mButton.name, mButton)
+  Vue.component(mFloor.name, mFloor)
+  Vue.component(mBannerFloor.name, mBannerFloor)
+  Vue.component(mGoods.name, mGoods)
+  Vue.component(mNumber.name, mNumber)
+  Vue.component(mCell.name, mCell)
+  Vue.component(mCellGroup.name, mCellGroup)
+  Vue.component(mInput.name, mInput)
+  Vue.component(mPopup.name, mPopup)
 }
+
+Vue.use({ version, install })
+
+Vue.$mPopup = Vue.prototype.$mPopup = mPopup

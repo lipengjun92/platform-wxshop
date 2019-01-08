@@ -113,7 +113,7 @@ public class ApiCommentController extends ApiBaseAction {
     /**
      */
     @ApiOperation(value = "评论数量")
-    @GetMapping("count")
+    @PostMapping("count")
     public Object count(Integer typeId, Integer valueId) {
         Map<String, Object> resultObj = new HashMap();
         //
@@ -138,7 +138,7 @@ public class ApiCommentController extends ApiBaseAction {
      */
     @ApiOperation(value = "选择评论类型")
     @IgnoreAuth
-    @GetMapping("list")
+    @PostMapping("list")
     public Object list(Integer typeId, Integer valueId, Integer showType,
                        @RequestParam(value = "page", defaultValue = "1") Integer page, @RequestParam(value = "size", defaultValue = "10") Integer size,
                        String sort, String order) {

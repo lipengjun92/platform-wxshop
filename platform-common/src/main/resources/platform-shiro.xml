@@ -47,6 +47,7 @@
 	        <value>
 	        	/statics/**=anon
 				/api/**=anon
+				/api/**=noSessionCreation
 	        	/login.html=anon
 	        	/sys/login=anon
 	        	/captcha.jpg=anon

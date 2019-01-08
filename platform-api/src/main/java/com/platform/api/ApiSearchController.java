@@ -14,7 +14,6 @@ import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -43,7 +42,7 @@ public class ApiSearchController extends ApiBaseAction {
      * 　　index
      */
     @ApiOperation(value = "搜索商品列表")
-    @GetMapping("index")
+    @PostMapping("index")
     public Object index(@LoginUser UserVo loginUser) {
         Map<String, Object> resultObj = new HashMap();
         Map param = new HashMap();
@@ -94,7 +93,7 @@ public class ApiSearchController extends ApiBaseAction {
     @ApiOperation(value = "搜索商品")
     @ApiImplicitParams({@ApiImplicitParam(name = "keyword", value = "关键字", paramType = "path", required = true)})
     @IgnoreAuth
-    @GetMapping("helper")
+    @PostMapping("helper")
     public Object helper(@LoginUser UserVo loginUser, String keyword) {
         Map param = new HashMap();
         param.put("fields", "distinct keyword");

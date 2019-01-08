@@ -40,7 +40,8 @@ Page({
           productList: res.data.productList,
           userHasCollect: res.data.userHasCollect
         });
-
+          //设置默认值
+          that.setDefSpecInfo(that.data.specificationList);
         if (res.data.userHasCollect == 1) {
           that.setData({
             'collectBackImage': that.data.hasCollectImage
@@ -170,7 +171,7 @@ Page({
   },
   getCheckedProductItem: function (key) {
     return this.data.productList.filter(function (v) {
-      if (v.goods_specification_ids == key) {
+      if (v.goods_specification_ids.indexOf(key) > -1) {
         return true;
       } else {
         return false;
@@ -202,7 +203,6 @@ Page({
           clientWidth = res.windowWidth,
           rpxR = 750 / clientWidth;
         var calc = clientHeight * rpxR - 100;
-        console.log(calc)
         that.setData({
           winHeight: calc
         });
@@ -250,7 +250,7 @@ Page({
       }
     } else {
       //添加或是取消收藏
-      util.request(api.CollectAddOrDelete, { typeId: 0, valueId: this.data.id }, "POST")
+      util.request(api.CollectAddOrDelete, { typeId: 0, valueId: this.data.id }, "POST", "application/json")
         .then(function (res) {
           let _res = res;
           if (_res.errno == 0) {
@@ -314,7 +314,7 @@ Page({
       }
 
       // 直接购买商品
-      util.request(api.BuyAdd, { goodsId: this.data.goods.id, number: this.data.number, productId: checkedProduct[0].id }, "POST")
+      util.request(api.BuyAdd, { goodsId: this.data.goods.id, number: this.data.number, productId: checkedProduct[0].id }, "POST",'application/json')
         .then(function (res) {
           let _res = res;
           if (_res.errno == 0) {
@@ -352,6 +352,9 @@ Page({
 
       //提示选择完整规格
       if (!this.isCheckedAllSpec()) {
+          wx.showToast({
+              title: '请选择完整规格'
+          });
         return false;
       }
 
@@ -369,7 +372,7 @@ Page({
       }
 
       //添加到购物车
-      util.request(api.CartAdd, { goodsId: this.data.goods.id, number: this.data.number, productId: checkedProduct[0].id }, "POST")
+      util.request(api.CartAdd, { goodsId: this.data.goods.id, number: this.data.number, productId: checkedProduct[0].id }, 'POST', 'application/json')
         .then(function (res) {
           let _res = res;
           if (_res.errno == 0) {
@@ -410,5 +413,23 @@ Page({
     this.setData({
       number: this.data.number + 1
     });
-  }
+  },
+    setDefSpecInfo: function (specificationList) {
+        //未考虑规格联动情况
+        let that = this;
+        if (!specificationList)return;
+        for (let i = 0; i < specificationList.length;i++){
+            let specification = specificationList[i];
+            let specNameId = specification.specification_id;
+            //规格只有一个时自动选择规格
+            if (specification.valueList && specification.valueList.length == 1){
+                let specValueId = specification.valueList[0].id;
+                that.clickSkuValue({ currentTarget: { dataset: { "nameId": specNameId, "valueId": specValueId } } });
+            }
+        }
+        specificationList.map(function(item){
+
+        });
+
+    }
 })

@@ -8,16 +8,16 @@ import com.platform.entity.UserVo;
 import com.platform.service.ApiUserService;
 import com.platform.service.SysConfigService;
 import com.platform.util.ApiBaseAction;
-import com.platform.utils.*;
+import com.platform.utils.CharUtil;
+import com.platform.utils.Constant;
+import com.platform.utils.SmsUtil;
+import com.platform.utils.StringUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.Date;
 
 /**
  * 作者: @author Harmon <br>
@@ -54,23 +54,22 @@ public class ApiUserController extends ApiBaseAction {
         //获取云存储配置信息
         SmsConfig config = sysConfigService.getConfigObject(Constant.SMS_CONFIG_KEY, SmsConfig.class);
         if (StringUtils.isNullOrEmpty(config)) {
-            throw new RRException("请先配置短信平台信息");
+            return toResponsFail("请先配置短信平台信息");
         }
         if (StringUtils.isNullOrEmpty(config.getName())) {
-            throw new RRException("请先配置短信平台用户名");
+            return toResponsFail("请先配置短信平台用户名");
         }
         if (StringUtils.isNullOrEmpty(config.getPwd())) {
-            throw new RRException("请先配置短信平台密钥");
+            return toResponsFail("请先配置短信平台密钥");
         }
         if (StringUtils.isNullOrEmpty(config.getSign())) {
-            throw new RRException("请先配置短信平台签名");
+            return toResponsFail("请先配置短信平台签名");
         }
         try {
             /**
              * 状态,发送编号,无效号码数,成功提交数,黑名单数和消息，无论发送的号码是多少，一个发送请求只返回一个sendid，如果响应的状态不是“0”，则只有状态和消息
              */
-            result = SmsUtil.crSendSms(config.getName(), config.getPwd(), phone, msgContent, config.getSign(),
-                    DateUtils.format(new Date(), "yyyy-MM-dd HH:mm:ss"), "");
+            result = SmsUtil.crSendSms(config.getName(), config.getPwd(), phone, msgContent, config.getSign(), "", "");
         } catch (Exception e) {
 
         }
@@ -97,7 +96,7 @@ public class ApiUserController extends ApiBaseAction {
      * @return
      */
     @ApiOperation(value = "获取当前会员等级")
-    @GetMapping("getUserLevel")
+    @PostMapping("getUserLevel")
     public Object getUserLevel(@LoginUser UserVo loginUser) {
         String userLevel = userService.getUserLevel(loginUser);
         return toResponsSuccess(userLevel);

@@ -8,8 +8,8 @@
 		"newFeature": true
 	},
 	"compileType": "miniprogram",
-	"libVersion": "1.9.0",
-	"appid": "wx11ed3e37387289b8",
+	"libVersion": "2.3.0",
+	"appid": "wx2a601dffd92609df",
 	"projectname": "pwm",
 	"condition": {
 		"search": {

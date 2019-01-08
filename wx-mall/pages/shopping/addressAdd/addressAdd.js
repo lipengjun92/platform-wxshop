@@ -56,7 +56,6 @@ Page({
   getAddressDetail() {
     let that = this;
     util.request(api.AddressDetail, { id: that.data.addressId }).then(function (res) {
-      console.log(res.data);
       if (res.errno === 0) {
         if(res.data){
             that.setData({
@@ -122,7 +121,6 @@ Page({
   },
   onLoad: function (options) {
     // 页面初始化 options为页面跳转所带来的参数
-    console.log(options);
     if (options.id != '' && options.id != 0) {
       this.setData({
         addressId: options.id
@@ -267,7 +265,6 @@ Page({
     })
   },
   saveAddress(){
-    console.log(this.data.address)
     let address = this.data.address;
 
     if (address.userName == '') {
@@ -306,7 +303,7 @@ Page({
       cityName: address.city_name,
       countyName: address.district_name,
       detailInfo: address.detailInfo,
-    }, 'POST').then(function (res) {
+    }, 'POST', 'application/json').then(function (res) {
       if (res.errno === 0) {
         wx.navigateBack({
           url: '/pages/shopping/address/address',

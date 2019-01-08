@@ -50,11 +50,16 @@
             <version>1.0.0</version>
             <type>war</type>
         </dependency>
+        <dependency>
+            <groupId>com.platform</groupId>
+            <artifactId>platform-mp</artifactId>
+            <version>1.0.0</version>
+        </dependency>
     </dependencies>
 
     <build>
         <sourceDirectory>src/main/java</sourceDirectory>
-        <finalName>platform-framework</finalName>
+        <finalName>platform</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

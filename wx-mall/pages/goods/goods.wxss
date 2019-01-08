@@ -627,6 +627,7 @@
     height: 33rpx;
     line-height: 33rpx;
     margin-bottom: 10rpx;
+    overflow:hidden;
 }
 
 .attr-pop .a{
@@ -643,7 +644,6 @@
 }
 
 .spec-con .name{
-    height: 32rpx;
     margin-bottom: 22rpx;
     font-size: 29rpx;
     color: #333;

@@ -15,10 +15,13 @@
         <module>platform-framework</module>
         <module>platform-admin</module>
         <module>platform-shop</module>
+        <module>platform-mp</module><!-- 微信公众号模版 -->
     </modules>
 
     <properties>
-        <java-version>1.7</java-version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <server.port>8080</server.port>
+        <java-version>1.8</java-version>
         <servlet-version>3.1.0</servlet-version>
         <junit-version>4.12</junit-version>
         <springframework-version>4.3.7.RELEASE</springframework-version>
@@ -41,10 +44,12 @@
         <jstl-version>1.2</jstl-version>
         <taglibs-version>1.1.2</taglibs-version>
         <freemarker-version>2.3.23</freemarker-version>
-        <kaptcha.version>0.0.9</kaptcha.version>
-        <j2cache.version>2.3.22-release</j2cache.version>
+        <kaptcha.version>2.3.2</kaptcha.version>
+        <j2cache.version>2.7.2-release</j2cache.version>
         <ehcache.version>2.10.4</ehcache.version>
         <jgroups.version>3.6.13.Final</jgroups.version>
+        <mybatis.paginator.version>1.2.10</mybatis.paginator.version>
+        <weixin-java-mp.version>3.2.0</weixin-java-mp.version>
     </properties>
 
     <!-- 阿里云maven仓库 -->
@@ -264,7 +269,7 @@
         </dependency>
         <!--验证码生成工具-->
         <dependency>
-            <groupId>com.github.axet</groupId>
+            <groupId>com.github.penggle</groupId>
             <artifactId>kaptcha</artifactId>
             <version>${kaptcha.version}</version>
         </dependency>

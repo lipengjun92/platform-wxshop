@@ -143,5 +143,10 @@
             <artifactId>jgroups</artifactId>
             <version>${jgroups.version}</version>
         </dependency>
+        <dependency>
+            <groupId>com.github.miemiedev</groupId>
+            <artifactId>mybatis-paginator</artifactId>
+            <version>${mybatis.paginator.version}</version>
+        </dependency>
     </dependencies>
 </project>

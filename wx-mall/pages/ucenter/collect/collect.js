@@ -12,7 +12,6 @@ Page({
     let that = this;
     util.request(api.CollectList, { typeId: that.data.typeId}).then(function (res) {
       if (res.errno === 0) {
-        console.log(res.data);
         that.setData({
           collectList: res.data
         });
@@ -39,22 +38,18 @@ Page({
     
     let that = this;
     let goodsId = this.data.collectList[event.currentTarget.dataset.index].value_id;
-    console.log(goodsId);
 
     //触摸时间距离页面打开的毫秒数  
     var touchTime = that.data.touch_end - that.data.touch_start;
-    console.log(touchTime);
-    //如果按下时间大于350为长按  
+    //如果按下时间大于350为长按
     if (touchTime > 350) {
       wx.showModal({
         title: '',
         content: '确定删除收藏吗？',
         success: function (res) {
           if (res.confirm) {
-            console.log('用户点击确认');
-            util.request(api.CollectAddOrDelete, { typeId: that.data.typeId, valueId: goodsId}, 'POST').then(function (res) {
+            util.request(api.CollectAddOrDelete, { typeId: that.data.typeId, valueId: goodsId}).then(function (res) {
               if (res.errno === 0) {
-                console.log(res.data);
                 wx.showToast({
                   title: '删除成功',
                   icon: 'success',
@@ -79,7 +74,6 @@ Page({
     that.setData({
       touch_start: e.timeStamp
     })
-    console.log(e.timeStamp + '- touch-start')
   },
   //按下事件结束  
   touchEnd: function (e) {
@@ -87,6 +81,5 @@ Page({
     that.setData({
       touch_end: e.timeStamp
     })
-    console.log(e.timeStamp + '- touch-end')
-  }, 
+  },
 })

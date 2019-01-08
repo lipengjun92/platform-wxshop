@@ -8,7 +8,7 @@ import com.platform.util.ApiBaseAction;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -45,7 +45,7 @@ public class ApiIndexController extends ApiBaseAction {
      * 测试
      */
     @IgnoreAuth
-    @GetMapping(value = "test")
+    @PostMapping(value = "test")
     public Object test() {
         return toResponsMsgSuccess("请求成功yyy");
     }
@@ -55,7 +55,7 @@ public class ApiIndexController extends ApiBaseAction {
      */
     @ApiOperation(value = "首页")
     @IgnoreAuth
-    @GetMapping(value = "index")
+    @PostMapping(value = "index")
     public Object index() {
         Map<String, Object> resultObj = new HashMap<String, Object>();
         //
@@ -153,7 +153,7 @@ public class ApiIndexController extends ApiBaseAction {
      */
     @ApiOperation(value = "新商品信息")
     @IgnoreAuth
-    @GetMapping(value = "newGoods")
+    @PostMapping(value = "newGoods")
     public Object newGoods() {
         Map<String, Object> resultObj = new HashMap<String, Object>();
         //
@@ -171,7 +171,7 @@ public class ApiIndexController extends ApiBaseAction {
 
     @ApiOperation(value = "新热门商品信息")
     @IgnoreAuth
-    @GetMapping(value = "hotGoods")
+    @PostMapping(value = "hotGoods")
     public Object hotGoods() {
         Map<String, Object> resultObj = new HashMap<String, Object>();
         //
@@ -188,7 +188,7 @@ public class ApiIndexController extends ApiBaseAction {
 
     @ApiOperation(value = "topic")
     @IgnoreAuth
-    @GetMapping(value = "topic")
+    @PostMapping(value = "topic")
     public Object topic() {
         Map<String, Object> resultObj = new HashMap<String, Object>();
         //
@@ -204,7 +204,7 @@ public class ApiIndexController extends ApiBaseAction {
 
     @ApiOperation(value = "brand")
     @IgnoreAuth
-    @GetMapping(value = "brand")
+    @PostMapping(value = "brand")
     public Object brand() {
         Map<String, Object> resultObj = new HashMap<String, Object>();
         //
@@ -223,7 +223,7 @@ public class ApiIndexController extends ApiBaseAction {
 
     @ApiOperation(value = "category")
     @IgnoreAuth
-    @GetMapping(value = "category")
+    @PostMapping(value = "category")
     public Object category() {
         Map<String, Object> resultObj = new HashMap<String, Object>();
         //
@@ -238,14 +238,18 @@ public class ApiIndexController extends ApiBaseAction {
             param.remove("fields");
             param.put("parent_id", categoryItem.getId());
             List<CategoryVo> categoryEntityList = categoryService.queryList(param);
-            List<Integer> childCategoryIds = new ArrayList<>();
-            for (CategoryVo categoryEntity : categoryEntityList) {
-                childCategoryIds.add(categoryEntity.getId());
+            List<Integer> childCategoryIds = null;
+            if (categoryEntityList != null && categoryEntityList.size() > 0) {
+                childCategoryIds = new ArrayList<>();
+                for (CategoryVo categoryEntity : categoryEntityList) {
+                    childCategoryIds.add(categoryEntity.getId());
+                }
             }
             //
             param = new HashMap<String, Object>();
             param.put("categoryIds", childCategoryIds);
             param.put("fields", "id as id, name as name, list_pic_url as list_pic_url, retail_price as retail_price");
+            param.put("is_delete", "0");
             PageHelper.startPage(0, 7, false);
             List<GoodsVo> categoryGoods = goodsService.queryList(param);
             Map<String, Object> newCategory = new HashMap<String, Object>();
@@ -262,7 +266,7 @@ public class ApiIndexController extends ApiBaseAction {
 
     @ApiOperation(value = "banner")
     @IgnoreAuth
-    @GetMapping(value = "banner")
+    @PostMapping(value = "banner")
     public Object banner() {
         Map<String, Object> resultObj = new HashMap<String, Object>();
         //
@@ -277,7 +281,7 @@ public class ApiIndexController extends ApiBaseAction {
 
     @ApiOperation(value = "channel")
     @IgnoreAuth
-    @GetMapping(value = "channel")
+    @PostMapping(value = "channel")
     public Object channel() {
         Map<String, Object> resultObj = new HashMap<String, Object>();
         //

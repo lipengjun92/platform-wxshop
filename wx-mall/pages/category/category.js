@@ -77,7 +77,6 @@ Page({
   },
   onShow: function () {
     // 页面显示
-    console.log(1);
   },
   onHide: function () {
     // 页面隐藏
@@ -87,7 +86,6 @@ Page({
      * 页面上拉触底事件的处理函数
      */
   onReachBottom: function () {
-    console.log("下一页")
     this.getGoodsList()
   },
 

@@ -33,7 +33,7 @@ public class ApiFootprintController extends ApiBaseAction {
      */
     @ApiOperation(value = "删除足迹")
     @ApiImplicitParams({@ApiImplicitParam(name = "footprintId", value = "足迹id", paramType = "path", required = true)})
-    @GetMapping("delete")
+    @PostMapping("delete")
     public Object delete(@LoginUser UserVo loginUser, Integer footprintId) {
         if (footprintId == null) {
             return toResponsFail("删除出错");
@@ -56,7 +56,7 @@ public class ApiFootprintController extends ApiBaseAction {
     /**
      */
     @ApiOperation(value = "获取足迹列表")
-    @GetMapping("list")
+    @PostMapping("list")
     public Object list(@LoginUser UserVo loginUser,
                        @RequestParam(value = "page", defaultValue = "1") Integer page,
                        @RequestParam(value = "size", defaultValue = "10") Integer size) {
