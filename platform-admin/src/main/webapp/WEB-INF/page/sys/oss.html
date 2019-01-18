@@ -33,6 +33,9 @@
                     <Radio label="3">
                         <span>腾讯云</span>
                     </Radio>
+                    <Radio label="4">
+                        <span>服务器</span>
+                    </Radio>
                     <Radio label="1">
                         <span>七牛</span>
                     </Radio>
@@ -98,6 +101,15 @@
                 </Form-item>
                 <Form-item label="Bucket所属地区" prop="qcloudRegion">
                     <i-input v-model="config.qcloudRegion" placeholder="如：sh（可选值 ，华南：gz 华北：tj 华东：sh）"/>
+                </Form-item>
+            </i-form>
+            <i-form ref="formValidate" :model="config" :rules="diskRuleValidate" v-if="config.type == 4"
+                    :label-width="130">
+                <Form-item label="存储路径" prop="diskPath">
+                    <i-input v-model="config.diskPath" placeholder="本地存储路径"/>
+                </Form-item>
+                <Form-item label="代理服务器" prop="proxyServer">
+                    <i-input v-model="config.proxyServer" placeholder="本地存储代理服务器，比如Nginx代理服务"/>
                 </Form-item>
             </i-form>
             <Form-item>

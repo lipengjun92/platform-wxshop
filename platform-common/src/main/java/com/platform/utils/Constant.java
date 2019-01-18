@@ -126,7 +126,11 @@ public class Constant {
         /**
          * 腾讯云
          */
-        QCLOUD(3);
+        QCLOUD(3),
+        /**
+         * 服务器存储
+         */
+        DISCK(4);
 
         private int value;
 
