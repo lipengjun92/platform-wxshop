@@ -78,6 +78,14 @@ var vm = new Vue({
             qcloudRegion: [
                 {required: true, message: 'Bucket所属地区不能为空', trigger: 'blur'}
             ]
+        },
+        diskRuleValidate:{
+            diskPath: [
+                {required: true, message: '本地存储路径不能为空', trigger: 'blur'}
+            ],
+            proxyServer: [
+                {required: true, message: '本地存储代理服务器不能为空', trigger: 'blur'}
+            ]
         }
     },
     created: function () {
