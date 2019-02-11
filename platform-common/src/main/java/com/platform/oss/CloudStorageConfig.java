@@ -1,6 +1,7 @@
 package com.platform.oss;
 
 import com.platform.validator.group.AliyunGroup;
+import com.platform.validator.group.DiskGroup;
 import com.platform.validator.group.QcloudGroup;
 import com.platform.validator.group.QiniuGroup;
 import org.hibernate.validator.constraints.NotBlank;
@@ -20,8 +21,8 @@ import java.io.Serializable;
 public class CloudStorageConfig implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    //类型 1：七牛  2：阿里云  3：腾讯云
-    @Range(min = 1, max = 3, message = "类型错误")
+    //类型 1：七牛  2：阿里云  3：腾讯云  4：服务器存储
+    @Range(min = 1, max = 4, message = "类型错误")
     private Integer type;
 
     //七牛绑定的域名
@@ -80,6 +81,12 @@ public class CloudStorageConfig implements Serializable {
     //腾讯云COS所属地区
     @NotBlank(message = "所属地区不能为空", groups = QcloudGroup.class)
     private String qcloudRegion;
+
+    //服务器存储
+    @NotBlank(message = "本地存储路径不能为空", groups = DiskGroup.class)
+    private String diskPath;
+    @NotBlank(message = "本地存储代理服务器不能为空", groups = DiskGroup.class)
+    private String proxyServer;
 
     public Integer getType() {
         return type;
@@ -231,5 +238,21 @@ public class CloudStorageConfig implements Serializable {
 
     public void setQcloudRegion(String qcloudRegion) {
         this.qcloudRegion = qcloudRegion;
+    }
+
+    public String getDiskPath() {
+        return diskPath;
+    }
+
+    public void setDiskPath(String diskPath) {
+        this.diskPath = diskPath;
+    }
+
+    public String getProxyServer() {
+        return proxyServer;
+    }
+
+    public void setProxyServer(String proxyServer) {
+        this.proxyServer = proxyServer;
     }
 }
