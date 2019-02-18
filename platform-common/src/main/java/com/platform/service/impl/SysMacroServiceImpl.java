@@ -1,5 +1,6 @@
 package com.platform.service.impl;
 
+import com.platform.annotation.RedisCache;
 import com.platform.cache.J2CacheUtils;
 import com.platform.dao.SysMacroDao;
 import com.platform.entity.SysMacroEntity;
@@ -30,6 +31,7 @@ public class SysMacroServiceImpl implements SysMacroService {
     }
 
     @Override
+    @RedisCache
     public List<SysMacroEntity> queryList(Map<String, Object> map) {
         return sysMacroDao.queryList(map);
     }
@@ -43,7 +45,7 @@ public class SysMacroServiceImpl implements SysMacroService {
     public int save(SysMacroEntity sysMacro) {
         sysMacro.setGmtCreate(new Date());
         sysMacroDao.save(sysMacro);
-        J2CacheUtils.put("macroList", queryList(new HashMap<>()));
+        J2CacheUtils.delByClass(this.getClass().getName(),"queryList");
         return 1;
     }
 
@@ -51,26 +53,32 @@ public class SysMacroServiceImpl implements SysMacroService {
     public int update(SysMacroEntity sysMacro) {
         sysMacro.setGmtModified(new Date());
         sysMacroDao.update(sysMacro);
-        J2CacheUtils.put("macroList", queryList(new HashMap<>()));
+        J2CacheUtils.delByClass(this.getClass().getName(),"queryList");
         return 1;
     }
 
     @Override
     public int delete(Long macroId) {
         sysMacroDao.delete(macroId);
-        J2CacheUtils.put("macroList", queryList(new HashMap<>()));
+        J2CacheUtils.delByClass(this.getClass().getName(),"queryList");
         return 1;
     }
 
     @Override
     public int deleteBatch(Long[] macroIds) {
         sysMacroDao.deleteBatch(macroIds);
-        J2CacheUtils.put("macroList", queryList(new HashMap<>()));
+        J2CacheUtils.delByClass(this.getClass().getName(),"queryList");
         return 1;
     }
 
     @Override
     public List<SysMacroEntity> queryMacrosByValue(String value) {
         return sysMacroDao.queryMacrosByValue(value);
+    }
+
+    @Override
+    public List<SysMacroEntity> queryAllParent(Map<String, Object> map) {
+        map.put("type", 0);
+        return sysMacroDao.queryList(map);
     }
 }
