@@ -1,5 +1,7 @@
 package com.platform.cache;
 
+import com.platform.utils.Constant;
+import com.platform.utils.StringUtils;
 import net.oschina.j2cache.CacheChannel;
 import net.oschina.j2cache.J2Cache;
 
@@ -123,6 +125,16 @@ public class J2CacheUtils {
     }
 
     /**
+     * 判断某个缓存键是否存在
+     *
+     * @param key    cache key
+     * @return true if key exists
+     */
+    public static boolean exists(String key) {
+        return check(SYS_CACHE_NAME, key) > 0;
+    }
+
+    /**
      * 判断某个key存在于哪级的缓存中
      *
      * @param region cache region
@@ -131,5 +143,17 @@ public class J2CacheUtils {
      */
     public static int check(String region, String key) {
         return cache.check(region, key);
+    }
+
+    /**
+     * 删除缓存
+     *
+     * @param className  类名
+     * @param methodName 方法名
+     */
+    public static void delByClass(String className, String methodName) {
+        String key = StringUtils.genKey(Constant.SYS_CACHE, className, methodName);
+
+        remove(key);
     }
 }

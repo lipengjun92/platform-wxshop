@@ -153,4 +153,21 @@ public class StringUtils {
         }
         return Integer.parseInt(s);
     }
+
+    /**
+     * 生成key
+     *
+     * @param prefix     前缀
+     * @param className  类名
+     * @param methodName 方法名
+     * @return prefix className.methodName
+     */
+    public static String genKey(String prefix, String className, String methodName) {
+        return prefix + "userId_" +
+                ShiroUtils.getUserId() +
+                "_" +
+                className +
+                "." +
+                methodName;
+    }
 }

@@ -71,4 +71,12 @@ public interface SysMacroService {
     int deleteBatch(Long[] macroIds);
 
     List<SysMacroEntity> queryMacrosByValue(String value);
+
+    /**
+     * 查看字典目录列表
+     *
+     * @param map
+     * @return
+     */
+    List<SysMacroEntity> queryAllParent(Map<String, Object> map);
 }

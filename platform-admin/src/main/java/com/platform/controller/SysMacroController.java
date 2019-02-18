@@ -120,6 +120,20 @@ public class SysMacroController {
     }
 
     /**
+     * 查看字典目录列表
+     *
+     * @param params 请求参数
+     * @return R
+     */
+    @RequestMapping("/queryAllParent")
+    public R queryAllParent(@RequestParam Map<String, Object> params) {
+
+        List<SysMacroEntity> list = sysMacroService.queryAllParent(params);
+
+        return R.ok().put("list", list);
+    }
+
+    /**
      * 根据value查询数据字典
      *
      * @param value value
