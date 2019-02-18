@@ -46,7 +46,7 @@
         `gmt_modified`
         from sys_macro
         WHERE 1=1
-        <if test="type != null and type.trim() != ''">
+        <if test="type != null">
             AND type = #{type}
         </if>
         <choose>
@@ -65,7 +65,7 @@
     <select id="queryTotal" resultType="int">
         select count(*) from sys_macro
         WHERE 1=1
-        <if test="type != null and type.trim() != ''">
+        <if test="type != null">
             AND type = #{type}
         </if>
     </select>
