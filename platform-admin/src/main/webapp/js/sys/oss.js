@@ -79,7 +79,7 @@ var vm = new Vue({
                 {required: true, message: 'Bucket所属地区不能为空', trigger: 'blur'}
             ]
         },
-        diskRuleValidate:{
+        diskRuleValidate: {
             diskPath: [
                 {required: true, message: '本地存储路径不能为空', trigger: 'blur'}
             ],
