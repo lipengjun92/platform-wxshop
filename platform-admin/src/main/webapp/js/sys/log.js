@@ -10,8 +10,8 @@ $(function () {
             {label: 'IP地址', name: 'ip', width: 150},
             {
                 label: '创建时间', name: 'createDate', width: 90, formatter: function (value) {
-                return transDate(value);
-            }
+                    return transDate(value);
+                }
             }
         ]
     });

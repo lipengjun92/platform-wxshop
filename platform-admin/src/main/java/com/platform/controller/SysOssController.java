@@ -10,6 +10,7 @@ import com.platform.service.SysOssService;
 import com.platform.utils.*;
 import com.platform.validator.ValidatorUtils;
 import com.platform.validator.group.AliyunGroup;
+import com.platform.validator.group.DiskGroup;
 import com.platform.validator.group.QcloudGroup;
 import com.platform.validator.group.QiniuGroup;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -98,6 +99,9 @@ public class SysOssController {
         } else if (config.getType() == Constant.CloudService.QCLOUD.getValue()) {
             //校验腾讯云数据
             ValidatorUtils.validateEntity(config, QcloudGroup.class);
+        } else if (config.getType() == Constant.CloudService.DISCK.getValue()) {
+            //校验腾讯云数据
+            ValidatorUtils.validateEntity(config, DiskGroup.class);
         }
 
         sysConfigService.updateValueByKey(KEY, JSON.toJSONString(config));
