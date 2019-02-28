@@ -67,7 +67,7 @@ Page({
     let that = this;
 
     if (!this.data.isEditCart) {
-      util.request(api.CartChecked, { productIds: that.data.cartGoods[itemIndex].product_id, isChecked: that.data.cartGoods[itemIndex].checked ? 0 : 1 }).then(function (res) {
+      util.request(api.CartChecked, { productIds: that.data.cartGoods[itemIndex].product_id, isChecked: that.data.cartGoods[itemIndex].checked ? 0 : 1 }, "POST", "application/json").then(function (res) {
         if (res.errno === 0) {
           that.setData({
             cartGoods: res.data.cartList,
@@ -112,7 +112,7 @@ Page({
       var productIds = this.data.cartGoods.map(function (v) {
         return v.product_id;
       });
-      util.request(api.CartChecked, { productIds: productIds.join(','), isChecked: that.isCheckedAll() ? 0 : 1 }).then(function (res) {
+      util.request(api.CartChecked, { productIds: productIds.join(','), isChecked: that.isCheckedAll() ? 0 : 1 }, "POST", "application/json").then(function (res) {
         if (res.errno === 0) {
           that.setData({
             cartGoods: res.data.cartList,
