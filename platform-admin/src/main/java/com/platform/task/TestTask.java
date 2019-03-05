@@ -2,7 +2,6 @@ package com.platform.task;
 
 import com.platform.entity.SysUserEntity;
 import com.platform.service.SysUserService;
-
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

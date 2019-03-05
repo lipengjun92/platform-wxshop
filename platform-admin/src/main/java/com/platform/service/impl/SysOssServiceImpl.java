@@ -1,52 +1,28 @@
 package com.platform.service.impl;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.platform.dao.SysOssDao;
 import com.platform.entity.SysOssEntity;
 import com.platform.service.SysOssService;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.platform.utils.PageUtilsPlus;
+import com.platform.utils.QueryPlus;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Map;
 
+/**
+ * @author 李鹏军
+ */
 @Service("sysOssService")
-public class SysOssServiceImpl implements SysOssService {
-    @Autowired
-    private SysOssDao sysOssDao;
+public class SysOssServiceImpl extends ServiceImpl<SysOssDao, SysOssEntity> implements SysOssService {
 
     @Override
-    public SysOssEntity queryObject(Long id) {
-        return sysOssDao.queryObject(id);
+    public PageUtilsPlus queryPage(Map<String, Object> params) {
+        //排序
+        params.put("sidx", "t.create_date");
+        params.put("asc", false);
+        Page<SysOssEntity> page = new QueryPlus<SysOssEntity>(params).getPage();
+        return new PageUtilsPlus(page.setRecords(baseMapper.selectSysOssPage(page, params)));
     }
-
-    @Override
-    public List<SysOssEntity> queryList(Map<String, Object> map) {
-        return sysOssDao.queryList(map);
-    }
-
-    @Override
-    public int queryTotal(Map<String, Object> map) {
-        return sysOssDao.queryTotal(map);
-    }
-
-    @Override
-    public void save(SysOssEntity sysOss) {
-        sysOssDao.save(sysOss);
-    }
-
-    @Override
-    public void update(SysOssEntity sysOss) {
-        sysOssDao.update(sysOss);
-    }
-
-    @Override
-    public void delete(Long id) {
-        sysOssDao.delete(id);
-    }
-
-    @Override
-    public void deleteBatch(Long[] ids) {
-        sysOssDao.deleteBatch(ids);
-    }
-
 }

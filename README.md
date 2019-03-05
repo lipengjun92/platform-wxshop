@@ -1,9 +1,10 @@
-#### [腾讯云新客专属福利](https://cloud.tencent.com/redirect.php?redirect=1025&cps_key=30280f92fc381dfc9e1d9e0e23d25a18&from=console)：
-新客户无门槛领取总价值高达2775元代金券，每种代金券限量500张，先到先得。
-[![腾讯云双十一](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/txnew.jpg)](https://cloud.tencent.com/redirect.php?redirect=1025&cps_key=30280f92fc381dfc9e1d9e0e23d25a18&from=console)
+#### [腾讯云2019新春采购节](https://cloud.tencent.com/redirect.php?redirect=1036&cps_key=30280f92fc381dfc9e1d9e0e23d25a18&from=console)：
+【开年好云 钜惠来袭】2019新春采购节，30款云产品感恩回馈。
+[![腾讯云2019新春采购节](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/active/tx/520_120.jpg)](https://cloud.tencent.com/redirect.php?redirect=1036&cps_key=30280f92fc381dfc9e1d9e0e23d25a18&from=console)
 
-#### [阿里云限量红包](https://promotion.aliyun.com/ntms/yunparter/invite.html?userCode=i8s6n64p)：
-即日起至12月31日，本站推荐的用户，限时领 “最高1888元红包” 。云产品通用红包，可叠加官网常规优惠使用。
+#### [阿里云开年采购季](https://www.aliyun.com/acts/product-section-2019/new-users?userCode=i8s6n64p)：
+入门爆款云服务器，降低采购成本，开发者和小微企业首选。
+[![阿里云开年采购季](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/active/ali/540x250.jpg)](https://www.aliyun.com/acts/product-section-2019/new-users?userCode=i8s6n64p)
 
 # 微信小程序商城（Java版）
 
@@ -29,7 +30,7 @@ https://platform-wxmall.oss-cn-beijing.aliyuncs.com/GVP.jpg "GVP")
 ## 技术选型
 * 1 后端使用技术
     * 1.1 springframework4.3.7.RELEASE
-    * 1.2 mybatis3.4.1
+    * 1.2 mybatis3.1.0、MyBatis-Plus 3.1.0
     * 1.3 shiro1.3.2
     * 1.4 servlet3.1.0
     * 1.5 druid1.0.28

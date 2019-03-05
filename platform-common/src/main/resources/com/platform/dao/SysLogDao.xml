@@ -3,80 +3,11 @@
 
 <mapper namespace="com.platform.dao.SysLogDao">
 
-	<select id="queryObject" resultType="com.platform.entity.SysLogEntity">
-		select * from sys_log where id = #{value}
-	</select>
-
-	<select id="queryList" resultType="com.platform.entity.SysLogEntity">
-		select * from sys_log
-		<where>
-			<if test="key != null and key.trim() != ''">
-				and `username` like concat('%',#{key},'%') or `operation` like concat('%',#{key},'%')
-			</if>
-			<if test="operation != null and operation.trim() != ''">
-				`operation` like concat('%',#{operation},'%')
-			</if>
-		</where>
-		order by id desc 
-		<if test="offset != null and limit != null">
-			limit #{offset}, #{limit}
-		</if>
-	</select>
-	
- 	<select id="queryTotal" resultType="int">
-		select count(*) from sys_log
-		<where>
-			<if test="key != null and key.trim() != ''">
-                `username` like concat('%',#{key},'%') or `operation` like concat('%',#{key},'%')
-			</if>
-			<if test="operation != null and operation.trim() != ''">
-				and `operation` like concat('%',#{operation},'%')
-			</if>
-		</where>
-	</select>
-	 
-	<insert id="save" parameterType="com.platform.entity.SysLogEntity" useGeneratedKeys="true" keyProperty="id">
-		insert into sys_log
-		(
-			`username`, 
-			`operation`, 
-			`method`, 
-			`params`, 
-			`ip`, 
-			`create_date`
-		)
-		values
-		(
-			#{username}, 
-			#{operation}, 
-			#{method}, 
-			#{params}, 
-			#{ip}, 
-			#{createDate}
-		)
-	</insert>
-	 
-	<update id="update" parameterType="com.platform.entity.SysLogEntity">
-		update sys_log 
-		<set>
-			<if test="username != null">`username` = #{username}, </if>
-			<if test="operation != null">`operation` = #{operation}, </if>
-			<if test="method != null">`method` = #{method}, </if>
-			<if test="params != null">`params` = #{params}, </if>
-			<if test="ip != null">`ip` = #{ip} </if>
-		</set>
-		where id = #{id}
-	</update>
-	
-	<delete id="delete">
-		delete from sys_log where id = #{value}
-	</delete>
-	
-	<delete id="deleteBatch">
-		delete from sys_log where id in 
-		<foreach item="id" collection="array" open="(" separator="," close=")">
-			#{id}
-		</foreach>
-	</delete>
+    <select id="selectSysLogPage" resultType="com.platform.entity.SysLogEntity">
+        select * from sys_log where 1=1
+        <if test="params.key != null and params.key.trim() != ''">
+            and `username` like '%${params.key}%' or `operation` like '%${params.key}%'
+        </if>
+    </select>
 
 </mapper>

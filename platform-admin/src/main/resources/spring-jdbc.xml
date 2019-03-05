@@ -14,6 +14,7 @@
 		http://www.springframework.org/schema/aop/spring-aop-2.5.xsd">
 
     <tx:annotation-driven/>
+    <!-- Import Properties -->
     <context:property-placeholder location="classpath*:platform.properties"/>
 
     <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource"
@@ -89,11 +90,46 @@
         <constructor-arg ref="dataSource"/>
     </bean>
 
-    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-        <property name="configLocation" value="classpath:mybatis.xml"/>
+    <!-- SqlSessionFactory MyBatisPlus Config -->
+    <bean id="sqlSessionFactory" class="com.baomidou.mybatisplus.extension.spring.MybatisSqlSessionFactoryBean">
+        <property name="typeAliasesPackage" value="com.platform.entity"/>
         <property name="dataSource" ref="dataSource"/>
+        <property name="globalConfig" ref="globalConfig"/>
+        <property name="configuration" ref="configuration"/>
+        <property name="plugins">
+            <array>
+                <!-- 性能分析拦截器 -->
+                <bean class="com.baomidou.mybatisplus.extension.plugins.PerformanceInterceptor"></bean>
+                <!-- 分页拦截器 -->
+                <bean class="com.baomidou.mybatisplus.extension.plugins.PaginationInterceptor"></bean>
+            </array>
+        </property>
     </bean>
 
+    <bean id="globalConfig" class="com.baomidou.mybatisplus.core.config.GlobalConfig">
+        <property name="dbConfig" ref="dbConfig"/>
+    </bean>
+
+    <bean id="dbConfig" class="com.baomidou.mybatisplus.core.config.GlobalConfig.DbConfig">
+        <property name="keyGenerator" ref="keyGenerator"/>
+        <!-- 主键类型  0:"数据库ID自增", 1:"用户输入ID",2:"全局唯一ID (数字类型唯一ID)", 3:"全局唯一ID UUID"; -->
+        <property name="idType" value="AUTO"/>
+        <!-- 字段策略 0:"忽略判断",1:"非 NULL 判断"),2:"非空判断" -->
+        <property name="fieldStrategy" value="NOT_EMPTY"/>
+        <!-- 逻辑删除配置 -->
+        <property name="logicDeleteValue" value="0"/>
+        <property name="logicNotDeleteValue" value="1"/>
+    </bean>
+    <bean id="keyGenerator" class="com.baomidou.mybatisplus.extension.incrementer.OracleKeyGenerator"/>
+
+    <bean id="configuration" class="com.baomidou.mybatisplus.core.MybatisConfiguration">
+        <property name="mapUnderscoreToCamelCase" value="true"/>
+        <property name="cacheEnabled" value="false"/>
+        <property name="callSettersOnNulls" value="false"/>
+        <!-- 配置JdbcTypeForNull, oracle数据库必须配置 -->
+        <property name="jdbcTypeForNull" value="NULL"/>
+    </bean>
+    <!-- MyBatis Mapper Scan Config  -->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <property name="basePackage" value="com.platform.dao,com.platform.*.dao"/>
     </bean>
