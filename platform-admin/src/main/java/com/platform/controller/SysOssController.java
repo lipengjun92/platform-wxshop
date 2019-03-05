@@ -7,7 +7,10 @@ import com.platform.oss.CloudStorageConfig;
 import com.platform.oss.OSSFactory;
 import com.platform.service.SysConfigService;
 import com.platform.service.SysOssService;
-import com.platform.utils.*;
+import com.platform.utils.Constant;
+import com.platform.utils.PageUtilsPlus;
+import com.platform.utils.R;
+import com.platform.utils.RRException;
 import com.platform.validator.ValidatorUtils;
 import com.platform.validator.group.AliyunGroup;
 import com.platform.validator.group.DiskGroup;
@@ -21,9 +24,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -53,12 +55,7 @@ public class SysOssController {
     @RequiresPermissions("sys:oss:all")
     public R list(@RequestParam Map<String, Object> params) {
         //查询列表数据
-        Query query = new Query(params);
-        List<SysOssEntity> sysOssList = sysOssService.queryList(query);
-        int total = sysOssService.queryTotal(query);
-
-        PageUtils pageUtil = new PageUtils(sysOssList, total, query.getLimit(), query.getPage());
-
+        PageUtilsPlus pageUtil = sysOssService.queryPage(params);
         return R.ok().put("page", pageUtil);
     }
 
@@ -147,28 +144,8 @@ public class SysOssController {
     @RequestMapping("/delete")
     @RequiresPermissions("sys:oss:all")
     public R delete(@RequestBody Long[] ids) {
-        sysOssService.deleteBatch(ids);
+        sysOssService.removeByIds(Arrays.asList(ids));
 
         return R.ok();
-    }
-
-    /**
-     * 查询所有列表
-     *
-     * @param params 请求参数
-     * @return R
-     */
-    @RequestMapping("/queryAll")
-    public List<String> queryAll(@RequestParam Map<String, Object> params) {
-        //查询列表数据
-        List<SysOssEntity> sysOssList = sysOssService.queryList(params);
-
-        List<String> list = new ArrayList<>();
-        if (null != sysOssList && sysOssList.size() > 0) {
-            for (SysOssEntity item : sysOssList) {
-                list.add(item.getUrl());
-            }
-        }
-        return list;
     }
 }
