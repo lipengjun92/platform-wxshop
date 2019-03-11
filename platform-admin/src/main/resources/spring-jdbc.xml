@@ -139,6 +139,8 @@
                 <bean class="com.baomidou.mybatisplus.extension.plugins.PerformanceInterceptor">
                     <property name="format" value="true"></property>
                     <property name="maxTime" value="100"></property>
+                    <!-- 是否写入日志文件(true 写入日志文件，不阻断程序执行！超过设定的最大执行时长异常提示) -->
+                    <property name="writeInLog" value="true"></property>
                 </bean>
                 <!-- 分页拦截器 -->
                 <bean class="com.baomidou.mybatisplus.extension.plugins.PaginationInterceptor"/>
