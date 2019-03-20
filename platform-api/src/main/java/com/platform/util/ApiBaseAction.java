@@ -124,7 +124,11 @@ public class ApiBaseAction {
      * @return 客户端Ip
      */
     public String getClientIp() {
-        String xff = request.getHeader("x-forwarded-for");
+    	String xff = request.getHeader("X-Real-IP");
+    	if(xff!=null) {
+    		return xff;
+    	}
+        xff = request.getHeader("x-forwarded-for");
         if (xff == null) {
             return "8.8.8.8";
         }
