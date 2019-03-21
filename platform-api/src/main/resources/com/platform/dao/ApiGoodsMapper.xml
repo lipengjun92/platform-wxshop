@@ -63,7 +63,7 @@
             and brand_id = #{brand_id}
         </if>
         <if test="name != null and name != ''">
-            and 'name' like concat('%',#{keyword},'%')
+            and name like concat('%',#{name},'%')
         </if>
         <if test="category_id != null and category_id != ''">
             and category_id = #{category_id}
@@ -115,7 +115,7 @@
             and a.brand_id = #{brand_id}
         </if>
         <if test="name != null and name != ''">
-            and a.'name' like concat('%',#{keyword},'%')
+            and a.name like concat('%',#{name},'%')
         </if>
         <if test="category_id != null and category_id != ''">
             and a.category_id = #{category_id}
@@ -169,7 +169,7 @@
             and a.brand_id = #{brand_id}
         </if>
         <if test="name != null and name != ''">
-            and a.'name' like concat('%',#{keyword},'%')
+            and a.name like concat('%',#{name},'%')
         </if>
         <if test="category_id != null and category_id != ''">
             and a.category_id = #{category_id}
