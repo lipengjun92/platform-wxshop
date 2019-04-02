@@ -1,59 +1,69 @@
+/*
+ * 类名称:${className}ServiceImpl.java
+ * 包名称:${package}.service.impl
+ *
+ * 修改履历:
+ *     日期                       修正者        主要内容
+ *     ${datetime}        ${author}     初版做成
+ *
+ * Copyright (c) 2019-2019 微同软件
+ */
 package ${package}.service.impl;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import java.util.List;
-import java.util.Map;
-
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.platform.utils.QueryPlus;
 import ${package}.dao.${className}Dao;
 import ${package}.entity.${className}Entity;
 import ${package}.service.${className}Service;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
 
 /**
  * ${comments}Service实现类
  *
  * @author ${author}
- * @email ${email}
  * @date ${datetime}
  */
 @Service("${classname}Service")
-public class ${className}ServiceImpl implements ${className}Service {
-    @Autowired
-    private ${className}Dao ${classname}Dao;
+public class ${className}ServiceImpl extends ServiceImpl<${className}Dao, ${className}Entity> implements ${className}Service {
 
     @Override
-    public ${className}Entity queryObject(${pk.attrType} ${pk.attrname}) {
-        return ${classname}Dao.queryObject(${pk.attrname});
+    public List<${className}Entity> queryAll(Map<String, Object> params) {
+        return baseMapper.queryAll(params);
     }
 
     @Override
-    public List<${className}Entity> queryList(Map<String, Object> map) {
-        return ${classname}Dao.queryList(map);
+    public Page queryPage(Map<String, Object> params) {
+        //排序
+        params.put("sidx", "T.${pk.columnName}");
+        params.put("asc", false);
+        Page<${className}Entity> page = new QueryPlus<${className}Entity>(params).getPage();
+        return page.setRecords(baseMapper.select${className}Page(page, params));
     }
 
     @Override
-    public int queryTotal(Map<String, Object> map) {
-        return ${classname}Dao.queryTotal(map);
+    public boolean add(${className}Entity ${classname}) {
+        return this.save(${classname});
     }
 
     @Override
-    public int save(${className}Entity ${classname}) {
-        return ${classname}Dao.save(${classname});
+    public boolean update(${className}Entity ${classname}) {
+        return this.updateById(${classname});
     }
 
     @Override
-    public int update(${className}Entity ${classname}) {
-        return ${classname}Dao.update(${classname});
+    public boolean delete(${pk.attrType} ${pk.attrname}) {
+        return this.removeById(${pk.attrname});
     }
 
     @Override
-    public int delete(${pk.attrType} ${pk.attrname}) {
-        return ${classname}Dao.delete(${pk.attrname});
-    }
-
-    @Override
-    public int deleteBatch(${pk.attrType}[] ${pk.attrname}s) {
-        return ${classname}Dao.deleteBatch(${pk.attrname}s);
+    @Transactional(rollbackFor = Exception.class)
+    public boolean deleteBatch(${pk.attrType}[] ${pk.attrname}s) {
+        return this.removeByIds(Arrays.asList(${pk.attrname}s));
     }
 }

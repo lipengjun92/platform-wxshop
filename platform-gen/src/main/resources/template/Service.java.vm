@@ -1,5 +1,17 @@
+/*
+ * 类名称:${className}Service.java
+ * 包名称:${package}.service
+ *
+ * 修改履历:
+ *     日期                       修正者        主要内容
+ *     ${datetime}        ${author}     初版做成
+ *
+ * Copyright (c) 2019-2019 微同软件
+ */
 package ${package}.service;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.baomidou.mybatisplus.extension.service.IService;
 import ${package}.entity.${className}Entity;
 
 import java.util.List;
@@ -9,64 +21,55 @@ import java.util.Map;
  * ${comments}Service接口
  *
  * @author ${author}
- * @email ${email}
  * @date ${datetime}
  */
-public interface ${className}Service {
+public interface ${className}Service extends IService<${className}Entity> {
 
     /**
-     * 根据主键查询实体
+     * 查询所有列表
      *
-     * @param id 主键
-     * @return 实体
+     * @param params 查询参数
+     * @return List
      */
-    ${className}Entity queryObject(${pk.attrType} ${pk.attrname});
+    List<${className}Entity> queryAll(Map<String, Object> params);
 
     /**
-     * 分页查询
+     * 分页查询${comments}
      *
-     * @param map 参数
-     * @return list
+     * @param params 查询参数
+     * @return Page
      */
-    List<${className}Entity> queryList(Map<String, Object> map);
+    Page queryPage(Map<String, Object> params);
 
     /**
-     * 分页统计总数
+     * 新增${comments}
      *
-     * @param map 参数
-     * @return 总数
+     * @param ${classname} ${comments}
+     * @return 新增结果
      */
-    int queryTotal(Map<String, Object> map);
+    boolean add(${className}Entity ${classname});
 
     /**
-     * 保存实体
+     * 根据主键更新${comments}
      *
-     * @param ${classname} 实体
-     * @return 保存条数
+     * @param ${classname} ${comments}
+     * @return 更新结果
      */
-    int save(${className}Entity ${classname});
+    boolean update(${className}Entity ${classname});
 
     /**
-     * 根据主键更新实体
+     * 根据主键删除${comments}
      *
-     * @param ${classname} 实体
-     * @return 更新条数
+     * @param ${pk.attrname} ${pk.attrname}
+     * @return 删除结果
      */
-    int update(${className}Entity ${classname});
-
-    /**
-     * 根据主键删除
-     *
-     * @param ${pk.attrname}
-     * @return 删除条数
-     */
-    int delete(${pk.attrType} ${pk.attrname});
+    boolean delete(${pk.attrType} ${pk.attrname});
 
     /**
      * 根据主键批量删除
      *
-     * @param ${pk.attrname}s
-     * @return 删除条数
+     * @param ${pk.attrname}s ${pk.attrname}s
+     * @return 删除结果
      */
-    int deleteBatch(${pk.attrType}[] ${pk.attrname}s);
+    boolean deleteBatch(${pk.attrType}[] ${pk.attrname}s);
 }
