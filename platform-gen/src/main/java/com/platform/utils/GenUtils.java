@@ -28,7 +28,7 @@ import java.util.zip.ZipOutputStream;
  */
 public class GenUtils {
 
-    public static List<String> getTemplates() {
+    private static List<String> getTemplates() {
         List<String> templates = new ArrayList<String>();
         templates.add("template/Entity.java.vm");
         templates.add("template/Dao.java.vm");
@@ -54,13 +54,16 @@ public class GenUtils {
         TableEntity tableEntity = new TableEntity();
         tableEntity.setTableName(table.get("tableName"));
         tableEntity.setComments(table.get("tableComment"));
+        String tablePrefix = table.get("tableName").split("_")[0];
         //表名转换成Java类名
-        String className = tableToJava(tableEntity.getTableName(), config.getString("tablePrefix"));
+        String className = tableToJava(tableEntity.getTableName(), tablePrefix);
         tableEntity.setClassName(className);
         tableEntity.setClassname(StringUtils.uncapitalize(className));
 
         //列信息
         List<ColumnEntity> columsList = new ArrayList<>();
+        boolean hasDate = false;
+        boolean hasBigDecimal = false;
         for (Map<String, String> column : columns) {
             ColumnEntity columnEntity = new ColumnEntity();
             columnEntity.setColumnName(column.get("columnName"));
@@ -77,6 +80,12 @@ public class GenUtils {
             String attrType = config.getString(columnEntity.getDataType(), "String");
             columnEntity.setAttrType(attrType);
 
+            if ("Date".equals(attrType)) {
+                hasDate = true;
+            }
+            if ("BigDecimal".equals(attrType)) {
+                hasBigDecimal = true;
+            }
             //是否主键
             if ("ORACLE".equals(Constant.USE_DATA)) {
                 if ((column.get("columnName").equalsIgnoreCase(column.get("columnKey")) && tableEntity.getPk() == null)) {
@@ -109,6 +118,7 @@ public class GenUtils {
             }
         }
 
+        String pre = tablePrefix.replace("_", "").toLowerCase();
 
         //设置velocity资源加载器
         Properties prop = new Properties();
@@ -126,8 +136,10 @@ public class GenUtils {
         map.put("columns", tableEntity.getColumns());
         map.put("package", config.getString("package"));
         map.put("author", config.getString("author"));
-        map.put("email", config.getString("email"));
         map.put("datetime", DateUtils.format(new Date(), DateUtils.DATE_TIME_PATTERN));
+        map.put("hasDate", hasDate);
+        map.put("hasBigDecimal", hasBigDecimal);
+        map.put("pre", pre);
         VelocityContext context = new VelocityContext(map);
 
         //获取模板列表
@@ -140,7 +152,7 @@ public class GenUtils {
 
             try {
                 //添加到zip
-                zip.putNextEntry(new ZipEntry(getFileName(template, tableEntity.getClassName(), config.getString("package"))));
+                zip.putNextEntry(new ZipEntry(getFileName(template, tableEntity.getClassName(), config.getString("package"), pre)));
                 IOUtils.write(sw.toString(), zip, "UTF-8");
                 IOUtils.closeQuietly(sw);
                 zip.closeEntry();
@@ -150,11 +162,10 @@ public class GenUtils {
         }
     }
 
-
     /**
      * 列名转换成Java属性名
      */
-    public static String columnToJava(String columnName) {
+    private static String columnToJava(String columnName) {
         return WordUtils.capitalizeFully(columnName, new char[]{'_'}).replace("_", "");
     }
 
@@ -171,7 +182,7 @@ public class GenUtils {
     /**
      * 获取配置信息
      */
-    public static Configuration getConfig() {
+    private static Configuration getConfig() {
         try {
             return new PropertiesConfiguration("generator.properties");
         } catch (ConfigurationException e) {
@@ -182,7 +193,8 @@ public class GenUtils {
     /**
      * 获取文件名
      */
-    public static String getFileName(String template, String className, String packageName) {
+    private static String getFileName(String template, String className, String packageName, String tablePrefix) {
+
         String packagePath = "main" + File.separator + "java" + File.separator;
         if (StringUtils.isNotBlank(packageName)) {
             packagePath += packageName.replace(".", File.separator) + File.separator;
@@ -214,11 +226,11 @@ public class GenUtils {
 
         if (template.contains("list.html.vm")) {
             return "main" + File.separator + "webapp" + File.separator + "WEB-INF" + File.separator + "page"
-                    + File.separator + "shop" + File.separator + className.toLowerCase() + ".html";
+                    + File.separator + tablePrefix + File.separator + className.toLowerCase() + ".html";
         }
 
         if (template.contains("list.js.vm")) {
-            return "main" + File.separator + "webapp" + File.separator + "js" + File.separator + "shop" + File.separator + className.toLowerCase() + ".js";
+            return "main" + File.separator + "webapp" + File.separator + "js" + File.separator + tablePrefix + File.separator + className.toLowerCase() + ".js";
         }
 
         if (template.contains("menu.sql.vm")) {

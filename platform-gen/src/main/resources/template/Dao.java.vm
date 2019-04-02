@@ -1,14 +1,47 @@
+/*
+ * 类名称:${className}Dao.java
+ * 包名称:${package}.dao
+ *
+ * 修改履历:
+ *     日期                       修正者        主要内容
+ *     ${datetime}        ${author}     初版做成
+ *
+ * Copyright (c) 2019-2019 微同软件
+ */
 package ${package}.dao;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import ${package}.entity.${className}Entity;
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * ${comments}Dao
  *
  * @author ${author}
- * @email ${email}
  * @date ${datetime}
  */
-public interface ${className}Dao extends BaseDao<${className}Entity> {
+@Mapper
+public interface ${className}Dao extends BaseMapper<${className}Entity> {
 
+    /**
+     * 查询所有列表
+     *
+     * @param params 查询参数
+     * @return List
+     */
+    List<${className}Entity> queryAll(@Param("params") Map<String, Object> params);
+
+    /**
+     * 自定义分页查询
+     *
+     * @param page   分页参数
+     * @param params 查询参数
+     * @return List
+     */
+    List<${className}Entity> select${className}Page(IPage page, @Param("params") Map<String, Object> params);
 }

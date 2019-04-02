@@ -3,96 +3,25 @@
 
 <mapper namespace="${package}.dao.${className}Dao">
 
-    <resultMap type="${package}.entity.${className}Entity" id="${classname}Map">
+    <sql id="selectSql">
+        SELECT
 #foreach($column in $columns)
-        <result property="${column.attrname}" column="${column.columnName}"/>
-#end
-    </resultMap>
-
-	<select id="queryObject" resultType="${package}.entity.${className}Entity">
-		select
-#foreach($column in $columns)
-			`$column.columnName`#if($velocityCount != $columns.size()),
+        T.$column.columnName#if($velocityCount != $columns.size()),
 #end
 #end
 
-		from ${tableName}
-		where ${pk.columnName} = #{id}
-	</select>
-
-	<select id="queryList" resultType="${package}.entity.${className}Entity">
-		select
-#foreach($column in $columns)
-    		`$column.columnName`#if($velocityCount != $columns.size()),
-#end
-#end
-
-		from ${tableName}
-		WHERE 1=1
-		<if test="name != null and name.trim() != ''">
-			AND name LIKE concat('%',#{name},'%')
-		</if>
-        <choose>
-            <when test="sidx != null and sidx.trim() != ''">
-                order by ${sidx} ${order}
-            </when>
-			<otherwise>
-                order by ${pk.columnName} desc
-			</otherwise>
-        </choose>
-		<if test="offset != null and limit != null">
-			limit #{offset}, #{limit}
-		</if>
-	</select>
-	
- 	<select id="queryTotal" resultType="int">
-		select count(*) from ${tableName}
-		WHERE 1=1
-        <if test="name != null and name.trim() != ''">
-            AND name LIKE concat('%',#{name},'%')
+        FROM ${tableName} T
+        WHERE 1=1
+        <if test="params.name != null and params.name.trim() != ''">
+            AND T.NAME LIKE '%${params.name}%'
         </if>
-	</select>
-	 
-	<insert id="save" parameterType="${package}.entity.${className}Entity"#if($pk.extra == 'auto_increment') useGeneratedKeys="true" keyProperty="$pk.attrname"#end>
-		insert into ${tableName}(
-#foreach($column in $columns)
-#if($column.columnName != $pk.columnName || $pk.extra != 'auto_increment')
-			`$column.columnName`#if($velocityCount != $columns.size()),
-#end
-#end
-#end
-)
-		values(
-#foreach($column in $columns)
-#if($column.columnName != $pk.columnName || $pk.extra != 'auto_increment')
-			#{$column.attrname}#if($velocityCount != $columns.size()),
-#end
-#end
-#end
-)
-	</insert>
-	 
-	<update id="update" parameterType="${package}.entity.${className}Entity">
-		update ${tableName} 
-		<set>
-#foreach($column in $columns)
-#if($column.columnName != $pk.columnName)
-			<if test="$column.attrname != null">`$column.columnName` = #{$column.attrname}#if($velocityCount != $columns.size()), #end</if>
-#end
-#end
-		</set>
-		where ${pk.columnName} = #{${pk.attrname}}
-	</update>
-	
-	<delete id="delete">
-		delete from ${tableName} where ${pk.columnName} = #{value}
-	</delete>
-	
-	<delete id="deleteBatch">
-		delete from ${tableName} where ${pk.columnName} in 
-		<foreach item="${pk.attrname}" collection="array" open="(" separator="," close=")">
-			#{${pk.attrname}}
-		</foreach>
-	</delete>
+    </sql>
 
+    <select id="select${className}Page" resultType="${package}.entity.${className}Entity">
+        <include refid="selectSql"/>
+    </select>
+
+    <select id="queryAll" resultType="${package}.entity.${className}Entity">
+        <include refid="selectSql"/>
+    </select>
 </mapper>
