@@ -369,22 +369,11 @@
                         toUrl('logout?_' + $.now());
                     }, 500);
                 });
-            },
-            love: function () {
-                setTimeout(function () {
-                    openWindow({
-                        type: 2,
-                        title: '全民云计算_云服务器促销_便宜云服务器活动_阿里云，推荐使用：计算网络增强型实例 2核4G 40G系统盘',
-                        closeBtn: 2,
-                        content: ['https://promotion.aliyun.com/ntms/act/qwbk.html?userCode=i8s6n64p']
-                    });
-                }, 3000)
             }
         },
         created: function () {
             this.getUser();
             this.getMenuList();
-            this.love();
         },
         updated: function () {
             // MetsiMenu
