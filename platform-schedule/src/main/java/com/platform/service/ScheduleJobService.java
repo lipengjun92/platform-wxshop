@@ -1,66 +1,73 @@
 package com.platform.service;
 
+import com.baomidou.mybatisplus.extension.service.IService;
 import com.platform.entity.ScheduleJobEntity;
+import com.platform.utils.PageUtilsPlus;
 
-import java.util.List;
 import java.util.Map;
 
 /**
  * 定时任务
  *
- * @author lipengjun
- * @email 939961241@qq.com
- * @date 2016年11月28日 上午9:55:32
+ * @author 李鹏军
  */
-public interface ScheduleJobService {
+public interface ScheduleJobService extends IService<ScheduleJobEntity> {
 
     /**
-     * 根据ID，查询定时任务
+     * 获取分页数据
+     *
+     * @param params 查询参数
+     * @return Page
      */
-    ScheduleJobEntity queryObject(Long jobId);
+    PageUtilsPlus queryPage(Map<String, Object> params);
 
     /**
-     * 查询定时任务列表
+     * 新增定时任务
+     *
+     * @param scheduleJob scheduleJob
      */
-    List<ScheduleJobEntity> queryList(Map<String, Object> map);
-
-    /**
-     * 查询总数
-     */
-    int queryTotal(Map<String, Object> map);
-
-    /**
-     * 保存定时任务
-     */
-    void save(ScheduleJobEntity scheduleJob);
+    void add(ScheduleJobEntity scheduleJob);
 
     /**
      * 更新定时任务
+     *
+     * @param scheduleJob scheduleJob
      */
     void update(ScheduleJobEntity scheduleJob);
 
     /**
      * 批量删除定时任务
+     *
+     * @param jobIds jobIds
      */
     void deleteBatch(Long[] jobIds);
 
     /**
      * 批量更新定时任务状态
+     *
+     * @param jobIds jobIds
+     * @param status status
      */
-    int updateBatch(Long[] jobIds, int status);
+    void updateBatch(Long[] jobIds, int status);
 
     /**
      * 立即执行
+     *
+     * @param jobIds jobIds
      */
     void run(Long[] jobIds);
 
     /**
      * 暂停运行
+     *
+     * @param jobIds jobIds
      */
     void pause(Long[] jobIds);
 
     /**
      * 恢复运行
+     *
+     * @param jobIds jobIds
      */
     void resume(Long[] jobIds);
 }
