@@ -2,17 +2,12 @@ package com.platform.controller;
 
 import com.platform.entity.ScheduleJobLogEntity;
 import com.platform.service.ScheduleJobLogService;
-import com.platform.utils.PageUtils;
-import com.platform.utils.Query;
+import com.platform.utils.PageUtilsPlus;
 import com.platform.utils.R;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -29,27 +24,28 @@ public class ScheduleJobLogController {
     private ScheduleJobLogService scheduleJobLogService;
 
     /**
-     * 定时任务日志列表
+     * 分页查询定时任务日志
+     *
+     * @param params 查询参数
+     * @return R
      */
-    @RequestMapping("/list")
+    @GetMapping("/list")
     @RequiresPermissions("sys:schedule:log")
     public R list(@RequestParam Map<String, Object> params) {
-        //查询列表数据
-        Query query = new Query(params);
-        List<ScheduleJobLogEntity> jobList = scheduleJobLogService.queryList(query);
-        int total = scheduleJobLogService.queryTotal(query);
+        PageUtilsPlus page = scheduleJobLogService.queryPage(params);
 
-        PageUtils pageUtil = new PageUtils(jobList, total, query.getLimit(), query.getPage());
-
-        return R.ok().put("page", pageUtil);
+        return R.ok().put("page", page);
     }
 
     /**
-     * 定时任务日志信息
+     * 根据主键查询详情
+     *
+     * @param logId logId
+     * @return R
      */
-    @RequestMapping("/info/{logId}")
+    @GetMapping("/info/{logId}")
     public R info(@PathVariable("logId") Long logId) {
-        ScheduleJobLogEntity log = scheduleJobLogService.queryObject(logId);
+        ScheduleJobLogEntity log = scheduleJobLogService.getById(logId);
 
         return R.ok().put("log", log);
     }

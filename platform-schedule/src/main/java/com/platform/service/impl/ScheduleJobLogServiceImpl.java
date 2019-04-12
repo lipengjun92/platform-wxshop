@@ -1,37 +1,28 @@
 package com.platform.service.impl;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.platform.dao.ScheduleJobLogDao;
 import com.platform.entity.ScheduleJobLogEntity;
 import com.platform.service.ScheduleJobLogService;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.platform.utils.PageUtilsPlus;
+import com.platform.utils.QueryPlus;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Map;
 
+/**
+ * @author 李鹏军
+ */
 @Service("scheduleJobLogService")
-public class ScheduleJobLogServiceImpl implements ScheduleJobLogService {
-	@Autowired
-	private ScheduleJobLogDao scheduleJobLogDao;
-	
-	@Override
-	public ScheduleJobLogEntity queryObject(Long jobId) {
-		return scheduleJobLogDao.queryObject(jobId);
-	}
+public class ScheduleJobLogServiceImpl extends ServiceImpl<ScheduleJobLogDao, ScheduleJobLogEntity> implements ScheduleJobLogService {
 
-	@Override
-	public List<ScheduleJobLogEntity> queryList(Map<String, Object> map) {
-		return scheduleJobLogDao.queryList(map);
-	}
-
-	@Override
-	public int queryTotal(Map<String, Object> map) {
-		return scheduleJobLogDao.queryTotal(map);
-	}
-
-	@Override
-	public void save(ScheduleJobLogEntity log) {
-		scheduleJobLogDao.save(log);
-	}
-
+    @Override
+    public PageUtilsPlus queryPage(Map<String, Object> params) {
+        //排序
+        params.put("sidx", "T.CREATE_TIME");
+        params.put("asc", false);
+        Page<ScheduleJobLogEntity> page = new QueryPlus<ScheduleJobLogEntity>(params).getPage();
+        return new PageUtilsPlus(page.setRecords(baseMapper.selectScheduleJobLogPage(page, params)));
+    }
 }
