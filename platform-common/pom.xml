@@ -143,10 +143,12 @@
             <artifactId>jgroups</artifactId>
             <version>${jgroups.version}</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/com.alipay.sdk/alipay-sdk-java -->
         <dependency>
-            <groupId>com.github.miemiedev</groupId>
-            <artifactId>mybatis-paginator</artifactId>
-            <version>${mybatis.paginator.version}</version>
+            <groupId>com.alipay.sdk</groupId>
+            <artifactId>alipay-sdk-java</artifactId>
+            <version>${alipay-sdk.version}</version>
         </dependency>
+
     </dependencies>
 </project>

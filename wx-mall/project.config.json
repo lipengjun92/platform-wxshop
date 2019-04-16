@@ -8,9 +8,11 @@
 		"newFeature": true
 	},
 	"compileType": "miniprogram",
-	"libVersion": "2.3.0",
-	"appid": "wx2a601dffd92609df",
+	"libVersion": "2.6.5",
+	"appid": "wx59ee37cea6e05c08",
 	"projectname": "pwm",
+	"simulatorType": "wechat",
+	"simulatorPluginLibVersion": {},
 	"condition": {
 		"search": {
 			"current": -1,

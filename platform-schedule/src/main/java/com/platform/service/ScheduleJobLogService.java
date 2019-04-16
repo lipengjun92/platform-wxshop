@@ -1,37 +1,23 @@
 package com.platform.service;
 
+import com.baomidou.mybatisplus.extension.service.IService;
 import com.platform.entity.ScheduleJobLogEntity;
+import com.platform.utils.PageUtilsPlus;
 
-import java.util.List;
 import java.util.Map;
 
 /**
  * 定时任务日志
  *
- * @author lipengjun
- * @email 939961241@qq.com
- * @date 2016年12月1日 下午10:34:48
+ * @author 李鹏军
  */
-public interface ScheduleJobLogService {
+public interface ScheduleJobLogService extends IService<ScheduleJobLogEntity> {
 
     /**
-     * 根据ID，查询定时任务日志
+     * 获取分页数据
+     *
+     * @param params 查询参数
+     * @return Page
      */
-    ScheduleJobLogEntity queryObject(Long jobId);
-
-    /**
-     * 查询定时任务日志列表
-     */
-    List<ScheduleJobLogEntity> queryList(Map<String, Object> map);
-
-    /**
-     * 查询总数
-     */
-    int queryTotal(Map<String, Object> map);
-
-    /**
-     * 保存定时任务日志
-     */
-    void save(ScheduleJobLogEntity log);
-
+    PageUtilsPlus queryPage(Map<String, Object> params);
 }

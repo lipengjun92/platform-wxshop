@@ -1,16 +1,39 @@
-#### [腾讯云新客专属福利](https://cloud.tencent.com/redirect.php?redirect=1025&cps_key=30280f92fc381dfc9e1d9e0e23d25a18&from=console)：
-新客户无门槛领取总价值高达2775元代金券，每种代金券限量500张，先到先得。
-[![腾讯云双十一](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/txnew.jpg)](https://cloud.tencent.com/redirect.php?redirect=1025&cps_key=30280f92fc381dfc9e1d9e0e23d25a18&from=console)
+## 微同商城推荐服务器配置
+### 服务器配置：
 
-#### [阿里云限量红包](https://promotion.aliyun.com/ntms/yunparter/invite.html?userCode=i8s6n64p)：
-即日起至12月31日，本站推荐的用户，限时领 “最高1888元红包” 。云产品通用红包，可叠加官网常规优惠使用。
+    CPU：2核
+    内存：8G
+    实例规格：标准型S2机型
+    带宽：2M
+    价格：262 元/月 1768.5 元/年 4716 元/三年
+[点我购买](https://cloud.tencent.com/redirect.php?redirect=1014&cps_key=30280f92fc381dfc9e1d9e0e23d25a18&from=console)
+
+购买说明：如果业务量较大，推荐双机部署。
+
+### MySQL高可用版配置：
+    CPU：1核
+    内存：2G
+    硬盘：200G
+    价格：348元/月	3466.08元/年	3758.40元/三年
+[点我购买](https://cloud.tencent.com/redirect.php?redirect=10481&cps_key=30280f92fc381dfc9e1d9e0e23d25a18)
+
+购买说明：腾讯云产品购买时长越大折扣就越大，所有推荐选择3年时长，可以达到3折优惠。
+
+### COS资源包：
+    标准型存储容量：
+    100GB	1年	101 元
+    200GB	1年	200 元
+    下行流量：
+    100GB	3个月	43元
+    200GB	3个月	85元
+    500GB	3个月	213元
+[点我购买](https://cloud.tencent.com/redirect.php?redirect=10165&cps_key=30280f92fc381dfc9e1d9e0e23d25a18)
+
+购买说明：根据实际业务存储量购买，目前我的站点存储容量100G，下行流量100G，刚好够用！
 
 # 微信小程序商城（Java版）
 
 ## 获得荣誉
-### 1000+stars
-![](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/1000stars.jpg "1000+stars")
-
 ### GVP
 ![](
 https://platform-wxmall.oss-cn-beijing.aliyuncs.com/GVP.jpg "GVP")
@@ -29,7 +52,7 @@ https://platform-wxmall.oss-cn-beijing.aliyuncs.com/GVP.jpg "GVP")
 ## 技术选型
 * 1 后端使用技术
     * 1.1 springframework4.3.7.RELEASE
-    * 1.2 mybatis3.4.1
+    * 1.2 mybatis3.1.0、MyBatis-Plus 3.1.0
     * 1.3 shiro1.3.2
     * 1.4 servlet3.1.0
     * 1.5 druid1.0.28
@@ -42,6 +65,7 @@ https://platform-wxmall.oss-cn-beijing.aliyuncs.com/GVP.jpg "GVP")
     * 1.12 swagger2.4
     * 1.13 j2cache2.3.22-release
     * 1.14 weixin-java-mp3.2.0
+    * 1.15 MybatisPlus3.1.0
         
 * 2 前端使用技术
     * 2.1 Vue2.5.1
@@ -65,7 +89,7 @@ platform-wechat-mall
 |--platform-schedule 定时任务
 |--platform-shop 商城后台管理
 |--wx-mall 微信小程序商城
-|--platform-vue 微信公众号商城（待开发）
+|--platform-vue 微信公众号商城（待开发，感兴趣的同学可以参与开发）
 ~~~
 
 ## 实现功能

@@ -105,7 +105,7 @@ var vm = new Vue({
         },
         getMacros: function () {
             Ajax.request({
-                url: "../sys/macro/queryAll?type=0",
+                url: "../sys/macro/queryAllParent",
                 async: true,
                 successCallback: function (r) {
                     vm.macros = r.list;

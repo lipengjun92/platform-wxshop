@@ -1,6 +1,13 @@
 package com.platform.api;
 
 import com.alibaba.fastjson.JSONObject;
+import com.alipay.api.AlipayApiException;
+import com.alipay.api.AlipayClient;
+import com.alipay.api.DefaultAlipayClient;
+import com.alipay.api.request.AlipaySystemOauthTokenRequest;
+import com.alipay.api.request.AlipayUserInfoShareRequest;
+import com.alipay.api.response.AlipaySystemOauthTokenResponse;
+import com.alipay.api.response.AlipayUserInfoShareResponse;
 import com.platform.annotation.IgnoreAuth;
 import com.platform.entity.FullUserInfo;
 import com.platform.entity.UserInfo;
@@ -12,6 +19,7 @@ import com.platform.util.ApiUserUtils;
 import com.platform.util.CommonUtil;
 import com.platform.utils.CharUtil;
 import com.platform.utils.R;
+import com.platform.utils.ResourceUtil;
 import com.platform.validator.Assert;
 import com.qiniu.util.StringUtils;
 import io.swagger.annotations.Api;
@@ -64,9 +72,9 @@ public class ApiAuthController extends ApiBaseAction {
     }
 
     /**
-     * 登录
+     * 微信登录
      */
-    @ApiOperation(value = "登录")
+    @ApiOperation(value = "微信登录")
     @IgnoreAuth
     @PostMapping("login_by_weixin")
     public Object loginByWeixin() {
@@ -112,7 +120,8 @@ public class ApiAuthController extends ApiBaseAction {
             userVo.setLast_login_time(userVo.getRegister_time());
             userVo.setWeixin_openid(sessionData.getString("openid"));
             userVo.setAvatar(userInfo.getAvatarUrl());
-            userVo.setGender(userInfo.getGender()); // //性别 0：未知、1：男、2：女
+            //性别 0：未知、1：男、2：女
+            userVo.setGender(userInfo.getGender());
             userVo.setNickname(userInfo.getNickName());
             userService.save(userVo);
         } else {
@@ -132,5 +141,71 @@ public class ApiAuthController extends ApiBaseAction {
         resultObj.put("userInfo", userInfo);
         resultObj.put("userId", userVo.getUserId());
         return toResponsSuccess(resultObj);
+    }
+
+    /**
+     * 支付宝登录
+     */
+    @ApiOperation(value = "支付宝登录")
+    @IgnoreAuth
+    @PostMapping("login_by_ali")
+    public Object login_by_ali() {
+        JSONObject jsonParam = this.getJsonRequest();
+        String code = "";
+        if (!StringUtils.isNullOrEmpty(jsonParam.getString("code"))) {
+            code = jsonParam.getString("code");
+        }
+        AlipayClient alipayClient = new DefaultAlipayClient(ResourceUtil.getConfigByName("ali.webAccessTokenhttps"), ResourceUtil.getConfigByName("ali.appId"), ResourceUtil.getConfigByName("ali.privateKey"),
+                "json", "UTF-8", ResourceUtil.getConfigByName("ali.pubKey"), "RSA2");
+        AlipaySystemOauthTokenRequest request = new AlipaySystemOauthTokenRequest();
+        request.setCode(code);
+        request.setGrantType("authorization_code");
+        try {
+            //code 换取token
+            AlipaySystemOauthTokenResponse oauthTokenResponse = alipayClient.execute(request);
+            String accessToken = oauthTokenResponse.getAccessToken();
+
+            //根据token获取用户头像、昵称等信息
+            AlipayUserInfoShareRequest userInfoShareRequest = new AlipayUserInfoShareRequest();
+            AlipayUserInfoShareResponse userInfoResponse = alipayClient.execute(userInfoShareRequest, accessToken);
+
+            Date nowTime = new Date();
+            UserVo userVo = userService.queryByOpenId(userInfoResponse.getUserId());
+            if (null == userVo) {
+                userVo = new UserVo();
+                userVo.setUsername("支付宝用户" + CharUtil.getRandomString(12));
+                userVo.setPassword(userInfoResponse.getUserId());
+                userVo.setRegister_time(nowTime);
+                userVo.setRegister_ip(this.getClientIp());
+                userVo.setLast_login_ip(userVo.getRegister_ip());
+                userVo.setLast_login_time(nowTime);
+                userVo.setWeixin_openid(userInfoResponse.getUserId());
+                userVo.setAvatar(userInfoResponse.getAvatar());
+                //性别 0：未知、1：男、2：女
+                //F：女性；M：男性
+                userVo.setGender("m".equalsIgnoreCase(userInfoResponse.getGender()) ? 1 : 0);
+                userVo.setNickname(userInfoResponse.getNickName());
+                userService.save(userVo);
+            } else {
+                userVo.setLast_login_ip(this.getClientIp());
+                userVo.setLast_login_time(nowTime);
+                userService.update(userVo);
+            }
+
+            Map<String, Object> tokenMap = tokenService.createToken(userVo.getUserId());
+            String token = MapUtils.getString(tokenMap, "token");
+
+            if (StringUtils.isNullOrEmpty(token)) {
+                return toResponsFail("登录失败");
+            }
+
+            Map<String, Object> resultObj = new HashMap<String, Object>();
+            resultObj.put("token", token);
+            resultObj.put("userInfo", userInfoResponse);
+            resultObj.put("userId", userVo.getUserId());
+            return toResponsSuccess(resultObj);
+        } catch (AlipayApiException e) {
+            return toResponsFail("登录失败");
+        }
     }
 }

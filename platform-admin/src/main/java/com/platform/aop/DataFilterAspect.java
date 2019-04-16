@@ -78,36 +78,34 @@ public class DataFilterAspect {
         String deptAlias = dataFilter.deptAlias();
 
         StringBuilder filterSql = new StringBuilder();
-        filterSql.append(" and ( ");
-        if (StringUtils.isNotEmpty(deptAlias) || StringUtils.isNotBlank(userAlias)) {
-            if (StringUtils.isNotEmpty(deptAlias)) {
-                //取出登录用户部门权限
-                String alias = getAliasByUser(user.getUserId());
+
+        if (StringUtils.isNotBlank(deptAlias)) {
+            //取出登录用户部门权限
+            String alias = getAliasByUser(user.getUserId());
+            if (StringUtils.isNotEmpty(alias)) {
+                filterSql.append(" and (");
                 filterSql.append(deptAlias);
                 filterSql.append(" in ");
                 filterSql.append(" ( ");
                 filterSql.append(alias);
                 filterSql.append(" ) ");
                 if (StringUtils.isNotBlank(userAlias)) {
-                    if (dataFilter.self()) {
-                        filterSql.append(" or ");
-
-                    } else {
-                        filterSql.append(" and ");
-                    }
+                    filterSql.append(" or ");
+                    filterSql.append(userAlias);
+                    filterSql.append("='");
+                    filterSql.append(user.getUserId());
+                    filterSql.append("' ");
                 }
+                filterSql.append(" ) ");
             }
-            if (StringUtils.isNotBlank(userAlias)) {
-                //没有部门数据权限，也能查询本人数据
-                filterSql.append(userAlias);
-                filterSql.append(" = ");
-                filterSql.append(user.getUserId());
-                filterSql.append(" ");
-            }
-        } else {
-            return "";
+        } else if (StringUtils.isNotBlank(userAlias)) {
+            filterSql.append(" and ");
+            filterSql.append(userAlias);
+            filterSql.append("='");
+            filterSql.append(user.getUserId());
+            filterSql.append("' ");
         }
-        filterSql.append(" ) ");
+
         return filterSql.toString();
     }
 

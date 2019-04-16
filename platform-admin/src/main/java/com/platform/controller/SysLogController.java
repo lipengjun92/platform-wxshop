@@ -1,9 +1,7 @@
 package com.platform.controller;
 
-import com.platform.entity.SysLogEntity;
 import com.platform.service.SysLogService;
-import com.platform.utils.PageUtils;
-import com.platform.utils.Query;
+import com.platform.utils.PageUtilsPlus;
 import com.platform.utils.R;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -39,12 +36,7 @@ public class SysLogController {
     @RequiresPermissions("sys:log:list")
     public R list(@RequestParam Map<String, Object> params) {
         //查询列表数据
-        Query query = new Query(params);
-        List<SysLogEntity> sysLogList = sysLogService.queryList(query);
-        int total = sysLogService.queryTotal(query);
-
-        PageUtils pageUtil = new PageUtils(sysLogList, total, query.getLimit(), query.getPage());
-
+        PageUtilsPlus pageUtil = sysLogService.queryPage(params);
         return R.ok().put("page", pageUtil);
     }
 

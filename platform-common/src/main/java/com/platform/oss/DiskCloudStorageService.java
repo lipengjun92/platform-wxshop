@@ -31,9 +31,8 @@ public class DiskCloudStorageService extends CloudStorageService {
 
     @Override
     public String upload(byte[] data, String path) {
-        if (data.length < 3 || path.equals("")) {
+        if (data.length < 3 || path.equals(""))
             throw new RRException("上传文件为空");
-        }
 
         //本地存储必需要以"/"开头
         if (!path.startsWith("/")) {

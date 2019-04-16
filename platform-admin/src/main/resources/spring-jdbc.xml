@@ -14,6 +14,7 @@
 		http://www.springframework.org/schema/aop/spring-aop-2.5.xsd">
 
     <tx:annotation-driven/>
+    <!-- Import Properties -->
     <context:property-placeholder location="classpath*:platform.properties"/>
 
     <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource"
@@ -89,11 +90,67 @@
         <constructor-arg ref="dataSource"/>
     </bean>
 
-    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-        <property name="configLocation" value="classpath:mybatis.xml"/>
+    <!-- SqlSessionFactory MyBatisPlus Config -->
+    <bean id="sqlSessionFactory" class="com.baomidou.mybatisplus.extension.spring.MybatisSqlSessionFactoryBean">
+        <property name="typeAliasesPackage" value="com.platform.entity"/>
         <property name="dataSource" ref="dataSource"/>
+        <property name="globalConfig">
+            <bean class="com.baomidou.mybatisplus.core.config.GlobalConfig">
+                <property name="dbConfig">
+                    <bean class="com.baomidou.mybatisplus.core.config.GlobalConfig.DbConfig">
+                        <!-- 表关键词 key 生成器 -->
+                        <property name="keyGenerator">
+                            <bean class="com.baomidou.mybatisplus.extension.incrementer.OracleKeyGenerator"/>
+                        </property>
+                        <!-- 主键类型  0:"数据库ID自增", 1:"用户输入ID",2:"全局唯一ID (数字类型唯一ID)", 3:"全局唯一ID UUID"; -->
+                        <property name="idType" value="AUTO"/>
+                        <!-- 字段策略 0:"忽略判断",1:"非 NULL 判断"),2:"非空判断" -->
+                        <property name="fieldStrategy" value="NOT_EMPTY"/>
+                        <!-- 逻辑删除配置 -->
+                        <property name="logicDeleteValue" value="0"/>
+                        <property name="logicNotDeleteValue" value="1"/>
+                        <!-- 数据库类型,默认值为未知的数据库类型 如果值为OTHER,启动时会根据数据库连接 url 获取数据库类型;如果不是OTHER则不会自动获取数据库类型 -->
+                        <property name="dbType" value="OTHER"/>
+                    </bean>
+                </property>
+                <property name="sqlInjector">
+                    <!-- 注入逻辑删除 -->
+                    <bean class="com.baomidou.mybatisplus.extension.injector.LogicSqlInjector"/>
+                </property>
+            </bean>
+        </property>
+        <property name="configuration">
+            <bean class="com.baomidou.mybatisplus.core.MybatisConfiguration">
+                <!-- 是否开启自动驼峰命名规则（camel case）映射，即从A_COLUMN（下划线命名） 到Java 属性名 aColumn（驼峰命名） 的类似映射。 -->
+                <property name="mapUnderscoreToCamelCase" value="true"/>
+                <!-- 全局地开启或关闭配置文件中的所有映射器已经配置的任何缓存，默认为 true。 -->
+                <property name="cacheEnabled" value="false"/>
+                <!--指定当结果集中值为 null 的时候是否调用映射对象的 Setter（Map 对象时为 put）方法，通常运用于有 Map.keySet() 依赖或 null 值初始化的情况。
+                    通俗的讲，即 MyBatis 在使用 resultMap 来映射查询结果中的列，如果查询结果中包含空值的列，则 MyBatis 在映射的时候，不会映射这个字段，这就
+                    导致在调用到该字段的时候由于没有映射，取不到而报空指针异常。-->
+                <property name="callSettersOnNulls" value="false"/>
+                <!-- 配置JdbcTypeForNull, oracle数据库必须配置 -->
+                <property name="jdbcTypeForNull" value="NULL"/>
+            </bean>
+        </property>
+        <property name="plugins">
+            <array>
+                <!-- 性能分析拦截器 -->
+                <bean class="com.baomidou.mybatisplus.extension.plugins.PerformanceInterceptor">
+                    <property name="format" value="true"></property>
+                    <property name="maxTime" value="100"></property>
+                    <!-- 是否写入日志文件(true 写入日志文件，不阻断程序执行！超过设定的最大执行时长异常提示) -->
+                    <property name="writeInLog" value="true"></property>
+                </bean>
+                <!-- 分页拦截器 -->
+                <bean class="com.baomidou.mybatisplus.extension.plugins.PaginationInterceptor"/>
+                <!-- 乐观锁 -->
+                <bean class="com.baomidou.mybatisplus.extension.plugins.OptimisticLockerInterceptor"/>
+            </array>
+        </property>
     </bean>
 
+    <!-- MyBatis Mapper Scan Config  -->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <property name="basePackage" value="com.platform.dao,com.platform.*.dao"/>
     </bean>

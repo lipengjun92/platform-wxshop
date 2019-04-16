@@ -171,9 +171,9 @@ CREATE TABLE `nideshop_brand` (
   `list_pic_url` varchar(255) NOT NULL DEFAULT '' COMMENT '图片',
   `simple_desc` varchar(255) NOT NULL DEFAULT '' COMMENT '描述',
   `pic_url` varchar(255) NOT NULL DEFAULT '' COMMENT '图片',
-  `sort_order` tinyint(3) unsigned NOT NULL DEFAULT '50' COMMENT '排序',
+  `sort_order` tinyint(3) unsigned DEFAULT '50' COMMENT '排序',
   `is_show` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '显示',
-  `floor_price` decimal(10,2) NOT NULL DEFAULT '0.00',
+  `floor_price` decimal(10,2) DEFAULT '0.00',
   `app_list_pic_url` varchar(255) NOT NULL DEFAULT '' COMMENT 'app显示图片',
   `is_new` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '新品牌',
   `new_pic_url` varchar(255) NOT NULL DEFAULT '' COMMENT '图片',
@@ -3894,6 +3894,7 @@ ALTER TABLE `nideshop_user_coupon` ADD COLUMN `coupon_status` TINYINT (3) UNSIGN
 ALTER TABLE `nideshop_footprint` ADD INDEX `index_nideshop_footprint_user_id_goods_id` (`user_id`, `goods_id`) USING BTREE ;
 /** 2018-09-29 解决微信名存在特殊字符导致的无法登陆问题 **/
 ALTER TABLE nideshop_user CHANGE nickname nickname VARCHAR (60) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+
 
 /** 2018-11-07 添加帮助中心 **/
 DROP TABLE IF EXISTS `nideshop_help_issue`;
