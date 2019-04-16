@@ -64,6 +64,6 @@
       </navigator>
     </view>
   </view>
-  <view class='company'>由合肥微同软件工作室提供技术支持</view>
+  <view class='company'>合肥微同软件工作室提供技术支持 © fly2you.cn</view>
   <!--<view class="logout" bindtap="exitLogin">退出登录</view>-->
 </view>
