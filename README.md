@@ -42,6 +42,9 @@ https://platform-wxmall.oss-cn-beijing.aliyuncs.com/GVP.jpg "GVP")
 * [演示地址](http://fly2you.cn)
 * [最新开发文档](http://fly2you.cn/guide/index)
 
+### 微同商城商业版
+![](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/grocery/20181228/1114545734c867.jpg "PWM商业版")
+
 * 官方QQ群：<a target="_blank" href="//shang.qq.com/wpa/qunwpa?idkey=2d02d83d8be4c2cb6848bbae1df1037ba2acddecd2a1aa8cef7b3e4ab4ff75aa"><img border="0" src="//pub.idqqimg.com/wpa/images/group.png" alt="platform-wechat-mall ①群" title="platform-wechat-mall ①群"></a><a target="_blank" href="//shang.qq.com/wpa/qunwpa?idkey=990a15d445ef791dba99d22d9772c06ac7894ffa6ac639b1eec530554c432583"><img border="0" src="//pub.idqqimg.com/wpa/images/group.png" alt="platform-wechat-mall ②群" title="platform-wechat-mall ②群"></a>
 * git：[https://gitee.com/fuyang_lipengjun/platform](https://gitee.com/fuyang_lipengjun/platform)
 * 基础架构版
@@ -183,7 +186,7 @@ platform-wechat-mall
 * 启动后台项目（参照<a href="#doc">开发文档</a>）
 * 打开微信开发者工具
 * 导入 /wx-mall填写appId
-* 修改 /wx-mall/config/app.js里NewApiRootUrl的值
+* 修改 /wx-mall/config/api.js里API_BASE_URL的值
 * 使用eclipse启动项目后默认访问路径
     * [http://localhost:8080/platform-framework](http://localhost:8080/platform-framework)
 * 使用idea启动项目后默认访问路径
@@ -229,8 +232,6 @@ platform-wechat-mall
 ![](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/upload/20180727/12.png "VUE页面")
 
 ***
-### 微同商城商业版
-![](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/grocery/20181228/1114545734c867.jpg "PWM商业版")
 
 ### <a name="doc">开发文档目录</a>
 ![](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/catalog.png "开发文档目录")
