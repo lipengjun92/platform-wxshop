@@ -1,36 +1,3 @@
-## 微同商城推荐服务器配置
-### 服务器配置：
-
-    CPU：2核
-    内存：8G
-    实例规格：标准型S2机型
-    带宽：2M
-    价格：262 元/月 1768.5 元/年 4716 元/三年
-[点我购买](https://cloud.tencent.com/redirect.php?redirect=1014&cps_key=30280f92fc381dfc9e1d9e0e23d25a18&from=console)
-
-购买说明：如果业务量较大，推荐双机部署。
-
-### MySQL高可用版配置：
-    CPU：1核
-    内存：2G
-    硬盘：200G
-    价格：348元/月	3466.08元/年	3758.40元/三年
-[点我购买](https://cloud.tencent.com/redirect.php?redirect=10481&cps_key=30280f92fc381dfc9e1d9e0e23d25a18)
-
-购买说明：腾讯云产品购买时长越大折扣就越大，所有推荐选择3年时长，可以达到3折优惠。
-
-### COS资源包：
-    标准型存储容量：
-    100GB	1年	101 元
-    200GB	1年	200 元
-    下行流量：
-    100GB	3个月	43元
-    200GB	3个月	85元
-    500GB	3个月	213元
-[点我购买](https://cloud.tencent.com/redirect.php?redirect=10165&cps_key=30280f92fc381dfc9e1d9e0e23d25a18)
-
-购买说明：根据实际业务存储量购买，目前我的站点存储容量100G，下行流量100G，刚好够用！
-
 # 微信小程序商城（Java版）
 
 ## 获得荣誉
@@ -43,7 +10,7 @@ https://platform-wxmall.oss-cn-beijing.aliyuncs.com/GVP.jpg "GVP")
 * [最新开发文档](http://fly2you.cn/guide/index)
 
 ### 微同商城商业版
-![](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/grocery/20181228/1114545734c867.jpg "PWM商业版")
+![](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/grocery/20181228/1114545734c867.jpg "微同商城商业版")
 
 * 官方QQ群：<a target="_blank" href="//shang.qq.com/wpa/qunwpa?idkey=2d02d83d8be4c2cb6848bbae1df1037ba2acddecd2a1aa8cef7b3e4ab4ff75aa"><img border="0" src="//pub.idqqimg.com/wpa/images/group.png" alt="platform-wechat-mall ①群" title="platform-wechat-mall ①群"></a><a target="_blank" href="//shang.qq.com/wpa/qunwpa?idkey=990a15d445ef791dba99d22d9772c06ac7894ffa6ac639b1eec530554c432583"><img border="0" src="//pub.idqqimg.com/wpa/images/group.png" alt="platform-wechat-mall ②群" title="platform-wechat-mall ②群"></a>
 * git：[https://gitee.com/fuyang_lipengjun/platform](https://gitee.com/fuyang_lipengjun/platform)
