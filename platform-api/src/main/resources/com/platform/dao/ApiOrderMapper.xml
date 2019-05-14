@@ -49,6 +49,12 @@
 		where a.id = #{value}
 	</select>
 
+    <select id="queryObjectByOrderSn" resultMap="orderMap">
+        select a.*
+        from nideshop_order a
+        where a.order_sn = #{orderSn}
+    </select>
+
     <select id="queryList" resultMap="orderMap">
         select * from nideshop_order
         <where>
