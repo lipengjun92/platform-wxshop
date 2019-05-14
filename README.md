@@ -18,7 +18,10 @@ https://platform-wxmall.oss-cn-beijing.aliyuncs.com/GVP.jpg "GVP")
     * git：[https://gitee.com/fuyang_lipengjun/platform-framework](https://gitee.com/fuyang_lipengjun/platform-framework)
 * 代码生成工具IDEA插件
     * git：[https://gitee.com/fuyang_lipengjun/platform-gen](https://gitee.com/fuyang_lipengjun/platform-gen)
-     
+    
+# 注意
+Entity里不是缺少get、set方法，Eclipse、IDEA请先安装lombok插件
+ 
 ## 技术选型
 * 1 后端使用技术
     * 1.1 springframework4.3.7.RELEASE
@@ -36,6 +39,7 @@ https://platform-wxmall.oss-cn-beijing.aliyuncs.com/GVP.jpg "GVP")
     * 1.13 j2cache2.3.22-release
     * 1.14 weixin-java-mp3.2.0
     * 1.15 MybatisPlus3.1.0
+    * 1.16 lombok
         
 * 2 前端使用技术
     * 2.1 Vue2.5.1
