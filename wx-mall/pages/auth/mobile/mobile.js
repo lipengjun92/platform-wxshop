@@ -115,9 +115,9 @@ Page({
             icon: 'loading',
             duration: 5000
         })
-        util.request(api.BindMobile, {mobile_code: e.detail.value.code, mobile: mobile})
+        util.request(api.BindMobile, {mobile_code: e.detail.value.code, mobile: mobile}, "POST", "application/json")
             .then(function (res) {
-                if (res.data.code == 200) {
+                if (res.errno === 0) {
                     wx.showModal({
                         title: '提示',
                         content: '操作成功',
