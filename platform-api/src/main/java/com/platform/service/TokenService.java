@@ -10,13 +10,17 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-
+/**
+ * @author 李鹏军
+ */
 @Service
 public class TokenService {
     @Autowired
     private ApiTokenMapper tokenDao;
-    //30天过期
-    private final static int EXPIRE = 3600 * 24 * 30;
+    /**
+     * 30天过期
+     */
+    private final static Long EXPIRE = 3600 * 24 * 30L;
 
     public TokenEntity queryByUserId(Long userId) {
         return tokenDao.queryByUserId(userId);
