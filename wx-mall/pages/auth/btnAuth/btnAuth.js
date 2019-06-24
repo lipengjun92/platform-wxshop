@@ -22,11 +22,6 @@ Page({
       })
     }
 
-    let userInfo = wx.getStorageSync('userInfo');
-    let token = wx.getStorageSync('token');
-    if (userInfo && token) {
-      return;
-    }
     wx.login({
       success: function(res) {
         if (res.code) {
