@@ -35,6 +35,9 @@ https://platform-wxmall.oss-cn-beijing.aliyuncs.com/GVP.jpg "GVP")
 * [演示地址](http://fly2you.cn)
 * [最新开发文档](http://fly2you.cn/guide/index)
 
+### 微同商城开源版体验：
+![](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/gh_a7a467438863_344.jpg "微同商城开源版")
+
 ### 微同商城商业版
 ![](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/grocery/20181228/1114545734c867.jpg "微同商城商业版")
 
