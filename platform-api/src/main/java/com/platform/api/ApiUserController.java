@@ -1,6 +1,7 @@
 package com.platform.api;
 
 import com.alibaba.fastjson.JSONObject;
+import com.github.qcloudsms.SmsSingleSenderResult;
 import com.platform.annotation.LoginUser;
 import com.platform.entity.SmsConfig;
 import com.platform.entity.SmsLogVo;
@@ -48,40 +49,36 @@ public class ApiUserController extends ApiBaseAction {
         }
         //生成验证码
         String sms_code = CharUtil.getRandomNum(4);
-        String msgContent = "您的验证码是：" + sms_code + "，请在页面中提交验证码完成验证。";
-        // 发送短信
-        String result = "";
         //获取云存储配置信息
         SmsConfig config = sysConfigService.getConfigObject(Constant.SMS_CONFIG_KEY, SmsConfig.class);
         if (StringUtils.isNullOrEmpty(config)) {
             return toResponsFail("请先配置短信平台信息");
         }
-        if (StringUtils.isNullOrEmpty(config.getName())) {
-            return toResponsFail("请先配置短信平台用户名");
+        if (StringUtils.isNullOrEmpty(config.getAppid())) {
+            return toResponsFail("请先配置短信平台APPID");
         }
-        if (StringUtils.isNullOrEmpty(config.getPwd())) {
-            return toResponsFail("请先配置短信平台密钥");
+        if (StringUtils.isNullOrEmpty(config.getAppkey())) {
+            return toResponsFail("请先配置短信平台KEY");
         }
         if (StringUtils.isNullOrEmpty(config.getSign())) {
             return toResponsFail("请先配置短信平台签名");
         }
+        // 发送短信
+        SmsSingleSenderResult result;
+        int templateId = 23;
         try {
-            /**
-             * 状态,发送编号,无效号码数,成功提交数,黑名单数和消息，无论发送的号码是多少，一个发送请求只返回一个sendid，如果响应的状态不是“0”，则只有状态和消息
-             */
-            result = SmsUtil.crSendSms(config.getName(), config.getPwd(), phone, msgContent, config.getSign(), "", "");
+            result = SmsUtil.crSendSms(config.getAppid(), config.getAppkey(), phone, templateId, new String[]{sms_code}, "");
         } catch (Exception e) {
-
+            return toResponsFail("短信发送失败");
         }
-        String arr[] = result.split(",");
 
-        if ("0".equals(arr[0])) {
+        if (result.result == 0) {
             smsLogVo = new SmsLogVo();
             smsLogVo.setLog_date(System.currentTimeMillis() / 1000);
             smsLogVo.setUser_id(loginUser.getUserId());
             smsLogVo.setPhone(phone);
-            smsLogVo.setSms_code(sms_code);
-            smsLogVo.setSms_text(msgContent);
+            smsLogVo.setSms_code(templateId);
+            smsLogVo.setSms_text(sms_code);
             userService.saveSmsCodeLog(smsLogVo);
             return toResponsSuccess("短信发送成功");
         } else {
