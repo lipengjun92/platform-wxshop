@@ -23,7 +23,7 @@ public class SmsLogVo implements Serializable {
     //
     private Long log_date;
     // 发送模板
-    private String sms_code;
+    private int sms_code;
     // 1成功 0失败
     private Integer send_status;
     //
@@ -61,11 +61,11 @@ public class SmsLogVo implements Serializable {
         this.log_date = log_date;
     }
 
-    public String getSms_code() {
+    public int getSms_code() {
         return sms_code;
     }
 
-    public void setSms_code(String sms_code) {
+    public void setSms_code(int sms_code) {
         this.sms_code = sms_code;
     }
 
