@@ -1,28 +1,34 @@
 ## 服务器推荐配置
-### 服务器配置：
-    CPU：2核
-    内存：8G
-    实例规格：标准型S2机型
-    带宽：10M
-    价格：3999元/三年
+| 名称        | CPU    |  内存  |  硬盘  |  价格  |
+| --------    | -----:   | :----: | :----: | :----: |
+| 服务器(标准型S2机型 10M 双机)       | 2核      |   8G    |   50G    |   3999元/三年    |
+| MySQL高可用版| 1核      |   1G    |   100G    | 423元/三年    |
 
-购买说明：如果业务量较大，推荐双机部署。
+| COS资源包     | 大小     |  价格     |
+| --------     | -----:   | :----:   |
+| 标准型存储容量 |200GB	  |1年	171元|
+| 下行流量      | 500GB	  |3个月	177元|
 
-### MySQL高可用版配置：
-    CPU：1核
-    内存：1G
-    硬盘：100G
-    价格：423元/三年
+[抢购地址：https://cloud.tencent.com](https://cloud.tencent.com/act/cps/redirect?redirect=1044&cps_key=30280f92fc381dfc9e1d9e0e23d25a18&from=console)
 
-### COS资源包：
-    标准型存储容量：
-    100GB	1年	88元
-    200GB	1年	171元
-    下行流量：
-    100GB	3个月	37元
-    200GB	3个月	71元
-    500GB	3个月	177元
-[抢购地址：https://cloud.tencent.com](https://cloud.tencent.com/redirect.php?redirect=10562&cps_key=30280f92fc381dfc9e1d9e0e23d25a18)
+# 使用须知
+## ✅允许
+- 个人学习使用
+- 允许用于学习、毕设等
+- 允许进行商业使用，但是要保留 footer 水印，请自觉遵守使用协议，别给公司带来不必要麻烦，如需要商业使用推荐购买商业版
+
+### 微同商城商业版
+![](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/grocery/20181228/1114545734c867.jpg "微同商城商业版")
+
+[商业版与开源版差异](https://gitee.com/fuyang_lipengjun/platform/issues/I10TFX)
+
+## ❌禁止
+- 将本项目的代码和资源进行任何形式的出售（尤其上传GitHub、Gitee）
+- 利用本项目的部分或全部代码和资源进行任何商业行为
+- 擅自窃用，即属严重侵权行为，与盗窃无异。产生的一切任何后果责任由侵权者自负
+
+## 🙏呼吁
+- 维护国内开源环境，人人有责！
 
 # 微信小程序商城（Java版）
 
@@ -38,13 +44,8 @@ https://platform-wxmall.oss-cn-beijing.aliyuncs.com/GVP.jpg "GVP")
 ### 微同商城开源版体验：
 ![](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/gh_a7a467438863_344.jpg "微同商城开源版")
 
-### 微同商城商业版
-![](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/grocery/20181228/1114545734c867.jpg "微同商城商业版")
-
 * 官方QQ群：<a target="_blank" href="//shang.qq.com/wpa/qunwpa?idkey=2d02d83d8be4c2cb6848bbae1df1037ba2acddecd2a1aa8cef7b3e4ab4ff75aa"><img border="0" src="//pub.idqqimg.com/wpa/images/group.png" alt="platform-wechat-mall ①群" title="platform-wechat-mall ①群"></a><a target="_blank" href="//shang.qq.com/wpa/qunwpa?idkey=990a15d445ef791dba99d22d9772c06ac7894ffa6ac639b1eec530554c432583"><img border="0" src="//pub.idqqimg.com/wpa/images/group.png" alt="platform-wechat-mall ②群" title="platform-wechat-mall ②群"></a>
 * git：[https://gitee.com/fuyang_lipengjun/platform](https://gitee.com/fuyang_lipengjun/platform)
-* 基础架构版
-    * git：[https://gitee.com/fuyang_lipengjun/platform-framework](https://gitee.com/fuyang_lipengjun/platform-framework)
 * 代码生成工具IDEA插件
     * git：[https://gitee.com/fuyang_lipengjun/platform-gen](https://gitee.com/fuyang_lipengjun/platform-gen)
     

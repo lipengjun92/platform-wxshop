@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
  *
  * @author lipengjun
  * @email 939961241@qq.com
+ * @gitee https://gitee.com/fuyang_lipengjun/platform
  * @date 2017-03-26 17:27
  */
 @Api(tags = "注册")

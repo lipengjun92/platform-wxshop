@@ -5,6 +5,7 @@ import com.platform.utils.ResourceUtil;
 /**
  * 作者: @author Harmon <br>
  * 时间: 2017-08-11 08:58<br>
+ * @gitee https://gitee.com/fuyang_lipengjun/platform
  * 描述: ApiUserUtils <br>
  */
 public class ApiUserUtils {

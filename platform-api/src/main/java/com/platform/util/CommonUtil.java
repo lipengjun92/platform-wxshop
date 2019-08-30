@@ -25,9 +25,6 @@ import org.springframework.web.client.RestTemplate;
 public class CommonUtil {
     private static Logger log = LoggerFactory.getLogger(CommonUtil.class);
 
-    
-    
-    
     /**
      * 发送https请求
      *
