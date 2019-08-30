@@ -12,6 +12,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * @author lipengjun
+ * @email 939961241@qq.com
+ * @gitee https://gitee.com/fuyang_lipengjun/platform
+ */
 @Api(tags = "商品购买")
 @RestController
 @RequestMapping("/api/buy")

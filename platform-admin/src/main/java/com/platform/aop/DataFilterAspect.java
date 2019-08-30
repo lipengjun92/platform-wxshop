@@ -23,6 +23,7 @@ import java.util.Map;
  *
  * @author lipengjun
  * @email 939961241@qq.com
+ * @gitee https://gitee.com/fuyang_lipengjun/platform
  * @date 2017年10月23日 下午13:33:35
  */
 @Aspect

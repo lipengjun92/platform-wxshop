@@ -21,6 +21,8 @@ import java.util.Map;
  * 发送短信日志Controller
  *
  * @author lipengjun
+ * @email 939961241@qq.com
+ * @gitee https://gitee.com/fuyang_lipengjun/platform
  * @date 2017-12-16 23:38:05
  */
 @RestController

@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * 作者: @author Harmon <br>
  * 时间: 2017-08-11 08:32<br>
+ * @gitee https://gitee.com/fuyang_lipengjun/platform
  * 描述: ApiIndexController <br>
  */
 @Api(tags = "会员验证")
