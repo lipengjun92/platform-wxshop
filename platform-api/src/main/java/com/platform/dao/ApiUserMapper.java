@@ -14,6 +14,8 @@ import org.apache.ibatis.annotations.Param;
  */
 public interface ApiUserMapper extends BaseDao<UserVo> {
 
+    UserVo queryByMobile(String mobile);
+
     UserVo queryByOpenId(@Param("openId") String openId);
 
     /**

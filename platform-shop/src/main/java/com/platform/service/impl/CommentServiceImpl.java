@@ -4,7 +4,7 @@ import com.platform.dao.CommentDao;
 import com.platform.dao.CommentPictureDao;
 import com.platform.entity.CommentEntity;
 import com.platform.service.CommentService;
-import com.platform.utils.Base64;
+import com.platform.utils.Base64Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -36,7 +36,7 @@ public class CommentServiceImpl implements CommentService {
         List<CommentEntity> commentEntities = commentDao.queryList(map);
         if (null != commentEntities && commentEntities.size() > 0) {
             for (CommentEntity commentEntity : commentEntities) {
-                commentEntity.setContent(Base64.decode(commentEntity.getContent()));
+                commentEntity.setContent(Base64Util.decode(commentEntity.getContent()));
             }
         }
         return commentEntities;
