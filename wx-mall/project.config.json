@@ -9,8 +9,10 @@
 	},
 	"compileType": "miniprogram",
 	"libVersion": "1.9.0",
-	"appid": "wx11ed3e37387289b8",
+	"appid": "wx7d1077edf1fd3ae5",
 	"projectname": "wxshop",
+	"simulatorType": "wechat",
+	"simulatorPluginLibVersion": {},
 	"condition": {
 		"search": {
 			"current": -1,
