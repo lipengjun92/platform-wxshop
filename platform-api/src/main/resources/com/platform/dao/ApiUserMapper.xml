@@ -32,6 +32,9 @@
             and `weixin_openid` = #{openId}
         </if>
     </select>
+    <select id="queryByMobile" resultMap="userMap">
+      select * from nideshop_user where `mobile` = #{mobile}
+    </select>
 
     <select id="queryList" resultMap="userMap">
         select * from nideshop_user
@@ -49,32 +52,32 @@
     </select>
 
     <select id="queryTotal" resultType="int">
-		select count(*) from nideshop_user 
+		select count(*) from nideshop_user
 	</select>
 
     <insert id="save" parameterType="com.platform.entity.UserVo" useGeneratedKeys="true" keyProperty="userId">
 		insert into nideshop_user
 		(
-			`username`, 
-			`password`, 
-			`gender`, 
-			`birthday`, 
-			`register_time`, 
-			`last_login_time`, 
-			`last_login_ip`, 
-			`user_level_id`, 
-			`nickname`, 
-			`mobile`, 
-			`register_ip`, 
-			`avatar`, 
+			`username`,
+			`password`,
+			`gender`,
+			`birthday`,
+			`register_time`,
+			`last_login_time`,
+			`last_login_ip`,
+			`user_level_id`,
+			`nickname`,
+			`mobile`,
+			`register_ip`,
+			`avatar`,
 			`weixin_openid`
 		)
 		values
 		(
-			#{username}, 
-			#{password}, 
-			#{gender}, 
-			#{birthday}, 
+			#{username},
+			#{password},
+			#{gender},
+			#{birthday},
 			#{register_time},
 			#{last_login_time},
 			#{last_login_ip},

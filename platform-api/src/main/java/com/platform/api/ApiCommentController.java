@@ -8,7 +8,7 @@ import com.platform.entity.*;
 import com.platform.service.*;
 import com.platform.util.ApiBaseAction;
 import com.platform.util.ApiPageUtils;
-import com.platform.utils.Base64;
+import com.platform.utils.Base64Util;
 import com.platform.utils.CharUtil;
 import com.platform.utils.Query;
 import com.platform.utils.StringUtils;
@@ -61,7 +61,7 @@ public class ApiCommentController extends ApiBaseAction {
         //
         commentEntity.setAdd_time(System.currentTimeMillis() / 1000);
         commentEntity.setUser_id(loginUser.getUserId());
-        commentEntity.setContent(Base64.encode(commentEntity.getContent()));
+        commentEntity.setContent(Base64Util.encode(commentEntity.getContent()));
         Integer insertId = commentService.save(commentEntity);
         //
         if (insertId > 0 && null != imagesList && imagesList.size() > 0) {
@@ -170,7 +170,7 @@ public class ApiCommentController extends ApiBaseAction {
         ApiPageUtils pageUtil = new ApiPageUtils(commentList, total, query.getLimit(), query.getPage());
         //
         for (CommentVo commentItem : commentList) {
-            commentItem.setContent(Base64.decode(commentItem.getContent()));
+            commentItem.setContent(Base64Util.decode(commentItem.getContent()));
             commentItem.setUser_info(userService.queryObject(commentItem.getUser_id()));
 
             Map paramPicture = new HashMap();
