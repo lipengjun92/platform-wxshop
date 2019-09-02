@@ -93,7 +93,6 @@ platform-wechat-mall
 |--platform-schedule 定时任务
 |--platform-shop 商城后台管理
 |--wx-mall 微信小程序商城
-|--platform-vue 微信公众号商城（待开发，感兴趣的同学可以参与开发）
 ~~~
 
 ## 实现功能
@@ -195,12 +194,6 @@ platform-wechat-mall
 
 ## 生产环境打包
     platform-wechat-mall>mvn package -P prod
-    
-## platform-vue启动
-* npm install -g yarn
-* yarn install
-* yarn run dev
-* 浏览器输入[http://127.0.0.1:8001](http://127.0.0.1:8001)
 
 ***
 ### 关注微信公众号，第一时间获取项目最新动向，即将推出视频教程
