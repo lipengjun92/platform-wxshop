@@ -95,6 +95,8 @@ platform-wechat-mall
 |--platform-mp 微信公众号模块
 |--platform-schedule 定时任务
 |--platform-shop 商城后台管理
+|--uni-color-ui uni-mall商城参考项目
+|--uni-mall 移动端商城
 |--wx-mall 微信小程序商城
 ~~~
 
