@@ -20,7 +20,7 @@
 ### 微同商城商业版
 ![](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/grocery/20181228/1114545734c867.jpg "微同商城商业版")
 
-[商业版与开源版差异](https://gitee.com/fuyang_lipengjun/platform/issues/I10TFX)
+[商业版与开源版差异](http://fly2you.cn/business/index)
 
 ## ❌禁止
 - 将本项目的代码和资源进行任何形式的出售
