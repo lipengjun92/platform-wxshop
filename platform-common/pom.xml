@@ -149,6 +149,11 @@
             <artifactId>alipay-sdk-java</artifactId>
             <version>${alipay-sdk.version}</version>
         </dependency>
-
+        <!-- 腾讯云短信 -->
+        <dependency>
+            <groupId>com.github.qcloudsms</groupId>
+            <artifactId>qcloudsms</artifactId>
+            <version>${qcloudsms.version}</version>
+        </dependency>
     </dependencies>
 </project>

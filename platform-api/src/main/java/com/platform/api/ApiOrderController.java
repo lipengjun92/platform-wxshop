@@ -28,6 +28,7 @@ import java.util.Map;
 /**
  * 作者: @author Harmon <br>
  * 时间: 2017-08-11 08:32<br>
+ * @gitee https://gitee.com/fuyang_lipengjun/platform
  * 描述: ApiIndexController <br>
  */
 @Api(tags = "订单相关")
@@ -181,7 +182,7 @@ public class ApiOrderController extends ApiBaseAction {
             }
             // 需要退款
             if (orderVo.getPay_status() == 2) {
-                WechatRefundApiResult result = WechatUtil.wxRefund(orderVo.getId().toString(),
+                WechatRefundApiResult result = WechatUtil.wxRefund(orderVo.getOrder_sn(),
                         0.01, 0.01);
                 if (result.getResult_code().equals("SUCCESS")) {
                     if (orderVo.getOrder_status() == 201) {

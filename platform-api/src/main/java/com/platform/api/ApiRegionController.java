@@ -17,6 +17,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * @author lipengjun
+ * @email 939961241@qq.com
+ * @gitee https://gitee.com/fuyang_lipengjun/platform
+ */
 @Api(tags = "评论")
 @RestController
 @RequestMapping("/api/region")

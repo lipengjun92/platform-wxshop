@@ -1,16 +1,25 @@
 {
 	"description": "项目配置文件。",
 	"setting": {
-		"urlCheck": false,
+		"urlCheck": true,
 		"es6": true,
 		"postcss": true,
 		"minified": true,
-		"newFeature": true
+		"newFeature": true,
+		"autoAudits": false,
+		"checkInvalidKey": true,
+		"checkSiteMap": true,
+		"uploadWithSourceMap": true,
+		"babelSetting": {
+			"ignore": [],
+			"disablePlugins": [],
+			"outputPath": ""
+		}
 	},
 	"compileType": "miniprogram",
 	"libVersion": "2.6.5",
-	"appid": "wx59ee37cea6e05c08",
-	"projectname": "pwm",
+	"appid": "wx7d1077edf1fd3ae5",
+	"projectname": "%E5%BC%80%E6%BA%90%E7%89%88%E6%9C%AC",
 	"simulatorType": "wechat",
 	"simulatorPluginLibVersion": {},
 	"condition": {

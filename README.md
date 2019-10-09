@@ -1,35 +1,34 @@
-## 微同商城推荐服务器配置
-### 服务器配置：
+## 服务器推荐配置
+| 名称        | CPU    |  内存  |  硬盘  |  价格  |
+| --------    | -----:   | :----: | :----: | :----: |
+| 服务器(标准型S2机型 5M 双机)       | 2核      |   8G    |   50G    |   2970元/三年    |
+| MySQL高可用版| 1核      |   1G    |   100G    | 423元/三年    |
 
-    CPU：2核
-    内存：8G
-    实例规格：标准型S2机型
-    带宽：2M
-    价格：262 元/月 1768.5 元/年 4716 元/三年
-[点我购买](https://cloud.tencent.com/redirect.php?redirect=1014&cps_key=30280f92fc381dfc9e1d9e0e23d25a18&from=console)
+| COS资源包     | 大小     |  价格     |
+| --------     | -----:   | :----:   |
+| 标准型存储容量 |200GB	  |1年	171元|
+| 下行流量      | 500GB	  |3个月	177元|
 
-购买说明：如果业务量较大，推荐双机部署。
+[抢购地址：https://cloud.tencent.com](https://cloud.tencent.com/act/cps/redirect?redirect=1044&cps_key=30280f92fc381dfc9e1d9e0e23d25a18&from=console)
 
-### MySQL高可用版配置：
-    CPU：1核
-    内存：2G
-    硬盘：200G
-    价格：348元/月	3466.08元/年	3758.40元/三年
-[点我购买](https://cloud.tencent.com/redirect.php?redirect=10481&cps_key=30280f92fc381dfc9e1d9e0e23d25a18)
+# 使用须知
+## ✅允许
+- 个人学习使用
+- 允许用于学习、毕设等
+- 允许进行商业使用，但是要保留 footer 水印，请自觉遵守使用协议，别给公司带来不必要麻烦，如需要商业使用推荐购买商业版
 
-购买说明：腾讯云产品购买时长越大折扣就越大，所有推荐选择3年时长，可以达到3折优惠。
+### 微同商城商业版
+![](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/grocery/20181228/1114545734c867.jpg "微同商城商业版")
 
-### COS资源包：
-    标准型存储容量：
-    100GB	1年	101 元
-    200GB	1年	200 元
-    下行流量：
-    100GB	3个月	43元
-    200GB	3个月	85元
-    500GB	3个月	213元
-[点我购买](https://cloud.tencent.com/redirect.php?redirect=10165&cps_key=30280f92fc381dfc9e1d9e0e23d25a18)
+[商业版与开源版差异](http://fly2you.cn/business/index)
 
-购买说明：根据实际业务存储量购买，目前我的站点存储容量100G，下行流量100G，刚好够用！
+## ❌禁止
+- 将本项目的代码和资源进行任何形式的出售
+- 利用本项目的代码和资源进行任何商业行为
+- 擅自窃用，即属严重侵权行为，与盗窃无异。产生的一切任何后果责任由侵权者自负
+
+## 🙏呼吁
+- 维护国内开源环境，人人有责！
 
 # 微信小程序商城（Java版）
 
@@ -42,13 +41,20 @@ https://platform-wxmall.oss-cn-beijing.aliyuncs.com/GVP.jpg "GVP")
 * [演示地址](http://fly2you.cn)
 * [最新开发文档](http://fly2you.cn/guide/index)
 
+## 新手必看启动教程
+- [https://www.bilibili.com/video/av66149752](https://www.bilibili.com/video/av66149752)
+
+### 微同商城开源版体验：
+![](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/gh_a7a467438863_344.jpg "微同商城开源版")
+
 * 官方QQ群：<a target="_blank" href="//shang.qq.com/wpa/qunwpa?idkey=2d02d83d8be4c2cb6848bbae1df1037ba2acddecd2a1aa8cef7b3e4ab4ff75aa"><img border="0" src="//pub.idqqimg.com/wpa/images/group.png" alt="platform-wechat-mall ①群" title="platform-wechat-mall ①群"></a><a target="_blank" href="//shang.qq.com/wpa/qunwpa?idkey=990a15d445ef791dba99d22d9772c06ac7894ffa6ac639b1eec530554c432583"><img border="0" src="//pub.idqqimg.com/wpa/images/group.png" alt="platform-wechat-mall ②群" title="platform-wechat-mall ②群"></a>
 * git：[https://gitee.com/fuyang_lipengjun/platform](https://gitee.com/fuyang_lipengjun/platform)
-* 基础架构版
-    * git：[https://gitee.com/fuyang_lipengjun/platform-framework](https://gitee.com/fuyang_lipengjun/platform-framework)
 * 代码生成工具IDEA插件
     * git：[https://gitee.com/fuyang_lipengjun/platform-gen](https://gitee.com/fuyang_lipengjun/platform-gen)
-     
+    
+# 注意
+Entity里不是缺少get、set方法，Eclipse、IDEA请先安装lombok插件
+ 
 ## 技术选型
 * 1 后端使用技术
     * 1.1 springframework4.3.7.RELEASE
@@ -66,6 +72,7 @@ https://platform-wxmall.oss-cn-beijing.aliyuncs.com/GVP.jpg "GVP")
     * 1.13 j2cache2.3.22-release
     * 1.14 weixin-java-mp3.2.0
     * 1.15 MybatisPlus3.1.0
+    * 1.16 lombok
         
 * 2 前端使用技术
     * 2.1 Vue2.5.1
@@ -88,8 +95,9 @@ platform-wechat-mall
 |--platform-mp 微信公众号模块
 |--platform-schedule 定时任务
 |--platform-shop 商城后台管理
+|--uni-color-ui uni-mall商城参考项目
+|--uni-mall 移动端商城
 |--wx-mall 微信小程序商城
-|--platform-vue 微信公众号商城（待开发，感兴趣的同学可以参与开发）
 ~~~
 
 ## 实现功能
@@ -183,7 +191,7 @@ platform-wechat-mall
 * 启动后台项目（参照<a href="#doc">开发文档</a>）
 * 打开微信开发者工具
 * 导入 /wx-mall填写appId
-* 修改 /wx-mall/config/app.js里NewApiRootUrl的值
+* 修改 /wx-mall/config/api.js里API_BASE_URL的值
 * 使用eclipse启动项目后默认访问路径
     * [http://localhost:8080/platform-framework](http://localhost:8080/platform-framework)
 * 使用idea启动项目后默认访问路径
@@ -191,12 +199,6 @@ platform-wechat-mall
 
 ## 生产环境打包
     platform-wechat-mall>mvn package -P prod
-    
-## platform-vue启动
-* npm install -g yarn
-* yarn install
-* yarn run dev
-* 浏览器输入[http://127.0.0.1:8001](http://127.0.0.1:8001)
 
 ***
 ### 关注微信公众号，第一时间获取项目最新动向，即将推出视频教程
@@ -229,8 +231,6 @@ platform-wechat-mall
 ![](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/upload/20180727/12.png "VUE页面")
 
 ***
-### 微同商城商业版
-![](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/grocery/20181228/1114545734c867.jpg "PWM商业版")
 
 ### <a name="doc">开发文档目录</a>
 ![](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/catalog.png "开发文档目录")

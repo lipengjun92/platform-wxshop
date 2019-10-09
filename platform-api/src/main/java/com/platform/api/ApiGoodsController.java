@@ -8,7 +8,7 @@ import com.platform.entity.*;
 import com.platform.service.*;
 import com.platform.util.ApiBaseAction;
 import com.platform.util.ApiPageUtils;
-import com.platform.utils.Base64;
+import com.platform.utils.Base64Util;
 import com.platform.utils.CharUtil;
 import com.platform.utils.DateUtils;
 import com.platform.utils.Query;
@@ -28,6 +28,7 @@ import java.util.*;
 /**
  * 作者: @author Harmon <br>
  * 时间: 2017-08-11 08:32<br>
+ * @gitee https://gitee.com/fuyang_lipengjun/platform
  * 描述: ApiIndexController <br>
  */
 @Api(tags = "商品管理")
@@ -185,7 +186,7 @@ public class ApiGoodsController extends ApiBaseAction {
         Map commentInfo = new HashMap();
         if (null != hotComment && hotComment.size() > 0) {
             UserVo commentUser = userService.queryObject(hotComment.get(0).getUser_id());
-            commentInfo.put("content", Base64.decode(hotComment.get(0).getContent()));
+            commentInfo.put("content", Base64Util.decode(hotComment.get(0).getContent()));
             commentInfo.put("add_time", DateUtils.timeToStr(hotComment.get(0).getAdd_time(), DateUtils.DATE_PATTERN));
             commentInfo.put("nickname", commentUser.getNickname());
             commentInfo.put("avatar", commentUser.getAvatar());

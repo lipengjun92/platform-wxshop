@@ -3,7 +3,10 @@ package com.platform.api;
 import com.platform.annotation.IgnoreAuth;
 import com.platform.entity.SysSmsLogEntity;
 import com.platform.service.SysSmsLogService;
-import com.platform.utils.*;
+import com.platform.utils.R;
+import com.platform.utils.RRException;
+import com.platform.utils.RequestUtil;
+import com.platform.utils.ResourceUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -17,6 +20,7 @@ import java.util.Map;
  *
  * @author liepngjun
  * @email 939961241@qq.com
+ * @gitee https://gitee.com/fuyang_lipengjun/platform
  * @date 2018-06-05 13:58:47
  */
 @RestController
@@ -41,11 +45,10 @@ public class ApiSmsController {
             throw new RRException("非法IP请求！");
         }
         smsLog.setMobile(params.get("mobile"));
-        smsLog.setContent(params.get("content"));
-        String stime = params.get("stime");
-        if (StringUtils.isNotEmpty(stime)) {
-            smsLog.setStime(DateUtils.convertStringToDate(stime));
-        }
+
+        //todo 模板ID：实际使用需要修改
+        smsLog.setTemplateId(23);
+        smsLog.setCode(params.get("code"));
         SysSmsLogEntity sysSmsLogEntity = smsLogService.sendSms(smsLog);
         return R.ok().put("result", sysSmsLogEntity);
     }

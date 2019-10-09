@@ -10,6 +10,7 @@ import java.lang.annotation.Target;
  *
  * @author lipengjun
  * @email 939961241@qq.com
+ * @gitee https://gitee.com/fuyang_lipengjun/platform
  * @date 2017-03-23 20:39
  */
 @Target(ElementType.PARAMETER)

@@ -19,6 +19,7 @@ import java.util.Map;
  *
  * @author lipengjun
  * @email 939961241@qq.com
+ * @gitee https://gitee.com/fuyang_lipengjun/platform
  * @date 2018-11-07 11:04:20
  */
 @RestController

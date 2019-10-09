@@ -1,5 +1,6 @@
 package com.platform.api;
 
+import com.platform.annotation.IgnoreAuth;
 import com.platform.annotation.LoginUser;
 import com.platform.cache.J2CacheUtils;
 import com.platform.entity.OrderGoodsVo;
@@ -16,6 +17,7 @@ import io.swagger.annotations.ApiOperation;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import springfox.documentation.annotations.ApiIgnore;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -27,6 +29,7 @@ import java.util.*;
 /**
  * 作者: @author Harmon <br>
  * 时间: 2017-08-11 08:32<br>
+ * @gitee https://gitee.com/fuyang_lipengjun/platform
  * 描述: ApiIndexController <br>
  */
 @Api(tags = "商户支付")
@@ -229,9 +232,9 @@ public class ApiPayController extends ApiBaseAction {
      *
      * @return
      */
-    @ApiOperation(value = "微信订单回调接口")
+    @ApiIgnore
+    @IgnoreAuth
     @RequestMapping(value = "/notify", method = RequestMethod.POST, produces = "text/html;charset=UTF-8")
-    @ResponseBody
     public void notify(HttpServletRequest request, HttpServletResponse response) {
         try {
             request.setCharacterEncoding("UTF-8");
@@ -262,7 +265,7 @@ public class ApiPayController extends ApiBaseAction {
                 String out_trade_no = result.getOut_trade_no();
                 logger.error("订单" + out_trade_no + "支付成功");
                 // 业务处理
-                OrderVo orderInfo = orderService.queryObject(Integer.valueOf(out_trade_no));
+                OrderVo orderInfo = orderService.queryObjectByOrderSn(out_trade_no);
                 orderInfo.setPay_status(2);
                 orderInfo.setOrder_status(201);
                 orderInfo.setShipping_status(0);
