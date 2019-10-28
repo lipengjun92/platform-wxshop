@@ -9,7 +9,7 @@
 | 标准型存储容量 |200GB	  |1年	171元|
 | 下行流量      | 500GB	  |3个月	177元|
 
-[抢购地址：https://cloud.tencent.com](https://cloud.tencent.com/act/cps/redirect?redirect=1044&cps_key=30280f92fc381dfc9e1d9e0e23d25a18&from=console)
+[抢购地址：https://cloud.tencent.com](https://cloud.tencent.com/act/cps/redirect?redirect=1048&cps_key=30280f92fc381dfc9e1d9e0e23d25a18&from=console)
 
 # 使用须知
 ## ✅允许
