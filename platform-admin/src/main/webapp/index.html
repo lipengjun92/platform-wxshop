@@ -21,7 +21,7 @@
     <![endif]-->
     <script>
         var _hmt = _hmt || [];
-        (function () {
+        (function() {
             var hm = document.createElement("script");
             hm.src = "https://hm.baidu.com/hm.js?4656e49e8efa9f2ad6868ea26fb8984c";
             var s = document.getElementsByTagName("script")[0];
@@ -369,22 +369,11 @@
                         toUrl('logout?_' + $.now());
                     }, 500);
                 });
-            },
-            love: function () {
-                setTimeout(function () {
-                    openWindow({
-                        type: 2,
-                        title: '【助力企业上云】性能级主机2-5折',
-                        closeBtn: 2,
-                        content: ['https://promotion.aliyun.com/ntms/act/enterprise-discount.html?userCode=i8s6n64p']
-                    });
-                }, 2000)
             }
         },
         created: function () {
             this.getUser();
             this.getMenuList();
-            this.love();
         },
         updated: function () {
             // MetsiMenu

@@ -1,25 +1,16 @@
 {
 	"description": "项目配置文件。",
 	"setting": {
-		"urlCheck": true,
+		"urlCheck": false,
 		"es6": true,
 		"postcss": true,
 		"minified": true,
-		"newFeature": true,
-		"autoAudits": false,
-		"checkInvalidKey": true,
-		"checkSiteMap": true,
-		"uploadWithSourceMap": true,
-		"babelSetting": {
-			"ignore": [],
-			"disablePlugins": [],
-			"outputPath": ""
-		}
+		"newFeature": true
 	},
 	"compileType": "miniprogram",
-	"libVersion": "2.6.5",
+	"libVersion": "1.9.0",
 	"appid": "wx7d1077edf1fd3ae5",
-	"projectname": "%E5%BC%80%E6%BA%90%E7%89%88%E6%9C%AC",
+	"projectname": "wxshop",
 	"simulatorType": "wechat",
 	"simulatorPluginLibVersion": {},
 	"condition": {
