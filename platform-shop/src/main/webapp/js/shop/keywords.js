@@ -50,19 +50,16 @@ var vm = new Vue({
         saveOrUpdate: function (event) {
             var url = vm.keywords.id == null ? "../keywords/save" : "../keywords/update";
 
-            confirm('确定要删除选中的记录？', function () {
-                Ajax.request({
-                    type: "POST",
-                    url: url,
-                    contentType: "application/json",
-                    params: JSON.stringify(vm.keywords),
-                    successCallback: function (r) {
-                        alert('操作成功', function (index) {
-                            vm.reload();
-                        });
-                    }
-                });
-
+            Ajax.request({
+                type: "POST",
+                url: url,
+                contentType: "application/json",
+                params: JSON.stringify(vm.keywords),
+                successCallback: function (r) {
+                    alert('操作成功', function (index) {
+                        vm.reload();
+                    });
+                }
             });
         },
         del: function (event) {
