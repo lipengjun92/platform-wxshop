@@ -1,23 +1,27 @@
 package com.platform.shiro;
 
+import com.google.common.collect.Sets;
 import com.platform.cache.J2CacheUtils;
 import com.platform.utils.Constant;
 import org.apache.shiro.session.Session;
-import org.apache.shiro.session.mgt.eis.EnterpriseCacheSessionDAO;
+import org.apache.shiro.session.mgt.eis.AbstractSessionDAO;
 
 import java.io.Serializable;
+import java.util.Collection;
+import java.util.Set;
 
 /**
- * 分布式session管理
+ * 集群session管理
  *
  * @author lipengjun
  * @date 2018年07月31日 上午14:50
  */
-public class CluterShiroSessionDao extends EnterpriseCacheSessionDAO {
+public class CluterShiroSessionDao extends AbstractSessionDAO {
 
     @Override
     protected Serializable doCreate(Session session) {
-        Serializable sessionId = super.doCreate(session);
+        Serializable sessionId = generateSessionId(session);
+        assignSessionId(session, sessionId);
 
         final String key = Constant.SESSION_KEY + sessionId.toString();
         setShiroSession(key, session);
@@ -26,27 +30,38 @@ public class CluterShiroSessionDao extends EnterpriseCacheSessionDAO {
 
     @Override
     protected Session doReadSession(Serializable sessionId) {
-        Session session = super.doReadSession(sessionId);
-        if (null == session) {
-            final String key = Constant.SESSION_KEY + sessionId.toString();
-            session = getShiroSession(key);
+        if (sessionId == null) {
+            return null;
         }
-        return session;
+        final String key = Constant.SESSION_KEY + sessionId.toString();
+        return getShiroSession(key);
     }
 
     @Override
-    protected void doUpdate(Session session) {
-        super.doUpdate(session);
+    public void update(Session session) {
         final String key = Constant.SESSION_KEY + session.getId().toString();
         setShiroSession(key, session);
     }
 
     @Override
-    protected void doDelete(Session session) {
-        super.doDelete(session);
+    public void delete(Session session) {
         final String key = Constant.SESSION_KEY + session.getId().toString();
 
         J2CacheUtils.remove(key);
+    }
+
+    @Override
+    public Collection<Session> getActiveSessions() {
+        Collection<String> keys = J2CacheUtils.keys(Constant.SESSION_KEY + "*");
+
+        Set<Session> sessionSet = Sets.newHashSet();
+        for (String key : keys) {
+            Session session = getShiroSession(key);
+            if (session != null) {
+                sessionSet.add(session);
+            }
+        }
+        return sessionSet;
     }
 
     private Session getShiroSession(String key) {

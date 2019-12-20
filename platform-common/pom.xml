@@ -155,5 +155,11 @@
             <artifactId>qcloudsms</artifactId>
             <version>${qcloudsms.version}</version>
         </dependency>
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>RELEASE</version>
+            <scope>compile</scope>
+        </dependency>
     </dependencies>
 </project>
