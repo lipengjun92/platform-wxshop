@@ -411,6 +411,8 @@
                             });
                         }
                         flag = false;
+                        var activeTab = $('iframe[data-id="' + $('.active.J_menuTab').attr('data-id') + '"]');
+                        activeTab.attr('src', activeTab.attr('src'));
                         return false;
                     }
                 });
