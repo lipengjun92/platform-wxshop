@@ -18,10 +18,10 @@ Entity里不是缺少get、set方法，Eclipse、IDEA请先安装lombok插件
 ## ✅允许
 - 个人学习使用
 - 允许用于学习、毕设等
-- 允许进行商业使用，请自觉遵守使用协议，别给公司带来不必要麻烦，如需要商业使用推荐购买商业版
+- 允许进行商业使用，请自觉遵守使用协议，如需要商业使用推荐购买商业版（进群联系群主）
 
 ### 微同商城商业版
-![](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/grocery/20181228/1114545734c867.jpg "微同商城商业版")
+![](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/distribution.png "分销商城")
 
 [商业版与开源版差异](http://fly2you.cn/business/index)
 
