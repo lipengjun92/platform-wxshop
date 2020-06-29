@@ -10,25 +10,20 @@
 | 下行流量      | 500GB	  |3个月	177元|
 
 [抢购地址：https://cloud.tencent.com](https://cloud.tencent.com/act/cps/redirect?redirect=1048&cps_key=30280f92fc381dfc9e1d9e0e23d25a18&from=console)
+    
+# 注意
+Entity里不是缺少get、set方法，Eclipse、IDEA请先安装lombok插件
 
 # 使用须知
 ## ✅允许
 - 个人学习使用
 - 允许用于学习、毕设等
-- 允许进行商业使用，但是要保留 footer 水印，请自觉遵守使用协议，别给公司带来不必要麻烦，如需要商业使用推荐购买商业版
+- 允许进行商业使用，请自觉遵守使用协议，如需要商业使用推荐购买商业版（进群联系群主）
 
 ### 微同商城商业版
-![](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/grocery/20181228/1114545734c867.jpg "微同商城商业版")
+![](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/distribution.png "分销商城")
 
 [商业版与开源版差异](http://fly2you.cn/business/index)
-
-## ❌禁止
-- 将本项目的代码和资源进行任何形式的出售
-- 利用本项目的代码和资源进行任何商业行为
-- 擅自窃用，即属严重侵权行为，与盗窃无异。产生的一切任何后果责任由侵权者自负
-
-## 🙏呼吁
-- 维护国内开源环境，人人有责！
 
 # 微信小程序商城（Java版）
 
@@ -51,10 +46,7 @@ https://platform-wxmall.oss-cn-beijing.aliyuncs.com/GVP.jpg "GVP")
 * git：[https://gitee.com/fuyang_lipengjun/platform](https://gitee.com/fuyang_lipengjun/platform)
 * 代码生成工具IDEA插件
     * git：[https://gitee.com/fuyang_lipengjun/platform-gen](https://gitee.com/fuyang_lipengjun/platform-gen)
-    
-# 注意
-Entity里不是缺少get、set方法，Eclipse、IDEA请先安装lombok插件
- 
+
 ## 技术选型
 * 1 后端使用技术
     * 1.1 springframework4.3.7.RELEASE
@@ -153,8 +145,7 @@ platform-wechat-mall
     * i 文件上传
     * j 通用字典表
         
-* 六：短信服务平台  
-    * **需要短信验证码、短信通知、短信营销的客户进群私聊我**
+* 七：短信服务平台  
     * a 配置短信平台账户信息
     * b 向外提供发送短信接口：
     ```
@@ -198,7 +189,7 @@ platform-wechat-mall
     * [http://localhost:8080](http://localhost:8080)
 
 ## 生产环境打包
-    platform-wechat-mall>mvn package -P prod
+    platform-wechat-mall>mvn package -Pprod
 
 ***
 ### 关注微信公众号，第一时间获取项目最新动向，即将推出视频教程
