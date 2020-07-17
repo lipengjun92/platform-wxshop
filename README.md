@@ -2,6 +2,7 @@
 | 名称        | CPU    |  内存  |  硬盘  |  价格  |
 | --------    | -----:   | :----: | :----: | :----: |
 | 服务器(标准型S2机型 5M 双机)       | 4核      |   8G    |   40G    |   2320元    |
+
 抢购地址：[https://activity.huaweicloud.com/discount_area_v5/index.html?fromacct=1113b051-64d6-47ab-ae5b-c80e4c675620&utm_source=V1g3MDY4NTY=&utm_medium=cps&utm_campaign=201905](https://activity.huaweicloud.com/discount_area_v5/index.html?fromacct=1113b051-64d6-47ab-ae5b-c80e4c675620&utm_source=V1g3MDY4NTY=&utm_medium=cps&utm_campaign=201905)
 
 <a href="https://activity.huaweicloud.com/discount_area_v5/index.html?fromacct=1113b051-64d6-47ab-ae5b-c80e4c675620&utm_source=V1g3MDY4NTY=&utm_medium=cps&utm_campaign=201905" target="_blank">![](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/huaweiyun.jpg "微同商城开源版")</a>
@@ -10,6 +11,7 @@
 | 名称        | CPU    |  内存  |  硬盘  |  价格  |
 | --------    | -----:   | :----: | :----: | :----: |
 | MySQL高可用版| 2核      |   4G    |   40G    | 0元    |
+
 云数据0元免费试用：[https://activity.huaweicloud.com/dbs_Promotion/index.html?fromacct=1113b051-64d6-47ab-ae5b-c80e4c675620&utm_source=V1g3MDY4NTY=&utm_medium=cps&utm_campaign=201905](https://activity.huaweicloud.com/dbs_Promotion/index.html?fromacct=1113b051-64d6-47ab-ae5b-c80e4c675620&utm_source=V1g3MDY4NTY=&utm_medium=cps&utm_campaign=201905)
  
  ## 腾讯云服务器推荐配置
