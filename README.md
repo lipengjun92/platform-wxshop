@@ -1,16 +1,3 @@
-## 服务器推荐配置
-| 名称        | CPU    |  内存  |  硬盘  |  价格  |
-| --------    | -----:   | :----: | :----: | :----: |
-| 服务器(标准型S2机型 5M 双机)       | 2核      |   8G    |   50G    |   2970元/三年    |
-| MySQL高可用版| 1核      |   1G    |   100G    | 423元/三年    |
-
-| COS资源包     | 大小     |  价格     |
-| --------     | -----:   | :----:   |
-| 标准型存储容量 |200GB	  |1年	171元|
-| 下行流量      | 500GB	  |3个月	177元|
-
-[抢购地址：https://cloud.tencent.com](https://cloud.tencent.com/act/cps/redirect?redirect=1048&cps_key=30280f92fc381dfc9e1d9e0e23d25a18&from=console)
-    
 # 注意
 Entity里不是缺少get、set方法，Eclipse、IDEA请先安装lombok插件
 
@@ -21,7 +8,12 @@ Entity里不是缺少get、set方法，Eclipse、IDEA请先安装lombok插件
 - 允许进行商业使用，请自觉遵守使用协议，如需要商业使用推荐购买商业版（进群联系群主）
 
 ### 微同商城商业版
-![](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/distribution.png "分销商城")
+##### 小程序
+![](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/gh_9f71054867af_860.jpg "uniapp商城")
+
+- [H5](https://fly2you.cn/h5)
+- [IOS](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/wtkj.ipa)
+- [Android](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/wtkj.apk)
 
 [商业版与开源版差异](http://fly2you.cn/business/index)
 
@@ -32,9 +24,9 @@ Entity里不是缺少get、set方法，Eclipse、IDEA请先安装lombok插件
 ![](
 https://platform-wxmall.oss-cn-beijing.aliyuncs.com/GVP.jpg "GVP")
 
-## 官方首页
-* [演示地址](http://fly2you.cn)
-* [最新开发文档](http://fly2you.cn/guide/index)
+### 关注微信公众号，获取更多资讯
+![](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/upload/20180708/qr.jpg "微信公众号")
+
 
 ## 新手必看启动教程
 - [https://www.bilibili.com/video/av66149752](https://www.bilibili.com/video/av66149752)
@@ -42,7 +34,11 @@ https://platform-wxmall.oss-cn-beijing.aliyuncs.com/GVP.jpg "GVP")
 ### 微同商城开源版体验：
 ![](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/gh_a7a467438863_344.jpg "微同商城开源版")
 
-* 官方QQ群：<a target="_blank" href="//shang.qq.com/wpa/qunwpa?idkey=2d02d83d8be4c2cb6848bbae1df1037ba2acddecd2a1aa8cef7b3e4ab4ff75aa"><img border="0" src="//pub.idqqimg.com/wpa/images/group.png" alt="platform-wechat-mall ①群" title="platform-wechat-mall ①群"></a><a target="_blank" href="//shang.qq.com/wpa/qunwpa?idkey=990a15d445ef791dba99d22d9772c06ac7894ffa6ac639b1eec530554c432583"><img border="0" src="//pub.idqqimg.com/wpa/images/group.png" alt="platform-wechat-mall ②群" title="platform-wechat-mall ②群"></a>
+* 官方QQ群：
+    * <a target="_blank" href="https://qm.qq.com/cgi-bin/qm/qr?k=HNLRmaIdvnj2e_TGkMspORvIn-AHNZCb&jump_from=webapi"><img border="0" src="//pub.idqqimg.com/wpa/images/group.png" alt="微同科技 ①群" title="微同科技 ①群"></a>
+    * <a target="_blank" href="https://qm.qq.com/cgi-bin/qm/qr?k=4i3Z9xgp7SlPnk_X1v0TWToSOoT_gJMz&jump_from=webapi"><img border="0" src="//pub.idqqimg.com/wpa/images/group.png" alt="微同科技 ②群" title="微同科技 ②群"></a>
+    * <a target="_blank" href="https://qm.qq.com/cgi-bin/qm/qr?k=hQLMx7vYLfP_C-d2-yP_udx1yciJXfHC&jump_from=webapi"><img border="0" src="//pub.idqqimg.com/wpa/images/group.png" alt="微同科技 ③群" title="微同科技 ③群"></a>
+
 * git：[https://gitee.com/fuyang_lipengjun/platform](https://gitee.com/fuyang_lipengjun/platform)
 * 代码生成工具IDEA插件
     * git：[https://gitee.com/fuyang_lipengjun/platform-gen](https://gitee.com/fuyang_lipengjun/platform-gen)
@@ -78,7 +74,7 @@ https://platform-wxmall.oss-cn-beijing.aliyuncs.com/GVP.jpg "GVP")
 
 ## 项目结构
 ~~~
-platform-wechat-mall
+platform
 |--platform-admin 后台管理
 |--platform-api 微信小程序商城api接口
 |--platform-common 公共模块
@@ -179,6 +175,7 @@ platform-wechat-mall
 * 修改配置文件 /platform-admin/src/main/resources/j2cache.properties
     * redis.hosts
     * redis.password
+* 启动redis服务
 * 启动后台项目（参照<a href="#doc">开发文档</a>）
 * 打开微信开发者工具
 * 导入 /wx-mall填写appId
@@ -187,13 +184,6 @@ platform-wechat-mall
     * [http://localhost:8080/platform-framework](http://localhost:8080/platform-framework)
 * 使用idea启动项目后默认访问路径
     * [http://localhost:8080](http://localhost:8080)
-
-## 生产环境打包
-    platform-wechat-mall>mvn package -Pprod
-
-***
-### 关注微信公众号，第一时间获取项目最新动向，即将推出视频教程
-![](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/upload/20180708/qr.jpg "微信公众号")
 
 ## 页面展示
 ### 登录页面
@@ -223,5 +213,6 @@ platform-wechat-mall
 
 ***
 
-### <a name="doc">开发文档目录</a>
-![](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/catalog.png "开发文档目录")
+### 开发文档目录
+<a name="doc" href="http://fly2you.cn/guide/index" target="_blank">![](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/catalog.png "开发文档目录")</a>
+

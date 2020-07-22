@@ -14,7 +14,7 @@
         <qiniu-version>[7.2.0, 7.2.99]</qiniu-version>
         <aliyun-oss-version>2.5.0</aliyun-oss-version>
         <qcloud-cos-version>5.2.4</qcloud-cos-version>
-        <jackson.version>2.10.1</jackson.version>
+        <jackson.version>2.9.10</jackson.version>
         <poi.version>3.15</poi.version>
         <org-json-version>20180130</org-json-version>
     </properties>
@@ -154,6 +154,12 @@
             <groupId>com.github.qcloudsms</groupId>
             <artifactId>qcloudsms</artifactId>
             <version>${qcloudsms.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>RELEASE</version>
+            <scope>compile</scope>
         </dependency>
     </dependencies>
 </project>
