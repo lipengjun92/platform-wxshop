@@ -1,35 +1,3 @@
-## 华为云服务器推荐配置
-| 名称        | CPU    |  内存  |  硬盘  |  价格  |
-| --------    | -----:   | :----: | :----: | :----: |
-| 服务器(标准型S2机型 5M 双机)       | 4核      |   8G    |   40G    |   2320元    |
-
-抢购地址：[https://activity.huaweicloud.com/discount_area_v5/index.html?fromacct=1113b051-64d6-47ab-ae5b-c80e4c675620&utm_source=V1g3MDY4NTY=&utm_medium=cps&utm_campaign=201905](https://activity.huaweicloud.com/discount_area_v5/index.html?fromacct=1113b051-64d6-47ab-ae5b-c80e4c675620&utm_source=V1g3MDY4NTY=&utm_medium=cps&utm_campaign=201905)
-
-<a href="https://activity.huaweicloud.com/discount_area_v5/index.html?fromacct=1113b051-64d6-47ab-ae5b-c80e4c675620&utm_source=V1g3MDY4NTY=&utm_medium=cps&utm_campaign=201905" target="_blank">![](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/huaweiyun.jpg "微同商城开源版")</a>
-
-
-| 名称        | CPU    |  内存  |  硬盘  |  价格  |
-| --------    | -----:   | :----: | :----: | :----: |
-| MySQL高可用版| 2核      |   4G    |   40G    | 0元    |
-
-云数据0元免费试用：[https://activity.huaweicloud.com/dbs_Promotion/index.html?fromacct=1113b051-64d6-47ab-ae5b-c80e4c675620&utm_source=V1g3MDY4NTY=&utm_medium=cps&utm_campaign=201905](https://activity.huaweicloud.com/dbs_Promotion/index.html?fromacct=1113b051-64d6-47ab-ae5b-c80e4c675620&utm_source=V1g3MDY4NTY=&utm_medium=cps&utm_campaign=201905)
- 
- ## 腾讯云服务器推荐配置
-| 名称        | CPU    |  内存  |  硬盘  |  价格  |
-| --------    | -----:   | :----: | :----: | :----: |
-| 服务器(标准型SA2机型 5M)       | 2核      |   4G    |   50G    |   1735元/三年    |
-| MySQL高可用版| 1核      |   2G    |   100G    | 394元/三年    |
-
-| COS资源包     | 大小     |  价格     |
-| --------     | -----:   | :----:   |
-| 标准型存储容量 |200GB	  |1年	171元|
-| 下行流量      | 500GB	  |3个月	177元|
-
-抢购地址：[https://cloud.tencent.com/act/cps/redirect?redirect=1062&cps_key=30280f92fc381dfc9e1d9e0e23d25a18&from=console](https://cloud.tencent.com/act/cps/redirect?redirect=1062&cps_key=30280f92fc381dfc9e1d9e0e23d25a18&from=console)
-
-<a href="https://cloud.tencent.com/act/cps/redirect?redirect=1062&cps_key=30280f92fc381dfc9e1d9e0e23d25a18&from=console" target="_blank">![](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/tengxunyun.jpg "腾讯秒杀活动")</a>
- 
-
 # 注意
 Entity里不是缺少get、set方法，Eclipse、IDEA请先安装lombok插件
 
@@ -39,10 +7,13 @@ Entity里不是缺少get、set方法，Eclipse、IDEA请先安装lombok插件
 - 允许用于学习、毕设等
 - 允许进行商业使用，请自觉遵守使用协议，如需要商业使用推荐购买商业版（进群联系群主）
 
-### 微同商城商业版小程序
+### 微同商城商业版
+##### 小程序
 ![](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/gh_9f71054867af_860.jpg "uniapp商城")
-### 微同商城商业版H5
-[https://fly2you.cn/h5](https://fly2you.cn/h5)
+
+- [H5](https://fly2you.cn/h5)
+- [IOS](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/wtkj.ipa)
+- [Android](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/wtkj.apk)
 
 [商业版与开源版差异](http://fly2you.cn/business/index)
 
