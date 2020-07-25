@@ -12,7 +12,7 @@ Entity里不是缺少get、set方法，Eclipse、IDEA请先安装lombok插件
 ![](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/gh_9f71054867af_860.jpg "uniapp商城")
 
 - [H5](https://fly2you.cn/h5)
-- [IOS](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/wtkj.ipa)
+- [IOS](https://testflight.apple.com/join/0tLEEwkS)
 - [Android](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/wtkj.apk)
 
 [商业版与开源版差异](http://fly2you.cn/business/index)
