@@ -7,6 +7,20 @@ Entity里不是缺少get、set方法，Eclipse、IDEA请先安装lombok插件
 - 允许用于学习、毕设等
 - 允许进行商业使用，请自觉遵守使用协议，如需要商业使用推荐购买商业版（进群联系群主）
 
+**如何交流、反馈、参与贡献？** 
+- 官方社区：http://fly2you.cn
+- gitee仓库：https://gitee.com/fuyang_lipengjun/platform
+- github仓库：https://github.com/lipengjun92/platform-wxshop
+* 官方QQ群：
+    * <a target="_blank" href="https://qm.qq.com/cgi-bin/qm/qr?k=HNLRmaIdvnj2e_TGkMspORvIn-AHNZCb&jump_from=webapi"><img border="0" src="//pub.idqqimg.com/wpa/images/group.png" alt="微同科技 ①群" title="微同科技 ①群"></a>
+    * <a target="_blank" href="https://qm.qq.com/cgi-bin/qm/qr?k=4i3Z9xgp7SlPnk_X1v0TWToSOoT_gJMz&jump_from=webapi"><img border="0" src="//pub.idqqimg.com/wpa/images/group.png" alt="微同科技 ②群" title="微同科技 ②群"></a>
+    * <a target="_blank" href="https://qm.qq.com/cgi-bin/qm/qr?k=hQLMx7vYLfP_C-d2-yP_udx1yciJXfHC&jump_from=webapi"><img border="0" src="//pub.idqqimg.com/wpa/images/group.png" alt="微同科技 ③群" title="微同科技 ③群"></a>
+
+- 如需关注项目最新动态，请Watch、Star项目，同时也是对项目最好的支持
+- 技术讨论、二次开发等咨询、问题和建议，请移步到官方社区，我会在第一时间进行解答和回复！
+- 微信扫码并关注公众号，获得项目最新动态及更新提醒<br>
+![](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/upload/20180708/qr.jpg "微信公众号")
+
 ### 微同商城商业版
 ##### 小程序
 ![](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/gh_9f71054867af_860.jpg "uniapp商城")
@@ -24,20 +38,11 @@ Entity里不是缺少get、set方法，Eclipse、IDEA请先安装lombok插件
 ![](
 https://platform-wxmall.oss-cn-beijing.aliyuncs.com/GVP.jpg "GVP")
 
-### 关注微信公众号，获取更多资讯
-![](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/upload/20180708/qr.jpg "微信公众号")
-
-
 ## 新手必看启动教程
 - [https://www.bilibili.com/video/av66149752](https://www.bilibili.com/video/av66149752)
 
 ### 微同商城开源版体验：
 ![](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/gh_a7a467438863_344.jpg "微同商城开源版")
-
-* 官方QQ群：
-    * <a target="_blank" href="https://qm.qq.com/cgi-bin/qm/qr?k=HNLRmaIdvnj2e_TGkMspORvIn-AHNZCb&jump_from=webapi"><img border="0" src="//pub.idqqimg.com/wpa/images/group.png" alt="微同科技 ①群" title="微同科技 ①群"></a>
-    * <a target="_blank" href="https://qm.qq.com/cgi-bin/qm/qr?k=4i3Z9xgp7SlPnk_X1v0TWToSOoT_gJMz&jump_from=webapi"><img border="0" src="//pub.idqqimg.com/wpa/images/group.png" alt="微同科技 ②群" title="微同科技 ②群"></a>
-    * <a target="_blank" href="https://qm.qq.com/cgi-bin/qm/qr?k=hQLMx7vYLfP_C-d2-yP_udx1yciJXfHC&jump_from=webapi"><img border="0" src="//pub.idqqimg.com/wpa/images/group.png" alt="微同科技 ③群" title="微同科技 ③群"></a>
 
 * git：[https://gitee.com/fuyang_lipengjun/platform](https://gitee.com/fuyang_lipengjun/platform)
 * 代码生成工具IDEA插件
