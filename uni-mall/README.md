@@ -1,32 +1,17 @@
-# uni-app-mall
-使用uni-app开发商城项目，uni-app 是一个使用 Vue.js 开发所有前端应用的框架，开发者编写一套代码，可发布到iOS、Android、H5、以及各种小程序（微信/支付宝/百度/头条/QQ/钉钉）等多个平台。
+# uni-mall
+[uni-app](https://uniapp.dcloud.io/README) 是一个使用 Vue.js 开发所有前端应用的框架，开发者编写一套代码，可发布到iOS、Android、H5、以及各种小程序（微信/支付宝/百度/头条/QQ/钉钉/淘宝）、快应用等多个平台。
 
-一套代码编到8个平台，这不是梦想。眼见为实，扫描8个二维码，亲自体验最全面的跨平台效果！
+DCloud公司拥有500万开发者用户，几十万应用案例、10亿手机端月活用户，数千款uni-app插件、70+微信/qq群。阿里小程序工具官方内置uni-app，腾讯课堂官方为uni-app录制培训课程，开发者可以放心选择。
 
-## Project setup
-```
-yarn install
-```
+uni-app在手，做啥都不愁。即使不跨端，uni-app也是更好的小程序开发框架、更好的App跨平台框架、更方便的H5开发框架。不管领导安排什么样的项目，你都可以快速交付，不需要转换开发思维、不需要更改开发习惯。
 
-### Compiles and hot-reloads for development
-```
-yarn run serve
-```
+一套代码编到10个平台，这不是梦想。眼见为实，扫描10个二维码，亲自体验最全面的跨平台效果！
 
-### Compiles and minifies for production
-```
-yarn run build
-```
+### 目前已实现前端架构搭建，首页已开发完成，所有页面已注册到pages.json，感兴趣的同学可以积极参与到我们的项目来。
 
-### Run your tests
-```
-yarn run test
-```
-
-### Lints and fixes files
-```
-yarn run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+# 注意事项
+- 给个Star吧
+- 给个Star吧
+- 给个Star吧
+- 重要的事情要说三遍
+- Star后，项目有更新会第一时间通知哦
