@@ -23,10 +23,10 @@ Entity里不是缺少get、set方法，Eclipse、IDEA请先安装lombok插件
 ![](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/upload/20180708/qr.jpg "微信公众号")
 
 ### 开发计划
-* 1 是用uniapp重构小程序端所有页面
+* 1 使用uniapp重构小程序端所有页面
 * 2 修复所以已知bug，使用遇到bug请给我们提交[issues](https://gitee.com/fuyang_lipengjun/platform/issues)
 * 3 后台使用SpringBoot重构
-* 4 适配H5、IOS、Android
+* 4 适配H5、IOS、Android端
 * 5 接入支付宝支付
 * 6 出配套视频教程
 
