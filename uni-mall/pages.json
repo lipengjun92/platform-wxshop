@@ -157,6 +157,7 @@
 		"path": "pages/payResult/payResult",
 		"style": {
 			"navigationBarTitleText": "付款结果",
+			"navigationBarBackgroundColor": "#fafafa",
 			"app-plus": {
 				"bounce": "vertical"
 			}

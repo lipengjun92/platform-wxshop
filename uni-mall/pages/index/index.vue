@@ -206,7 +206,7 @@
 	}
 </script>
 
-<style>
+<style lang="scss">
 	.banner {
 		width: 750rpx;
 		height: 417rpx;
