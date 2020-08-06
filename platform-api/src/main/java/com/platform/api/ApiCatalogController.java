@@ -9,7 +9,10 @@ import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
 import java.util.List;
@@ -18,6 +21,7 @@ import java.util.Map;
 /**
  * 作者: @author Harmon <br>
  * 时间: 2017-08-11 08:32<br>
+ *
  * @gitee https://gitee.com/fuyang_lipengjun/platform
  * 描述: ApiIndexController <br>
  */
@@ -72,11 +76,12 @@ public class ApiCatalogController extends ApiBaseAction {
     }
 
     /**
+     *
      */
     @ApiOperation(value = "分类目录当前分类数据接口")
     @ApiImplicitParams({@ApiImplicitParam(name = "id", value = "id", paramType = "query", required = false)})
     @IgnoreAuth
-    @GetMapping(value = "current")
+    @PostMapping(value = "current")
     public Object current(Integer id) {
         Map<String, Object> resultObj = new HashMap();
         Map params = new HashMap();

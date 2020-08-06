@@ -96,8 +96,8 @@
 						}, 'POST', 'application/json').then(res => {
 							if (res.errno === 0) {
 								//存储用户信息
-								wx.setStorageSync('userInfo', res.data.userInfo);
-								wx.setStorageSync('token', res.data.token);
+								uni.setStorageSync('userInfo', res.data.userInfo);
+								uni.setStorageSync('X-Nideshop-Token', res.data.token);
 
 								resolve(res);
 							} else {
@@ -114,7 +114,7 @@
 			},
 			bindGetUserInfo(e) {
 				let userInfo = uni.getStorageSync('userInfo');
-				let token = uni.getStorageSync('token');
+				let token = uni.getStorageSync('X-Nideshop-Token');
 				let that = this;
 				if (userInfo && token) {
 					return;
@@ -125,6 +125,7 @@
 						that.userInfo = res.data.userInfo
 						app.globalData.userInfo = res.data.userInfo;
 						app.globalData.token = res.data.token;
+						util.setUserInfo('', res.data.token)
 					}).catch((err) => {
 						console.log(err)
 					});
