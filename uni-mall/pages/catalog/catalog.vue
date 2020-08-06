@@ -21,7 +21,7 @@
 					<text class="txt">{{currentCategory.name||''}}分类</text>
 				</view>
 				<view class="bd">
-					<navigator :url="'/pages/category/category?id='+item.id" class="'item ' + (index+1) % 3 == 0 ? 'last' : ''" v-for="(item, index) in currentCategory.subCategoryList"
+					<navigator :url="'/pages/category/category?id='+item.id" :class="'item ' + ((index+1) % 3 == 0 ? 'last' : '')" v-for="(item, index) in currentCategory.subCategoryList"
 					 :key="index">
 						<image class="icon" :src="item.wap_banner_url"></image>
 						<text class="txt">{{item.name}}</text>
