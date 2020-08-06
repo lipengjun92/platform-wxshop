@@ -287,7 +287,6 @@
 			"navigationBarTitleText": "商品详情",
 			"navigationBarBackgroundColor": "#fff",
 			"navigationBarTextStyle": "black",
-			"navigationStyle": "custom",
 			"app-plus": {
 				"titleNView": false,
 				"bounce": "vertical"

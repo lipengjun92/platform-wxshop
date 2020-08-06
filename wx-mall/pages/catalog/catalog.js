@@ -36,7 +36,7 @@ Page({
   },
   getCurrentCategory: function (id) {
     let that = this;
-    util.request(api.CatalogCurrent, { id: id }, 'GET')
+    util.request(api.CatalogCurrent, { id: id })
       .then(function (res) {
         that.setData({
           currentCategory: res.data.currentCategory
