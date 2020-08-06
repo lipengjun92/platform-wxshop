@@ -226,6 +226,7 @@ platform
 ### uniapp版本
 ![](https://platform-wxmall-1251990035.cos.ap-shanghai.myqcloud.com/upload/20200806/0594b3dafad9484f9f10cacff4926584.png "uniapp")
 ![](https://platform-wxmall-1251990035.cos.ap-shanghai.myqcloud.com/upload/20200806/ae749f40e0324790b708411b5860d224.png "uniapp")
+![](https://platform-wxmall-1251990035.cos.ap-shanghai.myqcloud.com/upload/20200806/4b4d53af290046c4866d0675b6328565.png "uniapp")
 ![](https://platform-wxmall-1251990035.cos.ap-shanghai.myqcloud.com/upload/20200806/d76909ce2448413f935615147dc0b124.png "uniapp")
 ![](https://platform-wxmall-1251990035.cos.ap-shanghai.myqcloud.com/upload/20200806/3c2da2b5ea094e2c9bc3e89f76f80a5f.png "uniapp")
 ![](https://platform-wxmall-1251990035.cos.ap-shanghai.myqcloud.com/upload/20200806/5c67a073a13e422f8d1e4a90324dc1b8.png "uniapp")
