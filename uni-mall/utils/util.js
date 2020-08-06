@@ -470,6 +470,26 @@ const utils = {
 				}
 			});
 		});
+	},
+
+	/**
+	 * 调用微信登录
+	 */
+	login: function() {
+		return new Promise(function(resolve, reject) {
+			uni.login({
+				success: function(res) {
+					if (res.code) {
+						resolve(res);
+					} else {
+						reject(res);
+					}
+				},
+				fail: function(err) {
+					reject(err);
+				}
+			});
+		});
 	}
 }
 
@@ -499,5 +519,6 @@ module.exports = {
 	isNumber: utils.isNumber,
 	isEmpty: utils.isEmpty,
 	expireTime: utils.expireTime,
-	payOrder: utils.payOrder
+	payOrder: utils.payOrder,
+	login: utils.login
 }
