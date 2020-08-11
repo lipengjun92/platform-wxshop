@@ -1,5 +1,5 @@
 # 注意
-Entity里不是缺少get、set方法，Eclipse、IDEA请先安装lombok插件
+Entity里提示报错不是缺少get、set方法，Eclipse、IDEA请先安装lombok插件
 
 # 使用须知
 ## ✅允许
@@ -8,6 +8,7 @@ Entity里不是缺少get、set方法，Eclipse、IDEA请先安装lombok插件
 - 允许进行商业使用，请自觉遵守使用协议，如需要商业使用推荐购买商业版（进群联系群主）
 - 请遵守 Apache License2.0 协议，再次开源请注明出处
 - 推荐Watch、Star项目，获取项目第一时间更新，同时也是对项目最好的支持
+- 希望大家多多支持原创作品
 
 **如何交流、反馈、参与贡献？** 
 - 官方社区：http://fly2you.cn
@@ -98,9 +99,8 @@ platform
 |--platform-mp 微信公众号模块
 |--platform-schedule 定时任务
 |--platform-shop 商城后台管理
-|--uni-color-ui uni-mall商城参考项目
-|--uni-mall 移动端商城
-|--wx-mall 微信小程序商城
+|--uni-mall uniapp版商城
+|--wx-mall 微信小程序原生商城
 ~~~
 
 ## 实现功能
