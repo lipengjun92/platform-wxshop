@@ -161,7 +161,7 @@
 					content: '退出登录？',
 					success: function(res) {
 						if (res.confirm) {
-							uni.removeStorageSync('token');
+							uni.removeStorageSync('X-Nideshop-Token');
 							uni.removeStorageSync('userInfo');
 							app.globalData.userInfo = {
 								nickName: 'Hi,游客',
@@ -178,17 +178,24 @@
 			}
 		},
 		onShow: function() {
+			let that = this;
 			let userInfo = uni.getStorageSync('userInfo');
-			let token = uni.getStorageSync('token');
+			let token = uni.getStorageSync('X-Nideshop-Token');
 
 			// 页面显示
 			if (userInfo && token) {
 				app.globalData.userInfo = userInfo;
 				app.globalData.token = token;
+			} else {
+				uni.login({
+					success: function(res) {
+						if (res.code) {
+							that.code = res.code
+						}
+					}
+				});
 			}
-
-			this.userInfo = app.globalData.userInfo
-
+			that.userInfo = app.globalData.userInfo
 		},
 		onLoad: function() {}
 	}
