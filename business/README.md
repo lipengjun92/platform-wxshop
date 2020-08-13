@@ -9,7 +9,7 @@
 - H5页面、APP端使用绑定的手机号登录
 
     - [H5](https://fly2you.cn/h5/)
-    - [IOS](https://testflight.apple.com/join/0tLEEwkS)
+    - [IOS](https://testflight.apple.com/join/I3IEIO5S)
     - [Android](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/wtkj.apk)
 - 体验账号 15209831990/123456
 
