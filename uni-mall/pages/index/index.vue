@@ -15,7 +15,7 @@
 				</navigator>
 			</view>
 		</view>
-
+		
 		<view class="a-section a-topic" v-if="brands.length > 0">
 			<view class="a-section a-brand">
 				<view class="h">
@@ -23,26 +23,26 @@
 						<text class="txt">品牌制造商直供</text>
 					</navigator>
 				</view>
-				<view class="b">
-					<view class="item item-1" v-for="(item, index) in brands" :key="item.id">
+			</view>
+			<view class="b">
+				<scroll-view scroll-x="true" class="list">
+					<view class="item" v-for="(item, index) in brands" :key="index">
 						<navigator :url="'/pages/brandDetail/brandDetail?id='+item.id">
-							<view class="wrap">
-								<image class="img" :src="item.new_pic_url" mode="aspectFill"></image>
-								<view class="mt">
-									<text class="brand">{{item.name}}</text>
-									<text class="price">{{item.floor_price}}</text>
-									<text class="unit">元起</text>
-								</view>
+							<image class="img" :src="item.new_pic_url" background-size="cover"></image>
+							<view class="np">
+								<text class="name">{{item.name}}</text>
+								<text class="price">￥{{item.floor_price}}元起</text>
 							</view>
+							<text class="desc">{{item.simple_desc}}</text>
 						</navigator>
 					</view>
-				</view>
+				</scroll-view>
 			</view>
 		</view>
 
 		<view class="a-section a-topic" v-if="topics.length > 0">
-			<view class="h">
-				<view>
+			<view class="a-section a-brand">
+				<view class="h">
 					<navigator url="../topic/topic">
 						<text class="txt">专题精选</text>
 					</navigator>
