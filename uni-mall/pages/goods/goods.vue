@@ -429,14 +429,14 @@
 			 */
 			addToCart: function() {
 				var that = this;
-				if (this.openAttr == false) {
+				if (that.openAttr == false) {
 					//打开规格选择窗口
-					this.openAttr = !this.openAttr
-					this.collectBackImage = "/static/images/detail_back.png"
+					that.openAttr = !that.openAttr
+					that.collectBackImage = "/static/images/detail_back.png"
 				} else {
 
 					//提示选择完整规格
-					if (!this.isCheckedAllSpec()) {
+					if (!that.isCheckedAllSpec()) {
 						uni.showToast({
 							title: '请选择完整规格'
 						});
@@ -444,46 +444,45 @@
 					}
 
 					//根据选中的规格，判断是否有对应的sku信息
-					let checkedProduct = this.getCheckedProductItem(this.getCheckedSpecKey());
+					let checkedProduct = that.getCheckedProductItem(that.getCheckedSpecKey());
 					if (!checkedProduct || checkedProduct.length <= 0) {
 						//找不到对应的product信息，提示没有库存
 						return false;
 					}
 
 					//验证库存
-					if (checkedProduct.goods_number < this.number) {
+					if (checkedProduct.goods_number < that.number) {
 						//找不到对应的product信息，提示没有库存
 						return false;
 					}
 
 					//添加到购物车
 					util.request(api.CartAdd, {
-							goodsId: this.goods.id,
-							number: this.number,
-							productId: checkedProduct[0].id
-						}, 'POST', 'application/json')
-						.then(function(res) {
-							let _res = res;
-							if (_res.errno == 0) {
-								uni.showToast({
-									title: '添加成功'
-								});
-								that.openAttr = !that.openAttr
-								that.cartGoodsCount = _res.data.cartTotal.goodsCount
-								if (that.userHasCollect == 1) {
-									this.collectBackImage = that.hasCollectImage
-								} else {
-									this.collectBackImage = that.noCollectImage
-								}
+						goodsId: that.goods.id,
+						number: that.number,
+						productId: checkedProduct[0].id
+					}, 'POST', 'application/json').then(function(res) {
+						let _res = res;
+						if (_res.errno == 0) {
+							uni.showToast({
+								title: '添加成功'
+							});
+							that.openAttr = !that.openAttr
+							that.cartGoodsCount = _res.data.cartTotal.goodsCount
+							if (that.userHasCollect == 1) {
+								that.collectBackImage = that.hasCollectImage
 							} else {
-								uni.showToast({
-									image: '/static/images/icon_error.png',
-									title: _res.errmsg,
-									mask: true
-								});
+								that.collectBackImage = that.noCollectImage
 							}
+						} else {
+							uni.showToast({
+								image: '/static/images/icon_error.png',
+								title: _res.errmsg,
+								mask: true
+							});
+						}
 
-						});
+					});
 				}
 
 			},
