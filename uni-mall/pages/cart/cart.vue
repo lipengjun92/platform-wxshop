@@ -19,8 +19,8 @@
 			<view class="list">
 				<view class="group-item">
 					<view class="goods">
-						<view :class="'item ' + isEditCart ? 'edit' : ''" v-for="(item, index) in cartGoods" :key="item.id">
-							<view :class="'checkbox ' + item.checked ? 'checked' : ''" @tap="checkedItem" :data-item-index="index"></view>
+						<view :class="'item ' + (isEditCart ? 'edit' : '')" v-for="(item, index) in cartGoods" :key="item.id">
+							<view :class="'checkbox ' + (item.checked ? 'checked' : '')" @tap="checkedItem" :data-item-index="index"></view>
 							<view class="cart-goods">
 								<image class="img" :src="item.list_pic_url"></image>
 								<view class="info">
@@ -44,7 +44,7 @@
 				</view>
 			</view>
 			<view class="cart-bottom">
-				<view :class="'checkbox ' + checkedAllStatus ? 'checked' : ''" @tap="checkedAll">全选({{cartTotal.checkedGoodsCount}})</view>
+				<view :class="'checkbox ' + (checkedAllStatus ? 'checked' : '')" @tap="checkedAll">全选({{cartTotal.checkedGoodsCount}})</view>
 				<view class="total">{{!isEditCart ? '￥'+cartTotal.checkedGoodsAmount : ''}}</view>
 				<view class="delete" @tap="editCart">{{!isEditCart ? '编辑' : '完成'}}</view>
 				<view class="checkout" @tap="deleteCart" v-if="isEditCart">删除所选</view>
@@ -98,7 +98,7 @@
 				let itemIndex = event.target.dataset.itemIndex;
 				let that = this;
 
-				if (!this.isEditCart) {
+				if (!that.isEditCart) {
 					util.request(api.CartChecked, {
 						productIds: that.cartGoods[itemIndex].product_id,
 						isChecked: that.cartGoods[itemIndex].checked ? 0 : 1
@@ -112,7 +112,7 @@
 					});
 				} else {
 					//编辑状态
-					let tmpCartData = this.cartGoods.map(function(element, index, array) {
+					let tmpCartData = that.cartGoods.map(function(element, index, array) {
 						if (index == itemIndex) {
 							element.checked = !element.checked;
 						}
@@ -137,8 +137,8 @@
 			checkedAll: function() {
 				let that = this;
 
-				if (!this.isEditCart) {
-					var productIds = this.cartGoods.map(function(v) {
+				if (!that.isEditCart) {
+					var productIds = that.cartGoods.map(function(v) {
 						return v.product_id;
 					});
 					util.request(api.CartChecked, {
@@ -155,7 +155,7 @@
 				} else {
 					//编辑状态
 					let checkedAllStatus = that.isCheckedAll();
-					let tmpCartData = this.cartGoods.map(function(v) {
+					let tmpCartData = that.cartGoods.map(function(v) {
 						v.checked = !checkedAllStatus;
 						return v;
 					});
@@ -167,18 +167,18 @@
 			},
 			editCart: function() {
 				var that = this;
-				if (this.isEditCart) {
-					this.getCartList();
-					this.isEditCart = !this.isEditCart
+				if (that.isEditCart) {
+					that.getCartList();
+					that.isEditCart = !that.isEditCart
 				} else {
 					//编辑状态
-					let tmpCartList = this.cartGoods.map(function(v) {
+					let tmpCartList = that.cartGoods.map(function(v) {
 						v.checked = false;
 						return v;
 					});
 					that.editCartList = that.cartGoods
 					that.isEditCart = !that.isEditCart
-					that.cartGoods = tmpCartData
+					that.cartGoods = tmpCartList
 					that.cartTotal.checkedGoodsCount = that.getCheckedGoodsCount()
 					that.checkedAllStatus = that.isCheckedAll()
 				}
@@ -223,7 +223,7 @@
 			checkoutOrder: function() {
 				//获取已选择的商品
 				let that = this;
-				var checkedGoods = this.cartGoods.filter(function(element, index, array) {
+				var checkedGoods = that.cartGoods.filter(function(element, index, array) {
 					if (element.checked == true) {
 						return true;
 					} else {
@@ -242,7 +242,7 @@
 				//获取已选择的商品
 				let that = this;
 
-				let productIds = this.cartGoods.filter(function(element, index, array) {
+				let productIds = that.cartGoods.filter(function(element, index, array) {
 					if (element.checked == true) {
 						return true;
 					} else {
@@ -277,6 +277,10 @@
 					that.checkedAllStatus = that.isCheckedAll()
 				});
 			}
+		},
+		onShow: function() {
+			// 页面显示
+			this.getCartList();
 		},
 		onLoad: function() {}
 	}
@@ -415,7 +419,7 @@
 	}
 
 	.cart-view .item .cart-goods {
-		float: left;
+		float: right;
 		height: 164rpx;
 		width: 672rpx;
 		border-bottom: 1px solid #f4f4f4;

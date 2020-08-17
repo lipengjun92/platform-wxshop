@@ -19,7 +19,7 @@
 		<view class="a-section a-topic" v-if="brands.length > 0">
 			<view class="a-section a-brand">
 				<view class="h">
-					<navigator url="../brand/brand">
+					<navigator url="/pages/brand/brand">
 						<text class="txt">品牌制造商直供</text>
 					</navigator>
 				</view>
@@ -43,7 +43,7 @@
 		<view class="a-section a-topic" v-if="topics.length > 0">
 			<view class="a-section a-brand">
 				<view class="h">
-					<navigator url="../topic/topic">
+					<navigator open-type="switchTab" url="/pages/topic/topic">
 						<text class="txt">专题精选</text>
 					</navigator>
 				</view>
