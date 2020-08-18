@@ -2,9 +2,10 @@
 	<view class="container">
 		<swiper class="banner" indicator-dots="true" autoplay="true" interval="3000" duration="1000">
 			<swiper-item v-for="(item, index) in banner" :key="index">
-				<navigator :url="item.link">
+				<navigator v-if="item.link" :url="item.link">
 					<image :src="item.image_url" background-size="cover"></image>
 				</navigator>
+				<image v-else :src="item.image_url" background-size="cover"></image>
 			</swiper-item>
 		</swiper>
 		<view class="a-section a-topic" v-if="channel.length > 0">
@@ -15,7 +16,7 @@
 				</navigator>
 			</view>
 		</view>
-		
+
 		<view class="a-section a-topic" v-if="brands.length > 0">
 			<view class="a-section a-brand">
 				<view class="h">

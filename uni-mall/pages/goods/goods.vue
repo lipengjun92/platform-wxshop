@@ -330,26 +330,26 @@
 			},
 			closeAttrOrCollect: function() {
 				let that = this;
-				if (this.openAttr) {
-					this.openAttr = false
+				if (that.openAttr) {
+					that.openAttr = false
 					if (that.userHasCollect == 1) {
-						this.collectBackImage = that.hasCollectImage
+						that.collectBackImage = that.hasCollectImage
 					} else {
-						this.collectBackImage = that.noCollectImage
+						that.collectBackImage = that.noCollectImage
 					}
 				} else {
 					//添加或是取消收藏
 					util.request(api.CollectAddOrDelete, {
 							typeId: 0,
-							valueId: this.id
+							valueId: that.id
 						}, "POST", "application/json")
 						.then(function(res) {
 							let _res = res;
 							if (_res.errno == 0) {
 								if (_res.data.type == 'add') {
-									this.collectBackImage = that.hasCollectImage
+									that.collectBackImage = that.hasCollectImage
 								} else {
-									this.collectBackImage = that.noCollectImage
+									that.collectBackImage = that.noCollectImage
 								}
 
 							} else {
@@ -359,10 +359,8 @@
 									mask: true
 								});
 							}
-
 						});
 				}
-
 			},
 			openCartPage: function() {
 				uni.switchTab({
@@ -375,34 +373,34 @@
 			 */
 			buyGoods: function() {
 				var that = this;
-				if (this.openAttr == false) {
+				if (that.openAttr == false) {
 					//打开规格选择窗口
-					this.openAttr = !this.openAttr
-					this.collectBackImage = "/static/images/detail_back.png"
+					that.openAttr = !that.openAttr
+					that.collectBackImage = "/static/images/detail_back.png"
 				} else {
 
 					//提示选择完整规格
-					if (!this.isCheckedAllSpec()) {
+					if (!that.isCheckedAllSpec()) {
 						return false;
 					}
 
 					//根据选中的规格，判断是否有对应的sku信息
-					let checkedProduct = this.getCheckedProductItem(this.getCheckedSpecKey());
+					let checkedProduct = that.getCheckedProductItem(that.getCheckedSpecKey());
 					if (!checkedProduct || checkedProduct.length <= 0) {
 						//找不到对应的product信息，提示没有库存
 						return false;
 					}
 
 					//验证库存
-					if (checkedProduct.goods_number < this.number) {
+					if (checkedProduct.goods_number < that.number) {
 						//找不到对应的product信息，提示没有库存
 						return false;
 					}
 
 					// 直接购买商品
 					util.request(api.BuyAdd, {
-							goodsId: this.goods.id,
-							number: this.number,
+							goodsId: that.goods.id,
+							number: that.number,
 							productId: checkedProduct[0].id
 						}, "POST", 'application/json')
 						.then(function(res) {
