@@ -2,7 +2,7 @@
 	<view class="container">
 		<view class="cate-nav">
 			<scroll-view scroll-x="true" class="cate-nav-body" style="width: 750rpx;" :scroll-left="scrollLeft">
-				<view v-for="(item, index) in navList" :class="'item ' + (id == item.id ? 'active' : '')" :data-id="item.id"
+				<view v-for="(item, index) in navList" :key="index" :class="'item ' + (id == item.id ? 'active' : '')" :data-id="item.id"
 				 :data-index="index" @tap="switchCate">
 					<view class="name">{{item.name}}</view>
 				</view>

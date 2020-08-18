@@ -16,6 +16,7 @@ module.exports = {
 	GoodsCategory: 'goods/category', //获得分类数据
 	GoodsDetail: 'goods/detail', //获得商品的详情
 	GoodsHot: 'goods/hot', //人气推荐
+	GoodsNew: 'goods/new', //新品推荐
 	GoodsRelated: 'goods/related', //商品详情页的关联商品（大家都在看）
 
 	BrandList: 'brand/list', //品牌列表
@@ -23,7 +24,7 @@ module.exports = {
 
 	CartList: 'cart/index', //获取购物车的数据
 	CartAdd: 'cart/add', // 添加商品到购物车
-	BuyAdd: 'buy/add', // 直接购买    
+	BuyAdd: 'buy/add', // 直接购买
 	CartUpdate: 'cart/update', // 更新购物车的商品
 	CartDelete: 'cart/delete', // 删除购物车的商品
 	CartChecked: 'cart/checked', // 选择或取消选择商品
@@ -69,7 +70,7 @@ module.exports = {
 	Login: 'auth/login', //账号登录
 	Register: 'auth/register', //注册
 	CouponList: 'coupon/list', // 优惠券列表
-	GoodsCouponList: 'coupon/listByGoods', // 商品优惠券列表   
+	GoodsCouponList: 'coupon/listByGoods', // 商品优惠券列表
 	OrderQuery: 'pay/query', //微信查询订单状态
 
 	HelpTypeList: 'helpissue/typeList', //查看帮助类型列表
