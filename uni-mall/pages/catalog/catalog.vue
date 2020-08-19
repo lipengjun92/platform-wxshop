@@ -68,7 +68,7 @@
 				let that = this;
 				util.request(api.CatalogCurrent, {
 					id: id
-				},'GET').then(function(res) {
+				}).then(function(res) {
 					that.currentCategory = res.data.currentCategory
 				});
 			},
@@ -164,7 +164,7 @@
 		border-left: 6rpx solid #fff;
 	}
 
-	.catalog .nav .item .active {
+	.catalog .nav .item.active {
 		color: #ab2b2b;
 		font-size: 36rpx;
 		border-left: 6rpx solid #ab2b2b;
