@@ -195,7 +195,7 @@
 	}, {
 		"path": "pages/commentPost/commentPost",
 		"style": {
-			"navigationBarTitleText": "评价晒单",
+			"navigationBarTitleText": "填写留言",
 			"app-plus": {
 				"bounce": "vertical"
 			}

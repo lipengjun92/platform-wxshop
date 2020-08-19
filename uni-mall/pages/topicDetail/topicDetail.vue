@@ -9,7 +9,7 @@
 			<scroll-view class="comments">
 				<view class="h">
 					<text class="t">精选留言</text>
-					<image bindtap="postComment" class="i" src="http://nos.netease.com/mailpub/hxm/yanxuan-wap/p/20150730/style/img/icon-normal/comment-add-2aca147c3f.png"></image>
+					<image @tap="postComment" class="i" src="http://nos.netease.com/mailpub/hxm/yanxuan-wap/p/20150730/style/img/icon-normal/comment-add-2aca147c3f.png"></image>
 				</view>
 				<view class="has-comments" v-if="commentList.length > 0">
 					<view class="b">
