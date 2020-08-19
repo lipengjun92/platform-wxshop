@@ -10,8 +10,8 @@
 				</view>
 			</navigator>
 			<view class="page" v-if="showPage">
-				<view :class="'prev ' + page <= 1 ? 'disabled' : ''" @tap="prevPage">上一页</view>
-				<view :class="'next ' + (count / size) < page +1 ? 'disabled' : ''" @tap="nextPage">下一页</view>
+				<view :class="'prev ' + (page <= 1 ? 'disabled' : '')" @tap="prevPage">上一页</view>
+				<view :class="'next ' + ((count / size) < page +1 ? 'disabled' : '')" @tap="nextPage">下一页</view>
 			</view>
 		</scroll-view>
 		<tui-show-empty v-else text="暂无专题"></tui-show-empty>
