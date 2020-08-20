@@ -261,6 +261,14 @@
 			}
 		}
 	}, {
+		"path": "pages/shopping/selCoupon/selCoupon",
+		"style": {
+			"navigationBarTitleText": "选择优惠券",
+			"app-plus": {
+				"bounce": "vertical"
+			}
+		}
+	}, {
 		"path": "pages/shopping/address/address",
 		"style": {
 			"navigationBarTitleText": "地址",
