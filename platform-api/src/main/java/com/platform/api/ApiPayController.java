@@ -29,6 +29,7 @@ import java.util.*;
 /**
  * 作者: @author Harmon <br>
  * 时间: 2017-08-11 08:32<br>
+ *
  * @gitee https://gitee.com/fuyang_lipengjun/platform
  * 描述: ApiIndexController <br>
  */
@@ -43,6 +44,7 @@ public class ApiPayController extends ApiBaseAction {
     private ApiOrderGoodsService orderGoodsService;
 
     /**
+     *
      */
     @ApiOperation(value = "跳转")
     @PostMapping("index")
@@ -64,7 +66,7 @@ public class ApiPayController extends ApiBaseAction {
             return toResponsObject(400, "订单已取消", "");
         }
 
-        if (orderInfo.getPay_status() != 0) {
+        if (orderInfo.getPay_status() == 2) {
             return toResponsObject(400, "订单已支付，请不要重复操作", "");
         }
 
@@ -86,11 +88,11 @@ public class ApiPayController extends ApiBaseAction {
             Map orderGoodsParam = new HashMap();
             orderGoodsParam.put("order_id", orderId);
             // 商品描述
-            parame.put("body", "超市-支付");
+            parame.put("body", "微同商城-支付");
             //订单的商品
             List<OrderGoodsVo> orderGoods = orderGoodsService.queryList(orderGoodsParam);
             if (null != orderGoods) {
-                String body = "超市-";
+                String body = "微同商城-";
                 for (OrderGoodsVo goodsVo : orderGoods) {
                     body = body + goodsVo.getGoods_name() + "、";
                 }

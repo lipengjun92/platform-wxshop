@@ -23,8 +23,7 @@
 				</view>
 			</view>
 		</view>
-
-		<view class="coupon-box" @tap='tapCoupon'>
+		<view class="coupon-box" @tap="tapCoupon">
 			<view class="coupon-item">
 				<view class="l">
 					<text class="name">请选择优惠券</text>
@@ -174,12 +173,11 @@
 			 * 选择可用优惠券
 			 */
 			tapCoupon: function() {
-				let that = this
-				wx.navigateTo({
-					url: '../selCoupon/selCoupon?buyType=' + that.buyType,
+				let that = this;
+				uni.navigateTo({
+					url: '/pages/shopping/selCoupon/selCoupon?buyType=' + that.buyType,
 				})
 			},
-
 			submitOrder: function() {
 				let that = this
 				if (that.addressId <= 0) {
@@ -194,11 +192,11 @@
 					if (res.errno === 0) {
 						const orderId = res.data.orderInfo.id;
 						util.payOrder(parseInt(orderId)).then(res => {
-							wx.redirectTo({
+							uni.redirectTo({
 								url: '/pages/payResult/payResult?status=1&orderId=' + orderId
 							});
 						}).catch(res => {
-							wx.redirectTo({
+							uni.redirectTo({
 								url: '/pages/payResult/payResult?status=0&orderId=' + orderId
 							});
 						});
@@ -213,7 +211,7 @@
 			this.getCheckoutInfo();
 
 			try {
-				var addressId = wx.getStorageSync('addressId');
+				var addressId = uni.getStorageSync('addressId');
 				if (addressId) {
 					this.addressId = addressId;
 				}
