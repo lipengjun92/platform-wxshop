@@ -11,7 +11,7 @@
 					<view class="address">{{item.full_region+item.detailInfo}}</view>
 				</view>
 				<view class="r">
-					<image @catchtap="addressAddOrUpdate" :data-address-id="item.id" class="del" src="http://yanxuan.nosdn.127.net/hxm/yanxuan-wap/p/20161201/style/img/icon-normal/address-edit-7fee7b0d63.png"></image>
+					<image @click.stop.prevent="addressAddOrUpdate" :data-address-id="item.id" class="del" src="http://yanxuan.nosdn.127.net/hxm/yanxuan-wap/p/20161201/style/img/icon-normal/address-edit-7fee7b0d63.png"></image>
 				</view>
 			</view>
 		</view>
@@ -61,7 +61,7 @@
 				});
 			}
 		},
-		onLoad: function() {
+		onShow: function() {
 			this.getAddressList();
 		}
 	}

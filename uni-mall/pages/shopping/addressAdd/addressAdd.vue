@@ -98,7 +98,7 @@
 				}).then(function(res) {
 					if (res.errno === 0) {
 						if (res.data) {
-							this.address = res.data
+							that.address = res.data
 						}
 					}
 				});
