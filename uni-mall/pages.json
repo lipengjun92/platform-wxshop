@@ -146,14 +146,6 @@
 			}
 		}
 	}, {
-		"path": "pages/pay/pay",
-		"style": {
-			"navigationBarTitleText": "支付",
-			"app-plus": {
-				"bounce": "vertical"
-			}
-		}
-	}, {
 		"path": "pages/payResult/payResult",
 		"style": {
 			"navigationBarTitleText": "付款结果",

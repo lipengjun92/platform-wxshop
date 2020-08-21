@@ -51,6 +51,8 @@ https://platform-wxmall.oss-cn-beijing.aliyuncs.com/GVP.jpg "GVP")
 
 ## 新手必看启动教程
 - [https://www.bilibili.com/video/av66149752](https://www.bilibili.com/video/av66149752)
+## 使用Hbuilder启动微同商城小程序端教程
+- [https://www.bilibili.com/video/BV1ni4y1M7CC](https://www.bilibili.com/video/BV1ni4y1M7CC)
 
 ### 微同商城开源版体验：
 ![](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/gh_a7a467438863_344.jpg "微同商城开源版")
