@@ -19,20 +19,10 @@
 				<view class="b">
 					<view class="l">实付：￥{{item.actual_price||''}}</view>
 					<view class="r">
-						<button class="btn" :data-order-index="index" @tap="payOrder" v-if="item.handleOption.pay">去付款</button>
+						<button class="btn" :data-order-index="index" @click.stop.prevent="payOrder" v-if="item.handleOption.pay">立即支付</button>
 					</view>
 				</view>
 			</navigator>
-		</view>
-
-		<view v-if="orderList.length>6" class="loadmore">
-			<block v-if="nomore">
-				<text>{{nomoreText}}</text>
-			</block>
-			<block v-else>
-				<text class="iconfont icon-loading loading" space="nbsp"></text>
-				<text> {{loadmoreText}}</text>
-			</block>
 		</view>
 	</view>
 </template>
@@ -46,20 +36,12 @@
 				orderList: [],
 				page: 1,
 				size: 10,
-				loadmoreText: '正在加载更多数据',
-				nomoreText: '全部加载完成',
-				nomore: false,
 				totalPages: 1
 			}
 		},
 		methods: {
 			getOrderList() {
 				let that = this;
-
-				if (that.totalPages <= that.page - 1) {
-					that.nomore = true
-					return;
-				}
 
 				util.request(api.OrderList, {
 					page: that.page,
@@ -76,9 +58,11 @@
 				let that = this;
 				let orderIndex = event.currentTarget.dataset.orderIndex;
 				let order = that.orderList[orderIndex];
-				uni.redirectTo({
-					url: '/pages/pay/pay?orderId=' + order.id + '&actualPrice=' + order.actual_price,
-				})
+				util.payOrder(parseInt(order.id)).then(res => {
+					that.getOrderList();
+				}).catch(res => {
+					util.toast('支付失败');
+				});
 			}
 		},
 		/**
@@ -87,7 +71,7 @@
 		onReachBottom: function() {
 			this.getOrderList()
 		},
-		onLoad: function(options) {
+		onShow: function(options) {
 			this.getOrderList();
 		}
 	}
@@ -206,60 +190,5 @@
 		font-size: 26rpx;
 		color: #fff;
 		background: #b4282d;
-	}
-
-	.loadmore {
-		height: 100rpx;
-		width: 100%;
-		line-height: 80rpx;
-		text-align: center;
-		margin-top: 0rpx;
-	}
-
-	.loadmore text {
-		color: #999;
-	}
-
-	@keyframes loading {
-		0% {
-			transform: rotate(0deg)
-		}
-
-		50% {
-			transform: rotate(180deg)
-		}
-
-		100% {
-			transform: rotate(360deg)
-		}
-	}
-
-	.loading {
-		display: inline-block;
-		transform-origin: 50% 50%;
-		animation: loading 1s linear infinite;
-	}
-
-	.iconfont {
-		font-family: "iconfont" !important;
-		font-style: normal;
-		-webkit-font-smoothing: antialiased;
-		-moz-osx-font-smoothing: grayscale;
-	}
-
-	.icon-release-up:before {
-		content: "\e987";
-	}
-
-	.icon-complete:before {
-		content: "\e992";
-	}
-
-	.icon-pull-down:before {
-		content: "\e996";
-	}
-
-	.icon-loading:before {
-		content: "\e9ac";
 	}
 </style>
