@@ -109,7 +109,7 @@
 	}, {
 		"path": "pages/ucenter/coupon/coupon",
 		"style": {
-			"navigationBarTitleText": "优惠券",
+			"navigationBarTitleText": "我的优惠券",
 			"app-plus": {
 				"bounce": "vertical"
 			}
@@ -310,6 +310,7 @@
 	}, {
 		"path": "pages/ucenter/help/help",
 		"style": {
+			"navigationBarTitleText": "帮助中心",
 			"app-plus": {
 				"bounce": "vertical"
 			}
@@ -317,6 +318,7 @@
 	}, {
 		"path": "pages/ucenter/helpInfo/helpInfo",
 		"style": {
+			"navigationBarTitleText": "帮助中心",
 			"app-plus": {
 				"bounce": "vertical"
 			}
