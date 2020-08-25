@@ -1,6 +1,6 @@
 <template>
 	<view class="container">
-		<view class="orders">
+		<view class="orders" v-if="orderList.length>0">
 			<navigator :url="'../orderDetail/orderDetail?id='+item.id" class="order" v-for="(item, index) in orderList" :key="item.id">
 				<view class="h">
 					<view class="l">订单编号：{{item.order_sn||''}}</view>
@@ -24,6 +24,7 @@
 				</view>
 			</navigator>
 		</view>
+		<tui-show-empty v-else text="暂无订单"></tui-show-empty>
 	</view>
 </template>
 
