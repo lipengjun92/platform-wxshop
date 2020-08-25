@@ -179,7 +179,12 @@
                 "desc" : "你的位置信息将用于微同商城"
             }
         },
-        "plugins" : {}
+        "plugins" : {
+            "wt-logistics" : {
+                "version" : "1.0.0",
+                "provider" : "wx7d1077edf1fd3ae5"
+            }
+        }
     },
     "mp-alipay" : {
         "usingComponents" : true,
