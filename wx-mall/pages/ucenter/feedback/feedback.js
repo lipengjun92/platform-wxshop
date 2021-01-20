@@ -60,7 +60,7 @@ Page({
       }
     });
 
-    util.request(api.FeedbackAdd, { mobile: that.data.mobile, index: that.data.index, content: that.data.content}).then(function (res) {
+    util.request(api.FeedbackAdd, { mobile: that.data.mobile, index: that.data.index, content: that.data.content}, 'POST', 'application/json').then(function (res) {
       if (res.errno === 0) {
 
         wx.hideLoading();
@@ -79,7 +79,7 @@ Page({
           }
         });
       } else {
-        util.showErrorToast(res.data);
+        util.showErrorToast(res.errmsg);
       }
       
     });
