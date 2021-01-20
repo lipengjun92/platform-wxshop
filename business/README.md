@@ -13,6 +13,8 @@
     - [Android](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/wtkj.apk)
 - 体验账号 15209831990/123456
 
+[商业版与开源版差异](http://fly2you.cn/business/index)
+
 ### 上线案例
 ||||
 |:-------|:-------|:-------|

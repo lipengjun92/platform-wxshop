@@ -34,22 +34,11 @@ Entity里提示报错不是缺少get、set方法，Eclipse、IDEA请先安装lom
 * 5 接入支付宝支付
 * 6 出配套视频教程
 
-### 微同商城商业版
-##### 小程序
-![](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/gh_9f71054867af_860.jpg "uniapp商城")
-
-- [H5](https://fly2you.cn/h5)
-- [IOS](https://testflight.apple.com/join/0tLEEwkS)
-- [Android](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/wtkj.apk)
-
-[商业版与开源版差异](http://fly2you.cn/business/index)
-
 # 微信小程序商城（Java版）
 
 ## 获得荣誉
 ### GVP
-![](
-https://platform-wxmall.oss-cn-beijing.aliyuncs.com/GVP.jpg "GVP")
+![](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/GVP.jpg "GVP")
 
 ## 新手必看启动教程
 - [https://www.bilibili.com/video/av66149752](https://www.bilibili.com/video/av66149752)
