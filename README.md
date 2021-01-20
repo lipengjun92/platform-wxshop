@@ -9,6 +9,8 @@ Entity里提示报错不是缺少get、set方法，Eclipse、IDEA请先安装lom
 - 请遵守 Apache License2.0 协议，再次开源请注明出处
 - 推荐Watch、Star项目，获取项目第一时间更新，同时也是对项目最好的支持
 - 希望大家多多支持原创作品
+- 如需购买 [商业版](https://gitee.com/fuyang_lipengjun/platform/blob/master/business/README.md) 请联系群主<br>
+![](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/wx.png "微信")
 
 **如何交流、反馈、参与贡献？** 
 - 官方社区：http://fly2you.cn
