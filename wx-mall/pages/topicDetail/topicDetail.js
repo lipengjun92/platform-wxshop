@@ -10,8 +10,26 @@ Page({
     topicList: [],
     commentCount: 0,
     commentList: []
-  },
-  onLoad: function (options) {
+  },onShareAppMessage: function() {//自定义函数 用户点击右上角分享给好友,要先在分享好友这里设置menus的两个参数,才可以分享朋友圈 
+    wx.showShareMenu({ 
+        withShareTicket: true, 
+        menus: ['shareAppMessage', 'shareTimeline'] 
+      }) 
+    return { 
+        title: this.data.topic.title, 
+        desc: this.data.topic.content, 
+        imageUrl: this.data.topic.scene_pic_url, 
+        path: '/pages/topicDetail/topicDetail?id='+this.data.id 
+    } 
+  },onShareTimeline: function () {//用户点击右上角分享朋友圈 
+  return { 
+      title: this.data.topic.title, 
+      query: { 
+        id:this.data.id 
+      }, 
+      imageUrl: this.data.topic.scene_pic_url 
+    } 
+  },onLoad: function (options) {
     // 页面初始化 options为页面跳转所带来的参数
     var that = this;
     that.setData({

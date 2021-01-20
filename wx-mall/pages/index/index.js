@@ -15,11 +15,21 @@ Page({
         channel: []
     },
     onShareAppMessage: function () {
+        wx.showShareMenu({ 
+            withShareTicket: true, 
+            menus: ['shareAppMessage', 'shareTimeline'] 
+          }) 
         return {
             title: 'NideShop',
             desc: '仿网易严选微信小程序商城',
             path: '/pages/index/index'
         }
+    },onShareTimeline: function () {//用户点击右上角分享朋友圈 
+        return { 
+          title: 'NideShop', 
+          query: "id=110101&name=heyzqt", 
+          imageUrl: '/static/images/logo.png' 
+        } 
     }, onPullDownRefresh() {
         // 增加下拉刷新数据的功能
         var self = this;
