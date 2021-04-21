@@ -5,13 +5,18 @@ const api = require('../../../config/api.js');
 const app = getApp()
 Page({
   data: {
-    canIUse: wx.canIUse('button.open-type.getUserInfo'),
+    canIUseGetUserProfile: false,
     navUrl: '',
     code: ''
   },
 
-  onLoad: function(options) {
+  onLoad: function (options) {
     let that = this;
+    if (wx.getUserProfile) {
+      this.setData({
+        canIUseGetUserProfile: true
+      })
+    }
     if (wx.getStorageSync("navUrl")) {
       that.setData({
         navUrl: wx.getStorageSync("navUrl")
@@ -23,7 +28,7 @@ Page({
     }
 
     wx.login({
-      success: function(res) {
+      success: function (res) {
         if (res.code) {
           that.setData({
             code: res.code
@@ -32,14 +37,27 @@ Page({
       }
     });
   },
-
-  bindGetUserInfo: function(e) {
-    let that = this;
+  getUserProfile() {
+    // 推荐使用wx.getUserProfile获取用户信息，开发者每次通过该接口获取用户个人信息均需用户确认
+    // 开发者妥善保管用户快速填写的头像昵称，避免重复弹窗
+    wx.getUserProfile({
+      desc: '用于完善会员资料', // 声明获取用户个人信息后的用途，后续会展示在弹窗中，请谨慎填写
+      success: (resp) => {
+        //登录远程服务器
+        this.loginByWeixin(resp)
+      }
+    })
+  },
+  bindGetUserInfo: function (e) {
     //登录远程服务器
+    this.loginByWeixin(e.detail)
+  },
+  loginByWeixin: function (userInfo) {
+    let that = this;
     if (that.data.code) {
       util.request(api.AuthLoginByWeixin, {
         code: that.data.code,
-        userInfo: e.detail
+        userInfo: userInfo
       }, 'POST', 'application/json').then(res => {
         if (res.errno === 0) {
           //存储用户信息
@@ -67,16 +85,16 @@ Page({
       })
     }
   },
-  onReady: function() {
+  onReady: function () {
     // 页面渲染完成
   },
-  onShow: function() {
+  onShow: function () {
     // 页面显示
   },
-  onHide: function() {
+  onHide: function () {
     // 页面隐藏
   },
-  onUnload: function() {
+  onUnload: function () {
     // 页面关闭
   }
 })
