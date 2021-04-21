@@ -11,7 +11,9 @@
   </view>
   <view class="btn spacing">
     <!-- 需要使用 button 来授权登录 -->
-    <button wx:if="{{canIUse}}" open-type="getUserInfo" class="weui_btn weui_btn_primary" bindgetuserinfo="bindGetUserInfo">授权登录</button>
+    <button wx:if="{{canIUseGetUserProfile}}" bindtap="getUserProfile" class="weui_btn weui_btn_primary">授权登录</button>
+    <button wx:else open-type="getUserInfo" class="weui_btn weui_btn_primary"
+      bindgetuserinfo="bindGetUserInfo">授权登录</button>
     <!-- <view wx:else>请升级微信版本</view> -->
   </view>
 </view>
