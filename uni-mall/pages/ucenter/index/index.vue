@@ -1,6 +1,10 @@
 <template>
 	<view class="container">
-		<button class="userinfo" open-type="getUserInfo" @getuserinfo="bindGetUserInfo">
+		<button v-if="canIUseGetUserProfile" class="userinfo" @tap="getUserProfile">
+			<image class="userinfo-avatar" :src="userInfo.avatarUrl" background-size="cover"></image>
+			<text class="userinfo-nickname">{{ userInfo.nickName}}</text>
+		</button>
+		<button v-else class="userinfo" open-type="getUserInfo" @getuserinfo="bindGetUserInfo">
 			<image class="userinfo-avatar" :src="userInfo.avatarUrl" background-size="cover"></image>
 			<text class="userinfo-nickname">{{ userInfo.nickName}}</text>
 		</button>
@@ -77,6 +81,7 @@
 	export default {
 		data() {
 			return {
+				canIUseGetUserProfile: false,
 				userInfo: {},
 				hasMobile: ''
 			}
@@ -112,47 +117,33 @@
 					})
 				});
 			},
-			bindGetUserInfo(e) {
-				let userInfo = uni.getStorageSync('userInfo');
-				let token = uni.getStorageSync('X-Nideshop-Token');
+			getUserProfile() {
 				let that = this;
-				if (userInfo && token) {
-					return;
-				}
-				if (e.detail.userInfo) {
-					//用户按了允许授权按钮
-					that.loginByWeixin(e.detail).then(res => {
-						that.userInfo = res.data.userInfo
-						app.globalData.userInfo = res.data.userInfo;
-						app.globalData.token = res.data.token;
-						util.setUserInfo('', res.data.token)
-					}).catch((err) => {
-						console.log(err)
-					});
-				} else {
-					//用户按了拒绝按钮
-					uni.showModal({
-						title: '警告通知',
-						content: '您点击了拒绝授权,将无法正常显示个人信息,点击确定重新获取授权。',
-						success: function(res) {
-							if (res.confirm) {
-								uni.openSetting({
-									success: (res) => {
-										if (res.authSetting["scope.userInfo"]) { ////如果用户重新同意了授权登录
-											that.loginByWeixin(e.detail).then(res => {
-												that.userInfo = res.data.userInfo
-												app.globalData.userInfo = res.data.userInfo;
-												app.globalData.token = res.data.token;
-											}).catch((err) => {
-												console.log(err)
-											});
-										}
-									}
-								})
-							}
-						}
-					});
-				}
+				// 推荐使用wx.getUserProfile获取用户信息，开发者每次通过该接口获取用户个人信息均需用户确认
+				// 开发者妥善保管用户快速填写的头像昵称，避免重复弹窗
+				wx.getUserProfile({
+					desc: '用于完善会员资料', // 声明获取用户个人信息后的用途，后续会展示在弹窗中，请谨慎填写
+					success: (resp) => {
+						//登录远程服务器
+						that.loginByWeixin(resp).then(res => {
+							that.userInfo = res.data.userInfo
+							app.globalData.userInfo = res.data.userInfo;
+							app.globalData.token = res.data.token;
+						}).catch((err) => {
+							console.log(err)
+						});
+					}
+				})
+			},
+			bindGetUserInfo(e) {
+				let that = this;
+				that.loginByWeixin(e.detail).then(res => {
+					that.userInfo = res.data.userInfo
+					app.globalData.userInfo = res.data.userInfo;
+					app.globalData.token = res.data.token;
+				}).catch((err) => {
+					console.log(err)
+				});
 			},
 			exitLogin: function() {
 				uni.showModal({
@@ -197,7 +188,12 @@
 			}
 			that.userInfo = app.globalData.userInfo
 		},
-		onLoad: function() {}
+		onLoad: function() {
+			// 页面初始化 options为页面跳转所带来的参数
+			if (wx.getUserProfile) {
+				this.canIUseGetUserProfile = true
+			}
+		}
 	}
 </script>
 

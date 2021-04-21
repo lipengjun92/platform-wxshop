@@ -12,8 +12,10 @@
 		</view>
 		<view class="btn spacing">
 			<!-- 需要使用 button 来授权登录 -->
-			<button v-if="canIUse" open-type="getUserInfo" class="weui_btn weui_btn_primary" @getuserinfo="bindGetUserInfo">授权登录</button>
-			<!-- <view v-else>请升级微信版本</view> -->
+			<button class="weui_btn weui_btn_primary" v-if="canIUseGetUserProfile" @tap="getUserProfile"> 微信登录 </button>
+			<button class="weui_btn weui_btn_primary" v-else open-type="getUserInfo" @getuserinfo="bindGetUserInfo">
+				微信登录
+			</button>
 		</view>
 	</view>
 </template>
@@ -24,20 +26,47 @@
 	export default {
 		data() {
 			return {
-				canIUse: uni.canIUse('button.open-type.getUserInfo'),
+				canIUseGetUserProfile: false,
 				navUrl: '',
 				code: ''
 			}
 		},
 		methods: {
-
+			getUserProfile() {
+				let that = this;
+				// 推荐使用uni.getUserProfile获取用户信息，开发者每次通过该接口获取用户个人信息均需用户确认
+				// 开发者妥善保管用户快速填写的头像昵称，避免重复弹窗
+				uni.getUserProfile({
+					desc: '用于完善会员资料', // 声明获取用户个人信息后的用途，后续会展示在弹窗中，请谨慎填写
+					success: (resp) => {
+						//登录远程服务器
+						if (that.code) {
+							//登录远程服务器
+							that.loginByWeixin(resp)
+						} else {
+							uni.login({
+								success: function(resp) {
+									if (resp.code) {
+										that.code = resp.code
+										that.loginByWeixin(resp)
+									}
+								}
+							});
+						}
+					}
+				})
+			},
 			bindGetUserInfo: function(e) {
+				//登录远程服务器
+				this.loginByWeixin(e.detail)
+			},
+			loginByWeixin: function(userInfo) {
 				let that = this;
 				//登录远程服务器
 				if (that.code) {
 					util.request(api.AuthLoginByWeixin, {
 						code: that.code,
-						userInfo: e.detail
+						userInfo: userInfo
 					}, 'POST', 'application/json').then(res => {
 						if (res.errno === 0) {
 							//存储用户信息
@@ -73,7 +102,9 @@
 			} else {
 				that.navUrl = '/pages/index/index'
 			}
-
+			if (uni.getUserProfile) {
+				that.canIUseGetUserProfile = true
+			}
 			uni.login({
 				success: function(res) {
 					if (res.code) {
