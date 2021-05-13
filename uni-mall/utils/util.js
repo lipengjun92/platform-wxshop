@@ -91,7 +91,7 @@ const utils = {
 				data: postData,
 				header: {
 					'content-type': contentType,
-					'token': utils.getToken()
+					'X-Nideshop-Token': utils.getToken()
 				},
 				method: method, //'GET','POST'
 				dataType: 'json',
