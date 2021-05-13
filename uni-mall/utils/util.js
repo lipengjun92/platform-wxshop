@@ -101,29 +101,20 @@ const utils = {
 					}
 					if (res.statusCode === 200) {
 						if (res.data.errno === 401) {
-							//返回码401说明token过期或者用户未登录
-							uni.removeStorage({
-								key: 'token',
-								success() {
-									//个人中心页不跳转
-									if (uni.getStorageSync("navUrl") != "/pages/ucenter/index/index") {
-										utils.modal('温馨提示', '您还没有登录，是否去登录', true, (confirm) => {
-											if (confirm) {
-												uni.redirectTo({
-													url: '/pages/auth/btnAuth/btnAuth',
-												})
-											} else {
-												uni.navigateBack({
-													delta: 1,
-													fail: (res) => {
-														uni.switchTab({
-															url: '/pages/index/index',
-														})
-													}
-												})
-											}
-										})
-									}
+							utils.modal('温馨提示', '您还没有登录，是否去登录', true, (confirm) => {
+								if (confirm) {
+									uni.redirectTo({
+										url: '/pages/auth/btnAuth/btnAuth',
+									})
+								} else {
+									uni.navigateBack({
+										delta: 1,
+										fail: (res) => {
+											uni.switchTab({
+												url: '/pages/index/index',
+											})
+										}
+									})
 								}
 							})
 						} else if (res.data.errno === 500) {
@@ -173,7 +164,7 @@ const utils = {
 				name: 'file',
 				header: {
 					'content-type': 'multipart/form-data',
-					'token': utils.getToken()
+					'X-Nideshop-Token': utils.getToken()
 				},
 				success: function(res) {
 					uni.hideLoading()
@@ -204,12 +195,12 @@ const utils = {
 	},
 	//设置用户信息
 	setUserInfo: function(mobile, token) {
-		uni.setStorageSync("token", token)
+		uni.setStorageSync("X-Nideshop-Token", token)
 		uni.setStorageSync("mobile", mobile)
 	},
 	//获取token
 	getToken: function() {
-		return uni.getStorageSync("token")
+		return uni.getStorageSync("X-Nideshop-Token")
 	},
 	//去空格
 	trim: function(value) {
@@ -397,53 +388,11 @@ const utils = {
 	 * 统一下单请求
 	 */
 	payOrder: function(orderId) {
-		let tradeType = 'JSAPI'
-		// #ifdef APP-PLUS
-		tradeType = 'APP'
-		// #endif
-		// #ifdef H5
-		tradeType = 'MWEB'
-		// #endif
 		return new Promise(function(resolve, reject) {
 			utils.request('pay/prepay', {
-				orderId: orderId,
-				tradeType: tradeType
+				orderId: orderId
 			}, 'POST').then((res) => {
 				if (res.errno === 0) {
-					// #ifdef H5
-					location.href = res.mwebOrderResult.mwebUrl + '&redirect_url=' + encodeURIComponent(utils.domain +
-						'h5/#/pages/payResult/payResult?orderId=' + orderId)
-					// #endif
-
-					// #ifdef APP-PLUS
-					let appOrderResult = res.appOrderResult;
-					uni.requestPayment({
-						provider: 'wxpay',
-						orderInfo: {
-							"appid": appOrderResult.appId,
-							"noncestr": appOrderResult.nonceStr,
-							"package": appOrderResult.packageValue,
-							"partnerid": appOrderResult.partnerId,
-							"prepayid": appOrderResult.prepayId,
-							"timestamp": appOrderResult.timeStamp,
-							"sign": appOrderResult.sign
-						},
-						success: function(res) {
-							console.log(res)
-							resolve(res);
-						},
-						fail: function(res) {
-							console.log(res)
-							reject(res);
-						},
-						complete: function(res) {
-							console.log(res)
-							reject(res);
-						}
-					});
-					// #endif
-
-					// #ifdef MP-WEIXIN
 					let payParam = res.data;
 					uni.requestPayment({
 						'timeStamp': payParam.timeStamp,
@@ -464,7 +413,6 @@ const utils = {
 							reject(res);
 						}
 					});
-					// #endif
 				} else {
 					reject(res);
 				}
