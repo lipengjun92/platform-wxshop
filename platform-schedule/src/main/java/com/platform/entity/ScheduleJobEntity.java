@@ -16,7 +16,7 @@ import java.util.Date;
  * @date 2016年11月28日 下午12:54:44
  */
 @Data
-@TableName("SCHEDULE_JOB")
+@TableName("schedule_job")
 public class ScheduleJobEntity implements Serializable {
     private static final long serialVersionUID = 1L;
 
