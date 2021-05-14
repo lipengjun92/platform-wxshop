@@ -1,6 +1,9 @@
 # 注意
 Entity里提示报错不是缺少get、set方法，Eclipse、IDEA请先安装lombok插件
 
+# 官网
+[https://fly2you.cn](https://fly2you.cn)
+
 # 使用须知
 ## ✅允许
 - 个人学习使用
@@ -9,17 +12,16 @@ Entity里提示报错不是缺少get、set方法，Eclipse、IDEA请先安装lom
 - 请遵守 Apache License2.0 协议，再次开源请注明出处
 - 推荐Watch、Star项目，获取项目第一时间更新，同时也是对项目最好的支持
 - 希望大家多多支持原创作品
-- 如需购买 [商业版](https://gitee.com/fuyang_lipengjun/platform/blob/master/business/README.md) 请联系群主<br>
+- 如需购买 [商业版](https://fly2you.cn/mall.html) 请联系群主<br>
 ![](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/wx.png "微信")
 
 **如何交流、反馈、参与贡献？** 
-- 官方社区：http://fly2you.cn
 - gitee仓库：https://gitee.com/fuyang_lipengjun/platform
 - github仓库：https://github.com/lipengjun92/platform-wxshop
 * 官方QQ群：
-    * <a target="_blank" href="https://qm.qq.com/cgi-bin/qm/qr?k=HNLRmaIdvnj2e_TGkMspORvIn-AHNZCb&jump_from=webapi"><img border="0" src="//pub.idqqimg.com/wpa/images/group.png" alt="微同科技 ①群" title="微同科技 ①群"></a>
-    * <a target="_blank" href="https://qm.qq.com/cgi-bin/qm/qr?k=4i3Z9xgp7SlPnk_X1v0TWToSOoT_gJMz&jump_from=webapi"><img border="0" src="//pub.idqqimg.com/wpa/images/group.png" alt="微同科技 ②群" title="微同科技 ②群"></a>
-    * <a target="_blank" href="https://qm.qq.com/cgi-bin/qm/qr?k=hQLMx7vYLfP_C-d2-yP_udx1yciJXfHC&jump_from=webapi"><img border="0" src="//pub.idqqimg.com/wpa/images/group.png" alt="微同科技 ③群" title="微同科技 ③群"></a>
+    * <a target="_blank" href="https://qm.qq.com/cgi-bin/qm/qr?k=HNLRmaIdvnj2e_TGkMspORvIn-AHNZCb&jump_from=webapi"><img border="0" src="//pub.idqqimg.com/wpa/images/group.png" alt="微同科技 ①群" title="微同科技 ①群"></a>：66502035
+    * <a target="_blank" href="https://qm.qq.com/cgi-bin/qm/qr?k=4i3Z9xgp7SlPnk_X1v0TWToSOoT_gJMz&jump_from=webapi"><img border="0" src="//pub.idqqimg.com/wpa/images/group.png" alt="微同科技 ②群" title="微同科技 ②群"></a>：870579539
+    * <a target="_blank" href="https://qm.qq.com/cgi-bin/qm/qr?k=hQLMx7vYLfP_C-d2-yP_udx1yciJXfHC&jump_from=webapi"><img border="0" src="//pub.idqqimg.com/wpa/images/group.png" alt="微同科技 ③群" title="微同科技 ③群"></a>：151602347
 * Watch、Star项目，进群联系群主获取《微同开源商城启动部署手册.docx》
 
 - 技术讨论、二次开发等咨询、问题和建议，请移步到官方社区，我会在第一时间进行解答和回复！
@@ -216,15 +218,13 @@ platform
 ![](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/upload/20180727/10.png "优惠券")
 ### 小程序并联手机
 ![](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/upload/20180727/11.png "并联手机")
-### uniapp版本
-![](https://platform-wxmall-1251990035.cos.ap-shanghai.myqcloud.com/upload/20200806/0594b3dafad9484f9f10cacff4926584.png "uniapp")
-![](https://platform-wxmall-1251990035.cos.ap-shanghai.myqcloud.com/upload/20200806/ae749f40e0324790b708411b5860d224.png "uniapp")
-![](https://platform-wxmall-1251990035.cos.ap-shanghai.myqcloud.com/upload/20200806/4b4d53af290046c4866d0675b6328565.png "uniapp")
-![](https://platform-wxmall-1251990035.cos.ap-shanghai.myqcloud.com/upload/20200806/d76909ce2448413f935615147dc0b124.png "uniapp")
-![](https://platform-wxmall-1251990035.cos.ap-shanghai.myqcloud.com/upload/20200806/3c2da2b5ea094e2c9bc3e89f76f80a5f.png "uniapp")
-![](https://platform-wxmall-1251990035.cos.ap-shanghai.myqcloud.com/upload/20200806/5c67a073a13e422f8d1e4a90324dc1b8.png "uniapp")
-***
 
 ### 开发文档目录
-<a name="doc" href="http://fly2you.cn/guide/index" target="_blank">![](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/catalog.png "开发文档目录")</a>
+<a name="doc" href="http://fly2you.cn/doc.html" target="_blank">![](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/catalog.png "开发文档目录")</a>
 
+## Stargazers over time
+[![Stargazers over time](https://whnb.wang/stars/fuyang_lipengjun/platform)](https://whnb.wang)
+
+## contributors
+[![contributors](https://whnb.wang/contributors/fuyang_lipengjun/platform)](https://whnb.wang)
+ 
