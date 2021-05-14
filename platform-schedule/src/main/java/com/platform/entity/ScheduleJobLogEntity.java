@@ -13,7 +13,7 @@ import java.util.Date;
  * @author 李鹏军
  */
 @Data
-@TableName("SCHEDULE_JOB_LOG")
+@TableName("schedule_job_log")
 public class ScheduleJobLogEntity implements Serializable {
     private static final long serialVersionUID = 1L;
 
