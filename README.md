@@ -223,8 +223,8 @@ platform
 <a name="doc" href="http://fly2you.cn/doc.html" target="_blank">![](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/catalog.png "开发文档目录")</a>
 
 ## Stargazers over time
-[![Stargazers over time](https://whnb.wang/stars/fuyang_lipengjun/platform)](https://whnb.wang)
+[![Stargazers over time](https://whnb.wang/stars/fuyang_lipengjun/platform)](https://whnb.wang/fuyang_lipengjun/platform)
 
 ## contributors
-[![contributors](https://whnb.wang/contributors/fuyang_lipengjun/platform)](https://whnb.wang)
+[![contributors](https://whnb.wang/contributors/fuyang_lipengjun/platform)](https://whnb.wang/fuyang_lipengjun/platform)
  
