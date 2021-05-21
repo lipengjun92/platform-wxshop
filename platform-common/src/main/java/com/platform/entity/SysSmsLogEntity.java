@@ -30,10 +30,6 @@ public class SysSmsLogEntity implements Serializable {
      */
     private String mobile;
     /**
-     * 发送时间
-     */
-    private Date stime;
-    /**
      * 模板ID
      */
     private int templateId;

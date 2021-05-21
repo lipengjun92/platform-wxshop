@@ -6,11 +6,6 @@ $(function () {
             {label: '操作人', name: 'userName', index: 'user_id', width: 80},
             {label: '发送编号', name: 'sendId', index: 'send_id', width: 80},
             {label: '验证码', name: 'code', index: 'code', width: 80},
-            {
-                label: '发送时间', name: 'stime', index: 'stime', width: 100, formatter: function (value) {
-                    return transDate(value, 'yyyy-MM-dd hh:mm:ss');
-                }
-            },
             {label: '用户签名', name: 'sign', index: 'sign', width: 80},
             {
                 label: '发送状态', name: 'sendStatus', index: 'send_status', width: 80, formatter: function (value) {
