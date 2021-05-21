@@ -33,7 +33,7 @@ public class ApiSmsController {
      * 发送短信
      *
      * @param request request
-     * @param params 请求参数{mobile：电话号码字符串，中间用英文逗号间隔,content：内容字符串,stime：追加发送时间，可为空，为空为及时发送}
+     * @param params
      * @return R
      */
     @IgnoreAuth
