@@ -72,7 +72,7 @@ public class ApiCatalogController extends ApiBaseAction {
 
         resultObj.put("categoryList", data);
         resultObj.put("currentCategory", currentCategory);
-        return toResponsSuccess(resultObj);
+        return toResponseSuccess(resultObj);
     }
 
     /**
@@ -96,6 +96,6 @@ public class ApiCatalogController extends ApiBaseAction {
             currentCategory.setSubCategoryList(categoryService.queryList(params));
         }
         resultObj.put("currentCategory", currentCategory);
-        return toResponsSuccess(resultObj);
+        return toResponseSuccess(resultObj);
     }
 }

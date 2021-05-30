@@ -85,7 +85,7 @@ public class ApiSearchController extends ApiBaseAction {
         resultObj.put("defaultKeyword", defaultKeyword);
         resultObj.put("historyKeywordList", historyKeywordList);
         resultObj.put("hotKeywordList", hotKeywordList);
-        return toResponsSuccess(resultObj);
+        return toResponseSuccess(resultObj);
     }
 
     /**
@@ -111,7 +111,7 @@ public class ApiSearchController extends ApiBaseAction {
             }
         }
         //
-        return toResponsSuccess(keys);
+        return toResponseSuccess(keys);
     }
 
     /**
@@ -121,6 +121,6 @@ public class ApiSearchController extends ApiBaseAction {
     public Object clearhistory(@LoginUser UserVo loginUser) {
         searchHistoryService.deleteByUserId(loginUser.getUserId());
         //
-        return toResponsSuccess("");
+        return this.toResponseSuccess("");
     }
 }

@@ -46,23 +46,23 @@ public class ApiUserController extends ApiBaseAction {
         // 一分钟之内不能重复发送短信
         SmsLogVo smsLogVo = userService.querySmsCodeByUserId(loginUser.getUserId());
         if (null != smsLogVo && (System.currentTimeMillis() / 1000 - smsLogVo.getLog_date()) < 1 * 60) {
-            return toResponsFail("短信已发送");
+            return toResponseFail("短信已发送");
         }
         //生成验证码
         String sms_code = CharUtil.getRandomNum(4);
         //获取云存储配置信息
         SmsConfig config = sysConfigService.getConfigObject(Constant.SMS_CONFIG_KEY, SmsConfig.class);
         if (StringUtils.isNullOrEmpty(config)) {
-            return toResponsFail("请先配置短信平台信息");
+            return toResponseFail("请先配置短信平台信息");
         }
         if (StringUtils.isNullOrEmpty(config.getAppid())) {
-            return toResponsFail("请先配置短信平台APPID");
+            return toResponseFail("请先配置短信平台APPID");
         }
         if (StringUtils.isNullOrEmpty(config.getAppkey())) {
-            return toResponsFail("请先配置短信平台KEY");
+            return toResponseFail("请先配置短信平台KEY");
         }
         if (StringUtils.isNullOrEmpty(config.getSign())) {
-            return toResponsFail("请先配置短信平台签名");
+            return toResponseFail("请先配置短信平台签名");
         }
         // 发送短信
         SmsSingleSenderResult result;
@@ -70,7 +70,7 @@ public class ApiUserController extends ApiBaseAction {
         try {
             result = SmsUtil.crSendSms(config.getAppid(), config.getAppkey(), phone, templateId, new String[]{sms_code}, "");
         } catch (Exception e) {
-            return toResponsFail("短信发送失败");
+            return toResponseFail("短信发送失败");
         }
 
         if (result.result == 0) {
@@ -81,9 +81,9 @@ public class ApiUserController extends ApiBaseAction {
             smsLogVo.setSms_code(templateId);
             smsLogVo.setSms_text(sms_code);
             userService.saveSmsCodeLog(smsLogVo);
-            return toResponsSuccess("短信发送成功");
+            return this.toResponseSuccess("短信发送成功");
         } else {
-            return toResponsFail("短信发送失败");
+            return toResponseFail("短信发送失败");
         }
     }
 
@@ -97,7 +97,7 @@ public class ApiUserController extends ApiBaseAction {
     @PostMapping("getUserLevel")
     public Object getUserLevel(@LoginUser UserVo loginUser) {
         String userLevel = userService.getUserLevel(loginUser);
-        return toResponsSuccess(userLevel);
+        return this.toResponseSuccess(userLevel);
     }
 
     /**
@@ -113,11 +113,11 @@ public class ApiUserController extends ApiBaseAction {
         String mobile = jsonParams.getString("mobile");
 
         if (!mobile_code.equals(smsLogVo.getSms_code())) {
-            return toResponsFail("验证码错误");
+            return toResponseFail("验证码错误");
         }
         UserVo userVo = userService.queryObject(loginUser.getUserId());
         userVo.setMobile(mobile);
         userService.update(userVo);
-        return toResponsSuccess("手机绑定成功");
+        return this.toResponseSuccess("手机绑定成功");
     }
 }

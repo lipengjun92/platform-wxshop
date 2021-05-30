@@ -45,7 +45,7 @@ public class ApiCollectController extends ApiBaseAction {
 //        Query query = new Query(param);
 //        int total = collectService.queryTotal(query);
 //        ApiPageUtils pageUtil = new ApiPageUtils(collectEntities, total, query.getLimit(), query.getPage());
-        return toResponsSuccess(collectEntities);
+        return toResponseSuccess(collectEntities);
     }
 
     /**
@@ -84,8 +84,8 @@ public class ApiCollectController extends ApiBaseAction {
         if (collectRes > 0) {
             Map data = new HashMap();
             data.put("type", handleType);
-            return toResponsSuccess(data);
+            return toResponseSuccess(data);
         }
-        return toResponsFail("操作失败");
+        return toResponseFail("操作失败");
     }
 }

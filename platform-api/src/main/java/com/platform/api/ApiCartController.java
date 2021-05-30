@@ -126,7 +126,7 @@ public class ApiCartController extends ApiBaseAction {
     @ApiOperation(value = "获取购物车信息")
     @PostMapping("index")
     public Object index(@LoginUser UserVo loginUser) {
-        return toResponsSuccess(getCart(loginUser));
+        return toResponseSuccess(getCart(loginUser));
     }
 
     private String[] getSpecificationIdsArray(String ids) {
@@ -209,7 +209,7 @@ public class ApiCartController extends ApiBaseAction {
             cartInfo.setNumber(cartInfo.getNumber() + number);
             cartService.update(cartInfo);
         }
-        return toResponsSuccess(getCart(loginUser));
+        return toResponseSuccess(getCart(loginUser));
     }
 
     /**
@@ -240,7 +240,7 @@ public class ApiCartController extends ApiBaseAction {
                 cart_num = 0;
             }
         }
-        return toResponsSuccess(cart_num);
+        return toResponseSuccess(cart_num);
     }
 
     /**
@@ -265,7 +265,7 @@ public class ApiCartController extends ApiBaseAction {
         if (cartInfo.getProduct_id().equals(productId)) {
             cartInfo.setNumber(number);
             cartService.update(cartInfo);
-            return toResponsSuccess(getCart(loginUser));
+            return toResponseSuccess(getCart(loginUser));
         }
 
         Map cartParam = new HashMap();
@@ -327,7 +327,7 @@ public class ApiCartController extends ApiBaseAction {
             cartInfo.setGoods_specifition_ids(productInfo.getGoods_specification_ids());
             cartService.update(cartInfo);
         }
-        return toResponsSuccess(getCart(loginUser));
+        return toResponseSuccess(getCart(loginUser));
     }
 
     /**
@@ -340,11 +340,11 @@ public class ApiCartController extends ApiBaseAction {
         String productIds = jsonParam.getString("productIds");
         Integer isChecked = jsonParam.getInteger("isChecked");
         if (StringUtils.isNullOrEmpty(productIds)) {
-            return this.toResponsFail("删除出错");
+            return this.toResponseFail("删除出错");
         }
         String[] productIdArray = productIds.split(",");
         cartService.updateCheck(productIdArray, isChecked, loginUser.getUserId());
-        return toResponsSuccess(getCart(loginUser));
+        return toResponseSuccess(getCart(loginUser));
     }
 
     //删除选中的购物车商品，批量删除
@@ -357,12 +357,12 @@ public class ApiCartController extends ApiBaseAction {
         String productIds = jsonObject.getString("productIds");
 
         if (StringUtils.isNullOrEmpty(productIds)) {
-            return toResponsFail("删除出错");
+            return toResponseFail("删除出错");
         }
         String[] productIdsArray = productIds.split(",");
         cartService.deleteByUserAndProductIds(userId, productIdsArray);
 
-        return toResponsSuccess(getCart(loginUser));
+        return toResponseSuccess(getCart(loginUser));
     }
 
     //  获取购物车商品的总件件数
@@ -370,7 +370,7 @@ public class ApiCartController extends ApiBaseAction {
     @PostMapping("goodscount")
     public Object goodscount(@LoginUser UserVo loginUser) {
         if (null == loginUser || null == loginUser.getUserId()) {
-            return toResponsFail("未登录");
+            return toResponseFail("未登录");
         }
         Map<String, Object> resultObj = new HashMap();
         //查询列表数据
@@ -388,7 +388,7 @@ public class ApiCartController extends ApiBaseAction {
         cartTotal.put("goodsCount", goodsCount);
         //
         resultObj.put("cartTotal", cartTotal);
-        return toResponsSuccess(resultObj);
+        return toResponseSuccess(resultObj);
     }
 
     /**
@@ -461,7 +461,7 @@ public class ApiCartController extends ApiBaseAction {
         resultObj.put("goodsTotalPrice", goodsTotalPrice);
         resultObj.put("orderTotalPrice", orderTotalPrice);
         resultObj.put("actualPrice", actualPrice);
-        return toResponsSuccess(resultObj);
+        return toResponseSuccess(resultObj);
     }
 
     /**
@@ -494,6 +494,6 @@ public class ApiCartController extends ApiBaseAction {
                 }
             }
         }
-        return toResponsSuccess(couponVos);
+        return toResponseSuccess(couponVos);
     }
 }

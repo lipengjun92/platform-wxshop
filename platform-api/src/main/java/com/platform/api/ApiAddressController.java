@@ -1,7 +1,6 @@
 package com.platform.api;
 
 import com.alibaba.fastjson.JSONObject;
-import com.platform.annotation.IgnoreAuth;
 import com.platform.annotation.LoginUser;
 import com.platform.entity.AddressVo;
 import com.platform.entity.UserVo;
@@ -42,7 +41,7 @@ public class ApiAddressController extends ApiBaseAction {
         Map<String, Object> param = new HashMap<String, Object>();
         param.put("user_id", loginUser.getUserId());
         List<AddressVo> addressEntities = addressService.queryList(param);
-        return toResponsSuccess(addressEntities);
+        return toResponseSuccess(addressEntities);
     }
 
     /**
@@ -57,7 +56,7 @@ public class ApiAddressController extends ApiBaseAction {
         if (!entity.getUserId().equals(loginUser.getUserId())) {
             return toResponsObject(403, "您无权查看", "");
         }
-        return toResponsSuccess(entity);
+        return toResponseSuccess(entity);
     }
 
     /**
@@ -87,7 +86,7 @@ public class ApiAddressController extends ApiBaseAction {
         } else {
             addressService.update(entity);
         }
-        return toResponsSuccess(entity);
+        return toResponseSuccess(entity);
     }
 
     /**
@@ -105,6 +104,6 @@ public class ApiAddressController extends ApiBaseAction {
             return toResponsObject(403, "您无权删除", "");
         }
         addressService.delete(id);
-        return toResponsSuccess("");
+        return this.toResponseSuccess("");
     }
 }

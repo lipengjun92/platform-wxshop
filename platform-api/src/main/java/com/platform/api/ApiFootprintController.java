@@ -37,13 +37,13 @@ public class ApiFootprintController extends ApiBaseAction {
     @PostMapping("delete")
     public Object delete(@LoginUser UserVo loginUser, Integer footprintId) {
         if (footprintId == null) {
-            return toResponsFail("删除出错");
+            return toResponseFail("删除出错");
         }
         //删除当天的同一个商品的足迹
         FootprintVo footprintEntity = footprintService.queryObject(footprintId);
         //
         if (loginUser == null || loginUser.getUserId() == null || footprintEntity == null || footprintEntity.getGoods_id() == null) {
-            return toResponsFail("删除出错");
+            return toResponseFail("删除出错");
         }
 
         Map<String, Object> param = new HashMap<String, Object>();
@@ -51,7 +51,7 @@ public class ApiFootprintController extends ApiBaseAction {
         param.put("goodsId", footprintEntity.getGoods_id());
         footprintService.deleteByParam(param);
 
-        return toResponsMsgSuccess("删除成功");
+        return toResponseSuccess("删除成功");
     }
 
     /**
@@ -105,7 +105,7 @@ public class ApiFootprintController extends ApiBaseAction {
             resultObj.put("data", footprintVoList);
         }
 
-        return this.toResponsSuccess(resultObj);
+        return this.toResponseSuccess(resultObj);
     }
 
 
@@ -126,6 +126,6 @@ public class ApiFootprintController extends ApiBaseAction {
         List<FootprintVo> footprintVos = footprintService.shareList(params);
         //
         resultObj.put("data", footprintVos);
-        return this.toResponsSuccess(resultObj);
+        return this.toResponseSuccess(resultObj);
     }
 }

@@ -38,7 +38,7 @@ public class ApiRegionController extends ApiBaseAction {
                 regionVoList.add(new RegionVo(sysRegionEntity));
             }
         }
-        return toResponsSuccess(regionVoList);
+        return toResponseSuccess(regionVoList);
     }
 
     @IgnoreAuth
@@ -51,7 +51,7 @@ public class ApiRegionController extends ApiBaseAction {
                 regionVoList.add(new RegionVo(sysRegionEntity));
             }
         }
-        return toResponsSuccess(regionVoList);
+        return toResponseSuccess(regionVoList);
     }
 
     @IgnoreAuth
@@ -64,7 +64,7 @@ public class ApiRegionController extends ApiBaseAction {
                 regionVoList.add(new RegionVo(sysRegionEntity));
             }
         }
-        return toResponsSuccess(regionVoList);
+        return toResponseSuccess(regionVoList);
     }
 
     @IgnoreAuth
@@ -77,14 +77,14 @@ public class ApiRegionController extends ApiBaseAction {
                 regionVoList.add(new RegionVo(sysRegionEntity));
             }
         }
-        return toResponsSuccess(regionVoList);
+        return toResponseSuccess(regionVoList);
     }
 
     @IgnoreAuth
     @PostMapping("info")
     public Object info(Integer regionId) {
         SysRegionEntity regionEntity = RegionCacheUtil.getAreaByAreaId(regionId);
-        return toResponsSuccess(new RegionVo(regionEntity));
+        return toResponseSuccess(new RegionVo(regionEntity));
     }
 
     @IgnoreAuth
@@ -106,6 +106,6 @@ public class ApiRegionController extends ApiBaseAction {
         resultObj.put("provinceId", provinceId);
         resultObj.put("cityId", cityId);
         resultObj.put("districtId", districtId);
-        return toResponsSuccess(resultObj);
+        return toResponseSuccess(resultObj);
     }
 }
