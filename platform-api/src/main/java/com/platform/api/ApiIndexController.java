@@ -48,7 +48,7 @@ public class ApiIndexController extends ApiBaseAction {
     @IgnoreAuth
     @PostMapping(value = "test")
     public Object test() {
-        return toResponsMsgSuccess("请求成功yyy");
+        return toResponseSuccess("请求成功yyy");
     }
 
     /**
@@ -145,7 +145,7 @@ public class ApiIndexController extends ApiBaseAction {
             newCategoryList.add(newCategory);
         }
         resultObj.put("categoryList", newCategoryList);
-        return toResponsSuccess(resultObj);
+        return toResponseSuccess(resultObj);
     }
 
 
@@ -167,7 +167,7 @@ public class ApiIndexController extends ApiBaseAction {
         resultObj.put("newGoodsList", newGoods);
         //
 
-        return toResponsSuccess(resultObj);
+        return toResponseSuccess(resultObj);
     }
 
     @ApiOperation(value = "新热门商品信息")
@@ -184,7 +184,7 @@ public class ApiIndexController extends ApiBaseAction {
         resultObj.put("hotGoodsList", hotGoods);
         //
 
-        return toResponsSuccess(resultObj);
+        return toResponseSuccess(resultObj);
     }
 
     @ApiOperation(value = "topic")
@@ -200,7 +200,7 @@ public class ApiIndexController extends ApiBaseAction {
         resultObj.put("topicList", topicList);
         //
 
-        return toResponsSuccess(resultObj);
+        return toResponseSuccess(resultObj);
     }
 
     @ApiOperation(value = "brand")
@@ -219,7 +219,7 @@ public class ApiIndexController extends ApiBaseAction {
         resultObj.put("brandList", brandList);
         //
 
-        return toResponsSuccess(resultObj);
+        return toResponseSuccess(resultObj);
     }
 
     @ApiOperation(value = "category")
@@ -262,7 +262,7 @@ public class ApiIndexController extends ApiBaseAction {
         resultObj.put("categoryList", newCategoryList);
         //
 
-        return toResponsSuccess(resultObj);
+        return toResponseSuccess(resultObj);
     }
 
     @ApiOperation(value = "banner")
@@ -277,7 +277,7 @@ public class ApiIndexController extends ApiBaseAction {
         resultObj.put("banner", banner);
         //
 
-        return toResponsSuccess(resultObj);
+        return toResponseSuccess(resultObj);
     }
 
     @ApiOperation(value = "channel")
@@ -294,6 +294,6 @@ public class ApiIndexController extends ApiBaseAction {
         resultObj.put("channel", channel);
         //
 
-        return toResponsSuccess(resultObj);
+        return toResponseSuccess(resultObj);
     }
 }

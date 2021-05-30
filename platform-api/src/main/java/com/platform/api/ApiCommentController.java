@@ -107,7 +107,7 @@ public class ApiCommentController extends ApiBaseAction {
         if (insertId > 0) {
             return toResponsObject(0, "评论添加成功", resultObj);
         } else {
-            return toResponsFail("评论保存失败");
+            return toResponseFail("评论保存失败");
         }
     }
 
@@ -126,7 +126,7 @@ public class ApiCommentController extends ApiBaseAction {
         //
         resultObj.put("allCount", allCount);
         resultObj.put("hasPicCount", hasPicCount);
-        return toResponsSuccess(resultObj);
+        return toResponseSuccess(resultObj);
     }
 
     /**
@@ -178,6 +178,6 @@ public class ApiCommentController extends ApiBaseAction {
             List<CommentPictureVo> commentPictureEntities = commentPictureService.queryList(paramPicture);
             commentItem.setPic_list(commentPictureEntities);
         }
-        return toResponsSuccess(pageUtil);
+        return toResponseSuccess(pageUtil);
     }
 }

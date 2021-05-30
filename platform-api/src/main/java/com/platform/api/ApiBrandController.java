@@ -52,7 +52,7 @@ public class ApiBrandController extends ApiBaseAction {
         int total = brandService.queryTotal(query);
         ApiPageUtils pageUtil = new ApiPageUtils(brandEntityList, total, query.getLimit(), query.getPage());
         //
-        return toResponsSuccess(pageUtil);
+        return toResponseSuccess(pageUtil);
     }
 
     /**
@@ -67,6 +67,6 @@ public class ApiBrandController extends ApiBaseAction {
         BrandVo entity = brandService.queryObject(id);
         //
         resultObj.put("brand", entity);
-        return toResponsSuccess(resultObj);
+        return toResponseSuccess(resultObj);
     }
 }

@@ -48,7 +48,7 @@ public class ApiCouponController extends ApiBaseAction {
         Map param = new HashMap();
         param.put("user_id", loginUser.getUserId());
         List<CouponVo> couponVos = apiCouponService.queryUserCoupons(param);
-        return toResponsSuccess(couponVos);
+        return toResponseSuccess(couponVos);
     }
 
     /**
@@ -92,7 +92,7 @@ public class ApiCouponController extends ApiBaseAction {
             }
         }
         useCoupons.addAll(notUseCoupons);
-        return toResponsSuccess(useCoupons);
+        return toResponseSuccess(useCoupons);
     }
 
     /**
@@ -104,7 +104,7 @@ public class ApiCouponController extends ApiBaseAction {
         JSONObject jsonParam = getJsonRequest();
         String coupon_number = jsonParam.getString("coupon_number");
         if (StringUtils.isNullOrEmpty(coupon_number)) {
-            return toResponsFail("当前优惠码无效");
+            return toResponseFail("当前优惠码无效");
         }
         //
         Map param = new HashMap();
@@ -112,20 +112,20 @@ public class ApiCouponController extends ApiBaseAction {
         List<UserCouponVo> couponVos = apiUserCouponService.queryList(param);
         UserCouponVo userCouponVo = null;
         if (null == couponVos || couponVos.size() == 0) {
-            return toResponsFail("当前优惠码无效");
+            return toResponseFail("当前优惠码无效");
         }
         userCouponVo = couponVos.get(0);
         if (null != userCouponVo.getUser_id() && !userCouponVo.getUser_id().equals(0L)) {
-            return toResponsFail("当前优惠码已经兑换");
+            return toResponseFail("当前优惠码已经兑换");
         }
         CouponVo couponVo = apiCouponService.queryObject(userCouponVo.getCoupon_id());
         if (null == couponVo || null == couponVo.getUse_end_date() || couponVo.getUse_end_date().before(new Date())) {
-            return toResponsFail("当前优惠码已经过期");
+            return toResponseFail("当前优惠码已经过期");
         }
         userCouponVo.setUser_id(loginUser.getUserId());
         userCouponVo.setAdd_time(new Date());
         apiUserCouponService.update(userCouponVo);
-        return toResponsSuccess(userCouponVo);
+        return toResponseSuccess(userCouponVo);
     }
 
     /**
@@ -141,7 +141,7 @@ public class ApiCouponController extends ApiBaseAction {
         // 校验短信码
         SmsLogVo smsLogVo = apiUserService.querySmsCodeByUserId(loginUser.getUserId());
         if (null != smsLogVo && smsLogVo.getSms_code() != smscode) {
-            return toResponsFail("短信校验失败");
+            return toResponseFail("短信校验失败");
         }
         // 更新手机号码
         if (!StringUtils.isNullOrEmpty(phone)) {
@@ -152,7 +152,7 @@ public class ApiCouponController extends ApiBaseAction {
         }
         // 判断是否是新用户
         if (!StringUtils.isNullOrEmpty(loginUser.getMobile())) {
-            return toResponsFail("当前优惠券只能新用户领取");
+            return toResponseFail("当前优惠券只能新用户领取");
         }
         // 是否领取过了
         Map params = new HashMap();
@@ -160,7 +160,7 @@ public class ApiCouponController extends ApiBaseAction {
         params.put("send_type", 4);
         List<CouponVo> couponVos = apiCouponService.queryUserCoupons(params);
         if (null != couponVos && couponVos.size() > 0) {
-            return toResponsFail("已经领取过，不能重复领取");
+            return toResponseFail("已经领取过，不能重复领取");
         }
         // 领取
         Map couponParam = new HashMap();
@@ -173,9 +173,9 @@ public class ApiCouponController extends ApiBaseAction {
             userCouponVo.setCoupon_number(CharUtil.getRandomString(12));
             userCouponVo.setUser_id(loginUser.getUserId());
             apiUserCouponService.save(userCouponVo);
-            return toResponsSuccess(userCouponVo);
+            return toResponseSuccess(userCouponVo);
         } else {
-            return toResponsFail("领取失败");
+            return toResponseFail("领取失败");
         }
     }
 
@@ -217,9 +217,9 @@ public class ApiCouponController extends ApiBaseAction {
             params.put("send_type", 2);
             params.put("source_key", sourceKey);
             couponVos = apiCouponService.queryUserCoupons(params);
-            return toResponsSuccess(couponVos);
+            return toResponseSuccess(couponVos);
         } else {
-            return toResponsFail("领取失败");
+            return toResponseFail("领取失败");
         }
     }
 }

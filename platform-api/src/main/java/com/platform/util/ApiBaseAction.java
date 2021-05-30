@@ -81,23 +81,23 @@ public class ApiBaseAction {
         return obj;
     }
 
-    public Map<String, Object> toResponsSuccess(Object data) {
+    public Map<String, Object> toResponseSuccess(Object data) {
         Map<String, Object> rp = toResponsObject(0, "执行成功", data);
         logger.info("response:" + rp);
         return rp;
     }
 
-    public Map<String, Object> toResponsMsgSuccess(String msg) {
+    public Map<String, Object> toResponseSuccess(String msg) {
         return toResponsObject(0, msg, "");
     }
 
-    public Map<String, Object> toResponsSuccessForSelect(Object data) {
+    public Map<String, Object> toResponseSuccessForSelect(Object data) {
         Map<String, Object> result = new HashMap<>(2);
         result.put("list", data);
         return toResponsObject(0, "执行成功", result);
     }
 
-    public Map<String, Object> toResponsFail(String msg) {
+    public Map<String, Object> toResponseFail(String msg) {
         return toResponsObject(1, msg, null);
     }
 

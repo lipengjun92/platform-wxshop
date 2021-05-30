@@ -49,7 +49,7 @@ public class ApiOrderController extends ApiBaseAction {
     @PostMapping("index")
     public Object index() {
         //
-        return toResponsSuccess("");
+        return this.toResponseSuccess("");
     }
 
     /**
@@ -84,7 +84,7 @@ public class ApiOrderController extends ApiBaseAction {
                 item.setGoodsCount(goodsCount);
             }
         }
-        return toResponsSuccess(pageUtil);
+        return toResponseSuccess(pageUtil);
     }
 
     /**
@@ -123,7 +123,7 @@ public class ApiOrderController extends ApiBaseAction {
             List Traces = apiKdniaoService.getOrderTracesByJson(orderInfo.getShipping_code(), orderInfo.getShipping_no());
             resultObj.put("shippingList", Traces);
         }
-        return toResponsSuccess(resultObj);
+        return toResponseSuccess(resultObj);
     }
 
     @ApiOperation(value = "修改订单")
@@ -131,9 +131,9 @@ public class ApiOrderController extends ApiBaseAction {
     public Object updateSuccess(Integer orderId) {
         OrderVo orderInfo = orderService.queryObject(orderId);
         if (orderInfo == null) {
-            return toResponsFail("订单不存在");
+            return toResponseFail("订单不存在");
         } else if (orderInfo.getOrder_status() != 0) {
-            return toResponsFail("订单状态不正确orderStatus" + orderInfo.getOrder_status() + "payStatus" + orderInfo.getPay_status());
+            return toResponseFail("订单状态不正确orderStatus" + orderInfo.getOrder_status() + "payStatus" + orderInfo.getPay_status());
         }
 
         orderInfo.setId(orderId);
@@ -143,9 +143,9 @@ public class ApiOrderController extends ApiBaseAction {
         orderInfo.setPay_time(new Date());
         int num = orderService.update(orderInfo);
         if (num > 0) {
-            return toResponsMsgSuccess("修改订单成功");
+            return toResponseSuccess("修改订单成功");
         } else {
-            return toResponsFail("修改订单失败");
+            return toResponseFail("修改订单失败");
         }
     }
 
@@ -164,7 +164,7 @@ public class ApiOrderController extends ApiBaseAction {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return toResponsFail("提交失败");
+        return toResponseFail("提交失败");
     }
 
     /**
@@ -176,9 +176,9 @@ public class ApiOrderController extends ApiBaseAction {
         try {
             OrderVo orderVo = orderService.queryObject(orderId);
             if (orderVo.getOrder_status() == 300) {
-                return toResponsFail("已发货，不能取消");
+                return toResponseFail("已发货，不能取消");
             } else if (orderVo.getOrder_status() == 301) {
-                return toResponsFail("已收货，不能取消");
+                return toResponseFail("已收货，不能取消");
             }
             // 需要退款
             if (orderVo.getPay_status() == 2) {
@@ -192,19 +192,19 @@ public class ApiOrderController extends ApiBaseAction {
                     }
                     orderVo.setPay_status(4);
                     orderService.update(orderVo);
-                    return toResponsMsgSuccess("取消成功");
+                    return toResponseSuccess("取消成功");
                 } else {
                     return toResponsObject(400, "取消成失败", "");
                 }
             } else {
                 orderVo.setOrder_status(101);
                 orderService.update(orderVo);
-                return toResponsSuccess("取消成功");
+                return this.toResponseSuccess("取消成功");
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return toResponsFail("提交失败");
+        return toResponseFail("提交失败");
     }
 
     /**
@@ -219,10 +219,10 @@ public class ApiOrderController extends ApiBaseAction {
             orderVo.setShipping_status(2);
             orderVo.setConfirm_time(new Date());
             orderService.update(orderVo);
-            return toResponsSuccess("确认收货成功");
+            return this.toResponseSuccess("确认收货成功");
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return toResponsFail("提交失败");
+        return toResponseFail("提交失败");
     }
 }

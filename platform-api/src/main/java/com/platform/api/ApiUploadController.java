@@ -37,6 +37,6 @@ public class ApiUploadController extends ApiBaseAction {
         }
         //上传文件
         String url = OSSFactory.build().upload(file);
-        return toResponsSuccess(url);
+        return this.toResponseSuccess(url);
     }
 }

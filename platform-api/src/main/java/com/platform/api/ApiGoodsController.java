@@ -84,7 +84,7 @@ public class ApiGoodsController extends ApiBaseAction {
         param.put("is_on_sale", 1);
         List<GoodsVo> goodsList = goodsService.queryList(param);
         //
-        return toResponsSuccess(goodsList);
+        return toResponseSuccess(goodsList);
     }
 
     /**
@@ -105,7 +105,7 @@ public class ApiGoodsController extends ApiBaseAction {
         //
         resultObj.put("specificationList", goodsSpecificationEntityList);
         resultObj.put("productList", productEntityList);
-        return toResponsSuccess(resultObj);
+        return toResponseSuccess(resultObj);
     }
 
     /**
@@ -269,7 +269,7 @@ public class ApiGoodsController extends ApiBaseAction {
             e.printStackTrace();
         }
 
-        return toResponsSuccess(resultObj);
+        return toResponseSuccess(resultObj);
     }
 
     /**
@@ -292,7 +292,7 @@ public class ApiGoodsController extends ApiBaseAction {
         resultObj.put("currentCategory", currentCategory);
         resultObj.put("parentCategory", parentCategory);
         resultObj.put("brotherCategory", brotherCategory);
-        return toResponsSuccess(resultObj);
+        return toResponseSuccess(resultObj);
     }
 
     /**
@@ -405,7 +405,7 @@ public class ApiGoodsController extends ApiBaseAction {
         }
         goodsData.setFilterCategory(filterCategory);
         goodsData.setGoodsList(goodsList);
-        return toResponsSuccess(goodsData);
+        return toResponseSuccess(goodsData);
     }
 
     /**
@@ -461,7 +461,7 @@ public class ApiGoodsController extends ApiBaseAction {
                 filterCategory.addAll(parentCategory);
             }
         }
-        return toResponsSuccess(filterCategory);
+        return toResponseSuccess(filterCategory);
     }
 
     /**
@@ -477,7 +477,7 @@ public class ApiGoodsController extends ApiBaseAction {
         bannerInfo.put("name", "坚持初心，为你寻觅世间好物");
         bannerInfo.put("img_url", "https://platform-wxmall.oss-cn-beijing.aliyuncs.com/upload/20180727/1504208321fef4.png");
         resultObj.put("bannerInfo", bannerInfo);
-        return toResponsSuccess(resultObj);
+        return toResponseSuccess(resultObj);
     }
 
     /**
@@ -493,7 +493,7 @@ public class ApiGoodsController extends ApiBaseAction {
         bannerInfo.put("name", "大家都在买的严选好物");
         bannerInfo.put("img_url", "https://platform-wxmall.oss-cn-beijing.aliyuncs.com/upload/20180727/1504208321fef4.png");
         resultObj.put("bannerInfo", bannerInfo);
-        return toResponsSuccess(resultObj);
+        return toResponseSuccess(resultObj);
     }
 
     /**
@@ -530,7 +530,7 @@ public class ApiGoodsController extends ApiBaseAction {
             relatedGoods = goodsService.queryList(paramRelated);
         }
         resultObj.put("goodsList", relatedGoods);
-        return toResponsSuccess(resultObj);
+        return toResponseSuccess(resultObj);
     }
 
     /**
@@ -546,7 +546,7 @@ public class ApiGoodsController extends ApiBaseAction {
         param.put("is_on_sale", 1);
         Integer goodsCount = goodsService.queryTotal(param);
         resultObj.put("goodsCount", goodsCount);
-        return toResponsSuccess(resultObj);
+        return toResponseSuccess(resultObj);
     }
 
     /**
@@ -619,6 +619,6 @@ public class ApiGoodsController extends ApiBaseAction {
         }
         ApiPageUtils goodsData = new ApiPageUtils(goodsList, total, query.getLimit(), query.getPage());
         goodsData.setGoodsList(goodsData.getData());
-        return toResponsSuccess(goodsData);
+        return toResponseSuccess(goodsData);
     }
 }

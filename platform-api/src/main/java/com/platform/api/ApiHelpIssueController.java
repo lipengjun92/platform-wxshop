@@ -39,7 +39,7 @@ public class ApiHelpIssueController extends ApiBaseAction {
 
         List<HelpTypeVo> list = helpTypeService.queryList(new HashMap());
 
-        return toResponsSuccess(list);
+        return toResponseSuccess(list);
     }
 
     /**
@@ -53,6 +53,6 @@ public class ApiHelpIssueController extends ApiBaseAction {
         params.put("type_id", type_id);
         List<HelpIssueVo> helpIssueList = helpIssueService.queryList(params);
 
-        return toResponsSuccess(helpIssueList);
+        return toResponseSuccess(helpIssueList);
     }
 }

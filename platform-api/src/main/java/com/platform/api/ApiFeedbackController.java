@@ -45,8 +45,8 @@ public class ApiFeedbackController extends ApiBaseAction {
             feedbackVo.setContent(feedbackJson.getString("content"));
             feedbackVo.setAddTime(new Date());
             feedbackService.save(feedbackVo);
-            return super.toResponsSuccess("感谢你的反馈");
+            return super.toResponseSuccess("感谢你的反馈");
         }
-        return super.toResponsFail("反馈失败");
+        return super.toResponseFail("反馈失败");
     }
 }

@@ -47,7 +47,7 @@ public class ApiTopicController extends ApiBaseAction {
         List<TopicVo> topicEntities = topicService.queryList(query);
         int total = topicService.queryTotal(query);
         ApiPageUtils pageUtil = new ApiPageUtils(topicEntities, total, query.getLimit(), query.getPage());
-        return toResponsSuccess(pageUtil);
+        return toResponseSuccess(pageUtil);
     }
 
     /**
@@ -56,7 +56,7 @@ public class ApiTopicController extends ApiBaseAction {
     @PostMapping("detail")
     public Object detail(@LoginUser UserVo loginUser, Integer id) {
         TopicVo topicEntity = topicService.queryObject(id);
-        return toResponsSuccess(topicEntity);
+        return toResponseSuccess(topicEntity);
     }
 
     /**
@@ -67,6 +67,6 @@ public class ApiTopicController extends ApiBaseAction {
         Map param = new HashMap();
         param.put("limit", 4);
         List<TopicVo> topicEntities = topicService.queryList(param);
-        return toResponsSuccess(topicEntities);
+        return toResponseSuccess(topicEntities);
     }
 }
