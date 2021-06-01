@@ -112,7 +112,7 @@ public class ApiUserController extends ApiBaseAction {
         String mobile_code = jsonParams.getString("mobile_code");
         String mobile = jsonParams.getString("mobile");
 
-        if (!mobile_code.equals(smsLogVo.getSms_code())) {
+        if (!mobile_code.equals(smsLogVo.getSms_text())) {
             return toResponseFail("验证码错误");
         }
         UserVo userVo = userService.queryObject(loginUser.getUserId());
