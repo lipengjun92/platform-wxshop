@@ -4,6 +4,9 @@ Entity里提示报错不是缺少get、set方法，Eclipse、IDEA请先安装lom
 # 官网
 [https://fly2you.cn](https://fly2you.cn)
 
+### 合作伙伴: 
+驰骋敏捷开发平台、工作流引擎、表单引擎. [http://ccflow.org/](http://ccflow.org/)
+
 # 使用须知
 ## ✅允许
 - 个人学习使用
