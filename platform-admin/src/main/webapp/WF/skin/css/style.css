@@ -1,0 +1,36 @@
+﻿.gray-bg{background-color:#f0f3f4 }
+.wrapper-content{padding:20px;}
+.ibox-content{background-color:#fff;color:inherit;padding:10px 20px 20px 20px;border-color:#e7eaec;-webkit-border-image:none;-o-border-image:none;border-image:none;border-style:solid solid none;border-width:0px}
+.ibox-content li{ line-height: 24px; font-size: 13px; list-style-type: square;}
+.ibox-content li a{ color:#666;}
+.ibox-content li a:hover{ color:#337ab7; text-decoration: underline;}
+.edit{ padding:2px 8px;}
+
+.ibox{margin-bottom:20px;background-color:#fff;border:1px solid #dee5e7;border-radius:4px;-webkit-box-shadow:0 1px 1px rgba(0,0,0,.05);box-shadow:0 1px 1px rgba(0,0,0,.05)}
+.ibox.collapsed .ibox-content{display:none}
+.ibox.collapsed .fa.fa-chevron-up:before{content:"\f078"}
+.ibox.collapsed .fa.fa-chevron-down:before{content:"\f077"}
+.ibox:after,.ibox:before{display:table}
+.ibox-title{height:41px;border-color:#edf1f2;background-color:#f6f8f8;color:#333;font-weight:700;border-radius:2px 2px 0 0;border-bottom:1px solid transparent;display:block;clear:both}
+.ibox-contents{background-color:#fff;color:inherit;padding:10px 0px 0px 0px;border-color:#e7eaec;-webkit-border-image:none;-o-border-image:none;border-image:none;border-style:solid solid none;border-width:1px 0}
+.ibox-content{background-color:#fff;color:inherit;padding:10px 20px 20px 20px;border-color:#e7eaec;-webkit-border-image:none;-o-border-image:none;border-image:none;border-style:solid solid none;border-width:0px}
+.ibox-content li{ line-height: 24px; font-size: 13px; list-style-type: square;}
+.ibox-content li a{ color:#666;}
+.ibox-content li a:hover{ color:#337ab7; text-decoration: underline;}
+table.table-mail tr td{padding:12px}
+.table-mail .check-mail{padding-left:20px}
+.table-mail .mail-date{padding-right:20px}
+.check-mail,.star-mail{width:40px}
+.unread td,.unread td a{font-weight:600;color:inherit}
+.read td,.read td a{font-weight:400;color:inherit}
+.unread td{background-color:#f9f8f8}
+.ibox-content{clear:both}
+.ibox-heading{background-color:#f3f6fb;border-bottom:none}
+.ibox-heading h3{font-weight:200;font-size:24px}
+.ibox-title h5{display:inline-block;font-size:14px; margin:0px; text-overflow:ellipsis;float:left; font-weight:bold;line-height:40px; padding-left:15px;}
+.ibox-title .label{float:left;margin-left:4px}
+.ibox-tools{display:inline-block;float:right;position:relative; padding:12px 10px 0px 0px;}
+.ibox-tools a{cursor:pointer;margin-left:5px;color:#c4c4c4}
+.ibox-tools a.btn-primary{color:#fff}
+
+.notab>tbody>tr>td{ border: none;}

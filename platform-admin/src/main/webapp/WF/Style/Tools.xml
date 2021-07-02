@@ -1,0 +1,38 @@
+<?xml version="1.0" standalone="yes"?>
+<NewDataSet>
+  <!-- 个人信息设置在Tools.aspx中  -->
+  <Item No="Per"  CH="个人信息" B5="个人信息" EN="Personal Information" RU="Запускаемых"  JP="个人信息"  Url="Default.aspx" Img="./Img/Start.gif" Title="发起我能够发起的流程" />
+  <Item No="Auto" CH="授权" B5="授权" EN="Authorization" RU="Чтобы Bыполнитe"  JP="授权"  Url="Auto.aspx" Img="./Img/MyWork.gif" Enable="1" Title="等待我处理的工作。" />
+  <Item No="AutoLog" CH="授权方式登陆" B5="授权方式登陆"  EN="Authorization Login" RU="В транзите" JP="授权方式登陆"   Url="AutoLog.aspx" Img="./Img/Runing.gif" Enable="1" Title="我参与的工作，没有完成。" />
+  <Item No="PerPng"  CH="修改头像" B5="修改头像" EN="Personal Information Png" RU="5апускаемых"  JP="图标信息"  Url="PerPng.aspx" Img="./Img/Start.gif" Title="发起我能够发起的流程" />
+  <Item No="Siganture"  CH="修改图片签名" B5="修改图片签名" EN="Personal Information Png" RU="5апускаемых"  JP="图标信息"  Url="Siganture.aspx" Img="./Img/Start.gif" Title="发起我能够发起的流程" />
+  <Item No="EditPerInfo"  CH="修改个人资料" B5="修改个人资料" EN="Personal Information Png" RU="5апускаемых"  JP="图标信息"  Url="EditPerInfo.aspx" Img="./Img/Start.gif" Title="发起我能够发起的流程" />
+  <Item No="Pass"  CH="修改密码" B5="修改密码" EN="Personal Information Png" RU="5апускаемых"  JP="图标信息"  Url="Password.aspx" Img="./Img/Start.gif" Title="发起我能够发起的流程" />
+
+  <Item1 No="Holiday"  CH="节假日设置" B5="假期设置" EN="假期设置" RU="假期设置"  JP="图标信息"  Url="/WF/Comm/Sys/Holiday.aspx" Img="./Img/Start.gif" Title="发起我能够发起的流程" />
+  <Item1 No="MyWorks" CH="我可做的工作" B5="我可做的工作"  EN="My works" RU="My works" JP="My works"   Url="AutoLou.aspx" Img="./Img/Runing.gif" Enable="1" Title="我可做的工作" />
+  <Item1 No="Times" CH="时效分析" B5="时效分析" EN="Aging analysis" RU="В транзите" JP="时效分析"   Url="FNTimes.aspx" Img="./Img/Runing.gif" Enable="1" Title="我参与的工作，没有完成。" />
+  <Item1 No="FtpSet" CH="Ftp服务器设置" B5="Ftp服务器设置" EN="Ftp server settings" RU="В транзите" JP="Ftp服务器设置"   Url="FNTimes.aspx" Img="./Img/Runing.gif" Enable="1" Title="我参与的工作，没有完成。" />
+    
+  <!-- 系统语言 -->
+  <Lang No="CH" Name="简体中文" />
+  <Lang No="B5" Name="繁体中文" />
+  <Lang No="EN" Name="English" />
+  <Lang No="JP" Name="日本语" />
+  <Lang No="RU" Name="Русский" />
+
+  <Skin No="0" CSS="#0053B9" CH="蓝"  B5="默认风格" EN="default sytle" RU="default sytle"  JP="default sytle" />
+  <Skin No="1" CSS="#429296" CH="青"  B5="青色风格" EN="blue sytle" RU="blue sytle"  JP="blue sytle" />
+  <Skin No="2" CSS="#FE9500" CH="橙"  B5="橙色风格" EN="green sytle" RU="green sytle"  JP="green sytle" />
+  <Skin No="3" CSS="#9934B7" CH="紫" B5="紫色风格" EN="green sytle" RU="green sytle"  JP="green sytle" />
+  <Skin No="4" CSS="#BA350F" CH="红" B5="红色风格" EN="green sytle" RU="green sytle"  JP="green sytle" />
+
+  <WorkOpt No="Home" URL="Home.aspx?WorkID=@WorkID~FK_Node=@FK_Node" CH="主页" />
+  <WorkOpt No="ExpImp" URL="ExpImp.aspx?WorkID=@WorkID~FK_Node=@FK_Node" CH="导入导出"/>
+  <WorkOpt No="UnPass" URL="UnPassDtl.aspx?WorkID=@WorkID~FK_Node=@FK_Node" CH="未通过审核的明细" />
+
+  <WorkOptDtl No="ExpImp" URL="DtlOpt.aspx" CH="导入导出"/>
+  <WorkOptDtl No="UnPass" URL="DtlOpt.aspx" CH="审核未通过"/>
+  
+  <!--<WorkOptDtl No="SelectItems" URL="DtlOpSelectItems.aspx" CH="选择数据导入"/>-->
+</NewDataSet>

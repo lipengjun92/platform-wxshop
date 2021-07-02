@@ -1,0 +1,145 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>Demo:在途</title>
+
+    <!-- 引入常用的JS脚本. -->
+    <script src="../WF/Scripts/QueryString.js"></script>
+    <script src="../WF/Scripts/jquery/jquery.min.js" type="text/javascript"></script>
+    <script src="../WF/Scripts/jquery/jquery.cookie.js" type="text/javascript"></script>
+    <link href="../WF/Scripts/bootstrap/css/bootstrap.css" rel="stylesheet" />
+    <!-- 引入ccbpm 的sdk开发js.  -->
+    <script src="../WF/config.js" type="text/javascript"></script>
+    <script src="../WF/ListAPI.js" type="text/javascript"></script>
+    <script src="../WF/Dev2Interface.js"></script>
+    <script language="javascript" type="text/javascript">
+
+        //启动函数
+        $(function () {
+
+            $("#docs").html("<img src=./Img/loading.gif />&nbsp;正在加载,请稍后......");
+
+            // ccbpmHostDevelopAPI 变量是定义在 /config.js 的服务地址. 访问必须两个参数DoWhat,SID.
+            // dowhat 就是一个请求的标记, sid 类似于token，登录的时候写入到 表Port_Emp的SID列的值.
+            //获得当前的SID.
+            var sid = $.cookie("MySID");
+
+            //$("#title").html("在途列表-Demo : <lable style='font-size:16px;color:green'>文件:ListAPI.js 方法:DB_Runing</lable>");
+
+            //调用 /WF/ListAPI.js 的 DB_Runing() 接口，获得当前人员未处理完的工作列表.
+            var db = DB_Runing();
+           // db = JSON.parse(db);
+            var html = "<table class='table table-bordered table-striped table-hover '>";
+            html += "<tr>";
+            html += "<th>#</th>";
+            //html += "<th>WorkID</th>";
+            html += "<th>标题</th>";
+            //  html += "<th>编号</th>";
+            html += "<th>流程名称</th>";
+            html += "<th>停留节点</th>";
+            //html += "<th>状态</th>";
+
+            html += "<th>发起人</th>";
+            html += "<th>发起人部门</th>";
+            html += "<th>发起日期</th>";
+
+            html += "<th>当前处理人</th>";
+            //html += "<th>参与人</th>";
+
+            html += "<th>操作</th>";
+            html += "</tr>";
+
+            for (var i = 0; i < db.length; i++) {
+                var en = db[i];
+                html += "<tr>";
+                html += "<td>" + (i + 1) + "</td>"; //序号
+                //html += "<td>" + en.WorkID + "</td>"; // 工作ID.
+
+
+                html += "<td> <a href=\"javascript:OpenFrm('" + en.WorkID + "','" + en.FK_Node + "','" + en.FK_Flow + "','" + en.FID + "');\" > " + en.Title + "</a></td>"; //标题.
+                // html += "<td>" + en.FK_Flow + "</td>"; //流程编号.
+                html += "<td>" + en.FlowName + "</td>"; //流程名称.
+
+                html += "<td>" + en.NodeName + "</td>"; //停留节点.
+                //html += "<td>" + en.NodeName + "</td>"; //节点名称.
+
+                //html += "<td>" + en.StarterName + "</td>"; //发起人.
+                html += "<td>" + en.StarterName + "</td>"; //发起人名称.
+                //html += "<td>" + en.FK_Dept + "</td>"; //发起人部门.
+                html += "<td>" + en.DeptName + "</td>"; //发起人部门.
+                html += "<td>" + en.RDT + "</td>"; //发起日期.
+
+                html += "<td>" + en.TodoEmps + "</td>"; //当前处理人.
+                //html += "<td>" + en.Emps + "</td>"; //参与人.
+
+                html += "<td>";
+
+                html += " <a href=\"javascript:DoUnSend('" + en.WorkID + "','" + en.FK_Node + "','" + en.FK_Flow + "','" + en.FID + "');\" >撤销</a>";
+
+                html += " <a href=\"javascript:DoPress('" + en.WorkID + "','" + en.FK_Node + "','" + en.FK_Flow + "','" + en.FID + "');\" >催办</a>";
+                html += "</td>";
+
+                html += "</tr>";
+            }
+            html += "</table>";
+            $("#docs").html(html);
+        });
+        /* 打开表单. */
+        function OpenFrm(workid, nodeID, flowNo, fid) {
+            var host = ccbpmHostDevelopAPI.replace('/DataUser/DevelopAPI/ProcessRequest', '');
+            //var url = "../WF/MyView.htm?WorkID=" + workid + "&FK_Flow=" + flowNo + "&FK_Node=" + nodeID + "&FID=" + fid;
+            var url = host + "/WF/MyViewGener.htm?HttpHandlerName=BP.WF.HttpHandler.WF_MyView&WorkID=" + workid + "&FK_Flow=" + flowNo + "&FK_Node=" + nodeID + "&FID=0&NodeID=" + nodeID + "&UserNo=" + $.cookie("MyUserNo") + "&SID=" + $.cookie("MySID");
+            window.open(url);
+            return;
+        }
+        /**
+         * 撤销发送，调用/WF/Dev2Interface.js 的方法.
+         * @param workid
+         */
+        function DoUnSend(workid) {
+
+            if (window.confirm('您确定要执行撤销发送吗？') == false)
+                return;
+            var sid = $.cookie("MySID");
+
+            //调用 /WF/Dev2Interface.js 里面的 Flow_DoUnSend 撤销发送方法.
+            var str = Flow_DoUnSend(sid, workid);
+
+            //如果撤销失败就提示信息.
+            if (str.indexOf('err@') == 0) {
+                alert(str);
+                return;
+            }
+
+            //如果没有撤销失败，就打开表单.
+            OpenFrm(workid);
+
+            //刷新一下列表，因为这条记录到了待办列表里去了.
+            window.location.href = window.location.href;
+        }
+        /**
+         * 催办
+         * @param workid
+         */
+        function DoPress(workid) {
+
+            var str = window.prompt('请输入催办消息', '此工作需要您尽快处理.');
+            var sid = $.cookie("MySID");
+
+            //调用 /WF/Dev2Interface.js 里面的 Flow_DoPress 催办方法.
+            var str = Flow_DoPress(sid, workid, str);
+            if (str.indexOf('err@') == 0) {
+                alert(str);
+                return;
+            }
+        }
+    </script>
+</head>
+<body>
+
+    <div id="title" style="font-family:'Microsoft YaHei';font-size:24px;margin:3px;"></div>
+    <div id="docs"></div>
+
+</body>
+</html>

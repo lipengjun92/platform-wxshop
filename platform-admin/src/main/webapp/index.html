@@ -28,6 +28,10 @@
             s.parentNode.insertBefore(hm, s);
         })();
     </script>
+    <script src="WF/config.js"></script>
+    <script src="WF/Scripts/QueryString.js"></script>
+    <script src="WF/Scripts/jquery/jquery.min.js"></script>
+    <script src="WF/Scripts/jquery/jquery.cookie.js"></script>
 </head>
 <!-- ADD THE CLASS layout-boxed TO GET A BOXED LAYOUT -->
 <body class="fixed-sidebar full-height-layout gray-bg" style="overflow:hidden">
@@ -55,8 +59,10 @@
     <div id="page-wrapper" class="gray-bg dashbard-1">
         <div class="border-bottom">
             <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
+
                 <div class="navbar-header"><a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i
                         class="fa fa-bars"></i> </a>
+
                     <form role="search" class="navbar-form-custom" method="post" action="#">
                         <div class="form-group">
                             <input type="text" placeholder="请输入您需要查找的内容 …" class="form-control" name="top-search"
@@ -65,10 +71,15 @@
                     </form>
                 </div>
                 <ul class="nav navbar-top-links navbar-right">
-
+                    <li><a href="WF/Start.htm" class="J_menuItem">发起</a></li>
+                    <li><a href="WF/Todolist.htm" class="J_menuItem">待办</a></li>
+                    <li><a href="WF/Runing.htm" class="J_menuItem">在途</a></li>
+                    <li><a href="WF/Search.htm" class="J_menuItem">查询</a></li>
+                    <li><a href="javascript:GotoCCBPMAdmin();" >流程设计</a></li>
                     <li class="dropdown">
                         <a href="javascript:;" @click="toggleFullScreen"><i class="fa fa-arrows-alt"></i> &nbsp;全屏</a>
                     </li>
+
                     <li><a href="javascript:;" @click="updatePassword"><i class="fa fa-lock"></i> &nbsp;修改密码</a></li>
                     <li class="dropdown hidden-xs">
                         <a class="right-sidebar-toggle" aria-expanded="false">
@@ -365,6 +376,7 @@
             logout: function () {
                 confirm('注：您确定要安全退出本次登录吗？', function () {
                     dialogLoading(true);
+                    LoginOut();
                     setTimeout(function () {
                         toUrl('logout?_' + $.now());
                     }, 500);
@@ -479,6 +491,8 @@
             }
         }
     });
+
+
 </script>
 </body>
 </html>

@@ -1,0 +1,102 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Demo:待办</title>
+
+    <!-- 引入常用的JS脚本. -->
+    <script src="../WF/Scripts/QueryString.js"></script>
+    <script src="../WF/Scripts/jquery/jquery.min.js" type="text/javascript"></script>
+    <script src="../WF/Scripts/jquery/jquery.cookie.js" type="text/javascript"></script>
+    <link href="../WF/Scripts/bootstrap/css/bootstrap.css" rel="stylesheet" />
+    <!-- 引入ccbpm 的sdk开发js.  -->
+    <script src="../WF/config.js" type="text/javascript"></script>
+    <script src="../WF/ListAPI.js" type="text/javascript"></script>
+    <script language="javascript" type="text/javascript">
+
+        //启动函数
+        $(function () {
+
+            $("#docs").html("<img src=./Img/loading.gif />&nbsp;正在加载,请稍后......");
+
+            // ccbpmHostDevelopAPI 变量是定义在 /config.js 的服务地址. 访问必须两个参数DoWhat,SID.
+            // dowhat 就是一个请求的标记, sid 类似于token，登录的时候写入到 表Port_Emp的SID列的值.
+            //获得当前的SID.
+            var sid = $.cookie("MySID");
+
+           // $("#title").html("待办列表-Demo : <lable style='font-size:16px;color:green'>文件:ListAPI.js 方法:DB_Todolist</lable>");
+
+            //调用 /WF/ListAPI.js 的 DB_Todolist 接口，获得当前人员的待办列表.
+            var db = DB_Todolist();
+           // db = JSON.parse(db);
+            var html = "<table class='table table-bordered table-striped table-hover '>";
+            html += "<tr>";
+            html += "<th>#</th>";
+            //html += "<th>WorkID</th>";
+            html += "<th>标题</th>";
+            //  html += "<th>流程编号</th>";
+            html += "<th>流程名称</th>";
+            html += "<th>停留节点</th>";
+            html += "<th>状态</th>";
+
+            html += "<th>发起人</th>";
+            html += "<th>部门</th>";
+            html += "<th>发起日期</th>";
+            html += "<th>当前处理人</th>";
+            html += "<th>应完成日期</th>";
+            //html += "<th>参与人</th>";
+            // html += "<th>操作</th>";
+            html += "</tr>";
+
+            for (var i = 0; i < db.length; i++) {
+                var en = db[i];
+                html += "<tr>";
+                html += "<td>" + (i + 1) + "</td>"; //序号
+                //html += "<td>" + en.WorkID + "</td>"; // 工作ID.
+
+                html += "<td><a href=\"javascript:OpenForm('" + en.FK_Flow + "','" + en.FK_Node + "','" + en.WorkID + "','" + en.FID + "');\" >" + en.Title + "</a></td>";
+
+                //  html += "<td>" + en.FK_Flow + "</td>"; //流程编号.
+                html += "<td>" + en.FlowName + "</td>"; //流程名称.
+
+                html += "<td>" + en.NodeName + "</td>"; //停留节点.
+
+
+                //判断流程的状态.
+                var wfState = "待办";
+                if (en.WFState == 5)
+                    wfState = "<font color=red><b>退回</b></font>";
+
+                html += "<td>" + wfState + "</td>";
+
+                //html += "<td>" + en.NodeName + "</td>"; //节点名称.
+                //html += "<td>" + en.StarterName + "</td>"; //发起人.
+
+                html += "<td>" + en.StarterName + "</td>"; //发起人名称.
+                //html += "<td>" + en.FK_Dept + "</td>"; //发起人部门.
+                html += "<td>" + en.DeptName + "</td>"; //发起人部门.
+                html += "<td>" + en.RDT + "</td>"; //发起日期.
+
+                html += "<td>" + en.TodoEmps + "</td>"; //当前处理人.
+                //html += "<td>" + en.Emps + "</td>"; //参与人.
+
+                html += "<td>" + en.SDT + "</td>"; //发起日期.
+
+
+                //调用 /WF/ListAPI.js 里面的 OpenForm 方法打开表单.
+                //   html += "<td><a href=\"javascript:OpenForm('" + en.FK_Flow + "','" + en.FK_Node + "','" + en.WorkID + "','" + en.FID + "');\" >处理工作</a></td>";
+                html += "</tr>";
+            }
+            html += "</table>";
+            $("#docs").html(html);
+        });
+    </script>
+</head>
+<body>
+
+    <div id="title" style="font-family:'Microsoft YaHei';font-size:24px;margin:3px;"></div>
+
+    <div id="docs"></div>
+
+</body>
+</html>

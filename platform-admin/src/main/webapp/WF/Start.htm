@@ -1,0 +1,66 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Demo:发起</title>
+
+    <!-- 引入常用的JS脚本. -->
+    <script src="../WF/Scripts/QueryString.js"></script>
+    <script src="../WF/Scripts/jquery/jquery.min.js" type="text/javascript"></script>
+    <script src="../WF/Scripts/jquery/jquery.cookie.js" type="text/javascript"></script>
+    <link href="../WF/Scripts/bootstrap/css/bootstrap.css" rel="stylesheet" />
+    <!-- 引入ccbpm 的sdk开发js.  -->
+    <script src="../WF/config.js" type="text/javascript"></script>
+    <script src="../WF/ListAPI.js" type="text/javascript"></script>
+    <script language="javascript" type="text/javascript">
+
+        //启动函数  
+        $(function () {
+
+            $("#docs").html("<img src=./Img/loading.gif />&nbsp;正在加载,请稍后......");
+
+            // ccbpmHostDevelopAPI 变量是定义在 /config.js 的服务地址. 访问必须两个参数DoWhat,SID.
+            // dowhat 就是一个请求的标记, sid 类似于token，登录的时候写入到 表Port_Emp的SID列的值.
+            //获得当前的SID.
+            var sid = $.cookie("MySID");
+            var userNo = $.cookie("MyUserNo");
+           // $("#title").html("发起列表-Demo : <lable style='font-size:16px;color:green'>文件:ListAPI.js 方法:DB_Start</lable>");
+
+            //调用 /WF/ListAPI.js 的 DB_Start() 接口，获得当前人员可以发起的列表.
+            var ens = DB_Start();
+
+            var html = "<table class='table table-bordered table-striped table-hover '>";
+            html += "<tr>";
+            html += "<th>#</th>";
+            //html += "<th>类别编号</th>";
+            html += "<th>流程类别</th>";
+            html += "<th>流程编号</th>";
+            html += "<th>流程名称</th>";
+            html += "<th>操作</th>";
+            html += "</tr>";
+
+            for (var i = 0; i < ens.length; i++) {
+                var en = ens[i];
+                html += "<tr>";
+                html += "<td>" + (i + 1) + "</td>"; //序号
+                //html += "<td>" + en.FK_FlowSort + "</td>"; //流程类别编号.
+                html += "<td>" + en.FK_FlowSortText + "</td>"; //类别名称.
+                html += "<td>" + en.No + "</td>"; //流程编号.
+                html += "<td>" + en.Name + "</td>"; //流程名称.
+
+                //调用 /WF/ListAPI.js 里面的 OpenForm 方法打开表单.
+                html += "<td><a href=\"javascript:OpenForm('" + en.No + "');\" >发起流程</a></td>";
+                html += "</tr>";
+            }
+            html += "</table>";
+            $("#docs").html(html);
+        });
+    </script>
+</head>
+<body>
+
+    <div id="title" style="font-family:'Microsoft YaHei';font-size:24px;margin:3px;"></div>
+    <div id="docs"></div>
+
+</body>
+</html>
