@@ -1,0 +1,22 @@
+.login-bg{ background: url(../images/login_bg.png) no-repeat center center fixed;
+             
+           background-size: 100% 100%;    
+    }
+
+/*login box*/
+.login-box{z-index:100;margin:0 auto;padding-top:10%;max-width:360px}
+
+.login-box h1{ background: url(../../../../DataUser/ICON/logoFrm.png) no-repeat left; height: 88px; text-indent: -9999px;}
+
+.login-form{ background:  #fff; padding: 40px 30px; border:1px solid #ddd; border-radius: 5px;}
+
+.login-nav{ color: #999; font-size: 12px;}
+
+
+
+/*login box*/
+.login-box_admin{z-index:100;margin:0 auto;padding-top:10%;max-width:360px}
+
+.login-box_admin h1{ background: url(../../../../DataUser/ICON/IconSmallFrm.png) no-repeat left; width:500px; height: 120px;text-indent: -9999px;}
+ 
+

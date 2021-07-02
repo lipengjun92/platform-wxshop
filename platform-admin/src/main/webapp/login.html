@@ -27,6 +27,10 @@
             s.parentNode.insertBefore(hm, s);
         })();
     </script>
+    <script src="WF/Scripts/QueryString.js"></script>
+    <script src="WF/Scripts/jquery/jquery.min.js"></script>
+    <script src="WF/Scripts/jquery/jquery.cookie.js"></script>
+    <script src="WF/config.js"></script>
 </head>
 <body class="signin hold-transition login-page">
 <div class="loginscreen animated fadeInDown signinpanel" id="loginBox" v-cloak>
@@ -98,6 +102,7 @@
 <script src="statics/libs/bootstrap.min.js"></script>
 <script src="statics/plugins/slimscroll/jquery.slimscroll.min.js"></script>
 <script src="statics/libs/fastclick.min.js"></script>
+
 <script type="text/javascript">
     var vm = new Vue({
         el: '#loginBox',
@@ -137,7 +142,18 @@
                     dataType: "json",
                     success: function (result) {
                         if (result.code == 0) {//登录成功
-                            parent.location.href = 'index.html';
+
+                            // 登录jflow
+                            //  1. 为了系统安全，请把 LoginCCBPM 的方法写入您的后台代码.
+                            //  2. LoginCCBPM 方法位于/WF/config.js文件中.
+
+                            var token = LoginCCBPM(PrivateKey, vm.username);
+                            if (token == null && token.indexOf('err@') == 0) {
+                                alert(token);
+                                return;
+                            }
+
+                            parent.location.href = 'index.html?Token=' + token + '&UserNo=' + vm.username;
                         } else {
                             vm.refreshCode();
                             iview.Message.error(result.msg);
