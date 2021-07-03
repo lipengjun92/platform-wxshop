@@ -58,6 +58,7 @@ Entity里提示报错不是缺少get、set方法，Eclipse、IDEA请先安装lom
     * git：[https://gitee.com/fuyang_lipengjun/platform-gen](https://gitee.com/fuyang_lipengjun/platform-gen)
 
 ## 技术选型
+* 0 选择开源的驰骋工作流作为系统提供流程引擎、表单引擎服务.
 * 1 后端使用技术
     * 1.1 springframework4.3.7.RELEASE
     * 1.2 mybatis3.1.0、MyBatis-Plus 3.1.0
