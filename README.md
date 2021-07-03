@@ -169,6 +169,7 @@ platform
 * 依次初始化sql脚本 
     * /_sql/platform.sql
     * /_sql/sys_region.sql
+
 * 导入项目到IDE中
 * 导入支付证书至/platform-shop/src/main/resources/cert/目录下（申请商户号、开通微信支付、下载支付证书）
 * 修改配置文件 /platform-admin/src/main/resources/dev/platform.properties
@@ -197,6 +198,10 @@ platform
     * [http://localhost:8080/platform-framework](http://localhost:8080/platform-framework)
 * 使用idea启动项目后默认访问路径
     * [http://localhost:8080](http://localhost:8080)
+
+## 驰骋工作流引擎的安装
+   1. 请参考: https://gitee.com/opencc/JFlow/wikis/pages/preview?sort_id=4199224&doc_id=31094
+
 
 ## 页面展示
 ### 登录页面
