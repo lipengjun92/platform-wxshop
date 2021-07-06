@@ -3,6 +3,8 @@ Entity里提示报错不是缺少get、set方法，Eclipse、IDEA请先安装lom
 
 # 官网
 [https://fly2you.cn](https://fly2you.cn)
+# 文档
+[http://doc.fly2you.cn](http://doc.fly2you.cn)
 
 ### 合作伙伴: 
 驰骋敏捷开发平台、工作流引擎、表单引擎. [http://ccflow.org/](http://ccflow.org/)
@@ -27,7 +29,6 @@ Entity里提示报错不是缺少get、set方法，Eclipse、IDEA请先安装lom
     * <a target="_blank" href="https://qm.qq.com/cgi-bin/qm/qr?k=hQLMx7vYLfP_C-d2-yP_udx1yciJXfHC&jump_from=webapi"><img border="0" src="//pub.idqqimg.com/wpa/images/group.png" alt="微同科技 ③群" title="微同科技 ③群"></a>：151602347
 * Watch、Star项目，进群联系群主获取《微同开源商城启动部署手册.docx》
 
-- 技术讨论、二次开发等咨询、问题和建议，请移步到官方社区，我会在第一时间进行解答和回复！
 - 微信扫码并关注公众号，获得项目最新动态及更新提醒<br>
 ![](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/upload/20180708/qr.jpg "微信公众号")
 
@@ -227,9 +228,6 @@ platform
 ![](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/upload/20180727/10.png "优惠券")
 ### 小程序并联手机
 ![](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/upload/20180727/11.png "并联手机")
-
-### 开发文档目录
-<a name="doc" href="http://fly2you.cn/doc.html" target="_blank">![](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/catalog.png "开发文档目录")</a>
 
 ## Stargazers over time
 [![Stargazers over time](https://whnb.wang/stars/fuyang_lipengjun/platform)](https://whnb.wang/fuyang_lipengjun/platform)
