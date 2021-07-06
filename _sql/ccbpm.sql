@@ -4148,29 +4148,29 @@ CREATE TABLE `wf_workflowdeletelog`  (
 -- View structure for port_dept
 -- ----------------------------
 DROP VIEW IF EXISTS `port_dept`;
-CREATE ALGORITHM = UNDEFINED DEFINER = `admin`@`%` SQL SECURITY DEFINER VIEW `port_dept` AS SELECT
-	plateform.sys_dept.dept_id AS `No`, 
-	plateform.sys_dept.`name` AS `Name`, 
-	plateform.sys_dept.parent_id AS `ParentNo`,
+CREATE ALGORITHM = UNDEFINED DEFINER = `root`@`%` SQL SECURITY DEFINER VIEW `port_dept` AS SELECT
+	`platform-shop`.sys_dept.dept_id AS `No`,
+	`platform-shop`.sys_dept.`name` AS `Name`,
+	`platform-shop`.sys_dept.parent_id AS `ParentNo`,
 	"" AS `OrgNo`,
 	"" AS `Leader`,
 	"" AS `Idx`,
 	"" AS `DeptType`,
 	"" AS `NameOfPath`
 FROM
-	plateform.sys_dept ;
+	`platform-shop`.sys_dept ;
 
 -- ----------------------------
 -- View structure for port_emp
 -- ----------------------------
 DROP VIEW IF EXISTS `port_emp`;
-CREATE ALGORITHM = UNDEFINED DEFINER = `admin`@`%` SQL SECURITY DEFINER VIEW `port_emp` AS SELECT
-	plateform.sys_user.username AS `No`,
-	plateform.sys_user.username AS `Name`,
-	plateform.sys_user.`password` AS Pass,
-	plateform.sys_user.dept_id AS FK_Dept,
-	plateform.sys_user.mobile AS `Tel`,
-	plateform.sys_user.email AS `Email`,
+CREATE ALGORITHM = UNDEFINED DEFINER = `root`@`%` SQL SECURITY DEFINER VIEW `port_emp` AS SELECT
+	`platform-shop`.sys_user.username AS `No`,
+	`platform-shop`.sys_user.username AS `Name`,
+	`platform-shop`.sys_user.`password` AS Pass,
+	`platform-shop`.sys_user.dept_id AS FK_Dept,
+	`platform-shop`.sys_user.mobile AS `Tel`,
+	`platform-shop`.sys_user.email AS `Email`,
 	"" AS `SID`,
 	"" AS `PinYin`,
 	"" AS `UserType`,
@@ -4178,53 +4178,53 @@ CREATE ALGORITHM = UNDEFINED DEFINER = `admin`@`%` SQL SECURITY DEFINER VIEW `po
 	"" AS `Idx`,
 	"" AS `SignType`
 FROM
-	plateform.sys_user ;
+	`platform-shop`.sys_user ;
 
 -- ----------------------------
 -- View structure for port_inc
 -- ----------------------------
 DROP VIEW IF EXISTS `port_inc`;
-CREATE ALGORITHM = UNDEFINED DEFINER = `admin`@`%` SQL SECURITY DEFINER VIEW `port_inc` AS SELECT * FROM Port_Dept WHERE (No='100' OR No='1060' OR No='1070') ;
+CREATE ALGORITHM = UNDEFINED DEFINER = `root`@`%` SQL SECURITY DEFINER VIEW `port_inc` AS SELECT * FROM Port_Dept WHERE (No='100' OR No='1060' OR No='1070') ;
 
 -- ----------------------------
 -- View structure for port_station
 -- ----------------------------
 DROP VIEW IF EXISTS `port_station`;
-CREATE ALGORITHM = UNDEFINED DEFINER = `admin`@`%` SQL SECURITY DEFINER VIEW `port_station` AS SELECT
-	plateform.sys_role.role_id AS `No`, 
-	plateform.sys_role.role_name AS `Name`, 
+CREATE ALGORITHM = UNDEFINED DEFINER = `root`@`%` SQL SECURITY DEFINER VIEW `port_station` AS SELECT
+	`platform-shop`.sys_role.role_id AS `No`,
+	`platform-shop`.sys_role.role_name AS `Name`,
 	"" AS `FK_StationType`,
 	"" AS `OrgNo`
 FROM
-	plateform.sys_role ;
+	`platform-shop`.sys_role ;
 
 -- ----------------------------
 -- View structure for v_flowstarterbpm
 -- ----------------------------
 DROP VIEW IF EXISTS `v_flowstarterbpm`;
-CREATE ALGORITHM = UNDEFINED DEFINER = `admin`@`%` SQL SECURITY DEFINER VIEW `v_flowstarterbpm` AS SELECT A.FK_Flow, a.FlowName, C.FK_Emp,C.OrgNo FROM WF_Node a, WF_NodeStation b, Port_DeptEmpStation c 
- WHERE a.NodePosType=0 AND ( a.WhoExeIt=0 OR a.WhoExeIt=2 ) 
+CREATE ALGORITHM = UNDEFINED DEFINER = `root`@`%` SQL SECURITY DEFINER VIEW `v_flowstarterbpm` AS SELECT A.FK_Flow, a.FlowName, C.FK_Emp,C.OrgNo FROM WF_Node a, WF_NodeStation b, Port_DeptEmpStation c
+ WHERE a.NodePosType=0 AND ( a.WhoExeIt=0 OR a.WhoExeIt=2 )
 AND  a.NodeID=b.FK_Node AND B.FK_Station=C.FK_Station   AND (A.DeliveryWay=0 OR A.DeliveryWay=14)
-  UNION  
-SELECT A.FK_Flow, a.FlowName, C.FK_Emp,C.OrgNo FROM WF_Node a, WF_NodeDept b, Port_DeptEmp c 
+  UNION
+SELECT A.FK_Flow, a.FlowName, C.FK_Emp,C.OrgNo FROM WF_Node a, WF_NodeDept b, Port_DeptEmp c
  WHERE a.NodePosType=0 AND ( a.WhoExeIt=0 OR a.WhoExeIt=2 )
 AND  a.NodeID=b.FK_Node AND B.FK_Dept=C.FK_Dept   AND A.DeliveryWay=1
-  UNION  
-SELECT A.FK_Flow, a.FlowName, B.FK_Emp, '' as OrgNo FROM WF_Node A, WF_NodeEmp B 
- WHERE A.NodePosType=0 AND ( A.WhoExeIt=0 OR A.WhoExeIt=2 ) 
+  UNION
+SELECT A.FK_Flow, a.FlowName, B.FK_Emp, '' as OrgNo FROM WF_Node A, WF_NodeEmp B
+ WHERE A.NodePosType=0 AND ( A.WhoExeIt=0 OR A.WhoExeIt=2 )
 AND A.NodeID=B.FK_Node  AND A.DeliveryWay=3
-  UNION 
-SELECT A.FK_Flow, A.FlowName, B.No AS FK_Emp, B.OrgNo FROM WF_Node A, Port_Emp B 
+  UNION
+SELECT A.FK_Flow, A.FlowName, B.No AS FK_Emp, B.OrgNo FROM WF_Node A, Port_Emp B
  WHERE A.NodePosType=0 AND ( A.WhoExeIt=0 OR A.WhoExeIt=2 )  AND A.DeliveryWay=4
-  UNION 
+  UNION
 SELECT A.FK_Flow, a.FlowName, E.FK_Emp,E.OrgNo FROM WF_Node A, WF_NodeDept B, WF_NodeStation C,  Port_DeptEmpStation E
- WHERE a.NodePosType=0 
- AND ( a.WhoExeIt=0 OR a.WhoExeIt=2 ) 
- AND  A.NodeID=B.FK_Node 
- AND A.NodeID=C.FK_Node 
- AND B.FK_Dept=E.FK_Dept 
+ WHERE a.NodePosType=0
+ AND ( a.WhoExeIt=0 OR a.WhoExeIt=2 )
+ AND  A.NodeID=B.FK_Node
+ AND A.NodeID=C.FK_Node
+ AND B.FK_Dept=E.FK_Dept
  AND C.FK_Station=E.FK_Station AND A.DeliveryWay=9
- UNION 
+ UNION
  SELECT  A.FK_Flow, A.FlowName, C.No as FK_Emp, B.OrgNo FROM WF_Node A, WF_FlowOrg B, Port_Emp C
  WHERE A.FK_Flow=B.FlowNo AND B.OrgNo=C.OrgNo
  AND  A.DeliveryWay=22 ;
@@ -4233,33 +4233,33 @@ SELECT A.FK_Flow, a.FlowName, E.FK_Emp,E.OrgNo FROM WF_Node A, WF_NodeDept B, WF
 -- View structure for v_gpm_empgroup
 -- ----------------------------
 DROP VIEW IF EXISTS `v_gpm_empgroup`;
-CREATE ALGORITHM = UNDEFINED DEFINER = `admin`@`%` SQL SECURITY DEFINER VIEW `v_gpm_empgroup` AS SELECT FK_Group,FK_Emp FROM GPM_GroupEmp
+CREATE ALGORITHM = UNDEFINED DEFINER = `root`@`%` SQL SECURITY DEFINER VIEW `v_gpm_empgroup` AS SELECT FK_Group,FK_Emp FROM GPM_GroupEmp
 UNION
-SELECT a.FK_Group,B.FK_Emp FROM GPM_GroupStation a, Port_DeptEmpStation b 
+SELECT a.FK_Group,B.FK_Emp FROM GPM_GroupStation a, Port_DeptEmpStation b
 WHERE a.FK_Station=b.FK_Station ;
 
 -- ----------------------------
 -- View structure for v_gpm_empstationmenu
 -- ----------------------------
 DROP VIEW IF EXISTS `v_gpm_empstationmenu`;
-CREATE ALGORITHM = UNDEFINED DEFINER = `admin`@`%` SQL SECURITY DEFINER VIEW `v_gpm_empstationmenu` AS SELECT b.FK_Station,a.FK_Emp,b.FK_Menu,b.IsChecked FROM Port_DeptEmpStation a,GPM_StationMenu b
+CREATE ALGORITHM = UNDEFINED DEFINER = `root`@`%` SQL SECURITY DEFINER VIEW `v_gpm_empstationmenu` AS SELECT b.FK_Station,a.FK_Emp,b.FK_Menu,b.IsChecked FROM Port_DeptEmpStation a,GPM_StationMenu b
 WHERE a.FK_Station = b.FK_Station ;
 
 -- ----------------------------
 -- View structure for v_gpm_empgroupmenu
 -- ----------------------------
 DROP VIEW IF EXISTS `v_gpm_empgroupmenu`;
-CREATE ALGORITHM = UNDEFINED DEFINER = `admin`@`%` SQL SECURITY DEFINER VIEW `v_gpm_empgroupmenu` AS SELECT a.FK_Group,a.FK_Emp,b.FK_Menu,b.IsChecked FROM V_GPM_EmpGroup a, GPM_GroupMenu b 
+CREATE ALGORITHM = UNDEFINED DEFINER = `root`@`%` SQL SECURITY DEFINER VIEW `v_gpm_empgroupmenu` AS SELECT a.FK_Group,a.FK_Emp,b.FK_Menu,b.IsChecked FROM V_GPM_EmpGroup a, GPM_GroupMenu b
 WHERE a.FK_Group=b.FK_Group ;
 
 -- ----------------------------
 -- View structure for v_gpm_empmenu
 -- ----------------------------
 DROP VIEW IF EXISTS `v_gpm_empmenu`;
-CREATE ALGORITHM = UNDEFINED DEFINER = `admin`@`%` SQL SECURITY DEFINER VIEW `v_gpm_empmenu` AS SELECT CONCAT(a.FK_Emp,'_',a.FK_Menu) as MyPK, a.FK_Emp, b.No as FK_Menu, b.* FROM 
+CREATE ALGORITHM = UNDEFINED DEFINER = `root`@`%` SQL SECURITY DEFINER VIEW `v_gpm_empmenu` AS SELECT CONCAT(a.FK_Emp,'_',a.FK_Menu) as MyPK, a.FK_Emp, b.No as FK_Menu, b.* FROM
    GPM_EmpMenu a,GPM_Menu b WHERE a.FK_Menu=b.No AND B.IsEnable=1
 UNION
-SELECT CONCAT(a.FK_Emp,'_',a.FK_Menu) as MyPK, a.FK_Emp, b.No as FK_Menu, b.* FROM 
+SELECT CONCAT(a.FK_Emp,'_',a.FK_Menu) as MyPK, a.FK_Emp, b.No as FK_Menu, b.* FROM
   V_GPM_EmpGroupMenu a,GPM_Menu b  WHERE a.FK_Menu=b.No AND B.IsEnable=1
 UNION
 SELECT CONCAT(a.FK_Emp,'_',a.FK_Menu) as MyPK, a.FK_Emp, b.No as FK_Menu, b.* FROM
@@ -4269,10 +4269,10 @@ SELECT CONCAT(a.FK_Emp,'_',a.FK_Menu) as MyPK, a.FK_Emp, b.No as FK_Menu, b.* FR
 -- View structure for v_gpm_empmenu_gpm
 -- ----------------------------
 DROP VIEW IF EXISTS `v_gpm_empmenu_gpm`;
-CREATE ALGORITHM = UNDEFINED DEFINER = `admin`@`%` SQL SECURITY DEFINER VIEW `v_gpm_empmenu_gpm` AS SELECT CONCAT(a.FK_Emp,'_',a.FK_Menu) as MyPK, a.FK_Emp,a.IsChecked, b.No as FK_Menu, b.* FROM 
+CREATE ALGORITHM = UNDEFINED DEFINER = `root`@`%` SQL SECURITY DEFINER VIEW `v_gpm_empmenu_gpm` AS SELECT CONCAT(a.FK_Emp,'_',a.FK_Menu) as MyPK, a.FK_Emp,a.IsChecked, b.No as FK_Menu, b.* FROM
    GPM_EmpMenu a,GPM_Menu b WHERE a.FK_Menu=b.No AND B.IsEnable=1
 UNION
-SELECT CONCAT(a.FK_Emp,'_',a.FK_Menu) as MyPK, a.FK_Emp,a.IsChecked, b.No as FK_Menu, b.* FROM 
+SELECT CONCAT(a.FK_Emp,'_',a.FK_Menu) as MyPK, a.FK_Emp,a.IsChecked, b.No as FK_Menu, b.* FROM
   V_GPM_EmpGroupMenu a,GPM_Menu b  WHERE a.FK_Menu=b.No AND B.IsEnable=1 ;
 
 
@@ -4280,20 +4280,20 @@ SELECT CONCAT(a.FK_Emp,'_',a.FK_Menu) as MyPK, a.FK_Emp,a.IsChecked, b.No as FK_
 -- View structure for v_myflowdata
 -- ----------------------------
 DROP VIEW IF EXISTS `v_myflowdata`;
-CREATE ALGORITHM = UNDEFINED DEFINER = `admin`@`%` SQL SECURITY DEFINER VIEW `v_myflowdata` AS SELECT A.*, B.EmpNo as MyEmpNo FROM WF_GenerWorkflow A, WF_PowerModel B  WHERE  A.FK_Flow=B.FlowNo AND B.PowerCtrlType=1 AND A.WFState>= 2    UNION   SELECT A.*, c.No as MyEmpNo FROM WF_GenerWorkflow A, WF_PowerModel B, Port_Emp C, Port_DeptEmpStation D WHERE  A.FK_Flow=B.FlowNo  AND B.PowerCtrlType=0 AND C.No=D.FK_Emp AND B.StaNo=D.FK_Station AND A.WFState>=2 ;
+CREATE ALGORITHM = UNDEFINED DEFINER = `root`@`%` SQL SECURITY DEFINER VIEW `v_myflowdata` AS SELECT A.*, B.EmpNo as MyEmpNo FROM WF_GenerWorkflow A, WF_PowerModel B  WHERE  A.FK_Flow=B.FlowNo AND B.PowerCtrlType=1 AND A.WFState>= 2    UNION   SELECT A.*, c.No as MyEmpNo FROM WF_GenerWorkflow A, WF_PowerModel B, Port_Emp C, Port_DeptEmpStation D WHERE  A.FK_Flow=B.FlowNo  AND B.PowerCtrlType=0 AND C.No=D.FK_Emp AND B.StaNo=D.FK_Station AND A.WFState>=2 ;
 
 -- ----------------------------
 -- View structure for v_wf_authtodolist
 -- ----------------------------
 DROP VIEW IF EXISTS `v_wf_authtodolist`;
-CREATE ALGORITHM = UNDEFINED DEFINER = `admin`@`%` SQL SECURITY DEFINER VIEW `v_wf_authtodolist` AS SELECT B.FK_Emp Auther,B.FK_EmpText AuthName,A.PWorkID,A.FK_Node,A.FID,A.WorkID,C.EmpNo,  C.TakeBackDT, A.FK_Flow, A.FlowName,A.Title  FROM WF_GenerWorkFlow A, WF_GenerWorkerlist B, WF_Auth C WHERE A.WorkID=B.WorkID AND C.AuthType=1 AND B.FK_Emp=C.Auther AND B.IsPass=0 AND B.IsEnable=1 AND A.FK_Node = B.FK_Node AND A.WFState >=2    UNION   SELECT B.FK_Emp Auther,B.FK_EmpText AuthName,A.PWorkID,A.FK_Node,A.FID,A.WorkID, C.EmpNo, C.TakeBackDT, A.FK_Flow, A.FlowName,A.Title FROM WF_GenerWorkFlow A, WF_GenerWorkerlist B, WF_Auth C WHERE A.WorkID=B.WorkID AND C.AuthType=2 AND B.FK_Emp=C.Auther AND B.IsPass=0 AND B.IsEnable=1 AND A.FK_Node = B.FK_Node AND A.WFState >=2 AND A.FK_Flow=C.FlowNo ;
+CREATE ALGORITHM = UNDEFINED DEFINER = `root`@`%` SQL SECURITY DEFINER VIEW `v_wf_authtodolist` AS SELECT B.FK_Emp Auther,B.FK_EmpText AuthName,A.PWorkID,A.FK_Node,A.FID,A.WorkID,C.EmpNo,  C.TakeBackDT, A.FK_Flow, A.FlowName,A.Title  FROM WF_GenerWorkFlow A, WF_GenerWorkerlist B, WF_Auth C WHERE A.WorkID=B.WorkID AND C.AuthType=1 AND B.FK_Emp=C.Auther AND B.IsPass=0 AND B.IsEnable=1 AND A.FK_Node = B.FK_Node AND A.WFState >=2    UNION   SELECT B.FK_Emp Auther,B.FK_EmpText AuthName,A.PWorkID,A.FK_Node,A.FID,A.WorkID, C.EmpNo, C.TakeBackDT, A.FK_Flow, A.FlowName,A.Title FROM WF_GenerWorkFlow A, WF_GenerWorkerlist B, WF_Auth C WHERE A.WorkID=B.WorkID AND C.AuthType=2 AND B.FK_Emp=C.Auther AND B.IsPass=0 AND B.IsEnable=1 AND A.FK_Node = B.FK_Node AND A.WFState >=2 AND A.FK_Flow=C.FlowNo ;
 
 -- ----------------------------
 -- View structure for wf_empworks
 -- ----------------------------
 DROP VIEW IF EXISTS `wf_empworks`;
-CREATE ALGORITHM = UNDEFINED DEFINER = `admin`@`%` SQL SECURITY DEFINER VIEW `wf_empworks` AS SELECT A.PRI,A.WorkID,B.IsRead, A.Starter,A.StarterName,A.WFState,A.FK_Dept,A.DeptName, A.FK_Flow, A.FlowName,A.PWorkID,
-A.PFlowNo,B.FK_Node, B.FK_NodeText AS NodeName, A.Title, A.RDT, B.RDT AS ADT, 
+CREATE ALGORITHM = UNDEFINED DEFINER = `root`@`%` SQL SECURITY DEFINER VIEW `wf_empworks` AS SELECT A.PRI,A.WorkID,B.IsRead, A.Starter,A.StarterName,A.WFState,A.FK_Dept,A.DeptName, A.FK_Flow, A.FlowName,A.PWorkID,
+A.PFlowNo,B.FK_Node, B.FK_NodeText AS NodeName, A.Title, A.RDT, B.RDT AS ADT,
 B.SDT, B.FK_Emp,B.FID ,A.FK_FlowSort,A.SysType,A.SDTOfNode,B.PressTimes,
 A.GuestNo,A.GuestName,A.BillNo,A.FlowNote,A.TodoEmps,A.TodoEmpsNum,A.TodoSta,A.TaskSta,0 as ListType,A.Sender,A.AtPara,
 A.Domain
@@ -4303,7 +4303,7 @@ WHERE     (B.IsEnable = 1) AND (B.IsPass = 0)
  UNION
 SELECT A.PRI,A.WorkID,B.Sta AS IsRead, A.Starter,
 A.StarterName,2 AS WFState,A.FK_Dept,A.DeptName, A.FK_Flow, A.FlowName,A.PWorkID,
-A.PFlowNo,B.FK_Node, B.NodeName, A.Title, A.RDT, B.RDT AS ADT, 
+A.PFlowNo,B.FK_Node, B.NodeName, A.Title, A.RDT, B.RDT AS ADT,
 B.RDT AS SDT, B.CCTo as FK_Emp,B.FID ,A.FK_FlowSort,A.SysType,A.SDTOfNode, 0 as PressTimes,
 A.GuestNo,A.GuestName,A.BillNo,A.FlowNote,A.TodoEmps,A.TodoEmpsNum,0 as TodoSta,0 AS TaskSta,1 as ListType,B.Rec as Sender,
 '@IsCC=1'||A.AtPara as AtPara,
