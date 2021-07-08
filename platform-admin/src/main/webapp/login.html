@@ -147,13 +147,16 @@
                             //  1. 为了系统安全，请把 LoginCCBPM 的方法写入您的后台代码.
                             //  2. LoginCCBPM 方法位于/WF/config.js文件中.
 
-                            var token = LoginCCBPM(PrivateKey, vm.username);
-                            if (token == null && token.indexOf('err@') == 0) {
-                                alert(token);
-                                return;
-                            }
+                            // fixme: 如果需要jflow功能打开注释
+                            // var token = LoginCCBPM(PrivateKey, vm.username);
+                            // if (token == null && token.indexOf('err@') == 0) {
+                            //     alert(token);
+                            //     return;
+                            // }
+                            //
+                            // parent.location.href = 'index.html?Token=' + token + '&UserNo=' + vm.username;
 
-                            parent.location.href = 'index.html?Token=' + token + '&UserNo=' + vm.username;
+                            parent.location.href = 'index.html';
                         } else {
                             vm.refreshCode();
                             iview.Message.error(result.msg);
