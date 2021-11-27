@@ -13,9 +13,9 @@ Entity里提示报错不是缺少get、set方法，Eclipse、IDEA请先安装lom
 <table align="center" cellspacing="0" cellpadding="0">
   <tbody>
     <tr>
-      <td align="center" valign="middle" width="500" colspan="3">
+      <td align="center" valign="middle" colspan="3">
 	      <a href="http://www.ccflow.org/?from=fuyang_lipengjun" target="_blank">
-					<img height="120" src="https://platform-wxmall-1251990035.cos.ap-shanghai.myqcloud.com/ccflow.png">
+					<img src="https://platform-wxmall-1251990035.cos.ap-shanghai.myqcloud.com/ccflow.png">
 				</a>
       </td>
     </tr>
