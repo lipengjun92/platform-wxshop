@@ -181,7 +181,7 @@
         },
         "plugins" : {
             "wt-logistics" : {
-                "version" : "1.0.0",
+                "version" : "1.2.0",
                 "provider" : "wx7d1077edf1fd3ae5"
             }
         }

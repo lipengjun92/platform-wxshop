@@ -6,8 +6,21 @@ Entity里提示报错不是缺少get、set方法，Eclipse、IDEA请先安装lom
 # 文档
 [http://doc.fly2you.cn](http://doc.fly2you.cn)
 
-### 合作伙伴: 
-驰骋敏捷开发平台、工作流引擎、表单引擎. [http://ccflow.org/](http://ccflow.org/)
+<p align="center">
+  <b>特别赞助</b>
+</p>
+<br/>
+<table align="center" cellspacing="0" cellpadding="0">
+  <tbody>
+    <tr>
+      <td align="center" valign="middle" width="500" colspan="3">
+	      <a href="http://www.ccflow.org/?from=fuyang_lipengjun" target="_blank">
+					<img height="120" src="https://platform-wxmall-1251990035.cos.ap-shanghai.myqcloud.com/ccflow.png">
+				</a>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
 # 使用须知
 ## ✅允许
