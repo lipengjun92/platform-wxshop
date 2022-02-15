@@ -6,12 +6,12 @@ import me.chanjar.weixin.common.api.WxConsts;
 import me.chanjar.weixin.common.api.WxConsts.EventType;
 import me.chanjar.weixin.common.api.WxConsts.MenuButtonType;
 import me.chanjar.weixin.common.api.WxConsts.XmlMsgType;
-import me.chanjar.weixin.mp.api.WxMpInMemoryConfigStorage;
 import me.chanjar.weixin.mp.api.WxMpMessageRouter;
 import me.chanjar.weixin.mp.api.impl.WxMpServiceImpl;
 import me.chanjar.weixin.mp.bean.kefu.result.WxMpKfOnlineList;
 import me.chanjar.weixin.mp.bean.message.WxMpXmlMessage;
 import me.chanjar.weixin.mp.bean.message.WxMpXmlOutMessage;
+import me.chanjar.weixin.mp.config.impl.WxMpMapConfigImpl;
 import me.chanjar.weixin.mp.constant.WxMpEventConstants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -55,7 +55,7 @@ public class WeixinService extends WxMpServiceImpl {
 
     @PostConstruct
     public void init() {
-        final WxMpInMemoryConfigStorage config = new WxMpInMemoryConfigStorage();
+        final WxMpMapConfigImpl config = new WxMpMapConfigImpl();
         // 设置微信公众号的appid
         config.setAppId(ResourceUtil.getConfigByName("mp.appId"));
         // 设置微信公众号的app corpSecret

@@ -121,8 +121,6 @@ public class ApiAuthController extends ApiBaseAction {
             userVo.setLast_login_time(userVo.getRegister_time());
             userVo.setWeixin_openid(sessionData.getString("openid"));
             userVo.setAvatar(userInfo.getAvatarUrl());
-            //性别 0：未知、1：男、2：女
-            userVo.setGender(userInfo.getGender());
             userVo.setNickname(userInfo.getNickName());
             userService.save(userVo);
         } else {
@@ -184,7 +182,6 @@ public class ApiAuthController extends ApiBaseAction {
                 userVo.setAvatar(userInfoResponse.getAvatar());
                 //性别 0：未知、1：男、2：女
                 //F：女性；M：男性
-                userVo.setGender("m".equalsIgnoreCase(userInfoResponse.getGender()) ? 1 : 0);
                 userVo.setNickname(userInfoResponse.getNickName());
                 userService.save(userVo);
             } else {
