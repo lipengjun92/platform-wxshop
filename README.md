@@ -1,9 +1,23 @@
-# 注意
-Entity里提示报错不是缺少get、set方法，Eclipse、IDEA请先安装lombok插件
+# 微信小程序商城（Java + uniapp）
 
-# 官网
+## 注意
+Entity里提示报错不是缺少get、set方法，Eclipse、IDEA请先安装`lombok`插件，如果不了解`lombok`的话，请先学习下相关知识，比如可以阅读[此文章](https://mp.weixin.qq.com/s/cUc-bUcprycADfNepnSwZQ)；
+
+## 新手必看启动教程
+- [https://www.bilibili.com/video/av66149752](https://www.bilibili.com/video/av66149752)
+## 使用Hbuilder启动微同商城小程序端教程
+- [https://www.bilibili.com/video/BV1ni4y1M7CC](https://www.bilibili.com/video/BV1ni4y1M7CC)
+
+### 微同商城开源版体验：
+![](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/gh_a7a467438863_344.jpg "微同商城开源版")
+
+* git：[https://gitee.com/fuyang_lipengjun/platform](https://gitee.com/fuyang_lipengjun/platform)
+* 代码生成工具IDEA插件
+  * git：[https://gitee.com/fuyang_lipengjun/platform-gen](https://gitee.com/fuyang_lipengjun/platform-gen)
+
+## 官网
 [https://fly2you.cn](https://fly2you.cn)
-# 文档
+## 文档
 [http://doc.fly2you.cn](http://doc.fly2you.cn)
 
 <p align="center">
@@ -22,16 +36,25 @@ Entity里提示报错不是缺少get、set方法，Eclipse、IDEA请先安装lom
   </tbody>
 </table>
 
-# 使用须知
-## ✅允许
+## 获得荣誉
+### GVP
+![](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/GVP.jpg "GVP")
+
+## 重要信息
+1. 项目合作洽谈，请联系客服微信（使用微信扫码添加好友，请注明来意）。
+2. 如需购买 [商业版源码](https://fly2you.cn/mall.html) 请联系客服。<br>
+![](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/wx.png "微信")
+3. 微信扫码并关注公众号回复“文档”，获取《微同开源商城启动部署手册.docx》<br>
+  ![](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/upload/20180708/qr.jpg "微信公众号")
+
+## 使用须知
+### ✅允许
 - 个人学习使用
 - 允许用于学习、毕设等
-- 允许进行商业使用，请自觉遵守使用协议，如需要商业使用推荐购买商业版（进群联系群主）
+- 允许进行商业使用，请自觉遵守使用协议，如需要商业使用推荐购买[商业版源码](https://fly2you.cn/mall.html)
 - 请遵守 Apache License2.0 协议，再次开源请注明出处
 - 推荐Watch、Star项目，获取项目第一时间更新，同时也是对项目最好的支持
 - 希望大家多多支持原创作品
-- 如需购买 [商业版](https://fly2you.cn/mall.html) 请联系群主<br>
-![](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/wx.png "微信")
 
 **如何交流、反馈、参与贡献？** 
 - gitee仓库：https://gitee.com/fuyang_lipengjun/platform
@@ -40,12 +63,8 @@ Entity里提示报错不是缺少get、set方法，Eclipse、IDEA请先安装lom
     * <a target="_blank" href="https://qm.qq.com/cgi-bin/qm/qr?k=HNLRmaIdvnj2e_TGkMspORvIn-AHNZCb&jump_from=webapi"><img border="0" src="//pub.idqqimg.com/wpa/images/group.png" alt="微同科技 ①群" title="微同科技 ①群"></a>：66502035
     * <a target="_blank" href="https://qm.qq.com/cgi-bin/qm/qr?k=4i3Z9xgp7SlPnk_X1v0TWToSOoT_gJMz&jump_from=webapi"><img border="0" src="//pub.idqqimg.com/wpa/images/group.png" alt="微同科技 ②群" title="微同科技 ②群"></a>：870579539
     * <a target="_blank" href="https://qm.qq.com/cgi-bin/qm/qr?k=hQLMx7vYLfP_C-d2-yP_udx1yciJXfHC&jump_from=webapi"><img border="0" src="//pub.idqqimg.com/wpa/images/group.png" alt="微同科技 ③群" title="微同科技 ③群"></a>：151602347
-* Watch、Star项目，进群联系群主获取《微同开源商城启动部署手册.docx》
 
-- 微信扫码并关注公众号，获得项目最新动态及更新提醒<br>
-![](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/upload/20180708/qr.jpg "微信公众号")
-
-### 开发计划
+## 开发计划
 * 1 使用uniapp重构小程序端所有页面【100%】
 * 2 修复所以已知bug，使用遇到bug请给我们提交[issues](https://gitee.com/fuyang_lipengjun/platform/issues)
 * 3 后台使用SpringBoot重构
@@ -53,61 +72,13 @@ Entity里提示报错不是缺少get、set方法，Eclipse、IDEA请先安装lom
 * 5 接入支付宝支付
 * 6 出配套视频教程
 
-# 微信小程序商城（Java版）
-
-## 获得荣誉
-### GVP
-![](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/GVP.jpg "GVP")
-
-## 新手必看启动教程
-- [https://www.bilibili.com/video/av66149752](https://www.bilibili.com/video/av66149752)
-## 使用Hbuilder启动微同商城小程序端教程
-- [https://www.bilibili.com/video/BV1ni4y1M7CC](https://www.bilibili.com/video/BV1ni4y1M7CC)
-
-### 微同商城开源版体验：
-![](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/gh_a7a467438863_344.jpg "微同商城开源版")
-
-* git：[https://gitee.com/fuyang_lipengjun/platform](https://gitee.com/fuyang_lipengjun/platform)
-* 代码生成工具IDEA插件
-    * git：[https://gitee.com/fuyang_lipengjun/platform-gen](https://gitee.com/fuyang_lipengjun/platform-gen)
-
-## 技术选型
-* 0 选择开源的驰骋工作流作为系统提供流程引擎、表单引擎服务.
-* 1 后端使用技术
-    * 1.1 springframework4.3.7.RELEASE
-    * 1.2 mybatis3.1.0、MyBatis-Plus 3.1.0
-    * 1.3 shiro1.3.2
-    * 1.4 servlet3.1.0
-    * 1.5 druid1.0.28
-    * 1.6 slf4j1.7.19
-    * 1.7 fastjson1.2.30
-    * 1.8 poi3.15
-    * 1.9 velocity1.7
-    * 1.10 quartz2.2.3
-    * 1.11 mysql5.1.39
-    * 1.12 swagger2.4
-    * 1.13 j2cache2.3.22-release
-    * 1.14 weixin-java-mp3.2.0
-    * 1.15 MybatisPlus3.1.0
-    * 1.16 lombok
-        
-* 2 前端使用技术
-    * 2.1 Vue2.5.1
-    * 2.2 iview
-    * 2.3 layer3.0.3
-    * 2.4 jquery2.2.4
-    * 2.5 bootstrap3.3.7
-    * 2.6 jqgrid5.1.1
-    * 2.7 ztree3.5.26
-    * 2.8 froala_editor1.2.2
-
 ## 项目结构
 ~~~
 platform
 |--platform-admin 后台管理
 |--platform-api 微信小程序商城api接口
 |--platform-common 公共模块
-|--platform-framework 系统WEB合并，请打包发布此项目
+|--platform-framework 打包发布此项目
 |--platform-gen 代码生成
 |--platform-mp 微信公众号模块
 |--platform-schedule 定时任务
@@ -115,67 +86,6 @@ platform
 |--uni-mall uniapp版商城
 |--wx-mall 微信小程序原生商城
 ~~~
-
-## 实现功能
-
-* 一：会员管理
-    * a 会员管理
-    * b 会员等级
-    * c 收货地址管理
-    * d 会员优惠劵
-    * e 会员收藏
-    * f 会员足迹
-    * g 搜索历史
-    * h 购物车
-
-* 二：商城配置
-    * a 区域配置
-    * b 商品属性种类
-    * c 品牌制造商
-    * d 商品规格
-    * e 订单管理
-    * f 商品类型
-    * g 渠道管理
-    * h 商品问答
-    * i 反馈
-    * j 关键词
-
-* 三：商品编辑
-    * a 所有商品
-    * b 用户评论
-    * c 产品设置
-    * d 商品规格
-    * e 商品回收站
-
-* 四：推广管理
-    * a 广告列表
-    * b 广告位置
-    * c 优惠劵管理
-    * d 专题管理
-    * e 专题分类
-
-* 五：订单管理
-    * a 所有订单管理
-
-* 六：系统管理
-    * a 管理员列表
-    * b 角色管理
-    * c 菜单管理
-    * d SQL监控
-    * e 定时任务
-    * f 参数管理
-    * g 代码生成器
-    * h 系统日志
-    * i 文件上传
-    * j 通用字典表
-        
-* 七：短信服务平台  
-    * a 配置短信平台账户信息
-    * b 向外提供发送短信接口：
-    ```
-    http://域名:端口/api/sendSms?mobile=13000000000,15209831990&content=发送的短信内容  
-    安全起见，需配置有效IP地址。platform.properties -> sms.validIp
-    ```
 
 ## 安装教程
 
@@ -213,6 +123,7 @@ platform
     * [http://localhost:8080/platform-framework](http://localhost:8080/platform-framework)
 * 使用idea启动项目后默认访问路径
     * [http://localhost:8080](http://localhost:8080)
+* 出现404问题的同学请检查设置的`Application context`
 
 ## 驰骋工作流引擎的安装
    1. 请参考: https://gitee.com/opencc/JFlow/wikis/pages/preview?sort_id=4199224&doc_id=31094
