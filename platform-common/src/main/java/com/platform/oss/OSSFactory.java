@@ -30,8 +30,9 @@ public final class OSSFactory {
             return new QcloudCloudStorageService(config);
         } else if (config.getType() == Constant.CloudService.DISCK.getValue()) {
             return new DiskCloudStorageService(config);
+        } else if (config.getType() == Constant.CloudService.MINIO.getValue()) {
+            return new MinioCloudStorageService(config);
         }
-
         return null;
     }
 

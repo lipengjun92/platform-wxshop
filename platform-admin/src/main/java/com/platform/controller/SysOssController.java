@@ -12,10 +12,7 @@ import com.platform.utils.PageUtilsPlus;
 import com.platform.utils.R;
 import com.platform.utils.RRException;
 import com.platform.validator.ValidatorUtils;
-import com.platform.validator.group.AliyunGroup;
-import com.platform.validator.group.DiskGroup;
-import com.platform.validator.group.QcloudGroup;
-import com.platform.validator.group.QiniuGroup;
+import com.platform.validator.group.*;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -100,6 +97,9 @@ public class SysOssController {
         } else if (config.getType() == Constant.CloudService.DISCK.getValue()) {
             //校验腾讯云数据
             ValidatorUtils.validateEntity(config, DiskGroup.class);
+        }else if (config.getType() == Constant.CloudService.MINIO.getValue()) {
+            //校验MINIO数据
+            ValidatorUtils.validateEntity(config, MinioGroup.class);
         }
 
         sysConfigService.updateValueByKey(KEY, JSON.toJSONString(config));

@@ -1,9 +1,6 @@
 package com.platform.oss;
 
-import com.platform.validator.group.AliyunGroup;
-import com.platform.validator.group.DiskGroup;
-import com.platform.validator.group.QcloudGroup;
-import com.platform.validator.group.QiniuGroup;
+import com.platform.validator.group.*;
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.Range;
 import org.hibernate.validator.constraints.URL;
@@ -21,8 +18,8 @@ import java.io.Serializable;
 public class CloudStorageConfig implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    //类型 1：七牛  2：阿里云  3：腾讯云  4：服务器存储
-    @Range(min = 1, max = 4, message = "类型错误")
+    //类型 1：七牛  2：阿里云  3：腾讯云  4：服务器存储 5: MINIO
+    @Range(min = 1, max = 5, message = "类型错误")
     private Integer type;
 
     //七牛绑定的域名
@@ -87,6 +84,15 @@ public class CloudStorageConfig implements Serializable {
     private String diskPath;
     @NotBlank(message = "本地存储代理服务器不能为空", groups = DiskGroup.class)
     private String proxyServer;
+
+    @NotBlank(message = "minio的AccessKey不能为空", groups = MinioGroup.class)
+    private String minioAccessKey;
+    @NotBlank(message = "minio的SecretKey不能为空", groups = MinioGroup.class)
+    private String minioSecretKey;
+    @NotBlank(message = "minio的Url不能为空", groups = MinioGroup.class)
+    private String minioUrl;
+    @NotBlank(message = "minio的BucketName不能为空", groups = MinioGroup.class)
+    private String  minioBucketName;
 
     public Integer getType() {
         return type;
@@ -254,5 +260,37 @@ public class CloudStorageConfig implements Serializable {
 
     public void setProxyServer(String proxyServer) {
         this.proxyServer = proxyServer;
+    }
+
+    public String getMinioAccessKey() {
+        return minioAccessKey;
+    }
+
+    public void setMinioAccessKey(String minioAccessKey) {
+        this.minioAccessKey = minioAccessKey;
+    }
+
+    public String getMinioSecretKey() {
+        return minioSecretKey;
+    }
+
+    public void setMinioSecretKey(String minioSecretKey) {
+        this.minioSecretKey = minioSecretKey;
+    }
+
+    public String getMinioUrl() {
+        return minioUrl;
+    }
+
+    public void setMinioUrl(String minioUrl) {
+        this.minioUrl = minioUrl;
+    }
+
+    public String getMinioBucketName() {
+        return minioBucketName;
+    }
+
+    public void setMinioBucketName(String minioBucketName) {
+        this.minioBucketName = minioBucketName;
     }
 }

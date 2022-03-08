@@ -86,6 +86,20 @@ var vm = new Vue({
             proxyServer: [
                 {required: true, message: '本地存储代理服务器不能为空', trigger: 'blur'}
             ]
+        },
+        minioRuleValidate: {
+            minioUrl: [
+                {required: true, message: '代理地址不能为空', trigger: 'blur'}
+            ],
+            minioBucketName: [
+                {required: true, message: '存储桶不能为空', trigger: 'blur'}
+            ],
+            minioAccessKey: [
+                {required: true, message: '账号不能为空', trigger: 'blur'}
+            ],
+            minioSecretKey: [
+                {required: true, message: '密码不能为空', trigger: 'blur'}
+            ]
         }
     },
     created: function () {

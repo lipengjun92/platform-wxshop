@@ -14,6 +14,7 @@
         <qiniu-version>[7.2.0, 7.2.99]</qiniu-version>
         <aliyun-oss-version>3.9.1</aliyun-oss-version>
         <qcloud-cos-version>5.6.9</qcloud-cos-version>
+        <minio-version>8.2.1</minio-version>
         <jackson.version>2.9.10</jackson.version>
         <poi.version>3.15</poi.version>
         <org-json-version>20180130</org-json-version>
@@ -40,6 +41,11 @@
             <groupId>com.qcloud</groupId>
             <artifactId>cos_api</artifactId>
             <version>${qcloud-cos-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.minio</groupId>
+            <artifactId>minio</artifactId>
+            <version>${minio-version}</version>
         </dependency>
 
         <!-- httpclient -->

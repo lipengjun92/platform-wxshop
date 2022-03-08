@@ -39,6 +39,9 @@
                     <Radio label="1">
                         <span>七牛</span>
                     </Radio>
+                    <Radio label="5">
+                        <span>MINIO</span>
+                    </Radio>
                 </Radio-group>
             </Form-item>
             <i-form v-if="config.type == 1" ref="formValidate" :label-width="130">
@@ -110,6 +113,21 @@
                 </Form-item>
                 <Form-item label="代理服务器" prop="proxyServer">
                     <i-input v-model="config.proxyServer" placeholder="本地存储代理服务器，比如Nginx代理服务"/>
+                </Form-item>
+            </i-form>
+            <i-form ref="formValidate" :model="config" :rules="minioRuleValidate" v-if="config.type == 5"
+                    :label-width="130">
+                <Form-item label="minioUrl" prop="minioUrl">
+                    <i-input v-model="config.minioUrl" placeholder="minio绑定的域名"/>
+                </Form-item>
+                <Form-item label="存储桶" prop="minioBucketName">
+                    <i-input v-model="config.minioBucketName" placeholder="设置存储桶"/>
+                </Form-item>
+                <Form-item label="minioAccessKey" prop="minioAccessKey">
+                    <i-input v-model="config.minioAccessKey" placeholder="minioAccessKey"/>
+                </Form-item>
+                <Form-item label="minioSecretKey" prop="minioSecretKey">
+                    <i-input v-model="config.minioSecretKey" placeholder="minioSecretKey"/>
                 </Form-item>
             </i-form>
             <Form-item>
