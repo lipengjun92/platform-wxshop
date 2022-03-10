@@ -21,6 +21,7 @@ import java.util.Map;
 
 /**
  * 作者: @author Harmon <br>
+ *
  * @gitee https://gitee.com/fuyang_lipengjun/platform
  * 时间: 2017-08-11 08:32<br>
  * 描述: ApiIndexController <br>
@@ -52,6 +53,9 @@ public class ApiAddressController extends ApiBaseAction {
     @PostMapping("detail")
     public Object detail(Integer id, @LoginUser UserVo loginUser) {
         AddressVo entity = addressService.queryObject(id);
+        if (null == entity) {
+            return toResponseFail("地址不存在");
+        }
         //判断越权行为
         if (!entity.getUserId().equals(loginUser.getUserId())) {
             return toResponsObject(403, "您无权查看", "");
