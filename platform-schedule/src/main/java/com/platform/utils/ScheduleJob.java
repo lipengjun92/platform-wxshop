@@ -1,5 +1,6 @@
 package com.platform.utils;
 
+import com.google.common.util.concurrent.ThreadFactoryBuilder;
 import com.platform.entity.ScheduleJobEntity;
 import com.platform.entity.ScheduleJobLogEntity;
 import com.platform.service.ScheduleJobLogService;
@@ -11,9 +12,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.quartz.QuartzJobBean;
 
 import java.util.Date;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
+import java.util.concurrent.*;
 
 
 /**
@@ -24,8 +23,11 @@ import java.util.concurrent.Future;
  * @date 2016年11月30日 下午12:44:21
  */
 public class ScheduleJob extends QuartzJobBean {
-    private Logger logger = LoggerFactory.getLogger(getClass());
-    private ExecutorService service = Executors.newSingleThreadExecutor();
+    private static final Logger logger = LoggerFactory.getLogger(ScheduleJob.class);
+
+    private static final ThreadFactory namedThreadFactory = new ThreadFactoryBuilder().setNameFormat("thread-call-runner-%d").build();
+
+    private static final ExecutorService service = new ThreadPoolExecutor(1, 1, 0L, TimeUnit.MILLISECONDS, new LinkedBlockingQueue<>(), namedThreadFactory);
 
     @Override
     protected void executeInternal(JobExecutionContext context) throws JobExecutionException {
