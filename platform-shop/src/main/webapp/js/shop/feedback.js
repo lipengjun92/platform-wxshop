@@ -117,7 +117,7 @@ let vm = new Vue({
             vm.showList = true;
             let page = $("#jqGrid").jqGrid('getGridParam', 'page');
             $("#jqGrid").jqGrid('setGridParam', {
-                postData: {'name': vm.q.userName},
+                postData: {'userName': vm.q.userName},
                 page: page
             }).trigger("reloadGrid");
             vm.handleReset('formValidate');
