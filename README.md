@@ -20,29 +20,13 @@ Entity里提示报错不是缺少get、set方法，Eclipse、IDEA请先安装`lo
 ## 文档
 [http://doc.fly2you.cn](http://doc.fly2you.cn)
 
-<p align="center">
-  <b>特别赞助</b>
-</p>
-<br/>
-<table align="center" cellspacing="0" cellpadding="0">
-  <tbody>
-    <tr>
-      <td align="center" valign="middle" colspan="3">
-	      <a href="http://www.ccflow.org/?from=fuyang_lipengjun" target="_blank">
-					<img src="https://platform-wxmall-1251990035.cos.ap-shanghai.myqcloud.com/ccflow.png">
-				</a>
-      </td>
-    </tr>
-  </tbody>
-</table>
-
 ## 获得荣誉
 ### GVP
 ![](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/GVP.jpg "GVP")
 
 ## 重要信息
 1. 项目合作洽谈，请联系客服微信（使用微信扫码添加好友，请注明来意）。
-2. 如需购买 [商业版源码](https://fly2you.cn/mall.html) 请联系客服。<br>
+2. 如需购买 [商业版源码](https://fly2you.cn/ma.html) 请联系客服。<br>
 ![](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/wx.png "微信")
 3. 微信扫码并关注公众号回复“文档”，获取《微同开源商城启动部署手册.docx》<br>
   ![](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/upload/20180708/qr.jpg "微信公众号")
@@ -51,7 +35,7 @@ Entity里提示报错不是缺少get、set方法，Eclipse、IDEA请先安装`lo
 ### ✅允许
 - 个人学习使用
 - 允许用于学习、毕设等
-- 允许进行商业使用，请自觉遵守使用协议，如需要商业使用推荐购买[商业版源码](https://fly2you.cn/mall.html)
+- 允许进行商业使用，请自觉遵守使用协议，如需要商业使用推荐购买[商业版源码](https://fly2you.cn/ma.html)
 - 请遵守 Apache License2.0 协议，再次开源请注明出处
 - 推荐Watch、Star项目，获取项目第一时间更新，同时也是对项目最好的支持
 - 希望大家多多支持原创作品
