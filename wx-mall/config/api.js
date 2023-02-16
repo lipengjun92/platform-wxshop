@@ -24,7 +24,7 @@ module.exports = {
 
     CartList: API_BASE_URL + 'cart/index', //获取购物车的数据
     CartAdd: API_BASE_URL + 'cart/add', // 添加商品到购物车
-    BuyAdd: API_BASE_URL + 'buy/add', // 直接购买    
+    BuyAdd: API_BASE_URL + 'buy/add', // 直接购买
     CartUpdate: API_BASE_URL + 'cart/update', // 更新购物车的商品
     CartDelete: API_BASE_URL + 'cart/delete', // 删除购物车的商品
     CartChecked: API_BASE_URL + 'cart/checked', // 选择或取消选择商品
@@ -70,7 +70,7 @@ module.exports = {
     Login: API_BASE_URL + 'auth/login', //账号登录
     Register: API_BASE_URL + 'auth/register', //注册
     CouponList: API_BASE_URL + 'coupon/list', // 优惠券列表
-    GoodsCouponList: API_BASE_URL + 'coupon/listByGoods', // 商品优惠券列表   
+    GoodsCouponList: API_BASE_URL + 'coupon/listByGoods', // 商品优惠券列表
     OrderQuery: API_BASE_URL + 'pay/query',//微信查询订单状态
 
     HelpTypeList: API_BASE_URL + 'helpissue/typeList', //查看帮助类型列表
