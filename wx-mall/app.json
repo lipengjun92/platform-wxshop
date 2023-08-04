@@ -87,6 +87,12 @@
     "request": 10000,
     "downloadFile": 10000
   },
+  "plugins": {
+    "wt-logistics": {
+      "version": "1.2.0",
+      "provider": "wx7d1077edf1fd3ae5"
+    }
+  },
   "debug": true,
   "sitemapLocation": "sitemap.json"
 }

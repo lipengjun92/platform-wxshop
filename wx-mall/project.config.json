@@ -34,7 +34,8 @@
     "userConfirmedBundleSwitch": false,
     "packNpmManually": false,
     "packNpmRelationList": [],
-    "minifyWXSS": true
+    "minifyWXSS": true,
+    "condition": false
   },
   "compileType": "miniprogram",
   "libVersion": "2.16.0",
@@ -56,5 +57,13 @@
       "list": []
     },
     "miniprogram": {}
+  },
+  "packOptions": {
+    "ignore": [],
+    "include": []
+  },
+  "editorSetting": {
+    "tabIndent": "insertSpaces",
+    "tabSize": 2
   }
 }
