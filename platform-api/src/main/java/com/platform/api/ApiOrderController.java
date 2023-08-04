@@ -18,7 +18,10 @@ import io.swagger.annotations.ApiOperation;
 import org.apache.commons.collections.MapUtils;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -28,6 +31,7 @@ import java.util.Map;
 /**
  * 作者: @author Harmon <br>
  * 时间: 2017-08-11 08:32<br>
+ *
  * @gitee https://gitee.com/fuyang_lipengjun/platform
  * 描述: ApiIndexController <br>
  */
@@ -43,6 +47,7 @@ public class ApiOrderController extends ApiBaseAction {
     private ApiKdniaoService apiKdniaoService;
 
     /**
+     *
      */
     @ApiOperation(value = "订单首页")
     @IgnoreAuth
@@ -92,12 +97,16 @@ public class ApiOrderController extends ApiBaseAction {
      */
     @ApiOperation(value = "获取订单详情")
     @PostMapping("detail")
-    public Object detail(Integer orderId) {
+    public Object detail(Integer orderId, @LoginUser UserVo loginUser) {
         Map resultObj = new HashMap();
         //
         OrderVo orderInfo = orderService.queryObject(orderId);
         if (null == orderInfo) {
             return toResponsObject(400, "订单不存在", "");
+        }
+
+        if (!loginUser.getUserId().equals(orderInfo.getUser_id())) {
+            return toResponseFail("越权操作！");
         }
         Map orderGoodsParam = new HashMap();
         orderGoodsParam.put("order_id", orderId);
@@ -128,7 +137,7 @@ public class ApiOrderController extends ApiBaseAction {
 
     @ApiOperation(value = "修改订单")
     @PostMapping("updateSuccess")
-    public Object updateSuccess(Integer orderId) {
+    public Object updateSuccess(Integer orderId, @LoginUser UserVo loginUser) {
         OrderVo orderInfo = orderService.queryObject(orderId);
         if (orderInfo == null) {
             return toResponseFail("订单不存在");
@@ -136,6 +145,9 @@ public class ApiOrderController extends ApiBaseAction {
             return toResponseFail("订单状态不正确orderStatus" + orderInfo.getOrder_status() + "payStatus" + orderInfo.getPay_status());
         }
 
+        if (!loginUser.getUserId().equals(orderInfo.getUser_id())) {
+            return toResponseFail("越权操作！");
+        }
         orderInfo.setId(orderId);
         orderInfo.setPay_status(2);
         orderInfo.setOrder_status(201);
@@ -168,13 +180,19 @@ public class ApiOrderController extends ApiBaseAction {
     }
 
     /**
-     * 获取订单列表
+     * 取消订单
      */
     @ApiOperation(value = "取消订单")
     @PostMapping("cancelOrder")
-    public Object cancelOrder(Integer orderId) {
+    public Object cancelOrder(Integer orderId, @LoginUser UserVo loginUser) {
         try {
             OrderVo orderVo = orderService.queryObject(orderId);
+            if (null == orderVo) {
+                return toResponseFail("订单不存在！");
+            }
+            if (!loginUser.getUserId().equals(orderVo.getUser_id())) {
+                return toResponseFail("越权操作！");
+            }
             if (orderVo.getOrder_status() == 300) {
                 return toResponseFail("已发货，不能取消");
             } else if (orderVo.getOrder_status() == 301) {
@@ -212,9 +230,15 @@ public class ApiOrderController extends ApiBaseAction {
      */
     @ApiOperation(value = "确认收货")
     @PostMapping("confirmOrder")
-    public Object confirmOrder(Integer orderId) {
+    public Object confirmOrder(Integer orderId, @LoginUser UserVo loginUser) {
         try {
             OrderVo orderVo = orderService.queryObject(orderId);
+            if (null == orderVo) {
+                return toResponseFail("订单不存在！");
+            }
+            if (!loginUser.getUserId().equals(orderVo.getUser_id())) {
+                return toResponseFail("越权操作！");
+            }
             orderVo.setOrder_status(301);
             orderVo.setShipping_status(2);
             orderVo.setConfirm_time(new Date());
