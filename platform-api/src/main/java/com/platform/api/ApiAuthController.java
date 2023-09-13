@@ -23,13 +23,12 @@ import com.platform.utils.ResourceUtil;
 import com.platform.validator.Assert;
 import com.qiniu.util.StringUtils;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import org.apache.commons.collections.MapUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -113,7 +112,8 @@ public class ApiAuthController extends ApiBaseAction {
         UserVo userVo = userService.queryByOpenId(sessionData.getString("openid"));
         if (null == userVo) {
             userVo = new UserVo();
-            userVo.setUsername("微信用户" + CharUtil.getRandomString(12));
+            String name = "微信用户" + CharUtil.getRandomString(12);
+            userVo.setUsername(name);
             userVo.setPassword(sessionData.getString("openid"));
             userVo.setRegister_time(nowTime);
             userVo.setRegister_ip(this.getClientIp());
@@ -121,7 +121,7 @@ public class ApiAuthController extends ApiBaseAction {
             userVo.setLast_login_time(userVo.getRegister_time());
             userVo.setWeixin_openid(sessionData.getString("openid"));
             userVo.setAvatar(userInfo.getAvatarUrl());
-            userVo.setNickname(userInfo.getNickName());
+            userVo.setNickname(name);
             userService.save(userVo);
         } else {
             userVo.setLast_login_ip(this.getClientIp());
@@ -138,6 +138,61 @@ public class ApiAuthController extends ApiBaseAction {
 
         resultObj.put("token", token);
         resultObj.put("userInfo", userInfo);
+        resultObj.put("userId", userVo.getUserId());
+        return toResponseSuccess(resultObj);
+    }
+
+    /**
+     * code静默登录
+     *
+     * @param code code
+     * @return RestResponse
+     */
+    @IgnoreAuth
+    @GetMapping("/{code}")
+    @ApiOperation(value = "静默登录", notes = "使用code静默登录")
+    @ApiImplicitParam(required = true, paramType = "path", name = "code", value = "code", example = "oxaA11ulr9134oBL9Xscon5at_Gc", dataType = "string")
+    public Object loginByCode(@PathVariable String code) {
+        //获取openid
+        String requestUrl = ApiUserUtils.getWebAccess(code);//通过自定义工具类组合出小程序需要的登录凭证 code
+        logger.info("》》》组合token为：" + requestUrl);
+        JSONObject sessionData = CommonUtil.httpsRequest(requestUrl, "GET", null);
+
+        if (null == sessionData || StringUtils.isNullOrEmpty(sessionData.getString("openid"))) {
+            return toResponseFail("登录失败");
+        }
+
+        String openid = sessionData.getString("openid");
+        Date nowTime = new Date();
+        UserVo userVo = userService.queryByOpenId(openid);
+        if (null == userVo) {
+            userVo = new UserVo();
+            String name = "微信用户" + CharUtil.getRandomString(12);
+            userVo.setUsername(name);
+            userVo.setPassword(sessionData.getString("openid"));
+            userVo.setRegister_time(nowTime);
+            userVo.setRegister_ip(this.getClientIp());
+            userVo.setLast_login_ip(userVo.getRegister_ip());
+            userVo.setLast_login_time(userVo.getRegister_time());
+            userVo.setWeixin_openid(sessionData.getString("openid"));
+            userVo.setNickname(name);
+            userService.save(userVo);
+        } else {
+            userVo.setLast_login_ip(this.getClientIp());
+            userVo.setLast_login_time(nowTime);
+            userService.update(userVo);
+        }
+
+        Map<String, Object> tokenMap = tokenService.createToken(userVo.getUserId());
+        String token = MapUtils.getString(tokenMap, "token");
+
+        if (StringUtils.isNullOrEmpty(token)) {
+            return toResponseFail("登录失败");
+        }
+
+        Map<String, Object> resultObj = new HashMap<>();
+        resultObj.put("token", token);
+        resultObj.put("userInfo", userVo);
         resultObj.put("userId", userVo.getUserId());
         return toResponseSuccess(resultObj);
     }

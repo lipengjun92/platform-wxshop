@@ -85,6 +85,25 @@ Page({
     },
     onLoad: function (options) {
         this.getIndexData();
+        wx.login({
+          success: (resp) => {
+            util.request(api.Code + resp.code, {}, 'GET').then(function (res) {
+              if (res.errno === 0) {
+                //存储用户信息
+                wx.setStorageSync('userInfo', res.data.userInfo);
+                wx.setStorageSync('token', res.data.token);
+                wx.setStorageSync('userId', res.data.userId);
+              } else {
+                // util.showErrorToast(res.errmsg)
+                wx.showModal({
+                  title: '提示',
+                  content: res.errmsg,
+                  showCancel: false
+                });
+              }
+            });
+          },
+        })
     },
     onReady: function () {
         // 页面渲染完成

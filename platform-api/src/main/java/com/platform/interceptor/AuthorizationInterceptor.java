@@ -27,7 +27,7 @@ public class AuthorizationInterceptor extends HandlerInterceptorAdapter {
     private TokenService tokenService;
 
     public static final String LOGIN_USER_KEY = "LOGIN_USER_KEY";
-    public static final String LOGIN_TOKEN_KEY = "X-Nideshop-Token";
+    public static final String LOGIN_TOKEN_KEY = "token";
 
 
     @Override
@@ -37,7 +37,7 @@ public class AuthorizationInterceptor extends HandlerInterceptorAdapter {
         response.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE");
         response.setHeader("Access-Control-Max-Age", "3600");
         response.setHeader("Access-Control-Allow-Credentials", "true");
-        response.setHeader("Access-Control-Allow-Headers", "x-requested-with,X-Nideshop-Token,X-URL-PATH,content-type");
+        response.setHeader("Access-Control-Allow-Headers", "x-requested-with,token,X-URL-PATH,content-type");
         response.setHeader("Access-Control-Allow-Origin", request.getHeader("Origin"));
 
         IgnoreAuth annotation;
