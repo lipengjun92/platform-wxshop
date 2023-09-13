@@ -32,7 +32,7 @@ function request(url, data = {}, method = "POST", header = "application/x-www-fo
             method: method,
             header: {
                 'Content-Type': header,
-                'X-Nideshop-Token': wx.getStorageSync('token')
+                'token': wx.getStorageSync('token')
             },
             success: function (res) {
                 wx.hideLoading();

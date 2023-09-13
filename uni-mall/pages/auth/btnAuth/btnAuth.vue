@@ -71,7 +71,7 @@
 						if (res.errno === 0) {
 							//存储用户信息
 							uni.setStorageSync('userInfo', res.data.userInfo);
-							uni.setStorageSync('X-Nideshop-Token', res.data.token);
+							uni.setStorageSync('token', res.data.token);
 							uni.setStorageSync('userId', res.data.userId);
 
 						} else {

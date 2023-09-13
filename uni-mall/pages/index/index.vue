@@ -202,6 +202,24 @@
 			}
 		},
 		onLoad: function() {
+      uni.login({
+        success: (resp) => {
+          util.request(api.Code + resp.code, {}, 'GET').then(function (res) {
+            if (res.errno === 0) {
+              //存储用户信息
+              uni.setStorageSync('userInfo', res.data.userInfo);
+              uni.setStorageSync('token', res.data.token);
+              uni.setStorageSync('userId', res.data.userId);
+            } else {
+              uni.showModal({
+                title: '提示',
+                content: res.errmsg,
+                showCancel: false
+              });
+            }
+          });
+        },
+      })
 			this.getIndexData();
 		}
 	}

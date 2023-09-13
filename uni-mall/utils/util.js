@@ -91,7 +91,7 @@ const utils = {
 				data: postData,
 				header: {
 					'content-type': contentType,
-					'X-Nideshop-Token': utils.getToken()
+					'token': utils.getToken()
 				},
 				method: method, //'GET','POST'
 				dataType: 'json',
@@ -164,7 +164,7 @@ const utils = {
 				name: 'file',
 				header: {
 					'content-type': 'multipart/form-data',
-					'X-Nideshop-Token': utils.getToken()
+					'token': utils.getToken()
 				},
 				success: function(res) {
 					uni.hideLoading()
@@ -195,12 +195,12 @@ const utils = {
 	},
 	//设置用户信息
 	setUserInfo: function(mobile, token) {
-		uni.setStorageSync("X-Nideshop-Token", token)
+		uni.setStorageSync("token", token)
 		uni.setStorageSync("mobile", mobile)
 	},
 	//获取token
 	getToken: function() {
-		return uni.getStorageSync("X-Nideshop-Token")
+		return uni.getStorageSync("token")
 	},
 	//去空格
 	trim: function(value) {

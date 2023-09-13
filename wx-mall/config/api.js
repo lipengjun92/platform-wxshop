@@ -68,6 +68,7 @@ module.exports = {
     SmsCode: API_BASE_URL + 'user/smscode', //发送短信
     BindMobile: API_BASE_URL + 'user/bindMobile', //绑定手机
     Login: API_BASE_URL + 'auth/login', //账号登录
+    Code: API_BASE_URL + 'auth/', //静默登录
     Register: API_BASE_URL + 'auth/register', //注册
     CouponList: API_BASE_URL + 'coupon/list', // 优惠券列表
     GoodsCouponList: API_BASE_URL + 'coupon/listByGoods', // 商品优惠券列表
