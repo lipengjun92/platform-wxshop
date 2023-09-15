@@ -39,7 +39,7 @@ App({
         userInfo: {
             nickName: 'Hi,游客',
             userName: '点击去登录',
-            avatarUrl: 'https://platform-wxmall.oss-cn-beijing.aliyuncs.com/upload/20180727/150547696d798c.png'
+            avatarUrl: 'https://mmbiz.qpic.cn/mmbiz/icTdbqWNOwNRna42FI242Lcia07jQodd2FJGIYQfG0LAJGFxM4FbnQP6yfMxBgJ0F3YRqJCJ1aPAK2dQagdusBZg/0'
         },
         token: '',
         userCoupon: 'NO_USE_COUPON',//默认不适用优惠券
