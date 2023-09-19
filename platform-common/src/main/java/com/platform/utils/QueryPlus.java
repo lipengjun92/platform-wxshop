@@ -1,5 +1,6 @@
 package com.platform.utils;
 
+import com.baomidou.mybatisplus.core.metadata.OrderItem;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.platform.xss.SQLFilter;
 
@@ -61,9 +62,9 @@ public class QueryPlus<T> extends LinkedHashMap<String, Object> {
         //排序
         if (StringUtils.isNotEmpty(sidx)) {
             if (asc) {
-                this.page.setAsc(sidx);
+                this.page.addOrder(OrderItem.asc(sidx));
             } else {
-                this.page.setDesc(sidx);
+                this.page.addOrder(OrderItem.desc(sidx));
             }
         }
 

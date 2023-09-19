@@ -99,24 +99,19 @@
                 <property name="dbConfig">
                     <bean class="com.baomidou.mybatisplus.core.config.GlobalConfig.DbConfig">
                         <!-- 表关键词 key 生成器 -->
-                        <property name="keyGenerator">
+                        <property name="keyGenerators">
                             <bean class="com.baomidou.mybatisplus.extension.incrementer.OracleKeyGenerator"/>
                         </property>
                         <!-- 主键类型  0:"数据库ID自增", 1:"用户输入ID",2:"全局唯一ID (数字类型唯一ID)", 3:"全局唯一ID UUID"; -->
                         <property name="idType" value="AUTO"/>
-                        <!-- 字段策略 0:"忽略判断",1:"非 NULL 判断"),2:"非空判断" -->
-                        <property name="fieldStrategy" value="NOT_EMPTY"/>
+                        <property name="capitalMode" value="true"/>
                         <!-- 逻辑删除配置 -->
+                        <property name="logicDeleteField" value="isDelete"/>
                         <property name="logicDeleteValue" value="0"/>
                         <property name="logicNotDeleteValue" value="1"/>
-                        <!-- 数据库类型,默认值为未知的数据库类型 如果值为OTHER,启动时会根据数据库连接 url 获取数据库类型;如果不是OTHER则不会自动获取数据库类型 -->
-                        <property name="dbType" value="OTHER"/>
                     </bean>
                 </property>
-                <property name="sqlInjector">
-                    <!-- 注入逻辑删除 -->
-                    <bean class="com.baomidou.mybatisplus.extension.injector.LogicSqlInjector"/>
-                </property>
+                <property name="banner" value="false"/>
             </bean>
         </property>
         <property name="configuration">
@@ -131,21 +126,19 @@
                 <property name="callSettersOnNulls" value="false"/>
                 <!-- 配置JdbcTypeForNull, oracle数据库必须配置 -->
                 <property name="jdbcTypeForNull" value="NULL"/>
+                <property name="autoMappingUnknownColumnBehavior" value="WARNING"/>
             </bean>
         </property>
         <property name="plugins">
             <array>
-                <!-- 性能分析拦截器 -->
-                <bean class="com.baomidou.mybatisplus.extension.plugins.PerformanceInterceptor">
-                    <property name="format" value="true"></property>
-                    <property name="maxTime" value="100"></property>
-                    <!-- 是否写入日志文件(true 写入日志文件，不阻断程序执行！超过设定的最大执行时长异常提示) -->
-                    <property name="writeInLog" value="true"></property>
+                <bean class="com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor">
+                    <property name="interceptors">
+                        <list>
+                            <!-- 乐观锁 -->
+                            <bean class="com.baomidou.mybatisplus.extension.plugins.inner.OptimisticLockerInnerInterceptor"/>
+                        </list>
+                    </property>
                 </bean>
-                <!-- 分页拦截器 -->
-                <bean class="com.baomidou.mybatisplus.extension.plugins.PaginationInterceptor"/>
-                <!-- 乐观锁 -->
-                <bean class="com.baomidou.mybatisplus.extension.plugins.OptimisticLockerInterceptor"/>
             </array>
         </property>
     </bean>
