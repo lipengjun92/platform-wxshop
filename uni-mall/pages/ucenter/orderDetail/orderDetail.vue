@@ -1,10 +1,10 @@
 <template>
 	<view class="container">
 		<view class="order-info">
-			<view class="item-a">下单时间：{{orderInfo.add_time}}</view>
-			<view class="item-b">订单编号：{{orderInfo.order_sn}}</view>
+			<view class="item-a">下单时间：{{orderInfo.addTime}}</view>
+			<view class="item-b">订单编号：{{orderInfo.orderSn}}</view>
 			<view class="item-c">
-				<view class="l">实付：<text class="cost">￥{{orderInfo.actual_price}}</text></view>
+				<view class="l">实付：<text class="cost">￥{{orderInfo.actualPrice}}</text></view>
 				<view class="r">
 					<view v-if="orderInfo.handleOption.pay">
 						<view class="btn" @tap="cancelOrder">取消订单</view>
@@ -24,20 +24,20 @@
 		<view class="order-goods">
 			<view class="h">
 				<view class="label">商品信息</view>
-				<view class="status">{{orderInfo.order_status_text}}</view>
+				<view class="status">{{orderInfo.orderStatusText}}</view>
 			</view>
 			<view class="goods">
 				<view class="item" v-for="(item, index) in orderGoods" :key="item.id">
 					<view class="img">
-						<image :src="item.list_pic_url"></image>
+						<image :src="item.listPicUrl"></image>
 					</view>
 					<view class="info">
 						<view class="t">
-							<text class="name">{{item.goods_name}}</text>
+							<text class="name">{{item.goodsName}}</text>
 							<text class="number">x{{item.number}}</text>
 						</view>
-						<view class="attr">{{item.goods_specifition_name_value||''}}</view>
-						<view class="price">￥{{item.retail_price}}</view>
+						<view class="attr">{{item.goodsSpecifitionNameValue||''}}</view>
+						<view class="price">￥{{item.retailPrice}}</view>
 					</view>
 				</view>
 			</view>
@@ -49,21 +49,21 @@
 					<text class="name">{{orderInfo.consignee}}</text>
 					<text class="mobile">{{orderInfo.mobile}}</text>
 				</view>
-				<view class="b">{{orderInfo.full_region + orderInfo.address}}</view>
+				<view class="b">{{orderInfo.fullRegion + orderInfo.address}}</view>
 			</view>
 			<view class="total">
 				<view class="t">
 					<text class="label">商品合计：</text>
-					<text class="txt">￥{{orderInfo.goods_price}}</text>
+					<text class="txt">￥{{orderInfo.goodsPrice}}</text>
 				</view>
 				<view class="t">
 					<text class="label">运费：</text>
-					<text class="txt">￥{{orderInfo.freight_price}}</text>
+					<text class="txt">￥{{orderInfo.freightPrice}}</text>
 				</view>
 			</view>
 			<view class="pay-fee">
 				<text class="label">实付：</text>
-				<text class="txt">￥{{orderInfo.actual_price}}</text>
+				<text class="txt">￥{{orderInfo.actualPrice}}</text>
 			</view>
 		</view>
 	</view>
@@ -100,7 +100,7 @@
 				let orderInfo = that.orderInfo;
 
 				setInterval(() => {
-					orderInfo.add_time -= 1;
+					orderInfo.addTime -= 1;
 					that.orderInfo = orderInfo;
 				}, 1000);
 			},
@@ -108,10 +108,10 @@
 				let that = this;
 				let orderInfo = that.orderInfo;
 
-				var order_status = orderInfo.order_status;
+				var orderStatus = orderInfo.orderStatus;
 
 				var errorMessage = '';
-				switch (order_status) {
+				switch (orderStatus) {
 					case 300:
 						{
 							errorMessage = '订单已发货';
@@ -189,10 +189,10 @@
 				let that = this;
 				let orderInfo = that.orderInfo;
 
-				var order_status = orderInfo.order_status;
+				var orderStatus = orderInfo.orderStatus;
 
 				var errorMessage = '';
-				switch (order_status) {
+				switch (orderStatus) {
 					// case 300: {
 					//   errorMessage = '订单已发货';
 					//   break;

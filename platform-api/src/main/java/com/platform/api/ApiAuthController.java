@@ -115,17 +115,17 @@ public class ApiAuthController extends ApiBaseAction {
             String name = "微信用户" + CharUtil.getRandomString(12);
             userVo.setUsername(name);
             userVo.setPassword(sessionData.getString("openid"));
-            userVo.setRegister_time(nowTime);
-            userVo.setRegister_ip(this.getClientIp());
-            userVo.setLast_login_ip(userVo.getRegister_ip());
-            userVo.setLast_login_time(userVo.getRegister_time());
-            userVo.setWeixin_openid(sessionData.getString("openid"));
-            userVo.setAvatar(userInfo.getAvatarUrl());
+            userVo.setRegisterTime(nowTime);
+            userVo.setRegisterIp(this.getClientIp());
+            userVo.setLastLoginIp(userVo.getRegisterIp());
+            userVo.setLastLoginTime(nowTime);
+            userVo.setWeixinOpenid(sessionData.getString("openid"));
+            userVo.setAvatar(userInfo.getAvatar());
             userVo.setNickname(name);
             userService.save(userVo);
         } else {
-            userVo.setLast_login_ip(this.getClientIp());
-            userVo.setLast_login_time(nowTime);
+            userVo.setLastLoginIp(this.getClientIp());
+            userVo.setLastLoginTime(nowTime);
             userService.update(userVo);
         }
 
@@ -170,16 +170,16 @@ public class ApiAuthController extends ApiBaseAction {
             String name = "微信用户" + CharUtil.getRandomString(12);
             userVo.setUsername(name);
             userVo.setPassword(sessionData.getString("openid"));
-            userVo.setRegister_time(nowTime);
-            userVo.setRegister_ip(this.getClientIp());
-            userVo.setLast_login_ip(userVo.getRegister_ip());
-            userVo.setLast_login_time(userVo.getRegister_time());
-            userVo.setWeixin_openid(sessionData.getString("openid"));
+            userVo.setRegisterTime(nowTime);
+            userVo.setRegisterIp(this.getClientIp());
+            userVo.setLastLoginIp(userVo.getRegisterIp());
+            userVo.setLastLoginTime(nowTime);
+            userVo.setWeixinOpenid(sessionData.getString("openid"));
             userVo.setNickname(name);
             userService.save(userVo);
         } else {
-            userVo.setLast_login_ip(this.getClientIp());
-            userVo.setLast_login_time(nowTime);
+            userVo.setRegisterIp(this.getClientIp());
+            userVo.setRegisterTime(nowTime);
             userService.update(userVo);
         }
 
@@ -229,19 +229,19 @@ public class ApiAuthController extends ApiBaseAction {
                 userVo = new UserVo();
                 userVo.setUsername("支付宝用户" + CharUtil.getRandomString(12));
                 userVo.setPassword(userInfoResponse.getUserId());
-                userVo.setRegister_time(nowTime);
-                userVo.setRegister_ip(this.getClientIp());
-                userVo.setLast_login_ip(userVo.getRegister_ip());
-                userVo.setLast_login_time(nowTime);
-                userVo.setWeixin_openid(userInfoResponse.getUserId());
+                userVo.setRegisterTime(nowTime);
+                userVo.setRegisterIp(this.getClientIp());
+                userVo.setLastLoginIp(userVo.getRegisterIp());
+                userVo.setLastLoginTime(nowTime);
+                userVo.setWeixinOpenid(userInfoResponse.getUserId());
                 userVo.setAvatar(userInfoResponse.getAvatar());
                 //性别 0：未知、1：男、2：女
                 //F：女性；M：男性
                 userVo.setNickname(userInfoResponse.getNickName());
                 userService.save(userVo);
             } else {
-                userVo.setLast_login_ip(this.getClientIp());
-                userVo.setLast_login_time(nowTime);
+                userVo.setRegisterIp(this.getClientIp());
+                userVo.setRegisterTime(nowTime);
                 userService.update(userVo);
             }
 

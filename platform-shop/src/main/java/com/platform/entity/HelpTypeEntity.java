@@ -1,5 +1,7 @@
 package com.platform.entity;
 
+import lombok.Data;
+
 import java.io.Serializable;
 
 
@@ -11,11 +13,12 @@ import java.io.Serializable;
  * @email 939961241@qq.com
  * @date 2018-11-07 10:09:54
  */
+@Data
 public class HelpTypeEntity implements Serializable {
     private static final long serialVersionUID = 1L;
 
     /**
-     * 
+     *
      */
     private Integer id;
     /**
@@ -26,44 +29,4 @@ public class HelpTypeEntity implements Serializable {
      * 排序
      */
     private Integer sort;
-
-    /**
-     * 设置：
-     */
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    /**
-     * 获取：
-     */
-    public Integer getId() {
-        return id;
-    }
-    /**
-     * 设置：问题分类
-     */
-    public void setTypeName(String typeName) {
-        this.typeName = typeName;
-    }
-
-    /**
-     * 获取：问题分类
-     */
-    public String getTypeName() {
-        return typeName;
-    }
-    /**
-     * 设置：排序
-     */
-    public void setSort(Integer sort) {
-        this.sort = sort;
-    }
-
-    /**
-     * 获取：排序
-     */
-    public Integer getSort() {
-        return sort;
-    }
 }

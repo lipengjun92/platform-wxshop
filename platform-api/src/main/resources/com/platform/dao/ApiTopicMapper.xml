@@ -9,14 +9,14 @@
         <result property="title" column="title"/>
         <result property="content" column="content"/>
         <result property="avatar" column="avatar"/>
-        <result property="item_pic_url" column="item_pic_url"/>
+        <result property="itemPicUrl" column="item_pic_url"/>
         <result property="subtitle" column="subtitle"/>
-        <result property="topic_category_id" column="topic_category_id"/>
-        <result property="price_info" column="price_info"/>
-        <result property="read_count" column="read_count"/>
-        <result property="scene_pic_url" column="scene_pic_url"/>
-        <result property="topic_template_id" column="topic_template_id"/>
-        <result property="topic_tag_id" column="topic_tag_id"/>
+        <result property="topicCategoryId" column="topic_category_id"/>
+        <result property="priceInfo" column="price_info"/>
+        <result property="readCount" column="read_count"/>
+        <result property="scenePicUrl" column="scene_pic_url"/>
+        <result property="topicTemplateId" column="topic_template_id"/>
+        <result property="topicTagId" column="topic_tag_id"/>
     </resultMap>
 
     <select id="queryObject" resultMap="topicMap">
@@ -46,37 +46,37 @@
     </select>
 
     <select id="queryTotal" resultType="int">
-		select count(*) from nideshop_topic 
+		select count(*) from nideshop_topic
 	</select>
 
     <insert id="save" parameterType="com.platform.entity.TopicVo" useGeneratedKeys="true" keyProperty="id">
 		insert into nideshop_topic
 		(
-			`title`, 
-			`content`, 
-			`avatar`, 
-			`item_pic_url`, 
-			`subtitle`, 
-			`topic_category_id`, 
-			`price_info`, 
-			`read_count`, 
-			`scene_pic_url`, 
-			`topic_template_id`, 
+			`title`,
+			`content`,
+			`avatar`,
+			`item_pic_url`,
+			`subtitle`,
+			`topic_category_id`,
+			`price_info`,
+			`read_count`,
+			`scene_pic_url`,
+			`topic_template_id`,
 			`topic_tag_id`
 		)
 		values
 		(
-			#{title}, 
-			#{content}, 
-			#{avatar}, 
-			#{item_pic_url},
+			#{title},
+			#{content},
+			#{avatar},
+			#{itemPicUrl},
 			#{subtitle},
-			#{topic_category_id},
-			#{price_info},
-			#{read_count},
-			#{scene_pic_url},
-			#{topic_template_id},
-			#{topic_tag_id}
+			#{topicCategoryId},
+			#{priceInfo},
+			#{readCount},
+			#{scenePicUrl},
+			#{topicTemplateId},
+			#{topicTagId}
 		)
 	</insert>
 
@@ -86,14 +86,14 @@
             <if test="title != null">`title` = #{title},</if>
             <if test="content != null">`content` = #{content},</if>
             <if test="avatar != null">`avatar` = #{avatar},</if>
-            <if test="item_pic_url != null">`item_pic_url` = #{item_pic_url},</if>
+            <if test="itemPicUrl != null">`item_pic_url` = #{itemPicUrl},</if>
             <if test="subtitle != null">`subtitle` = #{subtitle},</if>
-            <if test="topic_category_id != null">`topic_category_id` = #{topic_category_id},</if>
-            <if test="price_info != null">`price_info` = #{price_info},</if>
-            <if test="read_count != null">`read_count` = #{read_count},</if>
-            <if test="scene_pic_url != null">`scene_pic_url` = #{scene_pic_url},</if>
-            <if test="topic_template_id != null">`topic_template_id` = #{topic_template_id},</if>
-            <if test="topic_tag_id != null">`topic_tag_id` = #{topic_tag_id}</if>
+            <if test="topicCategoryId != null">`topic_category_id` = #{topicCategoryId},</if>
+            <if test="priceInfo != null">`price_info` = #{priceInfo},</if>
+            <if test="readCount != null">`read_count` = #{readCount},</if>
+            <if test="scenePicUrl != null">`scene_pic_url` = #{scenePicUrl},</if>
+            <if test="topicTemplateId != null">`topic_template_id` = #{topicTemplateId},</if>
+            <if test="topicTagId != null">`topic_tag_id` = #{topicTagId}</if>
         </set>
         where id = #{id}
     </update>

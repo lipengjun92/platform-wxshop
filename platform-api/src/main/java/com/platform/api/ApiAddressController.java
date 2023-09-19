@@ -40,7 +40,7 @@ public class ApiAddressController extends ApiBaseAction {
     @PostMapping("list")
     public Object list(@LoginUser UserVo loginUser) {
         Map<String, Object> param = new HashMap<String, Object>();
-        param.put("user_id", loginUser.getUserId());
+        param.put("userId", loginUser.getUserId());
         List<AddressVo> addressEntities = addressService.queryList(param);
         return toResponseSuccess(addressEntities);
     }
@@ -82,7 +82,7 @@ public class ApiAddressController extends ApiBaseAction {
             entity.setDetailInfo(addressJson.getString("detailInfo"));
             entity.setNationalCode(addressJson.getString("nationalCode"));
             entity.setTelNumber(addressJson.getString("telNumber"));
-            entity.setIs_default(addressJson.getInteger("is_default"));
+            entity.setIsDefault(addressJson.getInteger("isDefault"));
         }
         if (null == entity.getId() || entity.getId() == 0) {
             entity.setId(null);

@@ -1,7 +1,7 @@
 <view class="container">
     <view class="cate-nav">
         <scroll-view scroll-x="true" class="cate-nav-body" style="width: 750rpx;" scroll-left="{{scrollLeft}}">
-            <view  wx:for="{{navList}}" class="item {{ id == item.id ? 'active' : ''}}" data-id="{{item.id}}" data-index="{{index}}" bindtap="switchCate">
+            <view  wx:for="{{navList}}" class="item {{ id == item.id ? 'active' : ''}}" data-id="{{item.id}}" data-index="{{index}}" bindtap="switchCate" wx:key="id">
                 <view class="name">{{item.name}}</view>
             </view>
         </scroll-view>
@@ -11,13 +11,13 @@
     <view class="cate-item">
         <view class="h">
             <text class="name">{{currentCategory.name}}</text>
-            <text class="desc">{{currentCategory.front_name}}</text>
+            <text class="desc">{{currentCategory.frontName}}</text>
         </view>
         <view class="b">
-            <navigator class="item {{(iindex + 1) % 2 == 0 ? 'item-b' : ''}}"   url="/pages/goods/goods?id={{iitem.id}}" wx:for="{{goodsList}}" wx:for-item="iitem" wx:for-index="iindex" >
-                <image class="img" src="{{iitem.list_pic_url}}" background-size="cover"></image>
+            <navigator class="item {{(iindex + 1) % 2 == 0 ? 'item-b' : ''}}"   url="/pages/goods/goods?id={{iitem.id}}" wx:for="{{goodsList}}" wx:for-item="iitem" wx:for-index="iindex" wx:key="id">
+                <image class="img" src="{{iitem.listPicUrl}}" background-size="cover"></image>
                 <text class="name">{{iitem.name}}</text>
-                <text class="price">￥{{iitem.retail_price}}</text>
+                <text class="price">￥{{iitem.retailPrice}}</text>
             </navigator>
         </view>
     </view>

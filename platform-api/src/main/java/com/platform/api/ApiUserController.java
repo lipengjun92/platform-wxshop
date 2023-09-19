@@ -45,11 +45,11 @@ public class ApiUserController extends ApiBaseAction {
         String phone = jsonParams.getString("phone");
         // 一分钟之内不能重复发送短信
         SmsLogVo smsLogVo = userService.querySmsCodeByUserId(loginUser.getUserId());
-        if (null != smsLogVo && (System.currentTimeMillis() / 1000 - smsLogVo.getLog_date()) < 1 * 60) {
+        if (null != smsLogVo && (System.currentTimeMillis() / 1000 - smsLogVo.getLogDate()) < 1 * 60) {
             return toResponseFail("短信已发送");
         }
         //生成验证码
-        String sms_code = CharUtil.getRandomNum(4);
+        String smsCode = CharUtil.getRandomNum(4);
         //获取云存储配置信息
         SmsConfig config = sysConfigService.getConfigObject(Constant.SMS_CONFIG_KEY, SmsConfig.class);
         if (StringUtils.isNullOrEmpty(config)) {
@@ -68,18 +68,18 @@ public class ApiUserController extends ApiBaseAction {
         SmsSingleSenderResult result;
         int templateId = 23;
         try {
-            result = SmsUtil.crSendSms(config.getAppid(), config.getAppkey(), phone, templateId, new String[]{sms_code}, "");
+            result = SmsUtil.crSendSms(config.getAppid(), config.getAppkey(), phone, templateId, new String[]{smsCode}, "");
         } catch (Exception e) {
             return toResponseFail("短信发送失败");
         }
 
         if (result.result == 0) {
             smsLogVo = new SmsLogVo();
-            smsLogVo.setLog_date(System.currentTimeMillis() / 1000);
-            smsLogVo.setUser_id(loginUser.getUserId());
+            smsLogVo.setLogDate(System.currentTimeMillis() / 1000);
+            smsLogVo.setUserId(loginUser.getUserId());
             smsLogVo.setPhone(phone);
-            smsLogVo.setSms_code(templateId);
-            smsLogVo.setSms_text(sms_code);
+            smsLogVo.setSmsCode(templateId);
+            smsLogVo.setSmsText(smsCode);
             userService.saveSmsCodeLog(smsLogVo);
             return this.toResponseSuccess("短信发送成功");
         } else {
@@ -109,10 +109,10 @@ public class ApiUserController extends ApiBaseAction {
         JSONObject jsonParams = getJsonRequest();
         SmsLogVo smsLogVo = userService.querySmsCodeByUserId(loginUser.getUserId());
 
-        String mobile_code = jsonParams.getString("mobile_code");
+        String mobileCode = jsonParams.getString("mobileCode");
         String mobile = jsonParams.getString("mobile");
 
-        if (!mobile_code.equals(smsLogVo.getSms_text())) {
+        if (!mobileCode.equals(smsLogVo.getSmsText())) {
             return toResponseFail("验证码错误");
         }
         UserVo userVo = userService.queryObject(loginUser.getUserId());

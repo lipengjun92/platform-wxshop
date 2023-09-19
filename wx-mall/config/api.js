@@ -7,6 +7,7 @@ module.exports = {
     IndexUrlCategory: API_BASE_URL + 'index/category', //首页底部的分类及商品列表
     IndexUrlBanner: API_BASE_URL + 'index/banner', //首页banner
     IndexUrlChannel: API_BASE_URL + 'index/channel', //banner下的分类
+    Catalog: API_BASE_URL + 'catalog/',  //分类数据接口
     CatalogList: API_BASE_URL + 'catalog/index',  //分类目录全部分类数据接口
     CatalogCurrent: API_BASE_URL + 'catalog/current',  //分类目录当前分类数据接口
 

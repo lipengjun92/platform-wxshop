@@ -67,7 +67,7 @@ Page({
     let that = this;
 
     if (!this.data.isEditCart) {
-      util.request(api.CartChecked, { productIds: that.data.cartGoods[itemIndex].product_id, isChecked: that.data.cartGoods[itemIndex].checked ? 0 : 1 }, "POST", "application/json").then(function (res) {
+      util.request(api.CartChecked, { productIds: that.data.cartGoods[itemIndex].productId, isChecked: that.data.cartGoods[itemIndex].checked ? 0 : 1 }, "POST", "application/json").then(function (res) {
         if (res.errno === 0) {
           that.setData({
             cartGoods: res.data.cartList,
@@ -85,7 +85,7 @@ Page({
         if (index == itemIndex){
           element.checked = !element.checked;
         }
-        
+
         return element;
       });
 
@@ -110,7 +110,7 @@ Page({
 
     if (!this.data.isEditCart) {
       var productIds = this.data.cartGoods.map(function (v) {
-        return v.product_id;
+        return v.productId;
       });
       util.request(api.CartChecked, { productIds: productIds.join(','), isChecked: that.isCheckedAll() ? 0 : 1 }, "POST", "application/json").then(function (res) {
         if (res.errno === 0) {
@@ -199,7 +199,7 @@ Page({
     this.setData({
       cartGoods: this.data.cartGoods
     });
-    this.updateCart(cartItem.product_id, cartItem.goods_id, number, cartItem.id);
+    this.updateCart(cartItem.productId, cartItem.goodsId, number, cartItem.id);
   },
   addNumber: function (event) {
     let itemIndex = event.target.dataset.itemIndex;
@@ -209,7 +209,7 @@ Page({
     this.setData({
       cartGoods: this.data.cartGoods
     });
-    this.updateCart(cartItem.product_id, cartItem.goods_id, number, cartItem.id);
+    this.updateCart(cartItem.productId, cartItem.goodsId, number, cartItem.id);
 
   },
   checkoutOrder: function () {
@@ -251,7 +251,7 @@ Page({
 
     productIds = productIds.map(function (element, index, array) {
       if (element.checked == true) {
-        return element.product_id;
+        return element.productId;
       }
     });
 

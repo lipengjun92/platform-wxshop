@@ -7,21 +7,21 @@
     <resultMap type="com.platform.entity.CouponVo" id="couponMap">
         <result property="id" column="id"/>
         <result property="name" column="name"/>
-        <result property="type_money" column="type_money"/>
-        <result property="send_type" column="send_type"/>
-        <result property="min_amount" column="min_amount"/>
-        <result property="max_amount" column="max_amount"/>
-        <result property="send_start_date" column="send_start_date"/>
-        <result property="send_end_date" column="send_end_date"/>
-        <result property="use_start_date" column="use_start_date"/>
-        <result property="use_end_date" column="use_end_date"/>
-        <result property="min_goods_amount" column="min_goods_amount"/>
-        <result property="coupon_txt" column="coupon_txt"/>
-        <result property="user_id" column="user_id"/>
-        <result property="coupon_number" column="coupon_number"/>
-        <result property="min_transmit_num" column="min_transmit_num"/>
-        <result property="user_coupon_id" column="user_coupon_id"/>
-        <result property="coupon_status" column="coupon_status"/>
+        <result property="typeMoney" column="type_money"/>
+        <result property="sendType" column="send_type"/>
+        <result property="minAmount" column="min_amount"/>
+        <result property="maxAmount" column="max_amount"/>
+        <result property="sendStartDate" column="send_start_date"/>
+        <result property="sendEndDate" column="send_end_date"/>
+        <result property="useStartDate" column="use_start_date"/>
+        <result property="useEndDate" column="use_end_date"/>
+        <result property="minGoodsAmount" column="min_goods_amount"/>
+        <result property="couponTxt" column="coupon_txt"/>
+        <result property="userId" column="user_id"/>
+        <result property="couponNumber" column="coupon_number"/>
+        <result property="minTransmitNum" column="min_transmit_num"/>
+        <result property="userCouponId" column="user_coupon_id"/>
+        <result property="couponStatus" column="coupon_status"/>
     </resultMap>
 
     <select id="queryObject" resultMap="couponMap">
@@ -31,9 +31,9 @@
     <select id="queryList" resultMap="couponMap">
         select * from nideshop_coupon a
         where 1 = 1
-        <if test="send_types != null">
+        <if test="sendTypes != null">
             and send_type in
-            <foreach item="item" collection="send_types" open="(" separator="," close=")">
+            <foreach item="item" collection="sendTypes" open="(" separator="," close=")">
                 #{item}
             </foreach>
         </if>
@@ -54,29 +54,29 @@
     <insert id="save" parameterType="com.platform.entity.CouponVo" useGeneratedKeys="true" keyProperty="id">
 		insert into nideshop_coupon
 		(
-			`name`, 
-			`type_money`, 
-			`send_type`, 
-			`min_amount`, 
-			`max_amount`, 
-			`send_start_date`, 
-			`send_end_date`, 
-			`use_start_date`, 
-			`use_end_date`, 
+			`name`,
+			`type_money`,
+			`send_type`,
+			`min_amount`,
+			`max_amount`,
+			`send_start_date`,
+			`send_end_date`,
+			`use_start_date`,
+			`use_end_date`,
 			`min_goods_amount`
 		)
 		values
 		(
-			#{name}, 
-			#{type_money},
-			#{send_type},
-			#{min_amount},
-			#{max_amount},
-			#{send_start_date},
-			#{send_end_date},
-			#{use_start_date},
-			#{use_end_date},
-			#{min_goods_amount}
+			#{name},
+			#{typeMoney},
+			#{sendType},
+			#{minAmount},
+			#{maxAmount},
+			#{sendStartDate},
+			#{sendEndDate},
+			#{useStartDate},
+			#{useEndDate},
+			#{minGoodsAmount}
 		)
 	</insert>
 
@@ -84,16 +84,16 @@
         update nideshop_coupon
         <set>
             <if test="name != null">`name` = #{name},</if>
-            <if test="type_money != null">`type_money` = #{type_money},</if>
-            <if test="send_type != null">`send_type` = #{send_type},</if>
-            <if test="min_amount != null">`min_amount` = #{min_amount},</if>
-            <if test="max_amount != null">`max_amount` = #{max_amount},</if>
-            <if test="send_start_date != null">`send_start_date` = #{send_start_date},</if>
-            <if test="send_end_date != null">`send_end_date` = #{send_end_date},</if>
-            <if test="use_start_date != null">`use_start_date` = #{use_start_date},</if>
-            <if test="use_end_date != null">`use_end_date` = #{use_end_date},</if>
-            <if test="min_goods_amount != null">`min_goods_amount` = #{min_goods_amount}</if>
-            <if test="coupon_status != null">`coupon_status` = #{coupon_status}</if>
+            <if test="typeMoney != null">`type_money` = #{typeMoney},</if>
+            <if test="sendType != null">`send_type` = #{sendType},</if>
+            <if test="minAmount != null">`min_amount` = #{minAmount},</if>
+            <if test="maxAmount != null">`max_amount` = #{maxAmount},</if>
+            <if test="sendStartDate != null">`send_start_date` = #{sendStartDate},</if>
+            <if test="sendEndDate != null">`send_end_date` = #{sendEndDate},</if>
+            <if test="useStartDate != null">`use_start_date` = #{useStartDate},</if>
+            <if test="useEndDate != null">`use_end_date` = #{useEndDate},</if>
+            <if test="minGoodsAmount != null">`min_goods_amount` = #{minGoodsAmount}</if>
+            <if test="couponStatus != null">`coupon_status` = #{couponStatus}</if>
         </set>
         where id = #{id}
     </update>
@@ -101,9 +101,9 @@
     <update id="updateUserCoupon" parameterType="com.platform.entity.CouponVo">
         update nideshop_user_coupon
         <set>
-            <if test="coupon_status != null">`coupon_status` = #{coupon_status}</if>
+            <if test="couponStatus != null">`coupon_status` = #{couponStatus}</if>
         </set>
-        where id = #{user_coupon_id}
+        where id = #{userCouponId}
     </update>
 
     <delete id="delete">
@@ -122,20 +122,20 @@
         from nideshop_coupon a
         left join nideshop_user_coupon b on a.id = b.coupon_id
         where 1 = 1
-        <if test="user_id != null">
-            and b.`user_id` = #{user_id}
+        <if test="userId != null">
+            and b.`user_id` = #{userId}
         </if>
-        <if test="send_type != null">
-            and a.send_type = #{send_type}
+        <if test="sendType != null">
+            and a.send_type = #{sendType}
         </if>
-        <if test="coupon_status != null">
-            and b.coupon_status = #{coupon_status}
+        <if test="couponStatus != null">
+            and b.coupon_status = #{couponStatus}
         </if>
-        <if test="coupon_number != null">
-            and b.coupon_number = #{coupon_number}
+        <if test="couponNumber != null">
+            and b.coupon_number = #{couponNumber}
         </if>
-        <if test="source_key != null and source_key != ''">
-            and b.source_key = #{source_key}
+        <if test="sourceKey != null and source_key != ''">
+            and b.source_key = #{sourceKey}
         </if>
         <if test="unUsed != null and unUsed == true">
             and b.used_time is null and (b.order_id  is null or b.order_id =0)
@@ -169,8 +169,8 @@
         and a.use_end_date >= now()
         and now() >= a.use_start_date
         and b.id is null
-        <if test="send_type != null">
-            and a.send_type = #{send_type}
+        <if test="sendType != null">
+            and a.send_type = #{sendType}
         </if>
         limit 0, 1
     </select>
@@ -183,7 +183,7 @@
         and a.use_end_date >= now()
         and now() >= a.use_start_date
         and a.send_type in (1,4)
-        and b.user_id = #{user_id} and b.order_id is null
+        and b.user_id = #{userId} and b.order_id is null
     </select>
 
     <select id="getUserCoupon" resultMap="couponMap">

@@ -57,7 +57,7 @@ Page({
   },
   getList: function () {
     var that = this;
-    util.request(api.ApiRootUrl + 'api/catalog/' + that.data.currentCategory.cat_id)
+    util.request(api.Catalog + that.data.currentCategory.id)
       .then(function (res) {
         that.setData({
           categoryList: res.data,

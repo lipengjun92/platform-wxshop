@@ -16,10 +16,10 @@
 						<view class="item" v-for="(item, index) in commentList" :key="item.id">
 							<view class="info">
 								<view class="user">
-									<image class="avatar" :src="item.user_info.avatar"></image>
-									<text class="nickname">{{item.user_info.nickname}}</text>
+									<image class="avatar" :src="item.userInfo.avatar"></image>
+									<text class="nickname">{{item.userInfo.nickname}}</text>
 								</view>
-								<view class="time">{{item.add_time}}</view>
+								<view class="time">{{item.addTime}}</view>
 							</view>
 							<view class="comment">
 								{{item.content}}
@@ -43,7 +43,7 @@
 				</view>
 				<view class="b">
 					<navigator class="item" v-for="(item, index) in topicList" :key="index" :url="'../topicDetail/topicDetail?id='+item.id">
-						<image class="img" :src="item.scene_pic_url"></image>
+						<image class="img" :src="item.scenePicUrl"></image>
 						<text class="title">{{item.title}}</text>
 					</navigator>
 				</view>

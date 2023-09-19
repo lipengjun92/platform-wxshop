@@ -66,7 +66,7 @@ public class ApiPayController extends ApiBaseAction {
             return toResponsObject(400, "订单已取消", "");
         }
 
-        if (orderInfo.getPay_status() == 2) {
+        if (orderInfo.getPayStatus() == 2) {
             return toResponsObject(400, "订单已支付，请不要重复操作", "");
         }
 
@@ -84,9 +84,9 @@ public class ApiPayController extends ApiBaseAction {
             // 随机字符串
             parame.put("nonce_str", randomStr);
             // 商户订单编号
-            parame.put("out_trade_no", orderInfo.getOrder_sn());
+            parame.put("out_trade_no", orderInfo.getOrderSn());
             Map orderGoodsParam = new HashMap();
-            orderGoodsParam.put("order_id", orderId);
+            orderGoodsParam.put("orderId", orderId);
             // 商品描述
             parame.put("body", "微同商城-支付");
             //订单的商品
@@ -94,7 +94,7 @@ public class ApiPayController extends ApiBaseAction {
             if (null != orderGoods) {
                 String body = "微同商城-";
                 for (OrderGoodsVo goodsVo : orderGoods) {
-                    body = body + goodsVo.getGoods_name() + "、";
+                    body = body + goodsVo.getGoodsName() + "、";
                 }
                 if (body.length() > 0) {
                     body = body.substring(0, body.length() - 1);
@@ -103,13 +103,13 @@ public class ApiPayController extends ApiBaseAction {
                 parame.put("body", body);
             }
             //支付金额
-            parame.put("total_fee", orderInfo.getActual_price().multiply(new BigDecimal(100)).intValue());
+            parame.put("total_fee", orderInfo.getActualPrice().multiply(new BigDecimal(100)).intValue());
             // 回调地址
             parame.put("notify_url", ResourceUtil.getConfigByName("wx.notifyUrl"));
             // 交易类型APP
             parame.put("trade_type", ResourceUtil.getConfigByName("wx.tradeType"));
             parame.put("spbill_create_ip", getClientIp());
-            parame.put("openid", loginUser.getWeixin_openid());
+            parame.put("openid", loginUser.getWeixinOpenid());
             String sign = WechatUtil.arraySign(parame, ResourceUtil.getConfigByName("wx.paySignKey"));
             // 数字签证
             parame.put("sign", sign);
@@ -140,9 +140,9 @@ public class ApiPayController extends ApiBaseAction {
                     String paySign = WechatUtil.arraySign(resultObj, ResourceUtil.getConfigByName("wx.paySignKey"));
                     resultObj.put("paySign", paySign);
                     // 业务处理
-                    orderInfo.setPay_id(prepay_id);
+                    orderInfo.setPayId(prepay_id);
                     // 付款中
-                    orderInfo.setPay_status(1);
+                    orderInfo.setPayStatus(1);
                     orderService.update(orderInfo);
                     return toResponsObject(0, "微信统一订单下单成功", resultObj);
                 }
@@ -173,7 +173,7 @@ public class ApiPayController extends ApiBaseAction {
         // 随机字符串
         parame.put("nonce_str", randomStr);
         // 商户订单编号
-        parame.put("out_trade_no", orderDetail.getOrder_sn());
+        parame.put("out_trade_no", orderDetail.getOrderSn());
 
         String sign = WechatUtil.arraySign(parame, ResourceUtil.getConfigByName("wx.paySignKey"));
         // 数字签证
@@ -202,10 +202,10 @@ public class ApiPayController extends ApiBaseAction {
             // 业务处理
             OrderVo orderInfo = new OrderVo();
             orderInfo.setId(orderId);
-            orderInfo.setPay_status(2);
-            orderInfo.setOrder_status(201);
-            orderInfo.setShipping_status(0);
-            orderInfo.setPay_time(new Date());
+            orderInfo.setPayStatus(2);
+            orderInfo.setOrderStatus(201);
+            orderInfo.setShippingStatus(0);
+            orderInfo.setPayTime(new Date());
             orderService.update(orderInfo);
             return toResponseSuccess("支付成功");
         } else if ("USERPAYING".equals(trade_state)) {
@@ -268,10 +268,10 @@ public class ApiPayController extends ApiBaseAction {
                 logger.error("订单" + out_trade_no + "支付成功");
                 // 业务处理
                 OrderVo orderInfo = orderService.queryObjectByOrderSn(out_trade_no);
-                orderInfo.setPay_status(2);
-                orderInfo.setOrder_status(201);
-                orderInfo.setShipping_status(0);
-                orderInfo.setPay_time(new Date());
+                orderInfo.setPayStatus(2);
+                orderInfo.setOrderStatus(201);
+                orderInfo.setShippingStatus(0);
+                orderInfo.setPayTime(new Date());
                 orderService.update(orderInfo);
                 response.getWriter().write(setXml("SUCCESS", "OK"));
             }
@@ -294,7 +294,7 @@ public class ApiPayController extends ApiBaseAction {
             return toResponsObject(400, "订单已取消", "");
         }
 
-        if (orderInfo.getOrder_status() == 401 || orderInfo.getOrder_status() == 402) {
+        if (orderInfo.getOrderStatus() == 401 || orderInfo.getOrderStatus() == 402) {
             return toResponsObject(400, "订单已退款", "");
         }
 
@@ -307,10 +307,10 @@ public class ApiPayController extends ApiBaseAction {
         WechatRefundApiResult result = WechatUtil.wxRefund(orderInfo.getId().toString(),
                 10.01, 10.01);
         if (result.getResult_code().equals("SUCCESS")) {
-            if (orderInfo.getOrder_status() == 201) {
-                orderInfo.setOrder_status(401);
-            } else if (orderInfo.getOrder_status() == 300) {
-                orderInfo.setOrder_status(402);
+            if (orderInfo.getOrderStatus() == 201) {
+                orderInfo.setOrderStatus(401);
+            } else if (orderInfo.getOrderStatus() == 300) {
+                orderInfo.setOrderStatus(402);
             }
             orderService.update(orderInfo);
             return toResponsObject(400, "成功退款", "");

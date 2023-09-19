@@ -1,8 +1,8 @@
 <template>
 	<view>
 		<view class="userinfo">
-			<image class="userinfo-avatar" :src="userInfo.avatarUrl" background-size="cover"></image>
-			<text class="userinfo-nickname">{{userInfo.nickName}}</text>
+			<image class="userinfo-avatar" :src="userInfo.avatar" background-size="cover"></image>
+			<text class="userinfo-nickname">{{userInfo.nickname}}</text>
 		</view>
 		<view class="separate"></view>
 		<view>
@@ -102,7 +102,7 @@
 					return
 				}
 				util.request(api.BindMobile, {
-					mobile_code: e.detail.value.code,
+          mobileCode: e.detail.value.code,
 					mobile: mobile
 				}, "POST", "application/json").then(function(res) {
 					if (res.errno === 0) {

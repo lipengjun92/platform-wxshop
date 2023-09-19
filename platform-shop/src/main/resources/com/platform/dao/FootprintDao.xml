@@ -36,20 +36,20 @@
     </select>
 
     <select id="queryTotal" resultType="int">
-		select count(*) from nideshop_footprint 
+		select count(*) from nideshop_footprint
 	</select>
 
     <insert id="save" parameterType="com.platform.entity.FootprintEntity" useGeneratedKeys="true" keyProperty="id">
 		insert into nideshop_footprint
 		(
-			`user_id`, 
-			`goods_id`, 
+			`user_id`,
+			`goods_id`,
 			`add_time`
 		)
 		values
 		(
-			#{userId}, 
-			#{goodsId}, 
+			#{userId},
+			#{goodsId},
 			#{addTime}
 		)
 	</insert>

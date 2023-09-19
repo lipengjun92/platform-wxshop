@@ -47,10 +47,10 @@ public class ApiHelpIssueController extends ApiBaseAction {
      */
     @RequestMapping("/issueList")
     @IgnoreAuth
-    public Object issueList(Long type_id) {
+    public Object issueList(Long typeId) {
 
         Map params = new HashMap();
-        params.put("type_id", type_id);
+        params.put("typeId", typeId);
         List<HelpIssueVo> helpIssueList = helpIssueService.queryList(params);
 
         return toResponseSuccess(helpIssueList);

@@ -22,15 +22,15 @@
 						<view :class="'item ' + (isEditCart ? 'edit' : '')" v-for="(item, index) in cartGoods" :key="item.id">
 							<view :class="'checkbox ' + (item.checked ? 'checked' : '')" @tap="checkedItem" :data-item-index="index"></view>
 							<view class="cart-goods">
-								<image class="img" :src="item.list_pic_url"></image>
+								<image class="img" :src="item.listPicUrl"></image>
 								<view class="info">
 									<view class="t">
-										<text class="name">{{item.goods_name}}</text>
+										<text class="name">{{item.goodsName}}</text>
 										<text class="num">x{{item.number}}</text>
 									</view>
-									<view class="attr">{{ isEditCart ? '已选择:' : ''}}{{item.goods_specifition_name_value||''}}</view>
+									<view class="attr">{{ isEditCart ? '已选择:' : ''}}{{item.goodsSpecifitionNameValue||''}}</view>
 									<view class="b">
-										<text class="price">￥{{item.retail_price}}</text>
+										<text class="price">￥{{item.retailPrice}}</text>
 										<view class="selnum">
 											<view class="cut" @tap="cutNumber" :data-item-index="index">-</view>
 											<input :value="item.number" class="number" :disabled="true" type="number" />
@@ -100,7 +100,7 @@
 
 				if (!that.isEditCart) {
 					util.request(api.CartChecked, {
-						productIds: that.cartGoods[itemIndex].product_id,
+						productIds: that.cartGoods[itemIndex].productId,
 						isChecked: that.cartGoods[itemIndex].checked ? 0 : 1
 					}, "POST", "application/json").then(function(res) {
 						if (res.errno === 0) {
@@ -139,7 +139,7 @@
 
 				if (!that.isEditCart) {
 					var productIds = that.cartGoods.map(function(v) {
-						return v.product_id;
+						return v.productId;
 					});
 					util.request(api.CartChecked, {
 						productIds: productIds.join(','),
@@ -209,7 +209,7 @@
 				let number = (cartItem.number - 1 > 1) ? cartItem.number - 1 : 1;
 				cartItem.number = number;
 				this.cartGoods = this.cartGoods
-				this.updateCart(cartItem.product_id, cartItem.goods_id, number, cartItem.id);
+				this.updateCart(cartItem.productId, cartItem.goodsId, number, cartItem.id);
 			},
 			addNumber: function(event) {
 				let itemIndex = event.target.dataset.itemIndex;
@@ -217,7 +217,7 @@
 				let number = cartItem.number + 1;
 				cartItem.number = number;
 				this.cartGoods = this.cartGoods
-				this.updateCart(cartItem.product_id, cartItem.goods_id, number, cartItem.id);
+				this.updateCart(cartItem.productId, cartItem.goodsId, number, cartItem.id);
 
 			},
 			checkoutOrder: function() {
@@ -256,7 +256,7 @@
 
 				productIds = productIds.map(function(element, index, array) {
 					if (element.checked == true) {
-						return element.product_id;
+						return element.productId;
 					}
 				});
 

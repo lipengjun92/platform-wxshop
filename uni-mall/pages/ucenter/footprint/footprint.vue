@@ -2,15 +2,15 @@
 	<view class="container">
 		<view class="footprint" v-if="footprintList.length>0">
 			<view class="day-item" v-for="(item, index) in footprintList" :key="index">
-				<view class="day-hd">{{item[0].add_time}}</view>
+				<view class="day-hd">{{item[0].addTime}}</view>
 				<view class="day-list">
 					<view class="item" :data-footprint="iitem" @touchstart="touchStart" @touchend="touchEnd" @tap="deleteItem" v-for="(iitem, iindex) in item"
 					 :key="iitem.id">
-						<image class="img" :src="iitem.list_pic_url"></image>
+						<image class="img" :src="iitem.listPicUrl"></image>
 						<view class="info">
 							<view class="name">{{iitem.name||''}}</view>
-							<view class="subtitle">{{iitem.goods_brief||''}}</view>
-							<view class="price">￥{{iitem.retail_price||''}}</view>
+							<view class="subtitle">{{iitem.goodsBrief||''}}</view>
+							<view class="price">￥{{iitem.retailPrice||''}}</view>
 						</view>
 					</view>
 				</view>
@@ -76,16 +76,16 @@
 					});
 				} else {
 					uni.navigateTo({
-						url: '/pages/goods/goods?id=' + footprint.goods_id,
+						url: '/pages/goods/goods?id=' + footprint.goodsId,
 					});
 				}
 
 			},
-			//按下事件开始  
+			//按下事件开始
 			touchStart: function(e) {
 				this.touch_start = e.timeStamp
 			},
-			//按下事件结束  
+			//按下事件结束
 			touchEnd: function(e) {
 				this.touch_end = e.timeStamp
 			}

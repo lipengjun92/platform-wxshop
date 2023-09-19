@@ -35,7 +35,7 @@ Page({
     let orderInfo = that.data.orderInfo;
 
     setInterval(() => {
-      orderInfo.add_time -= 1;
+      orderInfo.addTime -= 1;
       that.setData({
         orderInfo: orderInfo,
       });
@@ -45,10 +45,10 @@ Page({
     let that = this;
     let orderInfo = that.data.orderInfo;
 
-    var order_status = orderInfo.order_status;
+    var orderStatus = orderInfo.orderStatus;
 
     var errorMessage = '';
-    switch (order_status){
+    switch (orderStatus){
       case 300: {
         errorMessage = '订单已发货';
         break;
@@ -74,12 +74,12 @@ Page({
         break;
       }
     }
-      
+
     if (errorMessage != '') {
       util.showErrorToast(errorMessage);
       return false;
     }
-    
+
     wx.showModal({
       title: '',
       content: '确定要取消此订单？',
@@ -138,10 +138,10 @@ Page({
       let that = this;
       let orderInfo = that.data.orderInfo;
 
-      var order_status = orderInfo.order_status;
+      var orderStatus = orderInfo.orderStatus;
 
       var errorMessage = '';
-      switch (order_status) {
+      switch (orderStatus) {
           // case 300: {
           //   errorMessage = '订单已发货';
           //   break;

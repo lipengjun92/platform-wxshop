@@ -4,14 +4,14 @@
 			<view class="item" v-for="(item, index) in comments" :key="item.id">
 				<view class="info">
 					<view class="user">
-						<image :src="item.user_info.avatar"></image>
-						<text>{{item.user_info.nickname||''}}</text>
+						<image :src="item.userInfo.avatar"></image>
+						<text>{{item.userInfo.nickname||''}}</text>
 					</view>
-					<view class="time">{{item.add_time||''}}</view>
+					<view class="time">{{item.addTime||''}}</view>
 				</view>
 				<view class="comment">{{item.content||''}}</view>
-				<view class="imgs" v-if="item.pic_list.length > 0">
-					<image class="img" v-for="(pitem, index) in item.pic_list" :key="pitem.id" :src="pitem.pic_url"></image>
+				<view class="imgs" v-if="item.picList.length > 0">
+					<image class="img" v-for="(pitem, index) in item.picList" :key="pitem.id" :src="pitem.picUrl"></image>
 				</view>
 			</view>
 		</view>

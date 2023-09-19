@@ -104,8 +104,8 @@ public class ApiOrderService {
         BigDecimal goodsTotalPrice;
         if (type.equals("cart")) {
             Map<String, Object> param = new HashMap<String, Object>();
-            param.put("user_id", loginUser.getUserId());
-            param.put("session_id", 1);
+            param.put("userId", loginUser.getUserId());
+            param.put("sessionId", 1);
             param.put("checked", 1);
             checkedGoodsList = apiCartMapper.queryList(param);
             if (null == checkedGoodsList) {
@@ -116,19 +116,19 @@ public class ApiOrderService {
             //统计商品总价
             goodsTotalPrice = new BigDecimal(0.00);
             for (CartVo cartItem : checkedGoodsList) {
-                goodsTotalPrice = goodsTotalPrice.add(cartItem.getRetail_price().multiply(new BigDecimal(cartItem.getNumber())));
+                goodsTotalPrice = goodsTotalPrice.add(cartItem.getRetailPrice().multiply(new BigDecimal(cartItem.getNumber())));
             }
         } else {
             BuyGoodsVo goodsVo = (BuyGoodsVo) J2CacheUtils.get(J2CacheUtils.SHOP_CACHE_NAME, "goods" + loginUser.getUserId());
             ProductVo productInfo = productService.queryObject(goodsVo.getProductId());
             //计算订单的费用
             //商品总价
-            goodsTotalPrice = productInfo.getRetail_price().multiply(new BigDecimal(goodsVo.getNumber()));
+            goodsTotalPrice = productInfo.getRetailPrice().multiply(new BigDecimal(goodsVo.getNumber()));
 
             CartVo cartVo = new CartVo();
             BeanUtils.copyProperties(productInfo, cartVo);
             cartVo.setNumber(goodsVo.getNumber());
-            cartVo.setProduct_id(goodsVo.getProductId());
+            cartVo.setProductId(goodsVo.getProductId());
             checkedGoodsList.add(cartVo);
         }
 
@@ -138,8 +138,8 @@ public class ApiOrderService {
         CouponVo couponVo = null;
         if (couponId != null && couponId != 0) {
             couponVo = apiCouponMapper.getUserCoupon(couponId);
-            if (couponVo != null && couponVo.getCoupon_status() == 1) {
-                couponPrice = couponVo.getType_money();
+            if (couponVo != null && couponVo.getCouponStatus() == 1) {
+                couponPrice = couponVo.getTypeMoney();
             }
         }
 
@@ -152,8 +152,8 @@ public class ApiOrderService {
 
         //
         OrderVo orderInfo = new OrderVo();
-        orderInfo.setOrder_sn(CommonUtil.generateOrderNumber());
-        orderInfo.setUser_id(loginUser.getUserId());
+        orderInfo.setOrderSn(CommonUtil.generateOrderNumber());
+        orderInfo.setUserId(loginUser.getUserId());
         //收货地址和运费
         orderInfo.setConsignee(addressVo.getUserName());
         orderInfo.setMobile(addressVo.getTelNumber());
@@ -163,28 +163,28 @@ public class ApiOrderService {
         orderInfo.setDistrict(addressVo.getCountyName());
         orderInfo.setAddress(addressVo.getDetailInfo());
         //
-        orderInfo.setFreight_price(freightPrice);
+        orderInfo.setFreightPrice(freightPrice);
         //留言
         orderInfo.setPostscript(postscript);
         //使用的优惠券
-        orderInfo.setCoupon_id(couponId);
-        orderInfo.setCoupon_price(couponPrice);
-        orderInfo.setAdd_time(new Date());
-        orderInfo.setGoods_price(goodsTotalPrice);
-        orderInfo.setOrder_price(orderTotalPrice);
-        orderInfo.setActual_price(actualPrice);
+        orderInfo.setCouponId(couponId);
+        orderInfo.setCouponPrice(couponPrice);
+        orderInfo.setAddTime(new Date());
+        orderInfo.setGoodsPrice(goodsTotalPrice);
+        orderInfo.setOrderPrice(orderTotalPrice);
+        orderInfo.setActualPrice(actualPrice);
         // 待付款
-        orderInfo.setOrder_status(0);
-        orderInfo.setShipping_status(0);
-        orderInfo.setPay_status(0);
-        orderInfo.setShipping_id(0);
-        orderInfo.setShipping_fee(new BigDecimal(0));
+        orderInfo.setOrderStatus(0);
+        orderInfo.setShippingStatus(0);
+        orderInfo.setPayStatus(0);
+        orderInfo.setShippingId(0);
+        orderInfo.setShippingFee(new BigDecimal(0));
         orderInfo.setIntegral(0);
-        orderInfo.setIntegral_money(new BigDecimal(0));
+        orderInfo.setIntegralMoney(new BigDecimal(0));
         if (type.equals("cart")) {
-            orderInfo.setOrder_type("1");
+            orderInfo.setOrderType("1");
         } else {
-            orderInfo.setOrder_type("4");
+            orderInfo.setOrderType("4");
         }
 
         //开启事务，插入订单信息和订单商品
@@ -198,17 +198,17 @@ public class ApiOrderService {
         List<OrderGoodsVo> orderGoodsData = new ArrayList<OrderGoodsVo>();
         for (CartVo goodsItem : checkedGoodsList) {
             OrderGoodsVo orderGoodsVo = new OrderGoodsVo();
-            orderGoodsVo.setOrder_id(orderInfo.getId());
-            orderGoodsVo.setGoods_id(goodsItem.getGoods_id());
-            orderGoodsVo.setGoods_sn(goodsItem.getGoods_sn());
-            orderGoodsVo.setProduct_id(goodsItem.getProduct_id());
-            orderGoodsVo.setGoods_name(goodsItem.getGoods_name());
-            orderGoodsVo.setList_pic_url(goodsItem.getList_pic_url());
-            orderGoodsVo.setMarket_price(goodsItem.getMarket_price());
-            orderGoodsVo.setRetail_price(goodsItem.getRetail_price());
+            orderGoodsVo.setOrderId(orderInfo.getId());
+            orderGoodsVo.setGoodsId(goodsItem.getGoodsId());
+            orderGoodsVo.setGoodsSn(goodsItem.getGoodsSn());
+            orderGoodsVo.setProductId(goodsItem.getProductId());
+            orderGoodsVo.setGoodsName(goodsItem.getGoodsName());
+            orderGoodsVo.setListPicUrl(goodsItem.getListPicUrl());
+            orderGoodsVo.setMarketPrice(goodsItem.getMarketPrice());
+            orderGoodsVo.setRetailPrice(goodsItem.getRetailPrice());
             orderGoodsVo.setNumber(goodsItem.getNumber());
-            orderGoodsVo.setGoods_specifition_name_value(goodsItem.getGoods_specifition_name_value());
-            orderGoodsVo.setGoods_specifition_ids(goodsItem.getGoods_specifition_ids());
+            orderGoodsVo.setGoodsSpecifitionNameValue(goodsItem.getGoodsSpecifitionNameValue());
+            orderGoodsVo.setGoodsSpecifitionIds(goodsItem.getGoodsSpecifitionIds());
             orderGoodsData.add(orderGoodsVo);
             apiOrderGoodsMapper.save(orderGoodsVo);
         }
@@ -223,8 +223,8 @@ public class ApiOrderService {
         //
         resultObj.put("data", orderInfoMap);
         // 优惠券标记已用
-        if (couponVo != null && couponVo.getCoupon_status() == 1) {
-            couponVo.setCoupon_status(2);
+        if (couponVo != null && couponVo.getCouponStatus() == 1) {
+            couponVo.setCouponStatus(2);
             apiCouponMapper.updateUserCoupon(couponVo);
         }
 

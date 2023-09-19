@@ -54,13 +54,13 @@ public class ApiCommentController extends ApiBaseAction {
         String content = jsonParam.getString("content");
         JSONArray imagesList = jsonParam.getJSONArray("imagesList");
         CommentVo commentEntity = new CommentVo();
-        commentEntity.setType_id(typeId);
-        commentEntity.setValue_id(valueId);
+        commentEntity.setTypeId(typeId);
+        commentEntity.setValueId(valueId);
         commentEntity.setContent(content);
         commentEntity.setStatus(0);
         //
-        commentEntity.setAdd_time(System.currentTimeMillis() / 1000);
-        commentEntity.setUser_id(loginUser.getUserId());
+        commentEntity.setAddTime(System.currentTimeMillis() / 1000);
+        commentEntity.setUserId(loginUser.getUserId());
         commentEntity.setContent(Base64Util.encode(commentEntity.getContent()));
         Integer insertId = commentService.save(commentEntity);
         //
@@ -69,9 +69,9 @@ public class ApiCommentController extends ApiBaseAction {
             for (Object imgLink : imagesList) {
                 i++;
                 CommentPictureVo pictureVo = new CommentPictureVo();
-                pictureVo.setComment_id(insertId);
-                pictureVo.setPic_url(imgLink.toString());
-                pictureVo.setSort_order(i);
+                pictureVo.setCommentId(insertId);
+                pictureVo.setPicUrl(imgLink.toString());
+                pictureVo.setSortOrder(i);
                 commentPictureService.save(pictureVo);
             }
         }
@@ -79,26 +79,26 @@ public class ApiCommentController extends ApiBaseAction {
         if (insertId > 0 && typeId == 0) {
             // 当前评价的次数
             Map param = new HashMap();
-            param.put("value_id", valueId);
+            param.put("valueId", valueId);
             List<CommentVo> commentVos = commentService.queryList(param);
             boolean hasComment = false;
             for (CommentVo commentVo : commentVos) {
-                if (commentVo.getUser_id().equals(loginUser.getUserId())
+                if (commentVo.getUserId().equals(loginUser.getUserId())
                         && !commentVo.getId().equals(insertId)) {
                     hasComment = true;
                 }
             }
             if (!hasComment) {
                 Map couponParam = new HashMap();
-                couponParam.put("send_type", 6);
+                couponParam.put("sendType", 6);
                 CouponVo newCouponConfig = apiCouponService.queryMaxUserEnableCoupon(couponParam);
                 if (null != newCouponConfig
-                        && newCouponConfig.getMin_transmit_num() >= commentVos.size()) {
+                        && newCouponConfig.getMinTransmitNum() >= commentVos.size()) {
                     UserCouponVo userCouponVo = new UserCouponVo();
-                    userCouponVo.setAdd_time(new Date());
-                    userCouponVo.setCoupon_id(newCouponConfig.getId());
-                    userCouponVo.setCoupon_number(CharUtil.getRandomString(12));
-                    userCouponVo.setUser_id(loginUser.getUserId());
+                    userCouponVo.setAddTime(new Date());
+                    userCouponVo.setCouponId(newCouponConfig.getId());
+                    userCouponVo.setCouponNumber(CharUtil.getRandomString(12));
+                    userCouponVo.setUserId(loginUser.getUserId());
                     apiUserCouponService.save(userCouponVo);
                     resultObj.put("coupon", newCouponConfig);
                 }
@@ -119,8 +119,8 @@ public class ApiCommentController extends ApiBaseAction {
         Map<String, Object> resultObj = new HashMap();
         //
         Map param = new HashMap();
-        param.put("type_id", typeId);
-        param.put("value_id", valueId);
+        param.put("typeId", typeId);
+        param.put("valueId", valueId);
         Integer allCount = commentService.queryTotal(param);
         Integer hasPicCount = commentService.queryhasPicTotal(param);
         //
@@ -146,8 +146,8 @@ public class ApiCommentController extends ApiBaseAction {
         Map<String, Object> resultObj = new HashMap();
         List<CommentVo> commentList = new ArrayList();
         Map param = new HashMap();
-        param.put("type_id", typeId);
-        param.put("value_id", valueId);
+        param.put("typeId", typeId);
+        param.put("valueId", valueId);
         param.put("page", page);
         param.put("limit", size);
         if (StringUtils.isNullOrEmpty(sort)) {
@@ -171,12 +171,12 @@ public class ApiCommentController extends ApiBaseAction {
         //
         for (CommentVo commentItem : commentList) {
             commentItem.setContent(Base64Util.decode(commentItem.getContent()));
-            commentItem.setUser_info(userService.queryObject(commentItem.getUser_id()));
+            commentItem.setUserInfo(userService.queryObject(commentItem.getUserId()));
 
             Map paramPicture = new HashMap();
-            paramPicture.put("comment_id", commentItem.getId());
+            paramPicture.put("commentId", commentItem.getId());
             List<CommentPictureVo> commentPictureEntities = commentPictureService.queryList(paramPicture);
-            commentItem.setPic_list(commentPictureEntities);
+            commentItem.setPicList(commentPictureEntities);
         }
         return toResponseSuccess(pageUtil);
     }

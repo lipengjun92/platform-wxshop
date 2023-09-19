@@ -46,7 +46,7 @@ public class ApiCouponController extends ApiBaseAction {
     @PostMapping("/list")
     public Object list(@LoginUser UserVo loginUser) {
         Map param = new HashMap();
-        param.put("user_id", loginUser.getUserId());
+        param.put("userId", loginUser.getUserId());
         List<CouponVo> couponVos = apiCouponService.queryUserCoupons(param);
         return toResponseSuccess(couponVos);
     }
@@ -60,30 +60,30 @@ public class ApiCouponController extends ApiBaseAction {
         BigDecimal goodsTotalPrice = new BigDecimal(0.00);
         if (type.equals("cart")) {
             Map param = new HashMap();
-            param.put("user_id", loginUser.getUserId());
+            param.put("userId", loginUser.getUserId());
             List<CartVo> cartList = apiCartService.queryList(param);
             //获取购物车统计信息
             for (CartVo cartItem : cartList) {
                 if (null != cartItem.getChecked() && 1 == cartItem.getChecked()) {
-                    goodsTotalPrice = goodsTotalPrice.add(cartItem.getRetail_price().multiply(new BigDecimal(cartItem.getNumber())));
+                    goodsTotalPrice = goodsTotalPrice.add(cartItem.getRetailPrice().multiply(new BigDecimal(cartItem.getNumber())));
                 }
             }
         } else { // 是直接购买的
             BuyGoodsVo goodsVo = (BuyGoodsVo) J2CacheUtils.get(J2CacheUtils.SHOP_CACHE_NAME, "goods" + loginUser.getUserId() + "");
             ProductVo productInfo = apiProductService.queryObject(goodsVo.getProductId());
             //商品总价
-            goodsTotalPrice = productInfo.getRetail_price().multiply(new BigDecimal(goodsVo.getNumber()));
+            goodsTotalPrice = productInfo.getRetailPrice().multiply(new BigDecimal(goodsVo.getNumber()));
         }
 
         // 获取可用优惠券
         Map param = new HashMap();
-        param.put("user_id", loginUser.getUserId());
-        param.put("coupon_status", 1);
+        param.put("userId", loginUser.getUserId());
+        param.put("couponStatus", 1);
         List<CouponVo> couponVos = apiCouponService.queryUserCoupons(param);
         List<CouponVo> useCoupons = new ArrayList<>();
         List<CouponVo> notUseCoupons = new ArrayList<>();
         for (CouponVo couponVo : couponVos) {
-            if (goodsTotalPrice.compareTo(couponVo.getMin_goods_amount()) >= 0) { // 可用优惠券
+            if (goodsTotalPrice.compareTo(couponVo.getMinGoodsAmount()) >= 0) { // 可用优惠券
                 couponVo.setEnabled(1);
                 useCoupons.add(couponVo);
             } else {
@@ -102,28 +102,28 @@ public class ApiCouponController extends ApiBaseAction {
     @PostMapping("exchange")
     public Object exchange(@LoginUser UserVo loginUser) {
         JSONObject jsonParam = getJsonRequest();
-        String coupon_number = jsonParam.getString("coupon_number");
-        if (StringUtils.isNullOrEmpty(coupon_number)) {
+        String couponNumber = jsonParam.getString("couponNumber");
+        if (StringUtils.isNullOrEmpty(couponNumber)) {
             return toResponseFail("当前优惠码无效");
         }
         //
         Map param = new HashMap();
-        param.put("coupon_number", coupon_number);
+        param.put("couponNumber", couponNumber);
         List<UserCouponVo> couponVos = apiUserCouponService.queryList(param);
         UserCouponVo userCouponVo = null;
         if (null == couponVos || couponVos.size() == 0) {
             return toResponseFail("当前优惠码无效");
         }
         userCouponVo = couponVos.get(0);
-        if (null != userCouponVo.getUser_id() && !userCouponVo.getUser_id().equals(0L)) {
+        if (null != userCouponVo.getUserId() && !userCouponVo.getUserId().equals(0L)) {
             return toResponseFail("当前优惠码已经兑换");
         }
-        CouponVo couponVo = apiCouponService.queryObject(userCouponVo.getCoupon_id());
-        if (null == couponVo || null == couponVo.getUse_end_date() || couponVo.getUse_end_date().before(new Date())) {
+        CouponVo couponVo = apiCouponService.queryObject(userCouponVo.getCouponId());
+        if (null == couponVo || null == couponVo.getUseEndDate() || couponVo.getUseEndDate().before(new Date())) {
             return toResponseFail("当前优惠码已经过期");
         }
-        userCouponVo.setUser_id(loginUser.getUserId());
-        userCouponVo.setAdd_time(new Date());
+        userCouponVo.setUserId(loginUser.getUserId());
+        userCouponVo.setAddTime(new Date());
         apiUserCouponService.update(userCouponVo);
         return toResponseSuccess(userCouponVo);
     }
@@ -140,7 +140,7 @@ public class ApiCouponController extends ApiBaseAction {
         Integer smscode = jsonParam.getInteger("smscode");
         // 校验短信码
         SmsLogVo smsLogVo = apiUserService.querySmsCodeByUserId(loginUser.getUserId());
-        if (null != smsLogVo && smsLogVo.getSms_code() != smscode) {
+        if (null != smsLogVo && smsLogVo.getSmsCode() != smscode) {
             return toResponseFail("短信校验失败");
         }
         // 更新手机号码
@@ -156,22 +156,22 @@ public class ApiCouponController extends ApiBaseAction {
         }
         // 是否领取过了
         Map params = new HashMap();
-        params.put("user_id", loginUser.getUserId());
-        params.put("send_type", 4);
+        params.put("userId", loginUser.getUserId());
+        params.put("sendType", 4);
         List<CouponVo> couponVos = apiCouponService.queryUserCoupons(params);
         if (null != couponVos && couponVos.size() > 0) {
             return toResponseFail("已经领取过，不能重复领取");
         }
         // 领取
         Map couponParam = new HashMap();
-        couponParam.put("send_type", 4);
+        couponParam.put("sendType", 4);
         CouponVo newCouponConfig = apiCouponService.queryMaxUserEnableCoupon(couponParam);
         if (null != newCouponConfig) {
             UserCouponVo userCouponVo = new UserCouponVo();
-            userCouponVo.setAdd_time(new Date());
-            userCouponVo.setCoupon_id(newCouponConfig.getId());
-            userCouponVo.setCoupon_number(CharUtil.getRandomString(12));
-            userCouponVo.setUser_id(loginUser.getUserId());
+            userCouponVo.setAddTime(new Date());
+            userCouponVo.setCouponId(newCouponConfig.getId());
+            userCouponVo.setCouponNumber(CharUtil.getRandomString(12));
+            userCouponVo.setUserId(loginUser.getUserId());
             apiUserCouponService.save(userCouponVo);
             return toResponseSuccess(userCouponVo);
         } else {
@@ -188,24 +188,24 @@ public class ApiCouponController extends ApiBaseAction {
         JSONObject jsonParam = getJsonRequest();
         // 是否领取过了
         Map params = new HashMap();
-        params.put("user_id", loginUser.getUserId());
-        params.put("send_type", 2);
-        params.put("source_key", sourceKey);
+        params.put("userId", loginUser.getUserId());
+        params.put("sendType", 2);
+        params.put("sourceKey", sourceKey);
         List<CouponVo> couponVos = apiCouponService.queryUserCoupons(params);
         if (null != couponVos && couponVos.size() > 0) {
             return toResponsObject(2, "已经领取过", couponVos);
         }
         // 领取
         Map couponParam = new HashMap();
-        couponParam.put("send_type", 2);
+        couponParam.put("sendType", 2);
         CouponVo newCouponConfig = apiCouponService.queryMaxUserEnableCoupon(couponParam);
         if (null != newCouponConfig) {
             UserCouponVo userCouponVo = new UserCouponVo();
-            userCouponVo.setAdd_time(new Date());
-            userCouponVo.setCoupon_id(newCouponConfig.getId());
-            userCouponVo.setCoupon_number(CharUtil.getRandomString(12));
-            userCouponVo.setUser_id(loginUser.getUserId());
-            userCouponVo.setSource_key(sourceKey);
+            userCouponVo.setAddTime(new Date());
+            userCouponVo.setCouponId(newCouponConfig.getId());
+            userCouponVo.setCouponNumber(CharUtil.getRandomString(12));
+            userCouponVo.setUserId(loginUser.getUserId());
+            userCouponVo.setSourceKey(sourceKey);
             userCouponVo.setReferrer(referrer);
             apiUserCouponService.save(userCouponVo);
             //
@@ -213,9 +213,9 @@ public class ApiCouponController extends ApiBaseAction {
             userCouponVos.add(userCouponVo);
             //
             params = new HashMap();
-            params.put("user_id", loginUser.getUserId());
-            params.put("send_type", 2);
-            params.put("source_key", sourceKey);
+            params.put("userId", loginUser.getUserId());
+            params.put("sendType", 2);
+            params.put("sourceKey", sourceKey);
             couponVos = apiCouponService.queryUserCoupons(params);
             return toResponseSuccess(couponVos);
         } else {

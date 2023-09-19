@@ -38,8 +38,8 @@ public class ApiCollectController extends ApiBaseAction {
     public Object list(@LoginUser UserVo loginUser, Integer typeId) {
 
         Map param = new HashMap();
-        param.put("user_id", loginUser.getUserId());
-        param.put("type_id", typeId);
+        param.put("userId", loginUser.getUserId());
+        param.put("typeId", typeId);
         List<CollectVo> collectEntities = collectService.queryList(param);
 
 //        Query query = new Query(param);
@@ -59,20 +59,20 @@ public class ApiCollectController extends ApiBaseAction {
         Integer valueId = jsonParam.getInteger("valueId");
 
         Map param = new HashMap();
-        param.put("user_id", loginUser.getUserId());
-        param.put("type_id", typeId);
-        param.put("value_id", valueId);
+        param.put("userId", loginUser.getUserId());
+        param.put("typeId", typeId);
+        param.put("valueId", valueId);
         List<CollectVo> collectEntities = collectService.queryList(param);
         //
         Integer collectRes = null;
         String handleType = "add";
         if (null == collectEntities || collectEntities.size() < 1) {
             CollectVo collectEntity = new CollectVo();
-            collectEntity.setAdd_time(System.currentTimeMillis() / 1000);
-            collectEntity.setType_id(typeId);
-            collectEntity.setValue_id(valueId);
-            collectEntity.setIs_attention(0);
-            collectEntity.setUser_id(loginUser.getUserId());
+            collectEntity.setAddTime(System.currentTimeMillis() / 1000);
+            collectEntity.setTypeId(typeId);
+            collectEntity.setValueId(valueId);
+            collectEntity.setIsAttention(0);
+            collectEntity.setUserId(loginUser.getUserId());
             //添加收藏
             collectRes = collectService.save(collectEntity);
         } else {

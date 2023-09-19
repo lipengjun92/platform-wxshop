@@ -6,10 +6,10 @@
     <!-- 可根据自己的需求，是否要使用 -->
     <resultMap type="com.platform.entity.GoodsSpecificationVo" id="goodsSpecificationMap">
         <result property="id" column="id"/>
-        <result property="goods_id" column="goods_id"/>
-        <result property="specification_id" column="specification_id"/>
+        <result property="goodsId" column="goods_id"/>
+        <result property="specificationId" column="specification_id"/>
         <result property="value" column="value"/>
-        <result property="pic_url" column="pic_url"/>
+        <result property="picUrl" column="pic_url"/>
         <result property="name" column="name"/>
     </resultMap>
 
@@ -30,8 +30,8 @@
             inner join nideshop_specification s on gs.specification_id= s.id
         </if>
         <where>
-            <if test="goods_id != null">
-                and gs.goods_id = #{goods_id}
+            <if test="goodsId != null">
+                and gs.goods_id = #{goodsId}
             </if>
             <if test="ids != null">
                  and  gs.id in
@@ -54,33 +54,33 @@
     </select>
 
     <select id="queryTotal" resultType="int">
-		select count(*) from nideshop_goods_specification 
+		select count(*) from nideshop_goods_specification
 	</select>
 
     <insert id="save" parameterType="com.platform.entity.GoodsSpecificationVo" useGeneratedKeys="true" keyProperty="id">
 		insert into nideshop_goods_specification
 		(
-			`goods_id`, 
-			`specification_id`, 
-			`value`, 
+			`goods_id`,
+			`specification_id`,
+			`value`,
 			`pic_url`
 		)
 		values
 		(
-			#{goods_id}, 
-			#{specification_id},
-			#{value}, 
-			#{pic_url}
+			#{goodsId},
+			#{specificationId},
+			#{value},
+			#{picUrl}
 		)
 	</insert>
 
     <update id="update" parameterType="com.platform.entity.GoodsSpecificationVo">
         update nideshop_goods_specification
         <set>
-            <if test="goods_id != null">`goods_id` = #{goods_id},</if>
-            <if test="specification_id != null">`specification_id` = #{specification_id},</if>
+            <if test="goodsId != null">`goods_id` = #{goodsId},</if>
+            <if test="specificationId != null">`specification_id` = #{specificationId},</if>
             <if test="value != null">`value` = #{value},</if>
-            <if test="pic_url != null">`pic_url` = #{pic_url}</if>
+            <if test="picUrl != null">`pic_url` = #{picUrl}</if>
         </set>
         where id = #{id}
     </update>

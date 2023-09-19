@@ -25,9 +25,9 @@ Page({
         } else {
           tmpFootPrint = [];
         }
-       
+
         that.setData({
-          footprintList: tmpFootPrint 
+          footprintList: tmpFootPrint
         });
       }
     });
@@ -52,7 +52,7 @@ Page({
                   complete:function(){
                     that.getFootprintList();
                   }
-                });                
+                });
               } else{
                 util.showErrorToast(res.errmsg);
               }
@@ -62,10 +62,10 @@ Page({
       });
     } else {
       wx.navigateTo({
-        url: '/pages/goods/goods?id=' + footprint.goods_id,
+        url: '/pages/goods/goods?id=' + footprint.goodsId,
       });
     }
-    
+
   },
   onLoad: function (options) {
     this.getFootprintList();
@@ -83,14 +83,14 @@ Page({
   onUnload: function () {
     // 页面关闭
   },
-  //按下事件开始  
+  //按下事件开始
   touchStart: function (e) {
     let that = this;
     that.setData({
       touch_start: e.timeStamp
     })
   },
-  //按下事件结束  
+  //按下事件结束
   touchEnd: function (e) {
     let that = this;
     that.setData({

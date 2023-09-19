@@ -24,7 +24,7 @@ public class ApiUserUtils {
     }
 
     //替换字符串
-    public static String getUserMessage(String access_token, String openid) {
-        return String.format(ResourceUtil.getConfigByName("wx.userMessage"), access_token, openid);
+    public static String getUserMessage(String accessToken, String openid) {
+        return String.format(ResourceUtil.getConfigByName("wx.userMessage"), accessToken, openid);
     }
 }

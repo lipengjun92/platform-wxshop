@@ -2,11 +2,11 @@
 	<view class="container">
 		<scroll-view v-if="topicList.length >0" class="topic-list" :scroll-y="true" :scroll-top="scrollTop">
 			<navigator class="item" v-for="(item, index) in topicList" :key="index" :url="'../topicDetail/topicDetail?id='+item.id">
-				<image class="img" :src="item.scene_pic_url"></image>
+				<image class="img" :src="item.scenePicUrl"></image>
 				<view class="info">
 					<text class="title">{{item.title}}</text>
 					<text class="desc">{{item.subtitle}}</text>
-					<text class="price">{{item.price_info}}元起</text>
+					<text class="price">{{item.priceInfo}}元起</text>
 				</view>
 			</navigator>
 			<view class="page" v-if="showPage">

@@ -9,7 +9,7 @@
 					<view class="content">
 						<view class="left">
 							<view class="name">{{item.name}}</view>
-							<view class="time">有效期至{{item.use_end_date}}</view>
+							<view class="time">有效期至{{item.useEndDate}}</view>
 						</view>
 						<view class="right">
 							<image v-if="item.enabled==1" class='mid-img' src='../../../static/images/coupon_ksy.png'></image>
@@ -17,7 +17,7 @@
 						</view>
 					</view>
 					<view class="condition">
-						<text class="txt">满￥{{item.min_goods_amount}} 减￥{{item.type_money}}</text>
+						<text class="txt">满￥{{item.minGoodsAmount}} 减￥{{item.typeMoney}}</text>
 					</view>
 				</view>
 			</block>

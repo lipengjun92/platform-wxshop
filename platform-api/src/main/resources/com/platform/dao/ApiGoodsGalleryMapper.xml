@@ -6,10 +6,10 @@
     <!-- 可根据自己的需求，是否要使用 -->
     <resultMap type="com.platform.entity.GoodsGalleryVo" id="goodsGalleryMap">
         <result property="id" column="id"/>
-        <result property="goods_id" column="goods_id"/>
-        <result property="img_url" column="img_url"/>
-        <result property="img_desc" column="img_desc"/>
-        <result property="sort_order" column="sort_order"/>
+        <result property="goodsId" column="goods_id"/>
+        <result property="imgUrl" column="img_url"/>
+        <result property="imgDesc" column="img_desc"/>
+        <result property="sortOrder" column="sort_order"/>
     </resultMap>
 
     <select id="queryObject" resultMap="goodsGalleryMap">
@@ -26,8 +26,8 @@
         </if>
         from nideshop_goods_gallery
         <where>
-            <if test="goods_id != null">
-                and goods_id = #{goods_id}
+            <if test="goodsId != null">
+                and goods_id = #{goodsId}
             </if>
         </where>
         <choose>
@@ -44,33 +44,33 @@
     </select>
 
     <select id="queryTotal" resultType="int">
-		select count(*) from nideshop_goods_gallery 
+		select count(*) from nideshop_goods_gallery
 	</select>
 
     <insert id="save" parameterType="com.platform.entity.GoodsGalleryVo" useGeneratedKeys="true" keyProperty="id">
 		insert into nideshop_goods_gallery
 		(
-			`goods_id`, 
-			`img_url`, 
-			`img_desc`, 
+			`goods_id`,
+			`img_url`,
+			`img_desc`,
 			`sort_order`
 		)
 		values
 		(
-			#{goods_id},
-			#{img_url},
-			#{img_desc},
-			#{sort_order}
+			#{goodsId},
+			#{imgUrl},
+			#{imgDesc},
+			#{sortOrder}
 		)
 	</insert>
 
     <update id="update" parameterType="com.platform.entity.GoodsGalleryVo">
         update nideshop_goods_gallery
         <set>
-            <if test="goods_id != null">`goods_id` = #{goods_id},</if>
-            <if test="img_url != null">`img_url` = #{img_url},</if>
-            <if test="img_desc != null">`img_desc` = #{img_desc},</if>
-            <if test="sort_order != null">`sort_order` = #{sort_order}</if>
+            <if test="goodsId != null">`goods_id` = #{goodsId},</if>
+            <if test="imgUrl != null">`img_url` = #{imgUrl},</if>
+            <if test="imgDesc != null">`img_desc` = #{imgDesc},</if>
+            <if test="sortOrder != null">`sort_order` = #{sortOrder}</if>
         </set>
         where id = #{id}
     </update>

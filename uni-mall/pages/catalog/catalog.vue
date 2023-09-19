@@ -13,8 +13,8 @@
 			</scroll-view>
 			<scroll-view class="cate" :scroll-y="true">
 				<navigator url="url" class="banner">
-					<image class="image" :src="currentCategory.wap_banner_url"></image>
-					<view class="txt">{{currentCategory.front_name}}</view>
+					<image class="image" :src="currentCategory.wapBannerUrl"></image>
+					<view class="txt">{{currentCategory.frontName}}</view>
 				</navigator>
 				<view class="hd">
 					<text class="line"></text>
@@ -23,7 +23,7 @@
 				<view class="bd">
 					<navigator :url="'/pages/category/category?id='+item.id" :class="'item ' + ((index+1) % 3 == 0 ? 'last' : '')" v-for="(item, index) in currentCategory.subCategoryList"
 					 :key="index">
-						<image class="icon" :src="item.wap_banner_url"></image>
+						<image class="icon" :src="item.wapBannerUrl"></image>
 						<text class="txt">{{item.name}}</text>
 					</navigator>
 				</view>
@@ -74,7 +74,7 @@
 			},
 			getList: function() {
 				var that = this;
-				util.request(api.ApiRootUrl + 'api/catalog/' + that.data.currentCategory.cat_id)
+				util.request(api.Catalog + that.data.currentCategory.id)
 					.then(function(res) {
 						that.categoryList = res.data
 					});

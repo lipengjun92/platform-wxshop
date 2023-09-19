@@ -7,7 +7,7 @@
     <resultMap type="com.platform.entity.SpecificationVo" id="specificationMap">
         <result property="id" column="id"/>
         <result property="name" column="name"/>
-        <result property="sort_order" column="sort_order"/>
+        <result property="sortOrder" column="sort_order"/>
     </resultMap>
 
     <select id="queryObject" resultMap="specificationMap">
@@ -30,19 +30,19 @@
     </select>
 
     <select id="queryTotal" resultType="int">
-		select count(*) from nideshop_specification 
+		select count(*) from nideshop_specification
 	</select>
 
     <insert id="save" parameterType="com.platform.entity.SpecificationVo" useGeneratedKeys="true" keyProperty="id">
 		insert into nideshop_specification
 		(
-			`name`, 
+			`name`,
 			`sort_order`
 		)
 		values
 		(
-			#{name}, 
-			#{sort_order}
+			#{name},
+			#{sortOrder}
 		)
 	</insert>
 
@@ -50,7 +50,7 @@
         update nideshop_specification
         <set>
             <if test="name != null">`name` = #{name},</if>
-            <if test="sort_order != null">`sort_order` = #{sort_order}</if>
+            <if test="sortOrder != null">`sort_order` = #{sortOrder}</if>
         </set>
         where id = #{id}
     </update>

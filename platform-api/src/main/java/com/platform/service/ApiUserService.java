@@ -44,7 +44,7 @@ public class ApiUserService {
         user.setMobile(mobile);
         user.setUsername(mobile);
         user.setPassword(DigestUtils.sha256Hex(password));
-        user.setRegister_time(new Date());
+        user.setRegisterTime(new Date());
         userDao.save(user);
     }
 
@@ -80,8 +80,8 @@ public class ApiUserService {
         return user.getUserId();
     }
 
-    public SmsLogVo querySmsCodeByUserId(Long user_id) {
-        return userDao.querySmsCodeByUserId(user_id);
+    public SmsLogVo querySmsCodeByUserId(Long userId) {
+        return userDao.querySmsCodeByUserId(userId);
     }
 
 
@@ -91,7 +91,7 @@ public class ApiUserService {
 
     public String getUserLevel(UserVo loginUser) {
         String result = "普通用户";
-        UserLevelVo userLevelVo = userLevelDao.queryObject(loginUser.getUser_level_id());
+        UserLevelVo userLevelVo = userLevelDao.queryObject(loginUser.getUserLevelId());
         if (null != userLevelVo) {
             result = userLevelVo.getName();
         }

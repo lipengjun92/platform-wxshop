@@ -2,7 +2,7 @@
 	<view class="container">
 		<view class="brand-info">
 			<view class="name">
-				<image class="img" :src="bannerInfo.img_url" background-size="cover"></image>
+				<image class="img" :src="bannerInfo.imgUrl" background-size="cover"></image>
 				<view class="info-box">
 					<view class="info">
 						<text class="txt">{{bannerInfo.name||''}}</text>
@@ -33,9 +33,9 @@
 			<view class="b">
 				<block v-for="(iitem, iindex) in goodsList" :key="iindex">
 					<navigator :class="'item '+(iindex % 2 == 0 ? 'item-b' : '')" :url="'../goods/goods?id='+iitem.id">
-						<image class="img" :src="iitem.list_pic_url" background-size="cover"></image>
+						<image class="img" :src="iitem.listPicUrl" background-size="cover"></image>
 						<text class="name">{{iitem.name||''}}</text>
-						<text class="price">￥{{iitem.retail_price||''}}</text>
+						<text class="price">￥{{iitem.retailPrice||''}}</text>
 					</navigator>
 				</block>
 			</view>
@@ -50,7 +50,7 @@
 		data() {
 			return {
 				bannerInfo: {
-					'img_url': '',
+					'imgUrl': '',
 					'name': ''
 				},
 				categoryFilter: false,

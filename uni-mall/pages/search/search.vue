@@ -25,7 +25,7 @@
 					<text class="title">热门搜索</text>
 				</view>
 				<view class="b">
-					<view :class="'item '+(item.is_hot === 1 ? 'active' : '')" hover-class="navigator-hover" @tap="onKeywordTap"
+					<view :class="'item '+(item.isHot === 1 ? 'active' : '')" hover-class="navigator-hover" @tap="onKeywordTap"
 					 :data-keyword="item.keyword" v-for="(item, index) in hotKeyword" :key="index">{{item.keyword}}</view>
 				</view>
 			</view>
@@ -58,9 +58,9 @@
 				<view class="b">
 					<navigator :class="'item ' + ((iindex + 1) % 2 == 0 ? 'item-b' : '')" :url="'/pages/goods/goods?id='+iitem.id"
 					 v-for="(iitem, iindex) in goodsList" :key="iidex">
-						<image class="img" :src="iitem.list_pic_url" background-size="cover"></image>
+						<image class="img" :src="iitem.listPicUrl" background-size="cover"></image>
 						<text class="name">{{iitem.name}}</text>
-						<text class="price">￥{{iitem.retail_price}}</text>
+						<text class="price">￥{{iitem.retailPrice}}</text>
 					</navigator>
 				</view>
 			</view>
@@ -218,7 +218,7 @@
 						filterCategory[key].selected = false;
 					}
 				}
-				
+
 				this.filterCategory = filterCategory
 				this.categoryFilter = false
 				this.categoryId = currentCategory.id

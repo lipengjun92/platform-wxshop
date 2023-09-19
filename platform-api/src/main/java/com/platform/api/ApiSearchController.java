@@ -47,7 +47,7 @@ public class ApiSearchController extends ApiBaseAction {
     public Object index(@LoginUser UserVo loginUser) {
         Map<String, Object> resultObj = new HashMap();
         Map param = new HashMap();
-        param.put("is_default", 1);
+        param.put("isDefault", 1);
         param.put("page", 1);
         param.put("limit", 1);
         param.put("sidx", "id");
@@ -66,7 +66,7 @@ public class ApiSearchController extends ApiBaseAction {
         List<Map> hotKeywordList = keywordsService.hotKeywordList(query);
         //
         param = new HashMap();
-        param.put("user_id", loginUser.getUserId());
+        param.put("userId", loginUser.getUserId());
         param.put("fields", "distinct keyword");
         param.put("page", 1);
         param.put("limit", 10);

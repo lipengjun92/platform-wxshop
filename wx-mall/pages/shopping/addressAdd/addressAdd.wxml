@@ -7,13 +7,13 @@
             <input class="input" bindinput="bindinputMobile" value="{{address.telNumber}}" maxlength="15" type="number" placeholder="手机号码"/>
         </view>
         <view class="form-item">
-            <input class="input" value="{{address.full_region}}" disabled="true" bindtap="chooseRegion" placeholder="省份、城市、区县"/>
+            <input class="input" value="{{address.fullRegion}}" disabled="true" bindtap="chooseRegion" placeholder="省份、城市、区县"/>
         </view>
         <view class="form-item">
             <input class="input" bindinput="bindinputAddress" value="{{address.detailInfo}}" placeholder="详细地址, 如街道、楼盘号等"/>
         </view>
         <view class="form-default">
-            <text bindtap="bindIsDefault" class="default-input {{address.is_default == 1 ? 'selected' : ''}}">设为默认地址</text>
+            <text bindtap="bindIsDefault" class="default-input {{address.isDefault == 1 ? 'selected' : ''}}">设为默认地址</text>
         </view>
     </view>
 
@@ -25,13 +25,13 @@
     <view class="region-select" wx:if="{{openSelectRegion}}">
       <view class="hd">
         <view class="region-selected">
-          <view class="item {{item.id == 0 ? 'disabled' : ''}} {{(regionType -1) === index ? 'selected' : ''}}" bindtap="selectRegionType" data-region-type-index="{{index}}" wx:for="{{selectRegionList}}" wx:key="{{item.id}}">{{item.name}}</view>
+          <view class="item {{item.id == 0 ? 'disabled' : ''}} {{(regionType -1) === index ? 'selected' : ''}}" bindtap="selectRegionType" data-region-type-index="{{index}}" wx:for="{{selectRegionList}}" wx:key="id">{{item.name}}</view>
         </view>
         <view class="done {{selectRegionDone ? '' : 'disabled'}}" bindtap="doneSelectRegion">确定</view>
       </view>
       <view class="bd">
         <scroll-view scroll-y="true" class="region-list">
-          <view class="item {{item.selected ? 'selected' : ''}}" bindtap="selectRegion" data-region-index="{{index}}" wx:for="{{regionList}}" wx:key="{{item.id}}">{{item.name}}</view>
+          <view class="item {{item.selected ? 'selected' : ''}}" bindtap="selectRegion" data-region-index="{{index}}" wx:for="{{regionList}}" wx:key="id">{{item.name}}</view>
         </scroll-view>
       </view>
     </view>

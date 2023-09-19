@@ -37,9 +37,9 @@ App({
     },
     globalData: {
         userInfo: {
-            nickName: 'Hi,游客',
+            nickname: 'Hi,游客',
             userName: '点击去登录',
-            avatarUrl: 'https://mmbiz.qpic.cn/mmbiz/icTdbqWNOwNRna42FI242Lcia07jQodd2FJGIYQfG0LAJGFxM4FbnQP6yfMxBgJ0F3YRqJCJ1aPAK2dQagdusBZg/0'
+            avatar: 'https://mmbiz.qpic.cn/mmbiz/icTdbqWNOwNRna42FI242Lcia07jQodd2FJGIYQfG0LAJGFxM4FbnQP6yfMxBgJ0F3YRqJCJ1aPAK2dQagdusBZg/0'
         },
         token: '',
         userCoupon: 'NO_USE_COUPON',//默认不适用优惠券

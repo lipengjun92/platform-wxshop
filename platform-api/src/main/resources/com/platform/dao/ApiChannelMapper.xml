@@ -8,8 +8,8 @@
         <result property="id" column="id"/>
         <result property="name" column="name"/>
         <result property="url" column="url"/>
-        <result property="icon_url" column="icon_url"/>
-        <result property="sort_order" column="sort_order"/>
+        <result property="iconUrl" column="icon_url"/>
+        <result property="sortOrder" column="sort_order"/>
     </resultMap>
 
     <select id="queryObject" resultMap="channelMap">
@@ -18,8 +18,8 @@
 
     <select id="queryList" resultMap="channelMap">
         select * from nideshop_channel
-        <if test="ad_position_id != null and ad_position_id != null">
-            and ad_position_id = #{ad_position_id}
+        <if test="adPositionId != null and adPositionId != null">
+            and ad_position_id = #{adPositionId}
         </if>
         <choose>
             <when test="sidx != null and sidx.trim() != ''">
@@ -35,23 +35,23 @@
     </select>
 
     <select id="queryTotal" resultType="int">
-		select count(*) from nideshop_channel 
+		select count(*) from nideshop_channel
 	</select>
 
     <insert id="save" parameterType="com.platform.entity.ChannelVo" useGeneratedKeys="true" keyProperty="id">
 		insert into nideshop_channel
 		(
-			`name`, 
-			`url`, 
-			`icon_url`, 
+			`name`,
+			`url`,
+			`icon_url`,
 			`sort_order`
 		)
 		values
 		(
-			#{name}, 
-			#{url}, 
-			#{icon_url}, 
-			#{sort_order}
+			#{name},
+			#{url},
+			#{iconUrl},
+			#{sortOrder}
 		)
 	</insert>
 
@@ -60,8 +60,8 @@
         <set>
             <if test="name != null">`name` = #{name},</if>
             <if test="url != null">`url` = #{url},</if>
-            <if test="icon_url != null">`icon_url` = #{icon_url},</if>
-            <if test="sort_order != null">`sort_order` = #{sort_order}</if>
+            <if test="iconUrl != null">`icon_url` = #{iconUrl},</if>
+            <if test="sortOrder != null">`sort_order` = #{sortOrder}</if>
         </set>
         where id = #{id}
     </update>

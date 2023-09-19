@@ -3675,9 +3675,9 @@ INSERT INTO `sys_menu` VALUES ('308', '307', '查看', null, 'channel:list,chann
 INSERT INTO `sys_menu` VALUES ('309', '307', '新增', null, 'channel:save', '2', null, '6', '0');
 INSERT INTO `sys_menu` VALUES ('310', '307', '修改', null, 'channel:update', '2', null, '6', '0');
 INSERT INTO `sys_menu` VALUES ('311', '307', '删除', null, 'channel:delete', '2', null, '6', '0');
-INSERT INTO `sys_menu` VALUES ('312', '0', '微信公众号', null, null, '0', 'fa fa-weixin', '6', '0');
-INSERT INTO `sys_menu` VALUES ('313', '0', '进销存', null, null, '0', 'fa fa-truck', '6', '0');
-INSERT INTO `sys_menu` VALUES ('314', '0', '统计报表', null, null, '0', 'fa fa-line-chart', '7', '0');
+# INSERT INTO `sys_menu` VALUES ('312', '0', '微信公众号', null, null, '0', 'fa fa-weixin', '6', '0');
+# INSERT INTO `sys_menu` VALUES ('313', '0', '进销存', null, null, '0', 'fa fa-truck', '6', '0');
+# INSERT INTO `sys_menu` VALUES ('314', '0', '统计报表', null, null, '0', 'fa fa-line-chart', '7', '0');
 INSERT INTO `sys_menu` VALUES ('315', '222', '商品问答', 'shop/goodsissue.html', null, '1', 'fa fa-question-circle-o', '6', '0');
 INSERT INTO `sys_menu` VALUES ('316', '315', '查看', null, 'goodsissue:list,goodsissue:info', '2', null, '6', '0');
 INSERT INTO `sys_menu` VALUES ('317', '315', '新增', null, 'goodsissue:save', '2', null, '6', '0');
@@ -3714,7 +3714,7 @@ INSERT INTO `sys_menu` VALUES ('357', '0', '编辑商品', null, null, '0', 'fa 
 INSERT INTO `sys_menu` VALUES ('358', '357', '商品回收站', 'shop/goodshistory.html', '', '1', 'fa fa-history', '12', '0');
 INSERT INTO `sys_menu` VALUES ('359', '358', '恢复', null, 'goods:back', '2', null, '0', '0');
 INSERT INTO `sys_menu` VALUES ('360', '294', '确认收货', null, 'order:confirm', '2', null, '0', '0');
-INSERT INTO `sys_menu` VALUES ('366', '0', 'CMS模块', null, null, '0', 'fa fa-leanpub', '6', '0');
+# INSERT INTO `sys_menu` VALUES ('366', '0', 'CMS模块', null, null, '0', 'fa fa-leanpub', '6', '0');
 INSERT INTO `sys_menu` VALUES ('368', '1', '部门管理', 'sys/dept.html', null, '1', 'fa fa-sitemap', '3', '0');
 INSERT INTO `sys_menu` VALUES ('369', '368', '查看', null, 'sys:dept:list,sys:dept:info', '2', null, '0', '0');
 INSERT INTO `sys_menu` VALUES ('370', '368', '新增', null, 'sys:dept:save', '2', null, '0', '0');

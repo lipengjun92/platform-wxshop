@@ -4,7 +4,7 @@
 			<view v-if="!openAttr">
 				<swiper class="goodsimgs" indicator-dots="true" autoplay="true" interval="3000" duration="1000">
 					<swiper-item v-for="(item, index) in gallery" :key="item.id">
-						<image :src="item.img_url" background-size="cover"></image>
+						<image :src="item.imgUrl" background-size="cover"></image>
 					</swiper-item>
 				</swiper>
 				<view class="service-policy">
@@ -15,8 +15,8 @@
 				<view class="goods-info">
 					<view class="c">
 						<text class="name">{{goods.name||''}}</text>
-						<text class="desc">{{goods.goods_brief||''}}</text>
-						<text class="price">￥{{goods.retail_price||'0'}}</text>
+						<text class="desc">{{goods.goodsBrief||''}}</text>
+						<text class="price">￥{{goods.retailPrice||'0'}}</text>
 						<view class="brand" v-if="brand.name">
 							<navigator :url="'../brandDetail/brandDetail?id='+ brand.id">
 								<text>{{brand.name}}</text>
@@ -42,13 +42,13 @@
 									<image :src="comment.data.avatar"></image>
 									<text>{{comment.data.nickname}}</text>
 								</view>
-								<view class="time">{{comment.data.add_time}}</view>
+								<view class="time">{{comment.data.addTime}}</view>
 							</view>
 							<view class="content">
 								{{comment.data.content}}
 							</view>
-							<view class="imgs" v-if="comment.data.pic_list.length > 0">
-								<image class="img" v-for="(item, index) in comment.data.pic_list" :key="index" :src="item.pic_url"></image>
+							<view class="imgs" v-if="comment.data.picList.length > 0">
+								<image class="img" v-for="(item, index) in comment.data.picList" :key="index" :src="item.picUrl"></image>
 							</view>
 							<!-- <view class="spec">白色 2件</view> -->
 						</view>
@@ -65,7 +65,7 @@
 				</view>
 
 				<view class="detail">
-					<uParse :content="goods.goods_desc" noData="" />
+					<uParse :content="goods.goodsDesc" noData="" />
 				</view>
 
 				<view class="common-problem">
@@ -94,9 +94,9 @@
 					<view class="b">
 						<view class="item" v-for="(item, index) in relatedGoods" :key="item.id">
 							<navigator :url="'/pages/goods/goods?id='+item.id">
-								<image class="img" :src="item.list_pic_url" background-size="cover"></image>
+								<image class="img" :src="item.listPicUrl" background-size="cover"></image>
 								<text class="name">{{item.name}}</text>
-								<text class="price">￥{{item.retail_price}}</text>
+								<text class="price">￥{{item.retailPrice}}</text>
 							</navigator>
 						</view>
 					</view>
@@ -105,20 +105,20 @@
 
 			<view v-if="openAttr" class="attr-pop">
 				<view class="img-info">
-					<image class="img" :src="goods.list_pic_url"></image>
+					<image class="img" :src="goods.listPicUrl"></image>
 					<view class="info">
 						<view class="c">
-							<view class="p">价格：￥{{goods.retail_price}}</view>
+							<view class="p">价格：￥{{goods.retailPrice}}</view>
 							<view class="a" v-if="productList.length>0">已选择：{{checkedSpecText}}</view>
 						</view>
 					</view>
 				</view>
 				<view class="spec-con">
-					<view class="spec-item" v-for="(item, index) in specificationList" :key="item.specification_id">
+					<view class="spec-item" v-for="(item, index) in specificationList" :key="item.specificationId">
 						<view class="name">{{item.name}}</view>
 						<view class="values">
 							<view :class="'value ' + (vitem.checked ? 'selected' : '')" @tap="clickSkuValue" v-for="(vitem, vindex) in item.valueList"
-							 :key="vitem.id" :data-value-id="vitem.id" :data-name-id="vitem.specification_id">{{vitem.value}}</view>
+							 :key="vitem.id" :data-value-id="vitem.id" :data-name-id="vitem.specificationId">{{vitem.value}}</view>
 						</view>
 					</view>
 
@@ -230,7 +230,7 @@
 
 				let _specificationList = this.specificationList;
 				for (let i = 0; i < _specificationList.length; i++) {
-					if (_specificationList[i].specification_id == specNameId) {
+					if (_specificationList[i].specificationId == specNameId) {
 						for (let j = 0; j < _specificationList[i].valueList.length; j++) {
 							if (_specificationList[i].valueList[j].id == specValueId) {
 								//如果已经选中，则反选
@@ -258,7 +258,7 @@
 				let _specificationList = this.specificationList;
 				for (let i = 0; i < _specificationList.length; i++) {
 					let _checkedObj = {
-						nameId: _specificationList[i].specification_id,
+						nameId: _specificationList[i].specificationId,
 						valueId: 0,
 						valueText: ''
 					};
@@ -315,7 +315,7 @@
 			},
 			getCheckedProductItem: function(key) {
 				return this.productList.filter(function(v) {
-					if (v.goods_specification_ids.indexOf(key) > -1) {
+					if (v.goodsSpecificationIds.indexOf(key) > -1) {
 						return true;
 					} else {
 						return false;
@@ -392,7 +392,7 @@
 					}
 
 					//验证库存
-					if (checkedProduct.goods_number < that.number) {
+					if (checkedProduct.goodsNumber < that.number) {
 						//找不到对应的product信息，提示没有库存
 						return false;
 					}
@@ -449,7 +449,7 @@
 					}
 
 					//验证库存
-					if (checkedProduct.goods_number < that.number) {
+					if (checkedProduct.goodsNumber < that.number) {
 						//找不到对应的product信息，提示没有库存
 						return false;
 					}
@@ -496,7 +496,7 @@
 				if (!specificationList) return;
 				for (let i = 0; i < specificationList.length; i++) {
 					let specification = specificationList[i];
-					let specNameId = specification.specification_id;
+					let specNameId = specification.specificationId;
 					//规格只有一个时自动选择规格
 					if (specification.valueList && specification.valueList.length == 1) {
 						let specValueId = specification.valueList[0].id;

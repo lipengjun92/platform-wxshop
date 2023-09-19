@@ -3,11 +3,11 @@
 		<view class="collect-list" v-if="collectList.length>0">
 			<view class="item" @tap="openGoods" @touchstart="touchStart" @touchend="touchEnd" v-for="(item, index) in collectList"
 			 :key="item.id" :data-index="index">
-				<image class="img" :src="item.list_pic_url"></image>
+				<image class="img" :src="item.listPicUrl"></image>
 				<view class="info">
 					<view class="name">{{item.name||''}}</view>
-					<view class="subtitle">{{item.goods_brief||''}}</view>
-					<view class="price">￥{{item.retail_price||''}}</view>
+					<view class="subtitle">{{item.goodsBrief||''}}</view>
+					<view class="price">￥{{item.retailPrice||''}}</view>
 				</view>
 			</view>
 		</view>
@@ -38,7 +38,7 @@
 			},
 			openGoods(event) {
 				let that = this;
-				let goodsId = that.collectList[event.currentTarget.dataset.index].value_id;
+				let goodsId = that.collectList[event.currentTarget.dataset.index].valueId;
 
 				//触摸时间距离页面打开的毫秒数
 				var touchTime = that.touch_end - that.touch_start;

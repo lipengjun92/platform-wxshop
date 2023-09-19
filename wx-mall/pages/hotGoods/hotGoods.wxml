@@ -1,7 +1,7 @@
 <view class="container">
   <view class="brand-info">
     <view class="name">
-      <image class="img" src="{{bannerInfo.img_url}}" background-size="cover"></image>
+      <image class="img" src="{{bannerInfo.imgUrl}}" background-size="cover"></image>
       <view class="info-box">
         <view class="info">
           <text class="txt">{{bannerInfo.name}}</text>
@@ -30,9 +30,9 @@
     <view class="b">
       <block wx:for="{{goodsList}}" wx:for-index="iindex" wx:for-item="iitem" wx:key="unique">
         <navigator class="item {{iindex % 2 == 0 ? 'item-b' : '' }}" url="../goods/goods?id={{iitem.id}}">
-          <image class="img" src="{{iitem.list_pic_url}}" background-size="cover"></image>
+          <image class="img" src="{{iitem.listPicUrl}}" background-size="cover"></image>
           <text class="name">{{iitem.name}}</text>
-          <text class="price">￥{{iitem.retail_price}}</text>
+          <text class="price">￥{{iitem.retailPrice}}</text>
         </navigator>
       </block>
     </view>

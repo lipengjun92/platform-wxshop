@@ -8,7 +8,7 @@ Page({
   },
   getHelpList(id) {
     let that = this;
-    util.request(api.HelpIssueList, { type_id: id}).then(function (res) {
+    util.request(api.HelpIssueList, { typeId: id}).then(function (res) {
       if (res.errno === 0) {
         that.setData({
           helpList: res.data
