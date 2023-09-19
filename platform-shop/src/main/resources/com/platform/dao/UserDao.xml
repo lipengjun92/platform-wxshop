@@ -59,8 +59,8 @@
         nideshop_user_level.name levelName
         from nideshop_user LEFT JOIN nideshop_user_level ON nideshop_user.user_level_id=nideshop_user_level.id
         WHERE 1=1
-        <if test="username != null and username.trim() != ''">
-            and username like concat('%',#{username},'%')
+        <if test="nickname != null and nickname.trim() != ''">
+            and nickname like concat('%',#{nickname},'%')
         </if>
         <choose>
             <when test="sidx != null and sidx.trim() != ''">
@@ -78,8 +78,8 @@
     <select id="queryTotal" resultType="int">
         select count(*) from nideshop_user
         WHERE 1=1
-        <if test="username != null and username.trim() != ''">
-            and username like concat('%',#{username},'%')
+        <if test="nickname != null and nickname.trim() != ''">
+            and nickname like concat('%',#{nickname},'%')
         </if>
     </select>
 

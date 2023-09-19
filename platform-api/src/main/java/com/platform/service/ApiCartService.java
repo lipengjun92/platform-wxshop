@@ -36,21 +36,21 @@ public class ApiCartService {
         // 更新购物车搭配减价
         // 判断购物车中是否存在此规格商品
         Map cartParam = new HashMap();
-        cartParam.put("user_id", cart.getUser_id());
+        cartParam.put("userId", cart.getUserId());
         List<CartVo> cartInfoList = cartDao.queryList(cartParam);
         Map crashParam = new HashMap();
-        List<Integer> goods_ids = new ArrayList();
+        List<Integer> goodsIds = new ArrayList();
         List<CartVo> cartUpdateList = new ArrayList();
         for (CartVo cartItem : cartInfoList) {
             if (null != cartItem.getChecked() && 1 == cartItem.getChecked()) {
-                goods_ids.add(cartItem.getGoods_id());
+                goodsIds.add(cartItem.getGoodsId());
             }
-            if (!cartItem.getRetail_price().equals(cartItem.getRetail_product_price())) {
-                cartItem.setRetail_price(cartItem.getRetail_product_price());
+            if (!cartItem.getRetailPrice().equals(cartItem.getRetailProductPrice())) {
+                cartItem.setRetailPrice(cartItem.getRetailProductPrice());
                 cartUpdateList.add(cartItem);
             }
         }
-        crashParam.put("goods_ids", goods_ids);
+        crashParam.put("goodsIds", goodsIds);
         for (CartVo cartItem : cartInfoList) {
             // 存在原始的
             if (null != cartItem.getChecked() && 1 == cartItem.getChecked()) {
@@ -87,22 +87,22 @@ public class ApiCartService {
 
         // 判断购物车中是否存在此规格商品
         Map cartParam = new HashMap();
-        cartParam.put("user_id", userId);
+        cartParam.put("userId", userId);
         List<CartVo> cartInfoList = cartDao.queryList(cartParam);
         Map crashParam = new HashMap();
-        List<Integer> goods_ids = new ArrayList();
+        List<Integer> goodsIds = new ArrayList();
         List<CartVo> cartUpdateList = new ArrayList();
         for (CartVo cartItem : cartInfoList) {
             if (null != cartItem.getChecked() && 1 == cartItem.getChecked()) {
-                goods_ids.add(cartItem.getGoods_id());
+                goodsIds.add(cartItem.getGoodsId());
             }
-            if (!cartItem.getRetail_price().equals(cartItem.getRetail_product_price())) {
-                cartItem.setRetail_price(cartItem.getRetail_product_price());
+            if (!cartItem.getRetailPrice().equals(cartItem.getRetailProductPrice())) {
+                cartItem.setRetailPrice(cartItem.getRetailProductPrice());
                 cartUpdateList.add(cartItem);
             }
         }
-        if (null != goods_ids && goods_ids.size() > 0) {
-            crashParam.put("goods_ids", goods_ids);
+        if (null != goodsIds && goodsIds.size() > 0) {
+            crashParam.put("goodsIds", goodsIds);
             for (CartVo cartItem : cartInfoList) {
                 // 存在原始的
                 if (null != cartItem.getChecked() && 1 == cartItem.getChecked()) {
@@ -130,8 +130,8 @@ public class ApiCartService {
         cartDao.deleteByUserAndProductIds(userId, productIds);
     }
 
-    public void deleteByCart(Long user_id, Integer session_id, Integer checked) {
-        cartDao.deleteByCart(user_id, session_id, checked);
+    public void deleteByCart(Long userId, Integer sessionId, Integer checked) {
+        cartDao.deleteByCart(userId, sessionId, checked);
     }
 
 }

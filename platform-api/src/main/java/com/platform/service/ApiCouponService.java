@@ -48,17 +48,17 @@ public class ApiCouponService {
         // 检查优惠券是否过期
         List<CouponVo> couponVos = apiCouponMapper.queryUserCoupons(map);
         for (CouponVo couponVo : couponVos) {
-            if (couponVo.getCoupon_status()==1) {
+            if (couponVo.getCouponStatus()==1) {
                 // 检查是否过期
-                if(couponVo.getUse_end_date().before(new Date())) {
-                    couponVo.setCoupon_status(3);
+                if(couponVo.getUseEndDate().before(new Date())) {
+                    couponVo.setCouponStatus(3);
                     apiCouponMapper.updateUserCoupon(couponVo);
                 }
             }
-            if (couponVo.getCoupon_status()==3) {
+            if (couponVo.getCouponStatus()==3) {
                 // 检查是否不过期
-                if(couponVo.getUse_end_date().after(new Date())) {
-                    couponVo.setCoupon_status(1);
+                if(couponVo.getUseEndDate().after(new Date())) {
+                    couponVo.setCouponStatus(1);
                     apiCouponMapper.updateUserCoupon(couponVo);
                 }
             }

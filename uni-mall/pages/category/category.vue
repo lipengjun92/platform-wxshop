@@ -12,14 +12,14 @@
 			<view class="cate-item">
 				<view class="h">
 					<text class="name">{{currentCategory.name||''}}</text>
-					<text class="desc">{{currentCategory.front_name||''}}</text>
+					<text class="desc">{{currentCategory.frontName||''}}</text>
 				</view>
 				<view class="b">
 					<navigator :class="'item '+((iindex + 1) % 2 == 0 ? 'item-b' : '')" :url="'/pages/goods/goods?id='+iitem.id" v-for="(iitem, iindex) in goodsList"
 					 :key="iindex">
-						<image class="img" :src="iitem.list_pic_url" background-size="cover"></image>
+						<image class="img" :src="iitem.listPicUrl" background-size="cover"></image>
 						<text class="name">{{iitem.name||''}}</text>
-						<text class="price">￥{{iitem.retail_price||''}}</text>
+						<text class="price">￥{{iitem.retailPrice||''}}</text>
 					</navigator>
 				</view>
 			</view>

@@ -1,7 +1,8 @@
 package com.platform.entity;
 
+import lombok.Data;
+
 import java.io.Serializable;
-import java.util.Date;
 
 
 /**
@@ -9,6 +10,7 @@ import java.util.Date;
  * @email 939961241@qq.com
  * @date 2017-08-15 08:03:40
  */
+@Data
 public class AdPositionVo implements Serializable {
     private static final long serialVersionUID = 1L;
 
@@ -22,44 +24,4 @@ public class AdPositionVo implements Serializable {
     private Integer height;
     //描述
     private String desc;
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Integer getWidth() {
-        return width;
-    }
-
-    public void setWidth(Integer width) {
-        this.width = width;
-    }
-
-    public Integer getHeight() {
-        return height;
-    }
-
-    public void setHeight(Integer height) {
-        this.height = height;
-    }
-
-    public String getDesc() {
-        return desc;
-    }
-
-    public void setDesc(String desc) {
-        this.desc = desc;
-    }
 }

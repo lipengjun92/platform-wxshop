@@ -4,11 +4,11 @@
 			<view class="item" v-for="(item, index) in addressList" :key="item.id" @tap="selectAddress" :data-address-id="item.id">
 				<view class="l">
 					<view class="name">{{item.userName||''}}</view>
-					<view class="default" v-if="item.is_default">默认</view>
+					<view class="default" v-if="item.isDefault">默认</view>
 				</view>
 				<view class="c">
 					<view class="mobile">{{item.telNumber}}</view>
-					<view class="address">{{item.full_region+item.detailInfo}}</view>
+					<view class="address">{{item.fullRegion+item.detailInfo}}</view>
 				</view>
 				<view class="r">
 					<image @click.stop.prevent="addressAddOrUpdate" :data-address-id="item.id" class="del" src="http://yanxuan.nosdn.127.net/hxm/yanxuan-wap/p/20161201/style/img/icon-normal/address-edit-7fee7b0d63.png"></image>

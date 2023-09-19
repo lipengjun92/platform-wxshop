@@ -67,7 +67,7 @@ const utils = {
 	 *  true: 隐藏
 	 *  false:显示
 	 */
-	request: function(url, postData = {}, method = "POST", contentType = "application/x-www-form-urlencoded", isDelay, hideLoading) {
+	request: function(url, postData = {}, method = "POST", contentType = "application/json", isDelay, hideLoading) {
 		//接口请求
 		let loadding = false;
 		utils.delayed && uni.hideLoading();

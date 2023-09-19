@@ -14,8 +14,8 @@ public interface ApiOrderMapper extends BaseDao<OrderVo> {
     /**
      * 根据订单编号查询订单
      *
-     * @param order_sn
+     * @param orderSn
      * @return
      */
-    OrderVo queryObjectByOrderSn(@Param("orderSn") String order_sn);
+    OrderVo queryObjectByOrderSn(@Param("orderSn") String orderSn);
 }

@@ -8,8 +8,8 @@
         <result property="id" column="id"/>
         <result property="keyword" column="keyword"/>
         <result property="from" column="from"/>
-        <result property="add_time" column="add_time"/>
-        <result property="user_id" column="user_id"/>
+        <result property="addTime" column="add_time"/>
+        <result property="userId" column="user_id"/>
     </resultMap>
 
     <select id="queryObject" resultMap="searchHistoryMap">
@@ -26,8 +26,8 @@
         </if>
         from nideshop_search_history
         <where>
-            <if test="user_id != null">
-                and user_id = #{user_id}
+            <if test="userId != null">
+                and user_id = #{userId}
             </if>
         </where>
         <choose>
@@ -44,23 +44,23 @@
     </select>
 
     <select id="queryTotal" resultType="int">
-		select count(*) from nideshop_search_history 
+		select count(*) from nideshop_search_history
 	</select>
 
     <insert id="save" parameterType="com.platform.entity.SearchHistoryVo" useGeneratedKeys="true" keyProperty="id">
 		insert into nideshop_search_history
 		(
-			`keyword`, 
-			`from`, 
-			`add_time`, 
+			`keyword`,
+			`from`,
+			`add_time`,
 			`user_id`
 		)
 		values
 		(
-			#{keyword}, 
-			#{from}, 
-			#{add_time}, 
-			#{user_id}
+			#{keyword},
+			#{from},
+			#{addTime},
+			#{userId}
 		)
 	</insert>
 
@@ -69,8 +69,8 @@
         <set>
             <if test="keyword != null">`keyword` = #{keyword},</if>
             <if test="from != null">`from` = #{from},</if>
-            <if test="add_time != null">`add_time` = #{add_time},</if>
-            <if test="user_id != null">`user_id` = #{user_id}</if>
+            <if test="addTime != null">`add_time` = #{addTime},</if>
+            <if test="userId != null">`user_id` = #{userId}</if>
         </set>
         where id = #{id}
     </update>
@@ -86,6 +86,6 @@
         </foreach>
     </delete>
     <delete id="deleteByUserId">
-		delete from nideshop_search_history where  user_id = #{user_id}
+		delete from nideshop_search_history where  user_id = #{userId}
 	</delete>
 </mapper>

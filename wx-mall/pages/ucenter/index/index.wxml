@@ -1,8 +1,9 @@
 <view class="container">
   <button class="userinfo" bindtap="getUserProfile">
-    <image wx:if="{{userInfo}}" class="userinfo-avatar" src="{{ userInfo.avatarUrl||'/static/images/defaultAvatar.png' }}"
+    <image wx:if="{{userInfo}}" class="userinfo-avatar" src="{{ userInfo.avatar||'/static/images/defaultAvatar.png' }}"
       background-size="cover"></image>
     <text class="userinfo-nickname">{{ userInfo.nickname }}</text>
+    <text class="level">{{userInfo.userName}}</text>
   </button>
   <view style="height:20rpx;background: #eee;width:100%;"></view>
   <view class="my-item" style='background:none;display:flex;flex-direction:column;height:auto;'></view>

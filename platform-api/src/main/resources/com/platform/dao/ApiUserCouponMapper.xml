@@ -6,13 +6,13 @@
     <!-- 可根据自己的需求，是否要使用 -->
     <resultMap type="com.platform.entity.UserCouponVo" id="userCouponMap">
         <result property="id" column="id"/>
-        <result property="coupon_id" column="coupon_id"/>
-        <result property="coupon_number" column="coupon_number"/>
-        <result property="user_id" column="user_id"/>
-        <result property="used_time" column="used_time"/>
-        <result property="add_time" column="add_time"/>
-        <result property="order_id" column="order_id"/>
-        <result property="source_key" column="source_key"/>
+        <result property="couponId" column="coupon_id"/>
+        <result property="couponNumber" column="coupon_number"/>
+        <result property="userId" column="user_id"/>
+        <result property="usedTime" column="used_time"/>
+        <result property="addTime" column="add_time"/>
+        <result property="orderId" column="order_id"/>
+        <result property="sourceKey" column="source_key"/>
         <result property="referrer" column="referrer"/>
     </resultMap>
 
@@ -21,27 +21,27 @@
 	</select>
 
     <select id="queryByCouponNumber" resultMap="userCouponMap">
-        select * from nideshop_user_coupon where coupon_number = #{coupon_number}
+        select * from nideshop_user_coupon where coupon_number = #{couponNumber}
     </select>
 
     <select id="queryList" resultMap="userCouponMap">
         select a.* from nideshop_user_coupon a
         left join nideshop_coupon b on b.id = a.coupon_id
         where 1 = 1
-        <if test="coupon_number != null">
-            and a.coupon_number = #{coupon_number}
+        <if test="couponNumber != null">
+            and a.coupon_number = #{couponNumber}
         </if>
-        <if test="user_id != null">
-            and a.user_id = #{user_id}
+        <if test="userId != null">
+            and a.user_id = #{userId}
         </if>
-        <if test="send_type != null">
-            and b.send_type = #{send_type}
+        <if test="sendType != null">
+            and b.send_type = #{sendType}
         </if>
         <if test="referrer != null">
             and a.referrer = #{referrer}
         </if>
-        <if test="source_key != null">
-            and a.source_key = #{source_key}
+        <if test="sourceKey != null">
+            and a.source_key = #{sourceKey}
         </if>
         <choose>
             <when test="sidx != null and sidx.trim() != ''">
@@ -57,16 +57,16 @@
     </select>
 
     <select id="queryTotal" resultType="int">
-		select count(*) from nideshop_user_coupon 
+		select count(*) from nideshop_user_coupon
 	</select>
 
     <insert id="save" parameterType="com.platform.entity.UserCouponVo" useGeneratedKeys="true" keyProperty="id">
 		insert into nideshop_user_coupon
 		(
-			`coupon_id`, 
-			`coupon_number`, 
-			`user_id`, 
-			`used_time`, 
+			`coupon_id`,
+			`coupon_number`,
+			`user_id`,
+			`used_time`,
 			`order_id`,
 			`add_time`,
 			`source_key`,
@@ -74,13 +74,13 @@
 		)
 		values
 		(
-            #{coupon_id},
-			#{coupon_number},
-			#{user_id},
-			#{used_time},
-			#{order_id},
-			#{add_time},
-			#{source_key},
+            #{couponId},
+			#{couponNumber},
+			#{userId},
+			#{usedTime},
+			#{orderId},
+			#{addTime},
+			#{sourceKey},
 			#{referrer}
 		)
 	</insert>
@@ -88,13 +88,13 @@
     <update id="update" parameterType="com.platform.entity.UserCouponVo">
         update nideshop_user_coupon
         <set>
-            <if test="coupon_id != null">`coupon_id` = #{coupon_id},</if>
-            <if test="coupon_number != null">`coupon_number` = #{coupon_number},</if>
-            <if test="user_id != null">`user_id` = #{user_id},</if>
-            <if test="used_time != null">`used_time` = #{used_time},</if>
-            <if test="order_id != null">`order_id` = #{order_id}</if>
-            <if test="add_time != null">`add_time` = #{add_time}</if>
-            <if test="source_key != null">`source_key` = #{source_key}</if>
+            <if test="couponId != null">`coupon_id` = #{couponId},</if>
+            <if test="couponNumber != null">`coupon_number` = #{couponNumber},</if>
+            <if test="userId != null">`user_id` = #{userId},</if>
+            <if test="usedTime != null">`used_time` = #{usedTime},</if>
+            <if test="orderId != null">`order_id` = #{orderId}</if>
+            <if test="addTime != null">`add_time` = #{addTime}</if>
+            <if test="sourceKey != null">`source_key` = #{sourceKey}</if>
             <if test="referrer != null">`referrer` = #{referrer}</if>
         </set>
         where id = #{id}

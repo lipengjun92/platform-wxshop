@@ -7,7 +7,7 @@
     <resultMap type="com.platform.entity.TopicCategoryVo" id="topicCategoryMap">
         <result property="id" column="id"/>
         <result property="title" column="title"/>
-        <result property="pic_url" column="pic_url"/>
+        <result property="picUrl" column="pic_url"/>
     </resultMap>
 
     <select id="queryObject" resultMap="topicCategoryMap">
@@ -30,19 +30,19 @@
     </select>
 
     <select id="queryTotal" resultType="int">
-		select count(*) from nideshop_topic_category 
+		select count(*) from nideshop_topic_category
 	</select>
 
     <insert id="save" parameterType="com.platform.entity.TopicCategoryVo" useGeneratedKeys="true" keyProperty="id">
 		insert into nideshop_topic_category
 		(
-			`title`, 
+			`title`,
 			`pic_url`
 		)
 		values
 		(
-			#{title}, 
-			#{pic_url}
+			#{title},
+			#{picUrl}
 		)
 	</insert>
 
@@ -50,7 +50,7 @@
         update nideshop_topic_category
         <set>
             <if test="title != null">`title` = #{title},</if>
-            <if test="pic_url != null">`pic_url` = #{pic_url}</if>
+            <if test="picUrl != null">`pic_url` = #{picUrl}</if>
         </set>
         where id = #{id}
     </update>

@@ -6,6 +6,7 @@ module.exports = {
 	IndexUrlCategory: 'index/category', //首页底部的分类及商品列表
 	IndexUrlBanner: 'index/banner', //首页banner
 	IndexUrlChannel: 'index/channel', //banner下的分类
+	Catalog: 'catalog/',  //分类数据接口
 	CatalogList: 'catalog/index', //分类目录全部分类数据接口
 	CatalogCurrent: 'catalog/current', //分类目录当前分类数据接口
 

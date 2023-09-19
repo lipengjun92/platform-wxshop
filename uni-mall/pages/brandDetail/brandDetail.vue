@@ -2,7 +2,7 @@
 	<view class="container">
 		<view class="brand-info">
 			<view class="name">
-				<image class="img" :src="brand.app_list_pic_url" background-size="cover"></image>
+				<image class="img" :src="brand.appListPicUrl" background-size="cover"></image>
 				<view class="info-box">
 					<view class="info">
 						<text class="txt">{{brand.name||''}}</text>
@@ -11,7 +11,7 @@
 				</view>
 			</view>
 			<view class="desc">
-				{{brand.simple_desc}}
+				{{brand.simpleDesc}}
 			</view>
 		</view>
 
@@ -19,9 +19,9 @@
 			<view class="b">
 				<block v-for="(iitem, iindex) in goodsList" :key="iindex">
 					<navigator :class="'item ' + (iindex % 2 == 0 ? 'item-b' : '')" :url="'../goods/goods?id='+iitem.id">
-						<image class="img" :src="iitem.list_pic_url" background-size="cover"></image>
+						<image class="img" :src="iitem.listPicUrl" background-size="cover"></image>
 						<text class="name">{{iitem.name||''}}</text>
-						<text class="price">￥{{iitem.retail_price||0}}</text>
+						<text class="price">￥{{iitem.retailPrice||0}}</text>
 					</navigator>
 				</block>
 			</view>

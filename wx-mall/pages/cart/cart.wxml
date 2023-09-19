@@ -18,18 +18,18 @@
     <view class="list">
       <view class="group-item">
         <view class="goods">
-          <view class="item {{isEditCart ? 'edit' : ''}}" wx:for="{{cartGoods}}" wx:key="{{item.id}}">
+          <view class="item {{isEditCart ? 'edit' : ''}}" wx:for="{{cartGoods}}" wx:key="id">
             <view class="checkbox {{item.checked ? 'checked' : ''}}" bindtap="checkedItem" data-item-index="{{index}}"></view>
             <view class="cart-goods">
-              <image class="img" src="{{item.list_pic_url}}"></image>
+              <image class="img" src="{{item.listPicUrl}}"></image>
               <view class="info">
                 <view class="t">
-                  <text class="name">{{item.goods_name}}</text>
+                  <text class="name">{{item.goodsName}}</text>
                   <text class="num">x{{item.number}}</text>
                 </view>
-                <view class="attr">{{ isEditCart ? '已选择:' : ''}}{{item.goods_specifition_name_value||''}}</view>
+                <view class="attr">{{ isEditCart ? '已选择:' : ''}}{{item.goodsSpecifitionNameValue||''}}</view>
                 <view class="b">
-                  <text class="price">￥{{item.retail_price}}</text>
+                  <text class="price">￥{{item.retailPrice}}</text>
                   <view class="selnum">
                     <view class="cut" bindtap="cutNumber" data-item-index="{{index}}">-</view>
                     <input value="{{item.number}}" class="number" disabled="true" type="number" />
@@ -49,7 +49,7 @@
                         <text class="txt">再加26元, 3件赠1件蔓越莓干</text>
                         <image class="icon" src="http://nos.netease.com/mailpub/hxm/yanxuan-wap/p/20150730/style/img/icon-normal/go-b67cb9718d.png"></image>
                     </view>
-                    <view class="get">领赠品</view>                
+                    <view class="get">领赠品</view>
                 </view>
                 <view class="goods">
                     <view class="item">

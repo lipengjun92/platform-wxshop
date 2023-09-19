@@ -57,7 +57,7 @@ Page({
       let orderIndex = event.currentTarget.dataset.orderIndex;
       let order = that.data.orderList[orderIndex];
       wx.redirectTo({
-          url: '/pages/pay/pay?orderId=' + order.id + '&actualPrice=' + order.actual_price,
+          url: '/pages/pay/pay?orderId=' + order.id + '&actualPrice=' + order.actualPrice,
       })
   },
   onReady:function(){

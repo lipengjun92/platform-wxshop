@@ -1,12 +1,12 @@
 <template>
 	<view class="container">
 		<button v-if="canIUseGetUserProfile" class="userinfo" @tap="getUserProfile">
-			<image class="userinfo-avatar" :src="userInfo.avatarUrl" background-size="cover"></image>
-			<text class="userinfo-nickname">{{ userInfo.nickName}}</text>
+			<image class="userinfo-avatar" :src="userInfo.avatar" background-size="cover"></image>
+			<text class="userinfo-nickname">{{ userInfo.nickname}}</text>
 		</button>
 		<button v-else class="userinfo" open-type="getUserInfo" @getuserinfo="bindGetUserInfo">
-			<image class="userinfo-avatar" :src="userInfo.avatarUrl" background-size="cover"></image>
-			<text class="userinfo-nickname">{{ userInfo.nickName}}</text>
+			<image class="userinfo-avatar" :src="userInfo.avatar" background-size="cover"></image>
+			<text class="userinfo-nickname">{{ userInfo.nickname}}</text>
 		</button>
 		<view style="height:20rpx;background: #eee;width:100%;"></view>
 		<view class="my-item" style='background:none;display:flex;flex-direction:column;height:auto;'></view>
@@ -155,9 +155,9 @@
 							uni.removeStorageSync('token');
 							uni.removeStorageSync('userInfo');
 							app.globalData.userInfo = {
-								nickName: 'Hi,游客',
+                nickname: 'Hi,游客',
 								userName: '点击去登录',
-								avatarUrl: 'https://platform-wxmall.oss-cn-beijing.aliyuncs.com/upload/20180727/150547696d798c.png'
+								avatar: 'https://platform-wxmall.oss-cn-beijing.aliyuncs.com/upload/20180727/150547696d798c.png'
 							}
 							util.toast('退出成功');
 							uni.switchTab({

@@ -42,13 +42,13 @@ public class ApiFootprintController extends ApiBaseAction {
         //删除当天的同一个商品的足迹
         FootprintVo footprintEntity = footprintService.queryObject(footprintId);
         //
-        if (loginUser == null || loginUser.getUserId() == null || footprintEntity == null || footprintEntity.getGoods_id() == null) {
+        if (loginUser == null || loginUser.getUserId() == null || footprintEntity == null || footprintEntity.getGoodsId() == null) {
             return toResponseFail("删除出错");
         }
 
         Map<String, Object> param = new HashMap<String, Object>();
         param.put("userId", loginUser.getUserId());
-        param.put("goodsId", footprintEntity.getGoods_id());
+        param.put("goodsId", footprintEntity.getGoodsId());
         footprintService.deleteByParam(param);
 
         return toResponseSuccess("删除成功");
@@ -86,7 +86,7 @@ public class ApiFootprintController extends ApiBaseAction {
 
         if (null != footprintVos && footprintVos.size() > 0) {
             for (FootprintVo footprintVo : footprintVos) {
-                String addTime = DateUtils.timeToStr(footprintVo.getAdd_time(), DateUtils.DATE_PATTERN);
+                String addTime = DateUtils.timeToStr(footprintVo.getAddTime(), DateUtils.DATE_PATTERN);
                 List<FootprintVo> tmpList = footPrintMap.get(addTime);
                 if (null == footPrintMap.get(addTime)) {
                     tmpList = new ArrayList<FootprintVo>();

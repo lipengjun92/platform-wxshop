@@ -61,7 +61,7 @@ public class ApiIndexController extends ApiBaseAction {
         Map<String, Object> resultObj = new HashMap<String, Object>();
         //
         Map<String, Object> param = new HashMap<String, Object>();
-        param.put("ad_position_id", 1);
+        param.put("adPositionId", 1);
         List<AdVo> banner = adService.queryList(param);
         resultObj.put("banner", banner);
         //
@@ -72,16 +72,16 @@ public class ApiIndexController extends ApiBaseAction {
         resultObj.put("channel", channel);
         //
         param = new HashMap<String, Object>();
-        param.put("is_new", 1);
-        param.put("is_delete", 0);
+        param.put("isNew", 1);
+        param.put("isDelete", 0);
         param.put("fields", "id, name, list_pic_url, retail_price");
         PageHelper.startPage(0, 4, false);
         List<GoodsVo> newGoods = goodsService.queryList(param);
         resultObj.put("newGoodsList", newGoods);
         //
         param = new HashMap<String, Object>();
-        param.put("is_hot", "1");
-        param.put("is_delete", 0);
+        param.put("isHot", "1");
+        param.put("isDelete", 0);
         PageHelper.startPage(0, 3, false);
         List<GoodsVo> hotGoods = goodsService.queryHotGoodsList(param);
         resultObj.put("hotGoodsList", hotGoods);
@@ -90,21 +90,21 @@ public class ApiIndexController extends ApiBaseAction {
         if (null != getUserId()) {
             //查询列表数据
             Map<String, Object> cartParam = new HashMap<String, Object>();
-            cartParam.put("user_id", getUserId());
+            cartParam.put("userId", getUserId());
             cartList = cartService.queryList(cartParam);
         }
         if (null != cartList && cartList.size() > 0 && null != hotGoods && hotGoods.size() > 0) {
             for (GoodsVo goodsVo : hotGoods) {
                 for (CartVo cartVo : cartList) {
-                    if (goodsVo.getId().equals(cartVo.getGoods_id())) {
-                        goodsVo.setCart_num(cartVo.getNumber());
+                    if (goodsVo.getId().equals(cartVo.getGoodsId())) {
+                        goodsVo.setCartNum(cartVo.getNumber());
                     }
                 }
             }
         }
         //
         param = new HashMap<String, Object>();
-        param.put("is_new", 1);
+        param.put("isNew", 1);
         param.put("sidx", "new_sort_order ");
         param.put("order", "asc ");
         param.put("offset", 0);
@@ -119,14 +119,14 @@ public class ApiIndexController extends ApiBaseAction {
         resultObj.put("topicList", topicList);
 
         param = new HashMap<String, Object>();
-        param.put("parent_id", 0);
+        param.put("parentId", 0);
         param.put("notName", "推荐");//<>
         List<CategoryVo> categoryList = categoryService.queryList(param);
         List<Map<String, Object>> newCategoryList = new ArrayList<>();
 
         for (CategoryVo categoryItem : categoryList) {
             param.remove("fields");
-            param.put("parent_id", categoryItem.getId());
+            param.put("parentId", categoryItem.getId());
             List<CategoryVo> categoryEntityList = categoryService.queryList(param);
             List<Integer> childCategoryIds = new ArrayList<>();
             for (CategoryVo categoryEntity : categoryEntityList) {
@@ -135,7 +135,7 @@ public class ApiIndexController extends ApiBaseAction {
             //
             param = new HashMap<String, Object>();
             param.put("categoryIds", childCategoryIds);
-            param.put("fields", "id as id, name as name, list_pic_url as list_pic_url, retail_price as retail_price");
+            param.put("fields", "id as id, name, list_pic_url, retail_price as retail_price");
             PageHelper.startPage(0, 7, false);
             List<GoodsVo> categoryGoods = goodsService.queryList(param);
             Map<String, Object> newCategory = new HashMap<String, Object>();
@@ -159,8 +159,8 @@ public class ApiIndexController extends ApiBaseAction {
         Map<String, Object> resultObj = new HashMap<String, Object>();
         //
         Map<String, Object> param = new HashMap<String, Object>();
-        param.put("is_new", 1);
-        param.put("is_delete", 0);
+        param.put("isNew", 1);
+        param.put("isDelete", 0);
         param.put("fields", "id, name, list_pic_url, retail_price");
         PageHelper.startPage(0, 4, false);
         List<GoodsVo> newGoods = goodsService.queryList(param);
@@ -177,8 +177,8 @@ public class ApiIndexController extends ApiBaseAction {
         Map<String, Object> resultObj = new HashMap<String, Object>();
         //
         Map<String, Object> param = new HashMap<String, Object>();
-        param.put("is_hot", "1");
-        param.put("is_delete", 0);
+        param.put("isHot", "1");
+        param.put("isDelete", 0);
         PageHelper.startPage(0, 3, false);
         List<GoodsVo> hotGoods = goodsService.queryHotGoodsList(param);
         resultObj.put("hotGoodsList", hotGoods);
@@ -210,7 +210,7 @@ public class ApiIndexController extends ApiBaseAction {
         Map<String, Object> resultObj = new HashMap<String, Object>();
         //
         Map<String, Object> param = new HashMap<String, Object>();
-        param.put("is_new", 1);
+        param.put("isNew", 1);
         param.put("sidx", "new_sort_order ");
         param.put("order", "asc ");
         param.put("offset", 0);
@@ -230,14 +230,14 @@ public class ApiIndexController extends ApiBaseAction {
         //
         Map<String, Object> param = new HashMap<String, Object>();
         param = new HashMap<String, Object>();
-        param.put("parent_id", 0);
+        param.put("parentId", 0);
         param.put("notName", "推荐");//<>
         List<CategoryVo> categoryList = categoryService.queryList(param);
         List<Map<String, Object>> newCategoryList = new ArrayList<>();
 
         for (CategoryVo categoryItem : categoryList) {
             param.remove("fields");
-            param.put("parent_id", categoryItem.getId());
+            param.put("parentId", categoryItem.getId());
             List<CategoryVo> categoryEntityList = categoryService.queryList(param);
             List<Integer> childCategoryIds = null;
             if (categoryEntityList != null && categoryEntityList.size() > 0) {
@@ -249,8 +249,8 @@ public class ApiIndexController extends ApiBaseAction {
             //
             param = new HashMap<String, Object>();
             param.put("categoryIds", childCategoryIds);
-            param.put("fields", "id as id, name as name, list_pic_url as list_pic_url, retail_price as retail_price");
-            param.put("is_delete", "0");
+            param.put("fields", "id as id, name, list_pic_url, retail_price as retail_price");
+            param.put("isDelete", "0");
             PageHelper.startPage(0, 7, false);
             List<GoodsVo> categoryGoods = goodsService.queryList(param);
             Map<String, Object> newCategory = new HashMap<String, Object>();
@@ -272,7 +272,7 @@ public class ApiIndexController extends ApiBaseAction {
         Map<String, Object> resultObj = new HashMap<String, Object>();
         //
         Map<String, Object> param = new HashMap<String, Object>();
-        param.put("ad_position_id", 1);
+        param.put("adPositionId", 1);
         List<AdVo> banner = adService.queryList(param);
         resultObj.put("banner", banner);
         //

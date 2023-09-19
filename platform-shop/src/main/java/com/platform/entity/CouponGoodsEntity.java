@@ -1,5 +1,7 @@
 package com.platform.entity;
 
+import lombok.Data;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -12,6 +14,7 @@ import java.util.Date;
  * @email 939961241@qq.com
  * @date 2017-08-29 21:50:17
  */
+@Data
 public class CouponGoodsEntity implements Serializable {
     private static final long serialVersionUID = 1L;
 
@@ -21,44 +24,4 @@ public class CouponGoodsEntity implements Serializable {
     private Integer couponId;
     //商品id
     private Integer goodsId;
-
-    /**
-     * 设置：主键
-     */
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    /**
-     * 获取：主键
-     */
-    public Integer getId() {
-        return id;
-    }
-    /**
-     * 设置：优惠券Id
-     */
-    public void setCouponId(Integer couponId) {
-        this.couponId = couponId;
-    }
-
-    /**
-     * 获取：优惠券Id
-     */
-    public Integer getCouponId() {
-        return couponId;
-    }
-    /**
-     * 设置：商品id
-     */
-    public void setGoodsId(Integer goodsId) {
-        this.goodsId = goodsId;
-    }
-
-    /**
-     * 获取：商品id
-     */
-    public Integer getGoodsId() {
-        return goodsId;
-    }
 }

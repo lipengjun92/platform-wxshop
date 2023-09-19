@@ -1,6 +1,6 @@
 <view class="userinfo">
-  <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
-  <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+  <image class="userinfo-avatar" src="{{userInfo.avatar}}" background-size="cover"></image>
+  <text class="userinfo-nickname">{{userInfo.nickname}}</text>
 </view>
 
 <view class="separate"></view>

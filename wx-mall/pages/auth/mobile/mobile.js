@@ -6,8 +6,8 @@ Page({
     data: {
         mobile: '',
         userInfo: {
-            avatarUrl: '',
-            nickName: ''
+            avatar: '',
+            nickname: ''
         },
         disableGetMobileCode: false,
         disableSubmitMobileCode: true,
@@ -115,7 +115,7 @@ Page({
             icon: 'loading',
             duration: 5000
         })
-        util.request(api.BindMobile, {mobile_code: e.detail.value.code, mobile: mobile}, "POST", "application/json")
+        util.request(api.BindMobile, {mobileCode: e.detail.value.code, mobile: mobile}, "POST", "application/json")
             .then(function (res) {
                 if (res.errno === 0) {
                     wx.showModal({

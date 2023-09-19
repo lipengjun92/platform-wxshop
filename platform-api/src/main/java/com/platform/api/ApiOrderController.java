@@ -67,7 +67,7 @@ public class ApiOrderController extends ApiBaseAction {
                        @RequestParam(value = "size", defaultValue = "10") Integer size) {
         //
         Map params = new HashMap();
-        params.put("user_id", loginUser.getUserId());
+        params.put("userId", loginUser.getUserId());
         params.put("page", page);
         params.put("limit", size);
         params.put("sidx", "add_time");
@@ -80,7 +80,7 @@ public class ApiOrderController extends ApiBaseAction {
         //
         for (OrderVo item : orderEntityList) {
             Map orderGoodsParam = new HashMap();
-            orderGoodsParam.put("order_id", item.getId());
+            orderGoodsParam.put("orderId", item.getId());
             //订单的商品
             List<OrderGoodsVo> goodsList = orderGoodsService.queryList(orderGoodsParam);
             Integer goodsCount = 0;
@@ -105,16 +105,16 @@ public class ApiOrderController extends ApiBaseAction {
             return toResponsObject(400, "订单不存在", "");
         }
 
-        if (!loginUser.getUserId().equals(orderInfo.getUser_id())) {
+        if (!loginUser.getUserId().equals(orderInfo.getUserId())) {
             return toResponseFail("越权操作！");
         }
         Map orderGoodsParam = new HashMap();
-        orderGoodsParam.put("order_id", orderId);
+        orderGoodsParam.put("orderId", orderId);
         //订单的商品
         List<OrderGoodsVo> orderGoods = orderGoodsService.queryList(orderGoodsParam);
         //订单最后支付时间
-        if (orderInfo.getOrder_status() == 0) {
-            // if (moment().subtract(60, 'minutes') < moment(orderInfo.add_time)) {
+        if (orderInfo.getOrderStatus() == 0) {
+            // if (moment().subtract(60, 'minutes') < moment(orderInfo.addTime)) {
 //            orderInfo.final_pay_time = moment("001234", "Hmmss").format("mm:ss")
             // } else {
             //     //超过时间不支付，更新订单状态为取消
@@ -127,9 +127,9 @@ public class ApiOrderController extends ApiBaseAction {
         resultObj.put("orderInfo", orderInfo);
         resultObj.put("orderGoods", orderGoods);
         resultObj.put("handleOption", handleOption);
-        if (!StringUtils.isEmpty(orderInfo.getShipping_code()) && !StringUtils.isEmpty(orderInfo.getShipping_no())) {
+        if (!StringUtils.isEmpty(orderInfo.getShippingCode()) && !StringUtils.isEmpty(orderInfo.getShippingNo())) {
             // 快递
-            List Traces = apiKdniaoService.getOrderTracesByJson(orderInfo.getShipping_code(), orderInfo.getShipping_no());
+            List Traces = apiKdniaoService.getOrderTracesByJson(orderInfo.getShippingCode(), orderInfo.getShippingNo());
             resultObj.put("shippingList", Traces);
         }
         return toResponseSuccess(resultObj);
@@ -141,18 +141,18 @@ public class ApiOrderController extends ApiBaseAction {
         OrderVo orderInfo = orderService.queryObject(orderId);
         if (orderInfo == null) {
             return toResponseFail("订单不存在");
-        } else if (orderInfo.getOrder_status() != 0) {
-            return toResponseFail("订单状态不正确orderStatus" + orderInfo.getOrder_status() + "payStatus" + orderInfo.getPay_status());
+        } else if (orderInfo.getOrderStatus() != 0) {
+            return toResponseFail("订单状态不正确orderStatus" + orderInfo.getOrderStatus() + "payStatus" + orderInfo.getPayStatus());
         }
 
-        if (!loginUser.getUserId().equals(orderInfo.getUser_id())) {
+        if (!loginUser.getUserId().equals(orderInfo.getUserId())) {
             return toResponseFail("越权操作！");
         }
         orderInfo.setId(orderId);
-        orderInfo.setPay_status(2);
-        orderInfo.setOrder_status(201);
-        orderInfo.setShipping_status(0);
-        orderInfo.setPay_time(new Date());
+        orderInfo.setPayStatus(2);
+        orderInfo.setOrderStatus(201);
+        orderInfo.setShippingStatus(0);
+        orderInfo.setPayTime(new Date());
         int num = orderService.update(orderInfo);
         if (num > 0) {
             return toResponseSuccess("修改订单成功");
@@ -190,32 +190,32 @@ public class ApiOrderController extends ApiBaseAction {
             if (null == orderVo) {
                 return toResponseFail("订单不存在！");
             }
-            if (!loginUser.getUserId().equals(orderVo.getUser_id())) {
+            if (!loginUser.getUserId().equals(orderVo.getUserId())) {
                 return toResponseFail("越权操作！");
             }
-            if (orderVo.getOrder_status() == 300) {
+            if (orderVo.getOrderStatus() == 300) {
                 return toResponseFail("已发货，不能取消");
-            } else if (orderVo.getOrder_status() == 301) {
+            } else if (orderVo.getOrderStatus() == 301) {
                 return toResponseFail("已收货，不能取消");
             }
             // 需要退款
-            if (orderVo.getPay_status() == 2) {
-                WechatRefundApiResult result = WechatUtil.wxRefund(orderVo.getOrder_sn(),
+            if (orderVo.getPayStatus() == 2) {
+                WechatRefundApiResult result = WechatUtil.wxRefund(orderVo.getOrderSn(),
                         0.01, 0.01);
                 if (result.getResult_code().equals("SUCCESS")) {
-                    if (orderVo.getOrder_status() == 201) {
-                        orderVo.setOrder_status(401);
-                    } else if (orderVo.getOrder_status() == 300) {
-                        orderVo.setOrder_status(402);
+                    if (orderVo.getOrderStatus() == 201) {
+                        orderVo.setOrderStatus(401);
+                    } else if (orderVo.getOrderStatus() == 300) {
+                        orderVo.setOrderStatus(402);
                     }
-                    orderVo.setPay_status(4);
+                    orderVo.setPayStatus(4);
                     orderService.update(orderVo);
                     return toResponseSuccess("取消成功");
                 } else {
                     return toResponsObject(400, "取消成失败", "");
                 }
             } else {
-                orderVo.setOrder_status(101);
+                orderVo.setOrderStatus(101);
                 orderService.update(orderVo);
                 return this.toResponseSuccess("取消成功");
             }
@@ -236,12 +236,12 @@ public class ApiOrderController extends ApiBaseAction {
             if (null == orderVo) {
                 return toResponseFail("订单不存在！");
             }
-            if (!loginUser.getUserId().equals(orderVo.getUser_id())) {
+            if (!loginUser.getUserId().equals(orderVo.getUserId())) {
                 return toResponseFail("越权操作！");
             }
-            orderVo.setOrder_status(301);
-            orderVo.setShipping_status(2);
-            orderVo.setConfirm_time(new Date());
+            orderVo.setOrderStatus(301);
+            orderVo.setShippingStatus(2);
+            orderVo.setConfirmTime(new Date());
             orderService.update(orderVo);
             return this.toResponseSuccess("确认收货成功");
         } catch (Exception e) {

@@ -4,11 +4,11 @@
 			<view class="address-item" @tap="selectAddress" v-if="checkedAddress.id > 0">
 				<view class="l">
 					<text class="name">{{checkedAddress.userName||''}}</text>
-					<text class="default" v-if="checkedAddress.is_default === 1">默认</text>
+					<text class="default" v-if="checkedAddress.isDefault === 1">默认</text>
 				</view>
 				<view class="m">
 					<text class="mobile">{{checkedAddress.telNumber||''}}</text>
-					<text class="address">{{checkedAddress.full_region+checkedAddress.detailInfo}}</text>
+					<text class="address">{{checkedAddress.fullRegion+checkedAddress.detailInfo}}</text>
 				</view>
 				<view class="r">
 					<image src="/static/images/address_right.png"></image>
@@ -65,15 +65,15 @@
 		<view class="goods-items">
 			<view class="item" v-for="(item, index) in checkedGoodsList" :key="item.id">
 				<view class="img">
-					<image :src="item.list_pic_url"></image>
+					<image :src="item.listPicUrl"></image>
 				</view>
 				<view class="info">
 					<view class="t">
-						<text class="name">{{item.goods_name||''}}</text>
+						<text class="name">{{item.goodsName||''}}</text>
 						<text class="number">x{{item.number||''}}</text>
 					</view>
-					<view class="m">{{item.goods_specifition_name_value||''}}</view>
-					<view class="b">￥{{item.retail_price||''}}</view>
+					<view class="m">{{item.goodsSpecifitionNameValue||''}}</view>
+					<view class="b">￥{{item.retailPrice||''}}</view>
 				</view>
 			</view>
 		</view>

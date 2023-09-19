@@ -23,7 +23,7 @@ public interface ApiCouponMapper extends BaseDao<CouponVo> {
     /**
      * 按条件查询用户优惠券
      *
-     * @param params
+     * @param id
      * @return
      */
     CouponVo getUserCoupon(Integer id);

@@ -50,7 +50,7 @@ public class ApiCatalogController extends ApiBaseAction {
         params.put("limit", size);
         params.put("sidx", "sort_order");
         params.put("order", "asc");
-        params.put("parent_id", 0);
+        params.put("parentId", 0);
         //查询列表数据
         List<CategoryVo> data = categoryService.queryList(params);
         //
@@ -66,7 +66,7 @@ public class ApiCatalogController extends ApiBaseAction {
 
         //获取子分类数据
         if (null != currentCategory && null != currentCategory.getId()) {
-            params.put("parent_id", currentCategory.getId());
+            params.put("parentId", currentCategory.getId());
             currentCategory.setSubCategoryList(categoryService.queryList(params));
         }
 
@@ -85,14 +85,14 @@ public class ApiCatalogController extends ApiBaseAction {
     public Object current(Integer id) {
         Map<String, Object> resultObj = new HashMap();
         Map params = new HashMap();
-        params.put("parent_id", 0);
+        params.put("parentId", 0);
         CategoryVo currentCategory = null;
         if (null != id) {
             currentCategory = categoryService.queryObject(id);
         }
         //获取子分类数据
         if (null != currentCategory && null != currentCategory.getId()) {
-            params.put("parent_id", currentCategory.getId());
+            params.put("parentId", currentCategory.getId());
             currentCategory.setSubCategoryList(categoryService.queryList(params));
         }
         resultObj.put("currentCategory", currentCategory);

@@ -230,7 +230,7 @@
 }
 
 .a-topic .b {
-  height: 533rpx;
+  height: auto;
   width: 750rpx;
   padding: 0 0 48rpx 0;
 }
@@ -243,7 +243,7 @@
 
 .a-topic .b .item {
   display: inline-block;
-  height: 533rpx;
+  min-height: 400rpx;
   width: 680.5rpx;
   margin-left: 30rpx;
   overflow: hidden;
@@ -254,9 +254,8 @@
 }
 
 .a-topic .b .img {
-  height: 387.5rpx;
+  height: 400rpx;
   width: 680.5rpx;
-  margin-bottom: 30rpx;
 }
 
 .a-topic .b .np {

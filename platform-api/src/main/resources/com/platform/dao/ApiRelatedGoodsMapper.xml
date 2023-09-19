@@ -6,8 +6,8 @@
     <!-- 可根据自己的需求，是否要使用 -->
     <resultMap type="com.platform.entity.RelatedGoodsVo" id="relatedGoodsMap">
         <result property="id" column="id"/>
-        <result property="goods_id" column="goods_id"/>
-        <result property="related_goods_id" column="related_goods_id"/>
+        <result property="goodsId" column="goods_id"/>
+        <result property="relatedGoodsId" column="related_goods_id"/>
     </resultMap>
 
     <select id="queryObject" resultMap="relatedGoodsMap">
@@ -37,27 +37,27 @@
     </select>
 
     <select id="queryTotal" resultType="int">
-		select count(*) from nideshop_related_goods 
+		select count(*) from nideshop_related_goods
 	</select>
 
     <insert id="save" parameterType="com.platform.entity.RelatedGoodsVo" useGeneratedKeys="true" keyProperty="id">
 		insert into nideshop_related_goods
 		(
-			`goods_id`, 
+			`goods_id`,
 			`related_goods_id`
 		)
 		values
 		(
-			#{goods_id}, 
-			#{related_goods_id}
+			#{goodsId},
+			#{relatedGoodsId}
 		)
 	</insert>
 
     <update id="update" parameterType="com.platform.entity.RelatedGoodsVo">
         update nideshop_related_goods
         <set>
-            <if test="goods_id != null">`goods_id` = #{goods_id},</if>
-            <if test="related_goods_id != null">`related_goods_id` = #{related_goods_id}</if>
+            <if test="goodsId != null">`goods_id` = #{goodsId},</if>
+            <if test="relatedGoodsId != null">`related_goods_id` = #{relatedGoodsId}</if>
         </set>
         where id = #{id}
     </update>

@@ -6,13 +6,13 @@
     <!-- 可根据自己的需求，是否要使用 -->
     <resultMap type="com.platform.entity.FootprintVo" id="footprintMap">
         <result property="id" column="id"/>
-        <result property="user_id" column="user_id"/>
-        <result property="goods_id" column="goods_id"/>
-        <result property="add_time" column="add_time"/>
+        <result property="userId" column="user_id"/>
+        <result property="goodsId" column="goods_id"/>
+        <result property="addTime" column="add_time"/>
         <result property="name" column="name"/>
-        <result property="list_pic_url" column="list_pic_url"/>
-        <result property="goods_brief" column="goods_brief"/>
-        <result property="retail_price" column="retail_price"/>
+        <result property="listPicUrl" column="list_pic_url"/>
+        <result property="goodsBrief" column="goods_brief"/>
+        <result property="retailPrice" column="retail_price"/>
         <result property="referrer" column="referrer"/>
         <result property="nickname" column="nickname"/>
         <result property="avatar" column="avatar"/>
@@ -24,7 +24,7 @@
 
     <select id="queryList" resultMap="footprintMap">
         select f.id,f.user_id,f.goods_id,f.add_time add_time,f.referrer,
-        g.name as name, g.list_pic_url as list_pic_url, g.goods_brief as goods_brief, g.retail_price as
+        g.name as name, g.list_pic_url, g.goods_brief as goods_brief, g.retail_price as
         retail_price
         from nideshop_footprint f
         <if test="maxFoot == true">
@@ -33,8 +33,8 @@
         </if>
         left join nideshop_goods g on f.goods_id = g.id
         <where>
-            <if test="user_id != null">
-                and f.user_id = #{user_id}
+            <if test="userId != null">
+                and f.user_id = #{userId}
             </if>
             <if test="maxFoot == true">
                 and max.id is null
@@ -57,10 +57,10 @@
 				MAX(f.id) id,
 				f.user_id,
 				f.goods_id,
-				f.add_time add_time,
+				f.add_time,
 				f.referrer,
-				g. NAME AS NAME,
-				g.list_pic_url AS list_pic_url,
+				g.NAME,
+				g.list_pic_url,
 				g.goods_brief AS goods_brief,
 				g.retail_price AS retail_price
 			FROM
@@ -75,11 +75,11 @@
     <select id="queryTotal" resultType="int">
         select count(*) from nideshop_footprint f
         <where>
-            <if test="user_id != null">
-                and f.user_id = #{user_id}
+            <if test="userId != null">
+                and f.user_id = #{userId}
             </if>
-            <if test="goods_id != null">
-                and f.goods_id = #{goods_id}
+            <if test="goodsId != null">
+                and f.goods_id = #{goodsId}
             </if>
             <if test="referrer != null">
                 and f.referrer = #{referrer}
@@ -90,16 +90,16 @@
     <insert id="save" parameterType="com.platform.entity.FootprintVo" useGeneratedKeys="true" keyProperty="id">
 		insert into nideshop_footprint
 		(
-			`user_id`, 
-			`goods_id`, 
+			`user_id`,
+			`goods_id`,
 			`add_time`,
 			`referrer`
 		)
 		values
 		(
-			#{user_id},
-			#{goods_id},
-			#{add_time},
+			#{userId},
+			#{goodsId},
+			#{addTime},
 			#{referrer}
 		)
 	</insert>
@@ -107,9 +107,9 @@
     <update id="update" parameterType="com.platform.entity.FootprintVo">
         update nideshop_footprint
         <set>
-            <if test="user_id != null">`user_id` = #{user_id},</if>
-            <if test="goods_id != null">`goods_id` = #{goods_id},</if>
-            <if test="add_time != null">`add_time` = #{add_time}</if>
+            <if test="userId != null">`user_id` = #{userId},</if>
+            <if test="goodsId != null">`goods_id` = #{goodsId},</if>
+            <if test="addTime != null">`add_time` = #{addTime}</if>
             <if test="referrer != null">`referrer` = #{referrer}</if>
         </set>
         where id = #{id}
@@ -135,7 +135,7 @@
 
     <select id="shareList" resultMap="footprintMap">
         select f.id,f.user_id,f.goods_id,f.add_time add_time,f.referrer,
-        g.name as name, g.list_pic_url as list_pic_url, g.goods_brief as goods_brief,
+        g.name as name, g.list_pic_url, g.goods_brief as goods_brief,
         g.retail_price as retail_price,
         u.nickname as nickname,u.avatar as avatar
         from nideshop_footprint f
@@ -143,8 +143,8 @@
         left join nideshop_user u on u.id = f.user_id
         <where>
             u.id is not null
-            <if test="user_id != null">
-                and f.user_id = #{user_id}
+            <if test="userId != null">
+                and f.user_id = #{userId}
             </if>
             <if test="referrer != null">
                 and f.referrer = #{referrer}

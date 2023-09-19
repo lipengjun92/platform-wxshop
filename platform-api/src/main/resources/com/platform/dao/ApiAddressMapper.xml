@@ -15,7 +15,7 @@
         <result property="cityName" column="city_Name"/>
         <result property="countyName" column="county_Name"/>
         <result property="detailInfo" column="detail_Info"/>
-        <result property="is_default" column="is_default"/>
+        <result property="isDefault" column="is_default"/>
     </resultMap>
 
     <select id="queryObject" resultMap="addressMap">
@@ -25,8 +25,8 @@
     <select id="queryList" resultMap="addressMap">
         select * from nideshop_address
         <where>
-            <if test="user_id != null">
-                and user_id = #{user_id}
+            <if test="userId != null">
+                and user_id = #{userId}
             </if>
         </where>
         <choose>
@@ -43,7 +43,7 @@
     </select>
 
     <select id="queryTotal" resultType="int">
-		select count(*) from nideshop_address 
+		select count(*) from nideshop_address
 	</select>
 
     <insert id="save" parameterType="com.platform.entity.AddressVo" useGeneratedKeys="true" keyProperty="id">
@@ -68,7 +68,7 @@
 			#{cityName},
 			#{countyName},
 			#{detailInfo},
-			#{is_default})
+			#{isDefault})
 	</insert>
 
     <update id="update" parameterType="com.platform.entity.AddressVo">
@@ -83,7 +83,7 @@
             <if test="cityName != null">`city_Name` = #{cityName}, </if>
             <if test="countyName != null">`county_Name` = #{countyName}, </if>
             <if test="detailInfo != null">`detail_Info` = #{detailInfo},</if>
-            <if test="is_default != null">`is_default` = #{is_default}</if>
+            <if test="isDefault != null">`is_default` = #{isDefault}</if>
         </set>
         where id = #{id}
     </update>

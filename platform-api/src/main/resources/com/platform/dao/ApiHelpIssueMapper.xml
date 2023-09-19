@@ -31,8 +31,8 @@
         `sort`
         from nideshop_help_issue
         WHERE 1=1
-        <if test="type_id != null and type_id != ''">
-            AND type_id = #{type_id}
+        <if test="typeId != null and typeId != ''">
+            AND type_id = #{typeId}
         </if>
         <choose>
             <when test="sidx != null and sidx.trim() != ''">

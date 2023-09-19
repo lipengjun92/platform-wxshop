@@ -3,13 +3,13 @@
 		<view class="brand-list">
 			<navigator :url="'../brandDetail/brandDetail?id='+item.id" class="item" v-for="(item, index) in brandList" :key="index">
 				<view class="img-bg">
-					<image :src="item.app_list_pic_url" background-size="cover"></image>
+					<image :src="item.appListPicUrl" background-size="cover"></image>
 				</view>
 				<view class="txt-box">
 					<view class="line">
 						<text class="name">{{item.name||''}}</text>
 						<text class="s">|</text>
-						<text class="price">{{item.floor_price||0}}元起</text>
+						<text class="price">{{item.floorPrice||0}}元起</text>
 					</view>
 				</view>
 			</navigator>

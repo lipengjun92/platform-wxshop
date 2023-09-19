@@ -3,15 +3,15 @@
 		<swiper class="banner" indicator-dots="true" autoplay="true" interval="3000" duration="1000">
 			<swiper-item v-for="(item, index) in banner" :key="index">
 				<navigator v-if="item.link" :url="item.link">
-					<image :src="item.image_url" background-size="cover"></image>
+					<image :src="item.imageUrl" background-size="cover"></image>
 				</navigator>
-				<image v-else :src="item.image_url" background-size="cover"></image>
+				<image v-else :src="item.imageUrl" background-size="cover"></image>
 			</swiper-item>
 		</swiper>
 		<view class="a-section a-topic" v-if="channel.length > 0">
 			<view class="m-menu">
 				<navigator class="item" v-for="(item, index) in channel" :key="index" :url="item.url">
-					<image :src="item.icon_url" background-size="cover"></image>
+					<image :src="item.iconUrl" background-size="cover"></image>
 					<text>{{item.name}}</text>
 				</navigator>
 			</view>
@@ -29,12 +29,12 @@
 				<scroll-view scroll-x="true" class="list">
 					<view class="item" v-for="(item, index) in brands" :key="index">
 						<navigator :url="'/pages/brandDetail/brandDetail?id='+item.id">
-							<image class="img" :src="item.new_pic_url" background-size="cover"></image>
+							<image class="img" :src="item.newPicUrl" background-size="cover"></image>
 							<view class="np">
 								<text class="name">{{item.name}}</text>
-								<text class="price">￥{{item.floor_price}}元起</text>
+								<text class="price">￥{{item.floorPrice}}元起</text>
 							</view>
-							<text class="desc">{{item.simple_desc}}</text>
+							<text class="desc">{{item.simpleDesc}}</text>
 						</navigator>
 					</view>
 				</scroll-view>
@@ -53,10 +53,10 @@
 				<scroll-view scroll-x="true" class="list">
 					<view class="item" v-for="(item, index) in topics" :key="index">
 						<navigator :url="'/pages/topicDetail/topicDetail?id='+item.id">
-							<image class="img" :src="item.scene_pic_url" background-size="cover"></image>
+							<image class="img" :src="item.scenePicUrl" background-size="cover"></image>
 							<view class="np">
 								<text class="name">{{item.title}}</text>
-								<text class="price">￥{{item.price_info}}元起</text>
+								<text class="price">￥{{item.priceInfo}}元起</text>
 							</view>
 							<text class="desc">{{item.subtitle}}</text>
 						</navigator>
@@ -76,9 +76,9 @@
 			<view class="b">
 				<view class="item" v-for="(item, index) in newGoods" :key="index">
 					<navigator :url="'/pages/goods/goods?id='+item.id">
-						<image class="img" :src="item.list_pic_url" background-size="cover"></image>
+						<image class="img" :src="item.listPicUrl" background-size="cover"></image>
 						<text class="name">{{item.name}}</text>
-						<text class="price">￥{{item.retail_price}}</text>
+						<text class="price">￥{{item.retailPrice}}</text>
 					</navigator>
 				</view>
 			</view>
@@ -95,12 +95,12 @@
 			<view class="b">
 				<view class="item" v-for="(item, index) in hotGoods" :key="index">
 					<navigator :url="'/pages/goods/goods?id='+item.id">
-						<image class="img" :src="item.list_pic_url" background-size="cover"></image>
+						<image class="img" :src="item.listPicUrl" background-size="cover"></image>
 						<view class="right">
 							<view class="text">
 								<text class="name">{{item.name}}</text>
-								<text class="desc">{{item.goods_brief}}</text>
-								<text class="price">￥{{item.retail_price}}</text>
+								<text class="desc">{{item.goodsBrief}}</text>
+								<text class="price">￥{{item.retailPrice}}</text>
 							</view>
 						</view>
 					</navigator>
@@ -118,9 +118,9 @@
 				<view class="item" v-for="(iitem, iindex) in item.goodsList" :key="iindex">
 					<view :class="'item ' + iindex % 2 == 0 ? '' : 'item-b'">
 						<navigator :url="'/pages/goods/goods?id='+item.id">
-							<image class="img" :src="iitem.list_pic_url" background-size="cover"></image>
+							<image class="img" :src="iitem.listPicUrl" background-size="cover"></image>
 							<text class="name">{{iitem.name}}</text>
-							<text class="price">￥{{iitem.retail_price}}</text>
+							<text class="price">￥{{iitem.retailPrice}}</text>
 						</navigator>
 					</view>
 				</view>
