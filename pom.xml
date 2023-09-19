@@ -48,7 +48,7 @@
         <jgroups.version>3.6.13.Final</jgroups.version>
         <weixin-java-mp.version>4.2.0</weixin-java-mp.version>
         <lombok.version>1.18.4</lombok.version>
-        <mybatis-plus.version>3.1.0</mybatis-plus.version>
+        <mybatis-plus.version>3.5.3</mybatis-plus.version>
         <alipay-sdk.version>3.6.0.ALL</alipay-sdk.version>
         <qcloudsms.version>1.0.6</qcloudsms.version>
     </properties>
