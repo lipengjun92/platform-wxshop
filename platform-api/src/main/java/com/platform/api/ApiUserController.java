@@ -26,7 +26,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @gitee https://gitee.com/fuyang_lipengjun/platform
  * 描述: ApiIndexController <br>
  */
-@Api(tags = "会员验证")
+@Api(tags = "会员操作-ApiUserController")
 @RestController
 @RequestMapping("/api/user")
 public class ApiUserController extends ApiBaseAction {

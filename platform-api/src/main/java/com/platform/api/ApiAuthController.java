@@ -42,7 +42,7 @@ import java.util.Map;
  * @gitee https://gitee.com/fuyang_lipengjun/platform
  * @date 2017-03-23 15:31
  */
-@Api(tags = "API登录授权接口")
+@Api(tags = "登录授权-ApiAuthController")
 @RestController
 @RequestMapping("/api/auth")
 public class ApiAuthController extends ApiBaseAction {
@@ -150,7 +150,7 @@ public class ApiAuthController extends ApiBaseAction {
      */
     @IgnoreAuth
     @GetMapping("/{code}")
-    @ApiOperation(value = "静默登录", notes = "使用code静默登录")
+    @ApiOperation(value = "微信静默登录", notes = "使用code静默登录")
     @ApiImplicitParam(required = true, paramType = "path", name = "code", value = "code", example = "oxaA11ulr9134oBL9Xscon5at_Gc", dataType = "string")
     public Object loginByCode(@PathVariable String code) {
         //获取openid

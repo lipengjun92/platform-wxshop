@@ -82,7 +82,7 @@ platform
     * /_sql/sys_region.sql
 
 * 导入项目到IDE中
-* 导入支付证书至/platform-shop/src/main/resources/cert/目录下（申请商户号、开通微信支付、下载支付证书）
+* 导入支付证书至/platform-admin/src/main/resources/cert/目录下（申请商户号、开通微信支付、下载支付证书）
 * 修改配置文件 /platform-admin/src/main/resources/dev/platform.properties
     * jdbc.url
     * jdbc.username
@@ -116,6 +116,8 @@ platform
 
 
 ## 页面展示
+### 接口文档
+![](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/image/2023_09_20/15_06_39.png "接口文档")
 ### 登录页面
 ![](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/upload/20180708/login.png "登录")
 ### 首页
@@ -136,4 +138,4 @@ platform
 ![](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/upload/20180727/11.png "并联手机")
 
 ## 贡献者列表
-![](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/image/2023_09_20/UNKNOWN_12_11_57.png "贡献者列表")
+![](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/image/2023_09_20/12_11_57.png "贡献者列表")

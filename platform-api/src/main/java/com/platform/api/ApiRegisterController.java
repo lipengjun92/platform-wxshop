@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @gitee https://gitee.com/fuyang_lipengjun/platform
  * @date 2017-03-26 17:27
  */
-@Api(tags = "注册")
+@Api(tags = "会员注册-ApiRegisterController")
 @RestController
 @RequestMapping("/api/register")
 public class ApiRegisterController {

@@ -21,7 +21,7 @@ import java.util.Date;
  * @gitee https://gitee.com/fuyang_lipengjun/platform
  * 描述: ApiFeedbackController <br>
  */
-@Api(tags = "反馈")
+@Api(tags = "会员反馈-ApiFeedbackController")
 @RestController
 @RequestMapping("/api/feedback")
 public class ApiFeedbackController extends ApiBaseAction {

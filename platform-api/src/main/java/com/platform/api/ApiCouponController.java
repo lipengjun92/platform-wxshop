@@ -24,7 +24,7 @@ import java.util.*;
  * @gitee https://gitee.com/fuyang_lipengjun/platform
  * @date 2017-03-23 15:31
  */
-@Api(tags = "优惠券")
+@Api(tags = "优惠券-ApiCouponController")
 @RestController
 @RequestMapping("/api/coupon")
 public class ApiCouponController extends ApiBaseAction {

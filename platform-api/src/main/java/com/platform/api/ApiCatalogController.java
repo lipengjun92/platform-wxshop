@@ -25,7 +25,7 @@ import java.util.Map;
  * @gitee https://gitee.com/fuyang_lipengjun/platform
  * 描述: ApiIndexController <br>
  */
-@Api(tags = "栏目")
+@Api(tags = "商品分类-ApiCatalogController")
 @RestController
 @RequestMapping("/api/catalog")
 public class ApiCatalogController extends ApiBaseAction {

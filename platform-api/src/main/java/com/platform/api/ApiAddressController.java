@@ -26,7 +26,7 @@ import java.util.Map;
  * 时间: 2017-08-11 08:32<br>
  * 描述: ApiIndexController <br>
  */
-@Api(tags = "收货地址")
+@Api(tags = "收货地址-ApiAddressController")
 @RestController
 @RequestMapping("/api/address")
 public class ApiAddressController extends ApiBaseAction {

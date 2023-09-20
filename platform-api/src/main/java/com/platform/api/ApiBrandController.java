@@ -24,7 +24,7 @@ import java.util.Map;
  * @gitee https://gitee.com/fuyang_lipengjun/platform
  * 描述: ApiIndexController <br>
  */
-@Api(tags = "品牌")
+@Api(tags = "品牌制造商-ApiBrandController")
 @RestController
 @RequestMapping("/api/brand")
 public class ApiBrandController extends ApiBaseAction {

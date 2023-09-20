@@ -8,6 +8,8 @@ import com.platform.service.ApiTopicService;
 import com.platform.util.ApiBaseAction;
 import com.platform.util.ApiPageUtils;
 import com.platform.utils.Query;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,6 +26,7 @@ import java.util.Map;
  * @gitee https://gitee.com/fuyang_lipengjun/platform
  * 描述: ApiIndexController <br>
  */
+@Api(tags = "专题管理|ApiTopicController")
 @RestController
 @RequestMapping("/api/topic")
 public class ApiTopicController extends ApiBaseAction {
@@ -32,6 +35,7 @@ public class ApiTopicController extends ApiBaseAction {
 
     /**
      */
+    @ApiOperation(value = "专题列表")
     @IgnoreAuth
     @PostMapping("list")
     public Object list(@RequestParam(value = "page", defaultValue = "1") Integer page,
@@ -52,6 +56,7 @@ public class ApiTopicController extends ApiBaseAction {
 
     /**
      */
+    @ApiOperation(value = "专题详情")
     @IgnoreAuth
     @PostMapping("detail")
     public Object detail(@LoginUser UserVo loginUser, Integer id) {
@@ -61,6 +66,7 @@ public class ApiTopicController extends ApiBaseAction {
 
     /**
      */
+    @ApiOperation(value = "关联专题")
     @IgnoreAuth
     @PostMapping("related")
     public Object related(@LoginUser UserVo loginUser, Integer id) {

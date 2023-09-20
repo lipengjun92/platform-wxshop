@@ -22,7 +22,7 @@ import java.util.Map;
  * @email 939961241@qq.com
  * @gitee https://gitee.com/fuyang_lipengjun/platform
  */
-@Api(tags = "评论")
+@Api(tags = "地区-ApiRegionController")
 @RestController
 @RequestMapping("/api/region")
 public class ApiRegionController extends ApiBaseAction {
@@ -41,6 +41,7 @@ public class ApiRegionController extends ApiBaseAction {
         return toResponseSuccess(regionVoList);
     }
 
+    @ApiOperation(value = "省份列表")
     @IgnoreAuth
     @PostMapping("provinceList")
     public Object provinceList() {
@@ -54,6 +55,7 @@ public class ApiRegionController extends ApiBaseAction {
         return toResponseSuccess(regionVoList);
     }
 
+    @ApiOperation(value = "根据省查市")
     @IgnoreAuth
     @PostMapping("cityList")
     public Object provinceList(String proviceName) {
@@ -67,6 +69,7 @@ public class ApiRegionController extends ApiBaseAction {
         return toResponseSuccess(regionVoList);
     }
 
+    @ApiOperation(value = "根据省市查区")
     @IgnoreAuth
     @PostMapping("distinctList")
     public Object distinctList(String proviceName, String cityName) {
@@ -80,6 +83,7 @@ public class ApiRegionController extends ApiBaseAction {
         return toResponseSuccess(regionVoList);
     }
 
+    @ApiOperation(value = "地区详情")
     @IgnoreAuth
     @PostMapping("info")
     public Object info(Integer regionId) {
@@ -87,6 +91,7 @@ public class ApiRegionController extends ApiBaseAction {
         return toResponseSuccess(new RegionVo(regionEntity));
     }
 
+    @ApiOperation(value = "区域名称转区域ID")
     @IgnoreAuth
     @PostMapping("regionIdsByNames")
     public Object regionIdsByNames(String provinceName, String cityName, String districtName) {

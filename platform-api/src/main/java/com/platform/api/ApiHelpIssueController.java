@@ -6,7 +6,10 @@ import com.platform.entity.HelpTypeVo;
 import com.platform.service.ApiHelpIssueService;
 import com.platform.service.ApiHelpTypeService;
 import com.platform.util.ApiBaseAction;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -22,6 +25,7 @@ import java.util.Map;
  * @gitee https://gitee.com/fuyang_lipengjun/platform
  * @date 2018-11-07 11:04:20
  */
+@Api(tags = "常见问题|ApiHelpIssueController")
 @RestController
 @RequestMapping("api/helpissue")
 public class ApiHelpIssueController extends ApiBaseAction {
@@ -33,7 +37,8 @@ public class ApiHelpIssueController extends ApiBaseAction {
     /**
      * 查看帮助类型列表
      */
-    @RequestMapping("/typeList")
+    @ApiOperation(value = "查看帮助类型列表")
+    @PostMapping("/typeList")
     @IgnoreAuth
     public Object typeList() {
 
@@ -45,7 +50,8 @@ public class ApiHelpIssueController extends ApiBaseAction {
     /**
      * 查看问题列表
      */
-    @RequestMapping("/issueList")
+    @ApiOperation(value = "查看问题列表")
+    @PostMapping("/issueList")
     @IgnoreAuth
     public Object issueList(Long typeId) {
 
