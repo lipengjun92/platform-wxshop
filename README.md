@@ -1,24 +1,23 @@
-# 微信小程序商城（Java + uniapp）
+## 前后端全部开源微信小程序商城（Java + uniapp）
 
-## 注意
-Entity里提示报错不是缺少get、set方法，Eclipse、IDEA请先安装`lombok`插件，如果不了解`lombok`的话，请先学习下相关知识，比如可以阅读[此文章](https://mp.weixin.qq.com/s/cUc-bUcprycADfNepnSwZQ)；
+### [新手启动视频教程](http://fly2you.cn/videos.html)
 
-## 新手必看启动教程
-- [https://www.bilibili.com/video/av66149752](https://www.bilibili.com/video/av66149752)
-## 使用Hbuilder启动微同商城小程序端教程
-- [https://www.bilibili.com/video/BV1ni4y1M7CC](https://www.bilibili.com/video/BV1ni4y1M7CC)
+#### 官网
+- [https://fly2you.cn](https://fly2you.cn)
+### 文档
+- [http://doc.fly2you.cn](http://doc.fly2you.cn)
 
 ### 微同商城开源版体验：
+- 后台体验：[管理系统](http://fly2you.cn/platform-framework/login.html)
+
 ![](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/gh_a7a467438863_344.jpg "微同商城开源版")
 
 * git：[https://gitee.com/fuyang_lipengjun/platform](https://gitee.com/fuyang_lipengjun/platform)
 * 代码生成工具IDEA插件
   * git：[https://gitee.com/fuyang_lipengjun/platform-gen](https://gitee.com/fuyang_lipengjun/platform-gen)
 
-## 官网
-[https://fly2you.cn](https://fly2you.cn)
-## 文档
-[http://doc.fly2you.cn](http://doc.fly2you.cn)
+### 注意
+Entity里提示报错不是缺少get、set方法，Eclipse、IDEA请先安装`lombok`插件，如果不了解`lombok`的话，请先学习下相关知识，比如可以阅读[此文章](https://mp.weixin.qq.com/s/cUc-bUcprycADfNepnSwZQ)；
 
 <p align="center">
   <b>特别赞助</b>
@@ -36,14 +35,10 @@ Entity里提示报错不是缺少get、set方法，Eclipse、IDEA请先安装`lo
   </tbody>
 </table>
 
-## 获得荣誉
-### GVP
-![](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/GVP.jpg "GVP")
-
 ## 重要信息
 1. 项目合作洽谈，请联系客服微信（使用微信扫码添加好友，请注明来意）。
 2. 如需购买 [商业版源码](https://fly2you.cn/ma.html) 请联系客服。<br>
-![](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/wx.png "微信")
+![](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/image/2023_09_20/UNKNOWN_11_33_59.png "微信")
 3. 微信扫码并关注公众号回复“文档”，获取《微同开源商城启动部署手册.docx》<br>
   ![](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/upload/20180708/qr.jpg "微信公众号")
 
@@ -64,14 +59,6 @@ Entity里提示报错不是缺少get、set方法，Eclipse、IDEA请先安装`lo
     * <a target="_blank" href="https://qm.qq.com/cgi-bin/qm/qr?k=4i3Z9xgp7SlPnk_X1v0TWToSOoT_gJMz&jump_from=webapi"><img border="0" src="//pub.idqqimg.com/wpa/images/group.png" alt="微同科技 ②群" title="微同科技 ②群"></a>：870579539
     * <a target="_blank" href="https://qm.qq.com/cgi-bin/qm/qr?k=hQLMx7vYLfP_C-d2-yP_udx1yciJXfHC&jump_from=webapi"><img border="0" src="//pub.idqqimg.com/wpa/images/group.png" alt="微同科技 ③群" title="微同科技 ③群"></a>：151602347
 
-## 开发计划
-* 1 使用uniapp重构小程序端所有页面【100%】
-* 2 修复所以已知bug，使用遇到bug请给我们提交[issues](https://gitee.com/fuyang_lipengjun/platform/issues)
-* 3 后台使用SpringBoot重构
-* 4 适配H5、IOS、Android端
-* 5 接入支付宝支付
-* 6 出配套视频教程
-
 ## 项目结构
 ~~~
 platform
@@ -80,7 +67,6 @@ platform
 |--platform-common 公共模块
 |--platform-framework 打包发布此项目
 |--platform-gen 代码生成
-|--platform-mp 微信公众号模块
 |--platform-schedule 定时任务
 |--platform-shop 商城后台管理
 |--uni-mall uniapp版商城
@@ -134,8 +120,6 @@ platform
 ![](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/upload/20180708/login.png "登录")
 ### 首页
 ![](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/upload/20180708/index.png "首页")
-### 发送短信
-![](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/upload/20180727/3.png "发送短信")
 ### 捐赠
 ![](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/upload/20180727/4.png "捐赠")
 ### 小程序首页
@@ -146,16 +130,10 @@ platform
 ![](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/upload/20180727/7.png "分类")
 ### 购物车
 ![](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/upload/20180727/8.png "购物车")
-### 登录授权
-![](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/upload/20180727/9.png "登录授权")
 ### 优惠券
 ![](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/upload/20180727/10.png "优惠券")
 ### 小程序并联手机
 ![](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/upload/20180727/11.png "并联手机")
 
-## Stargazers over time
-[![Stargazers over time](https://whnb.wang/stars/fuyang_lipengjun/platform)](https://whnb.wang/fuyang_lipengjun/platform)
-
-## contributors
-[![contributors](https://whnb.wang/contributors/fuyang_lipengjun/platform)](https://whnb.wang/fuyang_lipengjun/platform)
- 
+## 贡献者列表
+![](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/image/2023_09_20/UNKNOWN_12_11_57.png "贡献者列表")
