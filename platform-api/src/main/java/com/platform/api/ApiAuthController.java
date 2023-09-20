@@ -1,5 +1,7 @@
 package com.platform.api;
 
+import cn.binarywang.wx.miniapp.bean.WxMaJscode2SessionResult;
+import cn.binarywang.wx.miniapp.bean.WxMaUserInfo;
 import com.alibaba.fastjson.JSONObject;
 import com.alipay.api.AlipayApiException;
 import com.alipay.api.AlipayClient;
@@ -14,9 +16,8 @@ import com.platform.entity.UserInfo;
 import com.platform.entity.UserVo;
 import com.platform.service.ApiUserService;
 import com.platform.service.TokenService;
+import com.platform.service.WeixinMaService;
 import com.platform.util.ApiBaseAction;
-import com.platform.util.ApiUserUtils;
-import com.platform.util.CommonUtil;
 import com.platform.utils.CharUtil;
 import com.platform.utils.R;
 import com.platform.utils.ResourceUtil;
@@ -25,6 +26,8 @@ import com.qiniu.util.StringUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
+import me.chanjar.weixin.common.error.WxErrorException;
 import org.apache.commons.collections.MapUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,6 +45,7 @@ import java.util.Map;
  * @gitee https://gitee.com/fuyang_lipengjun/platform
  * @date 2017-03-23 15:31
  */
+@Slf4j
 @Api(tags = "登录授权-ApiAuthController")
 @RestController
 @RequestMapping("/api/auth")
@@ -51,6 +55,8 @@ public class ApiAuthController extends ApiBaseAction {
     private ApiUserService userService;
     @Autowired
     private TokenService tokenService;
+    @Autowired
+    private WeixinMaService weixinMaService;
 
     /**
      * 登录
@@ -95,51 +101,56 @@ public class ApiAuthController extends ApiBaseAction {
         //
         UserInfo userInfo = fullUserInfo.getUserInfo();
 
-        //获取openid
-        String requestUrl = ApiUserUtils.getWebAccess(code);//通过自定义工具类组合出小程序需要的登录凭证 code
-        logger.info("》》》组合token为：" + requestUrl);
-        JSONObject sessionData = CommonUtil.httpsRequest(requestUrl, "GET", null);
+        try {
+            WxMaJscode2SessionResult session = weixinMaService.getUserService().getSessionInfo(code);
+            // 用户信息校验
+            log.info("》》》微信返回sessionData：" + session.toString());
 
-        if (null == sessionData || StringUtils.isNullOrEmpty(sessionData.getString("openid"))) {
+            if (!weixinMaService.getUserService().checkUserInfo(session.getSessionKey(), fullUserInfo.getRawData(), fullUserInfo.getSignature())) {
+                log.error("登录失败：数据签名验证失败");
+                return toResponseFail("登录失败");
+            }
+
+            // 解密用户信息
+            WxMaUserInfo wxMpUser = weixinMaService.getUserService().getUserInfo(session.getSessionKey(), fullUserInfo.getEncryptedData(), fullUserInfo.getIv());
+            log.info("》》》解密用户信息：" + wxMpUser.toString());
+
+            Date nowTime = new Date();
+            UserVo userVo = userService.queryByOpenId(session.getOpenid());
+            if (null == userVo) {
+                userVo = new UserVo();
+                String name = "微信用户" + CharUtil.getRandomString(12);
+                userVo.setUsername(name);
+                userVo.setPassword(session.getOpenid());
+                userVo.setRegisterTime(nowTime);
+                userVo.setRegisterIp(this.getClientIp());
+                userVo.setLastLoginIp(userVo.getRegisterIp());
+                userVo.setLastLoginTime(nowTime);
+                userVo.setWeixinOpenid(session.getOpenid());
+                userVo.setAvatar("https://mmbiz.qpic.cn/mmbiz/icTdbqWNOwNRna42FI242Lcia07jQodd2FJGIYQfG0LAJGFxM4FbnQP6yfMxBgJ0F3YRqJCJ1aPAK2dQagdusBZg/0");
+                userVo.setNickname(name);
+                userService.save(userVo);
+            } else {
+                userVo.setLastLoginIp(this.getClientIp());
+                userVo.setLastLoginTime(nowTime);
+                userService.update(userVo);
+            }
+
+            Map<String, Object> tokenMap = tokenService.createToken(userVo.getUserId());
+            String token = MapUtils.getString(tokenMap, "token");
+
+            if (null == userInfo || StringUtils.isNullOrEmpty(token)) {
+                return toResponseFail("登录失败");
+            }
+
+            resultObj.put("token", token);
+            resultObj.put("userInfo", userInfo);
+            resultObj.put("userId", userVo.getUserId());
+            return toResponseSuccess(resultObj);
+        } catch (WxErrorException e) {
+            log.error("登录失败：" + e.getMessage());
             return toResponseFail("登录失败");
         }
-        //验证用户信息完整性
-        String sha1 = CommonUtil.getSha1(fullUserInfo.getRawData() + sessionData.getString("session_key"));
-        if (!fullUserInfo.getSignature().equals(sha1)) {
-            return toResponseFail("登录失败");
-        }
-        Date nowTime = new Date();
-        UserVo userVo = userService.queryByOpenId(sessionData.getString("openid"));
-        if (null == userVo) {
-            userVo = new UserVo();
-            String name = "微信用户" + CharUtil.getRandomString(12);
-            userVo.setUsername(name);
-            userVo.setPassword(sessionData.getString("openid"));
-            userVo.setRegisterTime(nowTime);
-            userVo.setRegisterIp(this.getClientIp());
-            userVo.setLastLoginIp(userVo.getRegisterIp());
-            userVo.setLastLoginTime(nowTime);
-            userVo.setWeixinOpenid(sessionData.getString("openid"));
-            userVo.setAvatar("https://mmbiz.qpic.cn/mmbiz/icTdbqWNOwNRna42FI242Lcia07jQodd2FJGIYQfG0LAJGFxM4FbnQP6yfMxBgJ0F3YRqJCJ1aPAK2dQagdusBZg/0");
-            userVo.setNickname(name);
-            userService.save(userVo);
-        } else {
-            userVo.setLastLoginIp(this.getClientIp());
-            userVo.setLastLoginTime(nowTime);
-            userService.update(userVo);
-        }
-
-        Map<String, Object> tokenMap = tokenService.createToken(userVo.getUserId());
-        String token = MapUtils.getString(tokenMap, "token");
-
-        if (null == userInfo || StringUtils.isNullOrEmpty(token)) {
-            return toResponseFail("登录失败");
-        }
-
-        resultObj.put("token", token);
-        resultObj.put("userInfo", userInfo);
-        resultObj.put("userId", userVo.getUserId());
-        return toResponseSuccess(resultObj);
     }
 
     /**
@@ -153,49 +164,48 @@ public class ApiAuthController extends ApiBaseAction {
     @ApiOperation(value = "微信静默登录", notes = "使用code静默登录")
     @ApiImplicitParam(required = true, paramType = "path", name = "code", value = "code", example = "oxaA11ulr9134oBL9Xscon5at_Gc", dataType = "string")
     public Object loginByCode(@PathVariable String code) {
-        //获取openid
-        String requestUrl = ApiUserUtils.getWebAccess(code);//通过自定义工具类组合出小程序需要的登录凭证 code
-        logger.info("》》》组合token为：" + requestUrl);
-        JSONObject sessionData = CommonUtil.httpsRequest(requestUrl, "GET", null);
+        try {
+            WxMaJscode2SessionResult session = weixinMaService.getUserService().getSessionInfo(code);
 
-        if (null == sessionData || StringUtils.isNullOrEmpty(sessionData.getString("openid"))) {
-            return toResponseFail("登录失败");
+            String openid = session.getOpenid();
+
+            Date nowTime = new Date();
+            UserVo userVo = userService.queryByOpenId(openid);
+            if (null == userVo) {
+                userVo = new UserVo();
+                String name = "微信用户" + CharUtil.getRandomString(12);
+                userVo.setUsername(name);
+                userVo.setPassword(openid);
+                userVo.setRegisterTime(nowTime);
+                userVo.setRegisterIp(this.getClientIp());
+                userVo.setLastLoginIp(userVo.getRegisterIp());
+                userVo.setLastLoginTime(nowTime);
+                userVo.setWeixinOpenid(openid);
+                userVo.setAvatar("https://mmbiz.qpic.cn/mmbiz/icTdbqWNOwNRna42FI242Lcia07jQodd2FJGIYQfG0LAJGFxM4FbnQP6yfMxBgJ0F3YRqJCJ1aPAK2dQagdusBZg/0");
+                userVo.setNickname(name);
+                userService.save(userVo);
+            } else {
+                userVo.setLastLoginIp(this.getClientIp());
+                userVo.setLastLoginTime(nowTime);
+                userService.update(userVo);
+            }
+
+            Map<String, Object> tokenMap = tokenService.createToken(userVo.getUserId());
+            String token = MapUtils.getString(tokenMap, "token");
+
+            if (StringUtils.isNullOrEmpty(token)) {
+                return toResponseFail("登录失败");
+            }
+
+            Map<String, Object> resultObj = new HashMap<>();
+            resultObj.put("token", token);
+            resultObj.put("userInfo", userVo);
+            resultObj.put("userId", userVo.getUserId());
+            return toResponseSuccess(resultObj);
+        } catch (WxErrorException e) {
+            log.error("登录失败", e);
+            return toResponseFail("登录失败：" + e.getError().getErrorMsg());
         }
-
-        String openid = sessionData.getString("openid");
-        Date nowTime = new Date();
-        UserVo userVo = userService.queryByOpenId(openid);
-        if (null == userVo) {
-            userVo = new UserVo();
-            String name = "微信用户" + CharUtil.getRandomString(12);
-            userVo.setUsername(name);
-            userVo.setPassword(sessionData.getString("openid"));
-            userVo.setRegisterTime(nowTime);
-            userVo.setRegisterIp(this.getClientIp());
-            userVo.setLastLoginIp(userVo.getRegisterIp());
-            userVo.setLastLoginTime(nowTime);
-            userVo.setWeixinOpenid(sessionData.getString("openid"));
-            userVo.setAvatar("https://mmbiz.qpic.cn/mmbiz/icTdbqWNOwNRna42FI242Lcia07jQodd2FJGIYQfG0LAJGFxM4FbnQP6yfMxBgJ0F3YRqJCJ1aPAK2dQagdusBZg/0");
-            userVo.setNickname(name);
-            userService.save(userVo);
-        } else {
-            userVo.setLastLoginIp(this.getClientIp());
-            userVo.setLastLoginTime(nowTime);
-            userService.update(userVo);
-        }
-
-        Map<String, Object> tokenMap = tokenService.createToken(userVo.getUserId());
-        String token = MapUtils.getString(tokenMap, "token");
-
-        if (StringUtils.isNullOrEmpty(token)) {
-            return toResponseFail("登录失败");
-        }
-
-        Map<String, Object> resultObj = new HashMap<>();
-        resultObj.put("token", token);
-        resultObj.put("userInfo", userVo);
-        resultObj.put("userId", userVo.getUserId());
-        return toResponseSuccess(resultObj);
     }
 
     /**
