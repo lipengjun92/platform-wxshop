@@ -25,7 +25,7 @@ import java.util.*;
  * @gitee https://gitee.com/fuyang_lipengjun/platform
  * 描述: ApiIndexController <br>
  */
-@Api(tags = "评论")
+@Api(tags = "会员评论-ApiCommentController")
 @RestController
 @RequestMapping("/api/comment")
 public class ApiCommentController extends ApiBaseAction {

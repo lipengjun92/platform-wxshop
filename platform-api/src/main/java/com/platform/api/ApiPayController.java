@@ -33,7 +33,7 @@ import java.util.*;
  * @gitee https://gitee.com/fuyang_lipengjun/platform
  * 描述: ApiIndexController <br>
  */
-@Api(tags = "商户支付")
+@Api(tags = "商户支付-ApiPayController")
 @RestController
 @RequestMapping("/api/pay")
 public class ApiPayController extends ApiBaseAction {

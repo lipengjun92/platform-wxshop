@@ -23,7 +23,7 @@ import java.util.Map;
  * @gitee https://gitee.com/fuyang_lipengjun/platform
  * 描述: ApiIndexController <br>
  */
-@Api(tags = "首页接口文档")
+@Api(tags = "首页接口-ApiIndexController")
 @RestController
 @RequestMapping("/api/index")
 public class ApiIndexController extends ApiBaseAction {
@@ -187,7 +187,7 @@ public class ApiIndexController extends ApiBaseAction {
         return toResponseSuccess(resultObj);
     }
 
-    @ApiOperation(value = "topic")
+    @ApiOperation(value = "专题")
     @IgnoreAuth
     @PostMapping(value = "topic")
     public Object topic() {
@@ -203,7 +203,7 @@ public class ApiIndexController extends ApiBaseAction {
         return toResponseSuccess(resultObj);
     }
 
-    @ApiOperation(value = "brand")
+    @ApiOperation(value = "品牌制造商")
     @IgnoreAuth
     @PostMapping(value = "brand")
     public Object brand() {
@@ -222,7 +222,7 @@ public class ApiIndexController extends ApiBaseAction {
         return toResponseSuccess(resultObj);
     }
 
-    @ApiOperation(value = "category")
+    @ApiOperation(value = "商品分类及分类下的商品")
     @IgnoreAuth
     @PostMapping(value = "category")
     public Object category() {
@@ -265,7 +265,7 @@ public class ApiIndexController extends ApiBaseAction {
         return toResponseSuccess(resultObj);
     }
 
-    @ApiOperation(value = "banner")
+    @ApiOperation(value = "轮播图")
     @IgnoreAuth
     @PostMapping(value = "banner")
     public Object banner() {
@@ -280,7 +280,7 @@ public class ApiIndexController extends ApiBaseAction {
         return toResponseSuccess(resultObj);
     }
 
-    @ApiOperation(value = "channel")
+    @ApiOperation(value = "快捷类目")
     @IgnoreAuth
     @PostMapping(value = "channel")
     public Object channel() {

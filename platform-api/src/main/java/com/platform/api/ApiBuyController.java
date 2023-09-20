@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @email 939961241@qq.com
  * @gitee https://gitee.com/fuyang_lipengjun/platform
  */
-@Api(tags = "商品购买")
+@Api(tags = "商品购买-ApiBuyController")
 @RestController
 @RequestMapping("/api/buy")
 public class ApiBuyController extends ApiBaseAction {

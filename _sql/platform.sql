@@ -3729,7 +3729,7 @@ INSERT INTO `sys_menu` VALUES ('378', '377', '删除', null, 'sys:region:delete'
 INSERT INTO `sys_menu` VALUES ('379', '377', '修改', '', 'sys:region:update', '2', null, '0', '0');
 INSERT INTO `sys_menu` VALUES ('380', '377', '新增', null, 'sys:region:save', '2', null, '0', '0');
 INSERT INTO `sys_menu` VALUES ('381', '377', '查看', null, 'sys:region:list,sys:region:info', '2', null, '0', '0');
-INSERT INTO `sys_menu` VALUES ('382', '31', 'swagger-ui.html', 'swagger-ui.html', '', '1', 'fa fa-code', '0', '0');
+INSERT INTO `sys_menu` VALUES ('382', '31', 'doc.html', 'doc.html', '', '1', 'fa fa-code', '0', '0');
 -- ----------------------------
 -- Table structure for `sys_oss`
 -- ----------------------------

@@ -35,7 +35,7 @@ import java.util.Map;
  * @gitee https://gitee.com/fuyang_lipengjun/platform
  * 描述: ApiIndexController <br>
  */
-@Api(tags = "订单相关")
+@Api(tags = "订单-ApiOrderController")
 @RestController
 @RequestMapping("/api/order")
 public class ApiOrderController extends ApiBaseAction {

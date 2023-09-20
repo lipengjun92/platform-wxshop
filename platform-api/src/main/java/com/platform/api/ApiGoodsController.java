@@ -31,7 +31,7 @@ import java.util.*;
  * @gitee https://gitee.com/fuyang_lipengjun/platform
  * 描述: ApiIndexController <br>
  */
-@Api(tags = "商品管理")
+@Api(tags = "商品信息-ApiGoodsController")
 @RestController
 @RequestMapping("/api/goods")
 public class ApiGoodsController extends ApiBaseAction {

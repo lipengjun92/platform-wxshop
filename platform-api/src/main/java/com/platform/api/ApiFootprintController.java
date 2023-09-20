@@ -23,7 +23,7 @@ import java.util.*;
  * @gitee https://gitee.com/fuyang_lipengjun/platform
  * 描述: ApiIndexController <br>
  */
-@Api(tags = "足迹")
+@Api(tags = "会员足迹-ApiFootprintController")
 @RestController
 @RequestMapping("/api/footprint")
 public class ApiFootprintController extends ApiBaseAction {

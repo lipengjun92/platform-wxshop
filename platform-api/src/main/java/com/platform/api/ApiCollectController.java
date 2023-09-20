@@ -23,7 +23,7 @@ import java.util.Map;
  * @gitee https://gitee.com/fuyang_lipengjun/platform
  * 描述: ApiIndexController <br>
  */
-@Api(tags = "用户收藏")
+@Api(tags = "会员收藏-ApiCollectController")
 @RestController
 @RequestMapping("/api/collect")
 public class ApiCollectController extends ApiBaseAction {

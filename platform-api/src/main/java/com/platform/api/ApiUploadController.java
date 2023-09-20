@@ -20,7 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
  * @gitee https://gitee.com/fuyang_lipengjun/platform
  * 描述: ApiUploadController <br>
  */
-@Api(tags = "上传")
+@Api(tags = "文件上传-ApiUploadController")
 @RestController
 @RequestMapping("/api/upload")
 public class ApiUploadController extends ApiBaseAction {

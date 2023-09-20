@@ -3567,6 +3567,7 @@ ol.unstyled {
     padding: 5px 20px;
     margin: 0 -15px;
     height: 36px;
+    text-align: center;
 }
 
 .footer.fixed_full {

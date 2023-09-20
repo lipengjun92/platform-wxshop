@@ -30,7 +30,7 @@ import java.util.Map;
  * @gitee https://gitee.com/fuyang_lipengjun/platform
  * @date 2017-03-23 15:31
  */
-@Api(tags = "商品搜索")
+@Api(tags = "会员搜索-ApiSearchController")
 @RestController
 @RequestMapping("/api/search")
 public class ApiSearchController extends ApiBaseAction {
@@ -40,7 +40,7 @@ public class ApiSearchController extends ApiBaseAction {
     private ApiSearchHistoryService searchHistoryService;
 
     /**
-     * 　　index
+     * index
      */
     @ApiOperation(value = "搜索商品列表")
     @PostMapping("index")
@@ -117,6 +117,7 @@ public class ApiSearchController extends ApiBaseAction {
     /**
      * 　　clearhistory
      */
+    @ApiOperation(value = "清空搜索记录")
     @PostMapping("clearhistory")
     public Object clearhistory(@LoginUser UserVo loginUser) {
         searchHistoryService.deleteByUserId(loginUser.getUserId());
