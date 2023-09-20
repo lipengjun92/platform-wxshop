@@ -120,7 +120,7 @@ public class ApiAuthController extends ApiBaseAction {
             userVo.setLastLoginIp(userVo.getRegisterIp());
             userVo.setLastLoginTime(nowTime);
             userVo.setWeixinOpenid(sessionData.getString("openid"));
-            userVo.setAvatar(userInfo.getAvatar());
+            userVo.setAvatar("https://mmbiz.qpic.cn/mmbiz/icTdbqWNOwNRna42FI242Lcia07jQodd2FJGIYQfG0LAJGFxM4FbnQP6yfMxBgJ0F3YRqJCJ1aPAK2dQagdusBZg/0");
             userVo.setNickname(name);
             userService.save(userVo);
         } else {
@@ -175,11 +175,12 @@ public class ApiAuthController extends ApiBaseAction {
             userVo.setLastLoginIp(userVo.getRegisterIp());
             userVo.setLastLoginTime(nowTime);
             userVo.setWeixinOpenid(sessionData.getString("openid"));
+            userVo.setAvatar("https://mmbiz.qpic.cn/mmbiz/icTdbqWNOwNRna42FI242Lcia07jQodd2FJGIYQfG0LAJGFxM4FbnQP6yfMxBgJ0F3YRqJCJ1aPAK2dQagdusBZg/0");
             userVo.setNickname(name);
             userService.save(userVo);
         } else {
-            userVo.setRegisterIp(this.getClientIp());
-            userVo.setRegisterTime(nowTime);
+            userVo.setLastLoginIp(this.getClientIp());
+            userVo.setLastLoginTime(nowTime);
             userService.update(userVo);
         }
 
