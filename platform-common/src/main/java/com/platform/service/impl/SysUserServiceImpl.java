@@ -1,11 +1,11 @@
 package com.platform.service.impl;
 
+import com.platform.dao.SysRoleDao;
 import com.platform.dao.SysUserDao;
 import com.platform.entity.SysUserEntity;
 import com.platform.entity.UserWindowDto;
 import com.platform.page.Page;
 import com.platform.page.PageHelper;
-import com.platform.service.SysRoleService;
 import com.platform.service.SysUserRoleService;
 import com.platform.service.SysUserService;
 import com.platform.utils.Constant;
@@ -37,7 +37,7 @@ public class SysUserServiceImpl implements SysUserService {
     @Autowired
     private SysUserRoleService sysUserRoleService;
     @Autowired
-    private SysRoleService sysRoleService;
+    private SysRoleDao sysRoleDao;
 
     @Override
     public List<String> queryAllPerms(Long userId) {
@@ -126,7 +126,7 @@ public class SysUserServiceImpl implements SysUserService {
         }
 
         //查询用户创建的角色列表
-        List<Long> roleIdList = sysRoleService.queryRoleIdList(user.getCreateUserId());
+        List<Long> roleIdList = sysRoleDao.queryRoleIdList(user.getCreateUserId());
 
         //判断是否越权
         if (!roleIdList.containsAll(user.getRoleIdList())) {
