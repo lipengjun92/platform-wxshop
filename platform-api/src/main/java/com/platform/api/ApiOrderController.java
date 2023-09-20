@@ -1,5 +1,6 @@
 package com.platform.api;
 
+import com.github.binarywang.wxpay.bean.result.WxPayRefundResult;
 import com.platform.annotation.IgnoreAuth;
 import com.platform.annotation.LoginUser;
 import com.platform.entity.OrderGoodsVo;
@@ -8,10 +9,9 @@ import com.platform.entity.UserVo;
 import com.platform.service.ApiKdniaoService;
 import com.platform.service.ApiOrderGoodsService;
 import com.platform.service.ApiOrderService;
+import com.platform.service.WeixinPayService;
 import com.platform.util.ApiBaseAction;
 import com.platform.util.ApiPageUtils;
-import com.platform.util.wechat.WechatRefundApiResult;
-import com.platform.util.wechat.WechatUtil;
 import com.platform.utils.Query;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -45,6 +45,8 @@ public class ApiOrderController extends ApiBaseAction {
     private ApiOrderGoodsService orderGoodsService;
     @Autowired
     private ApiKdniaoService apiKdniaoService;
+    @Autowired
+    private WeixinPayService weixinPayService;
 
     /**
      *
@@ -185,44 +187,40 @@ public class ApiOrderController extends ApiBaseAction {
     @ApiOperation(value = "取消订单")
     @PostMapping("cancelOrder")
     public Object cancelOrder(Integer orderId, @LoginUser UserVo loginUser) {
-        try {
-            OrderVo orderVo = orderService.queryObject(orderId);
-            if (null == orderVo) {
-                return toResponseFail("订单不存在！");
-            }
-            if (!loginUser.getUserId().equals(orderVo.getUserId())) {
-                return toResponseFail("越权操作！");
-            }
-            if (orderVo.getOrderStatus() == 300) {
-                return toResponseFail("已发货，不能取消");
-            } else if (orderVo.getOrderStatus() == 301) {
-                return toResponseFail("已收货，不能取消");
-            }
-            // 需要退款
-            if (orderVo.getPayStatus() == 2) {
-                WechatRefundApiResult result = WechatUtil.wxRefund(orderVo.getOrderSn(),
-                        0.01, 0.01);
-                if (result.getResult_code().equals("SUCCESS")) {
-                    if (orderVo.getOrderStatus() == 201) {
-                        orderVo.setOrderStatus(401);
-                    } else if (orderVo.getOrderStatus() == 300) {
-                        orderVo.setOrderStatus(402);
-                    }
-                    orderVo.setPayStatus(4);
-                    orderService.update(orderVo);
-                    return toResponseSuccess("取消成功");
-                } else {
-                    return toResponsObject(400, "取消成失败", "");
-                }
-            } else {
-                orderVo.setOrderStatus(101);
-                orderService.update(orderVo);
-                return this.toResponseSuccess("取消成功");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
+
+        OrderVo orderVo = orderService.queryObject(orderId);
+        if (null == orderVo) {
+            return toResponseFail("订单不存在！");
         }
-        return toResponseFail("提交失败");
+        if (!loginUser.getUserId().equals(orderVo.getUserId())) {
+            return toResponseFail("越权操作！");
+        }
+        if (orderVo.getOrderStatus() == 300) {
+            return toResponseFail("已发货，不能取消");
+        } else if (orderVo.getOrderStatus() == 301) {
+            return toResponseFail("已收货，不能取消");
+        }
+        // 需要退款
+        if (orderVo.getPayStatus() == 2) {
+            WxPayRefundResult result = weixinPayService.refund(orderVo.getOrderSn(),
+                    0.01, 0.01);
+            if (result.getResultCode().equals("SUCCESS")) {
+                if (orderVo.getOrderStatus() == 201) {
+                    orderVo.setOrderStatus(401);
+                } else if (orderVo.getOrderStatus() == 300) {
+                    orderVo.setOrderStatus(402);
+                }
+                orderVo.setPayStatus(4);
+                orderService.update(orderVo);
+                return toResponseSuccess("取消成功");
+            } else {
+                return toResponsObject(400, "取消成失败", "");
+            }
+        } else {
+            orderVo.setOrderStatus(101);
+            orderService.update(orderVo);
+            return this.toResponseSuccess("取消成功");
+        }
     }
 
     /**
