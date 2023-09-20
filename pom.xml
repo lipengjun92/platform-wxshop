@@ -44,7 +44,7 @@
         <j2cache.version>2.7.2-release</j2cache.version>
         <ehcache.version>2.10.4</ehcache.version>
         <jgroups.version>3.6.13.Final</jgroups.version>
-        <weixin-java-mp.version>4.2.0</weixin-java-mp.version>
+        <weixin-java.version>4.5.0</weixin-java.version>
         <lombok.version>1.18.4</lombok.version>
         <mybatis-plus.version>3.5.3</mybatis-plus.version>
         <alipay-sdk.version>3.6.0.ALL</alipay-sdk.version>
