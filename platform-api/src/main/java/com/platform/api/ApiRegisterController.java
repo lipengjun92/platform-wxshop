@@ -3,7 +3,7 @@ package com.platform.api;
 import com.platform.annotation.IgnoreAuth;
 import com.platform.service.ApiUserService;
 import com.platform.utils.R;
-import com.platform.validator.Assert;
+import com.platform.validator.AbstractAssert;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,8 +33,8 @@ public class ApiRegisterController {
     @IgnoreAuth
     @PostMapping("register")
     public R register(String mobile, String password) {
-        Assert.isBlank(mobile, "手机号不能为空");
-        Assert.isBlank(password, "密码不能为空");
+        AbstractAssert.isBlank(mobile, "手机号不能为空");
+        AbstractAssert.isBlank(password, "密码不能为空");
 
         userService.save(mobile, password);
 

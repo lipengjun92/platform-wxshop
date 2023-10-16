@@ -25,9 +25,9 @@ import java.util.concurrent.*;
 public class ScheduleJob extends QuartzJobBean {
     private static final Logger logger = LoggerFactory.getLogger(ScheduleJob.class);
 
-    private static final ThreadFactory namedThreadFactory = new ThreadFactoryBuilder().setNameFormat("thread-call-runner-%d").build();
+    private static final ThreadFactory NAMED_THREAD_FACTORY = new ThreadFactoryBuilder().setNameFormat("thread-call-runner-%d").build();
 
-    private static final ExecutorService service = new ThreadPoolExecutor(1, 1, 0L, TimeUnit.MILLISECONDS, new LinkedBlockingQueue<>(), namedThreadFactory);
+    private static final ExecutorService SERVICE = new ThreadPoolExecutor(1, 1, 0L, TimeUnit.MILLISECONDS, new LinkedBlockingQueue<>(), NAMED_THREAD_FACTORY);
 
     @Override
     protected void executeInternal(JobExecutionContext context) throws JobExecutionException {
@@ -53,7 +53,7 @@ public class ScheduleJob extends QuartzJobBean {
             logger.info("任务准备执行，任务ID：" + scheduleJob.getJobId());
             ScheduleRunnable task = new ScheduleRunnable(scheduleJob.getBeanName(),
                     scheduleJob.getMethodName(), scheduleJob.getParams());
-            Future<?> future = service.submit(task);
+            Future<?> future = SERVICE.submit(task);
 
             future.get();
 

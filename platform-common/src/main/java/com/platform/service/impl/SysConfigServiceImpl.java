@@ -16,7 +16,7 @@ import java.util.Map;
 public class SysConfigServiceImpl implements SysConfigService {
 	@Autowired
 	private SysConfigDao sysConfigDao;
-	
+
 	@Override
 	public void save(SysConfigEntity config) {
 		sysConfigDao.save(config);
@@ -60,7 +60,7 @@ public class SysConfigServiceImpl implements SysConfigService {
 		}
 		return value;
 	}
-	
+
 	@Override
 	public <T> T getConfigObject(String key, Class<T> clazz) {
 		String value = getValue(key, null);
@@ -69,7 +69,7 @@ public class SysConfigServiceImpl implements SysConfigService {
 		}
 
 		try {
-			return clazz.newInstance();
+			return clazz.getDeclaredConstructor().newInstance();
 		} catch (Exception e) {
 			throw new RRException("获取参数失败");
 		}

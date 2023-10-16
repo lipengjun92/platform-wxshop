@@ -14,7 +14,9 @@ import java.io.IOException;
  * @date 2017-04-01 10:20
  */
 public class XssFilter implements Filter {
-    //需要排除过滤的url
+    /**
+     * 需要排除过滤的url
+     */
     private String excludedPages;
     private String[] excludedPageArray;
 
@@ -26,6 +28,7 @@ public class XssFilter implements Filter {
         }
     }
 
+    @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
             throws IOException, ServletException {
         XssHttpServletRequestWrapper xssRequest = new XssHttpServletRequestWrapper((HttpServletRequest) request);

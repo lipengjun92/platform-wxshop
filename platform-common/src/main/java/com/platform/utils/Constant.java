@@ -20,7 +20,7 @@ public class Constant {
     /**
      * 分页条数
      */
-    public static final int pageSize = 10;
+    public static final int PAGE_SIZE = 10;
     /**
      * 权限前缀
      */

@@ -4,7 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.platform.entity.TokenEntity;
 import com.platform.interceptor.AuthorizationInterceptor;
 import com.platform.service.TokenService;
-import org.apache.log4j.Logger;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.authz.UnauthorizedException;
 import org.springframework.beans.TypeMismatchException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,8 +32,8 @@ import java.util.Map;
  * @Description: 基础控制类
  * @date 2016年9月2日
  */
+@Slf4j
 public class ApiBaseAction {
-    protected Logger logger = Logger.getLogger(getClass());
     /**
      * 得到request对象
      */
@@ -66,7 +66,7 @@ public class ApiBaseAction {
      * @param requestCode
      * @param msg
      * @param data
-     * @return Map<String,Object>
+     * @return Map<String, Object>
      * @throws
      * @Description:构建统一格式返回对象
      * @date 2016年9月2日
@@ -76,14 +76,15 @@ public class ApiBaseAction {
         Map<String, Object> obj = new HashMap<String, Object>();
         obj.put("errno", requestCode);
         obj.put("errmsg", msg);
-        if (data != null)
+        if (data != null) {
             obj.put("data", data);
+        }
         return obj;
     }
 
     public Map<String, Object> toResponseSuccess(Object data) {
         Map<String, Object> rp = toResponsObject(0, "执行成功", data);
-        logger.info("response:" + rp);
+        log.info("response:" + rp);
         return rp;
     }
 
@@ -125,10 +126,10 @@ public class ApiBaseAction {
      * @return 客户端Ip
      */
     public String getClientIp() {
-    	String xff = request.getHeader("X-Real-IP");
-    	if(xff!=null) {
-    		return xff;
-    	}
+        String xff = request.getHeader("X-Real-IP");
+        if (xff != null) {
+            return xff;
+        }
         xff = request.getHeader("x-forwarded-for");
         if (xff == null) {
             return "8.8.8.8";

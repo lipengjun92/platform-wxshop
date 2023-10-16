@@ -1,5 +1,6 @@
 package com.platform.page;
 
+import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.executor.parameter.ParameterHandler;
 import org.apache.ibatis.executor.resultset.ResultSetHandler;
 import org.apache.ibatis.executor.statement.StatementHandler;
@@ -13,7 +14,6 @@ import org.apache.ibatis.plugin.Signature;
 import org.apache.ibatis.reflection.MetaObject;
 import org.apache.ibatis.reflection.SystemMetaObject;
 import org.apache.ibatis.scripting.defaults.DefaultParameterHandler;
-import org.apache.log4j.Logger;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -30,12 +30,12 @@ import java.util.Properties;
  * @email 939961241@qq.com
  * @date 2017年11月16日 下午10:43:36
  */
+@Slf4j
 @Intercepts({@Signature(type = StatementHandler.class, method = "prepare", args = {Connection.class, Integer.class}),
         @Signature(type = ResultSetHandler.class, method = "handleResultSets", args = {Statement.class})})
 public class PageHelper implements Interceptor {
-    private static final Logger logger = Logger.getLogger(PageHelper.class);
 
-    public static final ThreadLocal<Page> localPage = new ThreadLocal<Page>();
+    public static final ThreadLocal<Page> LOCAL_PAGE = new ThreadLocal<>();
 
     /**
      * 开始分页
@@ -44,7 +44,7 @@ public class PageHelper implements Interceptor {
      * @param pageSize
      */
     public static void startPage(int pageNum, int pageSize) {
-        localPage.set(new Page(pageNum, pageSize));
+        LOCAL_PAGE.set(new Page(pageNum, pageSize));
     }
 
     /**
@@ -53,48 +53,48 @@ public class PageHelper implements Interceptor {
      * @return
      */
     public static Page endPage() {
-        Page page = localPage.get();
-        localPage.remove();
+        Page page = LOCAL_PAGE.get();
+        LOCAL_PAGE.remove();
         return page;
     }
 
     @Override
     public Object intercept(Invocation invocation) throws Throwable {
-        if (localPage.get() == null) {
+        if (LOCAL_PAGE.get() == null) {
             return invocation.proceed();
         }
         if (invocation.getTarget() instanceof StatementHandler) {
             StatementHandler statementHandler = (StatementHandler) invocation.getTarget();
             MetaObject metaStatementHandler = SystemMetaObject.forObject(statementHandler);
-            // 分离代理对象链(由于目标类可能被多个拦截器拦截，从而形成多次代理，通过下面的两次循环  
-            // 可以分离出最原始的的目标类)  
+            // 分离代理对象链(由于目标类可能被多个拦截器拦截，从而形成多次代理，通过下面的两次循环
+            // 可以分离出最原始的的目标类)
             while (metaStatementHandler.hasGetter("h")) {
                 Object object = metaStatementHandler.getValue("h");
                 metaStatementHandler = SystemMetaObject.forObject(object);
             }
-            // 分离最后一个代理对象的目标类  
+            // 分离最后一个代理对象的目标类
             while (metaStatementHandler.hasGetter("target")) {
                 Object object = metaStatementHandler.getValue("target");
                 metaStatementHandler = SystemMetaObject.forObject(object);
             }
             MappedStatement mappedStatement = (MappedStatement) metaStatementHandler.getValue("delegate.mappedStatement");
-            //分页信息if (localPage.get() != null) {  
-            Page page = localPage.get();
+            //分页信息if (localPage.get() != null) {
+            Page page = LOCAL_PAGE.get();
             BoundSql boundSql = (BoundSql) metaStatementHandler.getValue("delegate.boundSql");
-            // 分页参数作为参数对象parameterObject的一个属性  
+            // 分页参数作为参数对象parameterObject的一个属性
             String sql = boundSql.getSql();
-            // 重写sql  
+            // 重写sql
             String pageSql = buildPageSqlMysql(sql, page);
-            //重写分页sql  
+            //重写分页sql
             metaStatementHandler.setValue("delegate.boundSql.sql", pageSql);
             Connection connection = (Connection) invocation.getArgs()[0];
-            // 重设分页参数里的总页数等  
+            // 重设分页参数里的总页数等
             setPageParameter(sql, connection, mappedStatement, boundSql, page);
-            // 将执行权交给下一个拦截器  
+            // 将执行权交给下一个拦截器
             return invocation.proceed();
         } else if (invocation.getTarget() instanceof ResultSetHandler) {
             Object result = invocation.proceed();
-            Page page = localPage.get();
+            Page page = LOCAL_PAGE.get();
             page.setResult((List) result);
             return result;
         }
@@ -165,15 +165,15 @@ public class PageHelper implements Interceptor {
      */
     private void setPageParameter(String sql, Connection connection, MappedStatement mappedStatement,
                                   BoundSql boundSql, Page page) {
-        // 记录总记录数  
+        // 记录总记录数
         String countSql = "select count(0) from (" + sql + ")as total";
         PreparedStatement countStmt = null;
         ResultSet rs = null;
         try {
             countStmt = connection.prepareStatement(countSql);
-            BoundSql countBS = new BoundSql(mappedStatement.getConfiguration(), countSql,
+            BoundSql countB = new BoundSql(mappedStatement.getConfiguration(), countSql,
                     boundSql.getParameterMappings(), boundSql.getParameterObject());
-            setParameters(countStmt, mappedStatement, countBS, boundSql.getParameterObject());
+            setParameters(countStmt, mappedStatement, countB, boundSql.getParameterObject());
             rs = countStmt.executeQuery();
             int totalCount = 0;
             if (rs.next()) {
@@ -183,19 +183,19 @@ public class PageHelper implements Interceptor {
             int totalPage = totalCount / page.getPageSize() + ((totalCount % page.getPageSize() == 0) ? 0 : 1);
             page.setPages(totalPage);
         } catch (SQLException e) {
-            logger.error("Ignore this exception", e);
+            log.error("Ignore this exception", e);
         } finally {
             try {
                 if (rs != null) {
                     rs.close();
                 }
             } catch (SQLException e) {
-                logger.error("Ignore this exception", e);
+                log.error("Ignore this exception", e);
             }
             try {
                 countStmt.close();
             } catch (SQLException e) {
-                logger.error("Ignore this exception", e);
+                log.error("Ignore this exception", e);
             }
         }
     }
@@ -214,4 +214,4 @@ public class PageHelper implements Interceptor {
         ParameterHandler parameterHandler = new DefaultParameterHandler(mappedStatement, parameterObject, boundSql);
         parameterHandler.setParameters(ps);
     }
-}  
+}

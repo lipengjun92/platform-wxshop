@@ -28,8 +28,8 @@ public class TreeUtils {
     public static List factorTree(List tree) {
         try {
             if (tree != null) {
-                List t_list = new ArrayList();
-                Map map = new HashMap();
+                List tList = new ArrayList<>();
+                Map map = new HashMap<>();
                 for (Object o : tree) {
                     Class clazz = o.getClass();
                     Field id = clazz.getDeclaredField("id");
@@ -49,7 +49,7 @@ public class TreeUtils {
                     }
                     Integer id = (Integer) pId.get(obj);
                     if (null == map.get(id)) {
-                        t_list.add(obj);
+                        tList.add(obj);
                     } else {
                         Object object = map.get(id);
                         Class clazz1 = object.getClass();
@@ -65,13 +65,13 @@ public class TreeUtils {
                         }
                         List list = (List) children.get(object);
                         if (CollectionUtils.isEmpty(list)) {
-                            list = new ArrayList();
+                            list = new ArrayList<>();
                         }
                         list.add(obj);
                         children.set(object, list);
                     }
                 }
-                return t_list;
+                return tList;
             }
         } catch (Exception e) {
             e.printStackTrace();

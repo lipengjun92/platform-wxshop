@@ -15,7 +15,7 @@ import java.util.UUID;
  * @email 939961241@qq.com
  * @date 2017-03-25 14:58
  */
-public abstract class CloudStorageService {
+public abstract class AbstractCloudStorageService {
     /**
      * 云存储配置信息
      */

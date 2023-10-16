@@ -181,9 +181,8 @@ public class SysRegionController {
     public R getAreaByType(@RequestParam(required = false) Integer type) {
 
         List<SysRegionEntity> list = new ArrayList<>();
-        if (type.equals(0)) {
-
-        } else if (type.equals(1)) {//省份
+        if (type.equals(1)) {
+            //省份
             list = RegionCacheUtil.getAllCountry();
         } else if (type.equals(2)) {
             list = RegionCacheUtil.getAllProvice();

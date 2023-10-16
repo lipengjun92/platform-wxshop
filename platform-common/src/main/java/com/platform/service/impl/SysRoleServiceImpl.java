@@ -114,7 +114,7 @@ public class SysRoleServiceImpl implements SysRoleService {
 
     @Override
     public Page<UserWindowDto> queryPageByDto(UserWindowDto userWindowDto, int pageNum) {
-        PageHelper.startPage(pageNum, Constant.pageSize);
+        PageHelper.startPage(pageNum, Constant.PAGE_SIZE);
         sysRoleDao.queryPageByDto(userWindowDto);
         return PageHelper.endPage();
     }

@@ -21,7 +21,7 @@ import com.platform.util.ApiBaseAction;
 import com.platform.utils.CharUtil;
 import com.platform.utils.R;
 import com.platform.utils.ResourceUtil;
-import com.platform.validator.Assert;
+import com.platform.validator.AbstractAssert;
 import com.qiniu.util.StringUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -29,7 +29,6 @@ import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import me.chanjar.weixin.common.error.WxErrorException;
 import org.apache.commons.collections.MapUtils;
-import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -50,7 +49,6 @@ import java.util.Map;
 @RestController
 @RequestMapping("/api/auth")
 public class ApiAuthController extends ApiBaseAction {
-    private Logger logger = Logger.getLogger(getClass());
     @Autowired
     private ApiUserService userService;
     @Autowired
@@ -65,8 +63,8 @@ public class ApiAuthController extends ApiBaseAction {
     @PostMapping("login")
     @ApiOperation(value = "登录接口")
     public R login(String mobile, String password) {
-        Assert.isBlank(mobile, "手机号不能为空");
-        Assert.isBlank(password, "密码不能为空");
+        AbstractAssert.isBlank(mobile, "手机号不能为空");
+        AbstractAssert.isBlank(password, "密码不能为空");
 
         //用户登录
         long userId = userService.login(mobile, password);
@@ -214,7 +212,7 @@ public class ApiAuthController extends ApiBaseAction {
     @ApiOperation(value = "支付宝登录")
     @IgnoreAuth
     @PostMapping("login_by_ali")
-    public Object login_by_ali() {
+    public Object loginByAli() {
         JSONObject jsonParam = this.getJsonRequest();
         String code = "";
         if (!StringUtils.isNullOrEmpty(jsonParam.getString("code"))) {

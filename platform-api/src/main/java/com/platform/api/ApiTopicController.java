@@ -40,7 +40,7 @@ public class ApiTopicController extends ApiBaseAction {
     @PostMapping("list")
     public Object list(@RequestParam(value = "page", defaultValue = "1") Integer page,
                        @RequestParam(value = "size", defaultValue = "10") Integer size) {
-        Map param = new HashMap();
+        Map<String, Object> param = new HashMap<>();
         param.put("page", page);
         param.put("limit", size);
         param.put("sidx", "id");
@@ -70,7 +70,7 @@ public class ApiTopicController extends ApiBaseAction {
     @IgnoreAuth
     @PostMapping("related")
     public Object related(@LoginUser UserVo loginUser, Integer id) {
-        Map param = new HashMap();
+        Map<String, Object> param = new HashMap<>();
         param.put("limit", 4);
         List<TopicVo> topicEntities = topicService.queryList(param);
         return toResponseSuccess(topicEntities);

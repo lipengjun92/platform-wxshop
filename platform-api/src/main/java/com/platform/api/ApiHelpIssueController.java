@@ -55,7 +55,7 @@ public class ApiHelpIssueController extends ApiBaseAction {
     @IgnoreAuth
     public Object issueList(Long typeId) {
 
-        Map params = new HashMap();
+        Map<String, Object> params = new HashMap<>();
         params.put("typeId", typeId);
         List<HelpIssueVo> helpIssueList = helpIssueService.queryList(params);
 

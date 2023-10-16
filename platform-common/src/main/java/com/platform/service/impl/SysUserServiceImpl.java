@@ -137,7 +137,7 @@ public class SysUserServiceImpl implements SysUserService {
 
     @Override
     public Page<UserWindowDto> findPage(UserWindowDto userWindowDto, int pageNum) {
-        PageHelper.startPage(pageNum, Constant.pageSize);
+        PageHelper.startPage(pageNum, Constant.PAGE_SIZE);
         sysUserDao.queryListByBean(userWindowDto);
         return PageHelper.endPage();
     }

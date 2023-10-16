@@ -21,7 +21,7 @@ import com.platform.util.ApiBaseAction;
 import com.platform.utils.ResourceUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.apache.log4j.Logger;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -48,8 +48,8 @@ import java.util.Map;
 @Api(tags = "商户支付-ApiPayController")
 @RestController
 @RequestMapping("/api/pay")
+@Slf4j
 public class ApiPayController extends ApiBaseAction {
-    private Logger logger = Logger.getLogger(getClass());
     @Autowired
     private ApiOrderService orderService;
     @Autowired
@@ -192,11 +192,11 @@ public class ApiPayController extends ApiBaseAction {
             WxPayOrderNotifyResult result = weixinPayService.parseOrderNotifyResult(reponseXml);
             String resultCode = result.getResultCode();
             String outTradeNo = result.getOutTradeNo();
-            if (resultCode.equalsIgnoreCase("FAIL")) {
-                logger.error("订单" + outTradeNo + "支付失败");
+            if ("FAIL".equalsIgnoreCase(resultCode)) {
+                log.error("订单" + outTradeNo + "支付失败");
                 response.getWriter().write(setXml("SUCCESS", "OK"));
-            } else if (resultCode.equalsIgnoreCase("SUCCESS")) {
-                logger.error("订单" + outTradeNo + "支付成功");
+            } else if ("SUCCESS".equalsIgnoreCase(resultCode)) {
+                log.error("订单" + outTradeNo + "支付成功");
                 // 业务处理
                 OrderVo orderInfo = orderService.queryObjectByOrderSn(outTradeNo);
                 orderInfo.setPayStatus(2);
@@ -208,7 +208,6 @@ public class ApiPayController extends ApiBaseAction {
             }
         } catch (Exception e) {
             e.printStackTrace();
-            return;
         }
     }
 
@@ -241,7 +240,7 @@ public class ApiPayController extends ApiBaseAction {
             return toResponsObject(400, "退款失败：" + e.getErrCode(), "");
         }
 
-        if (result.getResultCode().equals("SUCCESS")) {
+        if ("SUCCESS".equals(result.getResultCode())) {
             if (orderInfo.getOrderStatus() == 201) {
                 orderInfo.setOrderStatus(401);
             } else if (orderInfo.getOrderStatus() == 300) {

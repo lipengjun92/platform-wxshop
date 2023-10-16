@@ -36,7 +36,7 @@ public class Excel2Html {
 
     public static String excelToHtml(String realPath) {
         String excelFile = realPath;
-        //String htmlFile=realPath + "\\" + saveName + ".html";  
+        //String htmlFile=realPath + "\\" + saveName + ".html";
         InputStream is = null;
         String content = null;
         File sourcefile = null;
@@ -54,7 +54,7 @@ public class Excel2Html {
                 eval = new HSSFFormulaEvaluator((HSSFWorkbook) wb);
                 content = getExcelInfo(hWb, true);
             }
-            //writeFile(content, htmlFile);  
+            //writeFile(content, htmlFile);
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -91,7 +91,7 @@ public class Excel2Html {
             int lastColNum = row.getLastCellNum();
             for (int colNum = 0; colNum < lastColNum; colNum++) {
                 cell = row.getCell(colNum);
-                if (cell == null) {    //特殊情况 空白的单元格会返回null  
+                if (cell == null) {    //特殊情况 空白的单元格会返回null
                     sb.append("<td> </td>");
                     continue;
                 }
@@ -112,16 +112,16 @@ public class Excel2Html {
                     sb.append("<td ");
                 }
 
-                //判断是否需要样式  
+                //判断是否需要样式
                 if (isWithStyle) {
-                    dealExcelStyle(wb, sheet, cell, sb);//处理单元格样式  
+                    dealExcelStyle(wb, sheet, cell, sb);//处理单元格样式
                 }
 
                 sb.append(">");
                 if (stringValue == null || "".equals(stringValue.trim())) {
                     sb.append("   ");
                 } else {
-                    // 将ascii码为160的空格转换为html下的空格（ ）  
+                    // 将ascii码为160的空格转换为html下的空格（ ）
                     sb.append(stringValue.replace(String.valueOf((char) 160), " "));
                 }
                 sb.append("</td>");
@@ -144,7 +144,7 @@ public class Excel2Html {
             int bottomRow = range.getLastRow();
             int bottomCol = range.getLastColumn();
             map0.put(topRow + "," + topCol, bottomRow + "," + bottomCol);
-            // System.out.println(topRow + "," + topCol + "," + bottomRow + "," + bottomCol);  
+            // System.out.println(topRow + "," + topCol + "," + bottomRow + "," + bottomCol);
             int tempRow = topRow;
             while (tempRow <= bottomRow) {
                 int tempCol = topCol;
@@ -195,7 +195,7 @@ public class Excel2Html {
                     String value = cell.getStringCellValue();
                     DecimalFormat format = new DecimalFormat("#0.00%");
                     result = format.format(Double.parseDouble(value));
-                } else if (cell.getCellStyle().getDataFormatString().equals("0.0000%")) {
+                } else if ("0.0000%".equals(cell.getCellStyle().getDataFormatString())) {
                     // 百分比格式的处理
                     cell.setCellType(Cell.CELL_TYPE_STRING);
                     String value = cell.getStringCellValue();
@@ -207,7 +207,7 @@ public class Excel2Html {
                     DecimalFormat format = new DecimalFormat(",##0.00########");
                     String temp = style.getDataFormatString();
                     // 单元格设置成常规
-                    if (temp.equals("General")) {
+                    if ("General".equals(temp)) {
                         format.applyPattern("#");
                     }
                     result = format.format(value);
@@ -253,7 +253,7 @@ public class Excel2Html {
         CellStyle cellStyle = cell.getCellStyle();
         if (cellStyle != null) {
             short alignment = cellStyle.getAlignment();
-            sb.append("align='" + convertAlignToHtml(alignment) + "' ");//单元格内容的水平对齐方式  
+            sb.append("align='" + convertAlignToHtml(alignment) + "' ");//单元格内容的水平对齐方式
             short verticalAlignment = cellStyle.getVerticalAlignment();
             sb.append("valign='" + convertVerticalAlignToHtml(verticalAlignment) + "' ");//单元格中内容的垂直排列方式
 
@@ -262,19 +262,19 @@ public class Excel2Html {
                 XSSFFont xf = ((XSSFCellStyle) cellStyle).getFont();
                 short boldWeight = xf.getBoldweight();
                 sb.append("style='");
-                sb.append("font-weight:" + boldWeight + ";"); // 字体加粗  
-                sb.append("font-size: " + xf.getFontHeight() / 2 + "%;"); // 字体大小  
+                sb.append("font-weight:" + boldWeight + ";"); // 字体加粗
+                sb.append("font-size: " + xf.getFontHeight() / 2 + "%;"); // 字体大小
                 int columnWidth = sheet.getColumnWidth(cell.getColumnIndex());
                 sb.append("width:" + columnWidth + "px;");
 
                 XSSFColor xc = xf.getXSSFColor();
                 if (xc != null && !"".equals(xc)) {
-                    sb.append("color:#" + xc.getARGBHex().substring(2) + ";"); // 字体颜色  
+                    sb.append("color:#" + xc.getARGBHex().substring(2) + ";"); // 字体颜色
                 }
 
                 XSSFColor bgColor = (XSSFColor) cellStyle.getFillForegroundColorColor();
                 if (bgColor != null && !"".equals(bgColor)) {
-                    sb.append("background-color:#" + bgColor.getARGBHex().substring(2) + ";"); // 背景颜色  
+                    sb.append("background-color:#" + bgColor.getARGBHex().substring(2) + ";"); // 背景颜色
                 }
                 sb.append(getBorderStyle(0, cellStyle.getBorderTop(), ((XSSFCellStyle) cellStyle).getTopBorderXSSFColor()));
                 sb.append(getBorderStyle(1, cellStyle.getBorderRight(), ((XSSFCellStyle) cellStyle).getRightBorderXSSFColor()));
@@ -287,11 +287,11 @@ public class Excel2Html {
                 sb.append("style='");
                 HSSFPalette palette = ((HSSFWorkbook) wb).getCustomPalette(); // 类HSSFPalette用于求的颜色的国际标准形式
                 HSSFColor hc = palette.getColor(fontColor);
-                sb.append("font-weight:" + boldWeight + ";"); // 字体加粗  
-                sb.append("font-size: " + hf.getFontHeight() / 2 + "%;"); // 字体大小  
+                sb.append("font-weight:" + boldWeight + ";"); // 字体加粗
+                sb.append("font-size: " + hf.getFontHeight() / 2 + "%;"); // 字体大小
                 String fontColorStr = convertToStardColor(hc);
                 if (fontColorStr != null && !"".equals(fontColorStr.trim())) {
-                    sb.append("color:" + fontColorStr + ";"); // 字体颜色  
+                    sb.append("color:" + fontColorStr + ";"); // 字体颜色
                 }
                 int columnWidth = sheet.getColumnWidth(cell.getColumnIndex());
                 sb.append("width:" + columnWidth + "px;");
@@ -299,7 +299,7 @@ public class Excel2Html {
                 hc = palette.getColor(bgColor);
                 String bgColorStr = convertToStardColor(hc);
                 if (bgColorStr != null && !"".equals(bgColorStr.trim())) {
-                    sb.append("background-color:" + bgColorStr + ";"); // 背景颜色  
+                    sb.append("background-color:" + bgColorStr + ";"); // 背景颜色
                 }
                 sb.append(getBorderStyle(palette, 0, cellStyle.getBorderTop(), cellStyle.getTopBorderColor()));
                 sb.append(getBorderStyle(palette, 1, cellStyle.getBorderRight(), cellStyle.getRightBorderColor()));
@@ -383,16 +383,18 @@ public class Excel2Html {
     static String[] borderStyles = {"solid ", "solid ", "solid ", "solid ", "solid ", "solid ", "solid ", "solid ", "solid ", "solid", "solid", "solid", "solid", "solid"};
 
     private static String getBorderStyle(HSSFPalette palette, int b, short s, short t) {
-        if (s == 0) return bordesr[b] + borderStyles[s] + "#d0d7e5 1px;";
-        ;
+        if (s == 0) {
+            return bordesr[b] + borderStyles[s] + "#d0d7e5 1px;";
+        }
         String borderColorStr = convertToStardColor(palette.getColor(t));
         borderColorStr = borderColorStr == null || borderColorStr.length() < 1 ? "#000000" : borderColorStr;
         return bordesr[b] + borderStyles[s] + borderColorStr + " 1px;";
     }
 
     private static String getBorderStyle(int b, short s, XSSFColor xc) {
-        if (s == 0) return bordesr[b] + borderStyles[s] + "#d0d7e5 1px;";
-        ;
+        if (s == 0) {
+            return bordesr[b] + borderStyles[s] + "#d0d7e5 1px;";
+        }
         if (xc != null && !"".equals(xc)) {
             String borderColorStr = xc.getARGBHex();//t.getARGBHex();
             borderColorStr = borderColorStr == null || borderColorStr.length() < 1 ? "#000000" : borderColorStr.substring(2);
@@ -415,10 +417,12 @@ public class Excel2Html {
             ioe.printStackTrace();
         } finally {
             try {
-                if (bw != null)
+                if (bw != null) {
                     bw.close();
-                if (os != null)
+                }
+                if (os != null) {
                     os.close();
+                }
             } catch (IOException ie) {
                 ie.printStackTrace();
             }

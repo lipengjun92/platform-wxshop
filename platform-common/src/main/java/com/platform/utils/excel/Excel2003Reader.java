@@ -63,7 +63,7 @@ public class Excel2003Reader implements HSSFListener {
     private BoundSheetRecord[] orderedBSRs;
 
     @SuppressWarnings("rawtypes")
-    private ArrayList boundSheetRecords = new ArrayList();
+    private ArrayList boundSheetRecords = new ArrayList<>();
 
     // For handling formulas with string results
     private int nextRow;
@@ -192,7 +192,7 @@ public class Excel2003Reader implements HSSFListener {
                 LabelRecord lrec = (LabelRecord) record;
                 thisColumn = lrec.getColumn();
                 value = lrec.getValue().trim();
-                value = value.equals("") ? " " : value;
+                value = "".equals(value) ? " " : value;
                 this.rowlist.add(thisColumn, value);
                 break;
             case LabelSSTRecord.sid: // 单元格为字符串类型
@@ -202,7 +202,7 @@ public class Excel2003Reader implements HSSFListener {
                     rowlist.add(thisColumn, " ");
                 } else {
                     value = sstRecord.getString(lsrec.getSSTIndex()).toString().trim();
-                    value = value.equals("") ? " " : value;
+                    value = "".equals(value) ? " " : value;
                     rowlist.add(thisColumn, value);
                 }
                 break;
@@ -210,7 +210,7 @@ public class Excel2003Reader implements HSSFListener {
                 NumberRecord numrec = (NumberRecord) record;
                 thisColumn = numrec.getColumn();
                 value = formatListener.formatNumberDateCell(numrec).trim();
-                value = value.equals("") ? " " : value;
+                value = "".equals(value) ? " " : value;
                 // 向容器加入列值
                 rowlist.add(thisColumn, value);
                 break;

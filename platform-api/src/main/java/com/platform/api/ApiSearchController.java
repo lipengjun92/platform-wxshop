@@ -45,8 +45,8 @@ public class ApiSearchController extends ApiBaseAction {
     @ApiOperation(value = "搜索商品列表")
     @PostMapping("index")
     public Object index(@LoginUser UserVo loginUser) {
-        Map<String, Object> resultObj = new HashMap();
-        Map param = new HashMap();
+        Map<String, Object> resultObj = new HashMap<>();
+        Map<String, Object> param = new HashMap<>();
         param.put("isDefault", 1);
         param.put("page", 1);
         param.put("limit", 1);
@@ -56,7 +56,7 @@ public class ApiSearchController extends ApiBaseAction {
         //取出输入框默认的关键词
         KeywordsVo defaultKeyword = null != keywordsEntityList && keywordsEntityList.size() > 0 ? keywordsEntityList.get(0) : null;
         //取出热闹关键词
-        param = new HashMap();
+        param = new HashMap<>();
         param.put("fields", "distinct keyword,is_hot");
         param.put("page", 1);
         param.put("limit", 10);
@@ -65,7 +65,7 @@ public class ApiSearchController extends ApiBaseAction {
         Query query = new Query(param);
         List<Map> hotKeywordList = keywordsService.hotKeywordList(query);
         //
-        param = new HashMap();
+        param = new HashMap<>();
         param.put("userId", loginUser.getUserId());
         param.put("fields", "distinct keyword");
         param.put("page", 1);
@@ -96,7 +96,7 @@ public class ApiSearchController extends ApiBaseAction {
     @IgnoreAuth
     @PostMapping("helper")
     public Object helper(@LoginUser UserVo loginUser, String keyword) {
-        Map param = new HashMap();
+        Map<String, Object> param = new HashMap<>();
         param.put("fields", "distinct keyword");
         param.put("keyword", keyword);
         param.put("limit", 10);

@@ -82,7 +82,7 @@ public class SysDeptServiceImpl implements SysDeptService {
 
     @Override
     public Page<UserWindowDto> queryPageByDto(UserWindowDto userWindowDto, int pageNum) {
-        PageHelper.startPage(pageNum, Constant.pageSize);
+        PageHelper.startPage(pageNum, Constant.PAGE_SIZE);
         sysDeptDao.queryPageByDto(userWindowDto);
         return PageHelper.endPage();
     }

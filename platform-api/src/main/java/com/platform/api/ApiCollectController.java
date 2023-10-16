@@ -37,7 +37,7 @@ public class ApiCollectController extends ApiBaseAction {
     @PostMapping("list")
     public Object list(@LoginUser UserVo loginUser, Integer typeId) {
 
-        Map param = new HashMap();
+        Map<String, Object> param = new HashMap<>();
         param.put("userId", loginUser.getUserId());
         param.put("typeId", typeId);
         List<CollectVo> collectEntities = collectService.queryList(param);
@@ -58,7 +58,7 @@ public class ApiCollectController extends ApiBaseAction {
         Integer typeId = jsonParam.getInteger("typeId");
         Integer valueId = jsonParam.getInteger("valueId");
 
-        Map param = new HashMap();
+        Map<String, Object> param = new HashMap<>();
         param.put("userId", loginUser.getUserId());
         param.put("typeId", typeId);
         param.put("valueId", valueId);
@@ -82,7 +82,7 @@ public class ApiCollectController extends ApiBaseAction {
         }
 
         if (collectRes > 0) {
-            Map data = new HashMap();
+            Map<String, Object> data = new HashMap<>();
             data.put("type", handleType);
             return toResponseSuccess(data);
         }

@@ -68,7 +68,7 @@ public class ApiOrderController extends ApiBaseAction {
                        @RequestParam(value = "page", defaultValue = "1") Integer page,
                        @RequestParam(value = "size", defaultValue = "10") Integer size) {
         //
-        Map params = new HashMap();
+        Map<String, Object> params = new HashMap<>();
         params.put("userId", loginUser.getUserId());
         params.put("page", page);
         params.put("limit", size);
@@ -81,7 +81,7 @@ public class ApiOrderController extends ApiBaseAction {
         ApiPageUtils pageUtil = new ApiPageUtils(orderEntityList, total, query.getLimit(), query.getPage());
         //
         for (OrderVo item : orderEntityList) {
-            Map orderGoodsParam = new HashMap();
+            Map<String, Object> orderGoodsParam = new HashMap<>();
             orderGoodsParam.put("orderId", item.getId());
             //订单的商品
             List<OrderGoodsVo> goodsList = orderGoodsService.queryList(orderGoodsParam);
@@ -100,7 +100,7 @@ public class ApiOrderController extends ApiBaseAction {
     @ApiOperation(value = "获取订单详情")
     @PostMapping("detail")
     public Object detail(Integer orderId, @LoginUser UserVo loginUser) {
-        Map resultObj = new HashMap();
+        Map<String, Object> resultObj = new HashMap<>();
         //
         OrderVo orderInfo = orderService.queryObject(orderId);
         if (null == orderInfo) {
@@ -110,7 +110,7 @@ public class ApiOrderController extends ApiBaseAction {
         if (!loginUser.getUserId().equals(orderInfo.getUserId())) {
             return toResponseFail("越权操作！");
         }
-        Map orderGoodsParam = new HashMap();
+        Map<String, Object> orderGoodsParam = new HashMap<>();
         orderGoodsParam.put("orderId", orderId);
         //订单的商品
         List<OrderGoodsVo> orderGoods = orderGoodsService.queryList(orderGoodsParam);
@@ -124,15 +124,15 @@ public class ApiOrderController extends ApiBaseAction {
         }
 
         //订单可操作的选择,删除，支付，收货，评论，退换货
-        Map handleOption = orderInfo.getHandleOption();
+        Map<String, Object> handleOption = orderInfo.getHandleOption();
         //
         resultObj.put("orderInfo", orderInfo);
         resultObj.put("orderGoods", orderGoods);
         resultObj.put("handleOption", handleOption);
         if (!StringUtils.isEmpty(orderInfo.getShippingCode()) && !StringUtils.isEmpty(orderInfo.getShippingNo())) {
             // 快递
-            List Traces = apiKdniaoService.getOrderTracesByJson(orderInfo.getShippingCode(), orderInfo.getShippingNo());
-            resultObj.put("shippingList", Traces);
+            List traces = apiKdniaoService.getOrderTracesByJson(orderInfo.getShippingCode(), orderInfo.getShippingNo());
+            resultObj.put("shippingList", traces);
         }
         return toResponseSuccess(resultObj);
     }
@@ -169,7 +169,7 @@ public class ApiOrderController extends ApiBaseAction {
     @ApiOperation(value = "订单提交")
     @PostMapping("submit")
     public Object submit(@LoginUser UserVo loginUser) {
-        Map resultObj = null;
+        Map<String, Object> resultObj = null;
         try {
             resultObj = orderService.submit(getJsonRequest(), loginUser);
             if (null != resultObj) {
@@ -204,7 +204,7 @@ public class ApiOrderController extends ApiBaseAction {
         if (orderVo.getPayStatus() == 2) {
             WxPayRefundResult result = weixinPayService.refund(orderVo.getOrderSn(),
                     0.01, 0.01);
-            if (result.getResultCode().equals("SUCCESS")) {
+            if ("SUCCESS".equals(result.getResultCode())) {
                 if (orderVo.getOrderStatus() == 201) {
                     orderVo.setOrderStatus(401);
                 } else if (orderVo.getOrderStatus() == 300) {

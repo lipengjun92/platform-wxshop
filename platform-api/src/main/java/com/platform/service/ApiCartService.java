@@ -35,12 +35,12 @@ public class ApiCartService {
         cartDao.save(cart);
         // 更新购物车搭配减价
         // 判断购物车中是否存在此规格商品
-        Map cartParam = new HashMap();
+        Map<String, Object> cartParam = new HashMap<>();
         cartParam.put("userId", cart.getUserId());
         List<CartVo> cartInfoList = cartDao.queryList(cartParam);
-        Map crashParam = new HashMap();
-        List<Integer> goodsIds = new ArrayList();
-        List<CartVo> cartUpdateList = new ArrayList();
+        Map<String, Object> crashParam = new HashMap<>();
+        List<Integer> goodsIds = new ArrayList<>();
+        List<CartVo> cartUpdateList = new ArrayList<>();
         for (CartVo cartItem : cartInfoList) {
             if (null != cartItem.getChecked() && 1 == cartItem.getChecked()) {
                 goodsIds.add(cartItem.getGoodsId());
@@ -86,12 +86,12 @@ public class ApiCartService {
         cartDao.updateCheck(productIds, isChecked, userId);
 
         // 判断购物车中是否存在此规格商品
-        Map cartParam = new HashMap();
+        Map<String, Object> cartParam = new HashMap<>();
         cartParam.put("userId", userId);
         List<CartVo> cartInfoList = cartDao.queryList(cartParam);
-        Map crashParam = new HashMap();
-        List<Integer> goodsIds = new ArrayList();
-        List<CartVo> cartUpdateList = new ArrayList();
+        Map<String, Object> crashParam = new HashMap<>();
+        List<Integer> goodsIds = new ArrayList<>();
+        List<CartVo> cartUpdateList = new ArrayList<>();
         for (CartVo cartItem : cartInfoList) {
             if (null != cartItem.getChecked() && 1 == cartItem.getChecked()) {
                 goodsIds.add(cartItem.getGoodsId());
