@@ -104,16 +104,18 @@ public class XmlUtil {
      * @return
      */
     public static Map<String, Object> elementToMap(Element element, Map<String, Object> map) {
-        if (element == null || map == null)
+        if (element == null || map == null) {
             return null;
+        }
         List children = element.elements();
         if (children != null && children.size() > 0) {
             for (int i = 0; i < children.size(); i++) {
                 Element child = (Element) children.get(i);
-                if (child.elements() != null && child.elements().size() > 0)
+                if (child.elements() != null && child.elements().size() > 0) {
                     elementToMap(child, map);
-                else
+                } else {
                     map.put(child.getName(), child.getTextTrim());
+                }
             }
         }
         return map;
@@ -128,7 +130,7 @@ public class XmlUtil {
      * @throws Exception 异常
      */
     public static Object mapToBean(Map<String, Object> map, Class clazz) throws Exception {
-        Object obj = clazz.newInstance();
+        Object obj = clazz.getDeclaredConstructor().newInstance();
         if (map != null && map.size() > 0) {
             for (Map.Entry<String, Object> entry : map.entrySet()) {
                 String propertyName = entry.getKey();

@@ -8,5 +8,8 @@ package com.platform.utils.excel;
  * @date 2017年10月28日 13:11:27
  */
 public enum XssfDataType {
+    /**
+     * XSSFDataType
+     */
     BOOL, ERROR, FORMULA, INLINESTR, SSTINDEX, NUMBER, DATE, DATETIME, TIME,
 }

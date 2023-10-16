@@ -5,7 +5,7 @@ import com.platform.entity.SysUserEntity;
 import com.platform.service.SysUserRoleService;
 import com.platform.service.SysUserService;
 import com.platform.utils.*;
-import com.platform.validator.Assert;
+import com.platform.validator.AbstractAssert;
 import com.platform.validator.ValidatorUtils;
 import com.platform.validator.group.AddGroup;
 import com.platform.validator.group.UpdateGroup;
@@ -68,10 +68,10 @@ public class SysUserController extends AbstractController {
     @SysLog("修改密码")
     @RequestMapping("/password")
     public R password(String password, String newPassword) {
-        if(ResourceUtil.getConfigByName("sys.demo").equals("1")){
+        if("1".equals(ResourceUtil.getConfigByName("sys.demo"))){
             throw new RRException("演示环境无法修改密码！");
         }
-        Assert.isBlank(newPassword, "新密码不为能空");
+        AbstractAssert.isBlank(newPassword, "新密码不为能空");
 
         //sha256加密
         password = new Sha256Hash(password).toHex();

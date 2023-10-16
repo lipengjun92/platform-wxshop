@@ -45,8 +45,8 @@ public class ApiSmsController {
     @PostMapping("/sendSms")
     public R sendSms(HttpServletRequest request, @RequestParam Map<String, String> params) {
         SysSmsLogEntity smsLog = new SysSmsLogEntity();
-        String validIP = RequestUtil.getIpAddrByRequest(request);
-        if (ResourceUtil.getConfigByName("sms.validIp").indexOf(validIP) < 0) {
+        String validIp = RequestUtil.getIpAddrByRequest(request);
+        if (ResourceUtil.getConfigByName("sms.validIp").indexOf(validIp) < 0) {
             throw new RRException("非法IP请求！");
         }
         smsLog.setMobile(params.get("mobile"));

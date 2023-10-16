@@ -100,7 +100,7 @@ public class OrderVo implements Serializable {
     //
     private Integer goodsCount; //订单的商品
     private String orderStatusText;//订单状态的处理
-    private Map handleOption; //可操作的选项
+    private Map<String, Object> handleOption; //可操作的选项
     private BigDecimal fullCutPrice; //订单满减
     private String fullRegion;//区县
     private String orderType; // 订单状态
@@ -109,7 +109,7 @@ public class OrderVo implements Serializable {
         if (StringUtils.isNotEmpty(this.fullRegion)) {
             return fullRegion;
         } else {
-            StringBuffer strBuff = new StringBuffer();
+            StringBuilder strBuff = new StringBuilder();
             if (StringUtils.isNotEmpty(this.country)) {
                 strBuff.append(this.country).append(" ");
             }
@@ -129,7 +129,6 @@ public class OrderVo implements Serializable {
 
     public String getOrderStatusText() {
         if (null != orderStatus && StringUtils.isEmpty(orderStatusText)) {
-            orderStatusText = "未付款";
             switch (orderStatus) {
                 case 0:
                     orderStatusText = "未付款";
@@ -162,8 +161,8 @@ public class OrderVo implements Serializable {
         return orderStatusText;
     }
 
-    public Map getHandleOption() {
-        handleOption = new HashMap();
+    public Map<String, Object> getHandleOption() {
+        handleOption = new HashMap<>();
         //取消操作
         handleOption.put("cancel", false);
         //删除操作

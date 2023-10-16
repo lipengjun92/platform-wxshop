@@ -45,7 +45,7 @@ public class ApiCouponController extends ApiBaseAction {
     @ApiOperation(value = "获取优惠券列表")
     @PostMapping("/list")
     public Object list(@LoginUser UserVo loginUser) {
-        Map param = new HashMap();
+        Map<String, Object> param = new HashMap<>();
         param.put("userId", loginUser.getUserId());
         List<CouponVo> couponVos = apiCouponService.queryUserCoupons(param);
         return toResponseSuccess(couponVos);
@@ -57,9 +57,9 @@ public class ApiCouponController extends ApiBaseAction {
     @ApiOperation(value = "根据商品获取可用优惠券列表")
     @PostMapping("/listByGoods")
     public Object listByGoods(@RequestParam(defaultValue = "cart") String type, @LoginUser UserVo loginUser) {
-        BigDecimal goodsTotalPrice = new BigDecimal(0.00);
-        if (type.equals("cart")) {
-            Map param = new HashMap();
+        BigDecimal goodsTotalPrice = new BigDecimal("0.00");
+        if ("cart".equals(type)) {
+            Map<String, Object> param = new HashMap<>();
             param.put("userId", loginUser.getUserId());
             List<CartVo> cartList = apiCartService.queryList(param);
             //获取购物车统计信息
@@ -76,7 +76,7 @@ public class ApiCouponController extends ApiBaseAction {
         }
 
         // 获取可用优惠券
-        Map param = new HashMap();
+        Map<String, Object> param = new HashMap<>();
         param.put("userId", loginUser.getUserId());
         param.put("couponStatus", 1);
         List<CouponVo> couponVos = apiCouponService.queryUserCoupons(param);
@@ -107,7 +107,7 @@ public class ApiCouponController extends ApiBaseAction {
             return toResponseFail("当前优惠码无效");
         }
         //
-        Map param = new HashMap();
+        Map<String, Object> param = new HashMap<>();
         param.put("couponNumber", couponNumber);
         List<UserCouponVo> couponVos = apiUserCouponService.queryList(param);
         UserCouponVo userCouponVo = null;
@@ -155,7 +155,7 @@ public class ApiCouponController extends ApiBaseAction {
             return toResponseFail("当前优惠券只能新用户领取");
         }
         // 是否领取过了
-        Map params = new HashMap();
+        Map<String, Object> params = new HashMap<>();
         params.put("userId", loginUser.getUserId());
         params.put("sendType", 4);
         List<CouponVo> couponVos = apiCouponService.queryUserCoupons(params);
@@ -163,7 +163,7 @@ public class ApiCouponController extends ApiBaseAction {
             return toResponseFail("已经领取过，不能重复领取");
         }
         // 领取
-        Map couponParam = new HashMap();
+        Map<String, Object> couponParam = new HashMap<>();
         couponParam.put("sendType", 4);
         CouponVo newCouponConfig = apiCouponService.queryMaxUserEnableCoupon(couponParam);
         if (null != newCouponConfig) {
@@ -187,7 +187,7 @@ public class ApiCouponController extends ApiBaseAction {
     public Object transActivit(@LoginUser UserVo loginUser, String sourceKey, Long referrer) {
         JSONObject jsonParam = getJsonRequest();
         // 是否领取过了
-        Map params = new HashMap();
+        Map<String, Object> params = new HashMap<>();
         params.put("userId", loginUser.getUserId());
         params.put("sendType", 2);
         params.put("sourceKey", sourceKey);
@@ -196,7 +196,7 @@ public class ApiCouponController extends ApiBaseAction {
             return toResponsObject(2, "已经领取过", couponVos);
         }
         // 领取
-        Map couponParam = new HashMap();
+        Map<String, Object> couponParam = new HashMap<>();
         couponParam.put("sendType", 2);
         CouponVo newCouponConfig = apiCouponService.queryMaxUserEnableCoupon(couponParam);
         if (null != newCouponConfig) {
@@ -209,10 +209,10 @@ public class ApiCouponController extends ApiBaseAction {
             userCouponVo.setReferrer(referrer);
             apiUserCouponService.save(userCouponVo);
             //
-            List<UserCouponVo> userCouponVos = new ArrayList();
+            List<UserCouponVo> userCouponVos = new ArrayList<>();
             userCouponVos.add(userCouponVo);
             //
-            params = new HashMap();
+            params = new HashMap<>();
             params.put("userId", loginUser.getUserId());
             params.put("sendType", 2);
             params.put("sourceKey", sourceKey);

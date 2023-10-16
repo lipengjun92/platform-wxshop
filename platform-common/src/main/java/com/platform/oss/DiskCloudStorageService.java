@@ -16,7 +16,7 @@ import java.io.InputStream;
  * @email 939961241@qq.com
  * @date 2019-01-17 16:21:01
  */
-public class DiskCloudStorageService extends CloudStorageService {
+public class DiskCloudStorageService extends AbstractCloudStorageService {
 
     public DiskCloudStorageService(CloudStorageConfig config) {
         this.config = config;
@@ -31,8 +31,9 @@ public class DiskCloudStorageService extends CloudStorageService {
 
     @Override
     public String upload(byte[] data, String path) {
-        if (data.length < 3 || path.equals(""))
+        if (data.length < 3 || "".equals(path)) {
             throw new RRException("上传文件为空");
+        }
 
         //本地存储必需要以"/"开头
         if (!path.startsWith("/")) {

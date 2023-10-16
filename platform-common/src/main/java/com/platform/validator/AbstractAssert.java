@@ -10,7 +10,7 @@ import org.apache.commons.lang.StringUtils;
  * @email 939961241@qq.com
  * @date 2017-03-23 15:50
  */
-public abstract class Assert {
+public abstract class AbstractAssert {
 
     public static void isBlank(String str, String message) {
         if (StringUtils.isBlank(str)) {

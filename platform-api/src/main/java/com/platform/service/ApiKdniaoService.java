@@ -43,7 +43,7 @@ public class ApiKdniaoService {
      */
     public List getOrderTracesByJson(String expCode, String expNo) {
 
-        List<Map<String, Object>> resultObj = new ArrayList();
+        List<Map<String, Object>> resultObj = new ArrayList<>();
 
         try {
 
@@ -64,7 +64,7 @@ public class ApiKdniaoService {
                 JSONArray objects = jsonObject.getJSONArray("Traces");
                 for (Object obj : objects) {
                     JSONObject jsonObj = (JSONObject) obj;
-                    Map<String, Object> temp = new HashMap();
+                    Map<String, Object> temp = new HashMap<>();
                     temp.put("AcceptTime", jsonObj.getString("AcceptTime"));
                     temp.put("AcceptStation", jsonObj.getString("AcceptStation"));
                     resultObj.add(temp);

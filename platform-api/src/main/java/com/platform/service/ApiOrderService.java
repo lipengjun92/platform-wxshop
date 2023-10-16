@@ -102,7 +102,7 @@ public class ApiOrderService {
         // * 获取要购买的商品
         List<CartVo> checkedGoodsList = new ArrayList<>();
         BigDecimal goodsTotalPrice;
-        if (type.equals("cart")) {
+        if ("cart".equals(type)) {
             Map<String, Object> param = new HashMap<String, Object>();
             param.put("userId", loginUser.getUserId());
             param.put("sessionId", 1);
@@ -134,7 +134,7 @@ public class ApiOrderService {
 
 
         //获取订单使用的优惠券
-        BigDecimal couponPrice = new BigDecimal(0.00);
+        BigDecimal couponPrice = new BigDecimal("0.00");
         CouponVo couponVo = null;
         if (couponId != null && couponId != 0) {
             couponVo = apiCouponMapper.getUserCoupon(couponId);
@@ -181,7 +181,7 @@ public class ApiOrderService {
         orderInfo.setShippingFee(new BigDecimal(0));
         orderInfo.setIntegral(0);
         orderInfo.setIntegralMoney(new BigDecimal(0));
-        if (type.equals("cart")) {
+        if ("cart".equals(type)) {
             orderInfo.setOrderType("1");
         } else {
             orderInfo.setOrderType("4");

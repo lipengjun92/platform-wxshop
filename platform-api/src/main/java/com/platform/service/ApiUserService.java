@@ -6,7 +6,7 @@ import com.platform.entity.SmsLogVo;
 import com.platform.entity.UserLevelVo;
 import com.platform.entity.UserVo;
 import com.platform.utils.RRException;
-import com.platform.validator.Assert;
+import com.platform.validator.AbstractAssert;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -70,7 +70,7 @@ public class ApiUserService {
 
     public long login(String mobile, String password) {
         UserVo user = queryByMobile(mobile);
-        Assert.isNull(user, "手机号或密码错误");
+        AbstractAssert.isNull(user, "手机号或密码错误");
 
         //密码错误
         if (!user.getPassword().equals(DigestUtils.sha256Hex(password))) {

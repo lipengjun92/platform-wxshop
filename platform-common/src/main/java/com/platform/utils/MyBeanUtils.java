@@ -382,7 +382,7 @@ public class MyBeanUtils extends PropertyUtilsBean {
     @SuppressWarnings({"rawtypes", "unchecked"})
     public static List<Field> findAllFieldsOfSelfAndSuperClass(Class clazz) {
         Field[] fields = null;
-        List fieldList = new ArrayList();
+        List fieldList = new ArrayList<>();
         while (true) {
             if (clazz == null) {
                 break;
@@ -576,7 +576,7 @@ public class MyBeanUtils extends PropertyUtilsBean {
         Object obj = null;
         try {
             Map datas = map;
-            obj = Class.forName(clazz.getName()).newInstance();
+            obj = Class.forName(clazz.getName()).getDeclaredConstructor().newInstance();
             Method[] ms = clazz.getDeclaredMethods();
             Field[] fs = clazz.getDeclaredFields();
             Set<String> keys = datas.keySet();
@@ -614,15 +614,15 @@ public class MyBeanUtils extends PropertyUtilsBean {
                                     boolean can = true;
                                     int isMore = 0;
                                     for (String str : keys) {
-                                        String temp_str = str.replaceAll("_",
+                                        String tempStr = str.replaceAll("_",
                                                 "");
-                                        String temp_field = fieldname.replaceAll(
+                                        String tempField = fieldname.replaceAll(
                                                 "_", "");
-                                        if (temp_str.toLowerCase().equals(
-                                                temp_field.toLowerCase())) {
+                                        if (tempStr.toLowerCase().equals(
+                                                tempField.toLowerCase())) {
                                             if (isMore > 0) {
                                                 throw new RuntimeException(
-                                                        "java字段" + temp_str + "在数据库中有多个字段相对应！");
+                                                        "java字段" + tempStr + "在数据库中有多个字段相对应！");
                                             }
                                             val = datas.get(str);
                                             can = false;
@@ -733,11 +733,7 @@ public class MyBeanUtils extends PropertyUtilsBean {
                 }
             }
 
-        } catch (InstantiationException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return obj;

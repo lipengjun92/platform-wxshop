@@ -14,5 +14,5 @@ import java.util.Map;
  * @date 2017-08-11 09:16:46
  */
 public interface ApiKeywordsMapper extends BaseDao<KeywordsVo> {
-    List<Map> hotKeywordList(Map param);
+    List<Map> hotKeywordList(Map<String, Object> param);
 }

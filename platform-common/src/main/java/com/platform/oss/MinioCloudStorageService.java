@@ -20,7 +20,7 @@ import java.util.concurrent.TimeUnit;
  * @email 1193136099@qq.com
  * @date 2022-03-06 16:21:01
  */
-public class MinioCloudStorageService extends CloudStorageService {
+public class MinioCloudStorageService extends AbstractCloudStorageService {
 
     private MinioClient minioClient;
 
@@ -47,8 +47,9 @@ public class MinioCloudStorageService extends CloudStorageService {
 
     @Override
     public String upload(byte[] data, String path) {
-        if (data.length < 3 || path.equals(""))
+        if (data.length < 3 || "".equals(path)) {
             throw new RRException("上传文件为空");
+        }
 
         try {
             ByteArrayInputStream inputStream = new ByteArrayInputStream(data);

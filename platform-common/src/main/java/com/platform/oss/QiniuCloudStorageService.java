@@ -1,11 +1,11 @@
 package com.platform.oss;
 
-import com.qiniu.common.Zone;
+import com.platform.utils.RRException;
 import com.qiniu.http.Response;
 import com.qiniu.storage.Configuration;
+import com.qiniu.storage.Region;
 import com.qiniu.storage.UploadManager;
 import com.qiniu.util.Auth;
-import com.platform.utils.RRException;
 import org.apache.commons.io.IOUtils;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -19,7 +19,7 @@ import java.io.InputStream;
  * @email 939961241@qq.com
  * @date 2017-03-25 15:41
  */
-public class QiniuCloudStorageService extends CloudStorageService {
+public class QiniuCloudStorageService extends AbstractCloudStorageService {
     private UploadManager uploadManager;
     private String token;
 
@@ -31,7 +31,7 @@ public class QiniuCloudStorageService extends CloudStorageService {
     }
 
     private void init() {
-        uploadManager = new UploadManager(new Configuration(Zone.autoZone()));
+        uploadManager = new UploadManager(new Configuration(Region.autoRegion()));
         token = Auth.create(config.getQiniuAccessKey(), config.getQiniuSecretKey()).
                 uploadToken(config.getQiniuBucketName());
     }
@@ -48,7 +48,7 @@ public class QiniuCloudStorageService extends CloudStorageService {
         try {
             Response res = uploadManager.put(data, path, token);
             if (!res.isOK()) {
-                throw new RuntimeException("上传七牛出错：" + res.toString());
+                throw new RuntimeException("上传七牛出错：" + res);
             }
         } catch (Exception e) {
             throw new RRException("上传文件失败，请核对七牛配置信息", e);

@@ -12,7 +12,6 @@
         <module>platform-schedule</module> <!-- 定时任务模块 -->
         <module>platform-gen</module> <!-- 代码生成器模块 -->
         <module>platform-api</module> <!-- API模块 -->
-        <module>platform-framework</module>
         <module>platform-admin</module>
     </modules>
 

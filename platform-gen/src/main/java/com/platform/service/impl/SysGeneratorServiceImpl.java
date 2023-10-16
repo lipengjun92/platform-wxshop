@@ -87,10 +87,10 @@ public class SysGeneratorServiceImpl implements SysGeneratorService {
                     // 获取属性的名字
                     String name = field[j].getName();
                     // 将属性的首字符大写，方便构造get，set方法
-                    String Name = name.substring(0, 1).toUpperCase() + name.substring(1);
+                    String methodName = name.substring(0, 1).toUpperCase() + name.substring(1);
 
                     try {
-                        Method m = stringObjectMap.getClass().getMethod("get" + Name);
+                        Method m = stringObjectMap.getClass().getMethod("get" + methodName);
                         // 调用getter方法获取属性值
                         String value = (String) m.invoke(stringObjectMap);
                         objectMap.put(name, value);

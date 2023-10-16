@@ -21,50 +21,66 @@ import java.util.Set;
 public class MapUtils {
 
     public static String getString(String key, Map<String, Object> map) {
-        if (map == null || key == null)
+        if (map == null || key == null) {
             throw new IllegalArgumentException();
-        if (!map.containsKey(key))
+        }
+        if (!map.containsKey(key)) {
             return null;
+        }
         Object value = map.get(key);
-        if (value == null)
+        if (value == null) {
             return null;
+        }
         return value.toString();
     }
 
     public static Integer getInteger(String key, Map<String, Object> map) {
-        if (map == null || key == null)
+        if (map == null || key == null) {
             throw new IllegalArgumentException();
-        if (!map.containsKey(key))
+        }
+        if (!map.containsKey(key)) {
             return null;
+        }
         Object value = map.get(key);
-        if (value == null)
+        if (value == null) {
             return null;
-        if (value instanceof Integer)
+        }
+        if (value instanceof Integer) {
             return (Integer) value;
-        if (value instanceof String)
+        }
+        if (value instanceof String) {
             return Integer.valueOf((String) value);
+        }
         //Date 不支持变成为date类型
-        if (value instanceof Date)
+        if (value instanceof Date) {
             throw new ClassCastException();
-        if (value instanceof Number)
+        }
+        if (value instanceof Number) {
             return ((Number) value).intValue();
+        }
         throw new ClassCastException();
     }
 
     public static Long getLong(String key, Map<String, Object> map) {
-        if (map == null || key == null)
+        if (map == null || key == null) {
             throw new IllegalArgumentException();
-        if (!map.containsKey(key))
+        }
+        if (!map.containsKey(key)) {
             return null;
+        }
         Object value = map.get(key);
-        if (value == null)
+        if (value == null) {
             return null;
-        if (value instanceof Long)
+        }
+        if (value instanceof Long) {
             return (Long) value;
-        if (value instanceof Number)
+        }
+        if (value instanceof Number) {
             return ((Number) value).longValue();
-        if (value instanceof String)
+        }
+        if (value instanceof String) {
             return Long.valueOf((String) value);
+        }
         if (value instanceof Date) {
             return (((Date) value).getTime());
         }
@@ -79,44 +95,60 @@ public class MapUtils {
     }
 
     public static Double getDouble(String key, Map<String, Object> map) {
-        if (map == null || key == null)
+        if (map == null || key == null) {
             throw new IllegalArgumentException();
-        if (!map.containsKey(key))
+        }
+        if (!map.containsKey(key)) {
             return null;
+        }
         Object value = map.get(key);
-        if (value == null)
+        if (value == null) {
             return null;
-        if (value instanceof Double)
+        }
+        if (value instanceof Double) {
             return (Double) value;
-        if (value instanceof Number)
+        }
+        if (value instanceof Number) {
             return ((Number) value).doubleValue();
-        if (value instanceof String)
+        }
+        if (value instanceof String) {
             return Double.valueOf((String) value);
+        }
         throw new ClassCastException();
     }
 
     public static BigDecimal getBigDecimal(String key, Map<String, Object> map) {
-        if (map == null || key == null)
+        if (map == null || key == null) {
             throw new IllegalArgumentException();
-        if (!map.containsKey(key))
+        }
+        if (!map.containsKey(key)) {
             return null;
+        }
         Object value = map.get(key);
-        if (value == null)
+        if (value == null) {
             return null;
-        if (value instanceof BigDecimal)
+        }
+        if (value instanceof BigDecimal) {
             return (BigDecimal) value;
-        if (value instanceof Integer)
+        }
+        if (value instanceof Integer) {
             return new BigDecimal((Integer) value);
-        if (value instanceof Short)
+        }
+        if (value instanceof Short) {
             return new BigDecimal((Short) value);
-        if (value instanceof Byte)
+        }
+        if (value instanceof Byte) {
             return new BigDecimal((Byte) value);
-        if (value instanceof Long)
+        }
+        if (value instanceof Long) {
             return new BigDecimal((Long) value);
-        if (value instanceof Float)
+        }
+        if (value instanceof Float) {
             return new BigDecimal((Float) value);
-        if (value instanceof Double)
+        }
+        if (value instanceof Double) {
             return new BigDecimal((Double) value);
+        }
         if (value instanceof Date) {
             return new BigDecimal(((Date) value).getTime());
         }
@@ -127,10 +159,11 @@ public class MapUtils {
             return new BigDecimal(((Timestamp) value).getTime());
         }
         if (value instanceof String) {
-            if (!StringUtils.isNullOrEmpty((String) value))
+            if (!StringUtils.isNullOrEmpty((String) value)) {
                 return new BigDecimal((String) value);
-            else
+            } else {
                 return null;
+            }
         }
         throw new ClassCastException();
     }
@@ -152,11 +185,13 @@ public class MapUtils {
      * @param likeKey
      */
     public static void toLikeValue(Map<String, Object> map, String... likeKey) {
-        if (ArrayUtils.isEmpty(likeKey))
+        if (ArrayUtils.isEmpty(likeKey)) {
             return;
+        }
         for (String key : likeKey) {
-            if (map.containsKey(key))
+            if (map.containsKey(key)) {
                 map.put(key, "%" + map.get(key) + "%");
+            }
         }
     }
 
@@ -168,14 +203,16 @@ public class MapUtils {
      * @return
      */
     public static Date getDate(String key, Map<String, Object> map) {
-        if (map == null || key == null)
+        if (map == null || key == null) {
             throw new IllegalArgumentException();
-        if (!map.containsKey(key))
+        }
+        if (!map.containsKey(key)) {
             return null;
+        }
         Object value = map.get(key);
-        if (value == null)
+        if (value == null) {
             return null;
-        else {
+        } else {
             if (value instanceof Date) {
                 return (Date) value;
             } else if (value instanceof Timestamp) {
@@ -193,14 +230,16 @@ public class MapUtils {
      * @return
      */
     public static java.util.Date getTimestamp(String key, Map<String, Object> map) {
-        if (map == null || key == null)
+        if (map == null || key == null) {
             throw new IllegalArgumentException();
-        if (!map.containsKey(key))
+        }
+        if (!map.containsKey(key)) {
             return null;
+        }
         Object value = map.get(key);
-        if (value == null)
+        if (value == null) {
             return null;
-        else {
+        } else {
             if (value instanceof Date) {
                 return (Date) value;
             } else if (value instanceof Timestamp) {
@@ -219,10 +258,11 @@ public class MapUtils {
      * @param value
      */
     public static void putIfValueNotNull(Map<String, Object> map, String key, Object value) {
-        Assert.notNull(map);
-        Assert.hasText(key);
-        if (value != null)
+        Assert.notNull(map, "[Assertion failed] - this argument is required; it must not be null");
+        Assert.hasText(key, "[Assertion failed] - this String argument must have text; it must not be null, empty, or blank");
+        if (value != null) {
             map.put(key, value);
+        }
     }
 
     /**
@@ -233,10 +273,11 @@ public class MapUtils {
      * @param value
      */
     public static void putIfValueNotEmpty(Map<String, Object> map, String key, String value) {
-        Assert.notNull(map);
-        Assert.hasText(key);
-        if (!StringUtils.isNullOrEmpty(value))
+        Assert.notNull(map, "[Assertion failed] - this argument is required; it must not be null");
+        Assert.hasText(key, "[Assertion failed] - this String argument must have text; it must not be null, empty, or blank");
+        if (!StringUtils.isNullOrEmpty(value)) {
             map.put(key, value);
+        }
     }
 
     /**
@@ -247,9 +288,9 @@ public class MapUtils {
      * @param helper
      */
     public static void convertMapValuePattern(String key, Map<String, Object> map, DealMapValueHelper helper) {
-        Assert.hasText(key);
-        Assert.notNull(map);
-        Assert.notNull(helper);
+        Assert.hasText(key, "[Assertion failed] - this String argument must have text; it must not be null, empty, or blank");
+        Assert.notNull(map, "[Assertion failed] - this argument is required; it must not be null");
+        Assert.notNull(helper, "[Assertion failed] - this argument is required; it must not be null");
         helper.dealValue(key, map);
     }
 

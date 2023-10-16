@@ -79,7 +79,7 @@ public class ApiGoodsController extends ApiBaseAction {
     @PostMapping(value = "index")
     public Object index() {
         //
-        Map param = new HashMap();
+        Map<String, Object> param = new HashMap<>();
         param.put("isDelete", 0);
         param.put("isOnSale", 1);
         List<GoodsVo> goodsList = goodsService.queryList(param);
@@ -95,9 +95,9 @@ public class ApiGoodsController extends ApiBaseAction {
     @IgnoreAuth
     @PostMapping(value = "sku")
     public Object sku(Integer id) {
-        Map<String, Object> resultObj = new HashMap();
+        Map<String, Object> resultObj = new HashMap<>();
         //
-        Map param = new HashMap();
+        Map<String, Object> param = new HashMap<>();
         param.put("goodsId", id);
         List<GoodsSpecificationVo> goodsSpecificationEntityList = goodsSpecificationService.queryList(param);
         //
@@ -116,14 +116,14 @@ public class ApiGoodsController extends ApiBaseAction {
             @ApiImplicitParam(name = "referrer", value = "商品referrer", paramType = "path", required = false)})
     @PostMapping(value = "detail")
     public Object detail(Integer id, Long referrer) {
-        Map<String, Object> resultObj = new HashMap();
+        Map<String, Object> resultObj = new HashMap<>();
         //
         Long userId = getUserId();
         GoodsVo info = goodsService.queryObject(id);
-        Map param = new HashMap();
+        Map<String, Object> param = new HashMap<>();
         param.put("goodsId", id);
         //
-        Map specificationParam = new HashMap();
+        Map<String, Object> specificationParam = new HashMap<>();
         specificationParam.put("fields", "gs.*, s.name");
         specificationParam.put("goodsId", id);
         specificationParam.put("specification", true);
@@ -131,7 +131,7 @@ public class ApiGoodsController extends ApiBaseAction {
         specificationParam.put("order", "asc");
         List<GoodsSpecificationVo> goodsSpecificationEntityList = goodsSpecificationService.queryList(specificationParam);
 
-        List<Map> specificationList = new ArrayList();
+        List<Map> specificationList = new ArrayList<>();
         //按规格名称分组
         for (int i = 0; i < goodsSpecificationEntityList.size(); i++) {
             GoodsSpecificationVo specItem = goodsSpecificationEntityList.get(i);
@@ -145,10 +145,10 @@ public class ApiGoodsController extends ApiBaseAction {
             }
             //
             if (null == tempList) {
-                Map temp = new HashMap();
+                Map<String, Object> temp = new HashMap<>();
                 temp.put("specificationId", specItem.getSpecificationId());
                 temp.put("name", specItem.getName());
-                tempList = new ArrayList();
+                tempList = new ArrayList<>();
                 tempList.add(specItem);
                 temp.put("valueList", tempList);
                 specificationList.add(temp);
@@ -166,14 +166,14 @@ public class ApiGoodsController extends ApiBaseAction {
         List<ProductVo> productEntityList = productService.queryList(param);
         //
         List<GoodsGalleryVo> gallery = goodsGalleryService.queryList(param);
-        Map ngaParam = new HashMap();
+        Map<String, Object> ngaParam = new HashMap<>();
         ngaParam.put("fields", "nga.value, na.name");
         ngaParam.put("sidx", "nga.id");
         ngaParam.put("order", "asc");
         ngaParam.put("goodsId", id);
         List<AttributeVo> attribute = attributeService.queryList(ngaParam);
         //
-        Map issueParam = new HashMap();
+        Map<String, Object> issueParam = new HashMap<>();
 //        issueParam.put("goodsId", id);
         List<GoodsIssueVo> issue = goodsIssueService.queryList(issueParam);
         //
@@ -183,23 +183,23 @@ public class ApiGoodsController extends ApiBaseAction {
         param.put("typeId", 0);
         Integer commentCount = commentService.queryTotal(param);
         List<CommentVo> hotComment = commentService.queryList(param);
-        Map commentInfo = new HashMap();
+        Map<String, Object> commentInfo = new HashMap<>();
         if (null != hotComment && hotComment.size() > 0) {
             UserVo commentUser = userService.queryObject(hotComment.get(0).getUserId());
             commentInfo.put("content", Base64Util.decode(hotComment.get(0).getContent()));
             commentInfo.put("addTime", DateUtils.timeToStr(hotComment.get(0).getAddTime(), DateUtils.DATE_PATTERN));
             commentInfo.put("nickname", commentUser.getNickname());
             commentInfo.put("avatar", commentUser.getAvatar());
-            Map paramPicture = new HashMap();
+            Map<String, Object> paramPicture = new HashMap<>();
             paramPicture.put("commentId", hotComment.get(0).getId());
             List<CommentPictureVo> commentPictureEntities = commentPictureService.queryList(paramPicture);
             commentInfo.put("picList", commentPictureEntities);
         }
-        Map comment = new HashMap();
+        Map<String, Object> comment = new HashMap<>();
         comment.put("count", commentCount);
         comment.put("data", commentInfo);
         //当前用户是否收藏
-        Map collectParam = new HashMap();
+        Map<String, Object> collectParam = new HashMap<>();
         collectParam.put("userId", getUserId());
         collectParam.put("valueId", id);
         collectParam.put("typeId", 0);
@@ -235,7 +235,7 @@ public class ApiGoodsController extends ApiBaseAction {
         // 记录推荐人是否可以领取红包，用户登录时校验
         try {
             // 是否已经有可用的转发红包
-            Map params = new HashMap();
+            Map<String, Object> params = new HashMap<>();
             params.put("userId", userId);
             params.put("sendType", 2);
             params.put("unUsed", true);
@@ -243,14 +243,14 @@ public class ApiGoodsController extends ApiBaseAction {
             if ((null == enabledCouponVos || enabledCouponVos.size() == 0)
                     && null != referrer && null != userId) {
                 // 获取优惠信息提示
-                Map couponParam = new HashMap();
+                Map<String, Object> couponParam = new HashMap<>();
                 couponParam.put("enabled", true);
                 Integer[] sendTypes = new Integer[]{2};
                 couponParam.put("sendTypes", sendTypes);
                 List<CouponVo> couponVos = apiCouponService.queryList(couponParam);
                 if (null != couponVos && couponVos.size() > 0) {
                     CouponVo couponVo = couponVos.get(0);
-                    Map footprintParam = new HashMap();
+                    Map<String, Object> footprintParam = new HashMap<>();
                     footprintParam.put("goodsId", id);
                     footprintParam.put("referrer", referrer);
                     Integer footprintNum = footprintService.queryTotal(footprintParam);
@@ -280,12 +280,12 @@ public class ApiGoodsController extends ApiBaseAction {
     @IgnoreAuth
     @PostMapping(value = "category")
     public Object category(Integer id) {
-        Map<String, Object> resultObj = new HashMap();
+        Map<String, Object> resultObj = new HashMap<>();
         //
         CategoryVo currentCategory = categoryService.queryObject(id);
         //
         CategoryVo parentCategory = categoryService.queryObject(currentCategory.getParentId());
-        Map params = new HashMap();
+        Map<String, Object> params = new HashMap<>();
         params.put("parentId", currentCategory.getParentId());
         List<CategoryVo> brotherCategory = categoryService.queryList(params);
         //
@@ -309,7 +309,7 @@ public class ApiGoodsController extends ApiBaseAction {
                        Integer brandId, String keyword, Integer isNew, Integer isHot,
                        @RequestParam(value = "page", defaultValue = "1") Integer page, @RequestParam(value = "size", defaultValue = "10") Integer size,
                        String sort, String order) {
-        Map params = new HashMap();
+        Map<String, Object> params = new HashMap<>();
         params.put("isDelete", 0);
         params.put("isOnSale", 1);
         params.put("brandId", brandId);
@@ -321,7 +321,7 @@ public class ApiGoodsController extends ApiBaseAction {
         params.put("order", sort);
         params.put("sidx", order);
         //
-        if (null != sort && sort.equals("price")) {
+        if (null != sort && "price".equals(sort)) {
             params.put("sidx", "retail_price");
             params.put("order", order);
         } else {
@@ -339,7 +339,7 @@ public class ApiGoodsController extends ApiBaseAction {
 
         }
         //筛选的分类
-        List<CategoryVo> filterCategory = new ArrayList();
+        List<CategoryVo> filterCategory = new ArrayList<>();
         CategoryVo rootCategory = new CategoryVo();
         rootCategory.setId(0);
         rootCategory.setName("全部");
@@ -350,22 +350,22 @@ public class ApiGoodsController extends ApiBaseAction {
         List<GoodsVo> categoryEntityList = goodsService.queryList(params);
         params.remove("fields");
         if (null != categoryEntityList && categoryEntityList.size() > 0) {
-            List<Integer> categoryIds = new ArrayList();
+            List<Integer> categoryIds = new ArrayList<>();
             for (GoodsVo goodsVo : categoryEntityList) {
                 categoryIds.add(goodsVo.getCategoryId());
             }
             //查找二级分类的parentId
-            Map categoryParam = new HashMap();
+            Map<String, Object> categoryParam = new HashMap<>();
             categoryParam.put("ids", categoryIds);
             categoryParam.put("fields", "parent_id");
             List<CategoryVo> parentCategoryList = categoryService.queryList(categoryParam);
             //
-            List<Integer> parentIds = new ArrayList();
+            List<Integer> parentIds = new ArrayList<>();
             for (CategoryVo categoryEntity : parentCategoryList) {
                 parentIds.add(categoryEntity.getParentId());
             }
             //一级分类
-            categoryParam = new HashMap();
+            categoryParam = new HashMap<>();
             categoryParam.put("fields", "id,name");
             categoryParam.put("order", "asc");
             categoryParam.put("sidx", "sort_order");
@@ -377,8 +377,8 @@ public class ApiGoodsController extends ApiBaseAction {
         }
         //加入分类条件
         if (null != categoryId && categoryId > 0) {
-            List<Integer> categoryIds = new ArrayList();
-            Map categoryParam = new HashMap();
+            List<Integer> categoryIds = new ArrayList<>();
+            Map<String, Object> categoryParam = new HashMap<>();
             categoryParam.put("parentId", categoryId);
             categoryParam.put("fields", "id");
             List<CategoryVo> childIds = categoryService.queryList(categoryParam);
@@ -416,7 +416,7 @@ public class ApiGoodsController extends ApiBaseAction {
     @PostMapping(value = "filter")
     public Object filter(Integer categoryId,
                          String keyword, Integer isNew, Integer isHot) {
-        Map params = new HashMap();
+        Map<String, Object> params = new HashMap<>();
         params.put("isDelete", 0);
         params.put("isOnSale", 1);
         params.put("categoryId", categoryId);
@@ -424,33 +424,33 @@ public class ApiGoodsController extends ApiBaseAction {
         params.put("isNew", isNew);
         params.put("isHot", isHot);
         if (null != categoryId) {
-            Map categoryParams = new HashMap();
+            Map<String, Object> categoryParams = new HashMap<>();
             categoryParams.put("categoryId", categoryId);
             List<CategoryVo> categoryEntityList = categoryService.queryList(categoryParams);
-            List<Integer> category_ids = new ArrayList();
+            List<Integer> categoryIds = new ArrayList<>();
             for (CategoryVo categoryEntity : categoryEntityList) {
-                category_ids.add(categoryEntity.getId());
+                categoryIds.add(categoryEntity.getId());
             }
-            params.put("categoryId", category_ids);
+            params.put("categoryId", categoryIds);
         }
         //筛选的分类
-        List<CategoryVo> filterCategory = new ArrayList();
+        List<CategoryVo> filterCategory = new ArrayList<>();
         CategoryVo rootCategory = new CategoryVo();
         rootCategory.setId(0);
         rootCategory.setName("全部");
         // 二级分类id
         List<GoodsVo> goodsEntityList = goodsService.queryList(params);
         if (null != goodsEntityList && goodsEntityList.size() > 0) {
-            List<Integer> categoryIds = new ArrayList();
+            List<Integer> categoryIds = new ArrayList<>();
             for (GoodsVo goodsEntity : goodsEntityList) {
                 categoryIds.add(goodsEntity.getCategoryId());
             }
             //查找二级分类的parentId
-            Map categoryParam = new HashMap();
+            Map<String, Object> categoryParam = new HashMap<>();
             categoryParam.put("categoryIds", categoryIds);
             List<CategoryVo> parentCategoryList = categoryService.queryList(categoryParam);
             //
-            List<Integer> parentIds = new ArrayList();
+            List<Integer> parentIds = new ArrayList<>();
             for (CategoryVo categoryEntity : parentCategoryList) {
                 parentIds.add(categoryEntity.getId());
             }
@@ -471,8 +471,8 @@ public class ApiGoodsController extends ApiBaseAction {
     @IgnoreAuth
     @PostMapping(value = "new")
     public Object newAction() {
-        Map<String, Object> resultObj = new HashMap();
-        Map bannerInfo = new HashMap();
+        Map<String, Object> resultObj = new HashMap<>();
+        Map<String, Object> bannerInfo = new HashMap<>();
         bannerInfo.put("url", "");
         bannerInfo.put("name", "坚持初心，为你寻觅世间好物");
         bannerInfo.put("imgUrl", "https://platform-wxmall.oss-cn-beijing.aliyuncs.com/upload/20180727/1504208321fef4.png");
@@ -487,8 +487,8 @@ public class ApiGoodsController extends ApiBaseAction {
     @IgnoreAuth
     @PostMapping(value = "hot")
     public Object hot() {
-        Map<String, Object> resultObj = new HashMap();
-        Map bannerInfo = new HashMap();
+        Map<String, Object> resultObj = new HashMap<>();
+        Map<String, Object> bannerInfo = new HashMap<>();
         bannerInfo.put("url", "");
         bannerInfo.put("name", "大家都在买的严选好物");
         bannerInfo.put("imgUrl", "https://platform-wxmall.oss-cn-beijing.aliyuncs.com/upload/20180727/1504208321fef4.png");
@@ -503,13 +503,13 @@ public class ApiGoodsController extends ApiBaseAction {
     @IgnoreAuth
     @PostMapping(value = "related")
     public Object related(Integer id) {
-        Map<String, Object> resultObj = new HashMap();
-        Map param = new HashMap();
+        Map<String, Object> resultObj = new HashMap<>();
+        Map<String, Object> param = new HashMap<>();
         param.put("goodsId", id);
         param.put("fields", "related_goods_id");
         List<RelatedGoodsVo> relatedGoodsEntityList = relatedGoodsService.queryList(param);
 
-        List<Integer> relatedGoodsIds = new ArrayList();
+        List<Integer> relatedGoodsIds = new ArrayList<>();
         for (RelatedGoodsVo relatedGoodsEntity : relatedGoodsEntityList) {
             relatedGoodsIds.add(relatedGoodsEntity.getRelatedGoodsId());
         }
@@ -519,12 +519,12 @@ public class ApiGoodsController extends ApiBaseAction {
         if (null == relatedGoodsIds || relatedGoods.size() < 1) {
             //查找同分类下的商品
             GoodsVo goodsCategory = goodsService.queryObject(id);
-            Map paramRelated = new HashMap();
+            Map<String, Object> paramRelated = new HashMap<>();
             paramRelated.put("fields", "id, name, list_pic_url, retail_price");
             paramRelated.put("categoryId", goodsCategory.getCategoryId());
             relatedGoods = goodsService.queryList(paramRelated);
         } else {
-            Map paramRelated = new HashMap();
+            Map<String, Object> paramRelated = new HashMap<>();
             paramRelated.put("goodsIds", relatedGoodsIds);
             paramRelated.put("fields", "id, name, list_pic_url, retail_price");
             relatedGoods = goodsService.queryList(paramRelated);
@@ -540,8 +540,8 @@ public class ApiGoodsController extends ApiBaseAction {
     @IgnoreAuth
     @PostMapping(value = "count")
     public Object count() {
-        Map<String, Object> resultObj = new HashMap();
-        Map param = new HashMap();
+        Map<String, Object> resultObj = new HashMap<>();
+        Map<String, Object> param = new HashMap<>();
         param.put("isDelete", 0);
         param.put("isOnSale", 1);
         Integer goodsCount = goodsService.queryTotal(param);
@@ -559,17 +559,17 @@ public class ApiGoodsController extends ApiBaseAction {
                               Integer isNew, Integer discount,
                               @RequestParam(value = "page", defaultValue = "1") Integer page, @RequestParam(value = "size", defaultValue = "10") Integer size,
                               String sort, String order) {
-        Map params = new HashMap();
+        Map<String, Object> params = new HashMap<>();
         params.put("isNew", isNew);
         params.put("page", page);
         params.put("limit", size);
         params.put("order", sort);
         params.put("sidx", order);
         //
-        if (null != sort && sort.equals("price")) {
+        if ("price".equals(sort)) {
             params.put("sidx", "retail_price");
             params.put("order", order);
-        } else if (null != sort && sort.equals("sell")) {
+        } else if ("sell".equals(sort)) {
             params.put("sidx", "orderNum");
             params.put("order", order);
         } else {
@@ -584,8 +584,8 @@ public class ApiGoodsController extends ApiBaseAction {
         }
         //加入分类条件
         if (null != categoryId && categoryId > 0) {
-            List<Integer> categoryIds = new ArrayList();
-            Map categoryParam = new HashMap();
+            List<Integer> categoryIds = new ArrayList<>();
+            Map<String, Object> categoryParam = new HashMap<>();
             categoryParam.put("parentId", categoryId);
             categoryParam.put("fields", "id");
             List<CategoryVo> childIds = categoryService.queryList(categoryParam);
@@ -601,10 +601,10 @@ public class ApiGoodsController extends ApiBaseAction {
         int total = goodsService.queryTotal(query);
 
         // 当前购物车中
-        List<CartVo> cartList = new ArrayList();
+        List<CartVo> cartList = new ArrayList<>();
         if (null != getUserId()) {
             //查询列表数据
-            Map cartParam = new HashMap();
+            Map<String, Object> cartParam = new HashMap<>();
             cartParam.put("userId", getUserId());
             cartList = cartService.queryList(cartParam);
         }

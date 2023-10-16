@@ -1,6 +1,8 @@
 package com.platform.oss;
 
+import com.aliyun.oss.ClientConfiguration;
 import com.aliyun.oss.OSSClient;
+import com.aliyun.oss.common.auth.DefaultCredentialProvider;
 import com.platform.utils.RRException;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -14,7 +16,7 @@ import java.io.InputStream;
  * @email 939961241@qq.com
  * @date 2017-03-26 16:22
  */
-public class AliyunCloudStorageService extends CloudStorageService {
+public class AliyunCloudStorageService extends AbstractCloudStorageService {
     private OSSClient client;
 
     public AliyunCloudStorageService(CloudStorageConfig config) {
@@ -25,8 +27,8 @@ public class AliyunCloudStorageService extends CloudStorageService {
     }
 
     private void init() {
-        client = new OSSClient(config.getAliyunEndPoint(), config.getAliyunAccessKeyId(),
-                config.getAliyunAccessKeySecret());
+        client = new OSSClient(config.getAliyunEndPoint(), new DefaultCredentialProvider(config.getAliyunAccessKeyId(),
+                config.getAliyunAccessKeySecret()), new ClientConfiguration());
     }
 
     @Override

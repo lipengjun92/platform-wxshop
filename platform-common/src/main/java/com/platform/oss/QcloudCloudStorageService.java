@@ -19,7 +19,7 @@ import java.io.InputStream;
  * @email 939961241@qq.com
  * @date 2017-03-26 20:51
  */
-public class QcloudCloudStorageService extends CloudStorageService {
+public class QcloudCloudStorageService extends AbstractCloudStorageService {
     private COSClient client;
 
     public QcloudCloudStorageService(CloudStorageConfig config) {

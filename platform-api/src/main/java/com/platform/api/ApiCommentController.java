@@ -46,7 +46,7 @@ public class ApiCommentController extends ApiBaseAction {
     @ApiOperation(value = "发表评论")
     @PostMapping("post")
     public Object post(@LoginUser UserVo loginUser) {
-        Map resultObj = new HashMap();
+        Map<String, Object> resultObj = new HashMap<>();
         //
         JSONObject jsonParam = getJsonRequest();
         Integer typeId = jsonParam.getInteger("typeId");
@@ -78,7 +78,7 @@ public class ApiCommentController extends ApiBaseAction {
         // 是否领取优惠券
         if (insertId > 0 && typeId == 0) {
             // 当前评价的次数
-            Map param = new HashMap();
+            Map<String, Object> param = new HashMap<>();
             param.put("valueId", valueId);
             List<CommentVo> commentVos = commentService.queryList(param);
             boolean hasComment = false;
@@ -89,7 +89,7 @@ public class ApiCommentController extends ApiBaseAction {
                 }
             }
             if (!hasComment) {
-                Map couponParam = new HashMap();
+                Map<String, Object> couponParam = new HashMap<>();
                 couponParam.put("sendType", 6);
                 CouponVo newCouponConfig = apiCouponService.queryMaxUserEnableCoupon(couponParam);
                 if (null != newCouponConfig
@@ -116,9 +116,9 @@ public class ApiCommentController extends ApiBaseAction {
     @ApiOperation(value = "评论数量")
     @PostMapping("count")
     public Object count(Integer typeId, Integer valueId) {
-        Map<String, Object> resultObj = new HashMap();
+        Map<String, Object> resultObj = new HashMap<>();
         //
-        Map param = new HashMap();
+        Map<String, Object> param = new HashMap<>();
         param.put("typeId", typeId);
         param.put("valueId", valueId);
         Integer allCount = commentService.queryTotal(param);
@@ -143,9 +143,7 @@ public class ApiCommentController extends ApiBaseAction {
     public Object list(Integer typeId, Integer valueId, Integer showType,
                        @RequestParam(value = "page", defaultValue = "1") Integer page, @RequestParam(value = "size", defaultValue = "10") Integer size,
                        String sort, String order) {
-        Map<String, Object> resultObj = new HashMap();
-        List<CommentVo> commentList = new ArrayList();
-        Map param = new HashMap();
+        Map<String, Object> param = new HashMap<>();
         param.put("typeId", typeId);
         param.put("valueId", valueId);
         param.put("page", page);
@@ -165,7 +163,7 @@ public class ApiCommentController extends ApiBaseAction {
         }
         //查询列表数据
         Query query = new Query(param);
-        commentList = commentService.queryList(query);
+        List<CommentVo> commentList = commentService.queryList(query);
         int total = commentService.queryTotal(query);
         ApiPageUtils pageUtil = new ApiPageUtils(commentList, total, query.getLimit(), query.getPage());
         //
@@ -173,7 +171,7 @@ public class ApiCommentController extends ApiBaseAction {
             commentItem.setContent(Base64Util.decode(commentItem.getContent()));
             commentItem.setUserInfo(userService.queryObject(commentItem.getUserId()));
 
-            Map paramPicture = new HashMap();
+            Map<String, Object> paramPicture = new HashMap<>();
             paramPicture.put("commentId", commentItem.getId());
             List<CommentPictureVo> commentPictureEntities = commentPictureService.queryList(paramPicture);
             commentItem.setPicList(commentPictureEntities);
