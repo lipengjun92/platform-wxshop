@@ -1,6 +1,6 @@
 ## 前后端全部开源微信小程序商城（Java + uniapp）
 
-### [新手启动视频教程](http://fly2you.cn/videos.html)
+### [新手启动视频教程](https://doc.fly2you.cn/zh-CN/videos/)
 
 #### 官网
 - [https://fly2you.cn](https://fly2you.cn)
