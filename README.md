@@ -4,7 +4,7 @@
 
 #### 官网
 - [https://fly2you.cn](https://fly2you.cn)
-### 文档
+### 开发文档
 - [http://doc.fly2you.cn](http://doc.fly2you.cn)
 
 ### 微同商城开源版体验：
@@ -39,8 +39,6 @@ Entity里提示报错不是缺少get、set方法，Eclipse、IDEA请先安装`lo
 1. 项目合作洽谈，请联系客服微信（使用微信扫码添加好友，请注明来意）。
 2. 如需购买 [商业版源码](https://fly2you.cn/ma.html) 请联系客服。<br>
 ![](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/image/2023_09_20/11_33_59.png "微信")
-3. 微信扫码并关注公众号回复“文档”，获取《微同开源商城启动部署手册.docx》<br>
-  ![](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/upload/20180708/qr.jpg "微信公众号")
 
 ## 使用须知
 ### ✅允许
