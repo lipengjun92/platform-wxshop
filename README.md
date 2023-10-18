@@ -1,6 +1,6 @@
 ## 前后端全部开源微信小程序商城（Java + uniapp）
 
-### [新手启动视频教程](https://doc.fly2you.cn/zh-CN/videos/)
+### [新手必看视频教程](https://doc.fly2you.cn/zh-CN/start/videos.html)
 
 #### 官网
 - [https://fly2you.cn](https://fly2you.cn)
@@ -15,9 +15,6 @@
 * git：[https://gitee.com/fuyang_lipengjun/platform](https://gitee.com/fuyang_lipengjun/platform)
 * 代码生成工具IDEA插件
   * git：[https://gitee.com/fuyang_lipengjun/platform-gen](https://gitee.com/fuyang_lipengjun/platform-gen)
-
-### 注意
-Entity里提示报错不是缺少get、set方法，Eclipse、IDEA请先安装`lombok`插件，如果不了解`lombok`的话，请先学习下相关知识，比如可以阅读[此文章](https://mp.weixin.qq.com/s/cUc-bUcprycADfNepnSwZQ)；
 
 <p align="center">
   <b>特别赞助</b>
@@ -97,20 +94,17 @@ platform
     * redis.hosts
     * redis.password
 * 启动redis服务
-* 启动后台项目（参照<a href="#doc">开发文档</a>）
+* 启动后台项目（参照<a href="https://doc.fly2you.cn/zh-CN/start/02.html#%E6%9C%AC%E5%9C%B0%E9%83%A8%E7%BD%B2">开发文档</a>）
 * 打开微信开发者工具
 * 导入 /wx-mall填写appId
 * 修改 /wx-mall/config/api.js里API_BASE_URL的值
-* 使用eclipse启动项目后默认访问路径
+* 使用idea启动项目访问路径
     * [http://localhost:8080/platform-framework](http://localhost:8080/platform-framework)
-* 使用idea启动项目后默认访问路径
-    * [http://localhost:8080](http://localhost:8080)
-* 出现404问题的同学请检查设置的`Application context`
+* 出现404问题的同学请检查设置`Application context`为`/platform-framework`
 
 ## 驰骋工作流引擎的安装
    1. 请参考: https://gitee.com/opencc/JFlow/wikis/pages/preview?sort_id=4199224&doc_id=31094
-
-
+   
 ## 页面展示
 ### 接口文档
 ![](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/image/2023_09_20/15_06_39.png "接口文档")
