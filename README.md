@@ -1,20 +1,17 @@
 ## 前后端全部开源微信小程序商城（Java + uniapp）
 
-### [新手必看视频教程](https://doc.fly2you.cn/zh-CN/start/videos.html)
+### 重要链接
+- 新手必看视频教程：[https://doc.fly2you.cn/zh-CN/start/videos.html](https://doc.fly2you.cn/zh-CN/start/videos.html)
+- 官网：[https://fly2you.cn](https://fly2you.cn)
+- 开发文档：[http://doc.fly2you.cn](http://doc.fly2you.cn)
+- 在线体验：[https://doc.fly2you.cn/zh-CN/start/view.html](https://doc.fly2you.cn/zh-CN/start/view.html)
+- Gitee仓库：[https://gitee.com/fuyang_lipengjun/platform](https://gitee.com/fuyang_lipengjun/platform)
+- Github仓库：[https://github.com/lipengjun92/platform-wxshop](https://github.com/lipengjun92/platform-wxshop)
 
-#### 官网
-- [https://fly2you.cn](https://fly2you.cn)
-### 开发文档
-- [http://doc.fly2you.cn](http://doc.fly2you.cn)
-
-### 微同商城开源版体验：
-- 后台体验：[管理系统](http://fly2you.cn/platform-framework/login.html)
-
-![](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/gh_a7a467438863_344.jpg "微同商城开源版")
-
-* git：[https://gitee.com/fuyang_lipengjun/platform](https://gitee.com/fuyang_lipengjun/platform)
-* 代码生成工具IDEA插件
-  * git：[https://gitee.com/fuyang_lipengjun/platform-gen](https://gitee.com/fuyang_lipengjun/platform-gen)
+### 官方QQ群
+- <a target="_blank" href="https://qm.qq.com/cgi-bin/qm/qr?k=HNLRmaIdvnj2e_TGkMspORvIn-AHNZCb&jump_from=webapi"><img border="0" src="//pub.idqqimg.com/wpa/images/group.png" alt="微同科技 ①群" title="微同科技 ①群"></a>：66502035
+- <a target="_blank" href="https://qm.qq.com/cgi-bin/qm/qr?k=4i3Z9xgp7SlPnk_X1v0TWToSOoT_gJMz&jump_from=webapi"><img border="0" src="//pub.idqqimg.com/wpa/images/group.png" alt="微同科技 ②群" title="微同科技 ②群"></a>：870579539
+- <a target="_blank" href="https://qm.qq.com/cgi-bin/qm/qr?k=hQLMx7vYLfP_C-d2-yP_udx1yciJXfHC&jump_from=webapi"><img border="0" src="//pub.idqqimg.com/wpa/images/group.png" alt="微同科技 ③群" title="微同科技 ③群"></a>：151602347
 
 <p align="center">
   <b>特别赞助</b>
@@ -46,17 +43,10 @@
 - 推荐Watch、Star项目，获取项目第一时间更新，同时也是对项目最好的支持
 - 希望大家多多支持原创作品
 
-**如何交流、反馈、参与贡献？** 
-- gitee仓库：https://gitee.com/fuyang_lipengjun/platform
-- github仓库：https://github.com/lipengjun92/platform-wxshop
-* 官方QQ群：
-    * <a target="_blank" href="https://qm.qq.com/cgi-bin/qm/qr?k=HNLRmaIdvnj2e_TGkMspORvIn-AHNZCb&jump_from=webapi"><img border="0" src="//pub.idqqimg.com/wpa/images/group.png" alt="微同科技 ①群" title="微同科技 ①群"></a>：66502035
-    * <a target="_blank" href="https://qm.qq.com/cgi-bin/qm/qr?k=4i3Z9xgp7SlPnk_X1v0TWToSOoT_gJMz&jump_from=webapi"><img border="0" src="//pub.idqqimg.com/wpa/images/group.png" alt="微同科技 ②群" title="微同科技 ②群"></a>：870579539
-    * <a target="_blank" href="https://qm.qq.com/cgi-bin/qm/qr?k=hQLMx7vYLfP_C-d2-yP_udx1yciJXfHC&jump_from=webapi"><img border="0" src="//pub.idqqimg.com/wpa/images/group.png" alt="微同科技 ③群" title="微同科技 ③群"></a>：151602347
-
 ## 项目结构
 ~~~
 platform
+|--_sql 初始化数据库脚本
 |--platform-admin 后台管理（打包发布此项目）
 |--platform-api 微信小程序商城api接口
 |--platform-common 公共模块
@@ -65,6 +55,12 @@ platform
 |--uni-mall uniapp版商城
 |--wx-mall 微信小程序原生商城
 ~~~
+
+## 系统架构图
+![18_14_55.PNG](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/image/2023_10_19/18_14_55.png)
+
+## 数据流向图
+![18_16_01.PNG](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/image/2023_10_19/18_16_01.png)
 
 ## 安装教程
 
