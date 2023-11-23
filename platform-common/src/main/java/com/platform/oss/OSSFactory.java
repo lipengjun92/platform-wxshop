@@ -32,6 +32,8 @@ public final class OSSFactory {
             return new DiskCloudStorageService(config);
         } else if (config.getType() == Constant.CloudService.MINIO.getValue()) {
             return new MinioCloudStorageService(config);
+        } else if (config.getType() == Constant.CloudService.HUAWEI.getValue()) {
+            return new HuaWeiCloudStorageService(config);
         }
         return null;
     }

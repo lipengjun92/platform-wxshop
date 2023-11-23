@@ -47,6 +47,12 @@
             <artifactId>minio</artifactId>
             <version>${minio-version}</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/com.huaweicloud/esdk-obs-java-bundle -->
+        <dependency>
+            <groupId>com.huaweicloud</groupId>
+            <artifactId>esdk-obs-java-bundle</artifactId>
+            <version>${huaweicloud.obs}</version>
+        </dependency>
 
         <!-- httpclient -->
         <dependency>

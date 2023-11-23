@@ -139,7 +139,11 @@ public class Constant {
         /**
          * MINIO存储
          */
-        MINIO(5);
+        MINIO(5),
+        /**
+         * 华为云
+         */
+        HUAWEI(6);
 
         private int value;
 

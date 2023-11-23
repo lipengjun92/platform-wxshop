@@ -100,6 +100,9 @@ public class SysOssController {
         }else if (config.getType() == Constant.CloudService.MINIO.getValue()) {
             //校验MINIO数据
             ValidatorUtils.validateEntity(config, MinioGroup.class);
+        } else if (config.getType() == Constant.CloudService.HUAWEI.getValue()) {
+            //华为云OBS数据
+            ValidatorUtils.validateEntity(config, HuaweiGroup.class);
         }
 
         sysConfigService.updateValueByKey(KEY, JSON.toJSONString(config));
