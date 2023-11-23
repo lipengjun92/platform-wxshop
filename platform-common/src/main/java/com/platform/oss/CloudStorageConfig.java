@@ -1,6 +1,7 @@
 package com.platform.oss;
 
 import com.platform.validator.group.*;
+import lombok.Data;
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.Range;
 import org.hibernate.validator.constraints.URL;
@@ -15,11 +16,12 @@ import java.io.Serializable;
  * @email 939961241@qq.com
  * @date 2017-03-25 16:12
  */
+@Data
 public class CloudStorageConfig implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    //类型 1：七牛  2：阿里云  3：腾讯云  4：服务器存储 5: MINIO
-    @Range(min = 1, max = 5, message = "类型错误")
+    //类型 1：七牛  2：阿里云  3：腾讯云  4：服务器存储 5: MINIO 6：华为云
+    @Range(min = 1, max = 6, message = "类型错误")
     private Integer type;
 
     //七牛绑定的域名
@@ -94,203 +96,19 @@ public class CloudStorageConfig implements Serializable {
     @NotBlank(message = "minio的BucketName不能为空", groups = MinioGroup.class)
     private String  minioBucketName;
 
-    public Integer getType() {
-        return type;
-    }
-
-    public void setType(Integer type) {
-        this.type = type;
-    }
-
-    public String getQiniuDomain() {
-        return qiniuDomain;
-    }
-
-    public void setQiniuDomain(String qiniuDomain) {
-        this.qiniuDomain = qiniuDomain;
-    }
-
-    public String getQiniuAccessKey() {
-        return qiniuAccessKey;
-    }
-
-    public void setQiniuAccessKey(String qiniuAccessKey) {
-        this.qiniuAccessKey = qiniuAccessKey;
-    }
-
-    public String getQiniuSecretKey() {
-        return qiniuSecretKey;
-    }
-
-    public void setQiniuSecretKey(String qiniuSecretKey) {
-        this.qiniuSecretKey = qiniuSecretKey;
-    }
-
-    public String getQiniuBucketName() {
-        return qiniuBucketName;
-    }
-
-    public void setQiniuBucketName(String qiniuBucketName) {
-        this.qiniuBucketName = qiniuBucketName;
-    }
-
-    public String getQiniuPrefix() {
-        return qiniuPrefix;
-    }
-
-    public void setQiniuPrefix(String qiniuPrefix) {
-        this.qiniuPrefix = qiniuPrefix;
-    }
-
-    public String getAliyunDomain() {
-        return aliyunDomain;
-    }
-
-    public void setAliyunDomain(String aliyunDomain) {
-        this.aliyunDomain = aliyunDomain;
-    }
-
-    public String getAliyunPrefix() {
-        return aliyunPrefix;
-    }
-
-    public void setAliyunPrefix(String aliyunPrefix) {
-        this.aliyunPrefix = aliyunPrefix;
-    }
-
-    public String getAliyunEndPoint() {
-        return aliyunEndPoint;
-    }
-
-    public void setAliyunEndPoint(String aliyunEndPoint) {
-        this.aliyunEndPoint = aliyunEndPoint;
-    }
-
-    public String getAliyunAccessKeyId() {
-        return aliyunAccessKeyId;
-    }
-
-    public void setAliyunAccessKeyId(String aliyunAccessKeyId) {
-        this.aliyunAccessKeyId = aliyunAccessKeyId;
-    }
-
-    public String getAliyunAccessKeySecret() {
-        return aliyunAccessKeySecret;
-    }
-
-    public void setAliyunAccessKeySecret(String aliyunAccessKeySecret) {
-        this.aliyunAccessKeySecret = aliyunAccessKeySecret;
-    }
-
-    public String getAliyunBucketName() {
-        return aliyunBucketName;
-    }
-
-    public void setAliyunBucketName(String aliyunBucketName) {
-        this.aliyunBucketName = aliyunBucketName;
-    }
-
-    public String getQcloudDomain() {
-        return qcloudDomain;
-    }
-
-    public void setQcloudDomain(String qcloudDomain) {
-        this.qcloudDomain = qcloudDomain;
-    }
-
-    public String getQcloudPrefix() {
-        return qcloudPrefix;
-    }
-
-    public void setQcloudPrefix(String qcloudPrefix) {
-        this.qcloudPrefix = qcloudPrefix;
-    }
-
-    public Integer getQcloudAppId() {
-        return qcloudAppId;
-    }
-
-    public void setQcloudAppId(Integer qcloudAppId) {
-        this.qcloudAppId = qcloudAppId;
-    }
-
-    public String getQcloudSecretId() {
-        return qcloudSecretId;
-    }
-
-    public void setQcloudSecretId(String qcloudSecretId) {
-        this.qcloudSecretId = qcloudSecretId;
-    }
-
-    public String getQcloudSecretKey() {
-        return qcloudSecretKey;
-    }
-
-    public void setQcloudSecretKey(String qcloudSecretKey) {
-        this.qcloudSecretKey = qcloudSecretKey;
-    }
-
-    public String getQcloudBucketName() {
-        return qcloudBucketName;
-    }
-
-    public void setQcloudBucketName(String qcloudBucketName) {
-        this.qcloudBucketName = qcloudBucketName;
-    }
-
-    public String getQcloudRegion() {
-        return qcloudRegion;
-    }
-
-    public void setQcloudRegion(String qcloudRegion) {
-        this.qcloudRegion = qcloudRegion;
-    }
-
-    public String getDiskPath() {
-        return diskPath;
-    }
-
-    public void setDiskPath(String diskPath) {
-        this.diskPath = diskPath;
-    }
-
-    public String getProxyServer() {
-        return proxyServer;
-    }
-
-    public void setProxyServer(String proxyServer) {
-        this.proxyServer = proxyServer;
-    }
-
-    public String getMinioAccessKey() {
-        return minioAccessKey;
-    }
-
-    public void setMinioAccessKey(String minioAccessKey) {
-        this.minioAccessKey = minioAccessKey;
-    }
-
-    public String getMinioSecretKey() {
-        return minioSecretKey;
-    }
-
-    public void setMinioSecretKey(String minioSecretKey) {
-        this.minioSecretKey = minioSecretKey;
-    }
-
-    public String getMinioUrl() {
-        return minioUrl;
-    }
-
-    public void setMinioUrl(String minioUrl) {
-        this.minioUrl = minioUrl;
-    }
-
-    public String getMinioBucketName() {
-        return minioBucketName;
-    }
-
-    public void setMinioBucketName(String minioBucketName) {
-        this.minioBucketName = minioBucketName;
-    }
+    /**
+     * 华为云
+     */
+    @NotBlank(message = "访问密钥AK不能为空", groups = HuaweiGroup.class)
+    private String huaweiAccessKey;
+    @NotBlank(message = "访问密钥SK不能为空", groups = HuaweiGroup.class)
+    private String huaweiSecretKey;
+    @NotBlank(message = "华为云EndPoint不能为空", groups = HuaweiGroup.class)
+    private String huaweiEndPoint;
+    @NotBlank(message = "BucketName不能为空", groups = HuaweiGroup.class)
+    private String huaweiBucketName;
+    /**
+     * 华为云路径前缀
+     */
+    private String huaweiPrefix;
 }

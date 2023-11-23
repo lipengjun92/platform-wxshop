@@ -9,7 +9,7 @@ import java.util.Date;
 import java.util.UUID;
 
 /**
- * 云存储(支持七牛、阿里云、腾讯云、又拍云)
+ * 云存储(支持七牛、阿里云、腾讯云、MINIO、华为云)
  *
  * @author lipengjun
  * @email 939961241@qq.com

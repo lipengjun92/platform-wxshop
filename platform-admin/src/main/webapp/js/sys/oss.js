@@ -55,6 +55,9 @@ var vm = new Vue({
             aliyunAccessKeySecret: [
                 {required: true, message: '阿里云AccessKeySecret不能为空', trigger: 'blur'}
             ],
+            aliyunEndPoint: [
+                {required: true, message: '阿里云EndPoint不能为空', trigger: 'blur'}
+            ],
             aliyunBucketName: [
                 {required: true, message: '阿里云BucketName不能为空', trigger: 'blur'}
             ]
@@ -99,6 +102,20 @@ var vm = new Vue({
             ],
             minioSecretKey: [
                 {required: true, message: '密码不能为空', trigger: 'blur'}
+            ]
+        },
+        huaweiRuleValidate: {
+            huaweiAccessKey: [
+                {required: true, message: '华为云AccessKey不能为空', trigger: 'blur'}
+            ],
+            huaweiSecretKey: [
+                {required: true, message: '华为云SecretKey不能为空', trigger: 'blur'}
+            ],
+            huaweiEndPoint: [
+                {required: true, message: '华为云EndPoint不能为空', trigger: 'blur'}
+            ],
+            huaweiBucketName: [
+                {required: true, message: '华为云BucketName不能为空', trigger: 'blur'}
             ]
         }
     },

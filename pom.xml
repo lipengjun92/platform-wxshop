@@ -48,6 +48,7 @@
         <mybatis-plus.version>3.5.3</mybatis-plus.version>
         <alipay-sdk.version>3.6.0.ALL</alipay-sdk.version>
         <qcloudsms.version>1.0.6</qcloudsms.version>
+        <huaweicloud.obs>3.23.9.1</huaweicloud.obs>
     </properties>
 
     <!-- 阿里云maven仓库 -->

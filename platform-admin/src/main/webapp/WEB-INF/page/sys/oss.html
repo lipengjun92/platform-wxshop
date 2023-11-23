@@ -42,6 +42,9 @@
                     <Radio label="5">
                         <span>MINIO</span>
                     </Radio>
+                    <Radio label="6">
+                        <span>华为云</span>
+                    </Radio>
                 </Radio-group>
             </Form-item>
             <i-form v-if="config.type == 1" ref="formValidate" :label-width="130">
@@ -128,6 +131,24 @@
                 </Form-item>
                 <Form-item label="minioSecretKey" prop="minioSecretKey">
                     <i-input v-model="config.minioSecretKey" placeholder="minioSecretKey"/>
+                </Form-item>
+            </i-form>
+            <i-form ref="formValidate" :model="config" :rules="huaweiRuleValidate" v-if="config.type == 6"
+                    :label-width="130">
+                <Form-item label="AccessKey" prop="huaweiAccessKey">
+                    <i-input v-model="config.huaweiAccessKey" placeholder="AccessKey"/>
+                </Form-item>
+                <Form-item label="SecretKey" prop="huaweiSecretKey">
+                    <i-input v-model="config.huaweiSecretKey" placeholder="SecretKey"/>
+                </Form-item>
+                <Form-item label="EndPoint" prop="huaweiEndPoint">
+                    <i-input v-model="config.huaweiEndPoint" placeholder="华为云EndPoint"/>
+                </Form-item>
+                <Form-item label="BucketName" prop="huaweiBucketName">
+                    <i-input v-model="config.huaweiBucketName" placeholder="华为云BucketName"/>
+                </Form-item>
+                <Form-item label="路径前缀" prop="huaweiPrefix">
+                    <i-input v-model="config.huaweiPrefix" placeholder="不设置默认为空"/>
                 </Form-item>
             </i-form>
             <Form-item>
