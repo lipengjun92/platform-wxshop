@@ -9,9 +9,9 @@
 - Github仓库：[https://github.com/lipengjun92/platform-wxshop](https://github.com/lipengjun92/platform-wxshop)
 
 ### 官方QQ群
-- <a target="_blank" href="https://qm.qq.com/cgi-bin/qm/qr?k=HNLRmaIdvnj2e_TGkMspORvIn-AHNZCb&jump_from=webapi"><img border="0" src="//pub.idqqimg.com/wpa/images/group.png" alt="微同科技 ①群" title="微同科技 ①群"></a>：66502035
-- <a target="_blank" href="https://qm.qq.com/cgi-bin/qm/qr?k=4i3Z9xgp7SlPnk_X1v0TWToSOoT_gJMz&jump_from=webapi"><img border="0" src="//pub.idqqimg.com/wpa/images/group.png" alt="微同科技 ②群" title="微同科技 ②群"></a>：870579539
-- <a target="_blank" href="https://qm.qq.com/cgi-bin/qm/qr?k=hQLMx7vYLfP_C-d2-yP_udx1yciJXfHC&jump_from=webapi"><img border="0" src="//pub.idqqimg.com/wpa/images/group.png" alt="微同科技 ③群" title="微同科技 ③群"></a>：151602347
+<a target="_blank" href="https://qm.qq.com/cgi-bin/qm/qr?k=NI1TX8jkEeRITDnYv-oZ-9onMwNN9MNs&jump_from=webapi&authKey=a/L8SQ0vmI4X9Vomv7JK8Z3t94OxROqmNUW8gUGsldCHpcbd7db26DVB410gNhZv"><img border="0" src="https://img.shields.io/badge/点击加入-66502035-green.svg" alt="微同科技 ①群" title="微同科技 ①群"></a>
+<a target="_blank" href="https://qm.qq.com/cgi-bin/qm/qr?k=qB5gb43KlRIN-5dsIstw-gljfwD-LxDt&jump_from=webapi&authKey=Ua6s5QIIHy9Gf7Df/h1w93wBqaJax3hBPzUmREwDU31H7TMWO5pAh2ua9Bw9z231"><img border="0" src="https://img.shields.io/badge/点击加入-870579539-green.svg" alt="微同科技 ②群" title="微同科技 ②群"></a>
+<a target="_blank" href="https://qm.qq.com/cgi-bin/qm/qr?k=21agOH-MqJLZ5YqxNb-sBcPCB5PTl7XH&jump_from=webapi&authKey=hV6jd0tppJqvTWE/iSEHwLJg5EsTaz/aY/1bj8gWg4giQ4JdDEzYiK12F+u1TnuZ"><img border="0" src="https://img.shields.io/badge/点击加入-151602347-green.svg" alt="微同科技 ③群" title="微同科技 ③群"></a>
 
 <p align="center">
   <b>特别赞助</b>
