@@ -1,3 +1,19 @@
+<p align="center">
+ <a target="_blank" href="https://gitee.com/fuyang_lipengjun/platform/blob/master/LICENSE"><img src="https://img.shields.io/github/license/lipengjun92/platform-wxshop"/></a>
+ <a href='https://gitee.com/fuyang_lipengjun/platform/stargazers'><img src='https://gitee.com/fuyang_lipengjun/platform/badge/star.svg?theme=gvp' alt='star'/></a>
+ <a href='https://gitee.com/fuyang_lipengjun/platform/members'><img src='https://gitee.com/fuyang_lipengjun/platform/badge/fork.svg?theme=gvp' alt='fork'/></a>
+ <a target="_blank" href="https://gitee.com/fuyang_lipengjun/platform/contributors?ref=master"><img src="https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fgitee.com%2Ffuyang_lipengjun%2Fplatform%2Fcontributors_count%3Fref%3Dmaster&query=contributors_count&label=Contributors&color=green"/></a>
+ <a target="_blank" href="http://makeapullrequest.com"><img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square" alt="PRs Welcome" title="PRs Welcome"></a>
+</p>
+<p align="center">
+ <img src="https://img.shields.io/github/languages/count/lipengjun92/platform-wxshop?color=red"/>
+ <img src="https://img.shields.io/badge/Java-11-blue.svg"/>
+ <img src="https://img.shields.io/badge/SpringMVC-4.3.30.RELEASE-blue.svg"/>
+ <img src="https://img.shields.io/badge/MyBatisPlus-3.5.3-blue.svg"/>
+ <img src="https://img.shields.io/badge/weixin%20java-4.5.0-blue.svg"/>
+ <img src="https://img.shields.io/badge/MySQL-8.0-blue.svg"/>
+</p>
+
 ## 前后端全部开源微信小程序商城（Java + uniapp）
 
 ### 重要链接
@@ -8,7 +24,7 @@
 - Gitee仓库：[https://gitee.com/fuyang_lipengjun/platform](https://gitee.com/fuyang_lipengjun/platform)
 - Github仓库：[https://github.com/lipengjun92/platform-wxshop](https://github.com/lipengjun92/platform-wxshop)
 
-### 官方QQ群
+### QQ交流群
 <a target="_blank" href="https://qm.qq.com/cgi-bin/qm/qr?k=NI1TX8jkEeRITDnYv-oZ-9onMwNN9MNs&jump_from=webapi&authKey=a/L8SQ0vmI4X9Vomv7JK8Z3t94OxROqmNUW8gUGsldCHpcbd7db26DVB410gNhZv"><img border="0" src="https://img.shields.io/badge/点击加入-66502035-green.svg" alt="微同科技 ①群" title="微同科技 ①群"></a>
 <a target="_blank" href="https://qm.qq.com/cgi-bin/qm/qr?k=qB5gb43KlRIN-5dsIstw-gljfwD-LxDt&jump_from=webapi&authKey=Ua6s5QIIHy9Gf7Df/h1w93wBqaJax3hBPzUmREwDU31H7TMWO5pAh2ua9Bw9z231"><img border="0" src="https://img.shields.io/badge/点击加入-870579539-green.svg" alt="微同科技 ②群" title="微同科技 ②群"></a>
 <a target="_blank" href="https://qm.qq.com/cgi-bin/qm/qr?k=21agOH-MqJLZ5YqxNb-sBcPCB5PTl7XH&jump_from=webapi&authKey=hV6jd0tppJqvTWE/iSEHwLJg5EsTaz/aY/1bj8gWg4giQ4JdDEzYiK12F+u1TnuZ"><img border="0" src="https://img.shields.io/badge/点击加入-151602347-green.svg" alt="微同科技 ③群" title="微同科技 ③群"></a>
