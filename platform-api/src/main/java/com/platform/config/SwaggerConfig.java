@@ -28,7 +28,7 @@ public class SwaggerConfig {
     public Docket api() {
         return new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(this.apiInfo())
-                .groupName("移动端商城接口")
+                .groupName("API")
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("com.platform.api"))
                 .paths(PathSelectors.any())
