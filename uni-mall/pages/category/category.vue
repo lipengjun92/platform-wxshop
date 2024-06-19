@@ -62,7 +62,7 @@
 				let that = this;
 				util.request(api.GoodsCategory, {
 					id: this.id
-				}).then(function(res) {
+				}, 'POST', 'application/x-www-form-urlencoded').then(function(res) {
 					if (res.errno == 0) {
 						that.navList = res.data.brotherCategory
 						that.currentCategory = res.data.currentCategory
