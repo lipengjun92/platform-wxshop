@@ -2,8 +2,8 @@
 	<view class="container">
 		<view class="cate-nav">
 			<scroll-view scroll-x="true" class="cate-nav-body" style="width: 750rpx;" :scroll-left="scrollLeft">
-				<view v-for="(item, index) in navList" :key="index" :class="'item ' + (id == item.id ? 'active' : '')" :data-id="item.id"
-				 :data-index="index" @tap="switchCate">
+				<view v-for="(item, index) in navList" :key="index" :class="'item ' + (id == item.id ? 'active' : '')"
+					:data-id="item.id" :data-index="index" @tap="switchCate">
 					<view class="name">{{item.name}}</view>
 				</view>
 			</scroll-view>
@@ -15,8 +15,8 @@
 					<text class="desc">{{currentCategory.frontName||''}}</text>
 				</view>
 				<view class="b">
-					<navigator :class="'item '+((iindex + 1) % 2 == 0 ? 'item-b' : '')" :url="'/pages/goods/goods?id='+iitem.id" v-for="(iitem, iindex) in goodsList"
-					 :key="iindex">
+					<navigator :class="'item '+((iindex + 1) % 2 == 0 ? 'item-b' : '')"
+						:url="'/pages/goods/goods?id='+iitem.id" v-for="(iitem, iindex) in goodsList" :key="iindex">
 						<image class="img" :src="iitem.listPicUrl" background-size="cover"></image>
 						<text class="name">{{iitem.name||''}}</text>
 						<text class="price">￥{{iitem.retailPrice||''}}</text>
@@ -62,7 +62,7 @@
 				let that = this;
 				util.request(api.GoodsCategory, {
 					id: this.id
-				}, 'POST', 'application/x-www-form-urlencoded').then(function(res) {
+				}).then(function(res) {
 					if (res.errno == 0) {
 						that.navList = res.data.brotherCategory
 						that.currentCategory = res.data.currentCategory
