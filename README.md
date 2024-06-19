@@ -23,6 +23,7 @@
 - 在线体验：[https://doc.fly2you.cn/zh-CN/start/view.html](https://doc.fly2you.cn/zh-CN/start/view.html)
 - Gitee仓库：[https://gitee.com/fuyang_lipengjun/platform](https://gitee.com/fuyang_lipengjun/platform)
 - Github仓库：[https://github.com/lipengjun92/platform-wxshop](https://github.com/lipengjun92/platform-wxshop)
+- GitCode仓库：[https://gitcode.com/lipengjun92/platform-wxshop.git](https://gitcode.com/lipengjun92/platform-wxshop.git)
 
 ### QQ交流群
 <a target="_blank" href="https://qm.qq.com/cgi-bin/qm/qr?k=NI1TX8jkEeRITDnYv-oZ-9onMwNN9MNs&jump_from=webapi&authKey=a/L8SQ0vmI4X9Vomv7JK8Z3t94OxROqmNUW8gUGsldCHpcbd7db26DVB410gNhZv"><img border="0" src="https://img.shields.io/badge/点击加入-66502035-green.svg" alt="微同科技 ①群" title="微同科技 ①群"></a>
