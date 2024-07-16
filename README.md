@@ -48,14 +48,14 @@
 
 ## 重要信息
 1. 项目合作洽谈，请联系客服微信（使用微信扫码添加好友，请注明来意）。
-2. 如需购买 [商业版源码](https://fly2you.cn/ma.html) 请联系客服。<br>
+2. 如需购买 [商业版源码](https://fly2you.cn/blogs) 请联系客服。<br>
 ![](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/image/2023_09_20/11_33_59.png "微信")
 
 ## 使用须知
 ### ✅允许
 - 个人学习使用
 - 允许用于学习、毕设等
-- 允许进行商业使用，请自觉遵守使用协议，如需要商业使用推荐购买[商业版源码](https://fly2you.cn/ma.html)
+- 允许进行商业使用，请自觉遵守使用协议，如需要商业使用推荐购买[商业版源码](https://fly2you.cn/blogs)
 - 请遵守 Apache License2.0 协议，再次开源请注明出处
 - 推荐Watch、Star项目，获取项目第一时间更新，同时也是对项目最好的支持
 - 希望大家多多支持原创作品
