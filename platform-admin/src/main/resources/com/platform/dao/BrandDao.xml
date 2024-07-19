@@ -32,7 +32,7 @@
 			`is_new`,
 			`new_pic_url`,
 			`new_sort_order`
-		from nideshop_brand
+		from mall_brand
 		where id = #{id}
 	</select>
 
@@ -50,7 +50,7 @@
         `is_new`,
         `new_pic_url`,
         `new_sort_order`
-        from nideshop_brand
+        from mall_brand
         WHERE 1=1
         <if test="name != null and name.trim() != ''">
             AND name LIKE concat('%',#{name},'%')
@@ -69,7 +69,7 @@
     </select>
 
     <select id="queryTotal" resultType="int">
-        select count(*) from nideshop_brand
+        select count(*) from mall_brand
         WHERE 1=1
         <if test="name != null and name.trim() != ''">
             AND name LIKE concat('%',#{name},'%')
@@ -77,7 +77,7 @@
     </select>
 
     <insert id="save" parameterType="com.platform.entity.BrandEntity" useGeneratedKeys="true" keyProperty="id">
-		insert into nideshop_brand(
+		insert into mall_brand(
 			`name`,
 			`list_pic_url`,
 			`simple_desc`,
@@ -104,7 +104,7 @@
 	</insert>
 
     <update id="update" parameterType="com.platform.entity.BrandEntity">
-        update nideshop_brand
+        update mall_brand
         <set>
             <if test="name != null">`name` = #{name},</if>
             <if test="listPicUrl != null">`list_pic_url` = #{listPicUrl},</if>
@@ -122,11 +122,11 @@
     </update>
 
     <delete id="delete">
-		delete from nideshop_brand where id = #{value}
+		delete from mall_brand where id = #{value}
 	</delete>
 
     <delete id="deleteBatch">
-        delete from nideshop_brand where id in
+        delete from mall_brand where id in
         <foreach item="id" collection="array" open="(" separator="," close=")">
             #{id}
         </foreach>

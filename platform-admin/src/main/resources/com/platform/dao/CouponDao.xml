@@ -30,7 +30,7 @@
 			`use_start_date`,
 			`use_end_date`,
 			`min_goods_amount`
-		from nideshop_coupon
+		from mall_coupon
 		where id = #{id}
 	</select>
 
@@ -47,7 +47,7 @@
         `use_start_date`,
         `use_end_date`,
         `min_goods_amount`
-        from nideshop_coupon
+        from mall_coupon
         WHERE 1=1
         <if test="name != null and name.trim() != ''">
             AND name LIKE concat('%',#{name},'%')
@@ -63,7 +63,7 @@
     </select>
 
     <insert id="save" parameterType="com.platform.entity.CouponEntity" useGeneratedKeys="true" keyProperty="id">
-		insert into nideshop_coupon(
+		insert into mall_coupon(
 			`name`,
 			`type_money`,
 			`send_type`,
@@ -88,7 +88,7 @@
 	</insert>
 
     <update id="update" parameterType="com.platform.entity.CouponEntity">
-        update nideshop_coupon
+        update mall_coupon
         <set>
             <if test="name != null">`name` = #{name},</if>
             <if test="typeMoney != null">`type_money` = #{typeMoney},</if>
@@ -105,11 +105,11 @@
     </update>
 
     <delete id="delete">
-		delete from nideshop_coupon where id = #{value}
+		delete from mall_coupon where id = #{value}
 	</delete>
 
     <delete id="deleteBatch">
-        delete from nideshop_coupon where id in
+        delete from mall_coupon where id in
         <foreach item="id" collection="array" open="(" separator="," close=")">
             #{id}
         </foreach>

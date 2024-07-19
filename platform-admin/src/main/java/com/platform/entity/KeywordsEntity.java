@@ -8,7 +8,7 @@ import java.util.Date;
 
 /**
  * 热闹关键词表实体
- * 表名 nideshop_keywords
+ * 表名 mall_keywords
  *
  * @author lipengjun
  * @email 939961241@qq.com

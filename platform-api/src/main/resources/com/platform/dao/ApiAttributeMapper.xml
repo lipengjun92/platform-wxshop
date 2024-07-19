@@ -14,7 +14,7 @@
     </resultMap>
 
     <select id="queryObject" resultMap="attributeMap">
-		select * from nideshop_attribute where id = #{value}
+		select * from mall_attribute where id = #{value}
 	</select>
 
     <select id="queryList" resultMap="attributeMap">
@@ -25,8 +25,8 @@
         <if test="fields == null or fields == ''">
             *
         </if>
-        from nideshop_attribute na
-        left join nideshop_goods_attribute nga ON nga.attribute_id=na.id
+        from mall_attribute na
+        left join mall_goods_attribute nga ON nga.attribute_id=na.id
         <where>
             <if test="goodsId != null">
                 and nga.goods_id = #{goodsId}
@@ -46,11 +46,11 @@
     </select>
 
     <select id="queryTotal" resultType="int">
-		select count(*) from nideshop_attribute
+		select count(*) from mall_attribute
 	</select>
 
     <insert id="save" parameterType="com.platform.entity.AttributeVo" useGeneratedKeys="true" keyProperty="id">
-		insert into nideshop_attribute
+		insert into mall_attribute
 		(
 			`attribute_category_id`,
 			`name`,
@@ -69,7 +69,7 @@
 	</insert>
 
     <update id="update" parameterType="com.platform.entity.AttributeVo">
-        update nideshop_attribute
+        update mall_attribute
         <set>
             <if test="attributeCategoryId != null">`attribute_category_id` = #{attributeCategoryId},</if>
             <if test="name != null">`name` = #{name},</if>
@@ -81,11 +81,11 @@
     </update>
 
     <delete id="delete">
-		delete from nideshop_attribute where id = #{value}
+		delete from mall_attribute where id = #{value}
 	</delete>
 
     <delete id="deleteBatch">
-        delete from nideshop_attribute where id in
+        delete from mall_attribute where id in
         <foreach item="id" collection="array" open="(" separator="," close=")">
             #{id}
         </foreach>

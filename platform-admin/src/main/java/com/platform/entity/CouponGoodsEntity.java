@@ -8,7 +8,7 @@ import java.util.Date;
 
 /**
  * 优惠券关联商品实体
- * 表名 nideshop_coupon_goods
+ * 表名 mall_coupon_goods
  *
  * @author lipengjun
  * @email 939961241@qq.com

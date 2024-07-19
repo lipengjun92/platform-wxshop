@@ -24,7 +24,7 @@
 			`sort_order`,
 			`scheme_url`,
 			`type`
-		from nideshop_keywords
+		from mall_keywords
 		where id = #{id}
 	</select>
 
@@ -38,7 +38,7 @@
     		`sort_order`,
     		`scheme_url`,
     		`type`
-		from nideshop_keywords
+		from mall_keywords
 		WHERE 1=1
 		<if test="keyword != null and keyword.trim() != ''">
 			AND keyword LIKE concat('%',#{keyword},'%')
@@ -55,17 +55,17 @@
 			limit #{offset}, #{limit}
 		</if>
 	</select>
-	
+
  	<select id="queryTotal" resultType="int">
-		select count(*) from nideshop_keywords
+		select count(*) from mall_keywords
 		WHERE 1=1
         <if test="keyword != null and keyword.trim() != ''">
             AND keyword LIKE concat('%',#{keyword},'%')
         </if>
 	</select>
-	 
+
 	<insert id="save" parameterType="com.platform.entity.KeywordsEntity" useGeneratedKeys="true" keyProperty="id">
-		insert into nideshop_keywords(
+		insert into mall_keywords(
 			`keyword`,
 			`is_hot`,
 			`is_default`,
@@ -82,9 +82,9 @@
 			#{schemeUrl},
 			#{type})
 	</insert>
-	 
+
 	<update id="update" parameterType="com.platform.entity.KeywordsEntity">
-		update nideshop_keywords 
+		update mall_keywords
 		<set>
 			<if test="keyword != null">`keyword` = #{keyword}, </if>
 			<if test="isHot != null">`is_hot` = #{isHot}, </if>
@@ -96,13 +96,13 @@
 		</set>
 		where id = #{id}
 	</update>
-	
+
 	<delete id="delete">
-		delete from nideshop_keywords where id = #{value}
+		delete from mall_keywords where id = #{value}
 	</delete>
-	
+
 	<delete id="deleteBatch">
-		delete from nideshop_keywords where id in 
+		delete from mall_keywords where id in
 		<foreach item="id" collection="array" open="(" separator="," close=")">
 			#{id}
 		</foreach>

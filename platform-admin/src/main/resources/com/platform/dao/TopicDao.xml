@@ -32,7 +32,7 @@
 			`scene_pic_url`,
 			`topic_template_id`,
 			`topic_tag_id`
-		from nideshop_topic
+		from mall_topic
 		where id = #{id}
 	</select>
 
@@ -50,7 +50,7 @@
         `scene_pic_url`,
         `topic_template_id`,
         `topic_tag_id`
-        from nideshop_topic
+        from mall_topic
         WHERE 1=1
         <if test="title != null and title.trim() != ''">
             AND title LIKE concat('%',#{title},'%')
@@ -69,7 +69,7 @@
     </select>
 
     <select id="queryTotal" resultType="int">
-        select count(*) from nideshop_topic
+        select count(*) from mall_topic
         WHERE 1=1
         <if test="title != null and title.trim() != ''">
             AND title LIKE concat('%',#{title},'%')
@@ -77,7 +77,7 @@
     </select>
 
     <insert id="save" parameterType="com.platform.entity.TopicEntity" useGeneratedKeys="true" keyProperty="id">
-		insert into nideshop_topic(
+		insert into mall_topic(
 			`title`,
 			`content`,
 			`avatar`,
@@ -104,7 +104,7 @@
 	</insert>
 
     <update id="update" parameterType="com.platform.entity.TopicEntity">
-        update nideshop_topic
+        update mall_topic
         <set>
             <if test="title != null">`title` = #{title},</if>
             <if test="content != null">`content` = #{content},</if>
@@ -122,11 +122,11 @@
     </update>
 
     <delete id="delete">
-		delete from nideshop_topic where id = #{value}
+		delete from mall_topic where id = #{value}
 	</delete>
 
     <delete id="deleteBatch">
-        delete from nideshop_topic where id in
+        delete from mall_topic where id in
         <foreach item="id" collection="array" open="(" separator="," close=")">
             #{id}
         </foreach>

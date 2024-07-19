@@ -19,19 +19,19 @@
     </resultMap>
 
     <select id="queryObject" resultMap="footprintMap">
-		select f.id,f.user_id,f.goods_id,f.add_time add_time,f.referrer from nideshop_footprint f where id = #{value}
+		select f.id,f.user_id,f.goods_id,f.add_time add_time,f.referrer from mall_footprint f where id = #{value}
 	</select>
 
     <select id="queryList" resultMap="footprintMap">
         select f.id,f.user_id,f.goods_id,f.add_time add_time,f.referrer,
         g.name as name, g.list_pic_url, g.goods_brief as goods_brief, g.retail_price as
         retail_price
-        from nideshop_footprint f
+        from mall_footprint f
         <if test="maxFoot == true">
-            left join nideshop_footprint max on f.goods_id = max.goods_id and f.user_id = max.user_id
+            left join mall_footprint max on f.goods_id = max.goods_id and f.user_id = max.user_id
             and max.add_time > f.add_time
         </if>
-        left join nideshop_goods g on f.goods_id = g.id
+        left join mall_goods g on f.goods_id = g.id
         <where>
             <if test="userId != null">
                 and f.user_id = #{userId}
@@ -64,8 +64,8 @@
 				g.goods_brief AS goods_brief,
 				g.retail_price AS retail_price
 			FROM
-				nideshop_footprint f
-			  LEFT JOIN nideshop_goods g ON f.goods_id = g.id
+				mall_footprint f
+			  LEFT JOIN mall_goods g ON f.goods_id = g.id
 			WHERE
 				f.user_id = #{0} GROUP BY goods_id
 			 ORDER BY
@@ -73,7 +73,7 @@
     </select>
 
     <select id="queryTotal" resultType="int">
-        select count(*) from nideshop_footprint f
+        select count(*) from mall_footprint f
         <where>
             <if test="userId != null">
                 and f.user_id = #{userId}
@@ -88,7 +88,7 @@
     </select>
 
     <insert id="save" parameterType="com.platform.entity.FootprintVo" useGeneratedKeys="true" keyProperty="id">
-		insert into nideshop_footprint
+		insert into mall_footprint
 		(
 			`user_id`,
 			`goods_id`,
@@ -105,7 +105,7 @@
 	</insert>
 
     <update id="update" parameterType="com.platform.entity.FootprintVo">
-        update nideshop_footprint
+        update mall_footprint
         <set>
             <if test="userId != null">`user_id` = #{userId},</if>
             <if test="goodsId != null">`goods_id` = #{goodsId},</if>
@@ -116,18 +116,18 @@
     </update>
 
     <delete id="delete">
-		delete from nideshop_footprint where id = #{value}
+		delete from mall_footprint where id = #{value}
 	</delete>
 
     <delete id="deleteByParam">
-        delete from nideshop_footprint
+        delete from mall_footprint
         where 1 = 1
         <if test="userId != null">and `user_id` = #{userId} </if>
         <if test="goodsId != null">and `goods_id` = #{goodsId} </if>
     </delete>
 
     <delete id="deleteBatch">
-        delete from nideshop_footprint where id in
+        delete from mall_footprint where id in
         <foreach item="id" collection="array" open="(" separator="," close=")">
             #{id}
         </foreach>
@@ -138,9 +138,9 @@
         g.name as name, g.list_pic_url, g.goods_brief as goods_brief,
         g.retail_price as retail_price,
         u.nickname as nickname,u.avatar as avatar
-        from nideshop_footprint f
-        left join nideshop_goods g on f.goods_id = g.id
-        left join nideshop_user u on u.id = f.user_id
+        from mall_footprint f
+        left join mall_goods g on f.goods_id = g.id
+        left join mall_user u on u.id = f.user_id
         <where>
             u.id is not null
             <if test="userId != null">

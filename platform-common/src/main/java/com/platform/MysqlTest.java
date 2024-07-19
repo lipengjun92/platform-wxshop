@@ -44,7 +44,7 @@ public class MysqlTest {
             con = DriverManager.getConnection(URL, USER, PASSWORD);
             System.out.println("连接成功！");
 
-            String sql = "select * from nideshop_user";
+            String sql = "select * from mall_user";
             pre = con.prepareStatement(sql);
             result = pre.executeQuery();//执行查询
 

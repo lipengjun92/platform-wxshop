@@ -23,7 +23,7 @@
     </resultMap>
 
     <select id="queryObject" resultMap="categoryMap">
-		select * from nideshop_category where id = #{value}
+		select * from mall_category where id = #{value}
 	</select>
 
     <select id="queryList" resultMap="categoryMap">
@@ -34,7 +34,7 @@
         <if test="fields == null or fields == ''">
             *
         </if>
-        from nideshop_category
+        from mall_category
         where 1 = 1
         <if test="parentId != null and parentId != null">
             and parent_id = #{parentId}
@@ -62,11 +62,11 @@
     </select>
 
     <select id="queryTotal" resultType="int">
-		select count(*) from nideshop_category
+		select count(*) from mall_category
 	</select>
 
     <insert id="save" parameterType="com.platform.entity.CategoryVo">
-		insert into nideshop_category
+		insert into mall_category
 		(
 			`id`,
 			`name`,
@@ -105,7 +105,7 @@
 	</insert>
 
     <update id="update" parameterType="com.platform.entity.CategoryVo">
-        update nideshop_category
+        update mall_category
         <set>
             <if test="name != null">`name` = #{name},</if>
             <if test="keywords != null">`keywords` = #{keywords},</if>
@@ -126,11 +126,11 @@
     </update>
 
     <delete id="delete">
-		delete from nideshop_category where id = #{value}
+		delete from mall_category where id = #{value}
 	</delete>
 
     <delete id="deleteBatch">
-        delete from nideshop_category where id in
+        delete from mall_category where id in
         <foreach item="id" collection="array" open="(" separator="," close=")">
             #{id}
         </foreach>

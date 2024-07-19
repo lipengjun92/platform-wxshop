@@ -8,7 +8,7 @@ import java.util.Date;
 
 /**
  * 实体
- * 表名 nideshop_channel
+ * 表名 mall_channel
  *
  * @author lipengjun
  * @email 939961241@qq.com

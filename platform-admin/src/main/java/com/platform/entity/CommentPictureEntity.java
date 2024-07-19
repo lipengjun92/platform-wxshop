@@ -8,7 +8,7 @@ import java.util.Date;
 
 /**
  * 评价图片实体
- * 表名 nideshop_comment_picture
+ * 表名 mall_comment_picture
  *
  * @author lipengjun
  * @email 939961241@qq.com

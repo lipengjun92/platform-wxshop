@@ -14,7 +14,7 @@
 			id,
 			name,
 			description
-		from nideshop_user_level
+		from mall_user_level
 		where id = #{id}
 	</select>
 
@@ -23,7 +23,7 @@
 			id,
 			name,
 			description
-		from nideshop_user_level
+		from mall_user_level
 		WHERE 1=1
 		<if test="name != null and name.trim() != ''">
 			AND name like concat('%',#{name},'%')
@@ -40,39 +40,39 @@
 			limit #{offset}, #{limit}
 		</if>
 	</select>
-	
+
  	<select id="queryTotal" resultType="int">
-		select count(*) from nideshop_user_level
+		select count(*) from mall_user_level
 		WHERE 1=1
 		<if test="name != null and name.trim() != ''">
 			AND name like concat('%',#{name},'%')
 		</if>
 	</select>
-	 
+
 	<insert id="save" parameterType="com.platform.entity.UserLevelEntity" useGeneratedKeys="true" keyProperty="id">
-		insert into nideshop_user_level(
+		insert into mall_user_level(
 			`name`,
 			`description`)
 		values(
 			#{name},
 			#{description})
 	</insert>
-	 
+
 	<update id="update" parameterType="com.platform.entity.UserLevelEntity">
-		update nideshop_user_level 
+		update mall_user_level
 		<set>
 			<if test="name != null">`name` = #{name}, </if>
 			<if test="description != null">`description` = #{description}</if>
 		</set>
 		where id = #{id}
 	</update>
-	
+
 	<delete id="delete">
-		delete from nideshop_user_level where id = #{value}
+		delete from mall_user_level where id = #{value}
 	</delete>
-	
+
 	<delete id="deleteBatch">
-		delete from nideshop_user_level where id in 
+		delete from mall_user_level where id in
 		<foreach item="id" collection="array" open="(" separator="," close=")">
 			#{id}
 		</foreach>

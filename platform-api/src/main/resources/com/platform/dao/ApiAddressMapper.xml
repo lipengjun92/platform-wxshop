@@ -19,11 +19,11 @@
     </resultMap>
 
     <select id="queryObject" resultMap="addressMap">
-		select * from nideshop_address where id = #{value}
+		select * from mall_address where id = #{value}
 	</select>
 
     <select id="queryList" resultMap="addressMap">
-        select * from nideshop_address
+        select * from mall_address
         <where>
             <if test="userId != null">
                 and user_id = #{userId}
@@ -43,11 +43,11 @@
     </select>
 
     <select id="queryTotal" resultType="int">
-		select count(*) from nideshop_address
+		select count(*) from mall_address
 	</select>
 
     <insert id="save" parameterType="com.platform.entity.AddressVo" useGeneratedKeys="true" keyProperty="id">
-		insert into nideshop_address(
+		insert into mall_address(
 			`user_id`,
 			`user_name`,
 			`tel_number`,
@@ -72,7 +72,7 @@
 	</insert>
 
     <update id="update" parameterType="com.platform.entity.AddressVo">
-        update nideshop_address
+        update mall_address
         <set>
             <if test="userId != null">`user_id` = #{userId}, </if>
             <if test="userName != null">`user_name` = #{userName}, </if>
@@ -89,11 +89,11 @@
     </update>
 
     <delete id="delete">
-		delete from nideshop_address where id = #{value}
+		delete from mall_address where id = #{value}
 	</delete>
 
     <delete id="deleteBatch">
-        delete from nideshop_address where id in
+        delete from mall_address where id in
         <foreach item="id" collection="array" open="(" separator="," close=")">
             #{id}
         </foreach>

@@ -20,7 +20,7 @@
 			input_type,
 			value,
 			sort_order
-		from nideshop_attribute
+		from mall_attribute
 		where id = #{id}
 	</select>
 
@@ -33,7 +33,7 @@
         a.value,
         a.sort_order,
         ac.name category_name
-        from nideshop_attribute a LEFT JOIN nideshop_attribute_category ac
+        from mall_attribute a LEFT JOIN mall_attribute_category ac
         ON a.attribute_category_id = ac.id
         WHERE 1=1
         <if test="name != null and name.trim() != ''">
@@ -59,12 +59,12 @@
     </select>
 
     <select id="queryTotal" resultType="int">
-		select count(*) from nideshop_attribute
+		select count(*) from mall_attribute
 		WHERE 1=1
 	</select>
 
     <insert id="save" parameterType="com.platform.entity.AttributeEntity" useGeneratedKeys="true" keyProperty="id">
-		insert into nideshop_attribute(
+		insert into mall_attribute(
 			`attribute_category_id`,
 			`name`,
 			`input_type`,
@@ -79,7 +79,7 @@
 	</insert>
 
     <update id="update" parameterType="com.platform.entity.AttributeEntity">
-        update nideshop_attribute
+        update mall_attribute
         <set>
             <if test="attributeCategoryId != null">`attribute_category_id` = #{attributeCategoryId},</if>
             <if test="name != null">`name` = #{name},</if>
@@ -91,11 +91,11 @@
     </update>
 
     <delete id="delete">
-		delete from nideshop_attribute where id = #{value}
+		delete from mall_attribute where id = #{value}
 	</delete>
 
     <delete id="deleteBatch">
-        delete from nideshop_attribute where id in
+        delete from mall_attribute where id in
         <foreach item="id" collection="array" open="(" separator="," close=")">
             #{id}
         </foreach>

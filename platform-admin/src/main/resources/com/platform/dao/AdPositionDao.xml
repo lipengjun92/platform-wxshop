@@ -18,7 +18,7 @@
 			`width`,
 			`height`,
 			`desc`
-		from nideshop_ad_position
+		from mall_ad_position
 		where id = #{id}
 	</select>
 
@@ -29,7 +29,7 @@
         `width`,
         `height`,
         `desc`
-        from nideshop_ad_position
+        from mall_ad_position
         WHERE 1=1
         <if test="name != null and name.trim() != ''">
             AND name LIKE concat('%',#{name},'%')
@@ -48,7 +48,7 @@
     </select>
 
     <select id="queryTotal" resultType="int">
-		select count(*) from nideshop_ad_position
+		select count(*) from mall_ad_position
 		WHERE 1=1
         <if test="name != null and name.trim() != ''">
             AND name LIKE concat('%',#{name},'%')
@@ -56,7 +56,7 @@
 	</select>
 
     <insert id="save" parameterType="com.platform.entity.AdPositionEntity" useGeneratedKeys="true" keyProperty="id">
-		insert into nideshop_ad_position(
+		insert into mall_ad_position(
 			`name`,
 			`width`,
 			`height`,
@@ -69,7 +69,7 @@
 	</insert>
 
     <update id="update" parameterType="com.platform.entity.AdPositionEntity">
-        update nideshop_ad_position
+        update mall_ad_position
         <set>
             <if test="name != null">`name` = #{name},</if>
             <if test="width != null">`width` = #{width},</if>
@@ -80,11 +80,11 @@
     </update>
 
     <delete id="delete">
-		delete from nideshop_ad_position where id = #{value}
+		delete from mall_ad_position where id = #{value}
 	</delete>
 
     <delete id="deleteBatch">
-        delete from nideshop_ad_position where id in
+        delete from mall_ad_position where id in
         <foreach item="id" collection="array" open="(" separator="," close=")">
             #{id}
         </foreach>

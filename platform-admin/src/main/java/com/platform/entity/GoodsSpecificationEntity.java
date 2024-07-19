@@ -8,7 +8,7 @@ import java.util.Date;
 
 /**
  * 商品对应规格表值表实体
- * 表名 nideshop_goods_specification
+ * 表名 mall_goods_specification
  *
  * @author lipengjun
  * @email 939961241@qq.com

@@ -14,7 +14,7 @@
 			id,
 			name,
 			enabled
-		from nideshop_attribute_category
+		from mall_attribute_category
 		where id = #{id}
 	</select>
 
@@ -23,7 +23,7 @@
         id,
         name,
         enabled
-        from nideshop_attribute_category
+        from mall_attribute_category
         WHERE 1=1
         <if test="name != null and name.trim() != ''">
             AND name LIKE concat('%', #{name},'%')
@@ -45,12 +45,12 @@
     </select>
 
     <select id="queryTotal" resultType="int">
-		select count(*) from nideshop_attribute_category
+		select count(*) from mall_attribute_category
 		WHERE 1=1
 	</select>
 
     <insert id="save" parameterType="com.platform.entity.AttributeCategoryEntity">
-		insert into nideshop_attribute_category(
+		insert into mall_attribute_category(
 			`id`,
 			`name`,
 			`enabled`)
@@ -61,7 +61,7 @@
 	</insert>
 
     <update id="update" parameterType="com.platform.entity.AttributeCategoryEntity">
-        update nideshop_attribute_category
+        update mall_attribute_category
         <set>
             <if test="name != null">`name` = #{name},</if>
             <if test="enabled != null">`enabled` = #{enabled}</if>
@@ -70,11 +70,11 @@
     </update>
 
     <delete id="delete">
-		delete from nideshop_attribute_category where id = #{value}
+		delete from mall_attribute_category where id = #{value}
 	</delete>
 
     <delete id="deleteBatch">
-        delete from nideshop_attribute_category where id in
+        delete from mall_attribute_category where id in
         <foreach item="id" collection="array" open="(" separator="," close=")">
             #{id}
         </foreach>

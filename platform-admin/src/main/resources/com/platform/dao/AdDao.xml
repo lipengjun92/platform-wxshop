@@ -26,33 +26,33 @@
 			content,
 			end_time,
 			enabled
-		from nideshop_ad
+		from mall_ad
 		where id = #{id}
 	</select>
 
     <select id="queryList" resultType="com.platform.entity.AdEntity">
         select
-        nideshop_ad.id,
-        nideshop_ad.ad_position_id,
-        nideshop_ad.media_type,
-        nideshop_ad.name,
-        nideshop_ad.link,
-        nideshop_ad.image_url,
-        nideshop_ad.content,
-        nideshop_ad.end_time,
-        nideshop_ad.enabled,
-        nideshop_ad_position.name ad_Position_Name
-        from nideshop_ad LEFT JOIN nideshop_ad_position on nideshop_ad.ad_position_id = nideshop_ad_position.id
+        mall_ad.id,
+        mall_ad.ad_position_id,
+        mall_ad.media_type,
+        mall_ad.name,
+        mall_ad.link,
+        mall_ad.image_url,
+        mall_ad.content,
+        mall_ad.end_time,
+        mall_ad.enabled,
+        mall_ad_position.name ad_Position_Name
+        from mall_ad LEFT JOIN mall_ad_position on mall_ad.ad_position_id = mall_ad_position.id
         where 1=1
         <if test="name != null and name.trim() != ''">
-            AND nideshop_ad.name LIKE concat('%',#{name},'%')
+            AND mall_ad.name LIKE concat('%',#{name},'%')
         </if>
         <choose>
             <when test="sidx != null and sidx.trim() != ''">
                 order by ${sidx} ${order}
             </when>
             <otherwise>
-                order by nideshop_ad.id desc
+                order by mall_ad.id desc
             </otherwise>
         </choose>
         <if test="offset != null and limit != null">
@@ -61,7 +61,7 @@
     </select>
 
     <select id="queryTotal" resultType="int">
-		select count(*) from nideshop_ad
+		select count(*) from mall_ad
 		WHERE 1=1
         <if test="name != null and name.trim() != ''">
             AND name LIKE concat('%',#{name},'%')
@@ -69,7 +69,7 @@
 	</select>
 
     <insert id="save" parameterType="com.platform.entity.AdEntity" useGeneratedKeys="true" keyProperty="id">
-		insert into nideshop_ad(
+		insert into mall_ad(
 			`ad_position_id`,
 			`media_type`,
 			`name`,
@@ -90,7 +90,7 @@
 	</insert>
 
     <update id="update" parameterType="com.platform.entity.AdEntity">
-        update nideshop_ad
+        update mall_ad
         <set>
             <if test="adPositionId != null">`ad_position_id` = #{adPositionId},</if>
             <if test="mediaType != null">`media_type` = #{mediaType},</if>
@@ -105,11 +105,11 @@
     </update>
 
     <delete id="delete">
-		delete from nideshop_ad where id = #{value}
+		delete from mall_ad where id = #{value}
 	</delete>
 
     <delete id="deleteBatch">
-        delete from nideshop_ad where id in
+        delete from mall_ad where id in
         <foreach item="id" collection="array" open="(" separator="," close=")">
             #{id}
         </foreach>

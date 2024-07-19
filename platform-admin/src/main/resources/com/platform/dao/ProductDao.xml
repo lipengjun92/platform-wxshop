@@ -22,35 +22,35 @@
 			goods_number,
 			retail_price,
 			market_price
-		from nideshop_product
+		from mall_product
 		where id = #{id}
 	</select>
 
     <select id="queryList" resultType="com.platform.entity.ProductEntity">
         select
-        nideshop_product.id,
-        nideshop_product.goods_id,
-        nideshop_product.goods_specification_ids,
-        nideshop_product.goods_sn,
-        nideshop_product.goods_number,
-        nideshop_product.retail_price,
-        nideshop_product.market_price,
-        nideshop_goods.name goods_name
-        from nideshop_product
-        LEFT JOIN nideshop_goods ON nideshop_product.goods_id = nideshop_goods.id
+        mall_product.id,
+        mall_product.goods_id,
+        mall_product.goods_specification_ids,
+        mall_product.goods_sn,
+        mall_product.goods_number,
+        mall_product.retail_price,
+        mall_product.market_price,
+        mall_goods.name goods_name
+        from mall_product
+        LEFT JOIN mall_goods ON mall_product.goods_id = mall_goods.id
         WHERE 1=1
         <if test="goodsId != null and goodsId.trim() != ''">
-            AND nideshop_product.goods_id = #{goodsId}
+            AND mall_product.goods_id = #{goodsId}
         </if>
         <if test="goodsName != null and goodsName.trim() != ''">
-            AND nideshop_goods.name LIKE concat('%',#{goodsName},'%')
+            AND mall_goods.name LIKE concat('%',#{goodsName},'%')
         </if>
         <choose>
             <when test="sidx != null and sidx.trim() != ''">
                 order by ${sidx} ${order}
             </when>
             <otherwise>
-                order by nideshop_product.id desc
+                order by mall_product.id desc
             </otherwise>
         </choose>
         <if test="offset != null and limit != null">
@@ -59,19 +59,19 @@
     </select>
 
     <select id="queryTotal" resultType="int">
-        select count(*) from nideshop_product
-        LEFT JOIN nideshop_goods ON nideshop_product.goods_id = nideshop_goods.id
+        select count(*) from mall_product
+        LEFT JOIN mall_goods ON mall_product.goods_id = mall_goods.id
         WHERE 1=1
         <if test="goodsId != null and goodsId.trim() != ''">
-            AND nideshop_product.goods_id = #{goodsId}
+            AND mall_product.goods_id = #{goodsId}
         </if>
         <if test="goodsName != null and goodsName.trim() != ''">
-            AND nideshop_goods.name LIKE concat('%',#{goodsName},'%')
+            AND mall_goods.name LIKE concat('%',#{goodsName},'%')
         </if>
     </select>
 
     <insert id="save" parameterType="com.platform.entity.ProductEntity" useGeneratedKeys="true" keyProperty="id">
-		insert into nideshop_product(
+		insert into mall_product(
 			`goods_id`,
 			`goods_specification_ids`,
 			`goods_sn`,
@@ -88,7 +88,7 @@
 	</insert>
 
     <update id="update" parameterType="com.platform.entity.ProductEntity">
-        update nideshop_product
+        update mall_product
         <set>
             <if test="goodsId != null">`goods_id` = #{goodsId},</if>
             <if test="goodsSpecificationIds != null">`goods_specification_ids` = #{goodsSpecificationIds},</if>
@@ -101,11 +101,11 @@
     </update>
 
     <delete id="delete">
-		delete from nideshop_product where id = #{value}
+		delete from mall_product where id = #{value}
 	</delete>
 
     <delete id="deleteBatch">
-        delete from nideshop_product where id in
+        delete from mall_product where id in
         <foreach item="id" collection="array" open="(" separator="," close=")">
             #{id}
         </foreach>

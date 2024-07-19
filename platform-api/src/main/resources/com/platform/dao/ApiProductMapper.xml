@@ -18,7 +18,7 @@
 
     <select id="queryObject" resultMap="productMap">
 		select a.*, b.name as goods_name, b.list_pic_url
-		from nideshop_product a left join nideshop_goods b on a.goods_id = b.id
+		from mall_product a left join mall_goods b on a.goods_id = b.id
 		where a.id = #{value}
 	</select>
 
@@ -26,8 +26,8 @@
         select a.*,
         b.name as goods_name,
         b.list_pic_url
-        from nideshop_product a
-        left join nideshop_goods b on a.goods_id = b.id
+        from mall_product a
+        left join mall_goods b on a.goods_id = b.id
         <where>
             <if test="goodsId != null">
                 and a.goods_id = #{goodsId}
@@ -47,6 +47,6 @@
     </select>
 
     <select id="queryTotal" resultType="int">
-		select count(*) from nideshop_product
+		select count(*) from mall_product
 	</select>
 </mapper>

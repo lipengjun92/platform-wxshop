@@ -13,7 +13,7 @@
     </resultMap>
 
     <select id="queryObject" resultMap="goodsGalleryMap">
-		select * from nideshop_goods_gallery where id = #{value}
+		select * from mall_goods_gallery where id = #{value}
 	</select>
 
     <select id="queryList" resultMap="goodsGalleryMap">
@@ -24,7 +24,7 @@
         <if test="fields == null or fields == ''">
             *
         </if>
-        from nideshop_goods_gallery
+        from mall_goods_gallery
         <where>
             <if test="goodsId != null">
                 and goods_id = #{goodsId}
@@ -44,11 +44,11 @@
     </select>
 
     <select id="queryTotal" resultType="int">
-		select count(*) from nideshop_goods_gallery
+		select count(*) from mall_goods_gallery
 	</select>
 
     <insert id="save" parameterType="com.platform.entity.GoodsGalleryVo" useGeneratedKeys="true" keyProperty="id">
-		insert into nideshop_goods_gallery
+		insert into mall_goods_gallery
 		(
 			`goods_id`,
 			`img_url`,
@@ -65,7 +65,7 @@
 	</insert>
 
     <update id="update" parameterType="com.platform.entity.GoodsGalleryVo">
-        update nideshop_goods_gallery
+        update mall_goods_gallery
         <set>
             <if test="goodsId != null">`goods_id` = #{goodsId},</if>
             <if test="imgUrl != null">`img_url` = #{imgUrl},</if>
@@ -76,11 +76,11 @@
     </update>
 
     <delete id="delete">
-		delete from nideshop_goods_gallery where id = #{value}
+		delete from mall_goods_gallery where id = #{value}
 	</delete>
 
     <delete id="deleteBatch">
-        delete from nideshop_goods_gallery where id in
+        delete from mall_goods_gallery where id in
         <foreach item="id" collection="array" open="(" separator="," close=")">
             #{id}
         </foreach>

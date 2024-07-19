@@ -14,19 +14,19 @@
 			`id`,
 			`question`,
 			`answer`
-		from nideshop_goods_issue
+		from mall_goods_issue
 		where id = #{id}
 	</select>
 
     <select id="queryList" resultType="com.platform.entity.GoodsIssueEntity">
         select
-        nideshop_goods_issue.id,
-        nideshop_goods_issue.question,
-        nideshop_goods_issue.answer
-        from nideshop_goods_issue
+        mall_goods_issue.id,
+        mall_goods_issue.question,
+        mall_goods_issue.answer
+        from mall_goods_issue
         WHERE 1=1
         <if test="question != null and question.trim() != ''">
-            AND nideshop_goods_issue.question LIKE concat('%',#{question},'%')
+            AND mall_goods_issue.question LIKE concat('%',#{question},'%')
         </if>
         <choose>
             <when test="sidx != null and sidx.trim() != ''">
@@ -42,15 +42,15 @@
     </select>
 
     <select id="queryTotal" resultType="int">
-        select count(*) from nideshop_goods_issue
+        select count(*) from mall_goods_issue
         WHERE 1=1
         <if test="question != null and question.trim() != ''">
-            AND nideshop_goods_issue.question LIKE concat('%',#{question},'%')
+            AND mall_goods_issue.question LIKE concat('%',#{question},'%')
         </if>
     </select>
 
     <insert id="save" parameterType="com.platform.entity.GoodsIssueEntity" useGeneratedKeys="true" keyProperty="id">
-		insert into nideshop_goods_issue(
+		insert into mall_goods_issue(
 			`question`,
 			`answer`)
 		values(
@@ -59,7 +59,7 @@
 	</insert>
 
     <update id="update" parameterType="com.platform.entity.GoodsIssueEntity">
-        update nideshop_goods_issue
+        update mall_goods_issue
         <set>
             <if test="question != null">`question` = #{question},</if>
             <if test="answer != null">`answer` = #{answer}</if>
@@ -68,11 +68,11 @@
     </update>
 
     <delete id="delete">
-        delete from nideshop_goods_issue where id = #{value}
+        delete from mall_goods_issue where id = #{value}
     </delete>
 
     <delete id="deleteBatch">
-        delete from nideshop_goods_issue where id in
+        delete from mall_goods_issue where id in
         <foreach item="id" collection="array" open="(" separator="," close=")">
             #{id}
         </foreach>

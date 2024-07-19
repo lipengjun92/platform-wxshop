@@ -13,7 +13,7 @@
     </resultMap>
 
     <select id="queryObject" resultMap="searchHistoryMap">
-		select * from nideshop_search_history where id = #{value}
+		select * from mall_search_history where id = #{value}
 	</select>
 
     <select id="queryList" resultMap="searchHistoryMap">
@@ -24,7 +24,7 @@
         <if test="fields == null or fields == ''">
             *
         </if>
-        from nideshop_search_history
+        from mall_search_history
         <where>
             <if test="userId != null">
                 and user_id = #{userId}
@@ -44,11 +44,11 @@
     </select>
 
     <select id="queryTotal" resultType="int">
-		select count(*) from nideshop_search_history
+		select count(*) from mall_search_history
 	</select>
 
     <insert id="save" parameterType="com.platform.entity.SearchHistoryVo" useGeneratedKeys="true" keyProperty="id">
-		insert into nideshop_search_history
+		insert into mall_search_history
 		(
 			`keyword`,
 			`from`,
@@ -65,7 +65,7 @@
 	</insert>
 
     <update id="update" parameterType="com.platform.entity.SearchHistoryVo">
-        update nideshop_search_history
+        update mall_search_history
         <set>
             <if test="keyword != null">`keyword` = #{keyword},</if>
             <if test="from != null">`from` = #{from},</if>
@@ -76,16 +76,16 @@
     </update>
 
     <delete id="delete">
-		delete from nideshop_search_history where id = #{value}
+		delete from mall_search_history where id = #{value}
 	</delete>
 
     <delete id="deleteBatch">
-        delete from nideshop_search_history where id in
+        delete from mall_search_history where id in
         <foreach item="id" collection="array" open="(" separator="," close=")">
             #{id}
         </foreach>
     </delete>
     <delete id="deleteByUserId">
-		delete from nideshop_search_history where  user_id = #{userId}
+		delete from mall_search_history where  user_id = #{userId}
 	</delete>
 </mapper>

@@ -13,11 +13,11 @@
     </resultMap>
 
     <select id="queryObject" resultType="com.platform.entity.AdPositionVo">
-		select * from nideshop_ad_position where id = #{value}
+		select * from mall_ad_position where id = #{value}
 	</select>
 
     <select id="queryList" resultType="com.platform.entity.AdPositionVo">
-        select * from nideshop_ad_position
+        select * from mall_ad_position
         <choose>
             <when test="sidx != null and sidx.trim() != ''">
                 order by ${sidx} ${order}
@@ -32,28 +32,28 @@
     </select>
 
     <select id="queryTotal" resultType="int">
-		select count(*) from nideshop_ad_position 
+		select count(*) from mall_ad_position
 	</select>
 
     <insert id="save" parameterType="com.platform.entity.AdPositionVo" useGeneratedKeys="true" keyProperty="id">
-		insert into nideshop_ad_position
+		insert into mall_ad_position
 		(
-			`name`, 
-			`width`, 
-			`height`, 
+			`name`,
+			`width`,
+			`height`,
 			`desc`
 		)
 		values
 		(
-			#{name}, 
-			#{width}, 
-			#{height}, 
+			#{name},
+			#{width},
+			#{height},
 			#{desc}
 		)
 	</insert>
 
     <update id="update" parameterType="com.platform.entity.AdPositionVo">
-        update nideshop_ad_position
+        update mall_ad_position
         <set>
             <if test="name != null">`name` = #{name},</if>
             <if test="width != null">`width` = #{width},</if>
@@ -64,11 +64,11 @@
     </update>
 
     <delete id="delete">
-		delete from nideshop_ad_position where id = #{value}
+		delete from mall_ad_position where id = #{value}
 	</delete>
 
     <delete id="deleteBatch">
-        delete from nideshop_ad_position where id in
+        delete from mall_ad_position where id in
         <foreach item="id" collection="array" open="(" separator="," close=")">
             #{id}
         </foreach>

@@ -14,7 +14,7 @@
     </resultMap>
 
     <select id="queryObject" resultMap="goodsSpecificationMap">
-		select * from nideshop_goods_specification where id = #{value}
+		select * from mall_goods_specification where id = #{value}
 	</select>
 
     <select id="queryList" resultMap="goodsSpecificationMap">
@@ -25,9 +25,9 @@
         <if test="fields == null or fields == ''">
             gs.*
         </if>
-        from nideshop_goods_specification gs
+        from mall_goods_specification gs
         <if test="specification == true">
-            inner join nideshop_specification s on gs.specification_id= s.id
+            inner join mall_specification s on gs.specification_id= s.id
         </if>
         <where>
             <if test="goodsId != null">
@@ -54,11 +54,11 @@
     </select>
 
     <select id="queryTotal" resultType="int">
-		select count(*) from nideshop_goods_specification
+		select count(*) from mall_goods_specification
 	</select>
 
     <insert id="save" parameterType="com.platform.entity.GoodsSpecificationVo" useGeneratedKeys="true" keyProperty="id">
-		insert into nideshop_goods_specification
+		insert into mall_goods_specification
 		(
 			`goods_id`,
 			`specification_id`,
@@ -75,7 +75,7 @@
 	</insert>
 
     <update id="update" parameterType="com.platform.entity.GoodsSpecificationVo">
-        update nideshop_goods_specification
+        update mall_goods_specification
         <set>
             <if test="goodsId != null">`goods_id` = #{goodsId},</if>
             <if test="specificationId != null">`specification_id` = #{specificationId},</if>
@@ -86,11 +86,11 @@
     </update>
 
     <delete id="delete">
-		delete from nideshop_goods_specification where id = #{value}
+		delete from mall_goods_specification where id = #{value}
 	</delete>
 
     <delete id="deleteBatch">
-        delete from nideshop_goods_specification where id in
+        delete from mall_goods_specification where id in
         <foreach item="id" collection="array" open="(" separator="," close=")">
             #{id}
         </foreach>

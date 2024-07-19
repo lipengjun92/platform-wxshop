@@ -20,7 +20,7 @@
     </resultMap>
 
     <select id="queryObject" resultMap="brandMap">
-		select * from nideshop_brand where id = #{value}
+		select * from mall_brand where id = #{value}
 	</select>
 
     <select id="queryList" resultMap="brandMap">
@@ -31,7 +31,7 @@
         <if test="fields == null or fields == ''">
             *
         </if>
-        from nideshop_brand
+        from mall_brand
         <choose>
             <when test="sidx != null and sidx.trim() != ''">
                 order by ${sidx} ${order}
@@ -46,11 +46,11 @@
     </select>
 
     <select id="queryTotal" resultType="int">
-		select count(*) from nideshop_brand
+		select count(*) from mall_brand
 	</select>
 
     <insert id="save" parameterType="com.platform.entity.BrandVo" useGeneratedKeys="true" keyProperty="id">
-		insert into nideshop_brand
+		insert into mall_brand
 		(
 			`name`,
 			`list_pic_url`,
@@ -81,7 +81,7 @@
 	</insert>
 
     <update id="update" parameterType="com.platform.entity.BrandVo">
-        update nideshop_brand
+        update mall_brand
         <set>
             <if test="name != null">`name` = #{name},</if>
             <if test="listPicUrl != null">`list_pic_url` = #{listPicUrl},</if>
@@ -99,11 +99,11 @@
     </update>
 
     <delete id="delete">
-		delete from nideshop_brand where id = #{value}
+		delete from mall_brand where id = #{value}
 	</delete>
 
     <delete id="deleteBatch">
-        delete from nideshop_brand where id in
+        delete from mall_brand where id in
         <foreach item="id" collection="array" open="(" separator="," close=")">
             #{id}
         </foreach>

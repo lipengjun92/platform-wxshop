@@ -12,7 +12,7 @@
     </resultMap>
 
     <select id="queryObject" resultMap="goodsIssueMap">
-		select * from nideshop_goods_issue where id = #{value}
+		select * from mall_goods_issue where id = #{value}
 	</select>
 
     <select id="queryList" resultMap="goodsIssueMap">
@@ -23,7 +23,7 @@
         <if test="fields == null or fields == ''">
             *
         </if>
-        from nideshop_goods_issue
+        from mall_goods_issue
         <where>
             <if test="goodsId != null">
                 and goods_id = #{goodsId}
@@ -43,11 +43,11 @@
     </select>
 
     <select id="queryTotal" resultType="int">
-		select count(*) from nideshop_goods_issue
+		select count(*) from mall_goods_issue
 	</select>
 
     <insert id="save" parameterType="com.platform.entity.GoodsIssueVo" useGeneratedKeys="true" keyProperty="id">
-		insert into nideshop_goods_issue
+		insert into mall_goods_issue
 		(
 			`goods_id`,
 			`question`,
@@ -62,7 +62,7 @@
 	</insert>
 
     <update id="update" parameterType="com.platform.entity.GoodsIssueVo">
-        update nideshop_goods_issue
+        update mall_goods_issue
         <set>
             <if test="goodsId != null">`goods_id` = #{goodsId},</if>
             <if test="question != null">`question` = #{question},</if>
@@ -72,11 +72,11 @@
     </update>
 
     <delete id="delete">
-		delete from nideshop_goods_issue where id = #{value}
+		delete from mall_goods_issue where id = #{value}
 	</delete>
 
     <delete id="deleteBatch">
-        delete from nideshop_goods_issue where id in
+        delete from mall_goods_issue where id in
         <foreach item="id" collection="array" open="(" separator="," close=")">
             #{id}
         </foreach>

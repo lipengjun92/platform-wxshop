@@ -14,13 +14,13 @@
     </resultMap>
 
     <select id="queryObject" resultType="com.platform.entity.SearchHistoryEntity">
-		select * from nideshop_search_history where id = #{value}
+		select * from mall_search_history where id = #{value}
 	</select>
 
     <select id="queryList" resultMap="searchHistoryMap">
         select a.* ,b.username as user_name
-        from nideshop_search_history a
-        left join nideshop_user b on a.user_id = b.id
+        from mall_search_history a
+        left join mall_user b on a.user_id = b.id
         <choose>
             <when test="sidx != null and sidx.trim() != ''">
                 order by ${sidx} ${order}
@@ -35,28 +35,28 @@
     </select>
 
     <select id="queryTotal" resultType="int">
-		select count(*) from nideshop_search_history 
+		select count(*) from mall_search_history
 	</select>
 
     <insert id="save" parameterType="com.platform.entity.SearchHistoryEntity" useGeneratedKeys="true" keyProperty="id">
-		insert into nideshop_search_history
+		insert into mall_search_history
 		(
-			`keyword`, 
-			`from`, 
-			`add_time`, 
+			`keyword`,
+			`from`,
+			`add_time`,
 			`user_id`
 		)
 		values
 		(
-			#{keyword}, 
-			#{from}, 
-			#{addTime}, 
+			#{keyword},
+			#{from},
+			#{addTime},
 			#{userId}
 		)
 	</insert>
 
     <update id="update" parameterType="com.platform.entity.SearchHistoryEntity">
-        update nideshop_search_history
+        update mall_search_history
         <set>
             <if test="keyword != null">`keyword` = #{keyword},</if>
             <if test="from != null">`from` = #{from},</if>
@@ -67,11 +67,11 @@
     </update>
 
     <delete id="delete">
-		delete from nideshop_search_history where id = #{value}
+		delete from mall_search_history where id = #{value}
 	</delete>
 
     <delete id="deleteBatch">
-        delete from nideshop_search_history where id in
+        delete from mall_search_history where id in
         <foreach item="id" collection="array" open="(" separator="," close=")">
             #{id}
         </foreach>
