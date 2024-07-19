@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.platform.modules.sys.dao.SysUserRoleDao">
+
+	<delete id="deleteBatch">
+		DELETE FROM SYS_USER_ROLE WHERE ROLE_ID IN
+		<foreach item="roleId" collection="array" open="(" separator="," close=")">
+			#{roleId}
+		</foreach>
+	</delete>
+
+	<select id="queryRoleIdList" resultType="string">
+		SELECT ROLE_ID FROM SYS_USER_ROLE WHERE USER_ID = #{value}
+	</select>
+</mapper>

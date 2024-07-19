@@ -1,0 +1,9 @@
+-- 菜单
+name: ${comments}
+url: ${pre}/${pathName}
+perms: ${pre}:${pathName}:list,${pre}:${pathName}:info
+
+-- 按钮权限
+新增: ${pre}:${pathName}:save
+修改: ${pre}:${pathName}:update
+删除: ${pre}:${pathName}:delete

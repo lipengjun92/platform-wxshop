@@ -1,0 +1,148 @@
+/*
+ *
+ *      Copyright (c) 2018-2099, lipengjun All rights reserved.
+ *
+ *  Redistribution and use in source and binary forms, with or without
+ *  modification, are permitted provided that the following conditions are met:
+ *
+ * Redistributions of source code must retain the above copyright notice,
+ *  this list of conditions and the following disclaimer.
+ *  Redistributions in binary form must reproduce the above copyright
+ *  notice, this list of conditions and the following disclaimer in the
+ *  documentation and/or other materials provided with the distribution.
+ *  Neither the name of the fly2you.cn developer nor the names of its
+ *  contributors may be used to endorse or promote products derived from
+ *  this software without specific prior written permission.
+ *  Author: lipengjun (939961241@qq.com)
+ *
+ */
+package ${package}.controller;
+
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.platform.common.annotation.SysLog;
+import com.platform.common.utils.RestResponse;
+import com.platform.modules.sys.controller.AbstractController;
+import ${package}.entity.${className}Entity;
+import ${package}.service.${className}Service;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.enums.ParameterIn;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.RequiredArgsConstructor;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Map;
+
+/**
+ * ${comments}Controller
+ *
+ * @author ${author}
+ * @since ${datetime}
+ */
+@RestController
+@RequiredArgsConstructor
+@RequestMapping("${pre}/${pathName}")
+@Tag(name = "${className}Controller|${comments}")
+public class ${className}Controller extends AbstractController {
+
+    private final ${className}Service ${classname}Service;
+
+    /**
+     * 查看所有列表
+     *
+     * @param params 查询参数
+     * @return RestResponse
+     */
+    @Operation(summary = "查看所有列表", description = "查看所有列表")
+    @GetMapping("/queryAll")
+    @RequiresPermissions("${pre}:${pathName}:list")
+    public RestResponse<List<${className}Entity>> queryAll(@RequestParam Map<String, Object> params) {
+        List<${className}Entity> list = ${classname}Service.queryAll(params);
+
+        return RestResponse.ok(list);
+    }
+
+    /**
+     * 分页查询${comments}
+     *
+     * @param params 查询参数
+     * @return RestResponse
+     */
+    @Operation(summary = "分页查询${comments}", description = "分页查询${comments}")
+    @GetMapping("/list")
+    @RequiresPermissions("${pre}:${pathName}:list")
+    public RestResponse<Page<${className}Entity>> list(@RequestParam Map<String, Object> params) {
+        Page<${className}Entity> page = ${classname}Service.queryPage(params);
+
+        return RestResponse.ok(page);
+    }
+
+    /**
+     * 根据主键查询详情
+     *
+     * @param ${pk.attrname} 主键
+     * @return RestResponse
+     */
+    @Operation(summary = "根据主键查询详情", description = "根据主键查询详情",
+        parameters = {@Parameter(in = ParameterIn.PATH, name = "${pk.attrname}", description = "主键", example = "1", required = true)}
+    )
+    @GetMapping("/info/{${pk.attrname}}")
+    @RequiresPermissions("${pre}:${pathName}:info")
+    public RestResponse<${className}Entity> info(@PathVariable("${pk.attrname}") ${pk.attrType} ${pk.attrname}) {
+        ${className}Entity ${classname} = ${classname}Service.getById(${pk.attrname});
+
+        return RestResponse.ok(${classname});
+    }
+
+    /**
+     * 新增${comments}
+     *
+     * @param ${classname} ${classname}
+     * @return RestResponse
+     */
+    @Operation(summary = "新增${comments}", description = "新增${comments}")
+    @SysLog("新增${comments}")
+    @PostMapping("/save")
+    @RequiresPermissions("${pre}:${pathName}:save")
+    public RestResponse<String> save(@RequestBody ${className}Entity ${classname}) {
+
+        ${classname}Service.add(${classname});
+
+        return RestResponse.ok();
+    }
+
+    /**
+     * 修改${comments}
+     *
+     * @param ${classname} ${classname}
+     * @return RestResponse
+     */
+    @Operation(summary = "修改${comments}", description = "修改${comments}")
+    @SysLog("修改${comments}")
+    @PostMapping("/update")
+    @RequiresPermissions("${pre}:${pathName}:update")
+    public RestResponse<String> update(@RequestBody ${className}Entity ${classname}) {
+
+        ${classname}Service.update(${classname});
+
+        return RestResponse.ok();
+    }
+
+    /**
+     * 根据主键删除${comments}
+     *
+     * @param ${pk.attrname}s ${pk.attrname}s
+     * @return RestResponse
+     */
+    @Operation(summary = "删除${comments}", description = "删除${comments}")
+    @SysLog("删除${comments}")
+    @PostMapping("/delete")
+    @RequiresPermissions("${pre}:${pathName}:delete")
+    public RestResponse<String> delete(@RequestBody ${pk.attrType}[] ${pk.attrname}s) {
+        ${classname}Service.deleteBatch(${pk.attrname}s);
+
+        return RestResponse.ok();
+    }
+}

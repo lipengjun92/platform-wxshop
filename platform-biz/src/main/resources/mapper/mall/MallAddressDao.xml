@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.platform.modules.mall.dao.MallAddressDao">
+
+    <sql id="selectSql">
+        SELECT
+        T.ID,
+        T.USER_ID,
+        T.USER_NAME,
+        T.IS_DEFAULT,
+        T.TEL_NUMBER,
+        T.POSTAL_CODE,
+        T.NATIONAL_CODE,
+        T.PROVINCE_NAME,
+        T.CITY_NAME,
+        T.COUNTY_NAME,
+        T.DETAIL_INFO
+        FROM MALL_ADDRESS T
+        WHERE 1=1
+        <if test="params.id != null and params.id.trim() != ''">
+            AND T.ID = #{params.id}
+        </if>
+        <if test="params.name != null and params.name.trim() != ''">
+            AND T.NAME LIKE '%${params.name}%'
+        </if>
+    </sql>
+
+    <select id="selectMallAddressPage" resultType="com.platform.modules.mall.entity.MallAddressEntity">
+        <include refid="selectSql"/>
+    </select>
+
+    <select id="queryAll" resultType="com.platform.modules.mall.entity.MallAddressEntity">
+        <include refid="selectSql"/>
+    </select>
+</mapper>

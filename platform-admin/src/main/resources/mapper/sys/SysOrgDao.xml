@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.platform.modules.sys.dao.SysOrgDao">
+
+    <select id="queryMaxIdByParentNo" resultType="string">
+		SELECT MAX(ORG_NO) FROM SYS_ORG WHERE PARENT_NO = #{parentNo}
+	</select>
+
+	<sql id="selectSql">
+		SELECT O.ORG_NO,
+		O.ORG_NAME,
+		O.PARENT_NO,
+		O.ORG_TYPE,
+		O.STATUS,
+		O.SORT,
+		O.CREATE_TIME,
+		O.CREATE_USER_ID,
+		O.CREATE_USER_ORG_NO,
+		SO.ORG_NAME PARENT_NAME
+		FROM SYS_ORG O
+		LEFT JOIN SYS_ORG SO ON O.PARENT_NO = SO.ORG_NO
+		WHERE 1=1
+		<if test="orgName != null and orgName.trim() != ''">
+			AND O.ORG_NAME LIKE '%${orgName}%'
+		</if>
+		<if test="orgType != null">
+			AND O.ORG_TYPE = #{orgType}
+		</if>
+		<if test="parentName != null and parentName.trim() != ''">
+			AND SO.ORG_NAME LIKE '%${parentName}%'
+		</if>
+	</sql>
+
+	<select id="queryAll" resultType="com.platform.modules.sys.entity.SysOrgEntity">
+		<include refid="selectSql"/>
+	</select>
+
+	<select id="selectChildrensByOrgNo" resultType="com.platform.modules.sys.entity.SysOrgEntity">
+		SELECT
+		ORG_NAME
+		FROM SYS_ORG WHERE PARENT_NO = #{orgNo}
+	</select>
+</mapper>

@@ -2,17 +2,25 @@
  <a target="_blank" href="https://gitee.com/fuyang_lipengjun/platform/blob/master/LICENSE"><img src="https://img.shields.io/github/license/lipengjun92/platform-wxshop"/></a>
  <a href='https://gitee.com/fuyang_lipengjun/platform/stargazers'><img src='https://gitee.com/fuyang_lipengjun/platform/badge/star.svg?theme=gvp' alt='star'/></a>
  <a href='https://gitee.com/fuyang_lipengjun/platform/members'><img src='https://gitee.com/fuyang_lipengjun/platform/badge/fork.svg?theme=gvp' alt='fork'/></a>
- <a target="_blank" href="https://gitee.com/fuyang_lipengjun/platform/contributors?ref=master"><img src="https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fgitee.com%2Ffuyang_lipengjun%2Fplatform%2Fcontributors_count%3Fref%3Dmaster&query=contributors_count&label=Contributors&color=green"/></a>
+ <a target="_blank" href="https://gitee.com/fuyang_lipe ngjun/platform/contributors?ref=master"><img src="https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fgitee.com%2Ffuyang_lipengjun%2Fplatform%2Fcontributors_count%3Fref%3Dmaster&query=contributors_count&label=Contributors&color=green"/></a>
  <a target="_blank" href="http://makeapullrequest.com"><img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square" alt="PRs Welcome" title="PRs Welcome"></a>
 </p>
 <p align="center">
  <img src="https://img.shields.io/github/languages/count/lipengjun92/platform-wxshop?color=red"/>
  <img src="https://img.shields.io/badge/Java-11-blue.svg"/>
- <img src="https://img.shields.io/badge/SpringMVC-4.3.30.RELEASE-blue.svg"/>
+ <img src="https://img.shields.io/badge/SpringBoot-2.7.15-blue.svg"/>
  <img src="https://img.shields.io/badge/MyBatisPlus-3.5.3-blue.svg"/>
- <img src="https://img.shields.io/badge/weixin%20java-4.5.0-blue.svg"/>
+ <img src="https://img.shields.io/badge/weixin%20java-4.5.2-blue.svg"/>
  <img src="https://img.shields.io/badge/MySQL-8.0-blue.svg"/>
 </p>
+
+## SpringBoo版本持续更新中
+- 想参与的同学可以添加微信开发群
+- <img alt="http://platform-wxmall.oss-cn-beijing.aliyuncs.com/kaiyuangroup.jpg" src="http://platform-wxmall.oss-cn-beijing.aliyuncs.com/kaiyuangroup.jpg" width="400"/>
+
+技术站要求：
+- SpringBoot、MybatisPlus
+- Vue2、ElementUI
 
 ## 前后端全部开源微信小程序商城（Java + uniapp）
 
@@ -29,6 +37,7 @@
 <a target="_blank" href="https://qm.qq.com/cgi-bin/qm/qr?k=NI1TX8jkEeRITDnYv-oZ-9onMwNN9MNs&jump_from=webapi&authKey=a/L8SQ0vmI4X9Vomv7JK8Z3t94OxROqmNUW8gUGsldCHpcbd7db26DVB410gNhZv"><img border="0" src="https://img.shields.io/badge/点击加入-66502035-green.svg" alt="微同科技 ①群" title="微同科技 ①群"></a>
 <a target="_blank" href="https://qm.qq.com/cgi-bin/qm/qr?k=qB5gb43KlRIN-5dsIstw-gljfwD-LxDt&jump_from=webapi&authKey=Ua6s5QIIHy9Gf7Df/h1w93wBqaJax3hBPzUmREwDU31H7TMWO5pAh2ua9Bw9z231"><img border="0" src="https://img.shields.io/badge/点击加入-870579539-green.svg" alt="微同科技 ②群" title="微同科技 ②群"></a>
 <a target="_blank" href="https://qm.qq.com/cgi-bin/qm/qr?k=21agOH-MqJLZ5YqxNb-sBcPCB5PTl7XH&jump_from=webapi&authKey=hV6jd0tppJqvTWE/iSEHwLJg5EsTaz/aY/1bj8gWg4giQ4JdDEzYiK12F+u1TnuZ"><img border="0" src="https://img.shields.io/badge/点击加入-151602347-green.svg" alt="微同科技 ③群" title="微同科技 ③群"></a>
+<a target="_blank" href="https://qm.qq.com/cgi-bin/qm/qr?k=-uoUHqs9-qKf8rI5Ni1N7XPWmuUjqW2j&jump_from=webapi&authKey=f1FbGXYVKDo/gfgV9ZOY4XGkmn9huc+0Qx+1IbPP6kJsFyZo3SNOEXJYdWzk8jnu"><img border="0" src="https://img.shields.io/badge/点击加入-476734088-green.svg" alt="微同科技 ④群" title="微同科技 ④群"></a>
 
 <p align="center">
   <b>特别赞助</b>
@@ -64,69 +73,47 @@
 ~~~
 platform
 |--_sql 初始化数据库脚本
-|--platform-admin 后台管理（打包发布此项目）
-|--platform-api 微信小程序商城api接口
+|--platform-admin 后台管理接口服务
+|--platform-admin-ui 后台管理页面
+|--platform-api 微信小程序商城api接口服务
+|--platform-biz 业务代码
 |--platform-common 公共模块
-|--platform-gen 代码生成
-|--platform-schedule 定时任务
 |--uni-mall uniapp版商城
 |--wx-mall 微信小程序原生商城
 ~~~
 
-## 系统架构图
-![18_14_55.PNG](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/image/2023_10_19/18_14_55.png)
-
-## 数据流向图
-![18_16_01.PNG](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/image/2023_10_19/18_16_01.png)
-
 ## 安装教程
 
-* 配置环境（推荐jdk1.8、maven3.3、tomcat8、mysql5.7、redis4.0.1）
+* 配置环境（推荐Java11、maven3.3、mysql8.0、redis4.0.1）
 * 创建数据库
 * 依次初始化sql脚本 
-    * /_sql/platform.sql
-    * /_sql/sys_region.sql
+    * /_sql/base.sql
+    * /_sql/mall.sql
 
 * 导入项目到IDE中
 * 导入支付证书至/platform-admin/src/main/resources/cert/目录下（申请商户号、开通微信支付、下载支付证书）
-* 修改配置文件 /platform-admin/src/main/resources/dev/platform.properties
-    * jdbc.url
-    * jdbc.username
-    * jdbc.password
-    * wx.appId
-    * wx.secret
-    * wx.mchId
-    * wx.paySignKey
-    * wx.notifyUrl
-    * sms.validIp
-    * mp.appId
-    * mp.secret
-    * mp.token
-    * mp.aesKey
-* 修改配置文件 /platform-admin/src/main/resources/j2cache.properties
-    * redis.hosts
-    * redis.password
+* 导入支付证书至/platform-api/src/main/resources/cert/目录下
+* 修改配置文件 /platform-admin/src/main/resources/application.yml
+* 修改配置文件 /platform-api/src/main/resources/application.yml
+  * 微信公众号配置
+  * 微信小程序配置
+  * 微信支付配置
+* 修改配置文件 /platform-admin/src/main/resources/application-dev.yml
+* 修改配置文件 /platform-api/src/main/resources/application-dev.yml
+  * 数据库配置
 * 启动redis服务
-* 启动后台项目（参照<a href="https://doc.fly2you.cn/zh-CN/start/02.html#%E6%9C%AC%E5%9C%B0%E9%83%A8%E7%BD%B2">开发文档</a>）
+* 启动后台项目
+  * 启动类：PlatformAdminApplication.java
+  * 启动类：PlatformApiApplication.java
 * 打开微信开发者工具
 * 导入 /wx-mall填写appId
 * 修改 /wx-mall/config/api.js里API_BASE_URL的值
 * 使用idea启动项目访问路径
-    * [http://localhost:8080/platform-framework](http://localhost:8080/platform-framework)
-* 出现404问题的同学请检查设置`Application context`为`/platform-framework`
+    * [http://localhost:8000](http://localhost:8000)
 
-## 驰骋工作流引擎的安装
-   1. 请参考: https://gitee.com/opencc/JFlow/wikis/pages/preview?sort_id=4199224&doc_id=31094
-   
 ## 页面展示
 ### 接口文档
 ![](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/image/2023_09_20/15_06_39.png "接口文档")
-### 登录页面
-![](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/upload/20180708/login.png "登录")
-### 首页
-![](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/upload/20180708/index.png "首页")
-### 捐赠
-![](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/upload/20180727/4.png "捐赠")
 ### 小程序首页
 ![](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/upload/20180727/5.png "小程序首页")
 ### 专题

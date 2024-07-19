@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="${package}.dao.${className}Dao">
+
+    <sql id="selectSql">
+        SELECT
+#foreach($column in $columns)
+        T.$column.columnName#if($velocityCount != $columns.size()),
+#end
+#end
+
+        FROM ${tableName} T
+        WHERE 1=1
+        <if test="params.id != null and params.id.trim() != ''">
+            AND T.ID = #{params.id}
+        </if>
+        <if test="params.name != null and params.name.trim() != ''">
+            AND T.NAME LIKE '%${params.name}%'
+        </if>
+    </sql>
+
+    <select id="select${className}Page" resultType="${package}.entity.${className}Entity">
+        <include refid="selectSql"/>
+    </select>
+
+    <select id="queryAll" resultType="${package}.entity.${className}Entity">
+        <include refid="selectSql"/>
+    </select>
+</mapper>

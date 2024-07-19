@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.platform.modules.sys.dao.SysRoleDao">
+
+	<!-- 查询用户创建的角色ID列表 -->
+	<select id="queryRoleIdList" resultType="string">
+		SELECT ROLE_ID FROM SYS_ROLE T WHERE 1=1
+	</select>
+
+	<select id="selectSysRolePage" resultType="com.platform.modules.sys.entity.SysRoleEntity">
+		SELECT
+		T.ROLE_ID,
+		T.ROLE_NAME,
+		T.REMARK,
+		T.CREATE_USER_ID,
+		T.CREATE_USER_ORG_NO,
+		T.CREATE_TIME
+		FROM SYS_ROLE T
+		WHERE 1=1
+		<if test="params.roleName != null and params.roleName.trim() != ''">
+			AND T.ROLE_NAME LIKE '%${params.roleName}%'
+		</if>
+	</select>
+</mapper>

@@ -1,60 +1,461 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+
     <groupId>com.platform</groupId>
     <artifactId>platform</artifactId>
-    <version>1.0.0</version>
+    <version>2.0.0</version>
+    <name>platform</name>
     <packaging>pom</packaging>
-    <description>platform</description>
+
+    <profiles>
+        <profile>
+            <id>dev</id>
+            <properties>
+                <env>dev</env>
+            </properties>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+        </profile>
+        <profile>
+            <id>test</id>
+            <properties>
+                <env>test</env>
+            </properties>
+        </profile>
+        <profile>
+            <id>prod</id>
+            <properties>
+                <env>prod</env>
+            </properties>
+        </profile>
+    </profiles>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.7.15</version>
+    </parent>
 
     <modules>
-        <module>platform-common</module> <!-- 公共模块 -->
-        <module>platform-schedule</module> <!-- 定时任务模块 -->
-        <module>platform-gen</module> <!-- 代码生成器模块 -->
-        <module>platform-api</module> <!-- API模块 -->
+        <module>platform-common</module>
         <module>platform-admin</module>
+        <module>platform-api</module>
+        <module>platform-biz</module>
     </modules>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <servlet-version>3.1.0</servlet-version>
-        <junit-version>4.12</junit-version>
-        <springframework-version>4.3.30.RELEASE</springframework-version>
-        <mysql-version>8.0.11</mysql-version>
-        <hibernate-validator-version>5.4.1.Final</hibernate-validator-version>
-        <druid-version>1.2.20</druid-version>
-        <commons-lang-version>2.6</commons-lang-version>
-        <commons-fileupload-version>1.3.3</commons-fileupload-version>
-        <commons-io-version>2.5</commons-io-version>
-        <commons-codec-version>1.10</commons-codec-version>
-        <commons-configuration-version>1.10</commons-configuration-version>
-        <slf4j-version>1.7.19</slf4j-version>
-        <log4j-version>1.2.17</log4j-version>
-        <fastjson-version>1.2.83</fastjson-version>
-        <shiro-version>1.12.0</shiro-version>
-        <velocity-version>1.7</velocity-version>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <java.version>11</java.version>
+        <mybatisplus.version>3.5.3</mybatisplus.version>
+        <jedis.version>3.9.0</jedis.version>
+        <junit.version>4.13.2</junit.version>
+        <mysql.version>8.0.33</mysql.version>
+        <oracle.version>11.2.0.3</oracle.version>
+        <druid.version>1.2.19</druid.version>
+        <dynamic.version>4.1.3</dynamic.version>
+        <quartz.version>2.5.0-rc1</quartz.version>
+        <commons.io.version>2.13.0</commons.io.version>
+        <commons.configuration.version>1.10</commons.configuration.version>
+        <shiro.version>1.12.0</shiro.version>
+        <jwt.version>0.11.5</jwt.version>
+        <jwks-rsa.version>0.22.1</jwks-rsa.version>
+        <kaptcha.version>2.3.3</kaptcha.version>
+        <qiniu.version>[7.14.0, 7.14.99]</qiniu.version>
+        <aliyun.oss.version>3.17.1</aliyun.oss.version>
+        <qcloud.cos.version>5.6.169</qcloud.cos.version>
+        <minio-version>8.5.5</minio-version>
+        <knife4j.version>4.3.0</knife4j.version>
+        <joda.time.version>2.12.2</joda.time.version>
+        <fastjson.version>2.0.40</fastjson.version>
         <velocity-tools-version>2.0</velocity-tools-version>
-        <jstl-version>1.2</jstl-version>
-        <taglibs-version>1.1.2</taglibs-version>
-        <freemarker-version>2.3.23</freemarker-version>
-        <kaptcha.version>2.3.2</kaptcha.version>
-        <j2cache.version>2.7.2-release</j2cache.version>
-        <ehcache.version>2.10.4</ehcache.version>
-        <jgroups.version>3.6.13.Final</jgroups.version>
-        <weixin-java.version>4.5.0</weixin-java.version>
-        <lombok.version>1.18.4</lombok.version>
-        <mybatis-plus.version>3.5.3</mybatis-plus.version>
-        <alipay-sdk.version>3.6.0.ALL</alipay-sdk.version>
+        <easypoi.version>4.4.0</easypoi.version>
+        <lombok.version>1.18.28</lombok.version>
+        <activiti.version>6.0.0</activiti.version>
+        <batik.version>1.16</batik.version>
+        <logstash.version>7.4</logstash.version>
+        <hutool.version>5.8.20</hutool.version>
+        <weixin-java.version>4.5.2.B</weixin-java.version>
+        <alipay-sdk.version>4.38.76.ALL</alipay-sdk.version>
+        <alipay-easysdk.version>2.2.3</alipay-easysdk.version>
+        <javax.mail.version>1.6.2</javax.mail.version>
         <qcloudsms.version>1.0.6</qcloudsms.version>
+        <aliyun-sdk-sms.version>2.0.24</aliyun-sdk-sms.version>
+        <pdfbox.version>3.0.0</pdfbox.version>
+        <hibernate-validator.version>6.2.5.Final</hibernate-validator.version>
         <huaweicloud.obs>3.23.9.1</huaweicloud.obs>
     </properties>
 
-    <!-- 阿里云maven仓库 -->
+    <dependencies>
+        <!--undertow容器-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-undertow</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.github.xiaoymin</groupId>
+            <artifactId>knife4j-openapi3-spring-boot-starter</artifactId>
+            <version>${knife4j.version}</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/javax.servlet/servlet-api -->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>servlet-api</artifactId>
+            <version>3.0-alpha-1</version>
+            <scope>provided</scope>
+        </dependency>
+        <!-- Redis依赖 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+            <exclusions>
+                <!--排除tomcat依赖-->
+                <exclusion>
+                    <artifactId>spring-boot-starter-tomcat</artifactId>
+                    <groupId>org.springframework.boot</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-aop</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context-support</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <!-- mysql驱动 -->
+        <dependency>
+            <groupId>com.mysql</groupId>
+            <artifactId>mysql-connector-j</artifactId>
+            <version>${mysql.version}</version>
+        </dependency>
+        <!-- oracle驱动 -->
+        <dependency>
+            <groupId>com.oracle</groupId>
+            <artifactId>ojdbc6</artifactId>
+            <version>${oracle.version}</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/com.huawei/gsjdbc4 -->
+        <dependency>
+            <groupId>com.huawei</groupId>
+            <artifactId>gsjdbc4</artifactId>
+            <version>1</version>
+        </dependency>
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>dynamic-datasource-spring-boot-starter</artifactId>
+            <version>${dynamic.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid-spring-boot-starter</artifactId>
+            <version>${druid.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-boot-starter</artifactId>
+            <version>${mybatisplus.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.baomidou</groupId>
+                    <artifactId>mybatis-plus-generator</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <!-- fastjson -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>${fastjson.version}</version>
+        </dependency>
+        <!-- commons工具包 -->
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>${commons.io.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-configuration</groupId>
+            <artifactId>commons-configuration</artifactId>
+            <version>${commons.configuration.version}</version>
+        </dependency>
+        <!-- 处理时间库 -->
+        <dependency>
+            <groupId>joda-time</groupId>
+            <artifactId>joda-time</artifactId>
+            <version>${joda.time.version}</version>
+        </dependency>
+        <!-- lombok可使代码更简洁 -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${lombok.version}</version>
+        </dependency>
+        <!-- Knife4j（前身是 swagger-bootstrap-ui，集 Swagger2 和 OpenAPI3 为一体的增强解决方案） -->
+        <dependency>
+            <groupId>com.github.xiaoymin</groupId>
+            <artifactId>knife4j-dependencies</artifactId>
+            <version>${knife4j.version}</version>
+            <type>pom</type>
+            <scope>import</scope>
+        </dependency>
+
+        <!-- Hutool（小而全的 Java 工具类库，通过静态方法封装，降低相关 API 的学习成本，提高工作效率，使 Java 拥有函数式语言般的优雅，让 Java 语言也可以“甜甜的”） -->
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-core</artifactId>
+            <version>${hutool.version}</version>
+        </dependency>
+        <!-- Logstash -->
+        <dependency>
+            <groupId>net.logstash.logback</groupId>
+            <artifactId>logstash-logback-encoder</artifactId>
+            <version>${logstash.version}</version>
+        </dependency>
+        <!-- easypoi依赖 ，处理EXCEL WORD  PDF-->
+        <dependency>
+            <groupId>cn.afterturn</groupId>
+            <artifactId>easypoi-base</artifactId>
+            <version>${easypoi.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>cn.afterturn</groupId>
+            <artifactId>easypoi-web</artifactId>
+            <version>${easypoi.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>cn.afterturn</groupId>
+            <artifactId>easypoi-annotation</artifactId>
+            <version>${easypoi.version}</version>
+        </dependency>
+        <!-- 第三方图片存储 -->
+        <dependency>
+            <groupId>com.qiniu</groupId>
+            <artifactId>qiniu-java-sdk</artifactId>
+            <version>${qiniu.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.aliyun.oss</groupId>
+            <artifactId>aliyun-sdk-oss</artifactId>
+            <version>${aliyun.oss.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.qcloud</groupId>
+            <artifactId>cos_api</artifactId>
+            <version>${qcloud.cos.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-log4j12</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>io.minio</groupId>
+            <artifactId>minio</artifactId>
+            <version>${minio-version}</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/com.huaweicloud/esdk-obs-java-bundle -->
+        <dependency>
+            <groupId>com.huaweicloud</groupId>
+            <artifactId>esdk-obs-java-bundle</artifactId>
+            <version>${huaweicloud.obs}</version>
+        </dependency>
+
+        <!-- Velocity视图所需 -->
+        <dependency>
+            <groupId>org.apache.velocity</groupId>
+            <artifactId>velocity-tools</artifactId>
+            <version>${velocity-tools-version}</version>
+        </dependency>
+        <!-- shiro权限 -->
+        <dependency>
+            <groupId>org.apache.shiro</groupId>
+            <artifactId>shiro-core</artifactId>
+            <version>${shiro.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.shiro</groupId>
+            <artifactId>shiro-spring</artifactId>
+            <version>${shiro.version}</version>
+        </dependency>
+        <!-- jwt鉴权 -->
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt-api</artifactId>
+            <version>${jwt.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt-impl</artifactId>
+            <version>${jwt.version}</version>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt-gson</artifactId>
+            <version>${jwt.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.auth0</groupId>
+            <artifactId>jwks-rsa</artifactId>
+            <version>${jwks-rsa.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate.validator</groupId>
+            <artifactId>hibernate-validator</artifactId>
+            <version>${hibernate-validator.version}</version>
+        </dependency>
+        <!-- weixin-java-mp -->
+        <dependency>
+            <groupId>com.github.binarywang</groupId>
+            <artifactId>weixin-java-mp</artifactId>
+            <version>${weixin-java.version}</version>
+        </dependency>
+
+        <!-- 微信小程序 -->
+        <dependency>
+            <groupId>com.github.binarywang</groupId>
+            <artifactId>weixin-java-miniapp</artifactId>
+            <version>${weixin-java.version}</version>
+        </dependency>
+
+        <!-- 微信支付 -->
+        <dependency>
+            <groupId>com.github.binarywang</groupId>
+            <artifactId>weixin-java-pay</artifactId>
+            <version>${weixin-java.version}</version>
+        </dependency>
+
+        <!-- 企业微信 -->
+        <dependency>
+            <groupId>com.github.binarywang</groupId>
+            <artifactId>weixin-java-cp</artifactId>
+            <version>${weixin-java.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.github.binarywang</groupId>
+            <artifactId>weixin-java-open</artifactId>
+            <version>${weixin-java.version}</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/redis.clients/jedis -->
+        <dependency>
+            <groupId>redis.clients</groupId>
+            <artifactId>jedis</artifactId>
+            <version>${jedis.version}</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/com.alipay.sdk/alipay-easysdk -->
+        <dependency>
+            <groupId>com.alipay.sdk</groupId>
+            <artifactId>alipay-easysdk</artifactId>
+            <version>${alipay-easysdk.version}</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/com.alipay.sdk/alipay-sdk-java -->
+        <dependency>
+            <groupId>com.alipay.sdk</groupId>
+            <artifactId>alipay-sdk-java</artifactId>
+            <version>${alipay-sdk.version}</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.apache.xmlgraphics/batik-transcoder -->
+        <dependency>
+            <groupId>org.apache.xmlgraphics</groupId>
+            <artifactId>batik-transcoder</artifactId>
+            <version>${batik.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.xmlgraphics</groupId>
+            <artifactId>batik-codec</artifactId>
+            <version>${batik.version}</version>
+        </dependency>
+
+        <!-- PDF操作 -->
+        <dependency>
+            <groupId>org.apache.pdfbox</groupId>
+            <artifactId>pdfbox</artifactId>
+            <version>${pdfbox.version}</version>
+        </dependency>
+
+        <!-- 邮件 -->
+        <dependency>
+            <groupId>com.sun.mail</groupId>
+            <artifactId>javax.mail</artifactId>
+            <version>${javax.mail.version}</version>
+        </dependency>
+
+        <!-- 腾讯云短信 -->
+        <dependency>
+            <groupId>com.github.qcloudsms</groupId>
+            <artifactId>qcloudsms</artifactId>
+            <version>${qcloudsms.version}</version>
+        </dependency>
+
+        <!-- 阿里云短信 -->
+        <dependency>
+            <groupId>com.aliyun</groupId>
+            <artifactId>dysmsapi20170525</artifactId>
+            <version>${aliyun-sdk-sms.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.jodd</groupId>
+            <artifactId>jodd-http</artifactId>
+            <version>6.3.0</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-httpclient</groupId>
+            <artifactId>commons-httpclient</artifactId>
+            <version>3.1</version>
+        </dependency>
+    </dependencies>
+
+    <!-- maven仓库 -->
     <repositories>
         <repository>
             <id>public</id>
             <name>aliyun nexus</name>
             <url>http://maven.aliyun.com/nexus/content/groups/public/</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+        </repository>
+        <repository>
+            <id>public</id>
+            <name>nexus</name>
+            <url>http://nexus.dev.dtstack.cn/nexus/content/repositories/dtstack-release/</url>
             <releases>
                 <enabled>true</enabled>
             </releases>
@@ -73,290 +474,12 @@
             </snapshots>
         </pluginRepository>
     </pluginRepositories>
-
-    <dependencies>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>${junit-version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>javax.servlet-api</artifactId>
-            <version>${servlet-version}</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-validator</artifactId>
-            <version>${hibernate-validator-version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-webmvc</artifactId>
-            <version>${springframework-version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-jdbc</artifactId>
-            <version>${springframework-version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-context-support</artifactId>
-            <version>${springframework-version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-aop</artifactId>
-            <version>${springframework-version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-aspects</artifactId>
-            <version>${springframework-version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-test</artifactId>
-            <version>${springframework-version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-            <version>${slf4j-version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-log4j12</artifactId>
-            <version>${slf4j-version}</version>
-        </dependency>
-        <dependency>
-            <groupId>log4j</groupId>
-            <artifactId>log4j</artifactId>
-            <version>${log4j-version}</version>
-        </dependency>
-        <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <version>${mysql-version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>druid</artifactId>
-            <version>${druid-version}</version>
-        </dependency>
-        <dependency>
-            <groupId>commons-lang</groupId>
-            <artifactId>commons-lang</artifactId>
-            <version>${commons-lang-version}</version>
-        </dependency>
-        <dependency>
-            <groupId>commons-fileupload</groupId>
-            <artifactId>commons-fileupload</artifactId>
-            <version>${commons-fileupload-version}</version>
-        </dependency>
-        <dependency>
-            <groupId>commons-io</groupId>
-            <artifactId>commons-io</artifactId>
-            <version>${commons-io-version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>fastjson</artifactId>
-            <version>${fastjson-version}</version>
-        </dependency>
-        <dependency>
-            <groupId>commons-codec</groupId>
-            <artifactId>commons-codec</artifactId>
-            <version>${commons-codec-version}</version>
-        </dependency>
-        <dependency>
-            <groupId>commons-configuration</groupId>
-            <artifactId>commons-configuration</artifactId>
-            <version>${commons-configuration-version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.shiro</groupId>
-            <artifactId>shiro-core</artifactId>
-            <version>${shiro-version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.shiro</groupId>
-            <artifactId>shiro-spring</artifactId>
-            <version>${shiro-version}</version>
-        </dependency>
-        <!-- Velocity视图所需jar -->
-        <dependency>
-            <artifactId>velocity</artifactId>
-            <groupId>org.apache.velocity</groupId>
-            <version>${velocity-version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.velocity</groupId>
-            <artifactId>velocity-tools</artifactId>
-            <version>${velocity-tools-version}</version>
-            <exclusions>
-                <exclusion>
-                    <artifactId>dom4j</artifactId>
-                    <groupId>dom4j</groupId>
-                </exclusion>
-                <exclusion>
-                    <artifactId>oro</artifactId>
-                    <groupId>oro</groupId>
-                </exclusion>
-                <exclusion>
-                    <artifactId>sslext</artifactId>
-                    <groupId>sslext</groupId>
-                </exclusion>
-                <exclusion>
-                    <artifactId>struts-core</artifactId>
-                    <groupId>org.apache.struts</groupId>
-                </exclusion>
-                <exclusion>
-                    <artifactId>struts-taglib</artifactId>
-                    <groupId>org.apache.struts</groupId>
-                </exclusion>
-                <exclusion>
-                    <artifactId>struts-tiles</artifactId>
-                    <groupId>org.apache.struts</groupId>
-                </exclusion>
-                <exclusion>
-                    <artifactId>commons-beanutils</artifactId>
-                    <groupId>commons-beanutils</groupId>
-                </exclusion>
-                <exclusion>
-                    <artifactId>commons-chain</artifactId>
-                    <groupId>commons-chain</groupId>
-                </exclusion>
-                <exclusion>
-                    <artifactId>commons-collections</artifactId>
-                    <groupId>commons-collections</groupId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <!-- JSP视图所需jar -->
-        <dependency>
-            <groupId>jstl</groupId>
-            <artifactId>jstl</artifactId>
-            <version>${jstl-version}</version>
-        </dependency>
-        <dependency>
-            <groupId>taglibs</groupId>
-            <artifactId>standard</artifactId>
-            <version>${taglibs-version}</version>
-        </dependency>
-        <!-- Freemarker视图所需jar -->
-        <dependency>
-            <groupId>org.freemarker</groupId>
-            <artifactId>freemarker</artifactId>
-            <version>${freemarker-version}</version>
-        </dependency>
-        <!--验证码生成工具-->
-        <dependency>
-            <groupId>com.github.penggle</groupId>
-            <artifactId>kaptcha</artifactId>
-            <version>${kaptcha.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>net.oschina.j2cache</groupId>
-            <artifactId>j2cache-core</artifactId>
-            <version>${j2cache.version}</version>
-        </dependency>
-        <dependency><!-- Ehcache 2.x //-->
-            <groupId>net.sf.ehcache</groupId>
-            <artifactId>ehcache</artifactId>
-            <version>${ehcache.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.jgroups</groupId>
-            <artifactId>jgroups</artifactId>
-            <version>${jgroups.version}</version>
-        </dependency>
-
-        <!-- lombok可使代码更简洁 -->
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <version>${lombok.version}</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.baomidou</groupId>
-            <artifactId>mybatis-plus</artifactId>
-            <version>${mybatis-plus.version}</version>
-        </dependency>
-        <!-- https://mvnrepository.com/artifact/com.alipay.sdk/alipay-sdk-java -->
-        <dependency>
-            <groupId>com.alipay.sdk</groupId>
-            <artifactId>alipay-sdk-java</artifactId>
-            <version>${alipay-sdk.version}</version>
-        </dependency>
-        <!-- https://mvnrepository.com/artifact/jakarta.annotation/jakarta.annotation-api -->
-        <dependency>
-            <groupId>jakarta.annotation</groupId>
-            <artifactId>jakarta.annotation-api</artifactId>
-            <version>1.3.5</version>
-        </dependency>
-        <!-- https://mvnrepository.com/artifact/org.aspectj/aspectjweaver -->
-        <dependency>
-            <groupId>org.aspectj</groupId>
-            <artifactId>aspectjweaver</artifactId>
-            <version>1.9.19</version>
-        </dependency>
-
-        <!-- https://mvnrepository.com/artifact/org.aspectj/aspectjrt -->
-        <dependency>
-            <groupId>org.aspectj</groupId>
-            <artifactId>aspectjrt</artifactId>
-            <version>1.9.19</version>
-        </dependency>
-    </dependencies>
     <build>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.8.1</version>
-                <configuration>
-                    <source>11</source>
-                    <target>11</target>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.tomcat.maven</groupId>
-                <artifactId>tomcat7-maven-plugin</artifactId>
-                <version>2.2</version>
-                <configuration>
-                    <!-- 配置端口号，默认为8080 -->
-                    <port>8080</port>
-                    <path>/platform-framework</path>
-                    <!-- 配置是否在完成编译后执行 -->
-                    <useTestClasspath>true</useTestClasspath>
-                </configuration>
-            </plugin>
-            <plugin>
-                <artifactId>maven-war-plugin</artifactId>
-                <version>3.2.3</version>
-                <configuration>
-                    <warSourceDirectory>src/main/webapp</warSourceDirectory>
-                    <failOnMissingWebXml>false</failOnMissingWebXml>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-resources-plugin</artifactId>
-                <version>3.2.0</version>
-                <configuration>
-                    <encoding>UTF-8</encoding>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
-                <version>3.2.0</version>
+                <version>3.0.0</version>
             </plugin>
         </plugins>
     </build>

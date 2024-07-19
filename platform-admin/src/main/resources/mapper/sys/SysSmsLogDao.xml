@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.platform.modules.sys.dao.SysSmsLogDao">
+
+    <sql id="selectSql">
+        SELECT
+        T.ID,
+        T.TEMPLATE_ID,
+        T.CODE,
+        T.MOBILE,
+        T.STIME,
+        T.SIGN,
+        T.SEND_STATUS,
+        T.SEND_ID,
+        T.SUCCESS_NUM,
+        T.RETURN_MSG
+        FROM SYS_SMS_LOG T
+        WHERE 1=1
+        <if test="params.sendId != null and params.sendId.trim() != ''">
+            AND T.SEND_ID LIKE '%${params.sendId}%'
+        </if>
+        <if test="params.mobile != null and params.mobile.trim() != ''">
+            AND T.MOBILE LIKE '%${params.mobile}%'
+        </if>
+        <if test="params.sendStatus != null and params.sendStatus != ''">
+            AND T.SEND_STATUS = #{params.sendStatus}
+        </if>
+    </sql>
+
+    <select id="selectSysSmsLogPage" resultType="com.platform.modules.sys.entity.SysSmsLogEntity">
+        <include refid="selectSql"/>
+    </select>
+
+    <select id="queryAll" resultType="com.platform.modules.sys.entity.SysSmsLogEntity">
+        <include refid="selectSql"/>
+    </select>
+</mapper>

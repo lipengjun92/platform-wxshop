@@ -1,0 +1,204 @@
+projectVersion: @project.version@
+
+# Tomcat
+server:
+  undertow:
+    # 以下的配置会影响buffer,这些buffer会用于服务器连接的IO操作,有点类似netty的池化内存管理
+    # 每块buffer的空间大小,越小的空间被利用越充分，不要设置太大，以免影响其他应用，合适即可
+    buffer-size: 1024
+    direct-buffers: true
+    threads:
+      # 设置IO线程数, 它主要执行非阻塞的任务,它们会负责多个连接, 默认设置每个CPU核心一个线程
+      # 不要设置过大，如果过大，启动项目会报错：打开文件数过多
+      io: 2
+      # 阻塞任务线程池, 当执行类似servlet请求阻塞IO操作, undertow会从这个线程池中取得线程
+      # 它的值设置取决于系统线程执行任务的阻塞系数，默认值是IO线程数*8
+      # 是否分配的直接内存(NIO直接分配的堆外内存)
+      worker: 16
+  port: 8888
+  servlet:
+    context-path: /platform-admin
+
+--- ### 接口文档配置
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+    tags-sorter: alpha
+    operations-sorter: alpha
+    show-extensions: true
+  api-docs:
+    enabled: true
+    path: /v3/api-docs
+  group-configs:
+    - group: 'all'
+      display-name: '全部'
+      paths-to-match: '/**'
+      packages-to-scan:
+        - com.platform.modules.job.controller
+        - com.platform.modules.oss.controller
+        - com.platform.modules.sys.controller
+        - com.platform.modules.wx.controller
+    - group: 'sys'
+      display-name: '系统管理'
+      paths-to-match:
+        - '/sys/**'
+      packages-to-scan:
+        - com.platform.modules.sys.controller
+        - com.platform.modules.gen.controller
+        - com.platform.modules.job.controller
+        - com.platform.modules.oss.controller
+    - group: 'wx'
+      display-name: '微信管理'
+      paths-to-match: '/manage/**'
+      packages-to-scan: com.platform.modules.wx.controller
+
+## 接口文档增强配置
+knife4j:
+  enable: true
+  setting:
+    language: zh_cn
+    swagger-model-name: 实体类列表
+    enable-reload-cache-parameter: true
+    # 是否显示默认的 footer（默认 true 显示）
+    enable-footer: false
+    # 是否自定义 footer（默认 false 非自定义）
+    enable-footer-custom: true
+    # 自定义 footer 内容，支持 Markdown 语法
+    footer-custom-content: 'Copyright © 2018-present [lipengjun](https://gitee.com/fuyang_lipengjun/)&nbsp;⋅&nbsp;[微同软件](https://fly2you.cn/) v@project.version@'
+
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  application:
+    name: @artifactId@
+  profiles:
+    active: @env@
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 100MB
+      enabled: true
+  redis:
+    database: 0
+    host: 127.0.0.1
+    port: 6379
+    # 密码（默认为空）
+    password:
+    # 连接超时时长（毫秒）
+    timeout: 6000ms
+    jedis:
+      pool:
+        # 连接池最大连接数（使用负值表示没有限制）
+        max-active: 10000
+        # 连接池最大阻塞等待时间（使用负值表示没有限制）
+        max-wait: -1ms
+        # 连接池中的最大空闲连接
+        max-idle: 10
+        # 连接池中的最小空闲连接
+        min-idle: 0
+  mvc:
+    throw-exception-if-no-handler-found: true
+    static-path-pattern: /static/**
+  web:
+    resources:
+      add-mappings: false
+
+  # 系统邮件配置一般不会有改动，所以采用硬编码
+  mail:
+    host: smtp.139.com
+    username: 15209831990@139.com
+    password:
+    default-encoding: UTF-8
+
+#mybatis
+mybatis-plus:
+  mapper-locations: classpath*:mapper/**/*.xml
+  #实体扫描，多个package用逗号或者分号分隔
+  typeAliasesPackage: com.platform.modules.*.entity
+  check-config-location: true
+  configuration:
+    #是否开启自动驼峰命名规则（camel case）映射
+    map-underscore-to-camel-case: true
+    #全局地开启或关闭配置文件中的所有映射器已经配置的任何缓存
+    cache-enabled: false
+    call-setters-on-nulls: true
+    #配置JdbcTypeForNull, oracle数据库必须配置
+    jdbc-type-for-null: 'null'
+    #MyBatis 自动映射时未知列或未知属性处理策略 NONE：不做任何处理 (默认值), WARNING：以日志的形式打印相关警告信息, FAILING：当作映射失败处理，并抛出异常和详细信息
+    auto-mapping-unknown-column-behavior: warning
+  global-config:
+    banner: false
+    db-config:
+      #主键类型  0: AUTO "数据库ID自增", 1: NONE "未设置主键类型",2: INPUT "用户输入ID (该类型可以通过自己注册自动填充插件进行填充)", 3: ASSIGN_ID "全局唯一ID", 4: ASSIGN_UUID 全局唯一ID (UUID)
+      id-type: ASSIGN_UUID
+      #数据库大写下划线转换
+      capital-mode: true
+      #全局逻辑删除字段值 3.3.0开始支持，详情看下面。
+      logic-delete-field: isDelete
+      # 逻辑已删除值(默认为 1)
+      logic-delete-value: 0
+      # 逻辑未删除值(默认为 0)
+      logic-not-delete-value: 1
+
+ali:
+  ma: #支付宝小程序配置
+    appId:
+    # 应用私钥
+    privateKey:
+    # 支付宝公钥
+    pubKey:
+  pay:
+    #支付宝分配给开发者的网页&移动应用Id
+    appId:
+    #商户应用公钥
+    rsaPublicKey:
+    #商户应用私钥（注意，如果是Java语言，需要使用pkcs8格式的私钥，避免出现不可预知的错误）
+    merchantPrivateKey:
+    #支付宝公钥
+    alipayPublicKey:
+    #加密方式
+    signType: RSA2
+    #网关域名 线上为：openapi.alipay.com 沙箱为：openapi.alipaydev.com
+    gatewayHost: openapi.alipay.com
+    #通信协议，通常填写https
+    protocol: https
+    #支付回调通知地址
+    baseNotifyUrl: https://fly2you.cn/platform-api
+    encryptKey:
+
+wx:
+  mp:
+    # 公众号的appid
+    appId:
+    # 公众号的appsecret
+    secret:
+    # 接口配置里的Token值
+    token:
+    # 接口配置里的EncodingAESKey值
+    aesKey:
+  miniapp:
+    #微信小程序的appid
+    appid:
+    #微信小程序的Secret
+    secret:
+    #微信小程序消息服务器配置的token
+    token:
+    #微信小程序消息服务器配置的EncodingAESKey
+    aesKey:
+    msgDataFormat: JSON
+  #微信支付配置
+  pay:
+    #微信公众号或者小程序等的appid
+    appId: 1
+    #微信支付商户号
+    mchId: 1
+    #微信支付商户密钥
+    mchKey:
+    #服务商模式下的子商户公众账号ID
+    subAppId:
+    #服务商模式下的子商户号
+    subMchId:
+    # p12证书的位置，可以指定绝对路径，也可以指定类路径（以classpath:开头）
+    keyPath: classpath:/apiclient_cert.p12
+    #支付回调通知地址
+    baseNotifyUrl: https://fly2you.cn/platform-api

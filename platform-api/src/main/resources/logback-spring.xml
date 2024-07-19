@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <!-- 彩色日志 -->
+    <!-- 彩色日志依赖的渲染类 -->
+    <conversionRule conversionWord="clr" converterClass="org.springframework.boot.logging.logback.ColorConverter"/>
+    <conversionRule conversionWord="wex"
+                    converterClass="org.springframework.boot.logging.logback.WhitespaceThrowableProxyConverter"/>
+    <conversionRule conversionWord="wEx"
+                    converterClass="org.springframework.boot.logging.logback.ExtendedWhitespaceThrowableProxyConverter"/>
+    <!-- 彩色日志格式 -->
+    <property name="CONSOLE_LOG_PATTERN"
+              value="${CONSOLE_LOG_PATTERN:-%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(${PID:- }){magenta} %clr(---){faint} %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}}"/>
+    <!-- 开发环境 -->
+    <springProfile name="dev">
+        <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+            <encoder charset="UTF-8"> <!-- encoder 可以指定字符集，对于中文输出有意义 -->
+                <pattern>${CONSOLE_LOG_PATTERN}</pattern>
+            </encoder>
+        </appender>
+
+        <logger name="org.springframework.web" level="INFO"/>
+        <logger name="org.springboot.sample" level="INFO"/>
+        <logger name="com.platform" level="DEBUG"/>
+        <root level="INFO">
+            <appender-ref ref="STDOUT"/>
+        </root>
+    </springProfile>
+
+    <!-- 测试环境 -->
+    <springProfile name="test">
+        <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+            <encoder charset="UTF-8">
+                <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n</pattern>
+            </encoder>
+        </appender>
+
+        <appender name="ROLLING_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+            <File>/home/logs/platform-api/info.log</File>
+            <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+                <!--日志文件输出的文件名-->
+                <FileNamePattern>/home/logs/platform-api/info.%d{yyyy-MM-dd}.log</FileNamePattern>
+                <!--日志文件保留天数-->
+                <maxHistory>7</maxHistory>
+                <totalSizeCap>1GB</totalSizeCap>
+            </rollingPolicy>
+            <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+                <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n</pattern>
+            </encoder>
+        </appender>
+
+        <logger name="org.springframework.web" level="INFO"/>
+        <logger name="org.springboot.sample" level="INFO"/>
+        <logger name="com.platform" level="DEBUG"/>
+        <root level="INFO">
+            <appender-ref ref="STDOUT"/>
+            <appender-ref ref="ROLLING_FILE"/>
+        </root>
+    </springProfile>
+
+    <!-- 生产环境 -->
+    <springProfile name="prod">
+        <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+            <encoder charset="UTF-8">
+                <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n</pattern>
+            </encoder>
+        </appender>
+
+        <appender name="ROLLING_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+            <File>/home/logs/platform-api/info.log</File>
+            <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+                <!--日志文件输出的文件名-->
+                <FileNamePattern>/home/logs/platform-api/info.%d{yyyy-MM-dd}.log</FileNamePattern>
+                <!--日志文件保留天数-->
+                <maxHistory>7</maxHistory>
+                <totalSizeCap>1GB</totalSizeCap>
+            </rollingPolicy>
+            <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+                <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n</pattern>
+            </encoder>
+        </appender>
+
+        <logger name="org.springframework.web" level="ERROR"/>
+        <logger name="org.springboot.sample" level="ERROR"/>
+        <logger name="com.platform" level="INFO"/>
+        <root level="INFO">
+            <appender-ref ref="STDOUT"/>
+            <appender-ref ref="ROLLING_FILE"/>
+        </root>
+    </springProfile>
+
+    <logger name="org.springframework.web" level="INFO"/>
+    <logger name="org.springboot.sample" level="TRACE"/>
+</configuration>

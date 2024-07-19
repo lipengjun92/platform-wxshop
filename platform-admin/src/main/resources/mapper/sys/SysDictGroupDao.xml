@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.platform.modules.sys.dao.SysDictGroupDao">
+    <sql id="selectSql">
+        SELECT
+        T.ID,
+        T.CODE,
+        T.NAME,
+        T.CREATE_TIME,
+        T.REMARK
+        FROM SYS_DICT_GROUP T
+        WHERE 1=1
+        <if test="params.code != null and params.code.trim() != ''">
+            AND T.CODE LIKE '%${params.code}%'
+        </if>
+        <if test="params.name != null and params.name.trim() != ''">
+            AND T.NAME LIKE '%${params.name}%'
+        </if>
+    </sql>
+
+    <select id="selectSysDictGroupPage" resultType="com.platform.modules.sys.entity.SysDictGroupEntity">
+        <include refid="selectSql"/>
+    </select>
+
+    <select id="queryAll" resultType="com.platform.modules.sys.entity.SysDictGroupEntity">
+        <include refid="selectSql"/>
+    </select>
+</mapper>

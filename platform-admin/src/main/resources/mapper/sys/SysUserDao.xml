@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.platform.modules.sys.dao.SysUserDao">
+	<!-- 查询用户的所有权限 -->
+	<select id="queryAllPerms" resultType="string">
+		SELECT M.PERMS FROM SYS_USER_ROLE UR
+			LEFT JOIN SYS_ROLE_MENU RM ON UR.ROLE_ID = RM.ROLE_ID
+			LEFT JOIN SYS_MENU M ON RM.MENU_ID = M.MENU_ID
+		WHERE UR.USER_ID = #{userId}
+	</select>
+
+	<!-- 查询用户的所有菜单ID -->
+	<select id="queryAllMenuId" resultType="string">
+		SELECT DISTINCT RM.MENU_ID FROM SYS_USER_ROLE UR
+			LEFT JOIN SYS_ROLE_MENU RM ON UR.ROLE_ID = RM.ROLE_ID
+		WHERE UR.USER_ID = #{userId}
+	</select>
+
+	<select id="selectListPage" resultType="com.platform.modules.sys.entity.SysUserEntity">
+		SELECT T.USER_ID, T.SEX, T.REAL_NAME, T.USER_NAME, T.ORG_NO, T.EMAIL_HOST, T.EMAIL, T.EMAIL_PW, T.MOBILE, T.STATUS, T.CREATE_TIME,T.CREATE_USER_ID,T.CREATE_USER_ORG_NO FROM SYS_USER T
+		WHERE 1=1
+		<if test="params.userName != null and params.userName != ''">
+			AND T.USER_NAME LIKE '%${params.userName}%'
+		</if>
+		<if test="params.realName != null and params.realName != ''">
+			AND T.REAL_NAME LIKE '%${params.realName}%'
+		</if>
+		<if test="params.mobile != null and params.mobile != ''">
+			AND T.MOBILE LIKE '%${params.mobile}%'
+		</if>
+		<if test="params.orgNo != null and params.orgNo != ''">
+			AND T.ORG_NO = #{params.orgNo}
+		</if>
+		<if test="params.status != null and params.status != ''">
+			AND T.STATUS = #{params.status}
+		</if>
+	</select>
+</mapper>

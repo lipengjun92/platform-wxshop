@@ -1,0 +1,57 @@
+/*
+ *
+ *      Copyright (c) 2018-2099, lipengjun All rights reserved.
+ *
+ *  Redistribution and use in source and binary forms, with or without
+ *  modification, are permitted provided that the following conditions are met:
+ *
+ * Redistributions of source code must retain the above copyright notice,
+ *  this list of conditions and the following disclaimer.
+ *  Redistributions in binary form must reproduce the above copyright
+ *  notice, this list of conditions and the following disclaimer in the
+ *  documentation and/or other materials provided with the distribution.
+ *  Neither the name of the fly2you.cn developer nor the names of its
+ *  contributors may be used to endorse or promote products derived from
+ *  this software without specific prior written permission.
+ *  Author: lipengjun (939961241@qq.com)
+ *
+ */
+package ${package}.entity;
+
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
+import lombok.Data;
+
+import java.io.Serializable;
+#if(${hasBigDecimal})
+import java.math.BigDecimal;
+#end
+#if(${hasDate})
+import java.util.Date;
+#end
+
+/**
+ * ${comments}实体
+ *
+ * @author ${author}
+ * @since ${datetime}
+ */
+@Data
+@TableName("${tableName}")
+public class ${className}Entity implements Serializable {
+    private static final long serialVersionUID = 1L;
+
+#foreach ($column in $columns)
+#if($column.columnName == $pk.columnName)
+    /**
+     * $column.comments
+     */
+    @TableId
+    private $column.attrType $column.attrname;
+#else
+    /**
+     * $column.comments
+     */
+    private $column.attrType $column.attrname;
+#end#end
+}

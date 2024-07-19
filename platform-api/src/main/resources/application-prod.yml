@@ -1,0 +1,51 @@
+server:
+  undertow:
+    accesslog:
+      enabled: true
+      dir: /home/logs/platform-api
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    dynamic:
+      primary: master # 设置默认的数据源或者数据源组，默认值即为 master
+      datasource:
+        master:
+          url: jdbc:mysql://localhost:3306/platform?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&useSSL=false&serverTimezone=Asia/Shanghai
+          username: root
+          password: root1234
+          driverClassName: com.mysql.cj.jdbc.Driver
+        second:
+          url: jdbc:mysql://localhost:3306/platform?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&useSSL=false&serverTimezone=Asia/Shanghai
+          username: root
+          password: root1234
+          driverClassName: com.mysql.cj.jdbc.Driver
+      #dynamic - 公共配置
+      druid:
+        initialSize: 10 # 初始化连接:连接池启动时创建的初始化连接数量
+        minIdle: 10 # 最小空闲连接:连接池中容许保持空闲状态的最小连接数量,低于这个数量将创建新的连接,如果设置为0则不创建
+        maxActive: 1000 # 最大活动连接:连接池在同一时间能够分配的最大活动连接的数量,如果设置为非正数则表示不限制
+        maxWait: 60000 # 最大等待时间:当没有可用连接时,连接池等待连接被归还的最大时间(以毫秒计数),超过时间则抛出异常,如果设置为-1表示无限等待
+        test-while-idle: true # 指明连接是否被空闲连接回收器(如果有)进行检验.如果检测失败,则连接将被从池中去除.
+        test-on-borrow: true # 指明是否在从池中取出连接前进行检验,如果检验失败,则从池中去除连接并尝试取出另一个.
+        test-on-return: false # 指明是否在归还到池中前进行检验
+        timeBetweenEvictionRunsMillis: 60000
+        minEvictableIdleTimeMillis: 300000
+        validationQuery: SELECT 1
+        poolPreparedStatements: true
+        maxPoolPreparedStatementPerConnectionSize: 20
+        filters: stat,wall,slf4j
+        useGlobalDataSourceStat: true
+        stat:
+          log-slow-sql: true
+          merge-sql: true
+          slow-sql-millis: 10000
+    druid:
+      # 监控页面
+      statViewServlet:
+        enabled: true
+        # 设置白名单，不填则允许所有访问
+        allow:
+        url-pattern: /druid/*
+        # 控制台管理用户名和密码
+        login-username: druid
+        login-password: 123456
