@@ -9,8 +9,10 @@
         T.USER_ID,
         T.GOODS_ID,
         T.ADD_TIME,
-        T.REFERRER
+        T.REFERRER,
+        U.NICKNAME
         FROM MALL_FOOTPRINT T
+        LEFT JOIN WX_USER U ON T.USER_ID = U.ID
         WHERE 1=1
         <if test="params.id != null and params.id.trim() != ''">
             AND T.ID = #{params.id}

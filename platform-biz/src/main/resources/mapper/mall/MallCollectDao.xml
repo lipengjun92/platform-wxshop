@@ -10,8 +10,10 @@
         T.VALUE_ID,
         T.ADD_TIME,
         T.IS_ATTENTION,
-        T.TYPE_ID
+        T.TYPE_ID,
+        U.NICKNAME
         FROM MALL_COLLECT T
+        LEFT JOIN WX_USER U ON T.USER_ID = U.ID
         WHERE 1=1
         <if test="params.id != null and params.id.trim() != ''">
             AND T.ID = #{params.id}

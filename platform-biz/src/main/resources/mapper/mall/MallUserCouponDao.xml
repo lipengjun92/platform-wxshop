@@ -14,8 +14,10 @@
         T.ORDER_ID,
         T.COUPON_STATUS,
         T.SOURCE_KEY,
-        T.REFERRER
+        T.REFERRER,
+        U.NICKNAME
         FROM MALL_USER_COUPON T
+        LEFT JOIN WX_USER U ON T.USER_ID = U.ID
         WHERE 1=1
         <if test="params.id != null and params.id.trim() != ''">
             AND T.ID = #{params.id}

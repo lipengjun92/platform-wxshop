@@ -18,6 +18,7 @@
  */
 package com.platform.modules.mall.entity;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
@@ -69,4 +70,9 @@ public class MallFeedbackEntity implements Serializable {
      * 反馈时间
      */
     private Date addTime;
+    /**
+     * 微信昵称
+     */
+    @TableField(exist = false)
+    private String nickname;
 }

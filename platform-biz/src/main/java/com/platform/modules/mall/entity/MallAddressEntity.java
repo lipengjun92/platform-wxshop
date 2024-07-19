@@ -18,6 +18,7 @@
  */
 package com.platform.modules.mall.entity;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
@@ -36,7 +37,7 @@ public class MallAddressEntity implements Serializable {
     private static final long serialVersionUID = 1L;
 
     /**
-     * 
+     *
      */
     @TableId
     private Integer id;
@@ -49,7 +50,7 @@ public class MallAddressEntity implements Serializable {
      */
     private String userName;
     /**
-     * 
+     *
      */
     private Integer isDefault;
     /**
@@ -80,4 +81,9 @@ public class MallAddressEntity implements Serializable {
      * 详细收货地址信息
      */
     private String detailInfo;
+    /**
+     * 微信昵称
+     */
+    @TableField(exist = false)
+    private String nickname;
 }

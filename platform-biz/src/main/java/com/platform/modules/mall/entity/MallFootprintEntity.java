@@ -18,6 +18,7 @@
  */
 package com.platform.modules.mall.entity;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
@@ -56,4 +57,9 @@ public class MallFootprintEntity implements Serializable {
      * 转发人
      */
     private Integer referrer;
+    /**
+     * 微信昵称
+     */
+    @TableField(exist = false)
+    private String nickname;
 }

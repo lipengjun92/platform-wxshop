@@ -18,6 +18,7 @@
  */
 package com.platform.modules.mall.entity;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
@@ -57,7 +58,12 @@ public class MallCollectEntity implements Serializable {
      */
     private Integer isAttention;
     /**
-     * 
+     *
      */
     private Integer typeId;
+    /**
+     * 微信昵称
+     */
+    @TableField(exist = false)
+    private String nickname;
 }
