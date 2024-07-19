@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.platform.modules.mall.dao.MallCategoryDao">
+
+    <sql id="selectSql">
+        SELECT
+        T.ID,
+        T.NAME,
+        T.KEYWORDS,
+        T.FRONT_DESC,
+        T.PARENT_ID,
+        T.SORT_ORDER,
+        T.SHOW_INDEX,
+        T.IS_SHOW,
+        T.BANNER_URL,
+        T.ICON_URL,
+        T.IMG_URL,
+        T.WAP_BANNER_URL,
+        T.LEVEL,
+        T.TYPE,
+        T.FRONT_NAME,
+        C.NAME PARENT_NAME
+        FROM MALL_CATEGORY T
+        LEFT JOIN MALL_CATEGORY C ON T.PARENT_ID = C.ID
+        WHERE 1=1
+        <if test="params.name != null and params.name.trim() != ''">
+            AND T.NAME LIKE '%${params.name}%'
+        </if>
+        <if test="params.isShow != null and params.isShow != ''">
+            AND T.IS_SHOW = #{params.isShow}
+        </if>
+        <if test="params.parentId != null and params.parentId.trim() != ''">
+            AND T.PARENT_ID = #{params.parentId}
+        </if>
+        <if test="params.pName != null and params.pName.trim() != ''">
+            AND C.NAME LIKE '%${params.pName}%'
+        </if>
+        <if test="params.level != null and params.level != ''">
+            AND T.LEVEL = #{params.level}
+        </if>
+        <if test="params.ids != null">
+            and T.ID in
+            <foreach item="item" collection="params.ids" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+        </if>
+    </sql>
+
+    <select id="selectMallCategoryPage" resultType="com.platform.modules.mall.entity.MallCategoryEntity">
+        <include refid="selectSql"/>
+    </select>
+
+    <select id="queryAll" resultType="com.platform.modules.mall.entity.MallCategoryEntity">
+        <include refid="selectSql"/>
+    </select>
+</mapper>
