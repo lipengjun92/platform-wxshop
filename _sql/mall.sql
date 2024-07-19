@@ -8631,7 +8631,7 @@ CREATE TABLE `mall_user`
     UNIQUE KEY `user_name` (`username`)
 ) ENGINE = InnoDB
   AUTO_INCREMENT = 24
-  DEFAULT CHARSET = utf8mb4_general_ci;
+  DEFAULT CHARSET = utf8;
 
 -- ----------------------------
 -- Table structure for `mall_user_coupon`
