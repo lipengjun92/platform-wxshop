@@ -17,11 +17,11 @@
     </resultMap>
 
     <select id="queryObject" resultMap="adMap">
-		select * from nideshop_ad where id = #{value}
+		select * from mall_ad where id = #{value}
 	</select>
 
     <select id="queryList" resultMap="adMap">
-        select * from nideshop_ad
+        select * from mall_ad
         where 1 = 1
         AND enabled = 1
         <if test="adPositionId != null and adPositionId != null">
@@ -41,11 +41,11 @@
     </select>
 
     <select id="queryTotal" resultType="int">
-		select count(*) from nideshop_ad
+		select count(*) from mall_ad
 	</select>
 
     <insert id="save" parameterType="com.platform.entity.AdVo" useGeneratedKeys="true" keyProperty="id">
-		insert into nideshop_ad
+		insert into mall_ad
 		(
 			`ad_position_id`,
 			`media_type`,
@@ -70,7 +70,7 @@
 	</insert>
 
     <update id="update" parameterType="com.platform.entity.AdVo">
-        update nideshop_ad
+        update mall_ad
         <set>
             <if test="adPositionId != null">`ad_position_id` = #{adPositionId},</if>
             <if test="mediaType != null">`media_type` = #{mediaType},</if>
@@ -85,11 +85,11 @@
     </update>
 
     <delete id="delete">
-		delete from nideshop_ad where id = #{value}
+		delete from mall_ad where id = #{value}
 	</delete>
 
     <delete id="deleteBatch">
-        delete from nideshop_ad where id in
+        delete from mall_ad where id in
         <foreach item="id" collection="array" open="(" separator="," close=")">
             #{id}
         </foreach>

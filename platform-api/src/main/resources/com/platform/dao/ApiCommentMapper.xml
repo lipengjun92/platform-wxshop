@@ -15,13 +15,13 @@
     </resultMap>
 
     <select id="queryObject" resultMap="commentMap">
-		select * from nideshop_comment where id = #{value}
+		select * from mall_comment where id = #{value}
 	</select>
 
     <select id="queryList" resultMap="commentMap">
-        select distinct c.* from nideshop_comment c
+        select distinct c.* from mall_comment c
         <if test="hasPic != null and hasPic == 1">
-            left join nideshop_comment_picture cp on cp.comment_id = c.id
+            left join mall_comment_picture cp on cp.comment_id = c.id
         </if>
         where 1 = 1
         <if test="typeId != null and typeId != ''">
@@ -53,7 +53,7 @@
     </select>
 
     <select id="queryTotal" resultType="int">
-        select count(c.id) from nideshop_comment c
+        select count(c.id) from mall_comment c
         where 1= 1
         <if test="typeId != null and typeId != ''">
             and c.type_id = #{typeId}
@@ -67,8 +67,8 @@
     </select>
 
     <select id="queryhasPicTotal" resultType="int">
-        select count(distinct c.id) from nideshop_comment c
-        left join nideshop_comment_picture cp on cp.comment_id = c.id
+        select count(distinct c.id) from mall_comment c
+        left join mall_comment_picture cp on cp.comment_id = c.id
         where 1= 1 and cp.id > 0
         <if test="typeId != null and typeId != ''">
             and c.type_id = #{typeId}
@@ -79,7 +79,7 @@
     </select>
 
     <insert id="save" parameterType="com.platform.entity.CommentVo" useGeneratedKeys="true" keyProperty="id">
-		insert into nideshop_comment
+		insert into mall_comment
 		(
 			`type_id`,
 			`value_id`,
@@ -100,7 +100,7 @@
 	</insert>
 
     <update id="update" parameterType="com.platform.entity.CommentVo">
-        update nideshop_comment
+        update mall_comment
         <set>
             <if test="typeId != null">`type_id` = #{typeId},</if>
             <if test="valueId != null">`value_id` = #{valueId},</if>
@@ -113,11 +113,11 @@
     </update>
 
     <delete id="delete">
-		delete from nideshop_comment where id = #{value}
+		delete from mall_comment where id = #{value}
 	</delete>
 
     <delete id="deleteBatch">
-        delete from nideshop_comment where id in
+        delete from mall_comment where id in
         <foreach item="id" collection="array" open="(" separator="," close=")">
             #{id}
         </foreach>

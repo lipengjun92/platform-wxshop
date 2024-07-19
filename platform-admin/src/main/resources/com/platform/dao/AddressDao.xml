@@ -18,41 +18,41 @@
 
     <select id="queryObject" resultType="com.platform.entity.AddressEntity">
 		select
-        nideshop_address.id,
-		nideshop_address.user_id,
-		nideshop_address.user_name,
-		nideshop_address.tel_number,
-		nideshop_address.postal_Code,
-		nideshop_address.national_Code,
-		nideshop_address.province_Name,
-		nideshop_address.city_Name,
-		nideshop_address.county_Name,
-		nideshop_address.detail_Info,
-        nideshop_user.username shop_user_name
-        from nideshop_address LEFT JOIN nideshop_user ON nideshop_address.user_id = nideshop_user.id
-		where nideshop_address.id = #{id}
+        mall_address.id,
+		mall_address.user_id,
+		mall_address.user_name,
+		mall_address.tel_number,
+		mall_address.postal_Code,
+		mall_address.national_Code,
+		mall_address.province_Name,
+		mall_address.city_Name,
+		mall_address.county_Name,
+		mall_address.detail_Info,
+        mall_user.username shop_user_name
+        from mall_address LEFT JOIN mall_user ON mall_address.user_id = mall_user.id
+		where mall_address.id = #{id}
 	</select>
 
     <select id="queryList" resultType="com.platform.entity.AddressEntity">
         select
-        nideshop_address.id,
-        nideshop_address.user_id,
-        nideshop_address.user_name,
-        nideshop_address.tel_number,
-        nideshop_address.postal_Code,
-        nideshop_address.national_Code,
-        nideshop_address.province_Name,
-        nideshop_address.city_Name,
-        nideshop_address.county_Name,
-        nideshop_address.detail_Info,
-        nideshop_user.username shop_user_name
-        from nideshop_address LEFT JOIN nideshop_user ON nideshop_address.user_id = nideshop_user.id
+        mall_address.id,
+        mall_address.user_id,
+        mall_address.user_name,
+        mall_address.tel_number,
+        mall_address.postal_Code,
+        mall_address.national_Code,
+        mall_address.province_Name,
+        mall_address.city_Name,
+        mall_address.county_Name,
+        mall_address.detail_Info,
+        mall_user.username shop_user_name
+        from mall_address LEFT JOIN mall_user ON mall_address.user_id = mall_user.id
         WHERE 1=1
         <if test="userName != null and userName != ''">
-            AND nideshop_address.user_name LIKE concat('%', #{userName},'%')
+            AND mall_address.user_name LIKE concat('%', #{userName},'%')
         </if>
         <if test="telNumber != null and telNumber != ''">
-            AND nideshop_address.tel_number LIKE concat('%', #{telNumber},'%')
+            AND mall_address.tel_number LIKE concat('%', #{telNumber},'%')
         </if>
         <choose>
             <when test="sidx != null and sidx.trim() != ''">
@@ -68,18 +68,18 @@
     </select>
 
     <select id="queryTotal" resultType="int">
-        select count(*) from nideshop_address
+        select count(*) from mall_address
         WHERE 1=1
         <if test="userName != null and userName != ''">
-            AND nideshop_address.user_name LIKE concat('%', #{userName},'%')
+            AND mall_address.user_name LIKE concat('%', #{userName},'%')
         </if>
         <if test="telNumber != null and telNumber != ''">
-            AND nideshop_address.tel_number LIKE concat('%', #{telNumber},'%')
+            AND mall_address.tel_number LIKE concat('%', #{telNumber},'%')
         </if>
     </select>
 
     <insert id="save" parameterType="com.platform.entity.AddressEntity" useGeneratedKeys="true" keyProperty="id">
-		insert into nideshop_address(
+		insert into mall_address(
 			`user_id`,
 			`user_name`,
 			`tel_number`,
@@ -102,7 +102,7 @@
 	</insert>
 
     <update id="update" parameterType="com.platform.entity.AddressEntity">
-        update nideshop_address
+        update mall_address
         <set>
             <if test="userId != null">`user_id` = #{userId}, </if>
             <if test="userName != null">`user_name` = #{userName}, </if>
@@ -118,11 +118,11 @@
     </update>
 
     <delete id="delete">
-		delete from nideshop_address where id = #{value}
+		delete from mall_address where id = #{value}
 	</delete>
 
     <delete id="deleteBatch">
-        delete from nideshop_address where id in
+        delete from mall_address where id in
         <foreach item="id" collection="array" open="(" separator="," close=")">
             #{id}
         </foreach>

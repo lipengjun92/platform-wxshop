@@ -4,7 +4,7 @@ import lombok.Data;
 
 /**
  * 实体
- * 表名 nideshop_category
+ * 表名 mall_category
  *
  * @author lipengjun
  * @email 939961241@qq.com

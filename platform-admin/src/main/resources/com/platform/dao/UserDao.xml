@@ -36,28 +36,28 @@
 			register_ip,
 			avatar,
 			weixin_openid
-		from nideshop_user
+		from mall_user
 		where id = #{id}
 	</select>
 
     <select id="queryList" resultType="com.platform.entity.UserEntity">
         select
-        nideshop_user.id,
-        nideshop_user.username,
-        nideshop_user.password,
-        nideshop_user.gender,
-        nideshop_user.birthday,
-        nideshop_user.register_time,
-        nideshop_user.last_login_time,
-        nideshop_user.last_login_ip,
-        nideshop_user.user_level_id,
-        nideshop_user.nickname,
-        nideshop_user.mobile,
-        nideshop_user.register_ip,
-        nideshop_user.avatar,
-        nideshop_user.weixin_openid,
-        nideshop_user_level.name levelName
-        from nideshop_user LEFT JOIN nideshop_user_level ON nideshop_user.user_level_id=nideshop_user_level.id
+        mall_user.id,
+        mall_user.username,
+        mall_user.password,
+        mall_user.gender,
+        mall_user.birthday,
+        mall_user.register_time,
+        mall_user.last_login_time,
+        mall_user.last_login_ip,
+        mall_user.user_level_id,
+        mall_user.nickname,
+        mall_user.mobile,
+        mall_user.register_ip,
+        mall_user.avatar,
+        mall_user.weixin_openid,
+        mall_user_level.name levelName
+        from mall_user LEFT JOIN mall_user_level ON mall_user.user_level_id=mall_user_level.id
         WHERE 1=1
         <if test="nickname != null and nickname.trim() != ''">
             and nickname like concat('%',#{nickname},'%')
@@ -76,7 +76,7 @@
     </select>
 
     <select id="queryTotal" resultType="int">
-        select count(*) from nideshop_user
+        select count(*) from mall_user
         WHERE 1=1
         <if test="nickname != null and nickname.trim() != ''">
             and nickname like concat('%',#{nickname},'%')
@@ -84,7 +84,7 @@
     </select>
 
     <insert id="save" parameterType="com.platform.entity.UserEntity" useGeneratedKeys="true" keyProperty="id">
-		insert into nideshop_user(
+		insert into mall_user(
 			`username`,
 			`password`,
 			`gender`,
@@ -115,7 +115,7 @@
 	</insert>
 
     <update id="update" parameterType="com.platform.entity.UserEntity">
-        update nideshop_user
+        update mall_user
         <set>
             <if test="username != null">`username` = #{username},</if>
             <if test="password != null">`password` = #{password},</if>
@@ -135,11 +135,11 @@
     </update>
 
     <delete id="delete">
-		delete from nideshop_user where id = #{value}
+		delete from mall_user where id = #{value}
 	</delete>
 
     <delete id="deleteBatch">
-        delete from nideshop_user where id in
+        delete from mall_user where id in
         <foreach item="id" collection="array" open="(" separator="," close=")">
             #{id}
         </foreach>

@@ -11,11 +11,11 @@
     </resultMap>
 
     <select id="queryObject" resultMap="specificationMap">
-		select * from nideshop_specification where id = #{value}
+		select * from mall_specification where id = #{value}
 	</select>
 
     <select id="queryList" resultMap="specificationMap">
-        select * from nideshop_specification
+        select * from mall_specification
         <choose>
             <when test="sidx != null and sidx.trim() != ''">
                 order by ${sidx} ${order}
@@ -30,11 +30,11 @@
     </select>
 
     <select id="queryTotal" resultType="int">
-		select count(*) from nideshop_specification
+		select count(*) from mall_specification
 	</select>
 
     <insert id="save" parameterType="com.platform.entity.SpecificationVo" useGeneratedKeys="true" keyProperty="id">
-		insert into nideshop_specification
+		insert into mall_specification
 		(
 			`name`,
 			`sort_order`
@@ -47,7 +47,7 @@
 	</insert>
 
     <update id="update" parameterType="com.platform.entity.SpecificationVo">
-        update nideshop_specification
+        update mall_specification
         <set>
             <if test="name != null">`name` = #{name},</if>
             <if test="sortOrder != null">`sort_order` = #{sortOrder}</if>
@@ -56,11 +56,11 @@
     </update>
 
     <delete id="delete">
-		delete from nideshop_specification where id = #{value}
+		delete from mall_specification where id = #{value}
 	</delete>
 
     <delete id="deleteBatch">
-        delete from nideshop_specification where id in
+        delete from mall_specification where id in
         <foreach item="id" collection="array" open="(" separator="," close=")">
             #{id}
         </foreach>

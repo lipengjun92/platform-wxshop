@@ -18,38 +18,38 @@
 			`specification_id`,
 			`value`,
 			`pic_url`
-		from nideshop_goods_specification
+		from mall_goods_specification
 		where id = #{id}
 	</select>
 
     <select id="queryList" resultType="com.platform.entity.GoodsSpecificationEntity">
         select
-        nideshop_goods_specification.id,
-        nideshop_goods_specification.goods_id,
-        nideshop_goods_specification.specification_id,
-        nideshop_goods_specification.value,
-        nideshop_goods_specification.pic_url,
-        nideshop_goods.name goods_name,
-        nideshop_specification.name specification_name
-        from nideshop_goods_specification
-        LEFT JOIN nideshop_goods ON nideshop_goods.id = nideshop_goods_specification.goods_id
-        LEFT JOIN nideshop_specification ON nideshop_specification.id = nideshop_goods_specification.specification_id
+        mall_goods_specification.id,
+        mall_goods_specification.goods_id,
+        mall_goods_specification.specification_id,
+        mall_goods_specification.value,
+        mall_goods_specification.pic_url,
+        mall_goods.name goods_name,
+        mall_specification.name specification_name
+        from mall_goods_specification
+        LEFT JOIN mall_goods ON mall_goods.id = mall_goods_specification.goods_id
+        LEFT JOIN mall_specification ON mall_specification.id = mall_goods_specification.specification_id
         WHERE 1=1
         <if test="goodsName != null and goodsName.trim() != ''">
-            AND nideshop_goods.name LIKE concat('%',#{goodsName},'%')
+            AND mall_goods.name LIKE concat('%',#{goodsName},'%')
         </if>
         <if test="goodsId != null">
-            AND nideshop_goods_specification.goods_id = #{goodsId}
+            AND mall_goods_specification.goods_id = #{goodsId}
         </if>
         <if test="specificationId != null">
-            AND nideshop_goods_specification.specification_id = #{specificationId}
+            AND mall_goods_specification.specification_id = #{specificationId}
         </if>
         <choose>
             <when test="sidx != null and sidx.trim() != ''">
                 order by ${sidx} ${order}
             </when>
             <otherwise>
-                order by nideshop_goods_specification.id desc
+                order by mall_goods_specification.id desc
             </otherwise>
         </choose>
         <if test="offset != null and limit != null">
@@ -58,23 +58,23 @@
     </select>
 
     <select id="queryTotal" resultType="int">
-        select count(*) from nideshop_goods_specification
-        LEFT JOIN nideshop_goods ON nideshop_goods.id = nideshop_goods_specification.goods_id
+        select count(*) from mall_goods_specification
+        LEFT JOIN mall_goods ON mall_goods.id = mall_goods_specification.goods_id
         WHERE 1=1
         <if test="goodsName != null and goodsName.trim() != ''">
-            AND nideshop_goods.name LIKE concat('%',#{goodsName},'%')
+            AND mall_goods.name LIKE concat('%',#{goodsName},'%')
         </if>
         <if test="goodsId != null">
-            AND nideshop_goods_specification.goods_id = #{goodsId}
+            AND mall_goods_specification.goods_id = #{goodsId}
         </if>
         <if test="specificationId != null">
-            AND nideshop_goods_specification.specification_id = #{specificationId}
+            AND mall_goods_specification.specification_id = #{specificationId}
         </if>
     </select>
 
     <insert id="save" parameterType="com.platform.entity.GoodsSpecificationEntity" useGeneratedKeys="true"
             keyProperty="id">
-		insert into nideshop_goods_specification(
+		insert into mall_goods_specification(
 			`goods_id`,
 			`specification_id`,
 			`value`,
@@ -87,7 +87,7 @@
 	</insert>
 
     <update id="update" parameterType="com.platform.entity.GoodsSpecificationEntity">
-        update nideshop_goods_specification
+        update mall_goods_specification
         <set>
             <if test="goodsId != null">`goods_id` = #{goodsId},</if>
             <if test="specificationId != null">`specification_id` = #{specificationId},</if>
@@ -98,11 +98,11 @@
     </update>
 
     <delete id="delete">
-		delete from nideshop_goods_specification where id = #{value}
+		delete from mall_goods_specification where id = #{value}
 	</delete>
 
     <delete id="deleteBatch">
-        delete from nideshop_goods_specification where id in
+        delete from mall_goods_specification where id in
         <foreach item="id" collection="array" open="(" separator="," close=")">
             #{id}
         </foreach>

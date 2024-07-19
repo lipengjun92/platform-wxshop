@@ -7,7 +7,7 @@ import java.io.Serializable;
 
 /**
  * 商品顶部轮播图
- * 表名 nideshop_goods_gallery
+ * 表名 mall_goods_gallery
  *
  * @author lipengjun
  * @email 939961241@qq.com

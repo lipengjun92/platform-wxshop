@@ -25,11 +25,11 @@
     </resultMap>
 
     <select id="queryObject" resultMap="couponMap">
-		select * from nideshop_coupon where id = #{value}
+		select * from mall_coupon where id = #{value}
 	</select>
 
     <select id="queryList" resultMap="couponMap">
-        select * from nideshop_coupon a
+        select * from mall_coupon a
         where 1 = 1
         <if test="sendTypes != null">
             and send_type in
@@ -52,7 +52,7 @@
     </select>
 
     <insert id="save" parameterType="com.platform.entity.CouponVo" useGeneratedKeys="true" keyProperty="id">
-		insert into nideshop_coupon
+		insert into mall_coupon
 		(
 			`name`,
 			`type_money`,
@@ -81,7 +81,7 @@
 	</insert>
 
     <update id="update" parameterType="com.platform.entity.CouponVo">
-        update nideshop_coupon
+        update mall_coupon
         <set>
             <if test="name != null">`name` = #{name},</if>
             <if test="typeMoney != null">`type_money` = #{typeMoney},</if>
@@ -99,7 +99,7 @@
     </update>
 
     <update id="updateUserCoupon" parameterType="com.platform.entity.CouponVo">
-        update nideshop_user_coupon
+        update mall_user_coupon
         <set>
             <if test="couponStatus != null">`coupon_status` = #{couponStatus}</if>
         </set>
@@ -107,11 +107,11 @@
     </update>
 
     <delete id="delete">
-		delete from nideshop_coupon where id = #{value}
+		delete from mall_coupon where id = #{value}
 	</delete>
 
     <delete id="deleteBatch">
-        delete from nideshop_coupon where id in
+        delete from mall_coupon where id in
         <foreach item="id" collection="array" open="(" separator="," close=")">
             #{id}
         </foreach>
@@ -119,8 +119,8 @@
 
     <select id="queryUserCoupons" resultMap="couponMap">
         select a.*,b.coupon_number,b.user_id,b.coupon_status,b.id user_coupon_id
-        from nideshop_coupon a
-        left join nideshop_user_coupon b on a.id = b.coupon_id
+        from mall_coupon a
+        left join mall_user_coupon b on a.id = b.coupon_id
         where 1 = 1
         <if test="userId != null">
             and b.`user_id` = #{userId}
@@ -163,8 +163,8 @@
         a.`use_end_date`,
         a.`min_goods_amount`,
         a.min_transmit_num
-        from nideshop_coupon a
-        left join nideshop_coupon b on a.send_type = b.send_type and b.type_money > a.type_money
+        from mall_coupon a
+        left join mall_coupon b on a.send_type = b.send_type and b.type_money > a.type_money
         where 1 = 1
         and a.use_end_date >= now()
         and now() >= a.use_start_date
@@ -177,8 +177,8 @@
 
     <select id="queryUserCouponList" resultMap="couponMap">
         select a.*,b.coupon_number,b.user_id
-        from nideshop_coupon a
-        left join nideshop_user_coupon b on a.id = b.coupon_id
+        from mall_coupon a
+        left join mall_user_coupon b on a.id = b.coupon_id
         where 1 = 1
         and a.use_end_date >= now()
         and now() >= a.use_start_date
@@ -188,8 +188,8 @@
 
     <select id="getUserCoupon" resultMap="couponMap">
         select a.*,b.coupon_number,b.user_id,b.coupon_status,b.id user_coupon_id
-        from nideshop_coupon a
-        left join nideshop_user_coupon b on a.id = b.coupon_id
+        from mall_coupon a
+        left join mall_user_coupon b on a.id = b.coupon_id
         where 1 = 1
         and b.id = #{id}
     </select>

@@ -18,13 +18,13 @@
     </resultMap>
 
     <select id="queryObject" resultMap="collectMap">
-		select * from nideshop_collect where id = #{value}
+		select * from mall_collect where id = #{value}
 	</select>
 
     <select id="queryList" resultMap="collectMap">
         select c.*,g.name, g.list_pic_url, g.goods_brief as goods_brief, g.retail_price as retail_price
-        from nideshop_collect c
-        left join nideshop_goods g on c.value_id = g.id
+        from mall_collect c
+        left join mall_goods g on c.value_id = g.id
         where 1 = 1
         <if test="userId != null and userId != ''">
             and c.user_id = #{userId}
@@ -50,7 +50,7 @@
 
     <select id="queryTotal" resultType="int">
         select count(*)
-        from nideshop_collect c
+        from mall_collect c
         where 1 = 1
         <if test="userId != null and userId != ''">
             and c.user_id = #{userId}
@@ -64,7 +64,7 @@
     </select>
 
     <insert id="save" parameterType="com.platform.entity.CollectVo" useGeneratedKeys="true" keyProperty="id">
-		insert into nideshop_collect
+		insert into mall_collect
 		(
 			`user_id`,
 			`value_id`,
@@ -83,7 +83,7 @@
 	</insert>
 
     <update id="update" parameterType="com.platform.entity.CollectVo">
-        update nideshop_collect
+        update mall_collect
         <set>
             <if test="userId != null">`user_id` = #{userId},</if>
             <if test="valueId != null">`value_id` = #{valueId},</if>
@@ -95,11 +95,11 @@
     </update>
 
     <delete id="delete">
-		delete from nideshop_collect where id = #{value}
+		delete from mall_collect where id = #{value}
 	</delete>
 
     <delete id="deleteBatch">
-        delete from nideshop_collect where id in
+        delete from mall_collect where id in
         <foreach item="id" collection="array" open="(" separator="," close=")">
             #{id}
         </foreach>

@@ -8,7 +8,7 @@ import java.math.BigDecimal;
 
 /**
  * 实体
- * 表名 nideshop_brand
+ * 表名 mall_brand
  *
  * @author lipengjun
  * @email 939961241@qq.com

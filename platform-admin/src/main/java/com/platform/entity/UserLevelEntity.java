@@ -7,7 +7,7 @@ import java.io.Serializable;
 
 /**
  * 实体
- * 表名 nideshop_user_level
+ * 表名 mall_user_level
  *
  * @author lipengjun
  * @email 939961241@qq.com

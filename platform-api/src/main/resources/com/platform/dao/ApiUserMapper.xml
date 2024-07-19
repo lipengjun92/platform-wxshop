@@ -22,22 +22,22 @@
     </resultMap>
 
     <select id="queryObject" resultMap="userMap">
-		select * from nideshop_user where id = #{value}
+		select * from mall_user where id = #{value}
 	</select>
 
     <select id="queryByOpenId" resultMap="userMap">
-        select * from nideshop_user
+        select * from mall_user
         where 1 = 1
         <if test="openId != null">
             and `weixin_openid` = #{openId}
         </if>
     </select>
     <select id="queryByMobile" resultMap="userMap">
-      select * from nideshop_user where `mobile` = #{mobile}
+      select * from mall_user where `mobile` = #{mobile}
     </select>
 
     <select id="queryList" resultMap="userMap">
-        select * from nideshop_user
+        select * from mall_user
         <choose>
             <when test="sidx != null and sidx.trim() != ''">
                 order by ${sidx} ${order}
@@ -52,11 +52,11 @@
     </select>
 
     <select id="queryTotal" resultType="int">
-		select count(*) from nideshop_user
+		select count(*) from mall_user
 	</select>
 
     <insert id="save" parameterType="com.platform.entity.UserVo" useGeneratedKeys="true" keyProperty="userId">
-		insert into nideshop_user
+		insert into mall_user
 		(
 			`username`,
 			`password`,
@@ -91,7 +91,7 @@
 	</insert>
 
     <update id="update" parameterType="com.platform.entity.UserVo">
-        update nideshop_user
+        update mall_user
         <set>
             <if test="username != null">`username` = #{username},</if>
             <if test="password != null">`password` = #{password},</if>
@@ -130,13 +130,13 @@
         a.sms_code,
         a.send_status,
         a.sms_text
-        from nideshop_sms_log a
-        left join nideshop_sms_log b on a.user_id = b.user_id and b.log_date > a.log_date
+        from mall_sms_log a
+        left join mall_sms_log b on a.user_id = b.user_id and b.log_date > a.log_date
         where a.user_id = #{userId} and b.id is null
     </select>
 
     <insert id="saveSmsCodeLog" parameterType="com.platform.entity.SmsLogVo">
-        insert into nideshop_sms_log(
+        insert into mall_sms_log(
         `id`,
         `user_id`,
         `phone`,

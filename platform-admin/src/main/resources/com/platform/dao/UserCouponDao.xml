@@ -22,37 +22,37 @@
 			`used_time`,
 			`add_time`,
 			`order_id`
-		from nideshop_user_coupon
+		from mall_user_coupon
 		where id = #{id}
 	</select>
 
     <select id="queryList" resultType="com.platform.entity.UserCouponEntity">
         select
-        nideshop_user_coupon.id,
-        nideshop_user_coupon.coupon_id,
-        nideshop_user_coupon.coupon_number,
-        nideshop_user_coupon.user_id,
-        nideshop_user_coupon.used_time,
-        nideshop_user_coupon.add_time,
-        nideshop_user_coupon.order_id,
-        nideshop_user.username user_name,
-        nideshop_coupon.name coupon_name
-        from nideshop_user_coupon
-        LEFT JOIN nideshop_user ON nideshop_user_coupon.user_id = nideshop_user.id
-        LEFT JOIN nideshop_coupon ON nideshop_user_coupon.coupon_id = nideshop_coupon.id
+        mall_user_coupon.id,
+        mall_user_coupon.coupon_id,
+        mall_user_coupon.coupon_number,
+        mall_user_coupon.user_id,
+        mall_user_coupon.used_time,
+        mall_user_coupon.add_time,
+        mall_user_coupon.order_id,
+        mall_user.username user_name,
+        mall_coupon.name coupon_name
+        from mall_user_coupon
+        LEFT JOIN mall_user ON mall_user_coupon.user_id = mall_user.id
+        LEFT JOIN mall_coupon ON mall_user_coupon.coupon_id = mall_coupon.id
         WHERE 1=1
         <if test="userName != null and userName.trim() != ''">
-            AND nideshop_user.username LIKE concat('%',#{userName},'%')
+            AND mall_user.username LIKE concat('%',#{userName},'%')
         </if>
         <if test="couponName != null and couponName.trim() != ''">
-            AND nideshop_coupon.name LIKE concat('%',#{couponName},'%')
+            AND mall_coupon.name LIKE concat('%',#{couponName},'%')
         </if>
         <choose>
             <when test="sidx != null and sidx.trim() != ''">
                 order by ${sidx} ${order}
             </when>
             <otherwise>
-                order by nideshop_user_coupon.id desc
+                order by mall_user_coupon.id desc
             </otherwise>
         </choose>
         <if test="offset != null and limit != null">
@@ -62,19 +62,19 @@
 
     <select id="queryTotal" resultType="int">
         select count(*)
-        from nideshop_user_coupon LEFT JOIN nideshop_user ON nideshop_user_coupon.user_id = nideshop_user.id
-        LEFT JOIN nideshop_coupon ON nideshop_user_coupon.coupon_id = nideshop_coupon.id
+        from mall_user_coupon LEFT JOIN mall_user ON mall_user_coupon.user_id = mall_user.id
+        LEFT JOIN mall_coupon ON mall_user_coupon.coupon_id = mall_coupon.id
         WHERE 1=1
         <if test="userName != null and userName.trim() != ''">
-            AND nideshop_user.username LIKE concat('%',#{userName},'%')
+            AND mall_user.username LIKE concat('%',#{userName},'%')
         </if>
         <if test="couponName != null and couponName.trim() != ''">
-            AND nideshop_coupon.name LIKE concat('%',#{couponName},'%')
+            AND mall_coupon.name LIKE concat('%',#{couponName},'%')
         </if>
     </select>
 
     <insert id="save" parameterType="com.platform.entity.UserCouponEntity" useGeneratedKeys="true" keyProperty="id">
-		insert into nideshop_user_coupon(
+		insert into mall_user_coupon(
 			`coupon_id`,
 			`coupon_number`,
 			`user_id`,
@@ -91,7 +91,7 @@
 	</insert>
 
     <update id="update" parameterType="com.platform.entity.UserCouponEntity">
-        update nideshop_user_coupon
+        update mall_user_coupon
         <set>
             <if test="couponId != null">`coupon_id` = #{couponId},</if>
             <if test="couponNumber != null">`coupon_number` = #{couponNumber},</if>
@@ -104,11 +104,11 @@
     </update>
 
     <delete id="delete">
-		delete from nideshop_user_coupon where id = #{value}
+		delete from mall_user_coupon where id = #{value}
 	</delete>
 
     <delete id="deleteBatch">
-        delete from nideshop_user_coupon where id in
+        delete from mall_user_coupon where id in
         <foreach item="id" collection="array" open="(" separator="," close=")">
             #{id}
         </foreach>

@@ -16,7 +16,7 @@
 			`comment_id`,
 			`pic_url`,
 			`sort_order`
-		from nideshop_comment_picture
+		from mall_comment_picture
 		where id = #{id}
 	</select>
 
@@ -26,7 +26,7 @@
         `comment_id`,
         `pic_url`,
         `sort_order`
-        from nideshop_comment_picture
+        from mall_comment_picture
         WHERE 1=1
         <if test="commentId != null and commentId.trim() != ''">
             AND comment_id = #{commentId}
@@ -45,7 +45,7 @@
     </select>
 
     <select id="queryTotal" resultType="int">
-        select count(*) from nideshop_comment_picture
+        select count(*) from mall_comment_picture
         WHERE 1=1
         <if test="commentId != null and commentId.trim() != ''">
             AND comment_id = #{commentId}
@@ -53,7 +53,7 @@
     </select>
 
     <insert id="save" parameterType="com.platform.entity.CommentPictureEntity" useGeneratedKeys="true" keyProperty="id">
-		insert into nideshop_comment_picture(
+		insert into mall_comment_picture(
 			`comment_id`,
 			`pic_url`,
 			`sort_order`)
@@ -64,7 +64,7 @@
 	</insert>
 
     <update id="update" parameterType="com.platform.entity.CommentPictureEntity">
-        update nideshop_comment_picture
+        update mall_comment_picture
         <set>
             <if test="commentId != null">`comment_id` = #{commentId},</if>
             <if test="picUrl != null">`pic_url` = #{picUrl},</if>
@@ -74,17 +74,17 @@
     </update>
 
     <delete id="delete">
-		delete from nideshop_comment_picture where id = #{value}
+		delete from mall_comment_picture where id = #{value}
 	</delete>
 
     <delete id="deleteBatch">
-        delete from nideshop_comment_picture where id in
+        delete from mall_comment_picture where id in
         <foreach item="id" collection="array" open="(" separator="," close=")">
             #{id}
         </foreach>
     </delete>
 
     <delete id="deleteByCommentId">
-        delete from nideshop_comment_picture where comment_id = #{commentId}
+        delete from mall_comment_picture where comment_id = #{commentId}
     </delete>
 </mapper>

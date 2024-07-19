@@ -22,42 +22,42 @@
 			`add_time`,
 			`status`,
 			`user_id`
-		from nideshop_comment
+		from mall_comment
 		where id = #{id}
 	</select>
 
     <select id="queryList" resultType="com.platform.entity.CommentEntity">
         select
-        nideshop_comment.id,
-        nideshop_comment.type_id,
-        nideshop_comment.value_id,
-        nideshop_comment.content,
-        nideshop_comment.add_time,
-        nideshop_comment.status,
-        nideshop_comment.user_id,
-        nideshop_user.username user_name,
-        nideshop_goods.name value_name
-        from nideshop_comment LEFT JOIN nideshop_user ON nideshop_comment.user_id = nideshop_user.id
-        LEFT JOIN nideshop_goods ON nideshop_comment.value_id = nideshop_goods.id
+        mall_comment.id,
+        mall_comment.type_id,
+        mall_comment.value_id,
+        mall_comment.content,
+        mall_comment.add_time,
+        mall_comment.status,
+        mall_comment.user_id,
+        mall_user.username user_name,
+        mall_goods.name value_name
+        from mall_comment LEFT JOIN mall_user ON mall_comment.user_id = mall_user.id
+        LEFT JOIN mall_goods ON mall_comment.value_id = mall_goods.id
         WHERE 1=1
         <if test="userName != null and userName.trim() != ''">
-            AND nideshop_user.username LIKE concat('%',#{userName},'%')
+            AND mall_user.username LIKE concat('%',#{userName},'%')
         </if>
         <if test="valueName != null and valueName.trim() != ''">
-            AND nideshop_goods.name LIKE concat('%',#{valueName},'%')
+            AND mall_goods.name LIKE concat('%',#{valueName},'%')
         </if>
         <if test="status != null">
-            AND nideshop_comment.status = #{status}
+            AND mall_comment.status = #{status}
         </if>
         <if test="picUrl == 'true'">
-            AND EXISTS(SELECT 1 FROM nideshop_comment_picture WHERE nideshop_comment.id = nideshop_comment_picture.comment_id)
+            AND EXISTS(SELECT 1 FROM mall_comment_picture WHERE mall_comment.id = mall_comment_picture.comment_id)
         </if>
         <choose>
             <when test="sidx != null and sidx.trim() != ''">
                 order by ${sidx} ${order}
             </when>
             <otherwise>
-                order by nideshop_comment.id desc
+                order by mall_comment.id desc
             </otherwise>
         </choose>
         <if test="offset != null and limit != null">
@@ -66,25 +66,25 @@
     </select>
 
     <select id="queryTotal" resultType="int">
-        select count(*) from nideshop_comment LEFT JOIN nideshop_user ON nideshop_comment.user_id = nideshop_user.id
-        LEFT JOIN nideshop_goods ON nideshop_comment.value_id = nideshop_goods.id
+        select count(*) from mall_comment LEFT JOIN mall_user ON mall_comment.user_id = mall_user.id
+        LEFT JOIN mall_goods ON mall_comment.value_id = mall_goods.id
         WHERE 1=1
         <if test="userName != null and userName.trim() != ''">
-            AND nideshop_user.username LIKE concat('%',#{userName},'%')
+            AND mall_user.username LIKE concat('%',#{userName},'%')
         </if>
         <if test="valueName != null and valueName.trim() != ''">
-            AND nideshop_goods.name LIKE concat('%',#{valueName},'%')
+            AND mall_goods.name LIKE concat('%',#{valueName},'%')
         </if>
         <if test="status != null">
-            AND nideshop_comment.status = #{status}
+            AND mall_comment.status = #{status}
         </if>
         <if test="picUrl == 'true'">
-            AND EXISTS(SELECT 1 FROM nideshop_comment_picture WHERE nideshop_comment.id = nideshop_comment_picture.comment_id)
+            AND EXISTS(SELECT 1 FROM mall_comment_picture WHERE mall_comment.id = mall_comment_picture.comment_id)
         </if>
     </select>
 
     <insert id="save" parameterType="com.platform.entity.CommentEntity" useGeneratedKeys="true" keyProperty="id">
-		insert into nideshop_comment(
+		insert into mall_comment(
 			`type_id`,
 			`value_id`,
 			`content`,
@@ -101,7 +101,7 @@
 	</insert>
 
     <update id="update" parameterType="com.platform.entity.CommentEntity">
-        update nideshop_comment
+        update mall_comment
         <set>
             <if test="typeId != null">`type_id` = #{typeId},</if>
             <if test="valueId != null">`value_id` = #{valueId},</if>
@@ -114,11 +114,11 @@
     </update>
 
     <delete id="delete">
-		delete from nideshop_comment where id = #{value}
+		delete from mall_comment where id = #{value}
 	</delete>
 
     <delete id="deleteBatch">
-        delete from nideshop_comment where id in
+        delete from mall_comment where id in
         <foreach item="id" collection="array" open="(" separator="," close=")">
             #{id}
         </foreach>

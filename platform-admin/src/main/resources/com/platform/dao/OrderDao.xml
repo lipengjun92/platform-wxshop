@@ -44,15 +44,15 @@
 
     <select id="queryObject" resultType="com.platform.entity.OrderEntity">
 		select o.*,u.username as username
-        from nideshop_order o
-        left join nideshop_user u on o.user_id = u.id
+        from mall_order o
+        left join mall_user u on o.user_id = u.id
         where o.id = #{value}
 	</select>
 
     <select id="queryList" resultType="com.platform.entity.OrderEntity">
         select o.*,u.username as username
-        from nideshop_order o
-        left join nideshop_user u on o.user_id = u.id
+        from mall_order o
+        left join mall_user u on o.user_id = u.id
         WHERE 1=1
         <if test="orderSn != null and orderSn.trim() != ''">
             AND o.order_sn LIKE concat('%',#{orderSn},'%')
@@ -83,7 +83,7 @@
     </select>
 
     <select id="queryTotal" resultType="int">
-        select count(*) from nideshop_order WHERE 1=1
+        select count(*) from mall_order WHERE 1=1
         <if test="orderSn != null and orderSn.trim() != ''">
             AND order_sn LIKE concat('%',#{orderSn},'%')
         </if>
@@ -102,82 +102,82 @@
     </select>
 
     <insert id="save" parameterType="com.platform.entity.OrderEntity" useGeneratedKeys="true" keyProperty="id">
-		insert into nideshop_order
+		insert into mall_order
 		(
-			`order_sn`, 
-			`user_id`, 
-			`order_status`, 
-			`shipping_status`, 
-			`pay_status`, 
-			`consignee`, 
-			`country`, 
-			`province`, 
-			`city`, 
+			`order_sn`,
+			`user_id`,
+			`order_status`,
+			`shipping_status`,
+			`pay_status`,
+			`consignee`,
+			`country`,
+			`province`,
+			`city`,
 			`district`,
-			`address`, 
-			`mobile`, 
-			`postscript`, 
-			`shipping_id`, 
+			`address`,
+			`mobile`,
+			`postscript`,
+			`shipping_id`,
 			`shipping_name`,
 			`shipping_no`,
-			`pay_id`, 
-			`pay_name`, 
-			`shipping_fee`, 
-			`actual_price`, 
-			`integral`, 
-			`integral_money`, 
-			`order_price`, 
-			`goods_price`, 
-			`add_time`, 
-			`confirm_time`, 
-			`pay_time`, 
-			`freight_price`, 
-			`coupon_id`, 
-			`parent_id`, 
-			`coupon_price`, 
+			`pay_id`,
+			`pay_name`,
+			`shipping_fee`,
+			`actual_price`,
+			`integral`,
+			`integral_money`,
+			`order_price`,
+			`goods_price`,
+			`add_time`,
+			`confirm_time`,
+			`pay_time`,
+			`freight_price`,
+			`coupon_id`,
+			`parent_id`,
+			`coupon_price`,
 			`callback_status`,
 			`order_type`
 		)
 		values
 		(
-			#{orderSn}, 
-			#{userId}, 
-			#{orderStatus}, 
-			#{shippingStatus}, 
-			#{payStatus}, 
-			#{consignee}, 
-			#{country}, 
-			#{province}, 
-			#{city}, 
-			#{district}, 
-			#{address}, 
-			#{mobile}, 
-			#{postscript}, 
-			#{shippingId}, 
+			#{orderSn},
+			#{userId},
+			#{orderStatus},
+			#{shippingStatus},
+			#{payStatus},
+			#{consignee},
+			#{country},
+			#{province},
+			#{city},
+			#{district},
+			#{address},
+			#{mobile},
+			#{postscript},
+			#{shippingId},
 			#{shippingName},
 			#{shippingNo},
-			#{payId}, 
-			#{payName}, 
-			#{shippingFee}, 
-			#{actualPrice}, 
-			#{integral}, 
-			#{integralMoney}, 
-			#{orderPrice}, 
-			#{goodsPrice}, 
-			#{addTime}, 
-			#{confirmTime}, 
-			#{payTime}, 
-			#{freightPrice}, 
-			#{couponId}, 
-			#{parentId}, 
-			#{couponPrice}, 
+			#{payId},
+			#{payName},
+			#{shippingFee},
+			#{actualPrice},
+			#{integral},
+			#{integralMoney},
+			#{orderPrice},
+			#{goodsPrice},
+			#{addTime},
+			#{confirmTime},
+			#{payTime},
+			#{freightPrice},
+			#{couponId},
+			#{parentId},
+			#{couponPrice},
 			#{callbackStatus},
 			#{orderType}
 		)
 	</insert>
 
     <update id="update" parameterType="com.platform.entity.OrderEntity">
-        update nideshop_order
+        update mall_order
         <set>
             <if test="orderSn != null">`order_sn` = #{orderSn},</if>
             <if test="userId != null">`user_id` = #{userId},</if>
@@ -217,11 +217,11 @@
     </update>
 
     <delete id="delete">
-		delete from nideshop_order where id = #{value}
+		delete from mall_order where id = #{value}
 	</delete>
 
     <delete id="deleteBatch">
-        delete from nideshop_order where id in
+        delete from mall_order where id in
         <foreach item="id" collection="array" open="(" separator="," close=")">
             #{id}
         </foreach>

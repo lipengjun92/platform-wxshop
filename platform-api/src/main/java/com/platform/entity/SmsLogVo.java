@@ -5,7 +5,7 @@ import lombok.Data;
 import java.io.Serializable;
 
 /**
- * 实体表名 nideshop_sms_log
+ * 实体表名 mall_sms_log
  *
  * @author lipengjun
  * @email 939961241@qq.com

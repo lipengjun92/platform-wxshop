@@ -14,7 +14,7 @@
 			`id`,
 			`code`,
 			`name`
-		from nideshop_shipping
+		from mall_shipping
 		where id = #{id}
 	</select>
 
@@ -23,7 +23,7 @@
         `id`,
         `code`,
         `name`
-        from nideshop_shipping
+        from mall_shipping
         WHERE 1=1  and status = 0
         <if test="name != null and name.trim() != ''">
             AND name LIKE concat('%',#{name},'%')
@@ -42,7 +42,7 @@
     </select>
 
     <select id="queryTotal" resultType="int">
-        select count(*) from nideshop_shipping
+        select count(*) from mall_shipping
         WHERE 1=1  and status = 0
         <if test="name != null and name.trim() != ''">
             AND name LIKE concat('%',#{name},'%')
@@ -50,7 +50,7 @@
     </select>
 
     <insert id="save" parameterType="com.platform.entity.ShippingEntity" useGeneratedKeys="true" keyProperty="id">
-		insert into nideshop_shipping(
+		insert into mall_shipping(
 			`code`,
 			`name`)
 		values(
@@ -59,7 +59,7 @@
 	</insert>
 
     <update id="update" parameterType="com.platform.entity.ShippingEntity">
-        update nideshop_shipping
+        update mall_shipping
         <set>
             <if test="code != null">`code` = #{code},</if>
             <if test="name != null">`name` = #{name}</if>
@@ -68,11 +68,11 @@
     </update>
 
     <delete id="delete">
-		delete from nideshop_shipping where id = #{value}
+		delete from mall_shipping where id = #{value}
 	</delete>
 
     <delete id="deleteBatch">
-        delete from nideshop_shipping where id in
+        delete from mall_shipping where id in
         <foreach item="id" collection="array" open="(" separator="," close=")">
             #{id}
         </foreach>

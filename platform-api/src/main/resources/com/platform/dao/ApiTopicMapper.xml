@@ -20,7 +20,7 @@
     </resultMap>
 
     <select id="queryObject" resultMap="topicMap">
-		select * from nideshop_topic where id = #{value}
+		select * from mall_topic where id = #{value}
 	</select>
 
     <select id="queryList" resultMap="topicMap">
@@ -31,7 +31,7 @@
         <if test="fields == null or fields == ''">
             *
         </if>
-        from nideshop_topic
+        from mall_topic
         <choose>
             <when test="sidx != null and sidx.trim() != ''">
                 order by ${sidx} ${order}
@@ -46,11 +46,11 @@
     </select>
 
     <select id="queryTotal" resultType="int">
-		select count(*) from nideshop_topic
+		select count(*) from mall_topic
 	</select>
 
     <insert id="save" parameterType="com.platform.entity.TopicVo" useGeneratedKeys="true" keyProperty="id">
-		insert into nideshop_topic
+		insert into mall_topic
 		(
 			`title`,
 			`content`,
@@ -81,7 +81,7 @@
 	</insert>
 
     <update id="update" parameterType="com.platform.entity.TopicVo">
-        update nideshop_topic
+        update mall_topic
         <set>
             <if test="title != null">`title` = #{title},</if>
             <if test="content != null">`content` = #{content},</if>
@@ -99,11 +99,11 @@
     </update>
 
     <delete id="delete">
-		delete from nideshop_topic where id = #{value}
+		delete from mall_topic where id = #{value}
 	</delete>
 
     <delete id="deleteBatch">
-        delete from nideshop_topic where id in
+        delete from mall_topic where id in
         <foreach item="id" collection="array" open="(" separator="," close=")">
             #{id}
         </foreach>

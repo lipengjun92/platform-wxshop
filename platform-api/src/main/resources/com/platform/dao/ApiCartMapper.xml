@@ -23,16 +23,16 @@
     </resultMap>
 
     <select id="queryObject" resultMap="cartMap">
-		select * from nideshop_cart where id = #{value}
+		select * from mall_cart where id = #{value}
 	</select>
 
     <select id="queryList" resultMap="cartMap">
         select a.*,
         b.list_pic_url,
         c.retail_price as retail_product_price
-        from nideshop_cart a
-        left join nideshop_goods b on a.goods_id = b.id
-        left join nideshop_product c on c.goods_id = a.goods_id and c.id = a.product_id
+        from mall_cart a
+        left join mall_goods b on a.goods_id = b.id
+        left join mall_product c on c.goods_id = a.goods_id and c.id = a.product_id
         where 1 = 1
         <if test="userId != null">
             AND a.user_id = #{userId}
@@ -60,7 +60,7 @@
     </select>
 
     <select id="queryTotal" resultType="int">
-        select count(*) from nideshop_cart a
+        select count(*) from mall_cart a
         where 1 = 1
         <if test="userId != null">
             AND a.user_id = #{userId}
@@ -77,7 +77,7 @@
     </select>
 
     <insert id="save" parameterType="com.platform.entity.CartVo" useGeneratedKeys="true" keyProperty="id">
-		insert into nideshop_cart
+		insert into mall_cart
 		(
 			`user_id`,
 			`session_id`,
@@ -112,7 +112,7 @@
 	</insert>
 
     <update id="update" parameterType="com.platform.entity.CartVo">
-        update nideshop_cart
+        update mall_cart
         <set>
             <if test="userId != null">`user_id` = #{userId},</if>
             <if test="sessionId != null">`session_id` = #{sessionId},</if>
@@ -134,7 +134,7 @@
     </update>
 
     <update id="updateCheck">
-        update nideshop_cart
+        update mall_cart
         set `checked` = #{isChecked}
         where product_id in
         <foreach item="productId" collection="productIds" open="(" separator="," close=")">
@@ -144,25 +144,25 @@
     </update>
 
     <delete id="delete">
-		delete from nideshop_cart where id = #{value}
+		delete from mall_cart where id = #{value}
 	</delete>
 
     <delete id="deleteBatch">
-        delete from nideshop_cart where id in
+        delete from mall_cart where id in
         <foreach item="id" collection="array" open="(" separator="," close=")">
             #{id}
         </foreach>
     </delete>
 
     <delete id="deleteByProductIds">
-        delete from nideshop_cart where product_id in
+        delete from mall_cart where product_id in
         <foreach item="id" collection="productIds" open="(" separator="," close=")">
             #{id}
         </foreach>
     </delete>
 
     <delete id="deleteByUserAndProductIds">
-        delete from nideshop_cart where product_id in
+        delete from mall_cart where product_id in
         <foreach item="id" collection="productIds" open="(" separator="," close=")">
             #{id}
         </foreach>
@@ -170,7 +170,7 @@
     </delete>
 
     <delete id="deleteByCart">
-        delete from nideshop_cart
+        delete from mall_cart
         where  user_id = #{userId} and  session_id = #{sessionId} and  checked = #{checked}
     </delete>
 

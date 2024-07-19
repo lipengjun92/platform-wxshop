@@ -11,11 +11,11 @@
     </resultMap>
 
 	<select id="queryObject" resultType="com.platform.entity.RelatedGoodsEntity">
-		select * from nideshop_related_goods where id = #{value}
+		select * from mall_related_goods where id = #{value}
 	</select>
 
 	<select id="queryList" resultType="com.platform.entity.RelatedGoodsEntity">
-		select * from nideshop_related_goods
+		select * from mall_related_goods
         <choose>
             <when test="sidx != null and sidx.trim() != ''">
                 order by ${sidx} ${order}
@@ -28,39 +28,39 @@
 			limit #{offset}, #{limit}
 		</if>
 	</select>
-	
+
  	<select id="queryTotal" resultType="int">
-		select count(*) from nideshop_related_goods 
+		select count(*) from mall_related_goods
 	</select>
-	 
+
 	<insert id="save" parameterType="com.platform.entity.RelatedGoodsEntity" useGeneratedKeys="true" keyProperty="id">
-		insert into nideshop_related_goods
+		insert into mall_related_goods
 		(
-			`goods_id`, 
+			`goods_id`,
 			`related_goods_id`
 		)
 		values
 		(
-			#{goodsId}, 
+			#{goodsId},
 			#{relatedGoodsId}
 		)
 	</insert>
-	 
+
 	<update id="update" parameterType="com.platform.entity.RelatedGoodsEntity">
-		update nideshop_related_goods 
+		update mall_related_goods
 		<set>
 			<if test="goodsId != null">`goods_id` = #{goodsId}, </if>
 			<if test="relatedGoodsId != null">`related_goods_id` = #{relatedGoodsId}</if>
 		</set>
 		where id = #{id}
 	</update>
-	
+
 	<delete id="delete">
-		delete from nideshop_related_goods where id = #{value}
+		delete from mall_related_goods where id = #{value}
 	</delete>
-	
+
 	<delete id="deleteBatch">
-		delete from nideshop_related_goods where id in 
+		delete from mall_related_goods where id in
 		<foreach item="id" collection="array" open="(" separator="," close=")">
 			#{id}
 		</foreach>

@@ -18,7 +18,7 @@
 			`question`,
 			`answer`,
 			`sort`
-		from nideshop_help_issue
+		from mall_help_issue
 		where id = #{id}
 	</select>
 
@@ -29,7 +29,7 @@
         `question`,
         `answer`,
         `sort`
-        from nideshop_help_issue
+        from mall_help_issue
         WHERE 1=1
         <if test="typeId != null and typeId != ''">
             AND type_id = #{typeId}
@@ -48,7 +48,7 @@
     </select>
 
     <select id="queryTotal" resultType="int">
-        select count(*) from nideshop_help_issue
+        select count(*) from mall_help_issue
         WHERE 1=1
         <if test="name != null and name.trim() != ''">
             AND name LIKE concat('%',#{name},'%')

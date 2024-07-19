@@ -18,7 +18,7 @@
 			`url`,
 			`icon_url`,
 			`sort_order`
-		from nideshop_channel
+		from mall_channel
 		where id = #{id}
 	</select>
 
@@ -29,7 +29,7 @@
         `url`,
         `icon_url`,
         `sort_order`
-        from nideshop_channel
+        from mall_channel
         WHERE 1=1
         <if test="name != null and name.trim() != ''">
             AND name LIKE concat('%',#{name},'%')
@@ -48,7 +48,7 @@
     </select>
 
     <select id="queryTotal" resultType="int">
-        select count(*) from nideshop_channel
+        select count(*) from mall_channel
         WHERE 1=1
         <if test="name != null and name.trim() != ''">
             AND name LIKE concat('%',#{name},'%')
@@ -56,7 +56,7 @@
     </select>
 
     <insert id="save" parameterType="com.platform.entity.ChannelEntity" useGeneratedKeys="true" keyProperty="id">
-		insert into nideshop_channel(
+		insert into mall_channel(
 			`name`,
 			`url`,
 			`icon_url`,
@@ -69,7 +69,7 @@
 	</insert>
 
     <update id="update" parameterType="com.platform.entity.ChannelEntity">
-        update nideshop_channel
+        update mall_channel
         <set>
             <if test="name != null">`name` = #{name},</if>
             <if test="url != null">`url` = #{url},</if>
@@ -80,11 +80,11 @@
     </update>
 
     <delete id="delete">
-		delete from nideshop_channel where id = #{value}
+		delete from mall_channel where id = #{value}
 	</delete>
 
     <delete id="deleteBatch">
-        delete from nideshop_channel where id in
+        delete from mall_channel where id in
         <foreach item="id" collection="array" open="(" separator="," close=")">
             #{id}
         </foreach>

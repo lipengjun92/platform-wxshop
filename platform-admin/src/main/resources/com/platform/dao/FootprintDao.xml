@@ -14,14 +14,14 @@
     </resultMap>
 
     <select id="queryObject" resultType="com.platform.entity.FootprintEntity">
-		select * from nideshop_footprint where id = #{value}
+		select * from mall_footprint where id = #{value}
 	</select>
 
     <select id="queryList" resultMap="footprintMap">
         select a.* ,b.username as user_name,c.name as goods_name
-        from nideshop_footprint a
-        left join nideshop_user b on a.user_id = b.id
-        left join nideshop_goods c on a.goods_id = c.id
+        from mall_footprint a
+        left join mall_user b on a.user_id = b.id
+        left join mall_goods c on a.goods_id = c.id
         <choose>
             <when test="sidx != null and sidx.trim() != ''">
                 order by ${sidx} ${order}
@@ -36,11 +36,11 @@
     </select>
 
     <select id="queryTotal" resultType="int">
-		select count(*) from nideshop_footprint
+		select count(*) from mall_footprint
 	</select>
 
     <insert id="save" parameterType="com.platform.entity.FootprintEntity" useGeneratedKeys="true" keyProperty="id">
-		insert into nideshop_footprint
+		insert into mall_footprint
 		(
 			`user_id`,
 			`goods_id`,
@@ -55,7 +55,7 @@
 	</insert>
 
     <update id="update" parameterType="com.platform.entity.FootprintEntity">
-        update nideshop_footprint
+        update mall_footprint
         <set>
             <if test="userId != null">`user_id` = #{userId},</if>
             <if test="goodsId != null">`goods_id` = #{goodsId},</if>
@@ -65,11 +65,11 @@
     </update>
 
     <delete id="delete">
-		delete from nideshop_footprint where id = #{value}
+		delete from mall_footprint where id = #{value}
 	</delete>
 
     <delete id="deleteBatch">
-        delete from nideshop_footprint where id in
+        delete from mall_footprint where id in
         <foreach item="id" collection="array" open="(" separator="," close=")">
             #{id}
         </foreach>

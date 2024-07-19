@@ -18,23 +18,23 @@
 			`question`,
 			`answer`,
 			`sort`
-		from nideshop_help_issue
+		from mall_help_issue
 		where id = #{id}
 	</select>
 
 	<select id="queryList" resultType="com.platform.entity.HelpIssueEntity">
 		select
-		nideshop_help_issue.id,
-		nideshop_help_issue.type_id,
-		nideshop_help_issue.question,
-		nideshop_help_issue.answer,
-		nideshop_help_issue.sort,
-		nideshop_help_type.type_name
-		from nideshop_help_issue
-		LEFT JOIN nideshop_help_type ON nideshop_help_issue.type_id = nideshop_help_type.id
+		mall_help_issue.id,
+		mall_help_issue.type_id,
+		mall_help_issue.question,
+		mall_help_issue.answer,
+		mall_help_issue.sort,
+		mall_help_type.type_name
+		from mall_help_issue
+		LEFT JOIN mall_help_type ON mall_help_issue.type_id = mall_help_type.id
 		WHERE 1=1
 		<if test="typeName != null and typeName.trim() != ''">
-			AND nideshop_help_type.type_name LIKE concat('%',#{typeName},'%')
+			AND mall_help_type.type_name LIKE concat('%',#{typeName},'%')
 		</if>
         <choose>
             <when test="sidx != null and sidx.trim() != ''">
@@ -48,18 +48,18 @@
 			limit #{offset}, #{limit}
 		</if>
 	</select>
-	
+
  	<select id="queryTotal" resultType="int">
-		select count(*) from nideshop_help_issue
-		LEFT JOIN nideshop_help_type on nideshop_help_issue.type_id = nideshop_help_type.id
+		select count(*) from mall_help_issue
+		LEFT JOIN mall_help_type on mall_help_issue.type_id = mall_help_type.id
 		WHERE 1=1
 		<if test="typeName != null and typeName.trim() != ''">
-			AND nideshop_help_type.type_name LIKE concat('%',#{typeName},'%')
+			AND mall_help_type.type_name LIKE concat('%',#{typeName},'%')
 		</if>
 	</select>
-	 
+
 	<insert id="save" parameterType="com.platform.entity.HelpIssueEntity" useGeneratedKeys="true" keyProperty="id">
-		insert into nideshop_help_issue(
+		insert into mall_help_issue(
 			`type_id`,
 			`question`,
 			`answer`,
@@ -70,9 +70,9 @@
 			#{answer},
 			#{sort})
 	</insert>
-	 
+
 	<update id="update" parameterType="com.platform.entity.HelpIssueEntity">
-		update nideshop_help_issue
+		update mall_help_issue
 		<set>
 			<if test="typeId != null">`type_id` = #{typeId}, </if>
 			<if test="question != null">`question` = #{question}, </if>
@@ -81,13 +81,13 @@
 		</set>
 		where id = #{id}
 	</update>
-	
+
 	<delete id="delete">
-		delete from nideshop_help_issue where id = #{value}
+		delete from mall_help_issue where id = #{value}
 	</delete>
-	
+
 	<delete id="deleteBatch">
-		delete from nideshop_help_issue where id in
+		delete from mall_help_issue where id in
 		<foreach item="id" collection="array" open="(" separator="," close=")">
 			#{id}
 		</foreach>

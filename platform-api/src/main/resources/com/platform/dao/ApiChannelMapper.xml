@@ -13,11 +13,11 @@
     </resultMap>
 
     <select id="queryObject" resultMap="channelMap">
-		select * from nideshop_channel where id = #{value}
+		select * from mall_channel where id = #{value}
 	</select>
 
     <select id="queryList" resultMap="channelMap">
-        select * from nideshop_channel
+        select * from mall_channel
         <if test="adPositionId != null and adPositionId != null">
             and ad_position_id = #{adPositionId}
         </if>
@@ -35,11 +35,11 @@
     </select>
 
     <select id="queryTotal" resultType="int">
-		select count(*) from nideshop_channel
+		select count(*) from mall_channel
 	</select>
 
     <insert id="save" parameterType="com.platform.entity.ChannelVo" useGeneratedKeys="true" keyProperty="id">
-		insert into nideshop_channel
+		insert into mall_channel
 		(
 			`name`,
 			`url`,
@@ -56,7 +56,7 @@
 	</insert>
 
     <update id="update" parameterType="com.platform.entity.ChannelVo">
-        update nideshop_channel
+        update mall_channel
         <set>
             <if test="name != null">`name` = #{name},</if>
             <if test="url != null">`url` = #{url},</if>
@@ -67,11 +67,11 @@
     </update>
 
     <delete id="delete">
-		delete from nideshop_channel where id = #{value}
+		delete from mall_channel where id = #{value}
 	</delete>
 
     <delete id="deleteBatch">
-        delete from nideshop_channel where id in
+        delete from mall_channel where id in
         <foreach item="id" collection="array" open="(" separator="," close=")">
             #{id}
         </foreach>

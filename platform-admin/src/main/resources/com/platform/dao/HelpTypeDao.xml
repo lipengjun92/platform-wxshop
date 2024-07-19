@@ -14,7 +14,7 @@
 			`id`,
 			`type_name`,
 			`sort`
-		from nideshop_help_type
+		from mall_help_type
 		where id = #{id}
 	</select>
 
@@ -23,7 +23,7 @@
     		`id`,
     		`type_name`,
     		`sort`
-		from nideshop_help_type
+		from mall_help_type
 		WHERE 1=1
 		<if test="name != null and name.trim() != ''">
 			AND name LIKE concat('%',#{name},'%')
@@ -40,39 +40,39 @@
 			limit #{offset}, #{limit}
 		</if>
 	</select>
-	
+
  	<select id="queryTotal" resultType="int">
-		select count(*) from nideshop_help_type
+		select count(*) from mall_help_type
 		WHERE 1=1
         <if test="name != null and name.trim() != ''">
             AND name LIKE concat('%',#{name},'%')
         </if>
 	</select>
-	 
+
 	<insert id="save" parameterType="com.platform.entity.HelpTypeEntity" useGeneratedKeys="true" keyProperty="id">
-		insert into nideshop_help_type(
+		insert into mall_help_type(
 			`type_name`,
 			`sort`)
 		values(
 			#{typeName},
 			#{sort})
 	</insert>
-	 
+
 	<update id="update" parameterType="com.platform.entity.HelpTypeEntity">
-		update nideshop_help_type
+		update mall_help_type
 		<set>
 			<if test="typeName != null">`type_name` = #{typeName}, </if>
 			<if test="sort != null">`sort` = #{sort}</if>
 		</set>
 		where id = #{id}
 	</update>
-	
+
 	<delete id="delete">
-		delete from nideshop_help_type where id = #{value}
+		delete from mall_help_type where id = #{value}
 	</delete>
-	
+
 	<delete id="deleteBatch">
-		delete from nideshop_help_type where id in
+		delete from mall_help_type where id in
 		<foreach item="id" collection="array" open="(" separator="," close=")">
 			#{id}
 		</foreach>
