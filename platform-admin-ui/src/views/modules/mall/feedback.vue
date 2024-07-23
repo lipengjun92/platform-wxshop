@@ -61,7 +61,7 @@
         align="center"
         label="反馈类型">
         <template slot-scope="scope">
-          <span>{{transDict('FEED_TYPE', scope.row.feedType)}}</span>
+          <span>{{ transDict('FEED_TYPE', scope.row.feedType) }}</span>
         </template>
       </el-table-column>
       <el-table-column
@@ -94,10 +94,10 @@
         width="150"
         label="操作">
         <template slot-scope="scope">
-          <el-button v-if="isAuth('mall:feedback:info')" type="text" size="small" @click="showDetails(scope.row.id)">
+          <el-button v-if="isAuth('mall:feedback:info')" type="text" size="small" @click="showDetails(scope.row.msgId)">
             查看
           </el-button>
-          <el-button v-if="isAuth('mall:feedback:delete')" type="text" size="small" @click="deleteHandle(scope.row.id)">
+          <el-button v-if="isAuth('mall:feedback:delete')" type="text" size="small" @click="deleteHandle(scope.row.msgId)">
             删除
           </el-button>
         </template>

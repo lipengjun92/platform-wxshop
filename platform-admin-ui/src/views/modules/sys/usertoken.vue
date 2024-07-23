@@ -28,7 +28,7 @@
         align="center"
         label="用户名">
         <template slot-scope="scope">
-          <span>{{transUser(scope.row.userId)}}</span>
+          <span>{{ transUser(scope.row.userId) }}</span>
         </template>
       </el-table-column>
       <el-table-column

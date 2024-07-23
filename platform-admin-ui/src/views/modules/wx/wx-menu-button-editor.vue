@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="menu-input-group" style="border-bottom: 2px #e8e8e8 solid;">
-      <div class="menu-name">{{button.name}}</div>
+      <div class="menu-name">{{ button.name }}</div>
       <div class="menu-del" @click="$emit('delMenu')">删除菜单</div>
     </div>
     <div class="menu-input-group">
@@ -10,7 +10,7 @@
         <input type="text" name="name" placeholder="请输入菜单名称" class="menu-input-text" v-model="button.name"
                @input="checkMenuName(button.name)">
         <p class="menu-tips" style="color:#e15f63" v-show="menuNameBounds">字数超过上限</p>
-        <p class="menu-tips">字数不超过{{selectedMenuLevel == 1 ? '5' : '8'}}个汉字</p>
+        <p class="menu-tips">字数不超过{{ selectedMenuLevel == 1 ? '5' : '8' }}个汉字</p>
       </div>
     </div>
     <div v-show="!button.subButtons || button.subButtons.length===0">
@@ -68,7 +68,8 @@
           <p class="menu-tips">订阅者点击该子菜单会跳到以下小程序</p>
           <div class="menu-label">小程序appId</div>
           <div class="menu-input">
-            <input type="text" placeholder="小程序的appId（仅认证公众号可配置）" class="menu-input-text" v-model="button.appId">
+            <input type="text" placeholder="小程序的appId（仅认证公众号可配置）" class="menu-input-text"
+                   v-model="button.appId">
           </div>
         </div>
         <div class="menu-input-group">

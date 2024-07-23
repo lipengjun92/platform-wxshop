@@ -61,7 +61,7 @@
         align="center"
         label="创建者">
         <template slot-scope="scope">
-          <span>{{transUser(scope.row.createUserId)}}</span>
+          <span>{{ transUser(scope.row.createUserId) }}</span>
         </template>
       </el-table-column>
       <el-table-column

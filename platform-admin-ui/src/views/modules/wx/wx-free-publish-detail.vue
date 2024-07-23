@@ -1,15 +1,15 @@
 <template>
   <el-dialog
-      title="查看"
-      :close-on-click-modal="false"
-      :visible.sync="visible">
+    title="查看"
+    :close-on-click-modal="false"
+    :visible.sync="visible">
     <el-row v-if="dataForm.newsItem.length>0">
       <el-col tag="center" :span="6">
         <el-card shadow="hover" :style="{ width: '150px' }" v-for="(item, index) in dataForm.newsItem" :key="index">
           <div @click="tableName = index+''">
             <img :src="item.thumbUrl" style="width: 120px"/>
             <div>
-              {{item.title}}
+              {{ item.title }}
             </div>
           </div>
         </el-card>

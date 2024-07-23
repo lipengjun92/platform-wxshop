@@ -1,16 +1,16 @@
 <template>
   <el-dialog
-      title="修改"
-      :close-on-click-modal="false"
-      :before-close="handleClose"
-      :visible.sync="visible">
+    title="修改"
+    :close-on-click-modal="false"
+    :before-close="handleClose"
+    :visible.sync="visible">
     <el-row v-if="dataForm.newsItem.length>0">
       <el-col tag="center" :span="6">
         <el-card shadow="hover" :style="{ width: '150px' }" v-for="(item, index) in dataForm.newsItem" :key="index">
           <div @click="tableName = index+''">
             <img :src="item.thumbUrl" style="width: 120px"/>
             <div>
-              {{item.title}}
+              {{ item.title }}
             </div>
           </div>
         </el-card>
@@ -20,7 +20,7 @@
                  label-width="80px">
           <el-tabs v-model="tableName">
             <el-tab-pane :label="item.title" v-for="(item, index) in dataForm.newsItem" :key="index" :name="index+''">
-              <el-input hidden>{{item.index = index}}</el-input>
+              <el-input hidden>{{ item.index = index }}</el-input>
               <el-form-item label="标题" prop="title">
                 <el-input v-model="item.title" placeholder="请在这里输入标题"></el-input>
               </el-form-item>

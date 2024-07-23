@@ -25,9 +25,9 @@
             <el-card shadow="hover">
               <b>磁盘状态</b>
               <el-card shadow="hover" v-for="item in monitorData.diskInfos" :key="item.uuid">
-                <b>{{item.volume}}</b>
+                <b>{{ item.volume }}</b>
                 <el-progress :text-inside="true" :stroke-width="15" :percentage="item.usePercent"></el-progress>
-                <label>{{item.used}}可用，共{{item.size}}</label>
+                <label>{{ item.used }}可用，共{{ item.size }}</label>
               </el-card>
             </el-card>
           </el-col>
@@ -38,43 +38,43 @@
                   <template slot="label">
                     服务器名称
                   </template>
-                  {{monitorData.sysInfo.name}}
+                  {{ monitorData.sysInfo.name }}
                 </el-descriptions-item>
                 <el-descriptions-item>
                   <template slot="label">
                     操作系统
                   </template>
-                  {{monitorData.sysInfo.osName}}
+                  {{ monitorData.sysInfo.osName }}
                 </el-descriptions-item>
                 <el-descriptions-item>
                   <template slot="label">
                     服务器IP
                   </template>
-                  {{monitorData.sysInfo.ip}}
+                  {{ monitorData.sysInfo.ip }}
                 </el-descriptions-item>
                 <el-descriptions-item>
                   <template slot="label">
                     系统架构
                   </template>
-                  {{monitorData.sysInfo.osArch}}
+                  {{ monitorData.sysInfo.osArch }}
                 </el-descriptions-item>
                 <el-descriptions-item>
                   <template slot="label">
                     内核
                   </template>
-                  {{monitorData.cupInfo.logicalProcessorCount}}
+                  {{ monitorData.cupInfo.logicalProcessorCount }}
                 </el-descriptions-item>
                 <el-descriptions-item>
                   <template slot="label">
                     逻辑处理器
                   </template>
-                  {{monitorData.cupInfo.physicalProcessorCount}}
+                  {{ monitorData.cupInfo.physicalProcessorCount }}
                 </el-descriptions-item>
                 <el-descriptions-item>
                   <template slot="label">
                     处理器
                   </template>
-                  {{monitorData.centralProcessor.name}}
+                  {{ monitorData.centralProcessor.name }}
                 </el-descriptions-item>
               </el-descriptions>
             </el-card>
@@ -86,49 +86,49 @@
                   <template slot="label">
                     Java名称
                   </template>
-                  {{monitorData.jvmInfo.jdkName}}
+                  {{ monitorData.jvmInfo.jdkName }}
                 </el-descriptions-item>
                 <el-descriptions-item>
                   <template slot="label">
                     Java版本
                   </template>
-                  {{monitorData.jvmInfo.jdkVersion}}
+                  {{ monitorData.jvmInfo.jdkVersion }}
                 </el-descriptions-item>
                 <el-descriptions-item>
                   <template slot="label">
                     最大内存
                   </template>
-                  {{monitorData.jvmInfo.maxMemory}}
+                  {{ monitorData.jvmInfo.maxMemory }}
                 </el-descriptions-item>
                 <el-descriptions-item>
                   <template slot="label">
                     已使用内存
                   </template>
-                  {{monitorData.jvmInfo.usedMemory}}
+                  {{ monitorData.jvmInfo.usedMemory }}
                 </el-descriptions-item>
                 <el-descriptions-item>
                   <template slot="label">
                     可用内存
                   </template>
-                  {{monitorData.jvmInfo.freeMemory}}
+                  {{ monitorData.jvmInfo.freeMemory }}
                 </el-descriptions-item>
                 <el-descriptions-item>
                   <template slot="label">
                     内存使用率
                   </template>
-                  {{monitorData.jvmInfo.usePercent * 100}}%
+                  {{ monitorData.jvmInfo.usePercent * 100 }}%
                 </el-descriptions-item>
                 <el-descriptions-item>
                   <template slot="label">
                     启动时间
                   </template>
-                  {{transDate(monitorData.jvmInfo.startTime / 1000, 'yyyy-MM-dd hh:mm:ss')}}
+                  {{ transDate(monitorData.jvmInfo.startTime / 1000, 'yyyy-MM-dd hh:mm:ss') }}
                 </el-descriptions-item>
                 <el-descriptions-item>
                   <template slot="label">
                     安装路径
                   </template>
-                  {{monitorData.jvmInfo.jdkHome}}
+                  {{ monitorData.jvmInfo.jdkHome }}
                 </el-descriptions-item>
               </el-descriptions>
             </el-card>
@@ -155,7 +155,7 @@
                   prop="cpu"
                   label="cpu">
                   <template slot-scope="scope">
-                    {{scope.row.cpu}}%
+                    {{ scope.row.cpu }}%
                   </template>
                 </el-table-column>
                 <el-table-column
@@ -182,7 +182,7 @@
                   prop="startTime"
                   label="startTime">
                   <template slot-scope="scope">
-                    {{transDate(scope.row.startTime / 1000, 'yyyy-MM-dd hh:mm:ss')}}
+                    {{ transDate(scope.row.startTime / 1000, 'yyyy-MM-dd hh:mm:ss') }}
                   </template>
                 </el-table-column>
                 <el-table-column
@@ -209,7 +209,7 @@
       <el-col :span="24">
         <el-card shadow="hover">
           <div slot="header" class="clearfix">
-            <b>小程序概况趋势<b v-if="dailySummary.refDate">({{dailySummary.refDate}})</b></b>
+            <b>小程序概况趋势<b v-if="dailySummary.refDate">({{ dailySummary.refDate }})</b></b>
             <el-date-picker
               style="float: right;width: 140px"
               v-model="value1"
@@ -253,7 +253,7 @@
       <el-col :span="24">
         <el-card shadow="hover">
           <div slot="header" class="clearfix">
-            <b>小程序日访问趋势<b v-if="dailyVisit.refDate">({{dailyVisit.refDate}})</b></b>
+            <b>小程序日访问趋势<b v-if="dailyVisit.refDate">({{ dailyVisit.refDate }})</b></b>
             <el-date-picker
               style="float: right;width: 140px"
               v-model="value2"
@@ -325,7 +325,7 @@
       <el-col :span="24">
         <el-card shadow="hover">
           <div slot="header" class="clearfix">
-            <b>小程序周访问趋势<b v-if="weeklyVisit.refDate">({{weeklyVisit.refDate}})</b></b>
+            <b>小程序周访问趋势<b v-if="weeklyVisit.refDate">({{ weeklyVisit.refDate }})</b></b>
             <el-date-picker
               style="float: right;width: 160px"
               v-model="value3"
@@ -398,7 +398,7 @@
       <el-col :span="24">
         <el-card shadow="hover">
           <div slot="header" class="clearfix">
-            <b>小程序月访问趋势<b v-if="monthlyVisit.refDate">({{monthlyVisit.refDate}})</b></b>
+            <b>小程序月访问趋势<b v-if="monthlyVisit.refDate">({{ monthlyVisit.refDate }})</b></b>
             <el-date-picker
               style="float: right;width: 160px"
               v-model="value4"
@@ -471,7 +471,7 @@
       <el-col :span="24">
         <el-card shadow="hover">
           <div slot="header" class="clearfix">
-            <b>小程序访问分布数据<b v-if="visitDistribution.refDate">({{visitDistribution.refDate}})</b></b>
+            <b>小程序访问分布数据<b v-if="visitDistribution.refDate">({{ visitDistribution.refDate }})</b></b>
             <el-date-picker
               style="float: right;width: 140px"
               v-model="value5"
@@ -513,7 +513,7 @@
       <el-col :span="24">
         <el-card shadow="hover">
           <div slot="header" class="clearfix">
-            <b>小程序访问页面排行(<b>{{visitPageList.date}}</b>)</b>
+            <b>小程序访问页面排行(<b>{{ visitPageList.date }}</b>)</b>
             <el-date-picker
               style="float: right;width: 140px"
               v-model="value6"

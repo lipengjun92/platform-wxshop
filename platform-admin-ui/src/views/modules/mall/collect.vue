@@ -41,7 +41,7 @@
         align="center"
         label="添加时间">
         <template slot-scope="scope">
-          <span>{{scope.row.addTime}}</span>
+          <span>{{ scope.row.addTime }}</span>
         </template>
       </el-table-column>
       <el-table-column

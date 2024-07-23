@@ -49,7 +49,8 @@
                   placeholder="文本、图文ID、media_id、json配置"></el-input>
         <el-button type="text" v-show="'text'===dataForm.replyType" @click="addLink">插入链接</el-button>
         <el-button type="text" v-show="assetsType" @click="assetsSelectorVisible=true">
-          从素材库中选择<span v-if="'miniprogrampage'===dataForm.replyType || 'music'===dataForm.replyType">缩略图</span>
+          从素材库中选择<span
+          v-if="'miniprogrampage'===dataForm.replyType || 'music'===dataForm.replyType">缩略图</span>
         </el-button>
       </el-form-item>
       <el-form-item label="备注说明" prop="desc">
@@ -190,7 +191,10 @@ export default {
       } else if (value === 'msgmenu') {
         let demo = {
           head_content: '开头文字',
-          list: [{id: '菜单1ID', content: '菜单2内容'}, {id: '菜单2ID', content: '菜单2内容'}, {id: '菜单nID', content: '菜单n内容'}],
+          list: [{id: '菜单1ID', content: '菜单2内容'}, {id: '菜单2ID', content: '菜单2内容'}, {
+            id: '菜单nID',
+            content: '菜单n内容'
+          }],
           tail_content: '结尾文字'
         }
         this.dataForm.replyContent = JSON.stringify(demo, null, 4)

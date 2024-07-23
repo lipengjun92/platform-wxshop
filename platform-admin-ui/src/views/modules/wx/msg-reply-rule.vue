@@ -42,7 +42,8 @@
       </el-table-column>
       <el-table-column prop="matchValue" header-align="center" align="center" show-overflow-tooltip label="匹配关键词">
       </el-table-column>
-      <el-table-column prop="replyType" header-align="center" align="center" :formatter="replyTypeFormat" label="消息类型">
+      <el-table-column prop="replyType" header-align="center" align="center" :formatter="replyTypeFormat"
+                       label="消息类型">
       </el-table-column>
       <el-table-column prop="replyContent" header-align="center" align="center" show-overflow-tooltip label="回复内容">
       </el-table-column>
@@ -190,10 +191,12 @@ export default {
   font-size: 0;
   padding: 0 50px;
 }
+
 .demo-table-expand label {
   width: 90px;
   color: #99a9bf;
 }
+
 .demo-table-expand .el-form-item {
   margin-right: 0;
   margin-bottom: 0;

@@ -55,26 +55,27 @@
       </el-table-column>
       <el-table-column prop="headImgUrl" header-align="center" align="center" label="头像">
         <template slot-scope="scope">
-          <img class="headimg" @click="openImg(scope.row.headImgUrl)" v-if="scope.row.headImgUrl" :src="scope.row.headImgUrl"/>
+          <img class="headimg" @click="openImg(scope.row.headImgUrl)" v-if="scope.row.headImgUrl"
+               :src="scope.row.headImgUrl"/>
         </template>
       </el-table-column>
       <el-table-column prop="tagidList" header-align="center" align="center" label="标签" show-overflow-tooltip>
         <template slot-scope="scope">
-          <span v-for="tagid in scope.row.tagidList" :key="tagid">{{getTagName(tagid)}} </span>
+          <span v-for="tagid in scope.row.tagidList" :key="tagid">{{ getTagName(tagid) }} </span>
         </template>
       </el-table-column>
       <el-table-column prop="subscribeTime" header-align="center" align="center" label="订阅时间">
-        <template slot-scope="scope">{{scope.row.subscribeTime}}</template>
+        <template slot-scope="scope">{{ scope.row.subscribeTime }}</template>
       </el-table-column>
       <el-table-column prop="qrSceneStr" header-align="center" align="center" label="场景值">
       </el-table-column>
       <el-table-column prop="subscribeScene" header-align="center" align="center" label="关注渠道来源">
         <template slot-scope="scope">
-          <span>{{getSubscribeScene(scope.row.subscribeScene)}} </span>
+          <span>{{ getSubscribeScene(scope.row.subscribeScene) }} </span>
         </template>
       </el-table-column>
       <el-table-column prop="subscribe" header-align="center" align="center" label="是否关注">
-        <span slot-scope="scope">{{scope.row.subscribe ? "是" : "否"}}</span>
+        <span slot-scope="scope">{{ scope.row.subscribe ? '是' : '否' }}</span>
       </el-table-column>
       <el-table-column prop="integral" header-align="center" align="center" label="积分">
       </el-table-column>

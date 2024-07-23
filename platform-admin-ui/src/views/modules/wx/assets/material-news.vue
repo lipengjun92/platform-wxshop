@@ -7,12 +7,12 @@
             <div class="card-preview">
               <a v-for="(article,k) in item.content.articles" :key="k" :href="article.url" class="article-item"
                  target="_blank">
-                <div class="article-title">{{article.title}}</div>
+                <div class="article-title">{{ article.title }}</div>
                 <el-image class="article-thumb" :src="article.thumbUrl"></el-image>
               </a>
             </div>
             <div class="card-footer">
-              <div>{{item.updateTime}}</div>
+              <div>{{ item.updateTime }}</div>
               <div class="flex justify-between align-center" v-show="!selectMode">
                 <el-button size="mini" type="text" icon="el-icon-copy-document" v-clipboard:copy="item.mediaId"
                            v-clipboard:success="onCopySuccess" v-clipboard:error="onCopyError">复制media_id

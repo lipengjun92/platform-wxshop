@@ -16,7 +16,7 @@
       </el-form-item>
       <el-form-item label="失效时间/秒" prop="expireSeconds" v-if="dataForm.isTemp">
         <el-input v-model="dataForm.expireSeconds" placeholder="单位：秒，最大2592000（30天）"></el-input>
-        <div>最大30天，当前设置：<span class="text-warning">{{dataForm.expireSeconds / (24 * 3600)}}天</span></div>
+        <div>最大30天，当前设置：<span class="text-warning">{{ dataForm.expireSeconds / (24 * 3600) }}天</span></div>
       </el-form-item>
     </el-form>
     <span slot="footer" class="dialog-footer">

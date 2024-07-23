@@ -45,7 +45,7 @@
         <template slot-scope="scope">
           <el-button type="text" size="small" v-clipboard:copy="'/pages/category/category?categoryId=' + scope.row.id"
                      v-clipboard:success="copySuccess">
-            /pages/category/category?categoryId={{scope.row.id}}(点击复制)
+            /pages/category/category?categoryId={{ scope.row.id }}(点击复制)
           </el-button>
         </template>
       </el-table-column>

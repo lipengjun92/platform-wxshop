@@ -14,7 +14,7 @@
     <span slot="footer" class="dialog-footer">
             <el-button @click="visible = false">取消</el-button>
             <el-button type="success" @click="dataFormSubmit()"
-                       :disabled="uploading">{{uploading ? '发送中...' : '发送'}}</el-button>
+                       :disabled="uploading">{{ uploading ? '发送中...' : '发送' }}</el-button>
         </span>
   </el-dialog>
 </template>

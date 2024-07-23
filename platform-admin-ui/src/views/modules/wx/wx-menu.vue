@@ -20,7 +20,7 @@
                     @click.stop="selectSubMenu(i,i2)" draggable="true" @dragstart="selectSubMenu(i,i2)"
                     @dragover.prevent="onDragOverMenu=(i+'_'+i2)" @drop="onDrop(i,i2)">
                   <div class="menu-item-title">
-                    <span>{{sub.name}}</span>
+                    <span>{{ sub.name }}</span>
                   </div>
                 </li>
                 <li v-if="btn.subButtons.length<5" class="menu-sub-item"

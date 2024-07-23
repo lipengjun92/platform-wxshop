@@ -44,7 +44,8 @@
             :expand-on-click-node="false">
           </el-tree>
         </el-dialog>
-        <el-button @click="visiblePopover = true" class="width200">{{dataForm.orgName || '点击选择所属机构'}}</el-button>
+        <el-button @click="visiblePopover = true" class="width200">{{ dataForm.orgName || '点击选择所属机构' }}
+        </el-button>
       </el-form-item>
       <el-form-item label="角色" prop="roleIdList">
         <el-select v-model="dataForm.roleIdList" multiple clearable filterable placeholder="请选择">

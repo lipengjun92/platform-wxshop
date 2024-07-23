@@ -1,16 +1,16 @@
 <template>
   <el-dialog
-      title="修改"
-      :close-on-click-modal="false"
-      :before-close="handleClose"
-      :visible.sync="visible">
+    title="修改"
+    :close-on-click-modal="false"
+    :before-close="handleClose"
+    :visible.sync="visible">
     <el-row v-if="dataForm.articles.length>0">
       <el-col tag="center" :span="6">
         <el-card shadow="hover" :style="{ width: '150px' }" v-for="(item, index) in dataForm.articles" :key="index">
           <div @click="tableName = index+''">
             <img :src="item.thumbUrl" style="width: 120px"/>
             <div>
-              {{item.title}}
+              {{ item.title }}
             </div>
           </div>
         </el-card>

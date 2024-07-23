@@ -12,8 +12,8 @@
           <el-descriptions :style="{padding: '20px'}" :title="item.title"
                            v-for="(item, index) in props.row.content.newsItem"
                            :key="index" :column="2" border>
-            <el-descriptions-item label="作者" v-if="item.author">{{item.author}}</el-descriptions-item>
-            <el-descriptions-item label="摘要" v-if="item.digest">{{item.digest}}</el-descriptions-item>
+            <el-descriptions-item label="作者" v-if="item.author">{{ item.author }}</el-descriptions-item>
+            <el-descriptions-item label="摘要" v-if="item.digest">{{ item.digest }}</el-descriptions-item>
             <el-descriptions-item label="是否打开评论">
               <el-tag v-if="item.needOpenComment === 1" size="small" type="success">是</el-tag>
               <el-tag v-else-if="item.needOpenComment === 0" size="small" type="danger">否</el-tag>
@@ -26,7 +26,7 @@
               <a :href="item.url" target="_blank">临时链接</a>
             </el-descriptions-item>
             <el-descriptions-item label="阅读原文URL" v-if="item.contentSourceUrl">
-              <a :href="item.contentSourceUrl" target="_blank">{{item.contentSourceUrl}}</a>
+              <a :href="item.contentSourceUrl" target="_blank">{{ item.contentSourceUrl }}</a>
             </el-descriptions-item>
             <el-descriptions-item label="图文消息封面" v-if="item.thumbUrl">
               <img :style="{width: '150px'}" :src="item.thumbUrl"/>
@@ -35,30 +35,30 @@
         </template>
       </el-table-column>
       <el-table-column
-          prop="content"
-          header-align="center"
-          label="文章">
+        prop="content"
+        header-align="center"
+        label="文章">
         <template slot-scope="props">
           <img :style="{width: '150px'}" :src="props.row.content.newsItem[0].thumbUrl"/>
-          <span v-if="props.row.content.newsItem.length>1">[{{props.row.content.newsItem.length}}篇]</span>
-          {{props.row.content.newsItem[0].title}}
+          <span v-if="props.row.content.newsItem.length>1">[{{ props.row.content.newsItem.length }}篇]</span>
+          {{ props.row.content.newsItem[0].title }}
         </template>
       </el-table-column>
       <el-table-column
-          prop="updateTime"
-          header-align="center"
-          align="center"
-          label="更新时间"
-          width="180">
+        prop="updateTime"
+        header-align="center"
+        align="center"
+        label="更新时间"
+        width="180">
         <template slot-scope="scope">
-          {{transDate(scope.row.updateTime, 'yyyy-MM-dd hh:mm:ss')}}
+          {{ transDate(scope.row.updateTime, 'yyyy-MM-dd hh:mm:ss') }}
         </template>
       </el-table-column>
       <el-table-column
-          fixed="right"
-          header-align="center"
-          align="center" width="150"
-          label="操作">
+        fixed="right"
+        header-align="center"
+        align="center" width="150"
+        label="操作">
         <template slot-scope="scope">
           <el-button type="text" size="small" v-if="isAuth('wx:freepublish:submit')"
                      @click="submitHandle(scope.row.mediaId)">发布

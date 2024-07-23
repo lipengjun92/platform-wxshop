@@ -26,7 +26,8 @@
             :expand-on-click-node="false">
           </el-tree>
         </el-dialog>
-        <el-button @click="visiblePopover = true" class="width200">{{dataForm.parentName || '点击选择上级机构'}}</el-button>
+        <el-button @click="visiblePopover = true" class="width200">{{ dataForm.parentName || '点击选择上级机构' }}
+        </el-button>
       </el-form-item>
       <el-form-item label="状态" prop="status">
         <el-radio-group v-model="dataForm.status" class="width200">

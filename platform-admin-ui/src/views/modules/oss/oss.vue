@@ -32,7 +32,7 @@
         <template slot-scope="scope">
           <el-button type="text" size="small" v-clipboard:copy="scope.row.url"
                      v-clipboard:success="copySuccess">
-            {{scope.row.url}}(点击复制)
+            {{ scope.row.url }}(点击复制)
           </el-button>
         </template>
       </el-table-column>

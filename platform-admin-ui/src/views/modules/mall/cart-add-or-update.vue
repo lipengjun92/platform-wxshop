@@ -9,43 +9,43 @@
         <template slot="label">
           所属店铺
         </template>
-        {{dataForm.shopsName}}
+        {{ dataForm.shopsName }}
       </el-descriptions-item>
       <el-descriptions-item>
         <template slot="label">
           商品名称
         </template>
-        {{dataForm.goodsName}}
+        {{ dataForm.goodsName }}
       </el-descriptions-item>
       <el-descriptions-item>
         <template slot="label">
           商品编码
         </template>
-        {{dataForm.goodsSn}}
+        {{ dataForm.goodsSn }}
       </el-descriptions-item>
       <el-descriptions-item>
         <template slot="label">
           规格属性
         </template>
-        {{dataForm.goodsSpecifitionNameValue}}
+        {{ dataForm.goodsSpecifitionNameValue }}
       </el-descriptions-item>
       <el-descriptions-item>
         <template slot="label">
           市场价
         </template>
-        {{dataForm.marketPrice}}
+        {{ dataForm.marketPrice }}
       </el-descriptions-item>
       <el-descriptions-item>
         <template slot="label">
           零售价格
         </template>
-        {{dataForm.retailPrice}}
+        {{ dataForm.retailPrice }}
       </el-descriptions-item>
       <el-descriptions-item>
         <template slot="label">
           数量
         </template>
-        {{dataForm.number}}
+        {{ dataForm.number }}
       </el-descriptions-item>
       <el-descriptions-item>
         <template slot="label">

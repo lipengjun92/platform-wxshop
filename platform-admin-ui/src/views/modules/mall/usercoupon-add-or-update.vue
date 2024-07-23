@@ -10,21 +10,21 @@
           <i class="el-icon-user"></i>
           会员昵称
         </template>
-        {{dataForm.nickname}}
+        {{ dataForm.nickname }}
       </el-descriptions-item>
       <el-descriptions-item>
         <template slot="label">
           <i class="el-icon-tickets"></i>
           优惠券
         </template>
-        {{dataForm.title}}
+        {{ dataForm.title }}
       </el-descriptions-item>
       <el-descriptions-item>
         <template slot="label">
           <i class="el-icon-date"></i>
           领用时间
         </template>
-        {{dataForm.addTime}}
+        {{ dataForm.addTime }}
       </el-descriptions-item>
       <el-descriptions-item>
         <template slot="label">
@@ -49,14 +49,14 @@
           <i class="el-icon-alarm-clock"></i>
           使用时间
         </template>
-        {{dataForm.usedTime}}
+        {{ dataForm.usedTime }}
       </el-descriptions-item>
       <el-descriptions-item>
         <template slot="label">
           <i class="el-icon-wallet"></i>
           订单编号
         </template>
-        {{dataForm.orderSn}}
+        {{ dataForm.orderSn }}
       </el-descriptions-item>
     </el-descriptions>
     <span slot="footer" class="dialog-footer">

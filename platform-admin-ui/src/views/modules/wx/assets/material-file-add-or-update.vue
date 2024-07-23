@@ -11,7 +11,7 @@
           选择文件
           <input type="file" style="opacity: 0;height: 100%;position: absolute;left: 0;top: 0;" @change="onFileChange"/>
         </el-button>
-        <div>{{dataForm.file.name}}</div>
+        <div>{{ dataForm.file.name }}</div>
       </el-form-item>
       <el-form-item label="媒体类型" prop="mediaType">
         <el-select v-model="dataForm.mediaType" placeholder="媒体类型" style="width:100%">
@@ -28,7 +28,7 @@
     <span slot="footer" class="dialog-footer">
             <el-button @click="visible = false">取消</el-button>
             <el-button type="primary" @click="dataFormSubmit()"
-                       :disabled="uploading">{{uploading ? '提交中...' : '提交'}}</el-button>
+                       :disabled="uploading">{{ uploading ? '提交中...' : '提交' }}</el-button>
         </span>
   </el-dialog>
 </template>

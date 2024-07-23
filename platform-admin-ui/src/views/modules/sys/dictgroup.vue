@@ -34,7 +34,7 @@
             align="center"
             label="分组编码">
             <template slot-scope="scope">
-              <el-button type="text" size="small" @click="showDict(scope.row.id,scope.row.code)">{{scope.row.code}}
+              <el-button type="text" size="small" @click="showDict(scope.row.id,scope.row.code)">{{ scope.row.code }}
               </el-button>
             </template>
           </el-table-column>

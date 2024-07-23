@@ -18,7 +18,7 @@
       <el-table :data="dataForm.dnsInfos">
         <el-table-column property="realOperator" label="运营商">
           <template slot-scope="scope">
-            <span>{{getOperator(scope.row.realOperator)}} </span>
+            <span>{{ getOperator(scope.row.realOperator) }} </span>
           </template>
         </el-table-column>
         <el-table-column property="ip" label="ip"></el-table-column>
@@ -32,7 +32,7 @@
       <el-table :data="dataForm.pingInfos">
         <el-table-column property="fromOperator" label="运营商">
           <template slot-scope="scope">
-            <span>{{getOperator(scope.row.fromOperator)}} </span>
+            <span>{{ getOperator(scope.row.fromOperator) }} </span>
           </template>
         </el-table-column>
         <el-table-column property="ip" label="ip"></el-table-column>

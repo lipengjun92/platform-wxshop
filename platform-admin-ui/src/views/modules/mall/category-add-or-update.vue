@@ -60,7 +60,7 @@
 
 <script>
 export default {
-  data() {
+  data () {
     return {
       disabled: false,
       visible: false,
@@ -88,7 +88,7 @@ export default {
     }
   },
   methods: {
-    init(id, disabled) {
+    init (id, disabled) {
       this.disabled = disabled
       this.dataForm.id = id || ''
       this.visible = true
@@ -130,7 +130,7 @@ export default {
       })
     },
     // 表单提交
-    dataFormSubmit() {
+    dataFormSubmit () {
       this.$refs['dataForm']
         .validate((valid) => {
           if (valid) {

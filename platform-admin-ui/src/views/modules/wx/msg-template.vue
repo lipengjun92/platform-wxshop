@@ -18,7 +18,7 @@
       </el-form-item>
       <el-form-item class="fr">
         <el-button v-if="isAuth('wx:msgtemplate:save')" icon="el-icon-sort" type="success" @click="syncWxTemplate()"
-                   :disabled="synchonizingWxTemplate">{{synchonizingWxTemplate ? '同步中...' : '同步公众号模板'}}
+                   :disabled="synchonizingWxTemplate">{{ synchonizingWxTemplate ? '同步中...' : '同步公众号模板' }}
         </el-button>
         <el-button>
           <el-link type="primary" icon="el-icon-link" target="_blank"
@@ -35,7 +35,7 @@
       <el-table-column prop="templateId" show-overflow-tooltip header-align="center" align="center" label="模板ID">
       </el-table-column>
       <el-table-column prop="title" header-align="center" align="center" label="标题">
-        <a :href="scope.row.url" slot-scope="scope">{{scope.row.title}}</a>
+        <a :href="scope.row.url" slot-scope="scope">{{ scope.row.title }}</a>
       </el-table-column>
       <el-table-column prop="name" header-align="center" align="center" label="模版名称">
       </el-table-column>
@@ -43,7 +43,7 @@
                        width="200">
       </el-table-column>
       <el-table-column prop="status" header-align="center" align="center" label="是否有效">
-        <span slot-scope="scope">{{scope.row.status ? "是" : "否"}}</span>
+        <span slot-scope="scope">{{ scope.row.status ? '是' : '否' }}</span>
       </el-table-column>
       <el-table-column fixed="right" header-align="center" align="center" width="150" label="操作">
         <template slot-scope="scope">

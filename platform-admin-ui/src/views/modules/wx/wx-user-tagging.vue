@@ -8,12 +8,12 @@
       <el-select v-model="selectedTagid" filterable placeholder="请选择标签" style="width:100%">
         <el-option v-for="tagid in tagidsInOption" :key="tagid" :label="getTagName(tagid)" :value="tagid"></el-option>
       </el-select>
-      <div style="margin-top:20px;">已选择用户数：{{wxUsers.length}}</div>
+      <div style="margin-top:20px;">已选择用户数：{{ wxUsers.length }}</div>
     </div>
     <span slot="footer" class="dialog-footer">
             <el-button @click="dialogVisible=false">关闭</el-button>
             <el-button type="primary" @click="dataFormSubmit()"
-                       :disabled="submitting">{{submitting ? '保存中...' : '确定'}}</el-button>
+                       :disabled="submitting">{{ submitting ? '保存中...' : '确定' }}</el-button>
         </span>
   </el-dialog>
 </template>

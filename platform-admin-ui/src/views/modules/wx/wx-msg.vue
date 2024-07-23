@@ -28,8 +28,8 @@
         </div>
         <div class="item-content">
           <div class="flex justify-between margin-bottom">
-            <div class="text-cut">{{getUserInfo(msg.openid).nickname || '--'}}</div>
-            <div>{{msg.createTime}}</div>
+            <div class="text-cut">{{ getUserInfo(msg.openid).nickname || '--' }}</div>
+            <div>{{ msg.createTime }}</div>
             <div class="reply-btn">
               <div v-if="isAuth('wx:wxmsg:save')&&canReply(msg.createTime)" @click="replyHandle(msg.openid)"
                    class="el-icon-s-promotion">回复

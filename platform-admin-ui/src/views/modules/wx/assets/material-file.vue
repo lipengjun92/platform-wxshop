@@ -15,13 +15,14 @@
           <div class="card-preview-text">管理后台不支持预览<br/>微信中可正常播放</div>
         </div>
         <div class="card-footer">
-          <div class="text-cut-name">{{item.name}}</div>
-          <div>{{item.updateTime}}</div>
+          <div class="text-cut-name">{{ item.name }}</div>
+          <div>{{ item.updateTime }}</div>
           <div class="flex justify-between align-center" v-show="!selectMode">
             <el-button size="mini" type="text" icon="el-icon-copy-document" v-clipboard:copy="item.mediaId"
                        v-clipboard:success="onCopySuccess" v-clipboard:error="onCopyError">复制media_id
             </el-button>
-            <el-button size="mini" type="text" icon="el-icon-delete" @click="deleteHandle(item.mediaId)">删除</el-button>
+            <el-button size="mini" type="text" icon="el-icon-delete" @click="deleteHandle(item.mediaId)">删除
+            </el-button>
           </div>
         </div>
       </div>

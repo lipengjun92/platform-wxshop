@@ -58,7 +58,7 @@
         align="center"
         label="性别">
         <template slot-scope="scope">
-          <span>{{transDict('SEX', scope.row.sex)}}</span>
+          <span>{{ transDict('SEX', scope.row.sex) }}</span>
         </template>
       </el-table-column>
       <el-table-column
@@ -73,7 +73,7 @@
         align="center"
         label="所属机构">
         <template slot-scope="scope">
-          <span>{{transOrg(scope.row.orgNo)}}</span>
+          <span>{{ transOrg(scope.row.orgNo) }}</span>
         </template>
       </el-table-column>
       <el-table-column

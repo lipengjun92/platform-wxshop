@@ -34,7 +34,7 @@
           <el-input ref="gain" size="mini" v-if="isAuth('sys:config:update')&&scope.row.isOK"
                     @keyup.native.enter="blurClick(scope)" @blur="blurClick(scope)"
                     v-model="scope.row.paramKey"></el-input>
-          <span v-else>{{scope.row.paramKey}}</span>
+          <span v-else>{{ scope.row.paramKey }}</span>
         </template>
       </el-table-column>
       <el-table-column
@@ -46,7 +46,7 @@
           <el-input ref="gain" size="mini" v-if="isAuth('sys:config:update')&&scope.row.isOK1"
                     @keyup.native.enter="blurClick(scope)" @blur="blurClick(scope)"
                     v-model="scope.row.paramValue"></el-input>
-          <span v-else>{{scope.row.paramValue}}</span>
+          <span v-else>{{ scope.row.paramValue }}</span>
         </template>
       </el-table-column>
       <el-table-column
@@ -59,7 +59,7 @@
           <el-input ref="gain" size="mini" v-if="isAuth('sys:config:update')&&scope.row.isOK2"
                     @keyup.native.enter="blurClick(scope)" @blur="blurClick(scope)"
                     v-model="scope.row.remark"></el-input>
-          <span v-else>{{scope.row.remark}}</span>
+          <span v-else>{{ scope.row.remark }}</span>
         </template>
       </el-table-column>
     </el-table>

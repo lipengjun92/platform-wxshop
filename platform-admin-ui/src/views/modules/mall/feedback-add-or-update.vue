@@ -9,13 +9,13 @@
         <template slot="label">
           手机
         </template>
-        {{dataForm.mobile}}
+        {{ dataForm.mobile }}
       </el-descriptions-item>
       <el-descriptions-item>
         <template slot="label">
           反馈时间
         </template>
-        {{dataForm.addTime}}
+        {{ dataForm.addTime }}
       </el-descriptions-item>
       <el-descriptions-item>
         <template slot="label">
@@ -27,7 +27,7 @@
         <template slot="label">
           详细内容
         </template>
-        {{dataForm.content}}
+        {{ dataForm.content }}
       </el-descriptions-item>
     </el-descriptions>
     <span slot="footer" class="dialog-footer">

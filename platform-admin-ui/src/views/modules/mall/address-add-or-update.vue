@@ -10,45 +10,45 @@
           <i class="el-icon-user"></i>
           收货人
         </template>
-        {{dataForm.userName}}
+        {{ dataForm.userName }}
       </el-descriptions-item>
       <el-descriptions-item>
         <template slot="label">
           <i class="el-icon-mobile-phone"></i>
           手机
         </template>
-        {{dataForm.mobile}}
+        {{ dataForm.mobile }}
       </el-descriptions-item>
       <el-descriptions-item>
         <template slot="label">
           邮编
         </template>
-        {{dataForm.postalCode}}
+        {{ dataForm.postalCode }}
       </el-descriptions-item>
       <el-descriptions-item>
         <template slot="label">
           省
         </template>
-        {{dataForm.provinceName}}
+        {{ dataForm.provinceName }}
       </el-descriptions-item>
       <el-descriptions-item>
         <template slot="label">
           市
         </template>
-        {{dataForm.cityName}}
+        {{ dataForm.cityName }}
       </el-descriptions-item>
       <el-descriptions-item>
         <template slot="label">
           区
         </template>
-        {{dataForm.countyName}}
+        {{ dataForm.countyName }}
       </el-descriptions-item>
       <el-descriptions-item>
         <template slot="label">
           <i class="el-icon-map-location"></i>
           详细地址
         </template>
-        {{dataForm.detailInfo}}
+        {{ dataForm.detailInfo }}
       </el-descriptions-item>
       <el-descriptions-item>
         <template slot="label">
