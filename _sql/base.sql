@@ -524,6 +524,14 @@ INSERT INTO `SYS_MENU` VALUES ('1502', '15', '商品分类', 'mall/category', 'm
 INSERT INTO `SYS_MENU` VALUES ('150201', '1502', '新增', null, 'mall:category:save', 2, null, 0);
 INSERT INTO `SYS_MENU` VALUES ('150202', '1502', '修改', null, 'mall:category:update', 2, null, 0);
 INSERT INTO `SYS_MENU` VALUES ('150203', '1502', '删除', null, 'mall:category:delete', 2, null, 0);
+INSERT INTO `SYS_MENU` VALUES ('1503', '15', '广告位', 'mall/adposition', 'mall:adposition:list,mall:adposition:info', 1, 'dangdifill', 3);
+INSERT INTO `SYS_MENU` VALUES ('150301', '1503', '新增', null, 'mall:adposition:save', 2, null, 0);
+INSERT INTO `SYS_MENU` VALUES ('150302', '1503', '修改', null, 'mall:adposition:update', 2, null, 0);
+INSERT INTO `SYS_MENU` VALUES ('150303', '1503', '删除', null, 'mall:adposition:delete', 2, null, 0);
+INSERT INTO `SYS_MENU` VALUES ('1504', '15', '广告管理', 'mall/ad', 'mall:ad:list,mall:ad:info', 1, 'tubiao', 4);
+INSERT INTO `SYS_MENU` VALUES ('150401', '1504', '新增', null, 'mall:ad:save', 2, null, 0);
+INSERT INTO `SYS_MENU` VALUES ('150402', '1504', '修改', null, 'mall:ad:update', 2, null, 0);
+INSERT INTO `SYS_MENU` VALUES ('150403', '1504', '删除', null, 'mall:ad:delete', 2, null, 0);
 INSERT INTO `SYS_MENU` VALUES ('16', '0', '推广管理', null, null, 0, 'gift', 6);
 INSERT INTO `SYS_MENU` VALUES ('17', '0', '商品管理', null, null, 0, 'goods', 7);
 INSERT INTO `SYS_MENU` VALUES ('18', '0', '订单管理', null, null, 0, 'orders', 8);

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.platform.modules.mall.dao.MallAdDao">
+
+    <sql id="selectSql">
+        SELECT
+        T.ID,
+        T.AD_POSITION_ID,
+        T.MEDIA_TYPE,
+        T.NAME,
+        T.LINK,
+        T.IMAGE_URL,
+        T.CONTENT,
+        T.END_TIME,
+        T.ENABLED
+        FROM MALL_AD T
+        WHERE 1=1
+        <if test="params.id != null and params.id.trim() != ''">
+            AND T.ID = #{params.id}
+        </if>
+        <if test="params.name != null and params.name.trim() != ''">
+            AND T.NAME LIKE '%${params.name}%'
+        </if>
+    </sql>
+
+    <select id="selectMallAdPage" resultType="com.platform.modules.mall.entity.MallAdEntity">
+        <include refid="selectSql"/>
+    </select>
+
+    <select id="queryAll" resultType="com.platform.modules.mall.entity.MallAdEntity">
+        <include refid="selectSql"/>
+    </select>
+</mapper>
