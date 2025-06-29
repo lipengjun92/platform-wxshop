@@ -8170,7 +8170,7 @@ CREATE TABLE `mall_shipping`
     `id`     int(11)                  NOT NULL AUTO_INCREMENT,
     `code`   varchar(50)                       DEFAULT NULL,
     `name`   varchar(100)                      DEFAULT NULL,
-    `status` int(1) unsigned zerofill NOT NULL DEFAULT '0' COMMENT '状态 0正常 1删除',
+    `status` int(1) unsigned zerofill NOT NULL DEFAULT '0' COMMENT '状态 1正常 0删除',
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB
   AUTO_INCREMENT = 103
