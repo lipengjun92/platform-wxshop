@@ -18,6 +18,7 @@
  */
 package com.platform.modules.mall.entity;
 
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
@@ -39,7 +40,7 @@ public class MallBrandEntity implements Serializable {
     /**
      * 主键
      */
-    @TableId
+    @TableId(type = IdType.AUTO)
     private Integer id;
     /**
      * 品牌名称
@@ -66,7 +67,7 @@ public class MallBrandEntity implements Serializable {
      */
     private Integer isShow;
     /**
-     * 
+     *
      */
     private BigDecimal floorPrice;
     /**
