@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.platform.modules.mall.dao.MallGoodsIssueDao">
+
+    <sql id="selectSql">
+        SELECT
+        T.ID,
+        T.QUESTION,
+        T.ANSWER
+        FROM MALL_GOODS_ISSUE T
+        WHERE 1=1
+        <if test="params.id != null and params.id.trim() != ''">
+            AND T.ID = #{params.id}
+        </if>
+        <if test="params.question != null and params.question.trim() != ''">
+            AND T.QUESTION LIKE '%${params.question}%'
+        </if>
+    </sql>
+
+    <select id="selectMallGoodsIssuePage" resultType="com.platform.modules.mall.entity.MallGoodsIssueEntity">
+        <include refid="selectSql"/>
+    </select>
+
+    <select id="queryAll" resultType="com.platform.modules.mall.entity.MallGoodsIssueEntity">
+        <include refid="selectSql"/>
+    </select>
+</mapper>

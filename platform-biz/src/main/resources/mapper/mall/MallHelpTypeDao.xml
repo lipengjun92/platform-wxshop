@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.platform.modules.mall.dao.MallHelpTypeDao">
+
+    <sql id="selectSql">
+        SELECT
+        T.ID,
+        T.TYPE_NAME,
+        T.SORT
+        FROM MALL_HELP_TYPE T
+        WHERE 1=1
+        <if test="params.id != null and params.id.trim() != ''">
+            AND T.ID = #{params.id}
+        </if>
+        <if test="params.typeName != null and params.typeName.trim() != ''">
+            AND T.TYPE_NAME LIKE '%${params.typeName}%'
+        </if>
+    </sql>
+
+    <select id="selectMallHelpTypePage" resultType="com.platform.modules.mall.entity.MallHelpTypeEntity">
+        <include refid="selectSql"/>
+    </select>
+
+    <select id="queryAll" resultType="com.platform.modules.mall.entity.MallHelpTypeEntity">
+        <include refid="selectSql"/>
+    </select>
+</mapper>

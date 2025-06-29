@@ -565,6 +565,19 @@ INSERT INTO `SYS_MENU` VALUES ('151103', '1511', '删除', null, 'mall:channel:d
 INSERT INTO `SYS_MENU` VALUES ('16', '0', '推广管理', null, null, 0, 'gift', 6);
 INSERT INTO `SYS_MENU` VALUES ('17', '0', '商品管理', null, null, 0, 'goods', 7);
 INSERT INTO `SYS_MENU` VALUES ('18', '0', '订单管理', null, null, 0, 'orders', 8);
+INSERT INTO `SYS_MENU` VALUES ('19', '0', '帮助中心', null, null, 0, 'pinglun', 9);
+INSERT INTO `SYS_MENU` VALUES ('1901', '19', '问题类型', 'mall/helptype', 'mall:helptype:list,mall:helptype:info', 1, 'zhedie', 1);
+INSERT INTO `SYS_MENU` VALUES ('190101', '1901', '新增', null, 'mall:helptype:save', 2, null, 0);
+INSERT INTO `SYS_MENU` VALUES ('190102', '1901', '修改', null, 'mall:helptype:update', 2, null, 0);
+INSERT INTO `SYS_MENU` VALUES ('190103', '1901', '删除', null, 'mall:helptype:delete', 2, null, 0);
+INSERT INTO `SYS_MENU` VALUES ('1902', '19', '常见问题', 'mall/helpissue', 'mall:helpissue:list,mall:helpissue:info', 1, 'issue', 1);
+INSERT INTO `SYS_MENU` VALUES ('190201', '1902', '新增', null, 'mall:helpissue:save', 2, null, 0);
+INSERT INTO `SYS_MENU` VALUES ('190202', '1902', '修改', null, 'mall:helpissue:update', 2, null, 0);
+INSERT INTO `SYS_MENU` VALUES ('190203', '1902', '删除', null, 'mall:helpissue:delete', 2, null, 0);
+INSERT INTO `SYS_MENU` VALUES ('1903', '19', '商品页问答', 'mall/goodsissue', 'mall:goodsissue:list,mall:goodsissue:info', 1, 'issue', 1);
+INSERT INTO `SYS_MENU` VALUES ('190301', '1903', '新增', null, 'mall:goodsissue:save', 2, null, 0);
+INSERT INTO `SYS_MENU` VALUES ('190302', '1903', '修改', null, 'mall:goodsissue:update', 2, null, 0);
+INSERT INTO `SYS_MENU` VALUES ('190303', '1903', '删除', null, 'mall:goodsissue:delete', 2, null, 0);
 
 -- ----------------------------
 -- Table structure for `SYS_ORG`
