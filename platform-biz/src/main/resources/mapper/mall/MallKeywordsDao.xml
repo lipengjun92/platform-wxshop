@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.platform.modules.mall.dao.MallKeywordsDao">
+
+    <sql id="selectSql">
+        SELECT
+        T.ID,
+        T.KEYWORD,
+        T.IS_HOT,
+        T.IS_DEFAULT,
+        T.IS_SHOW,
+        T.SORT_ORDER,
+        T.SCHEME_URL,
+        T.TYPE
+        FROM MALL_KEYWORDS T
+        WHERE 1=1
+        <if test="params.id != null and params.id.trim() != ''">
+            AND T.ID = #{params.id}
+        </if>
+        <if test="params.keyword != null and params.keyword.trim() != ''">
+            AND T.KEYWORD LIKE '%${params.keyword}%'
+        </if>
+    </sql>
+
+    <select id="selectMallKeywordsPage" resultType="com.platform.modules.mall.entity.MallKeywordsEntity">
+        <include refid="selectSql"/>
+    </select>
+
+    <select id="queryAll" resultType="com.platform.modules.mall.entity.MallKeywordsEntity">
+        <include refid="selectSql"/>
+    </select>
+</mapper>

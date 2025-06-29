@@ -7474,7 +7474,7 @@ CREATE TABLE `mall_keywords`
 (
     `id`         int(11)                                 NOT NULL AUTO_INCREMENT COMMENT '主键',
     `keyword`    varchar(90) COLLATE utf8mb4_unicode_ci  NOT NULL DEFAULT '' COMMENT '关键字',
-    `is_hot`     tinyint(1) unsigned                     NOT NULL DEFAULT '0' COMMENT '热销',
+    `is_hot`     tinyint(1) unsigned                     NOT NULL DEFAULT '0' COMMENT '热搜',
     `is_default` tinyint(1) unsigned                     NOT NULL DEFAULT '0' COMMENT '默认',
     `is_show`    tinyint(1) unsigned                     NOT NULL DEFAULT '1' COMMENT '显示',
     `sort_order` int(11)                                 NOT NULL DEFAULT '100' COMMENT '排序',
@@ -7483,7 +7483,7 @@ CREATE TABLE `mall_keywords`
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8mb4
-  COLLATE = utf8mb4_unicode_ci COMMENT ='热闹关键词表';
+  COLLATE = utf8mb4_unicode_ci COMMENT ='关键词热搜表';
 
 -- ----------------------------
 -- Records of mall_keywords
