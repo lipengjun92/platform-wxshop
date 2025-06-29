@@ -442,7 +442,7 @@ public class ApiCartController extends ApiBaseAction {
         //获取可用的优惠券信息
         BigDecimal couponPrice = new BigDecimal("0.00");
         if (couponId != null && couponId != 0) {
-            CouponVo couponVo = apiCouponMapper.getUserCoupon(couponId);
+            CouponVo couponVo = apiCouponMapper.getUserCoupon(couponId, loginUser.getUserId());
             if (couponVo != null) {
                 couponPrice = couponVo.getTypeMoney();
             }

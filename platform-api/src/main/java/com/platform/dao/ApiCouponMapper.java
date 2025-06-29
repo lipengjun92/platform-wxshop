@@ -1,6 +1,7 @@
 package com.platform.dao;
 
 import com.platform.entity.CouponVo;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 import java.util.Map;
@@ -26,7 +27,7 @@ public interface ApiCouponMapper extends BaseDao<CouponVo> {
      * @param id
      * @return
      */
-    CouponVo getUserCoupon(Integer id);
+    CouponVo getUserCoupon(@Param(value = "id") Integer id, @Param("userId") Long userId);
 
     /**
      * 按类型查询

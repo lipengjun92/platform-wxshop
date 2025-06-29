@@ -137,7 +137,7 @@ public class ApiOrderService {
         BigDecimal couponPrice = new BigDecimal("0.00");
         CouponVo couponVo = null;
         if (couponId != null && couponId != 0) {
-            couponVo = apiCouponMapper.getUserCoupon(couponId);
+            couponVo = apiCouponMapper.getUserCoupon(couponId, loginUser.getUserId());
             if (couponVo != null && couponVo.getCouponStatus() == 1) {
                 couponPrice = couponVo.getTypeMoney();
             }
