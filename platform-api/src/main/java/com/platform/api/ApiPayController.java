@@ -64,6 +64,9 @@ public class ApiPayController extends ApiBaseAction {
     @PostMapping("prepay")
     public Object payPrepay(@LoginUser UserVo loginUser, Integer orderId) {
         OrderVo orderInfo = orderService.queryObject(orderId);
+        if (!loginUser.getUserId().equals(orderInfo.getUserId())) {
+            return toResponseFail("越权操作！");
+        }
 
         if (null == orderInfo) {
             return toResponsObject(400, "订单已取消", "");
