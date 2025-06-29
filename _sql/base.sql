@@ -532,6 +532,14 @@ INSERT INTO `SYS_MENU` VALUES ('1504', '15', '广告管理', 'mall/ad', 'mall:ad
 INSERT INTO `SYS_MENU` VALUES ('150401', '1504', '新增', null, 'mall:ad:save', 2, null, 0);
 INSERT INTO `SYS_MENU` VALUES ('150402', '1504', '修改', null, 'mall:ad:update', 2, null, 0);
 INSERT INTO `SYS_MENU` VALUES ('150403', '1504', '删除', null, 'mall:ad:delete', 2, null, 0);
+INSERT INTO `SYS_MENU` VALUES ('1505', '15', '专题分类', 'mall/topiccategory', 'mall:topiccategory:list,mall:topiccategory:info', 1, 'zhedie', 5);
+INSERT INTO `SYS_MENU` VALUES ('150501', '1505', '新增', null, 'mall:topiccategory:save', 2, null, 0);
+INSERT INTO `SYS_MENU` VALUES ('150502', '1505', '修改', null, 'mall:topiccategory:update', 2, null, 0);
+INSERT INTO `SYS_MENU` VALUES ('150503', '1505', '删除', null, 'mall:topiccategory:delete', 2, null, 0);
+INSERT INTO `SYS_MENU` VALUES ('1506', '15', '专题管理', 'mall/topic', 'mall:topic:list,mall:topic:info', 1, 'guize', 6);
+INSERT INTO `SYS_MENU` VALUES ('150601', '1506', '新增', null, 'mall:topic:save', 2, null, 0);
+INSERT INTO `SYS_MENU` VALUES ('150602', '1506', '修改', null, 'mall:topic:update', 2, null, 0);
+INSERT INTO `SYS_MENU` VALUES ('150603', '1506', '删除', null, 'mall:topic:delete', 2, null, 0);
 INSERT INTO `SYS_MENU` VALUES ('16', '0', '推广管理', null, null, 0, 'gift', 6);
 INSERT INTO `SYS_MENU` VALUES ('17', '0', '商品管理', null, null, 0, 'goods', 7);
 INSERT INTO `SYS_MENU` VALUES ('18', '0', '订单管理', null, null, 0, 'orders', 8);

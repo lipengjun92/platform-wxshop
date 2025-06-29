@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.platform.modules.mall.dao.MallTopicCategoryDao">
+
+    <sql id="selectSql">
+        SELECT
+        T.ID,
+        T.TITLE,
+        T.PIC_URL
+        FROM MALL_TOPIC_CATEGORY T
+        WHERE 1=1
+        <if test="params.id != null and params.id.trim() != ''">
+            AND T.ID = #{params.id}
+        </if>
+        <if test="params.title != null and params.title.trim() != ''">
+            AND T.TITLE LIKE '%${params.title}%'
+        </if>
+    </sql>
+
+    <select id="selectMallTopicCategoryPage" resultType="com.platform.modules.mall.entity.MallTopicCategoryEntity">
+        <include refid="selectSql"/>
+    </select>
+
+    <select id="queryAll" resultType="com.platform.modules.mall.entity.MallTopicCategoryEntity">
+        <include refid="selectSql"/>
+    </select>
+</mapper>
