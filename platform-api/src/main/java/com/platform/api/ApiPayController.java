@@ -223,6 +223,9 @@ public class ApiPayController extends ApiBaseAction {
         //
         OrderVo orderInfo = orderService.queryObject(orderId);
 
+        if (!getUserId().equals(orderInfo.getUserId())) {
+            return toResponseFail("越权操作！");
+        }
         if (null == orderInfo) {
             return toResponsObject(400, "订单已取消", "");
         }
