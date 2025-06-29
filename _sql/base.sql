@@ -515,6 +515,8 @@ INSERT INTO `SYS_MENU` VALUES ('1407', '14', '历史足迹', 'mall/footprint', '
 INSERT INTO `SYS_MENU` VALUES ('140701', '1407', '删除', null, 'mall:footprint:delete', 2, null, 0);
 INSERT INTO `SYS_MENU` VALUES ('1408', '14', '会员优惠券', 'mall/usercoupon', 'mall:usercoupon:list,mall:usercoupon:info', 1, 'coupon', 8);
 INSERT INTO `SYS_MENU` VALUES ('140801', '1408', '删除', null, 'mall:usercoupon:delete', 2, null, 0);
+INSERT INTO `SYS_MENU` VALUES ('1409', '14', '会员搜索历史', 'mall/searchhistory', 'mall:searchhistory:list,mall:searchhistory:info', 1, 'sousuo', 9);
+INSERT INTO `SYS_MENU` VALUES ('140901', '1409', '删除', null, 'mall:searchhistory:delete', 2, null, 0);
 INSERT INTO `SYS_MENU` VALUES ('15', '0', '商城配置', null, null, 0, 'mall', 5);
 INSERT INTO `SYS_MENU` VALUES ('1501', '15', '品牌制造商', 'mall/brand', 'mall:brand:list,mall:brand:info', 1, 'brand', 1);
 INSERT INTO `SYS_MENU` VALUES ('150101', '1501', '新增', null, 'mall:brand:save', 2, null, 0);

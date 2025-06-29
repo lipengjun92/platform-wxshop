@@ -172,7 +172,6 @@ export default {
   },
   methods: {
     // 获取数据列表
-
     getDataList (page) {
       if (page) {
         this.pageIndex = page

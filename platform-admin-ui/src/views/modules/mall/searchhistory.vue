@@ -1,13 +1,31 @@
 <template>
-  <div class="mod-topic">
+  <div class="mod-searchhistory">
     <el-form :inline="true" :model="searchForm" @keyup.enter.native="getDataList(1)">
       <el-form-item>
-        <el-input v-model="searchForm.name" placeholder="参数名" clearable></el-input>
+        <el-input v-model="searchForm.keyword" placeholder="关键字" clearable></el-input>
+      </el-form-item>
+      <el-form-item>
+        <el-select v-model="searchForm.from" clearable placeholder="搜索来源" @change="getDataList(1)">
+          <el-option
+            key="1"
+            label="小程序"
+            value="1">
+          </el-option>
+          <el-option
+            key="2"
+            label="PC"
+            value="2">
+          </el-option>
+          <el-option
+            key="3"
+            label="APP"
+            value="3">
+          </el-option>
+        </el-select>
       </el-form-item>
       <el-form-item>
         <el-button @click="getDataList(1)">查询</el-button>
-        <el-button v-if="isAuth('mall:topic:save')" type="primary" @click="addOrUpdateHandle()">新增</el-button>
-        <el-button v-if="isAuth('mall:topic:delete')" type="danger" @click="deleteHandle()"
+        <el-button v-if="isAuth('mall:searchhistory:delete')" type="danger" @click="deleteHandle()"
                    :disabled="dataListSelections.length <= 0">批量删除
         </el-button>
       </el-form-item>
@@ -24,62 +42,33 @@
         width="50">
       </el-table-column>
       <el-table-column
-        prop="title"
+        prop="keyword"
         header-align="center"
         align="center"
-        label="主题">
+        label="关键字">
       </el-table-column>
       <el-table-column
-        prop="avatar"
+        prop="from"
         header-align="center"
         align="center"
-        label="头像">
+        label="搜索来源">
         <template slot-scope="scope">
-          <img style="height: 50%;width: 50%" @click="openImg(scope.row.avatar)" :src="scope.row.avatar"/>
+          <el-tag v-if="scope.row.from === '1'" size="small" type="warning">小程序</el-tag>
+          <el-tag v-else-if="scope.row.from === '2'" size="small" type="danger">PC</el-tag>
+          <el-tag v-else-if="scope.row.from === '3'" size="small" type="success">APP</el-tag>
         </template>
       </el-table-column>
       <el-table-column
-        prop="itemPicUrl"
+        prop="addTime"
         header-align="center"
         align="center"
-        label="专题图片">
-        <template slot-scope="scope">
-          <img style="height: 50%;width: 50%" @click="openImg(scope.row.itemPicUrl)" :src="scope.row.itemPicUrl"/>
-        </template>
+        label="搜索时间">
       </el-table-column>
       <el-table-column
-        prop="subtitle"
-        header-align="center"
-        show-overflow-tooltip
-        align="center"
-        label="子标题">
-      </el-table-column>
-      <el-table-column
-        prop="categoryName"
+        prop="nickname"
         header-align="center"
         align="center"
-        label="主题类别">
-      </el-table-column>
-      <el-table-column
-        prop="priceInfo"
-        header-align="center"
-        align="center"
-        label="专题价格">
-      </el-table-column>
-      <el-table-column
-        prop="readCount"
-        header-align="center"
-        align="center"
-        label="阅读数">
-      </el-table-column>
-      <el-table-column
-        prop="scenePicUrl"
-        header-align="center"
-        align="center"
-        label="场景图片">
-        <template slot-scope="scope">
-          <img style="height: 50%;width: 50%" @click="openImg(scope.row.scenePicUrl)" :src="scope.row.scenePicUrl"/>
-        </template>
+        label="会员昵称">
       </el-table-column>
       <el-table-column
         fixed="right"
@@ -88,13 +77,8 @@
         width="150"
         label="操作">
         <template slot-scope="scope">
-          <el-button v-if="isAuth('mall:topic:info')" type="text" size="small" @click="showDetails(scope.row.id)">查看
-          </el-button>
-          <el-button v-if="isAuth('mall:topic:update')" type="text" size="small"
-                     @click="addOrUpdateHandle(scope.row.id)">修改
-          </el-button>
-          <el-button v-if="isAuth('mall:topic:delete')" type="text" size="small" @click="deleteHandle(scope.row.id)">
-            删除
+          <el-button v-if="isAuth('mall:searchhistory:delete')" type="text" size="small"
+                     @click="deleteHandle(scope.row.id)">删除
           </el-button>
         </template>
       </el-table-column>
@@ -108,30 +92,23 @@
       :total="totalPage"
       layout="total, sizes, prev, pager, next, jumper">
     </el-pagination>
-    <!-- 弹窗, 新增 / 修改 -->
-    <add-or-update v-if="addOrUpdateVisible" ref="addOrUpdate" @refreshDataList="getDataList"></add-or-update>
   </div>
 </template>
 
 <script>
-import AddOrUpdate from './topic-add-or-update'
-
 export default {
   data () {
     return {
       searchForm: {
-        name: ''
+        keyword: '',
+        from: ''
       },
       dataList: [],
       pageIndex: 1,
       pageSize: 10,
       totalPage: 0,
-      dataListSelections: [],
-      addOrUpdateVisible: false
+      dataListSelections: []
     }
-  },
-  components: {
-    AddOrUpdate
   },
   activated () {
     this.getDataList()
@@ -143,12 +120,13 @@ export default {
         this.pageIndex = page
       }
       this.$http({
-        url: '/mall/topic/list',
+        url: '/mall/searchhistory/list',
         method: 'get',
         params: {
           'page': this.pageIndex,
           'limit': this.pageSize,
-          'name': this.searchForm.name
+          'keyword': this.searchForm.keyword,
+          'from': this.searchForm.from
         }
       }).then(({data}) => {
         if (data && data.code === 0) {
@@ -175,20 +153,6 @@ export default {
     selectionChangeHandle (val) {
       this.dataListSelections = val
     },
-    // 查看详情
-    showDetails (id) {
-      this.addOrUpdateVisible = true
-      this.$nextTick(() => {
-        this.$refs.addOrUpdate.init(id, true)
-      })
-    },
-    // 新增 / 修改
-    addOrUpdateHandle (id) {
-      this.addOrUpdateVisible = true
-      this.$nextTick(() => {
-        this.$refs.addOrUpdate.init(id)
-      })
-    },
     // 删除
     deleteHandle (id) {
       let ids = id ? [id] : this.dataListSelections.map(item => {
@@ -200,7 +164,7 @@ export default {
         type: 'warning'
       }).then(() => {
         this.$http({
-          url: '/mall/topic/delete',
+          url: '/mall/searchhistory/delete',
           method: 'post',
           data: ids
         }).then(({data}) => {

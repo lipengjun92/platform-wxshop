@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.platform.modules.mall.dao.MallSearchHistoryDao">
+
+    <sql id="selectSql">
+        SELECT
+        T.ID,
+        T.KEYWORD,
+        T.FROM,
+        T.ADD_TIME,
+        T.USER_ID,
+        WU.NICKNAME
+        FROM MALL_SEARCH_HISTORY T LEFT JOIN WX_USER WU ON WU.ID = T.USER_ID
+        WHERE 1=1
+        <if test="params.id != null and params.id.trim() != ''">
+            AND T.ID = #{params.id}
+        </if>
+        <if test="params.from != null and params.from.trim() != ''">
+            AND T.FROM = #{params.from}
+        </if>
+        <if test="params.keyword != null and params.keyword.trim() != ''">
+            AND T.KEYWORD LIKE '%${params.keyword}%'
+        </if>
+    </sql>
+
+    <select id="selectMallSearchHistoryPage" resultType="com.platform.modules.mall.entity.MallSearchHistoryEntity">
+        <include refid="selectSql"/>
+    </select>
+
+    <select id="queryAll" resultType="com.platform.modules.mall.entity.MallSearchHistoryEntity">
+        <include refid="selectSql"/>
+    </select>
+</mapper>

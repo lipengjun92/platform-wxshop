@@ -97,7 +97,8 @@
           <el-button v-if="isAuth('mall:feedback:info')" type="text" size="small" @click="showDetails(scope.row.msgId)">
             查看
           </el-button>
-          <el-button v-if="isAuth('mall:feedback:delete')" type="text" size="small" @click="deleteHandle(scope.row.msgId)">
+          <el-button v-if="isAuth('mall:feedback:delete')" type="text" size="small"
+                     @click="deleteHandle(scope.row.msgId)">
             删除
           </el-button>
         </template>
