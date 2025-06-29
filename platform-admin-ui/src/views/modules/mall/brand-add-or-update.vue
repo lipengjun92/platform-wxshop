@@ -25,7 +25,8 @@
         </el-tooltip>
       </el-form-item>
       <el-form-item label="排序" prop="sortOrder">
-        <el-input v-model="dataForm.sortOrder" :disabled="disabled" placeholder="排序"></el-input>
+        <el-input-number v-model="dataForm.sortOrder" :disabled="disabled" controls-position="right" :min="0"
+                         step-strictly></el-input-number>
       </el-form-item>
       <el-form-item label="显示" prop="isShow">
         <el-radio-group v-model="dataForm.isShow" :disabled="disabled" class="width200">
@@ -48,7 +49,7 @@
           <el-radio-button :label="1">是</el-radio-button>
         </el-radio-group>
       </el-form-item>
-      <el-form-item label="排序" prop="newSortOrder">
+      <el-form-item label="新品排序" prop="newSortOrder">
         <el-input-number v-model="dataForm.newSortOrder" :disabled="disabled" controls-position="right" :min="0"
                          step-strictly></el-input-number>
       </el-form-item>

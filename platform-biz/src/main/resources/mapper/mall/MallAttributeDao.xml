@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.platform.modules.mall.dao.MallAttributeDao">
+
+    <sql id="selectSql">
+        SELECT
+        T.ID,
+        T.ATTRIBUTE_CATEGORY_ID,
+        T.NAME,
+        T.INPUT_TYPE,
+        T.VALUE,
+        T.SORT_ORDER,
+        MACC.NAME CATEGORY_NAME
+        FROM MALL_ATTRIBUTE T LEFT JOIN MALL_ATTRIBUTE_CATEGORY MACC ON MACC.ID = T.ATTRIBUTE_CATEGORY_ID
+        WHERE 1=1
+        <if test="params.id != null and params.id.trim() != ''">
+            AND T.ID = #{params.id}
+        </if>
+        <if test="params.name != null and params.name.trim() != ''">
+            AND T.NAME LIKE '%${params.name}%'
+        </if>
+    </sql>
+
+    <select id="selectMallAttributePage" resultType="com.platform.modules.mall.entity.MallAttributeEntity">
+        <include refid="selectSql"/>
+    </select>
+
+    <select id="queryAll" resultType="com.platform.modules.mall.entity.MallAttributeEntity">
+        <include refid="selectSql"/>
+    </select>
+</mapper>

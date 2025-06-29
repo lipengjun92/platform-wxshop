@@ -104,7 +104,7 @@ CREATE TABLE `mall_attribute`
     KEY `cat_id` (`attribute_category_id`)
 ) ENGINE = InnoDB
   AUTO_INCREMENT = 103
-  DEFAULT CHARSET = utf8;
+  DEFAULT CHARSET = utf8 COMMENT '商品参数属性';
 
 -- ----------------------------
 -- Records of mall_attribute
@@ -194,7 +194,7 @@ CREATE TABLE `mall_attribute_category`
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB
   AUTO_INCREMENT = 1036002
-  DEFAULT CHARSET = utf8;
+  DEFAULT CHARSET = utf8 COMMENT '商品参数类型';
 
 -- ----------------------------
 -- Records of mall_attribute_category
