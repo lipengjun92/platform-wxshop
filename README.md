@@ -29,22 +29,8 @@
 <a target="_blank" href="https://qm.qq.com/cgi-bin/qm/qr?k=NI1TX8jkEeRITDnYv-oZ-9onMwNN9MNs&jump_from=webapi&authKey=a/L8SQ0vmI4X9Vomv7JK8Z3t94OxROqmNUW8gUGsldCHpcbd7db26DVB410gNhZv"><img border="0" src="https://img.shields.io/badge/点击加入-66502035-green.svg" alt="微同科技 ①群" title="微同科技 ①群"></a>
 <a target="_blank" href="https://qm.qq.com/cgi-bin/qm/qr?k=qB5gb43KlRIN-5dsIstw-gljfwD-LxDt&jump_from=webapi&authKey=Ua6s5QIIHy9Gf7Df/h1w93wBqaJax3hBPzUmREwDU31H7TMWO5pAh2ua9Bw9z231"><img border="0" src="https://img.shields.io/badge/点击加入-870579539-green.svg" alt="微同科技 ②群" title="微同科技 ②群"></a>
 <a target="_blank" href="https://qm.qq.com/cgi-bin/qm/qr?k=21agOH-MqJLZ5YqxNb-sBcPCB5PTl7XH&jump_from=webapi&authKey=hV6jd0tppJqvTWE/iSEHwLJg5EsTaz/aY/1bj8gWg4giQ4JdDEzYiK12F+u1TnuZ"><img border="0" src="https://img.shields.io/badge/点击加入-151602347-green.svg" alt="微同科技 ③群" title="微同科技 ③群"></a>
-
-<p align="center">
-  <b>特别赞助</b>
-</p>
-<br/>
-<table align="center" cellspacing="0" cellpadding="0">
-  <tbody>
-    <tr>
-      <td align="center" valign="middle" colspan="3">
-	      <a href="http://www.ccflow.org/?from=fuyang_lipengjun" target="_blank">
-					<img src="https://platform-wxmall-1251990035.cos.ap-shanghai.myqcloud.com/ccflow.png">
-				</a>
-      </td>
-    </tr>
-  </tbody>
-</table>
+<a target="_blank" href="https://qm.qq.com/q/xwRSjnSsF2"><img border="0" src="https://img.shields.io/badge/点击加入-476734088-green.svg" alt="微同科技 ④群" title="微同科技 ④群"></a>
+<a target="_blank" href="https://qm.qq.com/q/rzuWvSHsbY"><img border="0" src="https://img.shields.io/badge/点击加入-690637772-green.svg" alt="微同科技 ⑤群" title="微同科技 ⑤群"></a>
 
 ## 重要信息
 1. 项目合作洽谈，请联系客服微信（使用微信扫码添加好友，请注明来意）。
@@ -115,9 +101,6 @@ platform
     * [http://localhost:8080/platform-framework](http://localhost:8080/platform-framework)
 * 出现404问题的同学请检查设置`Application context`为`/platform-framework`
 
-## 驰骋工作流引擎的安装
-   1. 请参考: https://gitee.com/opencc/JFlow/wikis/pages/preview?sort_id=4199224&doc_id=31094
-   
 ## 页面展示
 ### 接口文档
 ![](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/image/2023_09_20/15_06_39.png "接口文档")
@@ -135,8 +118,6 @@ platform
 ![](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/upload/20180727/7.png "分类")
 ### 购物车
 ![](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/upload/20180727/8.png "购物车")
-### 优惠券
-![](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/upload/20180727/10.png "优惠券")
 ### 小程序并联手机
 ![](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/upload/20180727/11.png "并联手机")
 
