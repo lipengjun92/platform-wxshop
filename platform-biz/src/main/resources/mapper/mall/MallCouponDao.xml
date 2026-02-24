@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.platform.modules.mall.dao.MallCouponDao">
+
+    <sql id="selectSql">
+        SELECT
+        T.ID,
+        T.NAME,
+        T.TYPE_MONEY,
+        T.SEND_TYPE,
+        T.MIN_AMOUNT,
+        T.MAX_AMOUNT,
+        T.SEND_START_DATE,
+        T.SEND_END_DATE,
+        T.USE_START_DATE,
+        T.USE_END_DATE,
+        T.MIN_GOODS_AMOUNT,
+        T.MIN_TRANSMIT_NUM
+        FROM MALL_COUPON T
+        WHERE 1=1
+        <if test="params.id != null and params.id.trim() != ''">
+            AND T.ID = #{params.id}
+        </if>
+        <if test="params.name != null and params.name.trim() != ''">
+            AND T.NAME LIKE '%${params.name}%'
+        </if>
+    </sql>
+
+    <select id="selectMallCouponPage" resultType="com.platform.modules.mall.entity.MallCouponEntity">
+        <include refid="selectSql"/>
+    </select>
+
+    <select id="queryAll" resultType="com.platform.modules.mall.entity.MallCouponEntity">
+        <include refid="selectSql"/>
+    </select>
+</mapper>
