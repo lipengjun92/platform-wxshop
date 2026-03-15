@@ -453,7 +453,7 @@
             </releases>
         </repository>
         <repository>
-            <id>public</id>
+            <id>nexus-public</id>
             <name>nexus</name>
             <url>http://nexus.dev.dtstack.cn/nexus/content/repositories/dtstack-release/</url>
             <releases>
