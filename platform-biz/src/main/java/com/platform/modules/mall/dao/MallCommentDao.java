@@ -16,44 +16,27 @@
  *  Author: lipengjun (939961241@qq.com)
  *
  */
-package com.platform.modules.mall.entity;
+package com.platform.modules.mall.dao;
 
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
-import lombok.Data;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.platform.modules.mall.entity.MallCommentEntity;
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
-import java.io.Serializable;
+import java.util.List;
+import java.util.Map;
 
 /**
- * 商品对应规格表值表实体
+ * 商品评论表Dao
  *
- * @author 李鹏军
- * @since 2026-02-24 13:15:28
+ * @author lipengjun
+ * @email 939961241@qq.com
+ * @date 2026-03-15 13:46:31
  */
-@Data
-@TableName("MALL_GOODS_SPECIFICATION")
-public class MallGoodsSpecificationEntity implements Serializable {
-    private static final long serialVersionUID = 1L;
+@Mapper
+public interface MallCommentDao extends BaseMapper<MallCommentEntity> {
+    List<MallCommentEntity> queryAll(@Param("params") Map<String, Object> params);
 
-    /**
-     *
-     */
-    @TableId
-    private Integer id;
-    /**
-     *
-     */
-    private Integer goodsId;
-    /**
-     *
-     */
-    private Integer specificationId;
-    /**
-     *
-     */
-    private String value;
-    /**
-     *
-     */
-    private String picUrl;
+    List<MallCommentEntity> selectMallCommentPage(Page<MallCommentEntity> page, @Param("params") Map<String, Object> params);
 }

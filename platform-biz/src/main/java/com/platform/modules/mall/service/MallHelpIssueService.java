@@ -61,7 +61,7 @@ public interface MallHelpIssueService extends IService<MallHelpIssueEntity> {
     /**
      * 新增
      *
-     * @param mallHelpIssue 
+     * @param mallHelpIssue
      * @return 新增结果
      */
     boolean add(MallHelpIssueEntity mallHelpIssue);
@@ -69,7 +69,7 @@ public interface MallHelpIssueService extends IService<MallHelpIssueEntity> {
     /**
      * 根据主键更新
      *
-     * @param mallHelpIssue 
+     * @param mallHelpIssue
      * @return 更新结果
      */
     boolean update(MallHelpIssueEntity mallHelpIssue);

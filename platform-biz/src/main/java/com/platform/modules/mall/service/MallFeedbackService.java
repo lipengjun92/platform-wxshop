@@ -61,7 +61,7 @@ public interface MallFeedbackService extends IService<MallFeedbackEntity> {
     /**
      * 新增
      *
-     * @param mallFeedback 
+     * @param mallFeedback
      * @return 新增结果
      */
     boolean add(MallFeedbackEntity mallFeedback);
@@ -69,7 +69,7 @@ public interface MallFeedbackService extends IService<MallFeedbackEntity> {
     /**
      * 根据主键更新
      *
-     * @param mallFeedback 
+     * @param mallFeedback
      * @return 更新结果
      */
     boolean update(MallFeedbackEntity mallFeedback);

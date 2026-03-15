@@ -61,7 +61,7 @@ public interface MallAdPositionService extends IService<MallAdPositionEntity> {
     /**
      * 新增
      *
-     * @param mallAdPosition 
+     * @param mallAdPosition
      * @return 新增结果
      */
     boolean add(MallAdPositionEntity mallAdPosition);
@@ -69,7 +69,7 @@ public interface MallAdPositionService extends IService<MallAdPositionEntity> {
     /**
      * 根据主键更新
      *
-     * @param mallAdPosition 
+     * @param mallAdPosition
      * @return 更新结果
      */
     boolean update(MallAdPositionEntity mallAdPosition);

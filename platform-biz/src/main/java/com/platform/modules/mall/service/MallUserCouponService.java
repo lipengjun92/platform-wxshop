@@ -61,7 +61,7 @@ public interface MallUserCouponService extends IService<MallUserCouponEntity> {
     /**
      * 新增
      *
-     * @param mallUserCoupon 
+     * @param mallUserCoupon
      * @return 新增结果
      */
     boolean add(MallUserCouponEntity mallUserCoupon);
@@ -69,7 +69,7 @@ public interface MallUserCouponService extends IService<MallUserCouponEntity> {
     /**
      * 根据主键更新
      *
-     * @param mallUserCoupon 
+     * @param mallUserCoupon
      * @return 更新结果
      */
     boolean update(MallUserCouponEntity mallUserCoupon);

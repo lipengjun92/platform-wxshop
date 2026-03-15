@@ -61,7 +61,7 @@ public interface MallAttributeCategoryService extends IService<MallAttributeCate
     /**
      * 新增
      *
-     * @param mallAttributeCategory 
+     * @param mallAttributeCategory
      * @return 新增结果
      */
     boolean add(MallAttributeCategoryEntity mallAttributeCategory);
@@ -69,7 +69,7 @@ public interface MallAttributeCategoryService extends IService<MallAttributeCate
     /**
      * 根据主键更新
      *
-     * @param mallAttributeCategory 
+     * @param mallAttributeCategory
      * @return 更新结果
      */
     boolean update(MallAttributeCategoryEntity mallAttributeCategory);

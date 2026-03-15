@@ -61,7 +61,7 @@ public interface MallUserLevelService extends IService<MallUserLevelEntity> {
     /**
      * 新增
      *
-     * @param mallUserLevel 
+     * @param mallUserLevel
      * @return 新增结果
      */
     boolean add(MallUserLevelEntity mallUserLevel);
@@ -69,7 +69,7 @@ public interface MallUserLevelService extends IService<MallUserLevelEntity> {
     /**
      * 根据主键更新
      *
-     * @param mallUserLevel 
+     * @param mallUserLevel
      * @return 更新结果
      */
     boolean update(MallUserLevelEntity mallUserLevel);

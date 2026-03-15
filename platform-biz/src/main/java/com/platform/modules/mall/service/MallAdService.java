@@ -61,7 +61,7 @@ public interface MallAdService extends IService<MallAdEntity> {
     /**
      * 新增
      *
-     * @param mallAd 
+     * @param mallAd
      * @return 新增结果
      */
     boolean add(MallAdEntity mallAd);
@@ -69,7 +69,7 @@ public interface MallAdService extends IService<MallAdEntity> {
     /**
      * 根据主键更新
      *
-     * @param mallAd 
+     * @param mallAd
      * @return 更新结果
      */
     boolean update(MallAdEntity mallAd);

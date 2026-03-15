@@ -21,9 +21,9 @@ package com.platform.modules.mall.controller;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.platform.common.annotation.SysLog;
 import com.platform.common.utils.RestResponse;
-import com.platform.modules.sys.controller.AbstractController;
 import com.platform.modules.mall.entity.MallCollectEntity;
 import com.platform.modules.mall.service.MallCollectService;
+import com.platform.modules.sys.controller.AbstractController;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
@@ -86,7 +86,7 @@ public class MallCollectController extends AbstractController {
      * @return RestResponse
      */
     @Operation(summary = "根据主键查询详情", description = "根据主键查询详情",
-        parameters = {@Parameter(in = ParameterIn.PATH, name = "id", description = "主键", example = "1", required = true)}
+            parameters = {@Parameter(in = ParameterIn.PATH, name = "id", description = "主键", example = "1", required = true)}
     )
     @GetMapping("/info/{id}")
     @RequiresPermissions("mall:collect:info")

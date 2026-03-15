@@ -61,7 +61,7 @@ public interface MallShippingService extends IService<MallShippingEntity> {
     /**
      * 新增
      *
-     * @param mallShipping 
+     * @param mallShipping
      * @return 新增结果
      */
     boolean add(MallShippingEntity mallShipping);
@@ -69,7 +69,7 @@ public interface MallShippingService extends IService<MallShippingEntity> {
     /**
      * 根据主键更新
      *
-     * @param mallShipping 
+     * @param mallShipping
      * @return 更新结果
      */
     boolean update(MallShippingEntity mallShipping);

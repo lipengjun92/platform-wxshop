@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.platform.modules.mall.dao.MallCommentDao">
+
+    <sql id="selectSql">
+        SELECT
+        T.ID,
+        T.TYPE_ID,
+        T.VALUE_ID,
+        G.NAME GOODS_NAME,
+        U.NICKNAME USER_NICKNAME,
+        T.CONTENT,
+        T.ADD_TIME,
+        T.STATUS,
+        T.USER_ID
+        FROM MALL_COMMENT T
+        LEFT JOIN MALL_GOODS G ON G.ID = T.VALUE_ID
+        LEFT JOIN mall_user U ON U.ID = T.USER_ID
+        WHERE 1=1
+        <if test="params.id != null and params.id.trim() != ''">
+            AND T.ID = #{params.id}
+        </if>
+        <if test="params.valueId != null and params.valueId.trim() != ''">
+            AND T.VALUE_ID = #{params.valueId}
+        </if>
+        <if test="params.userId != null and params.userId.trim() != ''">
+            AND T.USER_ID = #{params.userId}
+        </if>
+    </sql>
+
+    <select id="selectMallCommentPage" resultType="com.platform.modules.mall.entity.MallCommentEntity">
+        <include refid="selectSql"/>
+    </select>
+
+    <select id="queryAll" resultType="com.platform.modules.mall.entity.MallCommentEntity">
+        <include refid="selectSql"/>
+    </select>
+</mapper>

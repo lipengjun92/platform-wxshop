@@ -61,7 +61,7 @@ public interface MallSearchHistoryService extends IService<MallSearchHistoryEnti
     /**
      * 新增
      *
-     * @param mallSearchHistory 
+     * @param mallSearchHistory
      * @return 新增结果
      */
     boolean add(MallSearchHistoryEntity mallSearchHistory);
@@ -69,7 +69,7 @@ public interface MallSearchHistoryService extends IService<MallSearchHistoryEnti
     /**
      * 根据主键更新
      *
-     * @param mallSearchHistory 
+     * @param mallSearchHistory
      * @return 更新结果
      */
     boolean update(MallSearchHistoryEntity mallSearchHistory);

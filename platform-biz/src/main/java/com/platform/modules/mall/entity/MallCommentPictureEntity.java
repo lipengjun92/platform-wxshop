@@ -23,67 +23,22 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
-import java.util.Date;
 
 /**
- * 实体
+ * 商品评论图片表
  *
- * @author 李鹏军
- * @since 2026-02-24 10:20:41
+ * @author lipengjun
+ * @email 939961241@qq.com
+ * @date 2026-03-15 13:46:02
  */
 @Data
-@TableName("MALL_COUPON")
-public class MallCouponEntity implements Serializable {
+@TableName("MALL_COMMENT_PICTURE")
+public class MallCommentPictureEntity implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    /**
-     *
-     */
     @TableId
     private Integer id;
-    /**
-     *
-     */
-    private String name;
-    /**
-     *
-     */
-    private BigDecimal typeMoney;
-    /**
-     *
-     */
-    private Integer sendType;
-    /**
-     *
-     */
-    private BigDecimal minAmount;
-    /**
-     *
-     */
-    private BigDecimal maxAmount;
-    /**
-     *
-     */
-    private Date sendStartDate;
-    /**
-     *
-     */
-    private Date sendEndDate;
-    /**
-     *
-     */
-    private Date useStartDate;
-    /**
-     *
-     */
-    private Date useEndDate;
-    /**
-     *
-     */
-    private BigDecimal minGoodsAmount;
-    /**
-     * 转发次数
-     */
-    private Integer minTransmitNum;
+    private Integer commentId;
+    private String picUrl;
+    private Integer sortOrder;
 }

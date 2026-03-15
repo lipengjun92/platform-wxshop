@@ -25,44 +25,46 @@
 </template>
 
 <script>
-  export default {
-    data () {
-      return {
-        disabled: false,
-        visible: false,
-        dataForm: {
-          id: '',
-          goodsId: '',
-          imgUrl: '',
-          imgDesc: '',
-          sortOrder: ''},
-        dataRule: {
-          name: [
-            {required: true, message: '名称不能为空', trigger: 'blur'}
-          ]
-        }
-      }
-    },
-    methods: {
-      init (id, disabled) {
-        this.disabled = true
-        this.dataForm.id = id || ''
-        this.visible = true
-        this.$nextTick(() => {
-          this.$refs['dataForm'].resetFields()
-          if (this.dataForm.id) {
-            this.$http({
-              url: `/mall/goodsgallery/info/${this.dataForm.id}`,
-              method: 'get'
-            }).then(({data}) => {
-              if (data && data.code === 0) {
-                this.dataForm = data.data
-              }
-            })
-          }
-        })
+export default {
+  data () {
+    return {
+      disabled: false,
+      visible: false,
+      dataForm: {
+        id: '',
+        goodsId: '',
+        imgUrl: '',
+        imgDesc: '',
+        sortOrder: ''
       },
-      dataFormSubmit () {}
+      dataRule: {
+        name: [
+          {required: true, message: '名称不能为空', trigger: 'blur'}
+        ]
+      }
+    }
+  },
+  methods: {
+    init (id, disabled) {
+      this.disabled = true
+      this.dataForm.id = id || ''
+      this.visible = true
+      this.$nextTick(() => {
+        this.$refs['dataForm'].resetFields()
+        if (this.dataForm.id) {
+          this.$http({
+            url: `/mall/goodsgallery/info/${this.dataForm.id}`,
+            method: 'get'
+          }).then(({data}) => {
+            if (data && data.code === 0) {
+              this.dataForm = data.data
+            }
+          })
+        }
+      })
+    },
+    dataFormSubmit () {
     }
   }
+}
 </script>

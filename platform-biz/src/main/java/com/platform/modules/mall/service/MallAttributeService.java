@@ -61,7 +61,7 @@ public interface MallAttributeService extends IService<MallAttributeEntity> {
     /**
      * 新增
      *
-     * @param mallAttribute 
+     * @param mallAttribute
      * @return 新增结果
      */
     boolean add(MallAttributeEntity mallAttribute);
@@ -69,7 +69,7 @@ public interface MallAttributeService extends IService<MallAttributeEntity> {
     /**
      * 根据主键更新
      *
-     * @param mallAttribute 
+     * @param mallAttribute
      * @return 更新结果
      */
     boolean update(MallAttributeEntity mallAttribute);

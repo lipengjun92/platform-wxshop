@@ -17,14 +17,16 @@
             <el-col :span="8">
               <el-form-item label="商品分类" prop="categoryId">
                 <el-select v-model="form.goods.categoryId" :disabled="disabled" filterable placeholder="请选择">
-                  <el-option v-for="item in categoryOptions" :key="item.id" :label="item.name" :value="item.id"></el-option>
+                  <el-option v-for="item in categoryOptions" :key="item.id" :label="item.name"
+                             :value="item.id"></el-option>
                 </el-select>
               </el-form-item>
             </el-col>
             <el-col :span="8">
               <el-form-item label="品牌" prop="brandId">
                 <el-select v-model="form.goods.brandId" :disabled="disabled" filterable clearable placeholder="请选择">
-                  <el-option v-for="item in brandOptions" :key="item.id" :label="item.name" :value="item.id"></el-option>
+                  <el-option v-for="item in brandOptions" :key="item.id" :label="item.name"
+                             :value="item.id"></el-option>
                 </el-select>
               </el-form-item>
             </el-col>
@@ -37,19 +39,22 @@
             </el-col>
             <el-col :span="8">
               <el-form-item label="库存" prop="goodsNumber">
-                <el-input-number v-model="form.goods.goodsNumber" :disabled="disabled" :min="0" controls-position="right"></el-input-number>
+                <el-input-number v-model="form.goods.goodsNumber" :disabled="disabled" :min="0"
+                                 controls-position="right"></el-input-number>
               </el-form-item>
             </el-col>
             <el-col :span="8">
               <el-form-item label="零售价格" prop="retailPrice">
-                <el-input-number v-model="form.goods.retailPrice" :disabled="disabled" :min="0" :precision="2" controls-position="right"></el-input-number>
+                <el-input-number v-model="form.goods.retailPrice" :disabled="disabled" :min="0" :precision="2"
+                                 controls-position="right"></el-input-number>
               </el-form-item>
             </el-col>
           </el-row>
           <el-row :gutter="20">
             <el-col :span="8">
               <el-form-item label="市场价" prop="marketPrice">
-                <el-input-number v-model="form.goods.marketPrice" :disabled="disabled" :min="0" :precision="2" controls-position="right"></el-input-number>
+                <el-input-number v-model="form.goods.marketPrice" :disabled="disabled" :min="0" :precision="2"
+                                 controls-position="right"></el-input-number>
               </el-form-item>
             </el-col>
             <el-col :span="8">
@@ -98,8 +103,10 @@
         <el-table :data="form.attributes" border>
           <el-table-column label="属性" width="240">
             <template slot-scope="scope">
-              <el-select v-model="scope.row.attributeId" :disabled="disabled" filterable placeholder="请选择属性" @change="onAttributeChange(scope.row)">
-                <el-option v-for="item in attributeOptions" :key="item.id" :label="item.name" :value="item.id"></el-option>
+              <el-select v-model="scope.row.attributeId" :disabled="disabled" filterable placeholder="请选择属性"
+                         @change="onAttributeChange(scope.row)">
+                <el-option v-for="item in attributeOptions" :key="item.id" :label="item.name"
+                           :value="item.id"></el-option>
               </el-select>
             </template>
           </el-table-column>
@@ -133,7 +140,8 @@
           </el-table-column>
           <el-table-column label="排序" width="240" align="center">
             <template slot-scope="scope">
-              <el-input-number v-model="scope.row.sortOrder" :disabled="disabled" :min="1" controls-position="right"></el-input-number>
+              <el-input-number v-model="scope.row.sortOrder" :disabled="disabled" :min="1"
+                               controls-position="right"></el-input-number>
             </template>
           </el-table-column>
           <el-table-column v-if="!disabled" label="操作" width="120" align="center">
@@ -152,15 +160,18 @@
         <el-table :data="form.specs" border>
           <el-table-column label="规格名" width="260">
             <template slot-scope="scope">
-              <el-select v-model="scope.row.specificationId" :disabled="disabled" filterable placeholder="请选择规格" @change="onSpecificationChange(scope.row)">
-                <el-option v-for="item in specificationOptions" :key="item.id" :label="item.name" :value="item.id"></el-option>
+              <el-select v-model="scope.row.specificationId" :disabled="disabled" filterable placeholder="请选择规格"
+                         @change="onSpecificationChange(scope.row)">
+                <el-option v-for="item in specificationOptions" :key="item.id" :label="item.name"
+                           :value="item.id"></el-option>
               </el-select>
             </template>
           </el-table-column>
           <el-table-column label="规格值">
             <template slot-scope="scope">
               <div v-for="(value, valueIndex) in scope.row.values" :key="valueIndex" class="spec-value-row">
-                <el-input v-model="value.value" :disabled="disabled" placeholder="规格值" class="spec-value-input"></el-input>
+                <el-input v-model="value.value" :disabled="disabled" placeholder="规格值"
+                          class="spec-value-input"></el-input>
                 <el-img v-model="value.picUrl" :disabled="disabled"></el-img>
                 <el-button v-if="!disabled" type="text" @click="removeSpecValue(scope.row, valueIndex)">删除</el-button>
               </div>
@@ -176,7 +187,8 @@
       </el-tab-pane>
 
       <el-tab-pane label="SKU 列表" name="sku">
-        <el-alert type="info" :closable="false" show-icon title="规格变更后请点击“重建SKU”，系统会按规格组合生成 SKU。"></el-alert>
+        <el-alert type="info" :closable="false" show-icon
+                  title="规格变更后请点击“重建SKU”，系统会按规格组合生成 SKU。"></el-alert>
         <el-table :data="form.skuList" border class="mt10">
           <el-table-column label="规格组合" min-width="260">
             <template slot-scope="scope">
@@ -190,17 +202,20 @@
           </el-table-column>
           <el-table-column label="库存" width="240" align="center">
             <template slot-scope="scope">
-              <el-input-number v-model="scope.row.goodsNumber" :disabled="disabled" :min="0" controls-position="right"></el-input-number>
+              <el-input-number v-model="scope.row.goodsNumber" :disabled="disabled" :min="0"
+                               controls-position="right"></el-input-number>
             </template>
           </el-table-column>
           <el-table-column label="零售价" width="240" align="center">
             <template slot-scope="scope">
-              <el-input-number v-model="scope.row.retailPrice" :disabled="disabled" :min="0" :precision="2" controls-position="right"></el-input-number>
+              <el-input-number v-model="scope.row.retailPrice" :disabled="disabled" :min="0" :precision="2"
+                               controls-position="right"></el-input-number>
             </template>
           </el-table-column>
           <el-table-column label="市场价" width="240" align="center">
             <template slot-scope="scope">
-              <el-input-number v-model="scope.row.marketPrice" :disabled="disabled" :min="0" :precision="2" controls-position="right"></el-input-number>
+              <el-input-number v-model="scope.row.marketPrice" :disabled="disabled" :min="0" :precision="2"
+                               controls-position="right"></el-input-number>
             </template>
           </el-table-column>
         </el-table>
@@ -227,9 +242,9 @@ export default {
       attributeOptions: [],
       specificationOptions: [],
       dataRule: {
-        name: [{ required: true, message: '商品名称不能为空', trigger: 'blur' }],
-        categoryId: [{ required: true, message: '商品分类不能为空', trigger: 'change' }],
-        retailPrice: [{ required: true, message: '零售价格不能为空', trigger: 'blur' }]
+        name: [{required: true, message: '商品名称不能为空', trigger: 'blur'}],
+        categoryId: [{required: true, message: '商品分类不能为空', trigger: 'change'}],
+        retailPrice: [{required: true, message: '零售价格不能为空', trigger: 'blur'}]
       }
     }
   },
@@ -294,34 +309,34 @@ export default {
       })
     },
     loadOptions () {
-      this.$http({ url: '/mall/category/queryAll', method: 'get' }).then(({ data }) => {
+      this.$http({url: '/mall/category/queryAll', method: 'get'}).then(({data}) => {
         if (data && data.code === 0) {
           this.categoryOptions = data.data || []
         }
       })
-      this.$http({ url: '/mall/brand/queryAll', method: 'get' }).then(({ data }) => {
+      this.$http({url: '/mall/brand/queryAll', method: 'get'}).then(({data}) => {
         if (data && data.code === 0) {
           this.brandOptions = data.data || []
         }
       })
-      this.$http({ url: '/mall/attribute/queryAll', method: 'get' }).then(({ data }) => {
+      this.$http({url: '/mall/attribute/queryAll', method: 'get'}).then(({data}) => {
         if (data && data.code === 0) {
           this.attributeOptions = data.data || []
         }
       })
-      this.$http({ url: '/mall/specification/queryAll', method: 'get' }).then(({ data }) => {
+      this.$http({url: '/mall/specification/queryAll', method: 'get'}).then(({data}) => {
         if (data && data.code === 0) {
           this.specificationOptions = data.data || []
         }
       })
     },
     loadAggregate (id) {
-      this.$http({ url: `/mall/goods/aggregate/${id}`, method: 'get' }).then(({ data }) => {
+      this.$http({url: `/mall/goods/aggregate/${id}`, method: 'get'}).then(({data}) => {
         if (data && data.code === 0 && data.data) {
           this.form = Object.assign(this.getDefaultForm(), data.data)
           this.form.goods = Object.assign(this.getDefaultForm().goods, data.data.goods || {})
           this.form.attributes = data.data.attributes || []
-          this.form.gallery = (data.data.gallery || []).map((item, index) => Object.assign({ sortOrder: index + 1 }, item))
+          this.form.gallery = (data.data.gallery || []).map((item, index) => Object.assign({sortOrder: index + 1}, item))
           this.form.specs = data.data.specs || []
           this.form.skuList = (data.data.skuList || []).map(item => ({
             ...item,
@@ -331,7 +346,7 @@ export default {
       })
     },
     addAttribute () {
-      this.form.attributes.push({ attributeId: '', attributeName: '', value: '' })
+      this.form.attributes.push({attributeId: '', attributeName: '', value: ''})
     },
     removeAttribute (index) {
       this.form.attributes.splice(index, 1)
@@ -341,13 +356,13 @@ export default {
       row.attributeName = hit ? hit.name : ''
     },
     addGallery () {
-      this.form.gallery.push({ imgUrl: '', imgDesc: '', sortOrder: this.form.gallery.length + 1 })
+      this.form.gallery.push({imgUrl: '', imgDesc: '', sortOrder: this.form.gallery.length + 1})
     },
     removeGallery (index) {
       this.form.gallery.splice(index, 1)
     },
     addSpecGroup () {
-      this.form.specs.push({ specificationId: '', specificationName: '', values: [{ value: '', picUrl: '' }] })
+      this.form.specs.push({specificationId: '', specificationName: '', values: [{value: '', picUrl: ''}]})
     },
     removeSpecGroup (index) {
       this.form.specs.splice(index, 1)
@@ -359,7 +374,7 @@ export default {
       this.rebuildSkuList()
     },
     addSpecValue (row) {
-      row.values.push({ value: '', picUrl: '' })
+      row.values.push({value: '', picUrl: ''})
     },
     removeSpecValue (row, valueIndex) {
       row.values.splice(valueIndex, 1)
@@ -376,9 +391,9 @@ export default {
     },
     buildSpecCombinations (specs) {
       if (!specs.length) {
-        return [{ key: '', label: '默认规格' }]
+        return [{key: '', label: '默认规格'}]
       }
-      let combos = [{ key: '', label: '' }]
+      let combos = [{key: '', label: ''}]
       specs.forEach(spec => {
         const next = []
         combos.forEach(combo => {
@@ -444,9 +459,9 @@ export default {
           url: `/mall/goods/aggregate/${!payload.goods.id ? 'save' : 'update'}`,
           method: 'post',
           data: payload
-        }).then(({ data }) => {
+        }).then(({data}) => {
           if (data && data.code === 0) {
-            this.$message({ message: '操作成功', type: 'success', duration: 1500 })
+            this.$message({message: '操作成功', type: 'success', duration: 1500})
             this.visible = false
             this.$emit('refreshDataList')
           }
@@ -461,18 +476,22 @@ export default {
 .mb10 {
   margin-bottom: 10px;
 }
+
 .mt10 {
   margin-top: 10px;
 }
+
 .spec-value-row {
   display: flex;
   align-items: center;
   margin-bottom: 8px;
 }
+
 .spec-value-input {
   width: 180px;
   margin-right: 8px;
 }
+
 .spec-pic-input {
   width: 260px;
   margin-right: 8px;

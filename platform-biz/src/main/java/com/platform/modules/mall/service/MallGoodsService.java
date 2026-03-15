@@ -61,7 +61,7 @@ public interface MallGoodsService extends IService<MallGoodsEntity> {
     /**
      * 新增
      *
-     * @param mallGoods 
+     * @param mallGoods
      * @return 新增结果
      */
     boolean add(MallGoodsEntity mallGoods);
@@ -69,7 +69,7 @@ public interface MallGoodsService extends IService<MallGoodsEntity> {
     /**
      * 根据主键更新
      *
-     * @param mallGoods 
+     * @param mallGoods
      * @return 更新结果
      */
     boolean update(MallGoodsEntity mallGoods);

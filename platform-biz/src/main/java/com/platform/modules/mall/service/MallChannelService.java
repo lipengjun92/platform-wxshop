@@ -61,7 +61,7 @@ public interface MallChannelService extends IService<MallChannelEntity> {
     /**
      * 新增
      *
-     * @param mallChannel 
+     * @param mallChannel
      * @return 新增结果
      */
     boolean add(MallChannelEntity mallChannel);
@@ -69,7 +69,7 @@ public interface MallChannelService extends IService<MallChannelEntity> {
     /**
      * 根据主键更新
      *
-     * @param mallChannel 
+     * @param mallChannel
      * @return 更新结果
      */
     boolean update(MallChannelEntity mallChannel);

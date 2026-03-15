@@ -1,46 +1,45 @@
 <template>
-  <div class="mod-goods">
-    <el-form :inline="true" :model="searchForm" @keyup.enter.native="getDataList(1)">
-      <el-form-item>
-        <el-input v-model="searchForm.name" placeholder="商品名称" clearable></el-input>
-      </el-form-item>
-      <el-form-item>
-        <el-button @click="getDataList(1)">查询</el-button>
-        <el-button v-if="isAuth('mall:goods:save')" type="primary" @click="addOrUpdateHandle()">新增</el-button>
-        <el-button v-if="isAuth('mall:goods:delete')" type="danger" @click="deleteHandle()"
-                   :disabled="dataListSelections.length <= 0">批量删除
-        </el-button>
-      </el-form-item>
-    </el-form>
-
+  <div class="mod-comment">
     <el-table :data="dataList" border @selection-change="selectionChangeHandle" style="width: 100%;">
       <el-table-column type="selection" header-align="center" align="center" width="50"></el-table-column>
       <el-table-column prop="id" header-align="center" align="center" label="ID" width="80"></el-table-column>
-      <el-table-column prop="name" header-align="center" align="left" label="商品名称"
-                       min-width="220"></el-table-column>
-      <el-table-column prop="goodsSn" header-align="center" align="center" label="商品编码"
-                       min-width="160"></el-table-column>
-      <el-table-column prop="retailPrice" header-align="center" align="center" label="零售价"
-                       width="110"></el-table-column>
-      <el-table-column prop="marketPrice" header-align="center" align="center" label="市场价"
-                       width="110"></el-table-column>
-      <el-table-column prop="goodsNumber" header-align="center" align="center" label="库存"
-                       width="90"></el-table-column>
-      <el-table-column prop="isOnSale" header-align="center" align="center" label="上架" width="90">
+      <el-table-column header-align="center" align="left" label="商品" min-width="220">
         <template slot-scope="scope">
-          <el-tag :type="scope.row.isOnSale === 1 ? 'success' : 'info'" size="small">
-            {{ scope.row.isOnSale === 1 ? '是' : '否' }}
-          </el-tag>
+          <el-link type="primary" :underline="false" @click="showGoodsDetails(scope.row.valueId)">
+            {{ scope.row.goodsName || ('商品ID: ' + scope.row.valueId) }}
+          </el-link>
         </template>
       </el-table-column>
-      <el-table-column fixed="right" header-align="center" align="center" width="180" label="操作">
+      <el-table-column prop="content" header-align="center" align="left" label="评论内容"
+                       show-overflow-tooltip></el-table-column>
+      <el-table-column prop="status" header-align="center" align="center" label="状态" width="90">
         <template slot-scope="scope">
-          <el-button v-if="isAuth('mall:goods:info')" type="text" size="small" @click="showDetails(scope.row.id)">查看
+          <el-tag v-if="scope.row.status === 0" size="small">待审核</el-tag>
+          <el-tag v-if="scope.row.status === 1" size="small" type="success">通过</el-tag>
+        </template>
+      </el-table-column>
+      <el-table-column prop="userNickname" header-align="center" align="center" label="评论用户"
+                       width="110"></el-table-column>
+      <el-table-column prop="addTime" header-align="center" align="center" label="评论时间" width="260">
+        <template slot-scope="scope">
+          <el-date-picker
+            v-model="scope.row.addTime"
+            type="datetime"
+            disabled
+            value-format="timestamp"
+            placeholder="评论时间">
+          </el-date-picker>
+        </template>
+      </el-table-column>
+      <el-table-column fixed="right" header-align="center" align="center" width="150" label="操作">
+        <template slot-scope="scope">
+          <el-button v-if="isAuth('mall:comment:info')" type="text" size="small" @click="showDetails(scope.row.id)">
+            查看
           </el-button>
-          <el-button v-if="isAuth('mall:goods:update')" type="text" size="small"
-                     @click="addOrUpdateHandle(scope.row.id)">编辑
+          <el-button v-if="isAuth('mall:comment:update')" type="text" size="small"
+                     @click="addOrUpdateHandle(scope.row.id)">修改
           </el-button>
-          <el-button v-if="isAuth('mall:goods:delete')" type="text" size="small" @click="deleteHandle(scope.row.id)">
+          <el-button v-if="isAuth('mall:comment:delete')" type="text" size="small" @click="deleteHandle(scope.row.id)">
             删除
           </el-button>
         </template>
@@ -58,29 +57,31 @@
     </el-pagination>
 
     <add-or-update v-if="addOrUpdateVisible" ref="addOrUpdate" @refreshDataList="getDataList"></add-or-update>
+    <goods-detail v-if="goodsDetailVisible" ref="goodsDetail"></goods-detail>
   </div>
 </template>
 
 <script>
-import AddOrUpdate from './goods-add-or-update'
+import AddOrUpdate from './comment-add-or-update'
+import GoodsDetail from './goods-add-or-update'
 
 export default {
   data () {
     return {
       searchForm: {
-        name: ''
+        valueId: '',
+        userId: ''
       },
       dataList: [],
       pageIndex: 1,
       pageSize: 10,
       totalPage: 0,
       dataListSelections: [],
-      addOrUpdateVisible: false
+      addOrUpdateVisible: false,
+      goodsDetailVisible: false
     }
   },
-  components: {
-    AddOrUpdate
-  },
+  components: {AddOrUpdate, GoodsDetail},
   activated () {
     this.getDataList()
   },
@@ -90,12 +91,13 @@ export default {
         this.pageIndex = page
       }
       this.$http({
-        url: '/mall/goods/list',
+        url: '/mall/comment/list',
         method: 'get',
         params: {
           page: this.pageIndex,
           limit: this.pageSize,
-          name: this.searchForm.name
+          valueId: this.searchForm.valueId,
+          userId: this.searchForm.userId
         }
       }).then(({data}) => {
         if (data && data.code === 0) {
@@ -131,6 +133,16 @@ export default {
         this.$refs.addOrUpdate.init(id)
       })
     },
+    showGoodsDetails (goodsId) {
+      if (!goodsId) {
+        this.$message.warning('未关联商品')
+        return
+      }
+      this.goodsDetailVisible = true
+      this.$nextTick(() => {
+        this.$refs.goodsDetail.init(goodsId, true)
+      })
+    },
     deleteHandle (id) {
       let ids = id ? [id] : this.dataListSelections.map(item => item.id)
       this.$confirm('确定对所选项进行[删除]操作?', '提示', {
@@ -139,16 +151,12 @@ export default {
         type: 'warning'
       }).then(() => {
         this.$http({
-          url: '/mall/goods/delete',
+          url: '/mall/comment/delete',
           method: 'post',
           data: ids
         }).then(({data}) => {
           if (data && data.code === 0) {
-            this.$message({
-              message: '操作成功',
-              type: 'success',
-              duration: 1500
-            })
+            this.$message({message: '操作成功', type: 'success', duration: 1500})
             this.getDataList()
           }
         })

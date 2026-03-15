@@ -21,7 +21,8 @@
         <el-input v-model="dataForm.question" :disabled="disabled" placeholder="问题"></el-input>
       </el-form-item>
       <el-form-item label="回答" prop="answer">
-        <el-input type="textarea" :rows="4" v-model="dataForm.answer" :disabled="disabled" placeholder="回答"></el-input>
+        <el-input type="textarea" :rows="4" v-model="dataForm.answer" :disabled="disabled"
+                  placeholder="回答"></el-input>
       </el-form-item>
       <el-form-item label="排序" prop="sort">
         <el-input-number v-model="dataForm.sort" :disabled="disabled" controls-position="right" :min="0"

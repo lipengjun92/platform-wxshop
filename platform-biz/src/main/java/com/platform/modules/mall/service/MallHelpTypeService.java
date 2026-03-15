@@ -61,7 +61,7 @@ public interface MallHelpTypeService extends IService<MallHelpTypeEntity> {
     /**
      * 新增
      *
-     * @param mallHelpType 
+     * @param mallHelpType
      * @return 新增结果
      */
     boolean add(MallHelpTypeEntity mallHelpType);
@@ -69,7 +69,7 @@ public interface MallHelpTypeService extends IService<MallHelpTypeEntity> {
     /**
      * 根据主键更新
      *
-     * @param mallHelpType 
+     * @param mallHelpType
      * @return 更新结果
      */
     boolean update(MallHelpTypeEntity mallHelpType);

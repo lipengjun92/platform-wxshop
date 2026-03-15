@@ -21,72 +21,30 @@ package com.platform.modules.mall.service;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.platform.modules.mall.entity.MallCartEntity;
+import com.platform.modules.mall.entity.MallCommentEntity;
 
 import java.util.List;
 import java.util.Map;
 
 /**
- * Service接口
+ * 商品评论表
  *
- * @author 李鹏军
- * @since 2024-07-19 20:53:40
+ * @author lipengjun
+ * @email 939961241@qq.com
+ * @date 2026-03-15 13:46:21
  */
-public interface MallCartService extends IService<MallCartEntity> {
+public interface MallCommentService extends IService<MallCommentEntity> {
+    List<MallCommentEntity> queryAll(Map<String, Object> params);
 
-    /**
-     * 查询所有列表
-     *
-     * @param params 查询参数
-     * @return List
-     */
-    List<MallCartEntity> queryAll(Map<String, Object> params);
+    List<MallCommentEntity> queryAllByWrapper(QueryWrapper<MallCommentEntity> queryWrapper);
 
-    /**
-     * 查询所有列表
-     *
-     * @param queryWrapper 查询参数
-     * @return List
-     */
-    List<MallCartEntity> queryAllByWrapper(QueryWrapper<MallCartEntity> queryWrapper);
+    Page<MallCommentEntity> queryPage(Map<String, Object> params);
 
-    /**
-     * 分页查询
-     *
-     * @param params 查询参数
-     * @return Page
-     */
-    Page<MallCartEntity> queryPage(Map<String, Object> params);
+    boolean add(MallCommentEntity mallComment);
 
-    /**
-     * 新增
-     *
-     * @param mallCart
-     * @return 新增结果
-     */
-    boolean add(MallCartEntity mallCart);
+    boolean update(MallCommentEntity mallComment);
 
-    /**
-     * 根据主键更新
-     *
-     * @param mallCart
-     * @return 更新结果
-     */
-    boolean update(MallCartEntity mallCart);
-
-    /**
-     * 根据主键删除
-     *
-     * @param id id
-     * @return 删除结果
-     */
     boolean delete(Integer id);
 
-    /**
-     * 根据主键批量删除
-     *
-     * @param ids ids
-     * @return 删除结果
-     */
     boolean deleteBatch(Integer[] ids);
 }

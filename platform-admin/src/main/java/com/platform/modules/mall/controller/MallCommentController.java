@@ -21,8 +21,8 @@ package com.platform.modules.mall.controller;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.platform.common.annotation.SysLog;
 import com.platform.common.utils.RestResponse;
-import com.platform.modules.mall.entity.MallCartEntity;
-import com.platform.modules.mall.service.MallCartService;
+import com.platform.modules.mall.entity.MallCommentEntity;
+import com.platform.modules.mall.service.MallCommentService;
 import com.platform.modules.sys.controller.AbstractController;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -32,117 +32,77 @@ import lombok.RequiredArgsConstructor;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 /**
- * Controller
+ * 评论Controller
  *
- * @author 李鹏军
- * @since 2024-07-19 20:53:40
+ * @author lipengjun
+ * @email 939961241@qq.com
+ * @date 2026-03-15 13:48:40
  */
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("mall/cart")
-@Tag(name = "MallCartController|")
-public class MallCartController extends AbstractController {
+@RequestMapping("mall/comment")
+@Tag(name = "MallCommentController|评论")
+public class MallCommentController extends AbstractController {
 
-    private final MallCartService mallCartService;
+    private final MallCommentService mallCommentService;
 
-    /**
-     * 查看所有列表
-     *
-     * @param params 查询参数
-     * @return RestResponse
-     */
     @Operation(summary = "查看所有列表", description = "查看所有列表")
     @GetMapping("/queryAll")
-    @RequiresPermissions("mall:cart:list")
-    public RestResponse<List<MallCartEntity>> queryAll(@RequestParam Map<String, Object> params) {
-        List<MallCartEntity> list = mallCartService.queryAll(params);
-
-        return RestResponse.ok(list);
+    @RequiresPermissions("mall:comment:list")
+    public RestResponse<List<MallCommentEntity>> queryAll(@RequestParam Map<String, Object> params) {
+        return RestResponse.ok(mallCommentService.queryAll(params));
     }
 
-    /**
-     * 分页查询
-     *
-     * @param params 查询参数
-     * @return RestResponse
-     */
     @Operation(summary = "分页查询", description = "分页查询")
     @GetMapping("/list")
-    @RequiresPermissions("mall:cart:list")
-    public RestResponse<Page<MallCartEntity>> list(@RequestParam Map<String, Object> params) {
-        Page<MallCartEntity> page = mallCartService.queryPage(params);
-
-        return RestResponse.ok(page);
+    @RequiresPermissions("mall:comment:list")
+    public RestResponse<Page<MallCommentEntity>> list(@RequestParam Map<String, Object> params) {
+        return RestResponse.ok(mallCommentService.queryPage(params));
     }
 
-    /**
-     * 根据主键查询详情
-     *
-     * @param id 主键
-     * @return RestResponse
-     */
     @Operation(summary = "根据主键查询详情", description = "根据主键查询详情",
-            parameters = {@Parameter(in = ParameterIn.PATH, name = "id", description = "主键", example = "1", required = true)}
-    )
+            parameters = {@Parameter(in = ParameterIn.PATH, name = "id", description = "主键", example = "1", required = true)})
     @GetMapping("/info/{id}")
-    @RequiresPermissions("mall:cart:info")
-    public RestResponse<MallCartEntity> info(@PathVariable("id") Integer id) {
-        MallCartEntity mallCart = mallCartService.getById(id);
-
-        return RestResponse.ok(mallCart);
+    @RequiresPermissions("mall:comment:info")
+    public RestResponse<MallCommentEntity> info(@PathVariable("id") Integer id) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("id", String.valueOf(id));
+        List<MallCommentEntity> list = mallCommentService.queryAll(params);
+        if (list.isEmpty()) {
+            return RestResponse.ok(mallCommentService.getById(id));
+        }
+        return RestResponse.ok(list.get(0));
     }
 
-    /**
-     * 新增
-     *
-     * @param mallCart mallCart
-     * @return RestResponse
-     */
     @Operation(summary = "新增", description = "新增")
-    @SysLog("新增")
+    @SysLog("新增评论")
     @PostMapping("/save")
-    @RequiresPermissions("mall:cart:save")
-    public RestResponse<String> save(@RequestBody MallCartEntity mallCart) {
-
-        mallCartService.add(mallCart);
-
+    @RequiresPermissions("mall:comment:save")
+    public RestResponse<String> save(@RequestBody MallCommentEntity mallComment) {
+        mallCommentService.add(mallComment);
         return RestResponse.ok();
     }
 
-    /**
-     * 修改
-     *
-     * @param mallCart mallCart
-     * @return RestResponse
-     */
     @Operation(summary = "修改", description = "修改")
-    @SysLog("修改")
+    @SysLog("修改评论")
     @PostMapping("/update")
-    @RequiresPermissions("mall:cart:update")
-    public RestResponse<String> update(@RequestBody MallCartEntity mallCart) {
-
-        mallCartService.update(mallCart);
-
+    @RequiresPermissions("mall:comment:update")
+    public RestResponse<String> update(@RequestBody MallCommentEntity mallComment) {
+        mallCommentService.update(mallComment);
         return RestResponse.ok();
     }
 
-    /**
-     * 根据主键删除
-     *
-     * @param ids ids
-     * @return RestResponse
-     */
     @Operation(summary = "删除", description = "删除")
-    @SysLog("删除")
+    @SysLog("删除评论")
     @PostMapping("/delete")
-    @RequiresPermissions("mall:cart:delete")
+    @RequiresPermissions("mall:comment:delete")
     public RestResponse<String> delete(@RequestBody Integer[] ids) {
-        mallCartService.deleteBatch(ids);
-
+        mallCommentService.deleteBatch(ids);
         return RestResponse.ok();
     }
 }

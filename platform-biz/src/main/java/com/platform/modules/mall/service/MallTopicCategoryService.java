@@ -61,7 +61,7 @@ public interface MallTopicCategoryService extends IService<MallTopicCategoryEnti
     /**
      * 新增
      *
-     * @param mallTopicCategory 
+     * @param mallTopicCategory
      * @return 新增结果
      */
     boolean add(MallTopicCategoryEntity mallTopicCategory);
@@ -69,7 +69,7 @@ public interface MallTopicCategoryService extends IService<MallTopicCategoryEnti
     /**
      * 根据主键更新
      *
-     * @param mallTopicCategory 
+     * @param mallTopicCategory
      * @return 更新结果
      */
     boolean update(MallTopicCategoryEntity mallTopicCategory);

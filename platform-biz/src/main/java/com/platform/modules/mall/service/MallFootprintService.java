@@ -61,7 +61,7 @@ public interface MallFootprintService extends IService<MallFootprintEntity> {
     /**
      * 新增
      *
-     * @param mallFootprint 
+     * @param mallFootprint
      * @return 新增结果
      */
     boolean add(MallFootprintEntity mallFootprint);
@@ -69,7 +69,7 @@ public interface MallFootprintService extends IService<MallFootprintEntity> {
     /**
      * 根据主键更新
      *
-     * @param mallFootprint 
+     * @param mallFootprint
      * @return 更新结果
      */
     boolean update(MallFootprintEntity mallFootprint);
