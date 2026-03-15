@@ -30,7 +30,8 @@
       <el-table-column prop="id" header-align="center" align="center" label="ID" width="80"></el-table-column>
       <el-table-column prop="orderSn" header-align="center" align="center" label="订单编号"
                        min-width="180"></el-table-column>
-      <el-table-column prop="userNickname" header-align="center" align="center" label="用户昵称" width="120"></el-table-column>
+      <el-table-column prop="userNickname" header-align="center" align="center" label="用户昵称"
+                       width="120"></el-table-column>
       <el-table-column prop="consignee" header-align="center" align="center" label="收货人"
                        width="100"></el-table-column>
       <el-table-column prop="mobile" header-align="center" align="center" label="手机号" width="130"></el-table-column>
@@ -106,9 +107,9 @@
           <el-select v-model="shipForm.shippingName" placeholder="请选择快递公司" filterable style="width: 100%;">
             <el-option
               v-for="item in shippingCompanyOptions"
-              :key="item"
-              :label="item"
-              :value="item">
+              :key="item.id"
+              :label="item.name"
+              :value="item.name">
             </el-option>
           </el-select>
         </el-form-item>
@@ -147,18 +148,33 @@ export default {
         shippingName: '',
         shippingNo: ''
       },
-      shippingCompanyOptions: ['顺丰速运', '中通快递', '圆通速递', '申通快递', '韵达快递', '京东物流', '邮政EMS', '极兔速递', '百世快递', '德邦快递'],
+      shippingCompanyOptions: [],
       shipRule: {
-        shippingName: [{ required: true, message: '请选择快递公司', trigger: 'change' }],
-        shippingNo: [{ required: true, message: '请输入快递单号', trigger: 'blur' }]
+        shippingName: [{required: true, message: '请选择快递公司', trigger: 'change'}],
+        shippingNo: [{required: true, message: '请输入快递单号', trigger: 'blur'}]
       }
     }
   },
   components: {AddOrUpdate},
   activated () {
+    this.loadShippingCompanies()
     this.getDataList()
   },
   methods: {
+    loadShippingCompanies () {
+      this.$http({
+        url: '/mall/shipping/queryAll',
+        method: 'get'
+      }).then(({data}) => {
+        if (data && data.code === 0) {
+          this.shippingCompanyOptions = data.data || []
+        } else {
+          this.shippingCompanyOptions = []
+        }
+      }).catch(() => {
+        this.shippingCompanyOptions = []
+      })
+    },
     getDataList (page) {
       if (page) {
         this.pageIndex = page
@@ -297,7 +313,7 @@ export default {
           }
         }).then(({data}) => {
           if (data && data.code === 0) {
-            this.$message({ message: data.msg || '发货成功', type: 'success', duration: 1500 })
+            this.$message({message: data.msg || '发货成功', type: 'success', duration: 1500})
             this.shipDialogVisible = false
             this.getDataList()
           } else if (data) {
