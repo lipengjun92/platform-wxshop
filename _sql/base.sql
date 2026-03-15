@@ -581,6 +581,10 @@ INSERT INTO `SYS_MENU` VALUES ('170201', '1702', '新增', null, 'mall:comment:s
 INSERT INTO `SYS_MENU` VALUES ('170202', '1702', '修改', null, 'mall:comment:update', 2, null, 0);
 INSERT INTO `SYS_MENU` VALUES ('170203', '1702', '删除', null, 'mall:comment:delete', 2, null, 0);
 INSERT INTO `SYS_MENU` VALUES ('18', '0', '订单管理', null, null, 0, 'orders', 8);
+INSERT INTO `SYS_MENU` VALUES ('1801', '18', '订单管理', 'mall/order', 'mall:order:list,mall:order:info,mall:ordergoods:list', 1, 'orders', 1);
+INSERT INTO `SYS_MENU` VALUES ('180101', '1801', '新增', null, 'mall:order:save', 2, null, 0);
+INSERT INTO `SYS_MENU` VALUES ('180102', '1801', '修改', null, 'mall:order:update', 2, null, 0);
+INSERT INTO `SYS_MENU` VALUES ('180103', '1801', '删除', null, 'mall:order:delete', 2, null, 0);
 INSERT INTO `SYS_MENU` VALUES ('19', '0', '帮助中心', null, null, 0, 'pinglun', 9);
 INSERT INTO `SYS_MENU` VALUES ('1901', '19', '问题类型', 'mall/helptype', 'mall:helptype:list,mall:helptype:info', 1, 'zhedie', 1);
 INSERT INTO `SYS_MENU` VALUES ('190101', '1901', '新增', null, 'mall:helptype:save', 2, null, 0);

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.platform.modules.mall.dao.MallOrderDao">
+
+    <sql id="selectSql">
+        SELECT
+        T.ID,
+        T.ORDER_SN,
+        T.USER_ID,
+        U.NICKNAME USER_NICKNAME,
+        T.ORDER_STATUS,
+        T.SHIPPING_STATUS,
+        T.PAY_STATUS,
+        T.CONSIGNEE,
+        T.COUNTRY,
+        T.PROVINCE,
+        T.CITY,
+        T.DISTRICT,
+        T.ADDRESS,
+        T.MOBILE,
+        T.POSTSCRIPT,
+        T.SHIPPING_ID,
+        T.SHIPPING_NAME,
+        T.PAY_ID,
+        T.PAY_NAME,
+        T.SHIPPING_FEE,
+        T.ACTUAL_PRICE,
+        T.INTEGRAL,
+        T.INTEGRAL_MONEY,
+        T.ORDER_PRICE,
+        T.GOODS_PRICE,
+        T.ADD_TIME,
+        T.CONFIRM_TIME,
+        T.PAY_TIME,
+        T.FREIGHT_PRICE,
+        T.COUPON_ID,
+        T.PARENT_ID,
+        T.COUPON_PRICE,
+        T.CALLBACK_STATUS,
+        T.SHIPPING_NO,
+        T.FULL_CUT_PRICE,
+        T.ORDER_TYPE
+        FROM MALL_ORDER T
+        LEFT JOIN MALL_USER U ON U.ID = T.USER_ID
+        WHERE 1=1
+        <if test="params.id != null and params.id.trim() != ''">
+            AND T.ID = #{params.id}
+        </if>
+        <if test="params.orderSn != null and params.orderSn.trim() != ''">
+            AND T.ORDER_SN LIKE '%${params.orderSn}%'
+        </if>
+        <if test="params.userId != null and params.userId.trim() != ''">
+            AND T.USER_ID = #{params.userId}
+        </if>
+        <if test="params.nickname != null and params.nickname.trim() != ''">
+            AND U.NICKNAME LIKE '%${params.nickname}%'
+        </if>
+        <if test="params.orderStatus != null and params.orderStatus.trim() != ''">
+            AND T.ORDER_STATUS = #{params.orderStatus}
+        </if>
+    </sql>
+
+    <select id="selectMallOrderPage" resultType="com.platform.modules.mall.entity.MallOrderEntity">
+        <include refid="selectSql"/>
+    </select>
+
+    <select id="queryAll" resultType="com.platform.modules.mall.entity.MallOrderEntity">
+        <include refid="selectSql"/>
+    </select>
+</mapper>
