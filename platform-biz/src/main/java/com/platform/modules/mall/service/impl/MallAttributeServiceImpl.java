@@ -80,4 +80,9 @@ public class MallAttributeServiceImpl extends ServiceImpl<MallAttributeDao, Mall
     public boolean deleteBatch(Integer[] ids) {
         return this.removeByIds(Arrays.asList(ids));
     }
+
+    @Override
+    public List<MallAttributeEntity> queryList(Map<String, Object> ngaParam) {
+        return baseMapper.queryList(ngaParam);
+    }
 }

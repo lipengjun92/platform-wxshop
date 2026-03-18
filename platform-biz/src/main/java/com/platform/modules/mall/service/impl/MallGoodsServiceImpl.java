@@ -80,4 +80,19 @@ public class MallGoodsServiceImpl extends ServiceImpl<MallGoodsDao, MallGoodsEnt
     public boolean deleteBatch(Integer[] ids) {
         return this.removeByIds(Arrays.asList(ids));
     }
+
+    @Override
+    public List<MallGoodsEntity> queryCatalogProductList(Map<String, Object> params) {
+        return baseMapper.queryCatalogProductList(params);
+    }
+
+    @Override
+    public List<MallGoodsEntity> queryList(Map<String, Object> param) {
+        return baseMapper.queryList(param);
+    }
+
+    @Override
+    public long queryTotal(Map<String, Object> params) {
+        return baseMapper.queryTotal(params);
+    }
 }

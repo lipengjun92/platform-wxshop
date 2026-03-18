@@ -46,4 +46,6 @@ public interface MallCommentPictureService extends IService<MallCommentPictureEn
     boolean delete(Integer id);
 
     boolean deleteBatch(Integer[] ids);
+
+    List<MallCommentPictureEntity> queryList(Map<String, Object> paramPicture);
 }

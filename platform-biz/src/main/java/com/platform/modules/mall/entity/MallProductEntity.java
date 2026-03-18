@@ -18,6 +18,7 @@
  */
 package com.platform.modules.mall.entity;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
@@ -43,4 +44,10 @@ public class MallProductEntity implements Serializable {
     private Integer goodsNumber;
     private BigDecimal retailPrice;
     private BigDecimal marketPrice;
+    //商品名称
+    @TableField(exist = false)
+    private String goodsName;
+    //商品图片
+    @TableField(exist = false)
+    private String listPicUrl;
 }

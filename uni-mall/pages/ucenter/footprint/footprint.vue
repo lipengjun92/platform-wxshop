@@ -34,7 +34,7 @@
 				let that = this;
 				var tmpFootPrint;
 				util.request(api.FootprintList).then(function(res) {
-					if (res.errno === 0) {
+					if (res.code === 0) {
 						if (res.data.data != undefined) {
 							tmpFootPrint = res.data.data;
 						} else {
@@ -58,9 +58,9 @@
 								util.request(api.FootprintDelete, {
 									footprintId: footprint.id
 								}).then(function(res) {
-									if (res.errno === 0) {
+									if (res.code === 0) {
 										uni.showToast({
-											title: res.errmsg,
+											title: res.msg,
 											icon: 'success',
 											duration: 2000,
 											complete: function() {
@@ -68,7 +68,7 @@
 											}
 										});
 									} else {
-										util.showErrorToast(res.errmsg);
+										util.showErrorToast(res.msg);
 									}
 								});
 							}

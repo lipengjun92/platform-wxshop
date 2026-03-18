@@ -80,4 +80,9 @@ public class MallCategoryServiceImpl extends ServiceImpl<MallCategoryDao, MallCa
     public boolean deleteBatch(Integer[] ids) {
         return this.removeByIds(Arrays.asList(ids));
     }
+
+    @Override
+    public List<MallCategoryEntity> queryList(Map<String, Object> params) {
+        return baseMapper.queryList(params);
+    }
 }

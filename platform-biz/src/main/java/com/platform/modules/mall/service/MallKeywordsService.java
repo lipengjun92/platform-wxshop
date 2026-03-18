@@ -89,4 +89,6 @@ public interface MallKeywordsService extends IService<MallKeywordsEntity> {
      * @return 删除结果
      */
     boolean deleteBatch(Integer[] ids);
+
+    List<MallKeywordsEntity> queryList(Map<String, Object> param);
 }

@@ -20,6 +20,7 @@ package com.platform.modules.mall.dao;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.platform.modules.mall.entity.MallAttributeCategoryEntity;
 import com.platform.modules.mall.entity.MallCartEntity;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -52,4 +53,13 @@ public interface MallCartDao extends BaseMapper<MallCartEntity> {
      * @return List
      */
     List<MallCartEntity> selectMallCartPage(Page<MallCartEntity> page, @Param("params") Map<String, Object> params);
+
+    void updateCheck(@Param("productIds") String[] productIds,
+                     @Param("isChecked") Integer isChecked, @Param("userId") Long userId);
+
+    void deleteByUserAndProductIds(@Param("userId") Long userId,@Param("productIds") String[] productIds);
+
+    void deleteByCart(@Param("userId") Long userId, @Param("sessionId") Integer sessionId, @Param("checked") Integer checked);
+
+    List<MallCartEntity> queryList(Map<String, Object> param);
 }

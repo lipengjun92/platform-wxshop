@@ -17,7 +17,7 @@
 					<view class="status"></view>
 				</view>
 				<view class="b">
-					<view class="l">实付：￥{{item.actualPrice||''}}</view>
+					<view class="l">实付：￥{{item.actualPrice||'0'}}</view>
 					<view class="r">
 						<button class="btn" :data-order-index="index" @click.stop.prevent="payOrder" v-if="item.handleOption.pay">立即支付</button>
 					</view>
@@ -48,10 +48,10 @@
 					page: that.page,
 					size: that.size
 				}).then(function(res) {
-					if (res.errno === 0) {
-						that.orderList = that.orderList.concat(res.data.data)
-						that.page = res.data.currentPage + 1
-						that.totalPages = res.data.totalPages
+					if (res.code === 0) {
+						that.orderList = that.orderList.concat(res.data.list)
+						that.page = res.data.page + 1
+						that.totalPages = res.data.total
 					}
 				});
 			},

@@ -79,4 +79,19 @@ public class MallCommentServiceImpl extends ServiceImpl<MallCommentDao, MallComm
     public boolean deleteBatch(Integer[] ids) {
         return this.removeByIds(Arrays.asList(ids));
     }
+
+    @Override
+    public Integer queryTotal(Map<String, Object> param) {
+        return baseMapper.queryTotal(param);
+    }
+
+    @Override
+    public Integer queryhasPicTotal(Map<String, Object> param) {
+        return baseMapper.queryhasPicTotal(param);
+    }
+
+    @Override
+    public List<MallCommentEntity> queryList(Map<String, Object> param) {
+        return baseMapper.queryList(param);
+    }
 }

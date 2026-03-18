@@ -117,7 +117,7 @@
 			<view class="b">
 				<view class="item" v-for="(iitem, iindex) in item.goodsList" :key="iindex">
 					<view :class="'item ' + iindex % 2 == 0 ? '' : 'item-b'">
-						<navigator :url="'/pages/goods/goods?id='+item.id">
+						<navigator :url="'/pages/goods/goods?id='+iitem.id">
 							<image class="img" :src="iitem.listPicUrl" background-size="cover"></image>
 							<text class="name">{{iitem.name}}</text>
 							<text class="price">￥{{iitem.retailPrice}}</text>
@@ -154,37 +154,37 @@
 			getIndexData: function() {
 				let that = this;
 				util.request(api.IndexUrlNewGoods).then(function(res) {
-					if (res.errno === 0) {
+					if (res.code === 0) {
 						that.newGoods = res.data.newGoodsList
 					}
 				});
 				util.request(api.IndexUrlHotGoods).then(function(res) {
-					if (res.errno === 0) {
+					if (res.code === 0) {
 						that.hotGoods = res.data.hotGoodsList
 					}
 				});
 				util.request(api.IndexUrlTopic).then(function(res) {
-					if (res.errno === 0) {
+					if (res.code === 0) {
 						that.topics = res.data.topicList
 					}
 				});
 				util.request(api.IndexUrlBrand).then(function(res) {
-					if (res.errno === 0) {
+					if (res.code === 0) {
 						that.brands = res.data.brandList
 					}
 				});
 				util.request(api.IndexUrlCategory).then(function(res) {
-					if (res.errno === 0) {
+					if (res.code === 0) {
 						that.floorGoods = res.data.categoryList
 					}
 				});
 				util.request(api.IndexUrlBanner).then(function(res) {
-					if (res.errno === 0) {
+					if (res.code === 0) {
 						that.banner = res.data.banner
 					}
 				});
 				util.request(api.IndexUrlChannel).then(function(res) {
-					if (res.errno === 0) {
+					if (res.code === 0) {
 						that.channel = res.data.channel
 					}
 				});
@@ -205,7 +205,7 @@
       uni.login({
         success: (resp) => {
           util.request(api.Code + resp.code, {}, 'GET').then(function (res) {
-            if (res.errno === 0) {
+            if (res.code === 0) {
               //存储用户信息
               uni.setStorageSync('userInfo', res.data.userInfo);
               uni.setStorageSync('token', res.data.token);
@@ -213,7 +213,7 @@
             } else {
               uni.showModal({
                 title: '提示',
-                content: res.errmsg,
+                content: res.msg,
                 showCancel: false
               });
             }

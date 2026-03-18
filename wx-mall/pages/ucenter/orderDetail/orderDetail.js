@@ -20,7 +20,7 @@ Page({
     util.request(api.OrderDetail, {
       orderId: that.data.orderId
     }).then(function (res) {
-      if (res.errno === 0) {
+      if (res.code === 0) {
         that.setData({
           orderInfo: res.data.orderInfo,
           orderGoods: res.data.orderGoods,
@@ -89,7 +89,7 @@ Page({
           util.request(api.OrderCancel,{
             orderId: orderInfo.id
           }).then(function (res) {
-            if (res.errno === 0) {
+            if (res.code === 0) {
               wx.showModal({
                 title:'提示',
                 content: res.data,
@@ -114,7 +114,7 @@ Page({
     util.request(api.PayPrepayId, {
       orderId: that.data.orderId || 15
     }).then(function (res) {
-      if (res.errno === 0) {
+      if (res.code === 0) {
         const payParam = res.data;
         wx.requestPayment({
           'timeStamp': payParam.timeStamp,
@@ -182,7 +182,7 @@ Page({
                   util.request(api.OrderConfirm, {
                       orderId: orderInfo.id
                   }).then(function (res) {
-                      if (res.errno === 0) {
+                      if (res.code === 0) {
                           wx.showModal({
                               title: '提示',
                               content: res.data,

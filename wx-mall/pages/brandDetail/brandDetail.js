@@ -23,7 +23,7 @@ Page({
   getBrand: function () {
     let that = this;
     util.request(api.BrandDetail, { id: that.data.id }).then(function (res) {
-      if (res.errno === 0) {
+      if (res.code === 0) {
         that.setData({
           brand: res.data.brand
         });
@@ -37,9 +37,9 @@ Page({
 
     util.request(api.GoodsList, { brandId: that.data.id, page: that.data.page, size: that.data.size})
       .then(function (res) {
-        if (res.errno === 0) {
+        if (res.code === 0) {
           that.setData({
-            goodsList: res.data.goodsList
+            goodsList: res.data.goodsList.records
           });
         }
       });

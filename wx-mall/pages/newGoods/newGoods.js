@@ -20,7 +20,7 @@ Page({
   getData: function () {
     let that = this;
     util.request(api.GoodsHot).then(function (res) {
-      if (res.errno === 0) {
+      if (res.code === 0) {
         that.setData({
           bannerInfo: res.data.bannerInfo,
         });
@@ -33,9 +33,9 @@ Page({
 
     util.request(api.GoodsList, { isNew: 1, page: that.data.page, size: that.data.size, order: that.data.currentSortOrder, sort: that.data.currentSortType, categoryId: that.data.categoryId })
       .then(function (res) {
-        if (res.errno === 0) {
+        if (res.code === 0) {
           that.setData({
-            goodsList: res.data.goodsList,
+            goodsList: res.data.goodsList.records,
             filterCategory: res.data.filterCategory
           });
         }

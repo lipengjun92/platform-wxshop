@@ -96,7 +96,7 @@
 				util.request(api.AddressDetail, {
 					id: that.addressId
 				}).then(function(res) {
-					if (res.errno === 0) {
+					if (res.code === 0) {
 						if (res.data) {
 							that.address = res.data
 						}
@@ -254,7 +254,7 @@
 				util.request(api.RegionList, {
 					parentId: regionId
 				}).then(function(res) {
-					if (res.errno === 0) {
+					if (res.code === 0) {
 						that.regionList = res.data.map(item => {
 							//标记已选择的
 							if (regionType == item.type && that.selectRegionList[regionType - 1].id == item.id) {
@@ -313,7 +313,7 @@
 					countyName: address.districtName,
 					detailInfo: address.detailInfo,
 				}, 'POST', 'application/json').then(function(res) {
-					if (res.errno === 0) {
+					if (res.code === 0) {
 						uni.navigateBack({
 							url: '/pages/shopping/address/address',
 						})

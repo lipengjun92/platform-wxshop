@@ -52,4 +52,6 @@ public interface MallAttributeDao extends BaseMapper<MallAttributeEntity> {
      * @return List
      */
     List<MallAttributeEntity> selectMallAttributePage(Page<MallAttributeEntity> page, @Param("params") Map<String, Object> params);
+
+    List<MallAttributeEntity> queryList(Map<String, Object> ngaParam);
 }

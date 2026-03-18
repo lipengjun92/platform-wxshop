@@ -48,7 +48,7 @@
 				util.request(api.BrandDetail, {
 					id: that.id
 				}).then(function(res) {
-					if (res.errno === 0) {
+					if (res.code === 0) {
 						that.brand = res.data.brand
 
 						that.getGoodsList();
@@ -63,8 +63,8 @@
 					page: that.page,
 					size: that.size
 				}).then(function(res) {
-					if (res.errno === 0) {
-						that.goodsList = res.data.goodsList;
+					if (res.code === 0) {
+						that.goodsList = res.data.goodsList.records;
 					}
 				});
 			}

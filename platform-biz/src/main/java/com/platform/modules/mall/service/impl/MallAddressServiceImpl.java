@@ -80,4 +80,9 @@ public class MallAddressServiceImpl extends ServiceImpl<MallAddressDao, MallAddr
     public boolean deleteBatch(Integer[] ids) {
         return this.removeByIds(Arrays.asList(ids));
     }
+
+    @Override
+    public List<MallAddressEntity> queryList(Map<String, Object> param) {
+        return baseMapper.queryList(param);
+    }
 }

@@ -54,7 +54,7 @@ public class MallUserCouponEntity implements Serializable {
     /**
      *
      */
-    private Integer userId;
+    private Long userId;
     /**
      *
      */

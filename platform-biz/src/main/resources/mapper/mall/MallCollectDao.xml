@@ -30,4 +30,31 @@
     <select id="queryAll" resultType="com.platform.modules.mall.entity.MallCollectEntity">
         <include refid="selectSql"/>
     </select>
+
+    <select id="queryList" resultType="com.platform.modules.mall.entity.MallCollectEntity">
+        select c.*,g.name, g.list_pic_url, g.goods_brief as goods_brief, g.retail_price as retail_price
+        from mall_collect c
+        left join mall_goods g on c.value_id = g.id
+        where 1 = 1
+        <if test="userId != null and userId != ''">
+            and c.user_id = #{userId}
+        </if>
+        <if test="valueId != null and valueId != ''">
+            and c.value_id = #{valueId}
+        </if>
+        <if test="typeId != null and typeId != ''">
+            and c.type_id = #{typeId}
+        </if>
+        <choose>
+            <when test="sidx != null and sidx.trim() != ''">
+                order by ${sidx} ${order}
+            </when>
+            <otherwise>
+                order by c.id desc
+            </otherwise>
+        </choose>
+        <if test="offset != null and limit != null">
+            limit #{offset}, #{limit}
+        </if>
+    </select>
 </mapper>

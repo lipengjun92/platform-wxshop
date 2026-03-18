@@ -37,7 +37,7 @@ Page({
     });
 
     util.request(api.TopicDetail, { id: that.data.id}).then(function (res) {
-      if (res.errno === 0) {
+      if (res.code === 0) {
 
         that.setData({
           topic: res.data,
@@ -48,7 +48,7 @@ Page({
     });
 
     util.request(api.TopicRelated, { id: that.data.id}).then(function (res) {
-      if (res.errno === 0) {
+      if (res.code === 0) {
 
         that.setData({
           topicList: res.data
@@ -59,11 +59,11 @@ Page({
   getCommentList(){
     let that = this;
     util.request(api.CommentList, { valueId: that.data.id, typeId: 1, size: 5 }).then(function (res) {
-      if (res.errno === 0) {
+      if (res.code === 0) {
 
         that.setData({
-          commentList: res.data.data,
-          commentCount: res.data.count
+          commentList: res.data.records,
+          commentCount: res.data.total
         });
       }
     });

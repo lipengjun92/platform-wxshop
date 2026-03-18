@@ -89,4 +89,6 @@ public interface MallTopicService extends IService<MallTopicEntity> {
      * @return 删除结果
      */
     boolean deleteBatch(Integer[] ids);
+
+    List<MallTopicEntity> queryList(Map<String, Object> param);
 }

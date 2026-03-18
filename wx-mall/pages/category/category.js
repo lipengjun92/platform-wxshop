@@ -44,7 +44,7 @@ Page({
     util.request(api.GoodsCategory, { id: this.data.id })
       .then(function (res) {
 
-        if (res.errno == 0) {
+        if (res.code == 0) {
           that.setData({
             navList: res.data.brotherCategory,
             currentCategory: res.data.currentCategory
@@ -102,9 +102,9 @@ Page({
     util.request(api.GoodsList, {categoryId: that.data.id, page: that.data.page, size: that.data.size})
       .then(function (res) {
         that.setData({
-          goodsList: that.data.goodsList.concat(res.data.goodsList),        
-          page: res.data.currentPage+1,
-          totalPages: res.data.totalPages
+          goodsList: that.data.goodsList.concat(res.data.goodsList.records),        
+          page: res.data.goodsList.current + 1,
+          totalPages: res.data.goodsList.pages
         });
       });
   },

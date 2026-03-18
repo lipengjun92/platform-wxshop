@@ -119,7 +119,7 @@
 					couponId: that.couponId,
 					type: buyType
 				}).then(function(res) {
-					if (res.errno === 0) {
+					if (res.code === 0) {
 						that.checkedGoodsList = res.data.checkedGoodsList
 						that.checkedAddress = res.data.checkedAddress
 						that.actualPrice = res.data.actualPrice
@@ -189,7 +189,7 @@
 					couponId: that.couponId,
 					type: that.buyType
 				}, 'POST', 'application/json').then(res => {
-					if (res.errno === 0) {
+					if (res.code === 0) {
 						const orderId = res.data.orderInfo.id;
 						util.payOrder(parseInt(orderId)).then(res => {
 							uni.redirectTo({

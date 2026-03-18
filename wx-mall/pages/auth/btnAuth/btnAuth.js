@@ -59,17 +59,17 @@ Page({
         code: that.data.code,
         userInfo: userInfo
       }, 'POST', 'application/json').then(res => {
-        if (res.errno === 0) {
+        if (res.code === 0) {
           //存储用户信息
           wx.setStorageSync('userInfo', res.data.userInfo);
           wx.setStorageSync('token', res.data.token);
           wx.setStorageSync('userId', res.data.userId);
 
         } else {
-          // util.showErrorToast(res.errmsg)
+          // util.showErrorToast(res.msg)
           wx.showModal({
             title: '提示',
-            content: res.errmsg,
+            content: res.msg,
             showCancel: false
           });
         }

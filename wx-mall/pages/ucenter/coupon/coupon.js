@@ -17,7 +17,7 @@ Page({
     let that = this;
 
     util.request(api.CouponList).then(function (res) {
-      if (res.errno === 0) {
+      if (res.code === 0) {
         that.setData({
           couponList: res.data
         });

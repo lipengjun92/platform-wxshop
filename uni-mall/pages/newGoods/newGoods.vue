@@ -67,7 +67,7 @@
 			getData: function() {
 				let that = this;
 				util.request(api.GoodsNew).then(function(res) {
-					if (res.errno === 0) {
+					if (res.code === 0) {
 						that.bannerInfo = res.data.bannerInfo;
 						that.getGoodsList();
 					}
@@ -84,8 +84,8 @@
 					sort: that.currentSortType,
 					categoryId: that.categoryId
 				}).then(function(res) {
-					if (res.errno === 0) {
-						that.goodsList = res.data.goodsList
+					if (res.code === 0) {
+						that.goodsList = res.data.goodsList.records
 						that.filterCategory = res.data.filterCategory
 					}
 				});

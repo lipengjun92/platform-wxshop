@@ -89,4 +89,6 @@ public interface MallGoodsGalleryService extends IService<MallGoodsGalleryEntity
      * @return 删除结果
      */
     boolean deleteBatch(Integer[] ids);
+
+    List<MallGoodsGalleryEntity> queryList(Map<String, Object> param);
 }

@@ -47,4 +47,10 @@ public interface MallCommentService extends IService<MallCommentEntity> {
     boolean delete(Integer id);
 
     boolean deleteBatch(Integer[] ids);
+
+    Integer queryTotal(Map<String, Object> param);
+
+    Integer queryhasPicTotal(Map<String, Object> param);
+
+    List<MallCommentEntity> queryList(Map<String, Object> param);
 }

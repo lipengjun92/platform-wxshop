@@ -52,4 +52,6 @@ public interface MallGoodsSpecificationDao extends BaseMapper<MallGoodsSpecifica
      * @return List
      */
     List<MallGoodsSpecificationEntity> selectMallGoodsSpecificationPage(Page<MallGoodsSpecificationEntity> page, @Param("params") Map<String, Object> params);
+
+    List<MallGoodsSpecificationEntity> queryList(Map<String, Object> specificationParam);
 }

@@ -85,8 +85,6 @@
 				helpKeyword: [],
 				historyKeyword: [],
 				categoryFilter: false,
-				currentSortType: 'default',
-				currentSortOrder: '',
 				filterCategory: [],
 				defaultKeyword: {},
 				hotKeyword: [],
@@ -108,7 +106,7 @@
 			getSearchKeyword() {
 				let that = this;
 				util.request(api.SearchIndex).then(function(res) {
-					if (res.errno === 0) {
+					if (res.code === 0) {
 						that.historyKeyword = res.data.historyKeywordList
 						that.defaultKeyword = res.data.defaultKeyword
 						that.hotKeyword = res.data.hotKeywordList
@@ -126,7 +124,7 @@
 				util.request(api.SearchHelper, {
 					keyword: that.keyword
 				}).then(function(res) {
-					if (res.errno === 0) {
+					if (res.code === 0) {
 						that.helpKeyword = res.data;
 					}
 				});
@@ -153,13 +151,13 @@
 					order: that.currentSortOrder,
 					categoryId: that.categoryId
 				}).then(function(res) {
-					if (res.errno === 0) {
+					if (res.code === 0) {
 						that.searchStatus = true
 						that.categoryFilter = false
-						that.goodsList = res.data.data
+						that.goodsList = res.data.goodsList.records
 						that.filterCategory = res.data.filterCategory
-						that.page = res.data.currentPage
-						that.size = res.data.numsPerPage
+						that.page = res.data.goodsList.current
+						that.size = res.data.goodsList.size
 					}
 
 					//重新获取关键词

@@ -1,4 +1,3 @@
-
 <!--index.wxml-->
 <view class="container">
   <swiper class="banner" indicator-dots="true" autoplay="true" interval="3000" duration="1000">
@@ -8,44 +7,44 @@
       </navigator>
     </swiper-item>
   </swiper>
-<view class="a-section a-topic" wx:if="{{channel.length > 0}}">
-  <view class="m-menu">
-    <navigator  class="item" url="{{item.url}}" wx:for="{{channel}}" wx:key="id">
-      <image src="{{item.iconUrl}}" background-size="cover"></image>
-      <text>{{item.name}}</text>
-    </navigator>
-  </view>
- </view>
-
-<view class="a-section a-topic" wx:if="{{brand.length > 0}}">
-  <view class="a-section a-brand">
-    <view class="h">
-      <navigator url="../brand/brand">
-        <text class="txt">品牌制造商直供</text>
+  <view class="a-section a-topic" wx:if="{{channel.length > 0}}">
+    <view class="m-menu">
+      <navigator class="item" url="{{item.url}}" wx:for="{{channel}}" wx:key="id">
+        <image src="{{item.iconUrl}}" background-size="cover"></image>
+        <text>{{item.name}}</text>
       </navigator>
     </view>
-    <view class="b">
-      <view class="item item-1" wx:for="{{brand}}" wx:key="id" wx:if="{{item.newPicUrl}}">
-        <navigator url="/pages/brandDetail/brandDetail?id={{item.id}}">
-          <view class="wrap">
-            <image class="img" src="{{item.newPicUrl}}" mode="aspectFill"></image>
-            <view class="mt">
-              <text class="brand">{{item.name}}</text>
-              <text class="price">{{item.floorPrice}}</text>
-              <text class="unit">元起</text>
-            </view>
-          </view>
+  </view>
+
+  <view class="a-section a-topic" wx:if="{{brand.length > 0}}">
+    <view class="a-section a-brand">
+      <view class="h">
+        <navigator url="../brand/brand">
+          <text class="txt">品牌制造商直供</text>
         </navigator>
       </view>
+      <view class="b">
+        <view class="item item-1" wx:for="{{brand}}" wx:key="id" wx:if="{{item.newPicUrl}}">
+          <navigator url="/pages/brandDetail/brandDetail?id={{item.id}}">
+            <view class="wrap">
+              <image class="img" src="{{item.newPicUrl}}" mode="aspectFill"></image>
+              <view class="mt">
+                <text class="brand">{{item.name}}</text>
+                <text class="price">{{item.floorPrice}}</text>
+                <text class="unit">元起</text>
+              </view>
+            </view>
+          </navigator>
+        </view>
+      </view>
     </view>
-  </view>
   </view>
 
   <view class="a-section a-topic" wx:if="{{topics.length > 0}}">
     <view class="h">
       <view>
-      <navigator url="../topic/topic" open-type="switchTab">
-        <text class="txt">专题精选</text>
+        <navigator url="../topic/topic" open-type="switchTab">
+          <text class="txt">专题精选</text>
         </navigator>
       </view>
     </view>
@@ -125,10 +124,10 @@
         </view>
       </block>
       <view class="item item-b item-more">
-          <navigator url="/pages/category/category?id={{item.id}}" class="more-a">
-            <view class="txt">{{'更多'+item.name+'好物'}}</view>
-            <image class="icon" src="../../static/images/icon_go_more.png" background-size="cover"></image>
-          </navigator>
+        <navigator url="/pages/category/category?id={{item.id}}" class="more-a">
+          <view class="txt">{{'更多'+item.name+'好物'}}</view>
+          <image class="icon" src="../../static/images/icon_go_more.png" background-size="cover"></image>
+        </navigator>
       </view>
     </view>
   </view>

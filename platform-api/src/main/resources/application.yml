@@ -117,8 +117,8 @@ mybatis-plus:
       #数据库大写下划线转换
       capital-mode: true
       logic-delete-field: isDelete  #全局逻辑删除字段值 3.3.0开始支持，详情看下面。
-      logic-delete-value: 0 # 逻辑已删除值(默认为 1)
-      logic-not-delete-value: 1 # 逻辑未删除值(默认为 0)
+      logic-delete-value: 1 # 逻辑已删除值(默认为 1)
+      logic-not-delete-value: 0 # 逻辑未删除值(默认为 0)
 
 platform-api:
   # APPI模块，是通过jwt认证的，如果要使用APP模块，则需要修改【加密秘钥】
@@ -161,8 +161,8 @@ wx:
     token: # 接口配置里的Token值
     aesKey: # 接口配置里的EncodingAESKey值
   miniapp:
-    appid: #微信小程序的appid
-    secret: #微信小程序的Secret
+    appid: wx7d1077edf1fd3ae5 #微信小程序的appid
+    secret: 374110d514f1533c0ceb374b1da80e59 #微信小程序的Secret
     token: #微信小程序消息服务器配置的token
     aesKey: #微信小程序消息服务器配置的EncodingAESKey
     msgDataFormat: JSON

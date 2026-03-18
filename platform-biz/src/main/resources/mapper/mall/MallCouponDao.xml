@@ -26,6 +26,13 @@
             AND T.NAME LIKE '%${params.name}%'
         </if>
     </sql>
+    <update id="updateUserCoupon">
+        update mall_user_coupon
+        <set>
+            <if test="couponStatus != null">`coupon_status` = #{couponStatus}</if>
+        </set>
+        where id = #{userCouponId}
+    </update>
 
     <select id="selectMallCouponPage" resultType="com.platform.modules.mall.entity.MallCouponEntity">
         <include refid="selectSql"/>
@@ -33,5 +40,61 @@
 
     <select id="queryAll" resultType="com.platform.modules.mall.entity.MallCouponEntity">
         <include refid="selectSql"/>
+    </select>
+    <select id="getUserCoupon" resultType="com.platform.modules.mall.entity.MallCouponEntity">
+        select a.*, b.coupon_number, b.user_id, b.coupon_status, b.id user_coupon_id
+        from mall_coupon a
+                 left join mall_user_coupon b on a.id = b.coupon_id
+        where 1 = 1
+          and b.id = #{id}
+          and b.user_id = #{userId}
+    </select>
+
+    <select id="queryMaxUserEnableCoupon" resultType="com.platform.modules.mall.entity.MallCouponEntity">
+        select a.`id`,
+        a.`name`,
+        a.`type_money` as type_money,
+        a.`send_type`,
+        a.`min_amount`,
+        a.`max_amount`,
+        a.`send_start_date`,
+        a.`send_end_date`,
+        a.`use_start_date`,
+        a.`use_end_date`,
+        a.`min_goods_amount`,
+        a.min_transmit_num
+        from mall_coupon a
+        left join mall_coupon b on a.send_type = b.send_type and b.type_money > a.type_money
+        where 1 = 1
+        and a.use_end_date >= now()
+        and now() >= a.use_start_date
+        and b.id is null
+        <if test="sendType != null">
+            and a.send_type = #{sendType}
+        </if>
+        limit 0, 1
+    </select>
+
+    <select id="queryList" resultType="com.platform.modules.mall.entity.MallCouponEntity">
+        select * from mall_coupon a
+        where 1 = 1
+        <if test="sendTypes != null">
+            and send_type in
+            <foreach item="item" collection="sendTypes" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+        </if>
+        <if test="enabled != null and enabled == true">
+            and a.use_end_date >= now()
+            and now() >= a.use_start_date
+        </if>
+        <choose>
+            <when test="sidx != null and sidx.trim() != ''">
+                order by ${sidx} ${order}
+            </when>
+            <otherwise>
+                order by a.id desc
+            </otherwise>
+        </choose>
     </select>
 </mapper>

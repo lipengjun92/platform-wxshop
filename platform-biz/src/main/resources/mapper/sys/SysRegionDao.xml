@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.platform.modules.sys.dao.SysRegionDao">
+
+    <!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.platform.modules.sys.entity.SysRegionEntity" id="regionMap">
+        <result property="id" column="id"/>
+        <result property="parentId" column="parent_id"/>
+        <result property="name" column="name"/>
+        <result property="type" column="type"/>
+        <result property="agencyId" column="agency_id"/>
+    </resultMap>
+
+    <select id="queryList" resultMap="regionMap">
+        select
+        a.id,
+        a.parent_Id,
+        a.name,
+        a.type,
+        a.agency_Id,
+        b.name parent_Name
+        from sys_region a LEFT JOIN sys_region b on a.parent_id=b.id
+        <where>
+            <if test="name != null and name.trim() != ''">
+                AND a.name LIKE concat('%',#{name},'%')
+            </if>
+            <if test="parentName != null and parentName.trim() != ''">
+                AND b.name LIKE concat('%',#{parentName},'%')
+            </if>
+            <if test="type != null and type != ''">
+                AND a.type = #{type}
+            </if>
+        </where>
+        <choose>
+            <when test="sidx != null and sidx.trim() != ''">
+                order by ${sidx} ${order}
+            </when>
+            <otherwise>
+                order by a.parent_Id
+            </otherwise>
+        </choose>
+        <if test="offset != null and limit != null">
+            limit #{offset}, #{limit}
+        </if>
+    </select>
+
+    <select id="queryTotal" resultType="int">
+        select count(*)
+        from sys_region a LEFT JOIN sys_region b on a.parent_id=b.id
+        <where>
+            <if test="name != null and name.trim() != ''">
+                AND a.name LIKE concat('%',#{name},'%')
+            </if>
+            <if test="parentName != null and parentName.trim() != ''">
+                AND b.name LIKE concat('%',#{parentName},'%')
+            </if>
+            <if test="type != null and type != ''">
+                AND a.type = #{type}
+            </if>
+        </where>
+    </select>
+</mapper>

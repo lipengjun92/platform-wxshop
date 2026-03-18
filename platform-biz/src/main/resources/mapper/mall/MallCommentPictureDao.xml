@@ -26,4 +26,23 @@
     <select id="queryAll" resultType="com.platform.modules.mall.entity.MallCommentPictureEntity">
         <include refid="selectSql"/>
     </select>
+
+    <select id="queryList" resultType="com.platform.modules.mall.entity.MallCommentPictureEntity">
+        select * from mall_comment_picture
+        where 1 = 1
+        <if test="commentId != null">
+            and comment_id = #{commentId}
+        </if>
+        <choose>
+            <when test="sidx != null and sidx.trim() != ''">
+                order by ${sidx} ${order}
+            </when>
+            <otherwise>
+                order by id desc
+            </otherwise>
+        </choose>
+        <if test="offset != null and limit != null">
+            limit #{offset}, #{limit}
+        </if>
+    </select>
 </mapper>

@@ -79,4 +79,9 @@ public class MallCommentPictureServiceImpl extends ServiceImpl<MallCommentPictur
     public boolean deleteBatch(Integer[] ids) {
         return this.removeByIds(Arrays.asList(ids));
     }
+
+    @Override
+    public List<MallCommentPictureEntity> queryList(Map<String, Object> paramPicture) {
+        return baseMapper.queryList(paramPicture);
+    }
 }

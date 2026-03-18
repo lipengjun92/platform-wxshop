@@ -80,4 +80,20 @@ public class MallFootprintServiceImpl extends ServiceImpl<MallFootprintDao, Mall
     public boolean deleteBatch(Integer[] ids) {
         return this.removeByIds(Arrays.asList(ids));
     }
+
+    @Override
+    public void deleteByParam(Map<String, Object> param) {
+        baseMapper.deleteByMap(param);
+    }
+
+    @Override
+    public List<MallFootprintEntity> shareList(Map<String, Object> params) {
+        return baseMapper.shareList(params);
+    }
+
+    @Override
+    public List<MallFootprintEntity> queryListFootprint(String userId) {
+        return baseMapper.queryListFootprint(userId);
+    }
+
 }

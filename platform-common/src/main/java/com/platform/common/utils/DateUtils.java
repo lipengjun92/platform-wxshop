@@ -405,4 +405,8 @@ public class DateUtils {
     public static long currentSeconds() {
         return System.currentTimeMillis() / 1000;
     }
+
+    public static String timeToStr(Long addTime, String datePattern) {
+        return DateUtils.format(new Date(addTime * 1000L), datePattern);
+    }
 }

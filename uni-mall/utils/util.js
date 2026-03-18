@@ -1,10 +1,10 @@
 const utils = {
 	// 域名
-	domain: 'https://fly2you.cn/',
-	// domain: 'http://localhost:8080/',
+	// domain: 'https://fly2you.cn/',
+	domain: 'http://localhost:8889/',
 	//接口地址
 	interfaceUrl: function() {
-		return utils.domain + 'platform-framework/api/'
+		return utils.domain + 'platform-api/app/'
 	},
 	toast: function(text, duration, success) {
 		uni.showToast({
@@ -99,7 +99,7 @@ const utils = {
 						uni.hideLoading()
 					}
 					if (res.statusCode === 200) {
-						if (res.data.errno === 401) {
+						if (res.data.code === 401) {
 							utils.modal('温馨提示', '您还没有登录，是否去登录', true, (confirm) => {
 								if (confirm) {
 									uni.redirectTo({
@@ -116,9 +116,9 @@ const utils = {
 									})
 								}
 							})
-						} else if (res.data.errno === 500) {
+						} else if (res.data.code === 500) {
 							utils.toast(res.data.msg)
-						} else if (res.data.errno === 404) {
+						} else if (res.data.code === 404) {
 							utils.toast(res.data.msg)
 						} else {
 							resolve(res.data);
@@ -135,7 +135,7 @@ const utils = {
 					clearTimeout(utils.delayed)
 					utils.delayed = null;
 					if (res.statusCode === 200) {
-						if (res.data.errno === 0 || res.data.errno === 401) {
+						if (res.data.code === 0 || res.data.code === 401) {
 							uni.hideLoading()
 						} else {
 							utils.toast(res.data.msg)
@@ -168,7 +168,7 @@ const utils = {
 				success: function(res) {
 					uni.hideLoading()
 					let data = JSON.parse(res.data.replace(/\ufeff/g, "") || "{}")
-					if (data.errno == 0) {
+					if (data.code == 0) {
 						//返回图片地址
 						resolve(data)
 					} else {
@@ -391,7 +391,7 @@ const utils = {
 			utils.request('pay/prepay', {
 				orderId: orderId
 			}, 'POST').then((res) => {
-				if (res.errno === 0) {
+				if (res.code === 0) {
 					let payParam = res.data;
 					uni.requestPayment({
 						'timeStamp': payParam.timeStamp,

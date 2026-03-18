@@ -25,4 +25,20 @@
     <select id="queryAll" resultType="com.platform.modules.mall.entity.MallTopicCategoryEntity">
         <include refid="selectSql"/>
     </select>
+
+    <select id="queryList" resultType="com.platform.modules.mall.entity.MallTopicCategoryEntity">
+        select * from mall_topic_category
+        <choose>
+            <when test="sidx != null and sidx.trim() != ''">
+                order by ${sidx} ${order}
+            </when>
+            <otherwise>
+                order by id desc
+            </otherwise>
+        </choose>
+        <if test="offset != null and limit != null">
+            limit #{offset}, #{limit}
+        </if>
+    </select>
+
 </mapper>

@@ -17,5 +17,5 @@ public class LoginVo {
     private String token;
 
     @Schema(description = "用户ID", example = "1")
-    private String userId;
+    private Long userId;
 }

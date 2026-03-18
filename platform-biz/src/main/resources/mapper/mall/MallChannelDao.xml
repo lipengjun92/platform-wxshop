@@ -27,4 +27,22 @@
     <select id="queryAll" resultType="com.platform.modules.mall.entity.MallChannelEntity">
         <include refid="selectSql"/>
     </select>
+
+    <select id="queryList" resultType="com.platform.modules.mall.entity.MallChannelEntity">
+        select * from mall_channel
+        <if test="adPositionId != null and adPositionId != null">
+            and ad_position_id = #{adPositionId}
+        </if>
+        <choose>
+            <when test="sidx != null and sidx.trim() != ''">
+                order by ${sidx} ${order}
+            </when>
+            <otherwise>
+                order by id desc
+            </otherwise>
+        </choose>
+        <if test="offset != null and limit != null">
+            limit #{offset}, #{limit}
+        </if>
+    </select>
 </mapper>

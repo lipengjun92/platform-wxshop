@@ -29,6 +29,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -79,5 +80,10 @@ public class MallHelpTypeServiceImpl extends ServiceImpl<MallHelpTypeDao, MallHe
     @Transactional(rollbackFor = Exception.class)
     public boolean deleteBatch(Integer[] ids) {
         return this.removeByIds(Arrays.asList(ids));
+    }
+
+    @Override
+    public List<MallHelpTypeEntity> queryList(Map<String, Object> objectObjectHashMap) {
+        return baseMapper.queryList(objectObjectHashMap);
     }
 }

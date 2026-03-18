@@ -1,244 +1,297 @@
-/*
- *
- *      Copyright (c) 2018-2099, lipengjun All rights reserved.
- *
- *  Redistribution and use in source and binary forms, with or without
- *  modification, are permitted provided that the following conditions are met:
- *
- * Redistributions of source code must retain the above copyright notice,
- *  this list of conditions and the following disclaimer.
- *  Redistributions in binary form must reproduce the above copyright
- *  notice, this list of conditions and the following disclaimer in the
- *  documentation and/or other materials provided with the distribution.
- *  Neither the name of the fly2you.cn developer nor the names of its
- *  contributors may be used to endorse or promote products derived from
- *  this software without specific prior written permission.
- *  Author: lipengjun (939961241@qq.com)
- *
- */
 package com.platform.modules.app.controller;
 
-import com.aliyun.dysmsapi20170525.models.SendSmsResponse;
-import com.github.qcloudsms.SmsSingleSenderResult;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.platform.annotation.IgnoreAuth;
-import com.platform.annotation.LoginUser;
-import com.platform.common.utils.*;
-import com.platform.config.RedisTemplateUtil;
-import com.platform.modules.app.request.PhoneCodeRequest;
-import com.platform.modules.app.request.PhoneRequest;
-import com.platform.modules.sys.entity.SmsConfig;
-import com.platform.modules.sys.entity.SysSmsLogEntity;
-import com.platform.modules.sys.service.SysConfigService;
-import com.platform.modules.sys.service.SysSmsLogService;
-import com.platform.modules.wx.entity.WxUserEntity;
-import com.platform.modules.wx.service.WxUserService;
+import com.platform.common.utils.Query;
+import com.platform.common.utils.RestResponse;
+import com.platform.modules.mall.entity.*;
+import com.platform.modules.mall.service.*;
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.Parameter;
-import io.swagger.v3.oas.annotations.enums.ParameterIn;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Date;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
-import java.util.Objects;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
- * @author 李鹏军
+ * 作者: @author Harmon <br>
+ * 时间: 2017-08-11 08:32<br>
+ *
+ * 描述: AppIndexController <br>
  */
-@Slf4j
+@Tag(name = "首页接口-AppIndexController")
 @RestController
-@RequiredArgsConstructor
 @RequestMapping("/app/index")
-@Tag(name = "AppIndexController|APP首页接口")
 public class AppIndexController extends AppBaseController {
-    private final SysConfigService sysConfigService;
-    private final SysSmsLogService smsLogService;
-    private final WxUserService userService;
-    private final RedisTemplateUtil redisTemplateUtil;
+    @Autowired
+    private MallAdService adService;
+    @Autowired
+    private MallChannelService channelService;
+    @Autowired
+    private MallGoodsService goodsService;
+    @Autowired
+    private MallBrandService brandService;
+    @Autowired
+    private MallTopicService topicService;
+    @Autowired
+    private MallCategoryService categoryService;
+    @Autowired
+    private MallCartService cartService;
 
     /**
-     * 根据key获取value
+     * app首页
      */
+    @Operation(summary = "首页")
     @IgnoreAuth
-    @GetMapping("/getConfigByKey")
-    @Operation(summary = "根据key获取value", description = "根据key获取value",
-            parameters = {@Parameter(in = ParameterIn.QUERY, name = "key", description = "key", example = "1", required = true)}
-    )
-    public RestResponse<String> getConfigByKey(@RequestParam String key) {
-        String value = sysConfigService.getValue(key);
-        return RestResponse.ok("操作成功", value);
-    }
-
-    /**
-     * 发送短信
-     *
-     * @param request JSON格式参数
-     * @return RestResponse
-     */
-    @SuppressWarnings("AlibabaMethodTooLong")
-    @IgnoreAuth
-    @PostMapping("smsCode")
-    @Operation(summary = "发送短信", description = "发送短信验证码",
-            parameters = {@Parameter(in = ParameterIn.HEADER, name = "token", description = "用户token", required = true)}
-    )
-    public RestResponse<String> smsCode(@RequestBody PhoneRequest request) {
-        String phone = request.getPhone();
-        if (!isMobile(phone)) {
-            return RestResponse.fail("请输入正确的手机号");
+    @PostMapping("index")
+    public RestResponse<Object> index() {
+        Map<String, Object> resultObj = new HashMap<String, Object>();
+        //
+        Map<String, Object> param = new HashMap<String, Object>();
+        param.put("adPositionId", 1);
+        List<MallAdEntity> banner = adService.queryList(param);
+        resultObj.put("banner", banner);
+        //
+        param = new HashMap<String, Object>();
+        param.put("sidx", "sort_order ");
+        param.put("order", "asc ");
+        List<MallChannelEntity> channel = channelService.queryList(param);
+        resultObj.put("channel", channel);
+        //
+        QueryWrapper<MallGoodsEntity> newGoodsWrapper = new QueryWrapper<>();
+        newGoodsWrapper.select("id", "name", "list_pic_url", "retail_price").eq("IS_NEW", 1).eq("IS_DELETE", 0).orderByDesc("ID");
+        Page<MallGoodsEntity> newGoodsPage = goodsService.page(new Page<>(1, 4), newGoodsWrapper);
+        List<MallGoodsEntity> newGoods = newGoodsPage.getRecords();
+        resultObj.put("newGoodsList", newGoods);
+        //
+        QueryWrapper<MallGoodsEntity> hotGoodsWrapper = new QueryWrapper<>();
+        hotGoodsWrapper.eq("IS_HOT", 1).eq("IS_DELETE", 0).orderByDesc("ID");
+        Page<MallGoodsEntity> hotGoodsPage = goodsService.page(new Page<>(1, 4), hotGoodsWrapper);
+        List<MallGoodsEntity> hotGoods = hotGoodsPage.getRecords();
+        resultObj.put("hotGoodsList", hotGoods);
+        // 当前购物车中
+        List<MallCartEntity> cartList = new ArrayList<MallCartEntity>();
+        if (null != getUserId()) {
+            //查询列表数据
+            Map<String, Object> cartParam = new HashMap<String, Object>();
+            cartParam.put("userId", getUserId());
+            cartList = cartService.queryList(cartParam);
         }
-        // 五分钟之内不能重复发送短信
-        Object code = redisTemplateUtil.get(Constant.PRE_SMS + phone);
-        if (!StringUtils.isNullOrEmpty(code)) {
-            return RestResponse.ok("短信已发送");
-        }
-
-        //生成验证码
-        String smsCode = CharUtil.getRandomNum(4);
-        //获取云存储配置信息
-        SmsConfig config = sysConfigService.getConfigObject(Constant.SMS_CONFIG_KEY, SmsConfig.class);
-        if (StringUtils.isNullOrEmpty(config)) {
-            return RestResponse.fail("请先配置短信平台信息");
-        }
-        if (Objects.equals(config.getType(), Constant.SmsType.TX.getValue())) {
-            if (StringUtils.isNullOrEmpty(config.getAppid())) {
-                return RestResponse.fail("请先配置短信平台APPID");
-            }
-            if (StringUtils.isNullOrEmpty(config.getAppkey())) {
-                return RestResponse.fail("请先配置短信APP_KEY");
-            }
-            if (StringUtils.isNullOrEmpty(config.getTemplateId())) {
-                return RestResponse.fail("请先配置短信templateId");
-            }
-        }
-        if (Objects.equals(config.getType(), Constant.SmsType.ALI.getValue())) {
-            if (StringUtils.isNullOrEmpty(config.getAccessKeyId())) {
-                return RestResponse.fail("请先配置短信平台accessKeyId");
-            }
-            if (StringUtils.isNullOrEmpty(config.getAccessSecret())) {
-                return RestResponse.fail("请先配置短信accessSecret");
-            }
-            if (StringUtils.isNullOrEmpty(config.getTemplateCode())) {
-                return RestResponse.fail("请先配置短信templateCode");
-            }
-        }
-        if (StringUtils.isNullOrEmpty(config.getSign())) {
-            return RestResponse.fail("请先配置短信平台签名");
-        }
-        // 短信记录
-        SysSmsLogEntity smsLogVo = new SysSmsLogEntity();
-        smsLogVo.setCode(smsCode);
-        smsLogVo.setMobile(phone);
-        smsLogVo.setStime(new Date());
-        smsLogVo.setSign(config.getSign());
-
-        // 过期时间
-        int expireTime = 15;
-        redisTemplateUtil.set(Constant.PRE_SMS + phone, smsCode, expireTime * 60);
-
-        /**
-         * 您的验证码是{1}，请于{2}分钟内填写。如非本人操作，请忽略本短信。
-         */
-        // 腾讯云短信
-        if (config.getType() == 1) {
-            SmsSingleSenderResult result = SmsUtil.crSendSms(config.getAppid(), config.getAppkey(), "86", phone, config.getTemplateId(), new String[]{smsCode, String.valueOf(expireTime)}, config.getSign());
-            smsLogVo.setTemplateId(config.getTemplateId().toString());
-            smsLogVo.setReturnMsg(result.errMsg);
-
-            if (result.result == 0) {
-                smsLogVo.setSendStatus(result.result);
-                smsLogVo.setSendId(result.sid);
-                smsLogVo.setSuccessNum(1);
-                smsLogService.save(smsLogVo);
-            } else {
-                smsLogVo.setSuccessNum(0);
-                smsLogVo.setSendStatus(1);
-                smsLogService.save(smsLogVo);
-                return RestResponse.fail("短信发送失败");
-            }
-        } else {
-            // 阿里云短信
-            Map<String, Object> params = new HashMap<>(4);
-            params.put("code", smsCode);
-            params.put("time", expireTime);
-            SendSmsResponse response;
-            try {
-                smsLogVo.setTemplateId(config.getTemplateCode());
-                response = SmsUtil.aliSendSms(config.getAccessKeyId(), config.getAccessSecret(), phone, config.getTemplateCode(), params, config.getSign());
-                smsLogVo.setReturnMsg(response.getBody().getMessage());
-                if (Constant.OK.equals(response.getBody().code)) {
-                    smsLogVo.setSendStatus(0);
-                    smsLogVo.setSendId(response.getBody().getBizId());
-                    smsLogVo.setSuccessNum(1);
-                    smsLogService.save(smsLogVo);
-                } else {
-                    smsLogVo.setSuccessNum(0);
-                    smsLogVo.setSendStatus(1);
-                    smsLogService.save(smsLogVo);
-                    return RestResponse.fail("短信发送失败");
+        if (null != cartList && cartList.size() > 0 && null != hotGoods && hotGoods.size() > 0) {
+            for (MallGoodsEntity goodsVo : hotGoods) {
+                for (MallCartEntity cartVo : cartList) {
+                    if (goodsVo.getId().equals(cartVo.getGoodsId())) {
+                        goodsVo.setCartNum(cartVo.getNumber());
+                    }
                 }
-            } catch (Exception e) {
-                smsLogVo.setSuccessNum(0);
-                smsLogVo.setSendStatus(1);
-                smsLogVo.setReturnMsg(e.getMessage());
-                smsLogService.save(smsLogVo);
-                return RestResponse.fail("短信发送失败：" + e);
             }
         }
-        return RestResponse.ok("短信发送成功", smsCode);
+        //
+        param = new HashMap<String, Object>();
+        param.put("isNew", 1);
+        param.put("sidx", "new_sort_order ");
+        param.put("order", "asc ");
+        param.put("offset", 0);
+        param.put("limit", 4);
+        Query<MallBrandEntity> query = new Query<>(param);
+        List<MallBrandEntity> brandList = brandService.queryList(query);
+        resultObj.put("brandList", brandList);
+
+        param = new HashMap<String, Object>();
+        param.put("offset", 0);
+        param.put("limit", 4);
+        query = new Query<>(param);
+        List<MallTopicEntity> topicList = topicService.queryList(query);
+        resultObj.put("topicList", topicList);
+
+        param = new HashMap<String, Object>();
+        param.put("parentId", 0);
+        param.put("notName", "推荐");
+        query = new Query<>(param);
+        List<MallCategoryEntity> categoryList = categoryService.queryList(query);
+        List<Map<String, Object>> newCategoryList = new ArrayList<>();
+
+        for (MallCategoryEntity categoryItem : categoryList) {
+            param.remove("fields");
+            param.put("parentId", categoryItem.getId());
+            List<MallCategoryEntity> categoryEntityList = categoryService.queryList(query);
+            List<Integer> childCategoryIds = new ArrayList<>();
+            for (MallCategoryEntity categoryEntity : categoryEntityList) {
+                childCategoryIds.add(categoryEntity.getId());
+            }
+            //
+            param = new HashMap<String, Object>();
+            QueryWrapper<MallGoodsEntity> categoryGoodsWrapper = new QueryWrapper<>();
+            categoryGoodsWrapper.in(!childCategoryIds.isEmpty(), "CATEGORY_ID", childCategoryIds)
+                    .select("id, name, list_pic_url, retail_price")
+                    .eq("IS_DELETE", 0)
+                    .orderByDesc("ID");
+            Page<MallGoodsEntity> categoryGoodsPage = goodsService.page(new Page<>(1, 7), categoryGoodsWrapper);
+            List<MallGoodsEntity> categoryGoods = categoryGoodsPage.getRecords();
+            Map<String, Object> newCategory = new HashMap<String, Object>();
+            newCategory.put("id", categoryItem.getId());
+            newCategory.put("name", categoryItem.getName());
+            newCategory.put("goodsList", categoryGoods);
+            newCategoryList.add(newCategory);
+        }
+        resultObj.put("categoryList", newCategoryList);
+        return RestResponse.ok(resultObj);
     }
 
+
     /**
-     * 绑定手机
-     *
-     * @param loginUser 登录用户
-     * @param request   JSON格式参数
-     * @return RestResponse
+     * app首页
      */
-    @PostMapping("bindMobile")
-    @Operation(summary = "绑定手机", description = "校验验证码绑定手机",
-            parameters = {@Parameter(in = ParameterIn.HEADER, name = "token", description = "用户token", required = true)}
-    )
-    public RestResponse<String> bindMobile(@LoginUser WxUserEntity loginUser, @RequestBody PhoneCodeRequest request) {
-        String mobile = request.getMobile();
-        String mobileCode = request.getMobileCode();
+    @Operation(summary = "新商品信息")
+    @IgnoreAuth
+    @PostMapping("newGoods")
+    public RestResponse<Object> newGoods() {
+        Map<String, Object> resultObj = new HashMap<String, Object>();
+        //
+        Map<String, Object> param = new HashMap<String, Object>();
+        param.put("isNew", 1);
+        param.put("isDelete", 0);
+        QueryWrapper<MallGoodsEntity> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("IS_NEW", 1).eq("IS_DELETE", 0).orderByDesc("ID");
+        List<MallGoodsEntity> newGoods = goodsService.page(new Page<>(1, 4), queryWrapper).getRecords();
+        resultObj.put("newGoodsList", newGoods);
+        //
 
-        if (!isMobile(mobile)) {
-            return RestResponse.fail("请输入正确的手机号");
-        }
-        Object smsCode = redisTemplateUtil.get(Constant.PRE_SMS + mobile);
-        if (StringUtils.isNullOrEmpty(smsCode)) {
-            return RestResponse.fail("验证码已失效，请重新获取");
-        }
-        if (!mobileCode.equals(smsCode)) {
-            return RestResponse.fail("验证码错误");
-        }
-        WxUserEntity userVo = userService.getById(loginUser.getOpenid());
-        userVo.setPhone(mobile);
-        userService.updateById(userVo);
-
-        //验证通过后删除redis中的验证码
-        redisTemplateUtil.del(Constant.PRE_SMS + mobile);
-        return RestResponse.ok("手机绑定成功");
+        return RestResponse.ok(resultObj);
     }
 
-    /**
-     * 验证手机号
-     *
-     * @param mobile
-     * @return
-     */
-    private boolean isMobile(String mobile) {
-        if (StringUtils.isNotBlank(mobile)) {
-            String s2 = "^[1](([3][0-9])|([4][5,7,9])|([5][0-9])|([6][6])|([7][3,5,6,7,8])|([8][0-9])|([9][8,9]))[0-9]{8}$";
-            Pattern p = Pattern.compile(s2);
-            Matcher m = p.matcher(mobile);
-            return m.matches();
+    @Operation(summary = "新热门商品信息")
+    @IgnoreAuth
+    @PostMapping("hotGoods")
+    public RestResponse<Object> hotGoods() {
+        Map<String, Object> resultObj = new HashMap<String, Object>();
+        //
+        Map<String, Object> param = new HashMap<String, Object>();
+        param.put("isHot", "1");
+        param.put("isDelete", 0);
+        QueryWrapper<MallGoodsEntity> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("IS_HOT", 1).eq("IS_DELETE", 0).orderByDesc("ID");
+        List<MallGoodsEntity> hotGoods = goodsService.page(new Page<>(1, 4), queryWrapper).getRecords();
+        resultObj.put("hotGoodsList", hotGoods);
+        //
+
+        return RestResponse.ok(resultObj);
+    }
+
+    @Operation(summary = "专题")
+    @IgnoreAuth
+    @PostMapping("topic")
+    public RestResponse<Object> topic() {
+        Map<String, Object> resultObj = new HashMap<String, Object>();
+        //
+        Map<String, Object> param = new HashMap<String, Object>();
+        param.put("offset", 0);
+        param.put("limit", 4);
+        List<MallTopicEntity> topicList = topicService.queryList(param);
+        resultObj.put("topicList", topicList);
+        //
+
+        return RestResponse.ok(resultObj);
+    }
+
+    @Operation(summary = "品牌制造商")
+    @IgnoreAuth
+    @PostMapping("brand")
+    public RestResponse<Object> brand() {
+        Map<String, Object> resultObj = new HashMap<String, Object>();
+        //
+        Map<String, Object> param = new HashMap<String, Object>();
+        param.put("isNew", 1);
+        param.put("sidx", "new_sort_order ");
+        param.put("order", "asc ");
+        param.put("offset", 0);
+        param.put("limit", 4);
+        List<MallBrandEntity> brandList = brandService.queryList(param);
+        resultObj.put("brandList", brandList);
+        //
+
+        return RestResponse.ok(resultObj);
+    }
+
+    @Operation(summary = "商品分类及分类下的商品")
+    @IgnoreAuth
+    @PostMapping("category")
+    public RestResponse<Object> category() {
+        Map<String, Object> resultObj = new HashMap<String, Object>();
+        //
+        Map<String, Object> param = new HashMap<String, Object>();
+        param = new HashMap<String, Object>();
+        param.put("parentId", "0");
+        param.put("notName", "推荐");
+        List<MallCategoryEntity> categoryList = categoryService.queryList(param);
+        List<Map<String, Object>> newCategoryList = new ArrayList<>();
+
+        for (MallCategoryEntity categoryItem : categoryList) {
+            param.remove("fields");
+            param.put("parentId", categoryItem.getId());
+            List<MallCategoryEntity> categoryEntityList = categoryService.queryList(param);
+            List<Integer> childCategoryIds = null;
+            if (categoryEntityList != null && !categoryEntityList.isEmpty()) {
+                childCategoryIds = new ArrayList<>();
+                for (MallCategoryEntity categoryEntity : categoryEntityList) {
+                    childCategoryIds.add(categoryEntity.getId());
+                }
+            }
+            //
+            param = new HashMap<String, Object>();
+            QueryWrapper<MallGoodsEntity> categoryGoodsWrapper = new QueryWrapper<>();
+            categoryGoodsWrapper.in(childCategoryIds != null && !childCategoryIds.isEmpty(), "CATEGORY_ID", childCategoryIds)
+                    .eq("IS_DELETE", 0)
+                    .select("id, name, list_pic_url, retail_price")
+                    .orderByDesc("ID");
+            List<MallGoodsEntity> categoryGoods = goodsService.page(new Page<>(1, 7), categoryGoodsWrapper).getRecords();
+            Map<String, Object> newCategory = new HashMap<String, Object>();
+            newCategory.put("id", categoryItem.getId());
+            newCategory.put("name", categoryItem.getName());
+            newCategory.put("goodsList", categoryGoods);
+            newCategoryList.add(newCategory);
         }
-        return false;
+        resultObj.put("categoryList", newCategoryList);
+        //
+
+        return RestResponse.ok(resultObj);
+    }
+
+    @Operation(summary = "轮播图")
+    @IgnoreAuth
+    @PostMapping("banner")
+    public RestResponse<Object> banner() {
+        Map<String, Object> resultObj = new HashMap<String, Object>();
+        //
+        Map<String, Object> param = new HashMap<String, Object>();
+        param.put("adPositionId", 1);
+        List<MallAdEntity> banner = adService.queryList(param);
+        resultObj.put("banner", banner);
+        //
+
+        return RestResponse.ok(resultObj);
+    }
+
+    @Operation(summary = "快捷类目")
+    @IgnoreAuth
+    @PostMapping("channel")
+    public RestResponse<Object> channel() {
+        Map<String, Object> resultObj = new HashMap<String, Object>();
+        //
+        Map<String, Object> param = new HashMap<String, Object>();
+        param = new HashMap<String, Object>();
+        param.put("sidx", "sort_order ");
+        param.put("order", "asc ");
+        List<MallChannelEntity> channel = channelService.queryList(param);
+        resultObj.put("channel", channel);
+        //
+
+        return RestResponse.ok(resultObj);
     }
 }

@@ -18,10 +18,12 @@
  */
 package com.platform.modules.mall.service;
 
+import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.platform.modules.mall.entity.MallOrderEntity;
+import com.platform.modules.wx.entity.WxUserEntity;
 
 import java.util.List;
 import java.util.Map;
@@ -92,4 +94,8 @@ public interface MallOrderService extends IService<MallOrderEntity> {
      * @return 是否成功
      */
     boolean deleteBatch(Integer[] ids);
+
+    Map<String, Object> submit(JSONObject payload, WxUserEntity loginUser);
+
+    List<MallOrderEntity> queryList(Map<String, Object> params);
 }

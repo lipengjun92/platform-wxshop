@@ -188,7 +188,7 @@
 				util.request(api.GoodsDetail, {
 					id: that.id
 				}).then(function(res) {
-					if (res.errno === 0) {
+					if (res.code === 0) {
 						that.goods = res.data.info
 						that.gallery = res.data.gallery
 						that.attribute = res.data.attribute
@@ -215,7 +215,7 @@
 				util.request(api.GoodsRelated, {
 					id: that.id
 				}).then(function(res) {
-					if (res.errno === 0) {
+					if (res.code === 0) {
 						that.relatedGoods = res.data.goodsList
 					}
 				});
@@ -345,7 +345,7 @@
 						}, "POST", "application/json")
 						.then(function(res) {
 							let _res = res;
-							if (_res.errno == 0) {
+							if (_res.code == 0) {
 								if (_res.data.type == 'add') {
 									that.collectBackImage = that.hasCollectImage
 								} else {
@@ -355,7 +355,7 @@
 							} else {
 								uni.showToast({
 									image: '/static/images/icon_error.png',
-									title: _res.errmsg,
+									title: _res.msg,
 									mask: true
 								});
 							}
@@ -405,7 +405,7 @@
 						}, "POST", 'application/json')
 						.then(function(res) {
 							let _res = res;
-							if (_res.errno == 0) {
+							if (_res.code == 0) {
 								that.openAttr = !that.openAttr
 								uni.navigateTo({
 									url: '/pages/shopping/checkout/checkout?isBuy=true',
@@ -413,7 +413,7 @@
 							} else {
 								uni.showToast({
 									image: '/static/images/icon_error.png',
-									title: _res.errmsg,
+									title: _res.msg,
 									mask: true
 								});
 							}
@@ -461,7 +461,7 @@
 						productId: checkedProduct[0].id
 					}, 'POST', 'application/json').then(function(res) {
 						let _res = res;
-						if (_res.errno == 0) {
+						if (_res.code == 0) {
 							uni.showToast({
 								title: '添加成功'
 							});
@@ -475,7 +475,7 @@
 						} else {
 							uni.showToast({
 								image: '/static/images/icon_error.png',
-								title: _res.errmsg,
+								title: _res.msg,
 								mask: true
 							});
 						}
@@ -522,7 +522,7 @@
 			var that = this;
 			this.getGoodsInfo();
 			util.request(api.CartGoodsCount).then(function(res) {
-				if (res.errno === 0) {
+				if (res.code === 0) {
 					that.cartGoodsCount = res.data.cartTotal.goodsCount
 				}
 			});

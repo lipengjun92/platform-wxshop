@@ -28,9 +28,7 @@ import com.platform.modules.mall.service.MallCartService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Service实现类
@@ -79,5 +77,50 @@ public class MallCartServiceImpl extends ServiceImpl<MallCartDao, MallCartEntity
     @Transactional(rollbackFor = Exception.class)
     public boolean deleteBatch(Integer[] ids) {
         return this.removeByIds(Arrays.asList(ids));
+    }
+
+    @Override
+    public void updateCheck(String[] productIds, Integer isChecked, Long userId) {
+        baseMapper.updateCheck(productIds, isChecked, userId);
+
+        // 判断购物车中是否存在此规格商品
+        Map<String, Object> cartParam = new HashMap<>();
+        cartParam.put("userId", userId);
+        List<MallCartEntity> cartInfoList = baseMapper.queryAll(cartParam);
+        List<Integer> goodsIds = new ArrayList<>();
+        List<MallCartEntity> cartUpdateList = new ArrayList<>();
+        for (MallCartEntity cartItem : cartInfoList) {
+            if (null != cartItem.getChecked() && 1 == cartItem.getChecked()) {
+                goodsIds.add(cartItem.getGoodsId());
+            }
+        }
+        if (!goodsIds.isEmpty()) {
+            for (MallCartEntity cartItem : cartInfoList) {
+                // 存在原始的
+                if (null != cartItem.getChecked() && 1 == cartItem.getChecked()) {
+                    for (MallCartEntity cartCrash : cartInfoList) {
+                        if (!cartCrash.getId().equals(cartItem.getId())) {
+                            cartUpdateList.add(cartCrash);
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+        if (!cartUpdateList.isEmpty()) {
+            for (MallCartEntity cartItem : cartUpdateList) {
+                this.updateById(cartItem);
+            }
+        }
+    }
+
+    @Override
+    public void deleteByUserAndProductIds(Long userId, String[] productIdsArray) {
+        baseMapper.deleteByUserAndProductIds(userId, productIdsArray);
+    }
+
+    @Override
+    public List<MallCartEntity> queryList(Map<String, Object> param) {
+        return baseMapper.queryList(param);
     }
 }

@@ -89,4 +89,6 @@ public interface MallGoodsSpecificationService extends IService<MallGoodsSpecifi
      * @return 删除结果
      */
     boolean deleteBatch(Integer[] ids);
+
+    List<MallGoodsSpecificationEntity> queryList(Map<String, Object> specificationParam);
 }

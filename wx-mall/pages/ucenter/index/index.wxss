@@ -1,163 +1,164 @@
-page{
-    height: 100%;
-    width: 100%;
-    background: #f4f4f4;
-}
-.container{
-    background: #f4f4f4;
-    height: auto;
-    overflow: hidden;
-    width: 100%;
-}
-.userinfo {
-	display: flex;
-	flex-direction: column;
-	padding: 50rpx 0;
-	align-items: center;
-	background: #333;
-  width: 750rpx;
-}
-
-.userinfo-avatar {
-	width: 160rpx;
-	height: 160rpx;
-	margin: 20rpx;
-	border-radius: 50%;
-}
-
-.userinfo-nickname {
-  margin-top: 20rpx;
-  color: #FFF;
-}
-
-.userinfo .level{
-    display: block;
-    height: 30rpx;
-    line-height: 30rpx;
-    margin-bottom: 10rpx;
-    color: #7f7f7f;
-    font-size: 30rpx;
-}
-
-.user-menu{
-    width: 100%;
-    height: auto;
-    overflow: hidden;
-    background: #fff;
-}
-
-.user-menu .item{
-    float: left;
-    width: 33.33333%;
-    height: 187.5rpx;
-    border-right: 1px solid rgba(0,0,0,.15);
-    border-bottom: 1px solid rgba(0,0,0,.15);
-    text-align: center;
-}
-
-.user-menu .item .a{
-  display: flex;
-  width: 100%;
+page {
   height: 100%;
+  background: #f2f5f9;
+}
+
+.container {
+  min-height: 100%;
+  padding: 0 24rpx 36rpx;
+  box-sizing: border-box;
+  background:
+    radial-gradient(circle at 14% 12%, rgba(255, 214, 194, .95), transparent 42%),
+    radial-gradient(circle at 82% 2%, rgba(159, 214, 255, .72), transparent 34%),
+    linear-gradient(180deg, #10253f 0rpx, #173657 390rpx, #f2f5f9 700rpx);
+}
+
+.header {
+  padding-top: 36rpx;
+}
+
+.profile-btn {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 26rpx 28rpx;
+  border: 0;
+  border-radius: 28rpx;
+  background: linear-gradient(130deg, rgba(16, 26, 42, .88), rgba(34, 59, 90, .88));
+  box-shadow: 0 22rpx 54rpx rgba(10, 18, 33, .28);
+  text-align: left;
+  line-height: normal;
+}
+
+.profile-btn::after {
+  border: none;
+}
+
+.avatar {
+  width: 128rpx;
+  height: 128rpx;
+  border-radius: 50%;
+  box-shadow: 0 0 0 6rpx rgba(255, 255, 255, .22);
+  flex-shrink: 0;
+}
+
+.meta {
+  margin-left: 24rpx;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.nickname {
+  color: #fff;
+  font-size: 36rpx;
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+.desc {
+  margin-top: 10rpx;
+  color: rgba(245, 249, 255, .82);
+  font-size: 24rpx;
+  line-height: 1.45;
+}
+
+.menu-card {
+  margin-top: 24rpx;
+  background: rgba(255, 255, 255, .97);
+  border-radius: 26rpx;
+  padding: 8rpx 0;
+  box-shadow: 0 18rpx 38rpx rgba(16, 34, 59, .09);
+  display: flex;
+  flex-wrap: wrap;
+  overflow: hidden;
+}
+
+.menu-item {
+  width: 33.3333%;
+  height: 180rpx;
+  display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-}
-
-.user-menu .item.no-border {
-    border-right: 0;
-}
-
-.user-menu .item.item-bottom {
-    border-bottom: none;
-}
-
-.user-menu .icon{
-    margin: 0 auto;
-    display: block;
-    height: 52.803rpx;
-    width: 52.803rpx;
-    margin-bottom: 16rpx;
-}
-
-.user-menu .icon.order{
-    background: url(http://yanxuan.nosdn.127.net/hxm/yanxuan-wap/p/20161201/style/img/sprites/ucenter-sdf6a55ee56-f2c2b9c2f0.png) 0 -437.5rpx no-repeat;
-    background-size: 52.803rpx;
-}
-
-.user-menu .icon.coupon{
-    background: url(http://yanxuan.nosdn.127.net/hxm/yanxuan-wap/p/20161201/style/img/sprites/ucenter-sdf6a55ee56-f2c2b9c2f0.png) 0 -62.4997rpx no-repeat;
-    background-size: 52.803rpx;
-}
-
-.user-menu .icon.gift{
-    background: url(http://yanxuan.nosdn.127.net/hxm/yanxuan-wap/p/20161201/style/img/sprites/ucenter-sdf6a55ee56-f2c2b9c2f0.png) 0 -187.5rpx no-repeat;
-    background-size: 52.803rpx;
-}
-
-.user-menu .icon.address{
-    background: url(http://yanxuan.nosdn.127.net/hxm/yanxuan-wap/p/20161201/style/img/sprites/ucenter-sdf6a55ee56-f2c2b9c2f0.png) 0 0 no-repeat;
-    background-size: 52.803rpx;
-}
-
-.user-menu .icon.security{
-    background: url(http://yanxuan.nosdn.127.net/hxm/yanxuan-wap/p/20161201/style/img/sprites/ucenter-sdf6a55ee56-f2c2b9c2f0.png) 0 -500rpx no-repeat;
-    background-size: 52.803rpx;
-}
-
-.user-menu .icon.kefu{
-    background: url(http://yanxuan.nosdn.127.net/hxm/yanxuan-wap/p/20161201/style/img/sprites/ucenter-sdf6a55ee56-f2c2b9c2f0.png) 0 -312.5rpx no-repeat;
-    background-size: 52.803rpx;
-}
-
-.user-menu .icon.help{
-    background: url(http://yanxuan.nosdn.127.net/hxm/yanxuan-wap/p/20161201/style/img/sprites/ucenter-sdf6a55ee56-f2c2b9c2f0.png) 0 -250rpx no-repeat;
-    background-size: 52.803rpx;
-}
-
-.user-menu .icon.feedback{
-    background: url(http://yanxuan.nosdn.127.net/hxm/yanxuan-wap/p/20161201/style/img/sprites/ucenter-sdf6a55ee56-f2c2b9c2f0.png) 0 -125rpx no-repeat;
-    background-size: 52.803rpx;
-}
-.user-menu .icon.phone{
-    background: url(https://platform-wxmall.oss-cn-beijing.aliyuncs.com/upload/20180727/15011540ebe21.png) no-repeat;
-    background-size: 52.803rpx;
-}
-
-
-.user-menu .txt{
-    display: block;
-    height: 24rpx;
-    width: 100%;
-    font-size: 24rpx;
-    color:#333;
-}
-
-.logout{
-    margin-top: 50rpx;
-    height: 101rpx;
-    width: 100%;
-    line-height: 101rpx;
-    text-align: center;
-    background: #fff;
-    color: #333;
-    font-size: 30rpx;
-}
-
-.service {
-  position: static;
-  background-color: transparent;
-  color: transparent;
+  text-decoration: none;
+  position: relative;
   margin: 0;
   padding: 0;
-  border: none;
-  text-align: left;
+  border: 0;
+  border-radius: 0;
   line-height: normal;
-  display: inline;
+  background: transparent;
+}
+
+.menu-item::before {
+  content: '';
+  position: absolute;
+  left: 18rpx;
+  right: 18rpx;
+  bottom: 0;
+  height: 1rpx;
+  background: rgba(21, 50, 89, .08);
+}
+
+.menu-item::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 28rpx;
+  bottom: 28rpx;
+  width: 1rpx;
+  background: rgba(21, 50, 89, .08);
+}
+
+.menu-item:nth-child(3n)::after {
+  display: none;
+}
+
+.menu-item:nth-last-child(-n + 3)::before {
+  display: none;
+}
+
+.icon-badge {
+  width: 64rpx;
+  height: 64rpx;
+  border-radius: 18rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(145deg, #1f6db3, #144d8f);
+  color: #fff;
+  font-size: 30rpx;
+  font-weight: 600;
+  box-shadow: 0 10rpx 18rpx rgba(26, 82, 143, .26);
+}
+
+.txt {
+  margin-top: 14rpx;
+  color: #203853;
+  font-size: 24rpx;
+  font-weight: 500;
+}
+
+.contact-btn::after {
+  border: none;
 }
 
 .company {
-  font-size:20rpx;
-  text-align:center;
-  margin-top:50px;
+  margin-top: 34rpx;
+  font-size: 22rpx;
+  color: #6f7c8f;
+  text-align: center;
+}
+
+.logout {
+  margin-top: 22rpx;
+  height: 90rpx;
+  line-height: 90rpx;
+  text-align: center;
+  background: #fff;
+  border-radius: 20rpx;
+  font-size: 28rpx;
+  color: #ca4f49;
+  box-shadow: 0 12rpx 24rpx rgba(16, 34, 59, .08);
 }

@@ -23,6 +23,7 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
+import org.apache.commons.lang.StringUtils;
 
 import java.io.Serializable;
 
@@ -45,7 +46,7 @@ public class MallAddressEntity implements Serializable {
     /**
      * 会员ID
      */
-    private Integer userId;
+    private Long userId;
     /**
      * 收货人姓名
      */
@@ -87,4 +88,12 @@ public class MallAddressEntity implements Serializable {
      */
     @TableField(exist = false)
     private String nickname;
+    @TableField(exist = false)
+    private String fullRegion;
+    public String getFullRegion() {
+        if (StringUtils.isEmpty(this.fullRegion)) {
+            this.fullRegion = this.provinceName + this.cityName + this.countyName;
+        }
+        return fullRegion;
+    }
 }

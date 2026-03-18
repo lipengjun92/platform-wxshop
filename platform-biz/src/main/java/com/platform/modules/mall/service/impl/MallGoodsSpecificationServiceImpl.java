@@ -80,4 +80,9 @@ public class MallGoodsSpecificationServiceImpl extends ServiceImpl<MallGoodsSpec
     public boolean deleteBatch(Integer[] ids) {
         return this.removeByIds(Arrays.asList(ids));
     }
+
+    @Override
+    public List<MallGoodsSpecificationEntity> queryList(Map<String, Object> specificationParam) {
+        return baseMapper.queryList(specificationParam);
+    }
 }

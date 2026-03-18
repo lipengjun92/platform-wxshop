@@ -27,18 +27,18 @@
 		methods: {
 			onPost() {
 				let that = this;
-			
+
 				if (!that.content) {
 				  util.toast('请填写评论')
 				  return false;
 				}
-			
+
 				util.request(api.CommentPost, {
 				  typeId: that.typeId,
 				  valueId: that.valueId,
 				  content: that.content
 				}, 'POST', 'application/json').then(function (res) {
-				  if (res.errno === 0) {
+				  if (res.code === 0) {
 					uni.showToast({
 					  title: '评论成功',
 					  complete: function(){
@@ -69,21 +69,21 @@
 	  height: 100%;
 	  background: #f4f4f4;
 	}
-	
+
 	.post-comment {
 	  width: 750rpx;
 	  height: auto;
 	  overflow: hidden;
 	  padding: 30rpx;
 	}
-	
+
 	.post-comment .input-box {
 	  height: 337.5rpx;
 	  width: 690rpx;
 	  position: relative;
 	  background: #fff;
 	}
-	
+
 	.post-comment .input-box .content {
 	  position: absolute;
 	  top: 0;
@@ -96,7 +96,7 @@
 	  width: 650rpx;
 	  padding: 20rpx;
 	}
-	
+
 	.post-comment .input-box .count {
 	  position: absolute;
 	  bottom: 20rpx;
@@ -107,11 +107,11 @@
 	  font-size: 29rpx;
 	  color: #999;
 	}
-	
+
 	.post-comment .btns {
 	  height: 108rpx;
 	}
-	
+
 	.post-comment .close {
 	  float: left;
 	  height: 108rpx;
@@ -120,7 +120,7 @@
 	  color: #666;
 	  padding: 0 30rpx;
 	}
-	
+
 	.post-comment .post {
 	  float: right;
 	  height: 108rpx;

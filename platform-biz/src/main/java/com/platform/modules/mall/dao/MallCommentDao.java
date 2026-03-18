@@ -20,6 +20,7 @@ package com.platform.modules.mall.dao;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.platform.modules.mall.entity.MallAttributeCategoryEntity;
 import com.platform.modules.mall.entity.MallCommentEntity;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -39,4 +40,10 @@ public interface MallCommentDao extends BaseMapper<MallCommentEntity> {
     List<MallCommentEntity> queryAll(@Param("params") Map<String, Object> params);
 
     List<MallCommentEntity> selectMallCommentPage(Page<MallCommentEntity> page, @Param("params") Map<String, Object> params);
+
+    Integer queryTotal(Map<String, Object> param);
+
+    Integer queryhasPicTotal(Map<String, Object> param);
+
+    List<MallCommentEntity> queryList(Map<String, Object> param);
 }

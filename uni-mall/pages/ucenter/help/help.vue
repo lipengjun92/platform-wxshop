@@ -25,7 +25,7 @@
 			getHelpList() {
 				let that = this;
 				util.request(api.HelpTypeList, {}).then(function(res) {
-					if (res.errno === 0) {
+					if (res.code === 0) {
 						that.helpList = res.data
 					}
 				});

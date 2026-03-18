@@ -5,7 +5,6 @@ var api = require('../../config/api.js');
 
 Page({
   data: {
-    winHeight: "",
     id: 0,
     goods: {},
     gallery: [],
@@ -28,7 +27,7 @@ Page({
   getGoodsInfo: function () {
     let that = this;
     util.request(api.GoodsDetail, { id: that.data.id }).then(function (res) {
-      if (res.errno === 0) {
+      if (res.code === 0) {
         that.setData({
           goods: res.data.info,
           gallery: res.data.gallery,
@@ -62,7 +61,7 @@ Page({
   getGoodsRelated: function () {
     let that = this;
     util.request(api.GoodsRelated, { id: that.data.id }).then(function (res) {
-      if (res.errno === 0) {
+      if (res.code === 0) {
         that.setData({
           relatedGoods: res.data.goodsList,
         });
@@ -187,25 +186,11 @@ Page({
     var that = this;
     this.getGoodsInfo();
     util.request(api.CartGoodsCount).then(function (res) {
-      if (res.errno === 0) {
+      if (res.code === 0) {
         that.setData({
           cartGoodsCount: res.data.cartTotal.goodsCount
         });
 
-      }
-    });
-
-    var that = this
-    //  高度自适应
-    wx.getSystemInfo({
-      success: function (res) {
-        var clientHeight = res.windowHeight,
-          clientWidth = res.windowWidth,
-          rpxR = 750 / clientWidth;
-        var calc = clientHeight * rpxR - 100;
-        that.setData({
-          winHeight: calc
-        });
       }
     });
   },
@@ -253,7 +238,7 @@ Page({
       util.request(api.CollectAddOrDelete, { typeId: 0, valueId: this.data.id }, "POST", "application/json")
         .then(function (res) {
           let _res = res;
-          if (_res.errno == 0) {
+          if (_res.code == 0) {
             if ( _res.data.type == 'add') {
               that.setData({
                 'collectBackImage': that.data.hasCollectImage
@@ -267,7 +252,7 @@ Page({
           } else {
             wx.showToast({
               image: '/static/images/icon_error.png',
-              title: _res.errmsg,
+              title: _res.msg,
               mask: true
             });
           }
@@ -317,7 +302,7 @@ Page({
       util.request(api.BuyAdd, { goodsId: this.data.goods.id, number: this.data.number, productId: checkedProduct[0].id }, "POST",'application/json')
         .then(function (res) {
           let _res = res;
-          if (_res.errno == 0) {
+          if (_res.code == 0) {
             that.setData({
               openAttr: !that.data.openAttr,
             });
@@ -327,7 +312,7 @@ Page({
           } else {
             wx.showToast({
               image: '/static/images/icon_error.png',
-              title: _res.errmsg,
+              title: _res.msg,
               mask: true
             });
           }
@@ -375,7 +360,7 @@ Page({
       util.request(api.CartAdd, { goodsId: this.data.goods.id, number: this.data.number, productId: checkedProduct[0].id }, 'POST', 'application/json')
         .then(function (res) {
           let _res = res;
-          if (_res.errno == 0) {
+          if (_res.code == 0) {
             wx.showToast({
               title: '添加成功'
             });
@@ -395,7 +380,7 @@ Page({
           } else {
             wx.showToast({
               image: '/static/images/icon_error.png',
-              title: _res.errmsg,
+              title: _res.msg,
               mask: true
             });
           }

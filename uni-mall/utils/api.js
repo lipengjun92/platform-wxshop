@@ -10,7 +10,7 @@ module.exports = {
 	CatalogList: 'catalog/index', //分类目录全部分类数据接口
 	CatalogCurrent: 'catalog/current', //分类目录当前分类数据接口
 
-	AuthLoginByWeixin: 'auth/login_by_weixin', //微信登录
+	AuthLoginByWeixin: 'auth/LoginByMa', //微信登录
 
 	GoodsCount: 'goods/count', //统计商品总数
 	GoodsList: 'goods/list', //获得商品列表

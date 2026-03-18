@@ -31,7 +31,7 @@
 				util.request(api.CollectList, {
 					typeId: that.typeId
 				}).then(function(res) {
-					if (res.errno === 0) {
+					if (res.code === 0) {
 						that.collectList = res.data;
 					}
 				});
@@ -53,7 +53,7 @@
 									typeId: that.typeId,
 									valueId: goodsId
 								}, "POST", "application/json").then(function(res) {
-									if (res.errno === 0) {
+									if (res.code === 0) {
 										uni.showToast({
 											title: '删除成功',
 											icon: 'success',

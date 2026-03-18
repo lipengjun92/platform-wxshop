@@ -46,7 +46,7 @@ public class MallCartEntity implements Serializable {
     /**
      * 会员Id
      */
-    private Integer userId;
+    private Long userId;
     /**
      * sessionId
      */
@@ -100,4 +100,7 @@ public class MallCartEntity implements Serializable {
      */
     @TableField(exist = false)
     private String nickname;
+    //product表中的零售价格
+    @TableField(exist = false)
+    private BigDecimal retailProductPrice;
 }

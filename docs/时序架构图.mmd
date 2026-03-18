@@ -1,0 +1,64 @@
+sequenceDiagram
+    autonumber
+    participant U as 用户
+    participant C as 小程序客户端(uni-mall/wx-mall)
+    participant API as platform-api
+    participant BIZ as platform-biz
+    participant R as Redis
+    participant DB as MySQL
+    participant PAY as 微信支付
+    participant AUI as 后台管理端(platform-admin-ui)
+    participant ADM as platform-admin
+
+    %% 1) 注册/登录
+    U->>C: 微信授权登录/注册
+    C->>API: /app/loginByWeixin
+    API->>BIZ: 用户注册或登录逻辑
+    BIZ->>DB: 新增/更新用户
+    BIZ-->>API: token + userInfo
+    API-->>C: 登录成功
+    C->>R: 缓存会话(token)
+
+    %% 2) 下单
+    U->>C: 选择商品并提交订单
+    C->>API: /app/cart/checkout
+    API->>BIZ: 计算价格/优惠券/运费
+    BIZ->>DB: 查询购物车/商品/优惠券/地址
+    DB-->>BIZ: 数据结果
+    BIZ-->>API: 结算信息
+    API-->>C: 结算页数据
+
+    U->>C: 确认下单
+    C->>API: /app/order/submit
+    API->>BIZ: 创建订单
+    BIZ->>DB: 写入订单主表+订单明细
+    BIZ-->>API: orderId/orderSn
+    API-->>C: 下单成功
+
+    %% 3) 支付
+    U->>C: 发起支付
+    C->>API: /app/pay/prepay(orderId)
+    API->>PAY: 统一下单/预支付
+    PAY-->>API: prepay参数
+    API-->>C: 返回支付参数
+    C->>PAY: 调起微信支付SDK
+    PAY-->>API: 支付回调(notify)
+    API->>BIZ: 更新支付状态
+    BIZ->>DB: 订单状态=已支付(待发货)
+
+    %% 4) 发货
+    AUI->>ADM: 后台发货(订单ID+物流单号)
+    ADM->>BIZ: 发货业务校验
+    BIZ->>DB: 更新发货状态/物流信息
+    DB-->>BIZ: 更新成功
+    BIZ-->>ADM: 发货成功
+    ADM-->>AUI: 状态变更(待收货)
+
+    %% 5) 确认收货
+    U->>C: 确认收货
+    C->>API: /app/order/confirmOrder
+    API->>BIZ: 收货确认
+    BIZ->>DB: 订单状态=已完成
+    DB-->>BIZ: 更新成功
+    BIZ-->>API: 完成
+    API-->>C: 确认收货成功

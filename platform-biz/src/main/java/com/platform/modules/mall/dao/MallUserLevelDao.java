@@ -20,6 +20,7 @@ package com.platform.modules.mall.dao;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.platform.modules.mall.entity.MallProductEntity;
 import com.platform.modules.mall.entity.MallUserLevelEntity;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -52,4 +53,6 @@ public interface MallUserLevelDao extends BaseMapper<MallUserLevelEntity> {
      * @return List
      */
     List<MallUserLevelEntity> selectMallUserLevelPage(Page<MallUserLevelEntity> page, @Param("params") Map<String, Object> params);
+
+    List<MallUserLevelEntity> queryList(Map<String, Object> param);
 }

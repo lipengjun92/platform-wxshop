@@ -23,6 +23,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.platform.modules.mall.entity.MallHelpTypeEntity;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -89,4 +90,6 @@ public interface MallHelpTypeService extends IService<MallHelpTypeEntity> {
      * @return 删除结果
      */
     boolean deleteBatch(Integer[] ids);
+
+    List<MallHelpTypeEntity> queryList(Map<String, Object> objectObjectHashMap);
 }

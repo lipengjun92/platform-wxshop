@@ -22,9 +22,12 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.platform.common.utils.JsonDateSerializer;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 /**
  * 实体
@@ -45,7 +48,7 @@ public class MallFootprintEntity implements Serializable {
     /**
      * 会员Id
      */
-    private Integer userId;
+    private Long userId;
     /**
      * 商品id
      */
@@ -53,14 +56,26 @@ public class MallFootprintEntity implements Serializable {
     /**
      * 记录时间
      */
-    private Integer addTime;
+    @JsonSerialize(using = JsonDateSerializer.class)
+    private Long addTime;
     /**
      * 转发人
      */
-    private Integer referrer;
+    private Long referrer;
     /**
      * 微信昵称
      */
     @TableField(exist = false)
     private String nickname;
+    @TableField(exist = false)
+    private String name;
+    @TableField(exist = false)
+    private String listPicUrl;
+    @TableField(exist = false)
+    private String goodsBrief;
+    //
+    @TableField(exist = false)
+    private BigDecimal retailPrice;
+    @TableField(exist = false)
+    private String avatar;
 }

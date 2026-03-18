@@ -56,7 +56,7 @@ Page({
   getAddressDetail() {
     let that = this;
     util.request(api.AddressDetail, { id: that.data.addressId }).then(function (res) {
-      if (res.errno === 0) {
+      if (res.code === 0) {
         if(res.data){
             that.setData({
                 address: res.data
@@ -242,7 +242,7 @@ Page({
     let that = this;
     let regionType = that.data.regionType;
     util.request(api.RegionList, { parentId: regionId }).then(function (res) {
-      if (res.errno === 0) {
+      if (res.code === 0) {
         that.setData({
           regionList: res.data.map(item => {
 
@@ -304,7 +304,7 @@ Page({
       countyName: address.district_name,
       detailInfo: address.detailInfo,
     }, 'POST', 'application/json').then(function (res) {
-      if (res.errno === 0) {
+      if (res.code === 0) {
         wx.navigateBack({
           url: '/pages/shopping/address/address',
         })

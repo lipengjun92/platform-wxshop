@@ -18,8 +18,10 @@
  */
 package com.platform.modules.mall.entity;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -65,18 +67,22 @@ public class MallCouponEntity implements Serializable {
     /**
      *
      */
+    @JsonFormat(pattern = "yyyy.MM.dd")
     private Date sendStartDate;
     /**
      *
      */
+    @JsonFormat(pattern = "yyyy.MM.dd")
     private Date sendEndDate;
     /**
      *
      */
+    @JsonFormat(pattern = "yyyy.MM.dd")
     private Date useStartDate;
     /**
      *
      */
+    @JsonFormat(pattern = "yyyy年MM月dd日")
     private Date useEndDate;
     /**
      *
@@ -86,4 +92,8 @@ public class MallCouponEntity implements Serializable {
      * 转发次数
      */
     private Integer minTransmitNum;
+
+    //优惠券状态 1 可用 2 已用 3 过期
+    @TableField(exist = false)
+    private Integer couponStatus = 1;
 }

@@ -32,14 +32,14 @@
 	export default {
 		data() {
 			return {
-				couponList: null
+				couponList: []
 			}
 		},
 		methods: {
 			loadListData: function() {
 				let that = this;
 				util.request(api.CouponList).then(function(res) {
-					if (res.errno === 0) {
+					if (res.code === 0) {
 						that.couponList = res.data
 					}
 				});

@@ -52,4 +52,6 @@ public interface MallGoodsGalleryDao extends BaseMapper<MallGoodsGalleryEntity> 
      * @return List
      */
     List<MallGoodsGalleryEntity> selectMallGoodsGalleryPage(Page<MallGoodsGalleryEntity> page, @Param("params") Map<String, Object> params);
+
+    List<MallGoodsGalleryEntity> queryList(Map<String, Object> param);
 }

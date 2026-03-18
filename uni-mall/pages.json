@@ -162,7 +162,6 @@
 			"navigationBarTextStyle": "black",
 			"enablePullDownRefresh": true,
 			"onReachBottomDistance": 50,
-			"navigationStyle": "custom",
 			"app-plus": {
 				"titleNView": false,
 				"bounce": "vertical"

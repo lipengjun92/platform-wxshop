@@ -1,4 +1,4 @@
-<scroll-view class="container" style="height: {{winHeight}}rpx" scroll-y="true">
+<scroll-view class="container" scroll-y="true">
   <view wx:if="{{!openAttr}}">
     <swiper class="goodsimgs" indicator-dots="true" autoplay="true" interval="3000" duration="1000">
       <swiper-item wx:for="{{gallery}}" wx:key="id">

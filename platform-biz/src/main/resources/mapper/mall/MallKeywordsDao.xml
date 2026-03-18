@@ -5,6 +5,10 @@
 
     <sql id="selectSql">
         SELECT
+            <if test="fields != null">
+                distinct T.keyword,T.is_hot
+            </if>
+
         T.ID,
         T.KEYWORD,
         T.IS_HOT,
@@ -18,6 +22,9 @@
         <if test="params.id != null and params.id.trim() != ''">
             AND T.ID = #{params.id}
         </if>
+        <if test="params.isDefault != null and params.isDefault != ''">
+            AND T.IS_DEFAULT = #{params.isDefault}
+        </if>
         <if test="params.keyword != null and params.keyword.trim() != ''">
             AND T.KEYWORD LIKE '%${params.keyword}%'
         </if>
@@ -29,5 +36,35 @@
 
     <select id="queryAll" resultType="com.platform.modules.mall.entity.MallKeywordsEntity">
         <include refid="selectSql"/>
+    </select>
+
+    <select id="queryList" resultType="com.platform.modules.mall.entity.MallKeywordsEntity">
+        select
+        <if test="fields != null and fields != ''">
+            ${fields}
+        </if>
+        <if test="fields == null or fields == ''">
+            *
+        </if>
+        from mall_keywords
+        <where>
+            <if test="keyword != null">
+                and keyword like concat('%',#{keyword},'%')
+            </if>
+        </where>
+        <choose>
+            <when test="fields != null and fields != '' and fields.toLowerCase().contains('distinct')">
+                order by keyword asc
+            </when>
+            <when test="sidx != null and sidx.trim() != ''">
+                order by ${sidx} ${order}
+            </when>
+            <otherwise>
+                order by keyword desc
+            </otherwise>
+        </choose>
+        <if test="offset != null and limit != null">
+            limit #{offset}, #{limit}
+        </if>
     </select>
 </mapper>

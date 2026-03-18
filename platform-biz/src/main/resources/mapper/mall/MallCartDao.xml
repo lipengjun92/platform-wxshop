@@ -30,6 +30,26 @@
             AND T.NAME LIKE '%${params.name}%'
         </if>
     </sql>
+    <update id="updateCheck">
+        update mall_cart
+        set `checked` = #{isChecked}
+        where product_id in
+        <foreach item="productId" collection="productIds" open="(" separator="," close=")">
+            #{productId}
+        </foreach>
+        and user_id = #{userId}
+    </update>
+    <delete id="deleteByUserAndProductIds">
+        delete from mall_cart where product_id in
+        <foreach item="id" collection="productIds" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+        and user_id = #{userId}
+    </delete>
+    <delete id="deleteByCart">
+        delete from mall_cart
+        where  user_id = #{userId} and  session_id = #{sessionId} and  checked = #{checked}
+    </delete>
 
     <select id="selectMallCartPage" resultType="com.platform.modules.mall.entity.MallCartEntity">
         <include refid="selectSql"/>
@@ -37,5 +57,38 @@
 
     <select id="queryAll" resultType="com.platform.modules.mall.entity.MallCartEntity">
         <include refid="selectSql"/>
+    </select>
+
+    <select id="queryList" resultType="com.platform.modules.mall.entity.MallCartEntity">
+        select a.*,
+        b.list_pic_url,
+        c.retail_price as retail_product_price
+        from mall_cart a
+        left join mall_goods b on a.goods_id = b.id
+        left join mall_product c on c.goods_id = a.goods_id and c.id = a.product_id
+        where 1 = 1
+        <if test="userId != null">
+            AND a.user_id = #{userId}
+        </if>
+        <if test="goodsId != null">
+            AND a.goods_id = #{goodsId}
+        </if>
+        <if test="productId != null">
+            AND a.product_id = #{productId}
+        </if>
+        <if test="checked != null">
+            AND a.checked = #{checked}
+        </if>
+        <choose>
+            <when test="sidx != null and sidx.trim() != ''">
+                order by ${sidx} ${order}
+            </when>
+            <otherwise>
+                order by a.id desc
+            </otherwise>
+        </choose>
+        <if test="offset != null and limit != null">
+            limit #{offset}, #{limit}
+        </if>
     </select>
 </mapper>

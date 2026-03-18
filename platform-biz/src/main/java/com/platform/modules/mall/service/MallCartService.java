@@ -89,4 +89,10 @@ public interface MallCartService extends IService<MallCartEntity> {
      * @return 删除结果
      */
     boolean deleteBatch(Integer[] ids);
+
+    void updateCheck(String[] productIdArray, Integer isChecked, Long id);
+
+    void deleteByUserAndProductIds(Long userId, String[] productIdsArray);
+
+    List<MallCartEntity> queryList(Map<String, Object> param);
 }

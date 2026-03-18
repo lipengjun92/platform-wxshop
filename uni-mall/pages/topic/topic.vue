@@ -59,11 +59,11 @@
 					page: that.page,
 					size: that.size
 				}).then(function(res) {
-					if (res.errno === 0) {
+					if (res.code === 0) {
 						that.scrollTop = 0
-						that.topicList = res.data.data
+						that.topicList = res.data.records
 						that.showPage = true
-						that.count = res.data.count
+						that.count = res.data.total
 					}
 					uni.hideToast();
 				});

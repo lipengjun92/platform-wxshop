@@ -18,10 +18,10 @@ Page({
     });
     let that = this;
     util.request(api.BrandList, { page: that.data.page, size: that.data.size }).then(function (res) {
-      if (res.errno === 0) {
+      if (res.code === 0) {
         that.setData({
-          brandList: that.data.brandList.concat(res.data.data),
-          totalPages: res.data.totalPages
+          brandList: that.data.brandList.concat(res.data.records),
+          totalPages: res.data.total
         });
       }
       wx.hideLoading();

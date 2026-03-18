@@ -44,7 +44,7 @@
 					valueId: that.valueId,
 					typeId: that.typeId
 				}).then(function(res) {
-					if (res.errno === 0) {
+					if (res.code === 0) {
 						that.allCount = res.data.allCount
 						that.hasPicCount = res.data.hasPicCount
 					}
@@ -59,7 +59,7 @@
 					page: (that.showType == 0 ? that.allPage : that.picPage),
 					showType: that.showType
 				}).then(function(res) {
-					if (res.errno === 0) {
+					if (res.code === 0) {
 						if (that.showType == 0) {
 							that.allCommentList = that.allCommentList.concat(res.data.data)
 							that.allPage = res.data.currentPage

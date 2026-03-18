@@ -41,4 +41,25 @@
     <select id="queryAll" resultType="com.platform.modules.mall.entity.MallOrderGoodsEntity">
         <include refid="selectSql"/>
     </select>
+
+    <select id="queryList" resultType="com.platform.modules.mall.entity.MallOrderGoodsEntity">
+        select * from mall_order_goods
+        <where>
+            <if test="orderId != null and orderId != ''">
+                and order_id = #{orderId}
+            </if>
+        </where>
+        <choose>
+            <when test="sidx != null and sidx.trim() != ''">
+                order by ${sidx} ${order}
+            </when>
+            <otherwise>
+                order by id desc
+            </otherwise>
+        </choose>
+        <if test="offset != null and limit != null">
+            limit #{offset}, #{limit}
+        </if>
+    </select>
+
 </mapper>

@@ -259,19 +259,47 @@ export default {
       })
     },
     orderStatusText (status) {
-      const map = {0: '待付款', 1: '待发货', 2: '待收货', 3: '已完成', 4: '已取消'}
+      const map = {
+        0: '待付款',
+        1: '待发货',
+        2: '待收货',
+        3: '已完成',
+        4: '已取消',
+        101: '已取消',
+        102: '已删除',
+        200: '已支付',
+        201: '待发货',
+        300: '待收货',
+        301: '已完成',
+        401: '已退款',
+        402: '已退货'
+      }
       return map[status] || `状态${status}`
     },
     orderStatusType (status) {
-      const map = {0: 'warning', 1: '', 2: 'success', 3: 'success', 4: 'info'}
+      const map = {
+        0: 'warning',
+        1: '',
+        2: 'success',
+        3: 'success',
+        4: 'info',
+        101: 'info',
+        102: 'info',
+        200: '',
+        201: '',
+        300: 'success',
+        301: 'success',
+        401: 'danger',
+        402: 'danger'
+      }
       return map[status] || 'info'
     },
     payStatusText (status) {
-      const map = {0: '未支付', 1: '已支付'}
+      const map = {0: '未支付', 1: '已支付', 2: '已支付', 3: '退款中', 4: '已退款'}
       return map[status] || `状态${status}`
     },
     payStatusType (status) {
-      const map = {0: 'warning', 1: 'success'}
+      const map = {0: 'warning', 1: 'success', 2: 'success', 3: 'danger', 4: 'danger'}
       return map[status] || 'info'
     },
     shippingStatusText (status) {

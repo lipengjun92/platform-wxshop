@@ -77,9 +77,9 @@
 					typeId: 1,
 					size: 5
 				}).then(function(res) {
-					if (res.errno === 0) {
-						that.commentList = res.data.data
-						that.commentCount = res.data.count
+					if (res.code === 0) {
+						that.commentList = res.data.records
+						that.commentCount = res.data.total
 					}
 				});
 			},
@@ -101,7 +101,7 @@
 			util.request(api.TopicDetail, {
 				id: that.id
 			}).then(function(res) {
-				if (res.errno === 0) {
+				if (res.code === 0) {
 					that.topic = res.data;
 				}
 			});
@@ -109,7 +109,7 @@
 			util.request(api.TopicRelated, {
 				id: that.id
 			}).then(function(res) {
-				if (res.errno === 0) {
+				if (res.code === 0) {
 					that.topicList = res.data
 				}
 			});

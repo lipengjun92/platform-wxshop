@@ -52,4 +52,6 @@ public interface MallGoodsIssueDao extends BaseMapper<MallGoodsIssueEntity> {
      * @return List
      */
     List<MallGoodsIssueEntity> selectMallGoodsIssuePage(Page<MallGoodsIssueEntity> page, @Param("params") Map<String, Object> params);
+
+    List<MallGoodsIssueEntity> queryList(Map<String, Object> issueParam);
 }

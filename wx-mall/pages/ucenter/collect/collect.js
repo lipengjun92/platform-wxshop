@@ -11,7 +11,7 @@ Page({
   getCollectList() {
     let that = this;
     util.request(api.CollectList, { typeId: that.data.typeId}).then(function (res) {
-      if (res.errno === 0) {
+      if (res.code === 0) {
         that.setData({
           collectList: res.data
         });
@@ -49,7 +49,7 @@ Page({
         success: function (res) {
           if (res.confirm) {
             util.request(api.CollectAddOrDelete, { typeId: that.data.typeId, valueId: goodsId}, 'POST', 'application/json').then(function (res) {
-              if (res.errno === 0) {
+              if (res.code === 0) {
                 wx.showToast({
                   title: '删除成功',
                   icon: 'success',

@@ -41,7 +41,7 @@
 				util.request(api.GoodsCouponList, {
 					type: this.buyType
 				}).then(function(res) {
-					if (res.errno === 0) {
+					if (res.code === 0) {
 						that.couponList = res.data
 					}
 				});

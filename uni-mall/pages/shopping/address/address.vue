@@ -37,7 +37,7 @@
 			getAddressList() {
 				let that = this;
 				util.request(api.AddressList).then(function(res) {
-					if (res.errno === 0) {
+					if (res.code === 0) {
 						that.addressList = res.data
 					}
 				});

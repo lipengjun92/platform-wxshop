@@ -80,4 +80,9 @@ public class MallHelpIssueServiceImpl extends ServiceImpl<MallHelpIssueDao, Mall
     public boolean deleteBatch(Integer[] ids) {
         return this.removeByIds(Arrays.asList(ids));
     }
+
+    @Override
+    public List<MallHelpIssueEntity> queryList(Map<String, Object> params) {
+        return baseMapper.queryList(params);
+    }
 }

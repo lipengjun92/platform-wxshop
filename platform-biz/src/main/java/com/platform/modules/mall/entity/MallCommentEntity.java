@@ -21,9 +21,11 @@ package com.platform.modules.mall.entity;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.platform.modules.wx.entity.WxUserEntity;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * 商品评论表
@@ -44,11 +46,16 @@ public class MallCommentEntity implements Serializable {
     private String content;
     private Long addTime;
     private Integer status;
-    private Integer userId;
+    private Long userId;
 
     @TableField(exist = false)
     private String goodsName;
 
     @TableField(exist = false)
     private String userNickname;
+
+    @TableField(exist = false)
+    private WxUserEntity userInfo;
+    @TableField(exist = false)
+    List<MallCommentPictureEntity> picList;
 }

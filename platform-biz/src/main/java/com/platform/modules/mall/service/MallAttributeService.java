@@ -89,4 +89,6 @@ public interface MallAttributeService extends IService<MallAttributeEntity> {
      * @return 删除结果
      */
     boolean deleteBatch(Integer[] ids);
+
+    List<MallAttributeEntity> queryList(Map<String, Object> ngaParam);
 }

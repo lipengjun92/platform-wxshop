@@ -2,5 +2,56 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.platform.modules.mall.dao.MallProductDao">
+    <sql id="selectSql">
+        SELECT
+        T.ID,
+        T.GOODS_ID,
+        T.GOODS_SPECIFICATION_IDS,
+        T.GOODS_SN,
+        T.GOODS_NUMBER,
+        T.RETAIL_PRICE,
+        T.MARKET_PRICE
+        FROM MALL_PRODUCT T
+        WHERE 1=1
+        <if test="params.id != null and params.id.trim() != ''">
+            AND T.ID = #{params.id}
+        </if>
+        <if test="params.goodsId != null and params.goodsId != ''">
+            AND T.GOODS_ID = #{params.goodsId}
+        </if>
+    </sql>
+
+    <select id="queryAll" resultType="com.platform.modules.mall.entity.MallProductEntity">
+        <include refid="selectSql"/>
+    </select>
+
+    <select id="queryList" resultType="com.platform.modules.mall.entity.MallProductEntity">
+        select a.*,
+        b.name as goods_name,
+        b.list_pic_url
+        from mall_product a
+        left join mall_goods b on a.goods_id = b.id
+        <where>
+            <if test="id != null">
+                and a.id = #{id}
+            </if>
+        </where>
+        <where>
+            <if test="goodsId != null">
+                and a.goods_id = #{goodsId}
+            </if>
+        </where>
+        <choose>
+            <when test="sidx != null and sidx.trim() != ''">
+                order by ${sidx} ${order}
+            </when>
+            <otherwise>
+                order by a.id desc
+            </otherwise>
+        </choose>
+        <if test="offset != null and limit != null">
+            limit #{offset}, #{limit}
+        </if>
+    </select>
 
 </mapper>

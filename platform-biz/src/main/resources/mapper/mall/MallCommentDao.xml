@@ -18,13 +18,13 @@
         LEFT JOIN MALL_GOODS G ON G.ID = T.VALUE_ID
         LEFT JOIN mall_user U ON U.ID = T.USER_ID
         WHERE 1=1
-        <if test="params.id != null and params.id.trim() != ''">
+        <if test="params.id != null and params.id != ''">
             AND T.ID = #{params.id}
         </if>
-        <if test="params.valueId != null and params.valueId.trim() != ''">
+        <if test="params.valueId != null and params.valueId != ''">
             AND T.VALUE_ID = #{params.valueId}
         </if>
-        <if test="params.userId != null and params.userId.trim() != ''">
+        <if test="params.userId != null and params.userId != ''">
             AND T.USER_ID = #{params.userId}
         </if>
     </sql>
@@ -35,5 +35,65 @@
 
     <select id="queryAll" resultType="com.platform.modules.mall.entity.MallCommentEntity">
         <include refid="selectSql"/>
+    </select>
+
+    <select id="queryTotal" resultType="int">
+        select count(c.id) from mall_comment c
+        where 1= 1
+        <if test="typeId != null and typeId != ''">
+            and c.type_id = #{typeId}
+        </if>
+        <if test="valueId != null and valueId != ''">
+            and c.value_id = #{valueId}
+        </if>
+        <if test="goodsId != null and goodsId != ''">
+            and c.value_id = #{goodsId}
+        </if>
+    </select>
+
+    <select id="queryhasPicTotal" resultType="int">
+        select count(distinct c.id) from mall_comment c
+        left join mall_comment_picture cp on cp.comment_id = c.id
+        where 1= 1 and cp.id > 0
+        <if test="typeId != null and typeId != ''">
+            and c.type_id = #{typeId}
+        </if>
+        <if test="valueId != null and valueId != ''">
+            and c.value_id = #{valueId}
+        </if>
+    </select>
+
+    <select id="queryList" resultType="com.platform.modules.mall.entity.MallCommentEntity">
+        select distinct c.* from mall_comment c
+        <if test="hasPic != null and hasPic == 1">
+            left join mall_comment_picture cp on cp.comment_id = c.id
+        </if>
+        where 1 = 1
+        <if test="typeId != null and typeId != ''">
+            and c.type_id = #{typeId}
+        </if>
+        <if test="valueId != null and valueId != ''">
+            and c.value_id = #{valueId}
+        </if>
+        <if test="goodsId != null and goodsId != ''">
+            and c.value_id = #{goodsId}
+        </if>
+        <if test="userId != null and userId != ''">
+            and c.user_id = #{userId}
+        </if>
+        <if test="hasPic != null and hasPic == 1">
+            and cp.id is not null
+        </if>
+        <choose>
+            <when test="sidx != null and sidx.trim() != ''">
+                order by ${sidx} ${order}
+            </when>
+            <otherwise>
+                order by id desc
+            </otherwise>
+        </choose>
+        <if test="offset != null and limit != null">
+            limit #{offset}, #{limit}
+        </if>
     </select>
 </mapper>

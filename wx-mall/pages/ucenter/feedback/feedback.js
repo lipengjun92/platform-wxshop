@@ -25,7 +25,7 @@ Page({
     });
   },
   contentInput: function (e) {
-   
+
     let that = this;
     this.setData({
       contentLength: e.detail.cursor,
@@ -61,7 +61,7 @@ Page({
     });
 
     util.request(api.FeedbackAdd, { mobile: that.data.mobile, index: that.data.index, content: that.data.content}, 'POST', 'application/json').then(function (res) {
-      if (res.errno === 0) {
+      if (res.code === 0) {
 
         wx.hideLoading();
 
@@ -79,9 +79,9 @@ Page({
           }
         });
       } else {
-        util.showErrorToast(res.errmsg);
+        util.showErrorToast(res.msg);
       }
-      
+
     });
   },
   onLoad: function (options) {

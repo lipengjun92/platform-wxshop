@@ -18,6 +18,7 @@
  */
 package com.platform.modules.mall.entity;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
@@ -178,4 +179,10 @@ public class MallGoodsEntity implements Serializable {
      *
      */
     private Long createUserDeptId;
+    //购物车中商品数量
+    @TableField(exist = false)
+    private Integer cartNum = 0;
+    // 产品Id
+    @TableField(exist = false)
+    private Integer productId;
 }

@@ -89,4 +89,10 @@ public interface MallFootprintService extends IService<MallFootprintEntity> {
      * @return 删除结果
      */
     boolean deleteBatch(Integer[] ids);
+
+    void deleteByParam(Map<String, Object> param);
+
+    List<MallFootprintEntity> shareList(Map<String, Object> params);
+
+    List<MallFootprintEntity> queryListFootprint(String userId);
 }

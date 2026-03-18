@@ -25,6 +25,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * 实体
@@ -103,4 +104,8 @@ public class MallCategoryEntity implements Serializable {
      */
     @TableField(exist = false)
     private String parentName;
+    @TableField(exist = false)
+    private List<MallCategoryEntity> subCategoryList;
+    @TableField(exist = false)
+    private Boolean checked;
 }

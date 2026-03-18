@@ -45,7 +45,7 @@ public class MallCollectEntity implements Serializable {
     /**
      * 用户Id
      */
-    private Integer userId;
+    private Long userId;
     /**
      * 产品Id
      */
@@ -53,7 +53,7 @@ public class MallCollectEntity implements Serializable {
     /**
      * 添加时间
      */
-    private Integer addTime;
+    private Long addTime;
     /**
      * 是否提醒
      */
@@ -67,4 +67,12 @@ public class MallCollectEntity implements Serializable {
      */
     @TableField(exist = false)
     private String nickname;
+    @TableField(exist = false)
+    private String name;
+    @TableField(exist = false)
+    private String listPicUrl;
+    @TableField(exist = false)
+    private String goodsBrief;
+    @TableField(exist = false)
+    private String retailPrice;
 }

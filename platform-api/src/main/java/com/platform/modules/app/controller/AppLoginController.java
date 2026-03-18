@@ -334,6 +334,7 @@ public class AppLoginController extends AppBaseController {
             if (Objects.isNull(user)) {
                 // 用户不存在，新增用户
                 user = new WxUserEntity();
+                user.setNickname(openid);
                 user.setAllIntegral(0);
                 user.setIntegral(0);
                 user.setRegisterTime(new Date());

@@ -87,7 +87,7 @@
 				util.request(api.OrderDetail, {
 					orderId: that.orderId
 				}).then(function(res) {
-					if (res.errno === 0) {
+					if (res.code === 0) {
 						that.orderInfo = res.data.orderInfo
 						that.orderGoods = res.data.orderGoods
 						that.handleOption = res.data.handleOption
@@ -157,7 +157,7 @@
 							util.request(api.OrderCancel, {
 								orderId: orderInfo.id
 							}).then(function(res) {
-								if (res.errno === 0) {
+								if (res.code === 0) {
 									uni.showModal({
 										title: '提示',
 										content: res.data,
@@ -237,7 +237,7 @@
 							util.request(api.OrderConfirm, {
 								orderId: orderInfo.id
 							}).then(function(res) {
-								if (res.errno === 0) {
+								if (res.code === 0) {
 									uni.showModal({
 										title: '提示',
 										content: res.data,

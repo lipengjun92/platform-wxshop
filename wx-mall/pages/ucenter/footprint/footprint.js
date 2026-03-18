@@ -18,7 +18,7 @@ Page({
     let that = this;
     var tmpFootPrint;
     util.request(api.FootprintList).then(function (res) {
-      if (res.errno === 0) {
+      if (res.code === 0) {
 
         if (res.data.data != undefined){
           tmpFootPrint = res.data.data;
@@ -44,9 +44,9 @@ Page({
         success: function (res) {
           if (res.confirm) {
             util.request(api.FootprintDelete, { footprintId: footprint.id }).then(function (res) {
-              if (res.errno === 0) {
+              if (res.code === 0) {
                 wx.showToast({
-                  title: res.errmsg,
+                  title: res.msg,
                   icon: 'success',
                   duration: 2000,
                   complete:function(){
@@ -54,7 +54,7 @@ Page({
                   }
                 });
               } else{
-                util.showErrorToast(res.errmsg);
+                util.showErrorToast(res.msg);
               }
             });
           }

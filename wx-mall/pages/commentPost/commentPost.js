@@ -35,7 +35,7 @@ Page({
       valueId: that.data.valueId,
       content: that.data.content
     }, 'POST', 'application/json').then(function (res) {
-      if (res.errno === 0) {
+      if (res.code === 0) {
         wx.showToast({
           title: '评论成功',
           complete: function(){

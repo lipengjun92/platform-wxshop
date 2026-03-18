@@ -16,6 +16,9 @@
         <if test="params.id != null and params.id.trim() != ''">
             AND T.ID = #{params.id}
         </if>
+        <if test="params.userId != null and params.userId != ''">
+            AND T.USER_ID = #{params.userId}
+        </if>
         <if test="params.from != null and params.from.trim() != ''">
             AND T.FROM = #{params.from}
         </if>
@@ -31,4 +34,35 @@
     <select id="queryAll" resultType="com.platform.modules.mall.entity.MallSearchHistoryEntity">
         <include refid="selectSql"/>
     </select>
+
+    <select id="queryList" resultType="com.platform.modules.mall.entity.MallSearchHistoryEntity">
+        select
+        <if test="fields != null and fields != ''">
+            ${fields}
+        </if>
+        <if test="fields == null or fields == ''">
+            *
+        </if>
+        from mall_search_history
+        <where>
+            <if test="userId != null">
+                and user_id = #{userId}
+            </if>
+        </where>
+        <choose>
+            <when test="fields != null and fields != '' and fields.toLowerCase().contains('distinct')">
+                order by keyword asc
+            </when>
+            <when test="sidx != null and sidx.trim() != ''">
+                order by ${sidx} ${order}
+            </when>
+            <otherwise>
+                order by id desc
+            </otherwise>
+        </choose>
+        <if test="offset != null and limit != null">
+            limit #{offset}, #{limit}
+        </if>
+    </select>
+
 </mapper>

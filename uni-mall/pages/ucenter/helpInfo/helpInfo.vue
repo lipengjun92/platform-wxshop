@@ -24,7 +24,7 @@
 				util.request(api.HelpIssueList, {
           typeId: id
 				}).then(function(res) {
-					if (res.errno === 0) {
+					if (res.code === 0) {
 						that.helpList = res.data
 					}
 				});

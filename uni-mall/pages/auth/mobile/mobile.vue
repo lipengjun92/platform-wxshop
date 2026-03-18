@@ -69,7 +69,7 @@
 				util.request(api.SmsCode, {
 					phone: that.mobile
 				}, 'POST', 'application/json').then(function(res) {
-					if (res.errno == 0) {
+					if (res.code == 0) {
 						util.toast('发送成功')
 						var pages = getCurrentPages()
 						var i = 60;
@@ -105,7 +105,7 @@
           mobileCode: e.detail.value.code,
 					mobile: mobile
 				}, "POST", "application/json").then(function(res) {
-					if (res.errno === 0) {
+					if (res.code === 0) {
 						util.toast('操作成功')
 						uni.switchTab({
 							url: '/pages/ucenter/index/index'

@@ -42,11 +42,11 @@ Page({
     }
 
     util.request(api.OrderList, {page: that.data.page, size: that.data.size}).then(function (res) {
-      if (res.errno === 0) {
+      if (res.code === 0) {
         that.setData({
-          orderList: that.data.orderList.concat(res.data.data),
-          page: res.data.currentPage + 1,
-          totalPages: res.data.totalPages
+          orderList: that.data.orderList.concat(res.data.list),
+          page: res.data.page + 1,
+          totalPages: res.data.total
         });
         wx.hideLoading();
       }

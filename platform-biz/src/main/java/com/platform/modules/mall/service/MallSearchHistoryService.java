@@ -89,4 +89,6 @@ public interface MallSearchHistoryService extends IService<MallSearchHistoryEnti
      * @return 删除结果
      */
     boolean deleteBatch(Integer[] ids);
+
+    List<MallSearchHistoryEntity> queryList(Map<String, Object> param);
 }

@@ -71,7 +71,7 @@
 					index: that.index,
 					content: that.content
 				}, "POST", "application/json").then(function(res) {
-					if (res.errno === 0) {
+					if (res.code === 0) {
 						uni.showToast({
 							title: res.data,
 							icon: 'success',

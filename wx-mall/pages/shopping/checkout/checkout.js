@@ -39,7 +39,7 @@ Page({
     var url = api.CartCheckout
     let buyType = this.data.isBuy ? 'buy' : 'cart'
     util.request(url, { addressId: that.data.addressId, couponId: that.data.couponId, type: buyType }).then(function (res) {
-      if (res.errno === 0) {
+      if (res.code === 0) {
         that.setData({
           checkedGoodsList: res.data.checkedGoodsList,
           checkedAddress: res.data.checkedAddress,
@@ -149,7 +149,7 @@ Page({
       return false;
     }
     util.request(api.OrderSubmit, { addressId: this.data.addressId, couponId: this.data.couponId, type: this.data.buyType }, 'POST', 'application/json').then(res => {
-      if (res.errno === 0) {
+      if (res.code === 0) {
         const orderId = res.data.orderInfo.id;
         pay.payOrder(parseInt(orderId)).then(res => {
           wx.redirectTo({

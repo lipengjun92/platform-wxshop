@@ -89,4 +89,8 @@ public interface MallCouponService extends IService<MallCouponEntity> {
      * @return 删除结果
      */
     boolean deleteBatch(Integer[] ids);
+
+    MallCouponEntity queryMaxUserEnableCoupon(Map<String, Object> couponParam);
+
+    List<MallCouponEntity> queryList(Map<String, Object> couponParam);
 }

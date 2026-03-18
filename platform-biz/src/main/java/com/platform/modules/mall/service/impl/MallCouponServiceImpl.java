@@ -80,4 +80,13 @@ public class MallCouponServiceImpl extends ServiceImpl<MallCouponDao, MallCoupon
     public boolean deleteBatch(Integer[] ids) {
         return this.removeByIds(Arrays.asList(ids));
     }
+    public MallCouponEntity queryMaxUserEnableCoupon(Map<String, Object> map) {
+        return baseMapper.queryMaxUserEnableCoupon(map);
+    }
+
+    @Override
+    public List<MallCouponEntity> queryList(Map<String, Object> couponParam) {
+        return baseMapper.queryList(couponParam);
+    }
+
 }

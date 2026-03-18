@@ -21,6 +21,7 @@ package com.platform.modules.mall.dao;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.platform.modules.mall.entity.MallAdEntity;
+import com.platform.modules.mall.entity.MallAddressEntity;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -52,4 +53,6 @@ public interface MallAdDao extends BaseMapper<MallAdEntity> {
      * @return List
      */
     List<MallAdEntity> selectMallAdPage(Page<MallAdEntity> page, @Param("params") Map<String, Object> params);
+
+    List<MallAdEntity> queryList(Map<String, Object> param);
 }

@@ -20,6 +20,7 @@ package com.platform.modules.mall.dao;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.platform.modules.mall.entity.MallAttributeCategoryEntity;
 import com.platform.modules.mall.entity.MallFootprintEntity;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -52,4 +53,10 @@ public interface MallFootprintDao extends BaseMapper<MallFootprintEntity> {
      * @return List
      */
     List<MallFootprintEntity> selectMallFootprintPage(Page<MallFootprintEntity> page, @Param("params") Map<String, Object> params);
+
+    List<MallFootprintEntity> shareList(Map<String, Object> params);
+
+    List<MallFootprintEntity> queryList(Map<String, Object> param);
+
+    List<MallFootprintEntity> queryListFootprint(String userId);
 }

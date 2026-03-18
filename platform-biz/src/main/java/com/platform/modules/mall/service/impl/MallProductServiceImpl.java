@@ -24,6 +24,9 @@ import com.platform.modules.mall.entity.MallProductEntity;
 import com.platform.modules.mall.service.MallProductService;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.Map;
+
 /**
  * 描述：商品货品表服务实现类
  *
@@ -31,4 +34,13 @@ import org.springframework.stereotype.Service;
  */
 @Service("mallProductService")
 public class MallProductServiceImpl extends ServiceImpl<MallProductDao, MallProductEntity> implements MallProductService {
+    @Override
+    public List<MallProductEntity> queryAll(Map<String, Object> params) {
+        return baseMapper.queryAll(params);
+    }
+
+    @Override
+    public List<MallProductEntity> queryList(Map<String, Object> param) {
+        return baseMapper.queryList(param);
+    }
 }

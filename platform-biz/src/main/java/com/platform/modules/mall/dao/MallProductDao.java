@@ -19,8 +19,13 @@
 package com.platform.modules.mall.dao;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.platform.modules.mall.entity.MallAttributeCategoryEntity;
 import com.platform.modules.mall.entity.MallProductEntity;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * 商品SKU
@@ -29,4 +34,7 @@ import org.apache.ibatis.annotations.Mapper;
  */
 @Mapper
 public interface MallProductDao extends BaseMapper<MallProductEntity> {
+    List<MallProductEntity> queryAll(@Param("params") Map<String, Object> params);
+
+    List<MallProductEntity> queryList(Map<String, Object> param);
 }

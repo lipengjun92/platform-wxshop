@@ -50,8 +50,7 @@
     "borderStyle": "white",
     "selectedColor": "#b4282d",
     "color": "#666",
-    "list": [
-      {
+    "list": [{
         "pagePath": "pages/index/index",
         "iconPath": "static/images/ic_menu_choice_nor.png",
         "selectedIconPath": "static/images/ic_menu_choice_pressed.png",

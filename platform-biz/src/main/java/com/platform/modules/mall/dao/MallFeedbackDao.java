@@ -20,6 +20,7 @@ package com.platform.modules.mall.dao;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.platform.modules.mall.entity.MallAttributeCategoryEntity;
 import com.platform.modules.mall.entity.MallFeedbackEntity;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -52,4 +53,6 @@ public interface MallFeedbackDao extends BaseMapper<MallFeedbackEntity> {
      * @return List
      */
     List<MallFeedbackEntity> selectMallFeedbackPage(Page<MallFeedbackEntity> page, @Param("params") Map<String, Object> params);
+
+    List<MallFeedbackEntity> queryList(Map<String, Object> param);
 }

@@ -66,7 +66,7 @@ Page({
         }
         util.request(api.SmsCode, {phone: this.data.mobile}, 'POST', 'application/json')
             .then(function (res) {
-                if (res.errno == 0) {
+                if (res.code == 0) {
                     wx.showToast({
                         title: '发送成功',
                         icon: 'success',
@@ -117,7 +117,7 @@ Page({
         })
         util.request(api.BindMobile, {mobileCode: e.detail.value.code, mobile: mobile}, "POST", "application/json")
             .then(function (res) {
-                if (res.errno === 0) {
+                if (res.code === 0) {
                     wx.showModal({
                         title: '提示',
                         content: '操作成功',

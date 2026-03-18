@@ -1,0 +1,55 @@
+flowchart TB
+  %% ===== Client Layer =====
+  subgraph C[客户端层]
+    U1[uni-mall<br/>UniApp 商城]
+    U2[wx-mall<br/>微信原生小程序]
+    A1[platform-admin-ui<br/>Vue2 + ElementUI 后台]
+  end
+
+  %% ===== Gateway / Service Layer =====
+  subgraph S[服务层]
+    API[platform-api<br/>移动端接口服务<br/>/platform-api]
+    ADM[platform-admin<br/>后台管理接口服务<br/>/platform-admin]
+  end
+
+  %% ===== Core Modules =====
+  subgraph M[共享业务模块]
+    BIZ[platform-biz<br/>业务服务/领域逻辑]
+    COM[platform-common<br/>通用组件<br/>Redis/JWT/工具/配置]
+    MP[MyBatis-Plus Mapper XML]
+  end
+
+  %% ===== Data Layer =====
+  subgraph D[数据与基础设施]
+    MYSQL[(MySQL 8.x)]
+    REDIS[(Redis)]
+  end
+
+  %% ===== External Integrations =====
+  subgraph X[外部能力]
+    WX[微信生态<br/>小程序/公众号/支付]
+    ALI[支付宝/OSS/短信等第三方]
+  end
+
+  %% ===== Main Calls =====
+  U1 --> API
+  U2 --> API
+  A1 --> ADM
+
+  API --> BIZ
+  ADM --> BIZ
+  BIZ --> COM
+  BIZ --> MP
+  MP --> MYSQL
+  COM --> REDIS
+  BIZ --> REDIS
+
+  API --> WX
+  BIZ --> WX
+  API --> ALI
+  BIZ --> ALI
+
+  %% ===== Auth =====
+  API -. JWT + LoginUser 参数注入 .- U1
+  API -. JWT + LoginUser 参数注入 .- U2
+  ADM -. Shiro/OAuth2 .- A1

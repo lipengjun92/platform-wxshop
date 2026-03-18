@@ -18,7 +18,7 @@ Page({
   loadListData: function () {
     let that = this;
     util.request(api.GoodsCouponList, { type: this.data.buyType }).then(function (res) {
-      if (res.errno === 0) {
+      if (res.code === 0) {
         that.setData({
           couponList: res.data
         });

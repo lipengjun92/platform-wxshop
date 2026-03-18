@@ -14,9 +14,9 @@
  <img src="https://img.shields.io/badge/MySQL-8.0-blue.svg"/>
 </p>
 
-## SpringBoo版本持续更新中
-- 想参与的同学可以添加微信开发群
-- <img alt="http://platform-wxmall.oss-cn-beijing.aliyuncs.com/kaiyuangroup.jpg" src="http://platform-wxmall.oss-cn-beijing.aliyuncs.com/kaiyuangroup.jpg" width="400"/>
+## SpringBoo版本开发已完成
+- 想参与的同学可以添加微信入群（备注：开源微同）
+![](./images/wx.png "微信")
 
 技术站要求：
 - SpringBoot、MybatisPlus
@@ -43,7 +43,7 @@
 ## 重要信息
 1. 项目合作洽谈，请联系客服微信（使用微信扫码添加好友，请注明来意）。
 2. 如需购买 [商业版源码](https://fly2you.cn/blogs) 请联系客服。<br>
-![](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/image/2023_09_20/11_33_59.png "微信")
+![](./images/wx.png "微信")
 
 ## 使用须知
 ### ✅允许
@@ -69,11 +69,12 @@ platform
 
 ## 安装教程
 
-* 配置环境（推荐Java11、maven3.3、mysql8.0、redis4.0.1）
+* 配置环境（推荐Java11、maven3.8、mysql8.0、redis4.0.1）
 * 创建数据库
 * 依次初始化sql脚本 
     * /_sql/base.sql
     * /_sql/mall.sql
+    * /_sql/sys_region.sql
 
 * 导入项目到IDE中
 * 导入支付证书至/platform-admin/src/main/resources/cert/目录下（申请商户号、开通微信支付、下载支付证书）
@@ -97,18 +98,27 @@ platform
     * [http://localhost:8000](http://localhost:8000)
 
 ## 页面展示
+### 管理端
+![](./images/home.png "首页")
+### 品牌供应商
+![](./images/brand.png "品牌供应商")
+### 专题管理
+![](./images/topic.png "专题")
+### SKU编辑
+![](./images/sku.png "sku")
+### 订单
+![](./images/order.png "订单")
 ### 接口文档
-![](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/image/2023_09_20/15_06_39.png "接口文档")
+![](./images/15_06_39.png "接口文档")
 ### 小程序首页
-![](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/upload/20180727/5.png "小程序首页")
+![](./images/5.png "小程序首页")
 ### 专题
-![](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/upload/20180727/6.png "专题")
+![](./images/6.png "专题")
 ### 分类
-![](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/upload/20180727/7.png "分类")
+![](./images/7.png "分类")
 ### 购物车
-![](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/upload/20180727/8.png "购物车")
-### 小程序并联手机
-![](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/upload/20180727/11.png "并联手机")
+![](./images/8.png "购物车")
+### 我的
+![](./images/9.png "我的")
 
-## 贡献者列表
-![](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/image/2023_09_20/12_11_57.png "贡献者列表")
+### 

@@ -49,11 +49,12 @@ public class MallSearchHistoryEntity implements Serializable {
     /**
      * 搜索来源，如PC、小程序、APP等
      */
+    @TableField("`from`")
     private String from;
     /**
      * 搜索时间
      */
-    private Integer addTime;
+    private Long addTime;
     /**
      * 会员Id
      */

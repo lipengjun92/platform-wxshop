@@ -1,35 +1,40 @@
 /**app.wxss**/
 .container {
-  box-sizing: border-box;
-  background-color: #f4f4f4;
-  font-family: PingFangSC-Light,helvetica,'Heiti SC';
-} 
+    box-sizing: border-box;
+    background-color: #f4f4f4;
+    font-family: PingFangSC-Light, helvetica, 'Heiti SC';
+}
 
-view,image,text,navigator{
-  box-sizing: border-box;
-  padding:0;
-  margin:0;
+view,
+image,
+text,
+navigator {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
 
 }
 
-view,text{
-  font-family: PingFangSC-Light,helvetica,'Heiti SC';
-  font-size: 29rpx;
-  color: #333;
+view,
+text {
+    font-family: PingFangSC-Light, helvetica, 'Heiti SC';
+    font-size: 29rpx;
+    color: #333;
 }
 
 button::after {
-  display: none;
+    display: none;
 }
 
 .display-none {
-  display: none !important;
+    display: none !important;
 }
+
 ::-webkit-scrollbar {
-  width: 5px;
-  background-color: #f5f5f5;
+    width: 5px;
+    background-color: #f5f5f5;
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: #999;
+    background-color: #999;
 }

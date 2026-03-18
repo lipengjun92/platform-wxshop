@@ -423,6 +423,7 @@
     width: 750rpx;
     height: auto;
     overflow: hidden;
+    margin-bottom: 120rpx;
 }
 
 .related-goods .h{

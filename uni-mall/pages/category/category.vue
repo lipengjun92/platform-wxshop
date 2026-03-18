@@ -63,7 +63,7 @@
 				util.request(api.GoodsCategory, {
 					id: this.id
 				}).then(function(res) {
-					if (res.errno == 0) {
+					if (res.code == 0) {
 						that.navList = res.data.brotherCategory
 						that.currentCategory = res.data.currentCategory
 
@@ -100,9 +100,9 @@
 					page: that.page,
 					size: that.size
 				}).then(function(res) {
-					that.goodsList = that.goodsList.concat(res.data.goodsList)
-					that.page = res.data.currentPage + 1
-					that.totalPages = res.data.totalPages
+					that.goodsList = that.goodsList.concat(res.data.goodsList.records)
+					that.page = res.data.goodsList.current + 1
+					that.totalPages = res.data.goodsList.pages
 				});
 			},
 			switchCate: function(event) {

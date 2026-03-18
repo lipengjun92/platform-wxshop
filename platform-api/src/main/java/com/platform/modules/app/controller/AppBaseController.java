@@ -19,6 +19,9 @@
 package com.platform.modules.app.controller;
 
 import com.platform.common.utils.Constant;
+import com.platform.interceptor.AuthorizationInterceptor;
+import com.platform.modules.wx.entity.WxUserEntity;
+import com.platform.modules.wx.service.WxUserService;
 import org.apache.commons.lang.ObjectUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
@@ -40,6 +43,8 @@ public class AppBaseController {
      */
     @Autowired
     protected HttpServletRequest request;
+    @Autowired
+    private WxUserService userService;
 
     protected Object getAttribute(String param) {
         return request.getAttribute(param);
@@ -77,5 +82,20 @@ public class AppBaseController {
     public void initBinder(WebDataBinder binder, WebRequest request) {
         // 字符串自动Trim
         binder.registerCustomEditor(String.class, new StringTrimmerEditor(false));
+    }
+
+    /**
+     * 获取请求的用户Id
+     *
+     * @return 客户端Ip
+     */
+    public Long getUserId() {
+        String token = request.getHeader(Constant.USER_KEY);
+        //查询token信息
+        WxUserEntity tokenEntity = userService.getById(token);
+        if (tokenEntity == null) {
+            return null;
+        }
+        return tokenEntity.getId();
     }
 }

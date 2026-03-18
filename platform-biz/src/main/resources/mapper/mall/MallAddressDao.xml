@@ -35,4 +35,24 @@
     <select id="queryAll" resultType="com.platform.modules.mall.entity.MallAddressEntity">
         <include refid="selectSql"/>
     </select>
+
+    <select id="queryList" resultType="com.platform.modules.mall.entity.MallAddressEntity">
+        select * from mall_address
+        <where>
+            <if test="userId != null">
+                and user_id = #{userId}
+            </if>
+        </where>
+        <choose>
+            <when test="sidx != null and sidx.trim() != ''">
+                order by ${sidx} ${order}
+            </when>
+            <otherwise>
+                order by id desc
+            </otherwise>
+        </choose>
+        <if test="offset != null and limit != null">
+            limit #{offset}, #{limit}
+        </if>
+    </select>
 </mapper>
