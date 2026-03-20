@@ -3,8 +3,8 @@
     <div class="site-content__wrapper">
       <div class="site-content">
         <div class="brand-info">
-          <h2 class="brand-info__text">微同基础架构</h2>
-          <p class="brand-info__intro">微同基础架构后台管理系统</p>
+          <h2 class="brand-info__text">微同科技</h2>
+          <p class="brand-info__intro">开源微同商城后台管理系统</p>
         </div>
         <div class="login-main">
           <h3 class="login-title">管理员登录</h3>
