@@ -74,7 +74,7 @@ npm run dev
 ```
 修改
 /static/config/index-prod.js文件
-window.SITE_CONFIG['baseUrl'] = 'http://你的域名/platform-admin' // 后台接口请求地址
+window.SITE_CONFIG['baseUrl'] = 'http://你的域名/platform-framework' // 后台接口请求地址
 //如果使用第三方文件存储，将dist/1907180922 上传至第三方文件存储，然后填写cdn地址
 window.SITE_CONFIG['domain'] = '静态资源cdn地址';
 
@@ -89,16 +89,16 @@ npm run build
         root /usr/local/nginx/dist;
         index index.html;
     }
-    location /platform-admin {
+    location /platform-framework {
         # 转发请求到后端
-        proxy_pass                         http://你的域名:8890/platform-admin;
+        proxy_pass                         http://你的域名:8890/platform-framework;
         proxy_set_header  Host             $host;
         proxy_set_header  X-Real-IP        $remote_addr;
         proxy_set_header  X-Forwarded-For  $proxy_add_x_forwarded_for;
     }
-    location /platform-api {
+    location /platform-framework-api {
         # 转发请求到后端
-        proxy_pass                         http://你的域名:8889/platform-api;
+        proxy_pass                         http://你的域名:8889/platform-framework-api;
         proxy_set_header  Host             $host;
         proxy_set_header  X-Real-IP        $remote_addr;
         proxy_set_header  X-Forwarded-For  $proxy_add_x_forwarded_for;

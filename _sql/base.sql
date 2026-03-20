@@ -462,9 +462,9 @@ INSERT INTO `SYS_MENU` VALUES ('1201', '12', '令牌管理', 'sys/usertoken', 's
 INSERT INTO `SYS_MENU` VALUES ('120101', '1201', '删除', NULL, 'sys:usertoken:offline', 2, NULL, 0);
 INSERT INTO `SYS_MENU` VALUES ('1202', '12', '缓存信息', 'sys/redis', 'sys:cache:queryAll', 1, 'redis', 2);
 INSERT INTO `SYS_MENU` VALUES ('120201', '1202', '删除', NULL, 'sys:cache:deleteCache', 2, NULL, 0);
-INSERT INTO `SYS_MENU` VALUES ('1203', '12', 'SQL监控', 'http://localhost:8888/platform-admin/druid/sql.html', NULL, 1, 'sql', 3);
-INSERT INTO `SYS_MENU` VALUES ('1204', '12', 'admin接口文档', 'http://localhost:8888/platform-admin/doc.html', NULL, 1, 'interface', 4);
-INSERT INTO `SYS_MENU` VALUES ('1205', '12', 'api接口文档', 'http://localhost:8889/platform-api/doc.html', NULL, 1, 'interface', 5);
+INSERT INTO `SYS_MENU` VALUES ('1203', '12', 'SQL监控', 'http://localhost:8888/platform-framework/druid/sql.html', NULL, 1, 'sql', 3);
+INSERT INTO `SYS_MENU` VALUES ('1204', '12', 'admin接口文档', 'http://localhost:8888/platform-framework/doc.html', NULL, 1, 'interface', 4);
+INSERT INTO `SYS_MENU` VALUES ('1205', '12', 'api接口文档', 'http://localhost:8889/platform-framework-api/doc.html', NULL, 1, 'interface', 5);
 INSERT INTO `SYS_MENU` VALUES ('1206', '12', '代码生成器', 'gen/generator', 'sys:generator:list', 1, 'code', 6);
 INSERT INTO `SYS_MENU` VALUES ('120501', '1205', '生成代码', NULL, 'sys:generator:code', 2, NULL, 0);
 INSERT INTO `SYS_MENU` VALUES ('13', '0', '公众号管理', '', '', 0, 'wechat', 3);

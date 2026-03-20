@@ -2,7 +2,7 @@ server:
   undertow:
     accesslog:
       enabled: true
-      dir: /home/logs/platform-admin
+      dir: /home/logs/platform-framework
 spring:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource

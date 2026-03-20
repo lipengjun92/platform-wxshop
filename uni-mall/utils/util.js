@@ -4,7 +4,7 @@ const utils = {
 	domain: 'http://localhost:8889/',
 	//接口地址
 	interfaceUrl: function() {
-		return utils.domain + 'platform-api/app/'
+		return utils.domain + 'platform-framework-api/app/'
 	},
 	toast: function(text, duration, success) {
 		uni.showToast({

@@ -17,7 +17,7 @@ server:
       worker: 16
   port: 8888
   servlet:
-    context-path: /platform-admin
+    context-path: /platform-framework
 
 --- ### 接口文档配置
 springdoc:
@@ -163,7 +163,7 @@ ali:
     #通信协议，通常填写https
     protocol: https
     #支付回调通知地址
-    baseNotifyUrl: https://fly2you.cn/platform-api
+    baseNotifyUrl: https://fly2you.cn/platform-framework-api
     encryptKey:
 
 wx:
@@ -201,4 +201,4 @@ wx:
     # p12证书的位置，可以指定绝对路径，也可以指定类路径（以classpath:开头）
     keyPath: classpath:/apiclient_cert.p12
     #支付回调通知地址
-    baseNotifyUrl: https://fly2you.cn/platform-api
+    baseNotifyUrl: https://fly2you.cn/platform-framework-api

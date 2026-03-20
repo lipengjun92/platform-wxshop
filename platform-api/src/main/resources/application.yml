@@ -17,7 +17,7 @@ server:
       worker: 16
   port: 8889
   servlet:
-    context-path: /platform-api
+    context-path: /platform-framework-api
 
 --- ### 接口文档配置
 springdoc:
@@ -151,7 +151,7 @@ ali:
     gatewayHost: openapi.alipay.com
     #通信协议，通常填写https
     protocol: https
-    baseNotifyUrl: https://fly2you.cn/platform-api #支付回调通知地址
+    baseNotifyUrl: https://fly2you.cn/platform-framework-api #支付回调通知地址
     encryptKey:
 
 wx:
@@ -174,4 +174,4 @@ wx:
     subMchId: 1 #服务商模式下的子商户号
     keyPath: classpath:/apiclient_cert.p12 # p12证书的位置，可以指定绝对路径，也可以指定类路径（以classpath:开头）
     spbillCreateIp: 1 #APP和网页支付提交用户端ip，Native支付填调用微信支付API的机器IP。必填项
-    baseNotifyUrl: https://fly2you.cn/platform-api #支付回调通知地址
+    baseNotifyUrl: https://fly2you.cn/platform-framework-api #支付回调通知地址

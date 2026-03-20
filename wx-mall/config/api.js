@@ -1,5 +1,5 @@
 // const API_BASE_URL = 'https://fly2you.cn/platform-framework/app/';
-const API_BASE_URL = 'http://localhost:8889/platform-api/app/'
+const API_BASE_URL = 'http://localhost:8889/platform-framework-api/app/'
 module.exports = {
   IndexUrlNewGoods: API_BASE_URL + 'index/newGoods', //新品首发
   IndexUrlHotGoods: API_BASE_URL + 'index/hotGoods', //热卖商品

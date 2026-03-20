@@ -35,10 +35,10 @@
         </appender>
 
         <appender name="ROLLING_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
-            <File>/home/logs/platform-admin/info.log</File>
+            <File>/home/logs/platform-framework/info.log</File>
             <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
                 <!--日志文件输出的文件名-->
-                <FileNamePattern>/home/logs/platform-admin/info.%d{yyyy-MM-dd}.log</FileNamePattern>
+                <FileNamePattern>/home/logs/platform-framework/info.%d{yyyy-MM-dd}.log</FileNamePattern>
                 <!--日志文件保留天数-->
                 <maxHistory>7</maxHistory>
                 <totalSizeCap>1GB</totalSizeCap>
@@ -66,10 +66,10 @@
         </appender>
 
         <appender name="ROLLING_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
-            <File>/home/logs/platform-admin/info.log</File>
+            <File>/home/logs/platform-framework/info.log</File>
             <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
                 <!--日志文件输出的文件名-->
-                <FileNamePattern>/home/logs/platform-admin/info.%d{yyyy-MM-dd}.log</FileNamePattern>
+                <FileNamePattern>/home/logs/platform-framework/info.%d{yyyy-MM-dd}.log</FileNamePattern>
                 <!--日志文件保留天数-->
                 <maxHistory>7</maxHistory>
                 <totalSizeCap>1GB</totalSizeCap>

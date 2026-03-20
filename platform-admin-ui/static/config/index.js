@@ -5,7 +5,7 @@
   window.SITE_CONFIG = {}
 
   // api接口请求地址
-  window.SITE_CONFIG['baseUrl'] = 'http://localhost:8888/platform-admin'
+  window.SITE_CONFIG['baseUrl'] = 'http://localhost:8888/platform-framework'
 
   // cdn地址 = 域名 + 版本号
   window.SITE_CONFIG['domain'] = './' // 域名
