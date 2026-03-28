@@ -1,7 +1,7 @@
 const utils = {
 	// 域名
-	// domain: 'https://fly2you.cn/',
-	domain: 'http://localhost:8889/',
+	domain: 'https://fly2you.cn/',
+	// domain: 'http://localhost:8889/',
 	//接口地址
 	interfaceUrl: function() {
 		return utils.domain + 'platform-framework-api/app/'
