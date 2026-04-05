@@ -18,6 +18,7 @@
  */
 package com.platform.modules.mall.entity;
 
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
@@ -41,7 +42,7 @@ public class MallGoodsEntity implements Serializable {
     /**
      *
      */
-    @TableId
+    @TableId(type = IdType.AUTO)
     private Integer id;
     /**
      *

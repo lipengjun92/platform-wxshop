@@ -18,6 +18,7 @@
  */
 package com.platform.modules.mall.entity;
 
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
@@ -36,7 +37,7 @@ import java.math.BigDecimal;
 public class MallProductEntity implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    @TableId
+    @TableId(type = IdType.AUTO)
     private Integer id;
     private Integer goodsId;
     private String goodsSpecificationIds;
