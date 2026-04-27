@@ -25,10 +25,10 @@
 ## 前后端全部开源微信小程序商城（Java + uniapp）
 
 ### 重要链接
-- 新手必看视频教程：[https://doc.fly2you.cn/zh-CN/start/videos.html](https://doc.fly2you.cn/zh-CN/start/videos.html)
-- 官网：[https://fly2you.cn](https://fly2you.cn)
-- 开发文档：[http://doc.fly2you.cn](http://doc.fly2you.cn)
-- 在线体验：[https://doc.fly2you.cn/zh-CN/start/view.html](https://doc.fly2you.cn/zh-CN/start/view.html)
+- 新手必看视频教程：[https://doc.openwtai.com/zh-CN/start/videos.html](https://doc.openwtai.com/zh-CN/start/videos.html)
+- 官网：[https://openwtai.com](https://openwtai.com)
+- 开发文档：[http://doc.openwtai.com](http://doc.openwtai.com)
+- 在线体验：[https://doc.openwtai.com/zh-CN/start/view.html](https://doc.openwtai.com/zh-CN/start/view.html)
 - Gitee仓库：[https://gitee.com/fuyang_lipengjun/platform](https://gitee.com/fuyang_lipengjun/platform)
 - Github仓库：[https://github.com/lipengjun92/platform-wxshop](https://github.com/lipengjun92/platform-wxshop)
 - GitCode仓库：[https://gitcode.com/lipengjun92/platform-wxshop.git](https://gitcode.com/lipengjun92/platform-wxshop.git)
@@ -42,14 +42,14 @@
 
 ## 重要信息
 1. 项目合作洽谈，请联系客服微信（使用微信扫码添加好友，请注明来意）。
-2. 如需购买 [商业版源码](https://fly2you.cn/blogs) 请联系客服。<br>
+2. 如需购买 [商业版源码](https://openwtai.com/blogs) 请联系客服。<br>
 ![](./images/wx.png "微信")
 
 ## 使用须知
 ### ✅允许
 - 个人学习使用
 - 允许用于学习、毕设等
-- 允许进行商业使用，请自觉遵守使用协议，如需要商业使用推荐购买[商业版源码](https://fly2you.cn/blogs)
+- 允许进行商业使用，请自觉遵守使用协议，如需要商业使用推荐购买[商业版源码](https://openwtai.com/blogs)
 - 请遵守 Apache License2.0 协议，再次开源请注明出处
 - 推荐Watch、Star项目，获取项目第一时间更新，同时也是对项目最好的支持
 - 希望大家多多支持原创作品

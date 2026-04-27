@@ -1,4 +1,4 @@
-// const API_BASE_URL = 'https://fly2you.cn/platform-framework/app/';
+// const API_BASE_URL = 'https://openwtai.com/platform-framework/app/';
 const API_BASE_URL = 'http://localhost:8081/platform-framework-api/app/'
 module.exports = {
   IndexUrlNewGoods: API_BASE_URL + 'index/newGoods', //新品首发

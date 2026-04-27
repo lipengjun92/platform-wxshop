@@ -53,7 +53,7 @@ knife4j:
     # 是否自定义 footer（默认 false 非自定义）
     enable-footer-custom: true
     # 自定义 footer 内容，支持 Markdown 语法
-    footer-custom-content: 'Copyright © 2018-present [lipengjun](https://gitee.com/fuyang_lipengjun/)&nbsp;⋅&nbsp;[微同软件](https://fly2you.cn/) v@project.version@'
+    footer-custom-content: 'Copyright © 2018-present [lipengjun](https://gitee.com/fuyang_lipengjun/)&nbsp;⋅&nbsp;[微同软件](https://openwtai.com/) v@project.version@'
 
 spring:
   main:
@@ -151,7 +151,7 @@ ali:
     gatewayHost: openapi.alipay.com
     #通信协议，通常填写https
     protocol: https
-    baseNotifyUrl: https://fly2you.cn/platform-framework-api #支付回调通知地址
+    baseNotifyUrl: https://openwtai.com/platform-framework-api #支付回调通知地址
     encryptKey:
 
 wx:
@@ -166,12 +166,21 @@ wx:
     token: #微信小程序消息服务器配置的token
     aesKey: #微信小程序消息服务器配置的EncodingAESKey
     msgDataFormat: JSON
-  pay: #微信支付配置
-    appId: 1 #微信公众号或者小程序等的appid
-    mchId: 1 #微信支付商户号
-    mchKey: 1 #微信支付商户密钥
-    subAppId: 1 #服务商模式下的子商户公众账号ID
-    subMchId: 1 #服务商模式下的子商户号
-    keyPath: classpath:/apiclient_cert.p12 # p12证书的位置，可以指定绝对路径，也可以指定类路径（以classpath:开头）
-    spbillCreateIp: 1 #APP和网页支付提交用户端ip，Native支付填调用微信支付API的机器IP。必填项
-    baseNotifyUrl: https://fly2you.cn/platform-framework-api #支付回调通知地址
+  #微信支付配置
+  pay:
+    #微信公众号或者小程序等的appid
+    appId: wx7d1077edf1fd3ae5
+    #微信支付商户号
+    mchId: 1540420821
+    #微信支付商户密钥
+    mchKey: 11e67d7052271644e07499531116be01
+    #服务商模式下的子商户公众账号ID
+    subAppId:
+    #服务商模式下的子商户号
+    subMchId:
+    # p12证书的位置，可以指定绝对路径，也可以指定类路径（以classpath:开头）
+    keyPath: classpath:/apiclient_cert.p12
+    #APP和网页支付提交用户端ip，Native支付填调用微信支付API的机器IP。必填项
+    spbillCreateIp: 116.62.148.248
+    #支付回调通知地址
+    baseNotifyUrl: https://openwtai.com/platform-framework-api

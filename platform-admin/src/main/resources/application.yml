@@ -64,7 +64,7 @@ knife4j:
     # 是否自定义 footer（默认 false 非自定义）
     enable-footer-custom: true
     # 自定义 footer 内容，支持 Markdown 语法
-    footer-custom-content: 'Copyright © 2018-present [lipengjun](https://gitee.com/fuyang_lipengjun/)&nbsp;⋅&nbsp;[微同软件](https://fly2you.cn/) v@project.version@'
+    footer-custom-content: 'Copyright © 2018-present [lipengjun](https://gitee.com/fuyang_lipengjun/)&nbsp;⋅&nbsp;[微同软件](https://openwtai.com/) v@project.version@'
 
 spring:
   main:
@@ -163,7 +163,7 @@ ali:
     #通信协议，通常填写https
     protocol: https
     #支付回调通知地址
-    baseNotifyUrl: https://fly2you.cn/platform-framework-api
+    baseNotifyUrl: https://openwtai.com/platform-framework-api
     encryptKey:
 
 wx:
@@ -201,4 +201,4 @@ wx:
     # p12证书的位置，可以指定绝对路径，也可以指定类路径（以classpath:开头）
     keyPath: classpath:/apiclient_cert.p12
     #支付回调通知地址
-    baseNotifyUrl: https://fly2you.cn/platform-framework-api
+    baseNotifyUrl: https://openwtai.com/platform-framework-api

@@ -1,6 +1,6 @@
 const utils = {
 	// 域名
-	// domain: 'https://fly2you.cn/',
+	// domain: 'https://openwtai.com/',
 	domain: 'http://localhost:8081/',
 	//接口地址
 	interfaceUrl: function() {
