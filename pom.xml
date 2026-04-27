@@ -164,12 +164,6 @@
             <artifactId>ojdbc6</artifactId>
             <version>${oracle.version}</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/com.huawei/gsjdbc4 -->
-        <dependency>
-            <groupId>com.huawei</groupId>
-            <artifactId>gsjdbc4</artifactId>
-            <version>1</version>
-        </dependency>
         <dependency>
             <groupId>com.baomidou</groupId>
             <artifactId>dynamic-datasource-spring-boot-starter</artifactId>
