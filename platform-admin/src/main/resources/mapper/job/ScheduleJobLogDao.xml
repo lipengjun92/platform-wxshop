@@ -17,10 +17,10 @@
         FROM SCHEDULE_JOB_LOG T
         WHERE 1=1
         <if test="params.beanName != null and params.beanName.trim() != ''">
-            AND T.BEAN_NAME LIKE '%${params.beanName}%'
+            AND T.BEAN_NAME LIKE CONCAT('%', #{params.beanName}, '%')
         </if>
         <if test="params.methodName != null and params.methodName.trim() != ''">
-            AND T.METHOD_NAME LIKE '%${params.methodName}%'
+            AND T.METHOD_NAME LIKE CONCAT('%', #{params.methodName}, '%')
         </if>
     </select>
 </mapper>

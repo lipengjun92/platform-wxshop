@@ -14,7 +14,7 @@
             AND T.ID = #{params.id}
         </if>
         <if test="params.question != null and params.question.trim() != ''">
-            AND T.QUESTION LIKE '%${params.question}%'
+            AND T.QUESTION LIKE CONCAT('%', #{params.question}, '%')
         </if>
     </sql>
 

@@ -17,7 +17,7 @@
             AND T.ID = #{params.id}
         </if>
         <if test="params.typeName != null and params.typeName.trim() != ''">
-            AND HT.TYPE_NAME LIKE '%${params.typeName}%'
+            AND HT.TYPE_NAME LIKE CONCAT('%', #{params.typeName}, '%')
         </if>
     </sql>
 

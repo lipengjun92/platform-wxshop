@@ -30,7 +30,7 @@
             AND T.GOODS_ID = #{params.goodsId}
         </if>
         <if test="params.goodsName != null and params.goodsName.trim() != ''">
-            AND T.GOODS_NAME LIKE '%${params.goodsName}%'
+            AND T.GOODS_NAME LIKE CONCAT('%', #{params.goodsName}, '%')
         </if>
     </sql>
 

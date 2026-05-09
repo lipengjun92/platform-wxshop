@@ -21,13 +21,13 @@
 		SELECT T.USER_ID, T.SEX, T.REAL_NAME, T.USER_NAME, T.ORG_NO, T.EMAIL_HOST, T.EMAIL, T.EMAIL_PW, T.MOBILE, T.STATUS, T.CREATE_TIME,T.CREATE_USER_ID,T.CREATE_USER_ORG_NO FROM SYS_USER T
 		WHERE 1=1
 		<if test="params.userName != null and params.userName != ''">
-			AND T.USER_NAME LIKE '%${params.userName}%'
+			AND T.USER_NAME LIKE CONCAT('%', #{params.userName}, '%')
 		</if>
 		<if test="params.realName != null and params.realName != ''">
-			AND T.REAL_NAME LIKE '%${params.realName}%'
+			AND T.REAL_NAME LIKE CONCAT('%', #{params.realName}, '%')
 		</if>
 		<if test="params.mobile != null and params.mobile != ''">
-			AND T.MOBILE LIKE '%${params.mobile}%'
+			AND T.MOBILE LIKE CONCAT('%', #{params.mobile}, '%')
 		</if>
 		<if test="params.orgNo != null and params.orgNo != ''">
 			AND T.ORG_NO = #{params.orgNo}

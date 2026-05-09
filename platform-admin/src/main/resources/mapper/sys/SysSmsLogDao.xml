@@ -18,10 +18,10 @@
         FROM SYS_SMS_LOG T
         WHERE 1=1
         <if test="params.sendId != null and params.sendId.trim() != ''">
-            AND T.SEND_ID LIKE '%${params.sendId}%'
+            AND T.SEND_ID LIKE CONCAT('%', #{params.sendId}, '%')
         </if>
         <if test="params.mobile != null and params.mobile.trim() != ''">
-            AND T.MOBILE LIKE '%${params.mobile}%'
+            AND T.MOBILE LIKE CONCAT('%', #{params.mobile}, '%')
         </if>
         <if test="params.sendStatus != null and params.sendStatus != ''">
             AND T.SEND_STATUS = #{params.sendStatus}

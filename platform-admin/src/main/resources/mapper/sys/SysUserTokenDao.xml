@@ -24,7 +24,7 @@
         LEFT JOIN SYS_USER U ON T.USER_ID = U.USER_ID
         WHERE 1=1 AND T.EXPIRE_TIME > #{params.nowDate}
         <if test="params.name != null and params.name.trim() != ''">
-            AND U.REAL_NAME LIKE '%${params.name}%'
+            AND U.REAL_NAME LIKE CONCAT('%', #{params.name}, '%')
         </if>
     </sql>
 

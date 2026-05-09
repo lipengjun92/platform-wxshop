@@ -23,7 +23,7 @@
             AND T.FROM = #{params.from}
         </if>
         <if test="params.keyword != null and params.keyword.trim() != ''">
-            AND T.KEYWORD LIKE '%${params.keyword}%'
+            AND T.KEYWORD LIKE CONCAT('%', #{params.keyword}, '%')
         </if>
     </sql>
 

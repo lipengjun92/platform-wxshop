@@ -48,13 +48,13 @@
             AND T.ID = #{params.id}
         </if>
         <if test="params.orderSn != null and params.orderSn.trim() != ''">
-            AND T.ORDER_SN LIKE '%${params.orderSn}%'
+            AND T.ORDER_SN LIKE CONCAT('%', #{params.orderSn}, '%')
         </if>
         <if test="params.userId != null and params.userId.trim() != ''">
             AND T.USER_ID = #{params.userId}
         </if>
         <if test="params.nickname != null and params.nickname.trim() != ''">
-            AND U.NICKNAME LIKE '%${params.nickname}%'
+            AND U.NICKNAME LIKE CONCAT('%', #{params.nickname}, '%')
         </if>
         <if test="params.orderStatus != null and params.orderStatus.trim() != ''">
             AND T.ORDER_STATUS = #{params.orderStatus}

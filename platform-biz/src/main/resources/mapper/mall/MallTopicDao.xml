@@ -25,7 +25,7 @@
             AND T.ID = #{params.id}
         </if>
         <if test="params.title != null and params.title.trim() != ''">
-            AND T.TITLE LIKE '%${params.title}%'
+            AND T.TITLE LIKE CONCAT('%', #{params.title}, '%')
         </if>
     </sql>
 

@@ -12,10 +12,10 @@
         FROM SYS_DICT_GROUP T
         WHERE 1=1
         <if test="params.code != null and params.code.trim() != ''">
-            AND T.CODE LIKE '%${params.code}%'
+            AND T.CODE LIKE CONCAT('%', #{params.code}, '%')
         </if>
         <if test="params.name != null and params.name.trim() != ''">
-            AND T.NAME LIKE '%${params.name}%'
+            AND T.NAME LIKE CONCAT('%', #{params.name}, '%')
         </if>
     </sql>
 

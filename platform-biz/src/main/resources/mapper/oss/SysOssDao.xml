@@ -11,7 +11,7 @@
         FROM SYS_OSS T
         WHERE 1=1
         <if test="params.url != null and params.url.trim() != ''">
-            AND T.URL LIKE '%${params.url}%'
+            AND T.URL LIKE CONCAT('%', #{params.url}, '%')
         </if>
     </select>
 </mapper>

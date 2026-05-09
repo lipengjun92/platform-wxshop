@@ -19,7 +19,7 @@
 		FROM SYS_ROLE T
 		WHERE 1=1
 		<if test="params.roleName != null and params.roleName.trim() != ''">
-			AND T.ROLE_NAME LIKE '%${params.roleName}%'
+			AND T.ROLE_NAME LIKE CONCAT('%', #{params.roleName}, '%')
 		</if>
 	</select>
 </mapper>

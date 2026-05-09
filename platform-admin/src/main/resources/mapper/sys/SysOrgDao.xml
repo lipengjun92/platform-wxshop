@@ -22,13 +22,13 @@
 		LEFT JOIN SYS_ORG SO ON O.PARENT_NO = SO.ORG_NO
 		WHERE 1=1
 		<if test="orgName != null and orgName.trim() != ''">
-			AND O.ORG_NAME LIKE '%${orgName}%'
+			AND O.ORG_NAME LIKE CONCAT('%', #{orgName}, '%')
 		</if>
 		<if test="orgType != null">
 			AND O.ORG_TYPE = #{orgType}
 		</if>
 		<if test="parentName != null and parentName.trim() != ''">
-			AND SO.ORG_NAME LIKE '%${parentName}%'
+			AND SO.ORG_NAME LIKE CONCAT('%', #{parentName}, '%')
 		</if>
 	</sql>
 
