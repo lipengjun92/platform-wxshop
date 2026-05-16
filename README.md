@@ -14,10 +14,6 @@
  <img src="https://img.shields.io/badge/MySQL-8.0-blue.svg"/>
 </p>
 
-## SpringBoo版本开发已完成
-- 想参与的同学可以添加微信入群（备注：开源微同）
-![](./images/wx.png "微信")
-
 技术站要求：
 - SpringBoot、MybatisPlus
 - Vue2、ElementUI
@@ -39,6 +35,12 @@
 <a target="_blank" href="https://qm.qq.com/cgi-bin/qm/qr?k=21agOH-MqJLZ5YqxNb-sBcPCB5PTl7XH&jump_from=webapi&authKey=hV6jd0tppJqvTWE/iSEHwLJg5EsTaz/aY/1bj8gWg4giQ4JdDEzYiK12F+u1TnuZ"><img border="0" src="https://img.shields.io/badge/点击加入-151602347-green.svg" alt="微同科技 ③群" title="微同科技 ③群"></a>
 <a target="_blank" href="https://qm.qq.com/cgi-bin/qm/qr?k=-uoUHqs9-qKf8rI5Ni1N7XPWmuUjqW2j&jump_from=webapi&authKey=f1FbGXYVKDo/gfgV9ZOY4XGkmn9huc+0Qx+1IbPP6kJsFyZo3SNOEXJYdWzk8jnu"><img border="0" src="https://img.shields.io/badge/点击加入-476734088-green.svg" alt="微同科技 ④群" title="微同科技 ④群"></a>
 <a target="_blank" href="https://qm.qq.com/q/rzuWvSHsbY"><img border="0" src="https://img.shields.io/badge/点击加入-690637772-green.svg" alt="微同科技 ⑤群" title="微同科技 ⑤群"></a>
+
+## 系统架构图
+![](./images/system-architecture.png "系统架构图")
+
+## 时序架构图
+![](./images/sequence.png "时序架构图")
 
 ## 重要信息
 1. 项目合作洽谈，请联系客服微信（使用微信扫码添加好友，请注明来意）。
