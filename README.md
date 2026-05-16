@@ -7,7 +7,7 @@
 </p>
 <p align="center">
  <img src="https://img.shields.io/github/languages/count/lipengjun92/platform-wxshop?color=red"/>
- <img src="https://img.shields.io/badge/Java-11-blue.svg"/>
+ <img src="https://img.shields.io/badge/Java-21-blue.svg"/>
  <img src="https://img.shields.io/badge/SpringBoot-2.7.15-blue.svg"/>
  <img src="https://img.shields.io/badge/MyBatisPlus-3.5.3-blue.svg"/>
  <img src="https://img.shields.io/badge/weixin%20java-4.5.2-blue.svg"/>
@@ -69,7 +69,7 @@ platform
 
 ## 安装教程
 
-* 配置环境（推荐Java11、maven3.8、mysql8.0、redis4.0.1）
+* 配置环境（推荐Java21、maven3.8、mysql8.0、redis4.0.1）
 * 创建数据库
 * 依次初始化sql脚本 
     * /_sql/base.sql
