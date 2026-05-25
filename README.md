@@ -99,6 +99,58 @@ platform
 * 使用idea启动项目访问路径
     * [http://localhost:8000](http://localhost:8000)
 
+## Docker 一键启动
+
+适用前提：
+
+```bash
+scripts/build-jars.sh
+scripts/build-admin-ui.sh
+```
+
+输出到：
+
+* `deploy/packages/platform-admin.jar`
+* `deploy/packages/platform-api.jar`
+* `deploy/packages/platform-admin-ui-dist/`
+
+首次启动前，如需调整 Maven profile、端口、数据库密码或 JVM 参数，先复制配置文件：
+
+```bash
+cp deploy/.env.example deploy/.env
+```
+
+其中：
+
+* `MAVEN_PROFILE` 控制 `scripts/build-jars.sh` 使用的 Maven profile，默认 `dev`
+* `NGINX_PORT` 默认 `8888`
+* `MYSQL_ROOT_PASSWORD` 默认 `root1234`
+
+启动：
+
+```bash
+scripts/docker-up.sh
+```
+
+停止：
+
+```bash
+scripts/docker-down.sh
+```
+
+启动后默认访问地址：
+
+* 管理台：http://localhost:8888
+* 后台接口：http://localhost:8888/platform-framework
+* 商城接口：http://localhost:8888/platform-framework-api
+
+说明：
+
+* `docker-compose.yml` 会一键启动 `mysql`、`redis`、`platform-admin`、`platform-api`、`nginx`
+* `nginx` 负责托管前端静态资源，并反向代理两个后端服务
+* 后端容器运行时启用 `docker` profile，自动加载 `application-docker.yml`
+* MySQL 首次启动会自动执行仓库 `_sql/` 目录下的初始化脚本；如果 `deploy/data/mysql` 已有数据，则不会重复导入
+
 ## 页面展示
 ### 管理端
 ![](./images/home.png "首页")

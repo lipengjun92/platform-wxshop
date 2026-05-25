@@ -26,3 +26,6 @@
 hs_err_pid*
 /.project
 yarn.lock
+/deploy/.env
+/deploy/packages/platform-admin-ui-dist/*
+!/deploy/packages/platform-admin-ui-dist/.gitkeep
