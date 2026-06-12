@@ -51,7 +51,7 @@ public class MallShippingEntity implements Serializable {
      */
     private String name;
     /**
-     * 状态 1正常 0删除
+     * 状态 0未删除 1已删除
      */
     @TableLogic
     private Integer status;

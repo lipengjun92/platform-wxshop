@@ -10,7 +10,7 @@
         T.NAME,
         T.STATUS
         FROM MALL_SHIPPING T
-        WHERE T.STATUS = 1
+        WHERE T.STATUS = 0
         <if test="params.id != null and params.id.trim() != ''">
             AND T.ID = #{params.id}
         </if>
