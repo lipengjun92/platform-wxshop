@@ -12,7 +12,7 @@
         </view>
         <view class="goods-extra">
           <text>销量 {{salesText}}</text>
-          <text wx:if="{{productList.length}}">规格 {{productList.length}}</text>
+          <text wx:if="{{productList.length}}"> 规格 {{productList.length}}</text>
         </view>
       </view>
     </view>
