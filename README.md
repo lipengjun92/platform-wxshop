@@ -14,20 +14,23 @@
  <img src="https://img.shields.io/badge/MySQL-8.0-blue.svg"/>
 </p>
 
-技术站要求：
-- SpringBoot、MybatisPlus
-- Vue2、ElementUI
-
 ## 前后端全部开源微信小程序商城（Java + uniapp）
 
+### 技术站：
+- SpringBoot
+- Vue2、ElementUI
+
+### 重要说明
+- 微信 Ai 能力已经接入，需要在微信公众平台开通`AI 能力`，手机体验微信版本最低 `8.0.75`，开发工具中调试基础库最低`3.16.1`
+- 微信 Ai 能力还在灰度内测，暂未开放提审
+- 如果开发中遇到不清楚的地方可以添加下方客服微信，请注明来意
+
 ### 重要链接
-- 新手必看视频教程：[https://doc.openwtai.com/zh-CN/start/videos.html](https://doc.openwtai.com/zh-CN/start/videos.html)
 - 官网：[https://openwtai.com](https://openwtai.com)
 - 开发文档：[http://doc.openwtai.com](http://doc.openwtai.com)
 - 在线体验：[https://doc.openwtai.com/zh-CN/start/view.html](https://doc.openwtai.com/zh-CN/start/view.html)
 - Gitee仓库：[https://gitee.com/fuyang_lipengjun/platform](https://gitee.com/fuyang_lipengjun/platform)
 - Github仓库：[https://github.com/lipengjun92/platform-wxshop](https://github.com/lipengjun92/platform-wxshop)
-- GitCode仓库：[https://gitcode.com/lipengjun92/platform-wxshop.git](https://gitcode.com/lipengjun92/platform-wxshop.git)
 
 ### QQ交流群
 <a target="_blank" href="https://qm.qq.com/cgi-bin/qm/qr?k=NI1TX8jkEeRITDnYv-oZ-9onMwNN9MNs&jump_from=webapi&authKey=a/L8SQ0vmI4X9Vomv7JK8Z3t94OxROqmNUW8gUGsldCHpcbd7db26DVB410gNhZv"><img border="0" src="https://img.shields.io/badge/点击加入-66502035-green.svg" alt="微同科技 ①群" title="微同科技 ①群"></a>
@@ -164,6 +167,16 @@ scripts/docker-down.sh
 ![](./images/order.png "订单")
 ### 接口文档
 ![](./images/15_06_39.png "接口文档")
+
+### 微信 AI
+![](./images/guide-skills-1.png "1")
+![](./images/guide-skills-2.png "2")
+![](./images/guide-skills-3.png "3")
+![](./images/guide-skills-4.png "4")
+![](./images/guide-skills-5.png "5")
+![](./images/guide-skills-6.png "6")
+![](./images/guide-skills-7.png "7")
+
 ### 小程序首页
 ![](./images/5.png "小程序首页")
 ### 专题
