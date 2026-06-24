@@ -18,19 +18,3 @@
     </view>
   </view>
 </view>
-<view class="goods-detail-card" bindtap="onDetailTap">
-  <image class="banner" src="{{viewGoods.listPicUrl}}" mode="aspectFill"></image>
-  <view class="body">
-    <view class="name">{{viewGoods.name}}</view>
-    <view class="brief" wx:if="{{viewGoods.goodsBrief}}">{{viewGoods.goodsBrief}}</view>
-    <view class="price-row">
-      <text class="retail">￥{{viewGoods.retailPrice}}</text>
-      <text class="market" wx:if="{{viewGoods.marketPrice && viewGoods.marketPrice > viewGoods.retailPrice}}">￥{{viewGoods.marketPrice}}</text>
-      <text class="sales" wx:if="{{viewGoods.sales}}">销量 {{viewGoods.sales}}</text>
-    </view>
-    <view class="sku-tip" wx:if="{{viewGoods.productList && viewGoods.productList.length}}">
-      共 {{viewGoods.productList.length}} 个规格可选
-    </view>
-    <view class="action">点击查看完整详情 ></view>
-  </view>
-</view>
