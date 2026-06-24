@@ -1,0 +1,29 @@
+<view class="order-detail-card" bindtap="onDetailTap">
+  <view class="head">
+    <text class="sn">订单号：{{viewOrder.orderSn}}</text>
+    <text class="status">{{viewOrder.orderStatusText}}</text>
+  </view>
+  <view class="address" wx:if="{{viewOrder.consignee}}">
+    <view class="line"><text class="label">收货人</text>{{viewOrder.consignee}}　{{viewOrder.mobileMask}}</view>
+    <view class="line"><text class="label">地址</text>{{viewOrder.fullAddress}}</view>
+  </view>
+  <view class="goods">
+    <view class="goods-row" wx:for="{{viewOrder.orderGoods}}" wx:key="id" wx:for-item="g">
+      <image class="goods-pic" src="{{g.listPicUrl}}" mode="aspectFill"></image>
+      <view class="goods-info">
+        <view class="goods-name">{{g.goodsName}}</view>
+        <view class="goods-meta">
+          <text class="goods-price">￥{{g.retailPrice}}</text>
+          <text class="goods-num">×{{g.number}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="amount">
+    <view class="line"><text class="label">商品金额</text>￥{{viewOrder.goodsPrice}}</view>
+    <view class="line"><text class="label">运费</text>￥{{viewOrder.freightPrice}}</view>
+    <view class="line"><text class="label">优惠</text>-￥{{viewOrder.couponPrice}}</view>
+    <view class="line total"><text class="label">实付</text>￥{{viewOrder.actualPrice}}</view>
+  </view>
+  <view class="action">点击查看完整订单 ></view>
+</view>

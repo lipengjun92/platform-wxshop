@@ -1,5 +1,6 @@
 <template>
 	<view class="container">
+		<ai-guide-entry text="AI导购" :context="aiAgentContext" right="24rpx" bottom="280rpx"></ai-guide-entry>
 		<swiper class="banner" indicator-dots="true" autoplay="true" interval="3000" duration="1000">
 			<swiper-item v-for="(item, index) in banner" :key="index">
 				<navigator v-if="item.link" :url="item.link">
@@ -138,7 +139,11 @@
 <script>
 	const api = require('@/utils/api.js');
 	const util = require("@/utils/util.js")
+	import AiGuideEntry from '@/components/ai-guide-entry/ai-guide-entry.vue'
 	export default {
+		components: {
+			AiGuideEntry
+		},
 		data() {
 			return {
 				newGoods: [],
@@ -147,7 +152,8 @@
 				brands: [],
 				floorGoods: [],
 				banner: [],
-				channel: []
+				channel: [],
+				aiAgentContext: '当前页面是商城首页，包含轮播、品牌、专题、新品、热销、分类楼层。优先根据用户需求做商品推荐、商品搜索，并在用户明确想买时引导进入商品详情和结算。'
 			}
 		},
 		methods: {

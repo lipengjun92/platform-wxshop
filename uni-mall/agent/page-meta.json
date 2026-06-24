@@ -1,0 +1,59 @@
+{
+  "pages": [
+    {
+      "path": "pages/goods/goods",
+      "name": "商品详情",
+      "description": "查看某个商品的图文详情、规格、价格与购买入口",
+      "query": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "商品ID"
+          }
+        },
+        "required": ["id"]
+      }
+    },
+    {
+      "path": "pages/search/search",
+      "name": "商品搜索",
+      "description": "按关键词搜索商城商品"
+    },
+    {
+      "path": "pages/cart/cart",
+      "name": "购物车",
+      "description": "查看当前购物车清单与已勾选商品"
+    },
+    {
+      "path": "pages/shopping/checkout/checkout",
+      "name": "结算页",
+      "description": "确认收货地址、商品清单、配送方式、优惠信息并提交订单"
+    },
+    {
+      "path": "pages/pay/pay",
+      "name": "支付页",
+      "description": "发起订单支付并查看支付结果"
+    },
+    {
+      "path": "pages/ucenter/order/order",
+      "name": "订单列表",
+      "description": "查看历史订单列表与状态"
+    },
+    {
+      "path": "pages/ucenter/orderDetail/orderDetail",
+      "name": "订单详情",
+      "description": "查看订单状态、商品信息与售后入口",
+      "query": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "订单ID"
+          }
+        },
+        "required": ["id"]
+      }
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+.ai-guide-float {
+  position: fixed;
+  width: 80rpx;
+  height: 80rpx;
+  padding: 0 10rpx;
+  box-sizing: border-box;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #ff8a4d 0%, #eb5b2d 100%);
+  box-shadow: 0 12rpx 26rpx rgba(235, 91, 45, 0.22);
+}
+
+.ai-guide-text {
+  color: #fff;
+  font-size: 18rpx;
+  line-height: 1.25;
+  font-weight: 600;
+  text-align: center;
+}

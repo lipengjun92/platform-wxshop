@@ -1,5 +1,7 @@
 // const API_BASE_URL = 'https://openwtai.com/platform-framework/app/';
 const API_BASE_URL = 'http://localhost:8081/platform-framework-api/app/'
+wx.setStorageSync('apiBaseUrl', API_BASE_URL)
+
 module.exports = {
   IndexUrlNewGoods: API_BASE_URL + 'index/newGoods', //新品首发
   IndexUrlHotGoods: API_BASE_URL + 'index/hotGoods', //热卖商品

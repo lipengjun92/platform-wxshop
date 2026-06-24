@@ -1,0 +1,55 @@
+{
+  "apis": [
+    {
+      "name": "getCartSnapshot",
+      "description": "查询当前用户购物车的所有商品和勾选状态，仅用于核对，不会修改购物车。",
+      "inputSchema": {
+        "type": "object",
+        "properties": {}
+      },
+      "_meta": {
+        "ui": {
+          "componentPath": "components/cart-summary-card/index"
+        }
+      }
+    },
+    {
+      "name": "prepareCheckout",
+      "description": "结算前预览：根据当前勾选的购物车商品或直购商品，返回收货地址、商品清单、运费、优惠和应付金额。仅做预览，不创建订单。",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "结算来源，可选 cart（默认）或 buy（立即购买）"
+          },
+          "addressId": {
+            "type": "integer",
+            "description": "指定收货地址 ID，可选；不传则使用用户默认地址。"
+          },
+          "couponId": {
+            "type": "integer",
+            "description": "指定优惠券 ID，可选。"
+          }
+        }
+      },
+      "_meta": {
+        "ui": {
+          "componentPath": "components/order-preview-card/index"
+        }
+      }
+    }
+  ],
+  "components": [
+    {
+      "path": "components/cart-summary-card/index",
+      "relatedPage": "pages/cart/cart",
+      "expirable": false
+    },
+    {
+      "path": "components/order-preview-card/index",
+      "relatedPage": "pages/shopping/checkout/checkout",
+      "expirable": false
+    }
+  ]
+}

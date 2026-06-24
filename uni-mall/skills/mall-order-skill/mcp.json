@@ -1,0 +1,57 @@
+{
+  "apis": [
+    {
+      "name": "listOrders",
+      "description": "查询当前登录用户的订单列表，支持分页。",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "page": {
+            "type": "integer",
+            "description": "页码，默认 1。"
+          },
+          "size": {
+            "type": "integer",
+            "description": "每页条数，默认 6。"
+          }
+        }
+      },
+      "_meta": {
+        "ui": {
+          "componentPath": "components/order-list-card/index"
+        }
+      }
+    },
+    {
+      "name": "getOrderDetail",
+      "description": "查询某个订单的详情，包括状态、商品和操作选项。",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "orderId": {
+            "type": "string",
+            "description": "订单唯一标识，取自订单列表的 id 原值。"
+          }
+        },
+        "required": ["orderId"]
+      },
+      "_meta": {
+        "ui": {
+          "componentPath": "components/order-detail-card/index"
+        }
+      }
+    }
+  ],
+  "components": [
+    {
+      "path": "components/order-list-card/index",
+      "relatedPage": "pages/ucenter/order/order",
+      "expirable": false
+    },
+    {
+      "path": "components/order-detail-card/index",
+      "relatedPage": "pages/ucenter/orderDetail/orderDetail",
+      "expirable": false
+    }
+  ]
+}

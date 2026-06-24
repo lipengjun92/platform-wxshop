@@ -1,0 +1,25 @@
+<view class="cart-summary-card" bindtap="onCartTap">
+  <view class="head">
+    <text class="title">购物车（{{viewCart.goodsCount || 0}}）</text>
+    <text class="checked-tip">已勾选 {{viewCart.checkedGoodsCount || 0}} 件</text>
+  </view>
+  <block wx:if="{{viewCart.cartList && viewCart.cartList.length}}">
+    <view class="cart-row" wx:for="{{viewCart.cartList}}" wx:key="id">
+      <image class="goods-pic" src="{{item.listPicUrl}}" mode="aspectFill"></image>
+      <view class="goods-info">
+        <view class="goods-name">{{item.goodsName}}</view>
+        <view class="sku" wx:if="{{item.goodsSpecifitionNameValue}}">{{item.goodsSpecifitionNameValue}}</view>
+        <view class="goods-meta">
+          <text class="goods-price">￥{{item.retailPrice}}</text>
+          <text class="goods-num">×{{item.number}}</text>
+          <text class="checked-tag" wx:if="{{item.checked}}">已勾选</text>
+        </view>
+      </view>
+    </view>
+  </block>
+  <view class="empty" wx:else>购物车为空</view>
+  <view class="foot">
+    <text class="amount">已勾选合计：￥{{viewCart.checkedGoodsAmount || 0}}</text>
+    <text class="action">点击进入购物车 ></text>
+  </view>
+</view>

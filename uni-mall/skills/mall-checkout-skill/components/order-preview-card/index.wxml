@@ -1,0 +1,31 @@
+<view class="order-preview-card" bindtap="onCheckoutTap">
+  <view class="head">
+    <text class="title">结算预览</text>
+    <text class="type-tag">{{viewCheckout.type === 'buy' ? '立即购买' : '购物车结算'}}</text>
+  </view>
+  <view class="address" wx:if="{{viewCheckout.consignee}}">
+    <view class="row"><text class="label">收货人</text>{{viewCheckout.consignee}}　{{viewCheckout.mobileMask}}</view>
+    <view class="row"><text class="label">地址</text>{{viewCheckout.fullAddress}}</view>
+  </view>
+  <view class="address empty" wx:else>未选择收货地址，请到结算页设置</view>
+  <view class="goods">
+    <view class="goods-row" wx:for="{{viewCheckout.checkedGoodsList}}" wx:key="productId" wx:for-item="g">
+      <image class="goods-pic" src="{{g.listPicUrl}}" mode="aspectFill"></image>
+      <view class="goods-info">
+        <view class="goods-name">{{g.goodsName}}</view>
+        <view class="sku" wx:if="{{g.goodsSpecifitionNameValue}}">{{g.goodsSpecifitionNameValue}}</view>
+        <view class="goods-meta">
+          <text class="goods-price">￥{{g.retailPrice}}</text>
+          <text class="goods-num">×{{g.number}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="amount">
+    <view class="row"><text class="label">商品金额</text>￥{{viewCheckout.goodsTotalPrice}}</view>
+    <view class="row"><text class="label">运费</text>￥{{viewCheckout.freightPrice}}</view>
+    <view class="row"><text class="label">优惠</text>-￥{{viewCheckout.couponPrice}}</view>
+    <view class="row total"><text class="label">应付</text>￥{{viewCheckout.actualPrice}}</view>
+  </view>
+  <view class="action">点击前往结算页提交订单 ></view>
+</view>

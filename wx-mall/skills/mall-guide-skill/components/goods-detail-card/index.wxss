@@ -1,0 +1,55 @@
+.goods-detail-card {
+  background: #fff;
+  border-radius: 12rpx;
+  overflow: hidden;
+}
+.banner {
+  width: 100%;
+  height: 360rpx;
+  background: #f7f7f7;
+}
+.body {
+  padding: 20rpx 24rpx;
+}
+.name {
+  font-size: 30rpx;
+  color: #333;
+  font-weight: bold;
+  line-height: 1.4;
+}
+.brief {
+  margin-top: 8rpx;
+  color: #999;
+  font-size: 24rpx;
+}
+.price-row {
+  margin-top: 16rpx;
+  display: flex;
+  align-items: baseline;
+  gap: 12rpx;
+}
+.retail {
+  color: #b4282d;
+  font-size: 34rpx;
+  font-weight: bold;
+}
+.market {
+  color: #999;
+  font-size: 24rpx;
+  text-decoration: line-through;
+}
+.sales {
+  margin-left: auto;
+  color: #999;
+  font-size: 22rpx;
+}
+.sku-tip {
+  margin-top: 14rpx;
+  color: #666;
+  font-size: 24rpx;
+}
+.action {
+  margin-top: 14rpx;
+  color: #b4282d;
+  font-size: 24rpx;
+}

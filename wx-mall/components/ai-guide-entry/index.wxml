@@ -1,0 +1,5 @@
+<block wx:if="{{supported}}">
+  <view class="ai-guide-float ext-class" style="{{containerStyle}}" bindtap="openAgent">
+    <view class="ai-guide-text">{{text}}</view>
+  </view>
+</block>

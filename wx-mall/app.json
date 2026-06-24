@@ -92,6 +92,45 @@
       "provider": "wx7d1077edf1fd3ae5"
     }
   },
+  "agent": {
+    "instruction": "agent/AGENTS.md",
+    "pageMetadata": "agent/page-meta.json",
+    "skills": [
+      {
+        "name": "mall-guide-skill",
+        "description": "商品推荐、商品搜索、商品详情解释",
+        "path": "skills/mall-guide-skill"
+      },
+      {
+        "name": "mall-checkout-skill",
+        "description": "购物车核对、结算预览",
+        "path": "skills/mall-checkout-skill"
+      },
+      {
+        "name": "mall-order-skill",
+        "description": "订单列表查询、订单详情查询",
+        "path": "skills/mall-order-skill"
+      }
+    ]
+  },
+  "lazyCodeLoading": "requiredComponents",
+  "subPackages": [
+    {
+      "root": "skills/mall-guide-skill",
+      "independent": true,
+      "pages": []
+    },
+    {
+      "root": "skills/mall-checkout-skill",
+      "independent": true,
+      "pages": []
+    },
+    {
+      "root": "skills/mall-order-skill",
+      "independent": true,
+      "pages": []
+    }
+  ],
   "debug": true,
   "sitemapLocation": "sitemap.json"
 }

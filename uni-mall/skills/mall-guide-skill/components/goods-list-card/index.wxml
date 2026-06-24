@@ -1,0 +1,22 @@
+<view class="goods-list-card">
+  <block wx:if="{{viewItems && viewItems.length}}">
+    <view
+      class="goods-item"
+      wx:for="{{viewItems}}"
+      wx:key="id"
+      data-id="{{item.id}}"
+      bindtap="onGoodsTap"
+    >
+      <image class="goods-pic" src="{{item.listPicUrl}}" mode="aspectFill"></image>
+      <view class="goods-info">
+        <view class="goods-name">{{item.name}}</view>
+        <view class="goods-brief" wx:if="{{item.goodsBrief}}">{{item.goodsBrief}}</view>
+        <view class="goods-meta">
+          <text class="goods-price">￥{{item.retailPrice}}</text>
+          <text class="goods-sales" wx:if="{{item.sales}}">销量 {{item.sales}}</text>
+        </view>
+      </view>
+    </view>
+  </block>
+  <view class="empty" wx:else>暂无匹配商品</view>
+</view>

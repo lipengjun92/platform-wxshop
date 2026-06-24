@@ -12,7 +12,8 @@ Page({
     brands: [],
     floorGoods: [],
     banner: [],
-    channel: []
+    channel: [],
+    aiAgentContext: '当前页面是商城首页，包含轮播、品牌、专题、新品、热销、分类楼层。优先根据用户需求做商品推荐、商品搜索，并在用户明确想买时引导进入商品详情和结算。'
   },
   onShareAppMessage: function () {
     wx.showShareMenu({

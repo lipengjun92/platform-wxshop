@@ -1,0 +1,34 @@
+<view class="order-list-card">
+  <block wx:if="{{viewOrders && viewOrders.length}}">
+    <view
+      class="order-item"
+      wx:for="{{viewOrders}}"
+      wx:key="id"
+      wx:for-item="order"
+      data-id="{{order.id}}"
+      bindtap="onOrderTap"
+    >
+      <view class="order-head">
+        <text class="order-sn">订单号：{{order.orderSn}}</text>
+        <text class="order-status">{{order.orderStatusText}}</text>
+      </view>
+      <view class="order-goods">
+        <view class="goods-row" wx:for="{{order.goodsList}}" wx:key="id" wx:for-item="g">
+          <image class="goods-pic" src="{{g.listPicUrl}}" mode="aspectFill"></image>
+          <view class="goods-info">
+            <view class="goods-name">{{g.goodsName}}</view>
+            <view class="goods-meta">
+              <text class="goods-price">￥{{g.retailPrice}}</text>
+              <text class="goods-num">×{{g.number}}</text>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class="order-foot">
+        <text class="order-time">{{order.addTime}}</text>
+        <text class="order-amount">实付 ￥{{order.actualPrice}}</text>
+      </view>
+    </view>
+  </block>
+  <view class="empty" wx:else>暂无订单</view>
+</view>

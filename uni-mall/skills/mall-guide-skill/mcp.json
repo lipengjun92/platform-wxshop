@@ -1,0 +1,96 @@
+{
+  "apis": [
+    {
+      "name": "recommendGoods",
+      "description": "推荐适合用户当前意图的商品列表，可按热销或新品返回商城在售商品。",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "推荐类型，可填写 isHot 或 isNew，未填写时按热销推荐。"
+          },
+          "categoryId": {
+            "type": "integer",
+            "description": "分类 ID，可选。"
+          },
+          "page": {
+            "type": "integer",
+            "description": "页码，默认 1。"
+          },
+          "size": {
+            "type": "integer",
+            "description": "每页条数，默认 6。"
+          }
+        }
+      },
+      "_meta": {
+        "ui": {
+          "componentPath": "components/goods-list-card/index"
+        }
+      }
+    },
+    {
+      "name": "searchGoods",
+      "description": "按关键词搜索商品。直接使用用户输入的原文作为关键词。",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "keyword": {
+            "type": "string",
+            "description": "商品关键词。"
+          },
+          "categoryId": {
+            "type": "integer",
+            "description": "分类 ID，可选。"
+          },
+          "page": {
+            "type": "integer",
+            "description": "页码，默认 1。"
+          },
+          "size": {
+            "type": "integer",
+            "description": "每页条数，默认 6。"
+          }
+        },
+        "required": ["keyword"]
+      },
+      "_meta": {
+        "ui": {
+          "componentPath": "components/goods-list-card/index"
+        }
+      }
+    },
+    {
+      "name": "getGoodsDetail",
+      "description": "查询单个商品详情，用于解释价格、销量、规格，并引导用户进入结算。",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "goodsId": {
+            "type": "string",
+            "description": "商品唯一标识，取自商品搜索或推荐结果返回的 id 原值。"
+          }
+        },
+        "required": ["goodsId"]
+      },
+      "_meta": {
+        "ui": {
+          "componentPath": "components/goods-detail-card/index"
+        }
+      }
+    }
+  ],
+  "components": [
+    {
+      "path": "components/goods-list-card/index",
+      "relatedPage": "pages/category/category",
+      "expirable": false
+    },
+    {
+      "path": "components/goods-detail-card/index",
+      "relatedPage": "pages/goods/goods",
+      "expirable": false
+    }
+  ]
+}

@@ -1,5 +1,6 @@
 <!--index.wxml-->
 <view class="container">
+  <ai-guide-entry text="AI导购" context="{{aiAgentContext}}" right="24rpx" bottom="280rpx"></ai-guide-entry>
   <swiper class="banner" indicator-dots="true" autoplay="true" interval="3000" duration="1000">
     <swiper-item wx:for="{{banner}}" wx:key="id">
       <navigator url="{{item.link}}">
