@@ -1,3 +1,87 @@
+.card {
+  background: #fff;
+  border-radius: 24rpx;
+  padding: 24rpx;
+  box-sizing: border-box;
+}
+
+.card-title {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: #1f2430;
+  margin-bottom: 20rpx;
+}
+
+.detail-wrap {
+  display: flex;
+}
+
+.goods-image {
+  width: 188rpx;
+  height: 188rpx;
+  border-radius: 20rpx;
+  background: #f4f6fb;
+  flex-shrink: 0;
+}
+
+.goods-info {
+  flex: 1;
+  min-width: 0;
+  padding-left: 20rpx;
+}
+
+.goods-name {
+  font-size: 28rpx;
+  line-height: 1.5;
+  color: #1f2430;
+  font-weight: 600;
+}
+
+.goods-brief {
+  margin-top: 12rpx;
+  font-size: 24rpx;
+  line-height: 1.5;
+  color: #68707f;
+}
+
+.goods-meta {
+  margin-top: 18rpx;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  column-gap: 16rpx;
+}
+
+.goods-price-wrap {
+  display: flex;
+  align-items: baseline;
+  min-width: 0;
+}
+
+.goods-price {
+  color: #e74a3b;
+  font-size: 32rpx;
+  font-weight: 600;
+}
+
+.goods-market {
+  margin-left: 16rpx;
+  color: #8a92a3;
+  text-decoration: line-through;
+  font-size: 24rpx;
+}
+
+.goods-extra {
+  font-size: 22rpx;
+  line-height: 1.5;
+  color: #68707f;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.goods-extra text {
+  margin-left: 20rpx;
+}
 .goods-detail-card {
   background: #fff;
   border-radius: 12rpx;

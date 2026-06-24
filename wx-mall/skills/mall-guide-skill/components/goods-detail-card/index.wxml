@@ -1,3 +1,23 @@
+<view class="card" bindtap="openGoodsDetail">
+  <view class="card-title">商品详情</view>
+  <view class="detail-wrap">
+    <image class="goods-image" src="{{goods.listPicUrl}}" mode="aspectFill"></image>
+    <view class="goods-info">
+      <view class="goods-name">{{goods.name}}</view>
+      <view class="goods-brief" wx:if="{{goods.goodsBrief}}">{{goods.goodsBrief}}</view>
+      <view class="goods-meta">
+        <view class="goods-price-wrap">
+          <text class="goods-price">￥{{goods.retailPrice}}</text>
+          <text class="goods-market" wx:if="{{goods.marketPrice && goods.marketPrice > goods.retailPrice}}">￥{{goods.marketPrice}}</text>
+        </view>
+        <view class="goods-extra">
+          <text>销量 {{salesText}}</text>
+          <text wx:if="{{productList.length}}">规格 {{productList.length}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
 <view class="goods-detail-card" bindtap="onDetailTap">
   <image class="banner" src="{{viewGoods.listPicUrl}}" mode="aspectFill"></image>
   <view class="body">

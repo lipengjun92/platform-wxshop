@@ -1,3 +1,101 @@
+.card {
+  background: #fff;
+  border-radius: 24rpx;
+  padding: 24rpx;
+  box-sizing: border-box;
+}
+
+.card-title {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: #1f2430;
+  margin-bottom: 20rpx;
+}
+
+.empty-text {
+  font-size: 24rpx;
+  color: #8a92a3;
+  line-height: 1.6;
+}
+
+.goods-item {
+  display: flex;
+  padding: 20rpx 0;
+  border-top: 1rpx solid #eef1f6;
+}
+
+.goods-item-hover {
+  opacity: 0.88;
+}
+
+.goods-item:first-child {
+  border-top: 0;
+  padding-top: 0;
+}
+
+.goods-image {
+  width: 164rpx;
+  height: 164rpx;
+  border-radius: 20rpx;
+  background: #f4f6fb;
+  flex-shrink: 0;
+}
+
+.goods-info {
+  flex: 1;
+  padding-left: 20rpx;
+  min-width: 0;
+}
+
+.goods-name {
+  font-size: 28rpx;
+  font-weight: 600;
+  color: #1f2430;
+  line-height: 1.5;
+}
+
+.goods-brief {
+  margin-top: 12rpx;
+  font-size: 24rpx;
+  line-height: 1.5;
+  color: #68707f;
+}
+
+.goods-meta {
+  margin-top: 18rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 24rpx;
+}
+
+.goods-price {
+  color: #e74a3b;
+  font-size: 30rpx;
+  font-weight: 600;
+}
+
+.goods-sales {
+  color: #8a92a3;
+}
+
+.goods-more {
+  margin-top: 20rpx;
+  padding: 20rpx;
+  border-radius: 18rpx;
+  background: #fff4ef;
+  text-align: center;
+}
+
+.goods-more-hover {
+  opacity: 0.88;
+}
+
+.goods-more-text {
+  color: #e74a3b;
+  font-size: 24rpx;
+  font-weight: 600;
+}
 .goods-list-card {
   padding: 16rpx;
   background: #fff;

@@ -3,7 +3,7 @@ const { agentRequest, buildSuccess, buildError } = require('./request')
 module.exports = async function getGoodsDetail(args) {
   try {
     const data = await agentRequest('goods/detail', { id: args.goodsId }, 'POST')
-    const info = (data && data.info) || {}
+    const info = (data && data.goods) || {}
     const productList = ((data && data.productList) || []).map((item) => ({
       id: item.id,
       goodsId: item.goodsId,
