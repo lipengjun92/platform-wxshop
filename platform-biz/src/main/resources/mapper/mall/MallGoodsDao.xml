@@ -88,7 +88,7 @@
             and a.category_id = #{categoryId}
         </if>
         <if test="keyword != null">
-            and a.keywords like concat('%',#{keyword},'%')
+            and (a.keywords like concat('%',#{keyword},'%') or a.name like concat('%',#{keyword},'%'))
         </if>
         <if test="is_group != null and is_group == true">
             and gg.id is not null
@@ -137,7 +137,7 @@
             and category_id = #{categoryId}
         </if>
         <if test="keyword != null">
-            and keywords like concat('%',#{keyword},'%')
+            and (keywords like concat('%',#{keyword},'%') or name like concat('%',#{keyword},'%'))
         </if>
         <if test="isDelete != null">
             and is_delete = #{isDelete}
