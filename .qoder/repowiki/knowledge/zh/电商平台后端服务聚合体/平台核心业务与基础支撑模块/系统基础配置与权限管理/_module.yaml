@@ -1,0 +1,9 @@
+schema_version: 1
+module_path: backend_services/platform_biz/sys
+title: 系统基础配置与权限管理
+scope:
+    - platform-biz/src/main/java/com/platform/modules/sys/
+    - platform-biz/src/main/resources/mapper/sys/
+source_files: []
+depends_on: []
+related_to: []

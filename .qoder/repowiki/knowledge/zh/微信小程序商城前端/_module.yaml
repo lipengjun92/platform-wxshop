@@ -1,0 +1,10 @@
+schema_version: 1
+module_path: wx_mall
+title: 微信小程序商城前端
+scope:
+    - wx-mall/
+source_files: []
+depends_on: []
+related_to:
+    - path: backend_services/platform_api
+    - path: uni_mall

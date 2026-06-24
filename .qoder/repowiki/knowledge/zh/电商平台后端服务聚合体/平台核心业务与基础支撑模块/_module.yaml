@@ -1,0 +1,8 @@
+schema_version: 1
+module_path: backend_services/platform_biz
+title: 平台核心业务与基础支撑模块
+scope:
+    - platform-biz/
+source_files: []
+depends_on: []
+related_to: []

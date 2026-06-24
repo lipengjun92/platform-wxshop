@@ -1,0 +1,172 @@
+# 知识卡导出索引文件
+schema_version: 1
+locale: zh-CN
+branch: master
+exported_at: "2026-06-24T14:02:17Z"
+modules:
+    "":
+        dir_name: 微同全栈电商平台编排层
+        title: 微同全栈电商平台编排层
+        scope: []
+        source_files: []
+        children: []
+        depends_on: []
+        related_to: []
+    admin_ui:
+        dir_name: 微同平台管理后台前端
+        title: 微同平台管理后台前端
+        scope:
+            - platform-admin-ui/
+        source_files: []
+        children: []
+        depends_on: []
+        related_to:
+            - path: backend_services/platform_admin
+    backend_services:
+        dir_name: 电商平台后端服务聚合体
+        title: 电商平台后端服务聚合体
+        scope:
+            - platform-common/
+            - platform-biz/
+            - platform-admin/
+            - platform-api/
+            - pom.xml
+        source_files: []
+        children:
+            - backend_services/platform_biz
+            - backend_services/platform_api
+            - backend_services/platform_common
+            - backend_services/platform_admin
+        depends_on: []
+        related_to: []
+    backend_services/platform_admin:
+        dir_name: 平台管理后台服务
+        title: 平台管理后台服务
+        scope:
+            - platform-admin/
+        source_files: []
+        children: []
+        depends_on: []
+        related_to:
+            - path: admin_ui
+    backend_services/platform_api:
+        dir_name: 移动端API网关与认证中心
+        title: 移动端API网关与认证中心
+        scope:
+            - platform-api/
+        source_files: []
+        children: []
+        depends_on: []
+        related_to:
+            - path: wx_mall
+            - path: uni_mall
+    backend_services/platform_biz:
+        dir_name: 平台核心业务与基础支撑模块
+        title: 平台核心业务与基础支撑模块
+        scope:
+            - platform-biz/
+        source_files: []
+        children:
+            - backend_services/platform_biz/oss
+            - backend_services/platform_biz/mall
+            - backend_services/platform_biz/wx
+            - backend_services/platform_biz/sys
+        depends_on: []
+        related_to: []
+    backend_services/platform_biz/mall:
+        dir_name: 商城核心业务模块
+        title: 商城核心业务模块
+        scope:
+            - platform-biz/src/main/java/com/platform/modules/mall/
+            - platform-biz/src/main/resources/mapper/mall/
+        source_files: []
+        children: []
+        depends_on: []
+        related_to:
+            - path: backend_services/platform_biz/wx
+            - path: backend_services/platform_biz/oss
+    backend_services/platform_biz/oss:
+        dir_name: 多源对象存储服务模块
+        title: 多源对象存储服务模块
+        scope:
+            - platform-biz/src/main/java/com/platform/modules/oss/
+            - platform-biz/src/main/resources/mapper/oss/
+        source_files: []
+        children: []
+        depends_on: []
+        related_to:
+            - path: backend_services/platform_biz/mall
+    backend_services/platform_biz/sys:
+        dir_name: 系统基础配置与权限管理
+        title: 系统基础配置与权限管理
+        scope:
+            - platform-biz/src/main/java/com/platform/modules/sys/
+            - platform-biz/src/main/resources/mapper/sys/
+        source_files: []
+        children: []
+        depends_on: []
+        related_to: []
+    backend_services/platform_biz/wx:
+        dir_name: 微信公众号业务集成模块
+        title: 微信公众号业务集成模块
+        scope:
+            - platform-biz/src/main/java/com/platform/modules/wx/
+            - platform-biz/src/main/resources/mapper/wx/
+        source_files: []
+        children: []
+        depends_on: []
+        related_to:
+            - path: backend_services/platform_biz/mall
+    backend_services/platform_common:
+        dir_name: 平台通用基础组件
+        title: 平台通用基础组件
+        scope:
+            - platform-common/
+        source_files: []
+        children: []
+        depends_on: []
+        related_to: []
+    docs:
+        dir_name: 系统架构与开发文档
+        title: 系统架构与开发文档
+        scope:
+            - docs/
+        source_files: []
+        children: []
+        depends_on: []
+        related_to:
+            - path: infra
+    infra:
+        dir_name: 基础设施部署与运维
+        title: 基础设施部署与运维
+        scope:
+            - deploy/
+            - scripts/
+            - _sql/
+        source_files: []
+        children: []
+        depends_on: []
+        related_to:
+            - path: docs
+    uni_mall:
+        dir_name: 微同商城前端应用
+        title: 微同商城前端应用
+        scope:
+            - uni-mall/
+        source_files: []
+        children: []
+        depends_on: []
+        related_to:
+            - path: backend_services/platform_api
+            - path: wx_mall
+    wx_mall:
+        dir_name: 微信小程序商城前端
+        title: 微信小程序商城前端
+        scope:
+            - wx-mall/
+        source_files: []
+        children: []
+        depends_on: []
+        related_to:
+            - path: backend_services/platform_api
+            - path: uni_mall

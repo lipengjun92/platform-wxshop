@@ -1,0 +1,10 @@
+schema_version: 1
+module_path: backend_services/platform_biz/wx
+title: 微信公众号业务集成模块
+scope:
+    - platform-biz/src/main/java/com/platform/modules/wx/
+    - platform-biz/src/main/resources/mapper/wx/
+source_files: []
+depends_on: []
+related_to:
+    - path: backend_services/platform_biz/mall

@@ -1,0 +1,11 @@
+schema_version: 1
+module_path: infra
+title: 基础设施部署与运维
+scope:
+    - deploy/
+    - scripts/
+    - _sql/
+source_files: []
+depends_on: []
+related_to:
+    - path: docs

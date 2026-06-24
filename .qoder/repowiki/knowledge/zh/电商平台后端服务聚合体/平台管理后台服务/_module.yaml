@@ -1,0 +1,9 @@
+schema_version: 1
+module_path: backend_services/platform_admin
+title: 平台管理后台服务
+scope:
+    - platform-admin/
+source_files: []
+depends_on: []
+related_to:
+    - path: admin_ui

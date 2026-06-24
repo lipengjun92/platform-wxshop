@@ -1,0 +1,11 @@
+schema_version: 1
+module_path: backend_services/platform_biz/mall
+title: 商城核心业务模块
+scope:
+    - platform-biz/src/main/java/com/platform/modules/mall/
+    - platform-biz/src/main/resources/mapper/mall/
+source_files: []
+depends_on: []
+related_to:
+    - path: backend_services/platform_biz/wx
+    - path: backend_services/platform_biz/oss

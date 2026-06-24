@@ -1,0 +1,12 @@
+schema_version: 1
+module_path: backend_services
+title: 电商平台后端服务聚合体
+scope:
+    - platform-common/
+    - platform-biz/
+    - platform-admin/
+    - platform-api/
+    - pom.xml
+source_files: []
+depends_on: []
+related_to: []

@@ -1,0 +1,8 @@
+schema_version: 1
+module_path: backend_services/platform_common
+title: 平台通用基础组件
+scope:
+    - platform-common/
+source_files: []
+depends_on: []
+related_to: []

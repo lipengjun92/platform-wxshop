@@ -1,0 +1,10 @@
+schema_version: 1
+module_path: uni_mall
+title: 微同商城前端应用
+scope:
+    - uni-mall/
+source_files: []
+depends_on: []
+related_to:
+    - path: backend_services/platform_api
+    - path: wx_mall

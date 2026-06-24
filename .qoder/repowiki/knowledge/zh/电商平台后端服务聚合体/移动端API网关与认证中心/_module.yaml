@@ -1,0 +1,10 @@
+schema_version: 1
+module_path: backend_services/platform_api
+title: 移动端API网关与认证中心
+scope:
+    - platform-api/
+source_files: []
+depends_on: []
+related_to:
+    - path: wx_mall
+    - path: uni_mall
