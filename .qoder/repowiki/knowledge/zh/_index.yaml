@@ -2,16 +2,9 @@
 schema_version: 1
 locale: zh-CN
 branch: master
-exported_at: "2026-06-24T14:02:17Z"
+nodes_managed: true
+exported_at: "2026-06-25T02:59:04Z"
 modules:
-    "":
-        dir_name: 微同全栈电商平台编排层
-        title: 微同全栈电商平台编排层
-        scope: []
-        source_files: []
-        children: []
-        depends_on: []
-        related_to: []
     admin_ui:
         dir_name: 微同平台管理后台前端
         title: 微同平台管理后台前端
@@ -20,8 +13,7 @@ modules:
         source_files: []
         children: []
         depends_on: []
-        related_to:
-            - path: backend_services/platform_admin
+        related_to: []
     backend_services:
         dir_name: 电商平台后端服务聚合体
         title: 电商平台后端服务聚合体
@@ -33,10 +25,10 @@ modules:
             - pom.xml
         source_files: []
         children:
-            - backend_services/platform_biz
-            - backend_services/platform_api
-            - backend_services/platform_common
             - backend_services/platform_admin
+            - backend_services/platform_api
+            - backend_services/platform_biz
+            - backend_services/platform_common
         depends_on: []
         related_to: []
     backend_services/platform_admin:
@@ -47,8 +39,7 @@ modules:
         source_files: []
         children: []
         depends_on: []
-        related_to:
-            - path: admin_ui
+        related_to: []
     backend_services/platform_api:
         dir_name: 移动端API网关与认证中心
         title: 移动端API网关与认证中心
@@ -57,9 +48,7 @@ modules:
         source_files: []
         children: []
         depends_on: []
-        related_to:
-            - path: wx_mall
-            - path: uni_mall
+        related_to: []
     backend_services/platform_biz:
         dir_name: 平台核心业务与基础支撑模块
         title: 平台核心业务与基础支撑模块
@@ -67,10 +56,10 @@ modules:
             - platform-biz/
         source_files: []
         children:
-            - backend_services/platform_biz/oss
             - backend_services/platform_biz/mall
-            - backend_services/platform_biz/wx
+            - backend_services/platform_biz/oss
             - backend_services/platform_biz/sys
+            - backend_services/platform_biz/wx
         depends_on: []
         related_to: []
     backend_services/platform_biz/mall:
@@ -82,9 +71,7 @@ modules:
         source_files: []
         children: []
         depends_on: []
-        related_to:
-            - path: backend_services/platform_biz/wx
-            - path: backend_services/platform_biz/oss
+        related_to: []
     backend_services/platform_biz/oss:
         dir_name: 多源对象存储服务模块
         title: 多源对象存储服务模块
@@ -94,8 +81,7 @@ modules:
         source_files: []
         children: []
         depends_on: []
-        related_to:
-            - path: backend_services/platform_biz/mall
+        related_to: []
     backend_services/platform_biz/sys:
         dir_name: 系统基础配置与权限管理
         title: 系统基础配置与权限管理
@@ -115,8 +101,7 @@ modules:
         source_files: []
         children: []
         depends_on: []
-        related_to:
-            - path: backend_services/platform_biz/mall
+        related_to: []
     backend_services/platform_common:
         dir_name: 平台通用基础组件
         title: 平台通用基础组件
@@ -134,8 +119,7 @@ modules:
         source_files: []
         children: []
         depends_on: []
-        related_to:
-            - path: infra
+        related_to: []
     infra:
         dir_name: 基础设施部署与运维
         title: 基础设施部署与运维
@@ -146,8 +130,7 @@ modules:
         source_files: []
         children: []
         depends_on: []
-        related_to:
-            - path: docs
+        related_to: []
     uni_mall:
         dir_name: 微同商城前端应用
         title: 微同商城前端应用
@@ -156,9 +139,7 @@ modules:
         source_files: []
         children: []
         depends_on: []
-        related_to:
-            - path: backend_services/platform_api
-            - path: wx_mall
+        related_to: []
     wx_mall:
         dir_name: 微信小程序商城前端
         title: 微信小程序商城前端
@@ -167,6 +148,4 @@ modules:
         source_files: []
         children: []
         depends_on: []
-        related_to:
-            - path: backend_services/platform_api
-            - path: uni_mall
+        related_to: []

@@ -6,6 +6,4 @@ scope:
     - platform-biz/src/main/resources/mapper/mall/
 source_files: []
 depends_on: []
-related_to:
-    - path: backend_services/platform_biz/wx
-    - path: backend_services/platform_biz/oss
+related_to: []

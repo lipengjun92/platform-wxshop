@@ -6,5 +6,4 @@ scope:
     - platform-biz/src/main/resources/mapper/oss/
 source_files: []
 depends_on: []
-related_to:
-    - path: backend_services/platform_biz/mall
+related_to: []

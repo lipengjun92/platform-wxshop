@@ -5,5 +5,4 @@ scope:
     - docs/
 source_files: []
 depends_on: []
-related_to:
-    - path: infra
+related_to: []

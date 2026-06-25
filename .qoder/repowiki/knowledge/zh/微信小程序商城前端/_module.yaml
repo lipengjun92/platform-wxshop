@@ -5,6 +5,4 @@ scope:
     - wx-mall/
 source_files: []
 depends_on: []
-related_to:
-    - path: backend_services/platform_api
-    - path: uni_mall
+related_to: []

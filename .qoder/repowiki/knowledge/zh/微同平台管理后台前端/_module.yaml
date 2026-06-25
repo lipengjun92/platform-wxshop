@@ -5,5 +5,4 @@ scope:
     - platform-admin-ui/
 source_files: []
 depends_on: []
-related_to:
-    - path: backend_services/platform_admin
+related_to: []
