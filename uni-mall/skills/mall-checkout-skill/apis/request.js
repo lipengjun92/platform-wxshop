@@ -29,15 +29,11 @@ function agentRequest(url, data = {}, method = 'POST') {
   })
 }
 
-function buildSuccess(contentText, data, meta) {
-  const result = {
+function buildSuccess(contentText, data) {
+  return {
     content: [{ type: 'text', text: contentText }],
     structuredContent: data || {}
   }
-  if (meta && Object.keys(meta).length) {
-    result._meta = meta
-  }
-  return result
 }
 
 function buildError(message) {

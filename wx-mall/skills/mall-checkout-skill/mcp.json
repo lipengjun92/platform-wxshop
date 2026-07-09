@@ -9,7 +9,7 @@
       },
       "_meta": {
         "ui": {
-          "componentPath": "components/cart-summary-card/index"
+          "pagePath": "/pages/cart/cart"
         }
       }
     },
@@ -35,21 +35,9 @@
       },
       "_meta": {
         "ui": {
-          "componentPath": "components/order-preview-card/index"
+          "pagePath": "/pages/shopping/checkout/checkout"
         }
       }
-    }
-  ],
-  "components": [
-    {
-      "path": "components/cart-summary-card/index",
-      "relatedPage": "pages/cart/cart",
-      "expirable": false
-    },
-    {
-      "path": "components/order-preview-card/index",
-      "relatedPage": "pages/shopping/checkout/checkout",
-      "expirable": false
     }
   ]
 }

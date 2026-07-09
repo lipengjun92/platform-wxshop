@@ -228,8 +228,11 @@
 				this.getSearchResult(event.detail.value);
 			}
 		},
-		onLoad: function() {
+		onLoad: function(options) {
 			this.getSearchKeyword();
+			if (options && options.keyword) {
+				this.getSearchResult(options.keyword);
+			}
 		}
 	}
 </script>

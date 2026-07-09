@@ -31,9 +31,11 @@ Page({
       searchStatus: false
     });
   },
-  onLoad: function () {
-
+  onLoad: function (options) {
     this.getSearchKeyword();
+    if (options && options.keyword) {
+      this.getSearchResult(options.keyword);
+    }
   },
 
   getSearchKeyword() {

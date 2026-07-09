@@ -18,19 +18,12 @@ module.exports = async function getCartSnapshot() {
       listPicUrl: c.listPicUrl || ''
     }))
     const total = (data && data.cartTotal) || {}
-    return buildSuccess('已获取购物车清单。请展示购物车卡片，并引导用户在结算前确认勾选商品。', {
+    return buildSuccess('已获取购物车清单。请引导用户进入购物车页，并在结算前确认勾选商品。', {
       cartList,
       goodsCount: total.goodsCount || 0,
       checkedGoodsCount: total.checkedGoodsCount || 0,
       goodsAmount: total.goodsAmount || 0,
       checkedGoodsAmount: total.checkedGoodsAmount || 0
-    }, {
-      viewCart: {
-        cartList,
-        goodsCount: total.goodsCount || 0,
-        checkedGoodsCount: total.checkedGoodsCount || 0,
-        checkedGoodsAmount: total.checkedGoodsAmount || 0
-      }
     })
   } catch (err) {
     return buildError(err.message)

@@ -23,7 +23,7 @@ module.exports = async function recommendGoods(args) {
         type: args.type || 'isHot'
       })
     }
-    return buildSuccess('已找到一批可推荐商品。请展示商品列表卡片，并引导用户继续查看其中某个商品详情。', {
+    return buildSuccess('已找到一批可推荐商品。请引导用户进入商品列表页，或选择一个商品继续查看详情。', {
       goodsList: records.map((item) => ({
         id: item.id,
         name: item.name,
@@ -34,15 +34,6 @@ module.exports = async function recommendGoods(args) {
       total: page.total || records.length,
       pages: page.pages || 1,
       type: args.type || 'isHot'
-    }, {
-      viewItems: records.map((item) => ({
-        id: item.id,
-        name: item.name,
-        goodsBrief: item.goodsBrief || '',
-        retailPrice: item.retailPrice,
-        sales: item.sales || 0,
-        listPicUrl: item.listPicUrl || item.primaryPicUrl || ''
-      }))
     })
   } catch (err) {
     return buildError(err.message)

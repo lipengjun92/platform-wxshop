@@ -33,10 +33,8 @@ module.exports = async function prepareCheckout(args) {
       orderTotalPrice: (data && data.orderTotalPrice) || 0,
       actualPrice: (data && data.actualPrice) || 0
     }
-    return buildSuccess('已生成结算预览。请展示结算预览卡片，并提示用户：确认无误后点击卡片跳转到结算页提交订单（不要在 AI 中直接下单）。', {
+    return buildSuccess('已生成结算预览。请引导用户进入结算页提交订单，不要在 AI 中直接下单。', {
       preview: view
-    }, {
-      viewCheckout: view
     })
   } catch (err) {
     return buildError(err.message)

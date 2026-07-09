@@ -33,12 +33,10 @@ module.exports = async function listOrders(args) {
         retailPrice: g.retailPrice
       }))
     }))
-    return buildSuccess('已获取订单列表。请展示订单列表卡片，并引导用户继续查看某个订单详情。', {
+    return buildSuccess('已获取订单列表。请引导用户进入订单列表页，或选择一个订单继续查看详情。', {
       orderList: mapped,
       total: (data && data.total) || mapped.length,
       page: (data && data.page) || 1
-    }, {
-      viewOrders: mapped
     })
   } catch (err) {
     return buildError(err.message)

@@ -1,6 +1,20 @@
 {
   "pages": [
     {
+      "path": "pages/category/category",
+      "name": "商品列表",
+      "description": "按分类查看商城商品列表",
+      "query": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "分类ID"
+          }
+        }
+      }
+    },
+    {
       "path": "pages/goods/goods",
       "name": "商品详情",
       "description": "查看某个商品的图文详情、规格、价格与购买入口",
@@ -18,7 +32,16 @@
     {
       "path": "pages/search/search",
       "name": "商品搜索",
-      "description": "按关键词搜索商城商品"
+      "description": "按关键词搜索商城商品",
+      "query": {
+        "type": "object",
+        "properties": {
+          "keyword": {
+            "type": "string",
+            "description": "搜索关键词"
+          }
+        }
+      }
     },
     {
       "path": "pages/cart/cart",

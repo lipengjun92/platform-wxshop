@@ -26,7 +26,7 @@
       },
       "_meta": {
         "ui": {
-          "componentPath": "components/goods-list-card/index"
+          "pagePath": "/pages/search/search"
         }
       }
     },
@@ -57,7 +57,7 @@
       },
       "_meta": {
         "ui": {
-          "componentPath": "components/goods-list-card/index"
+          "pagePath": "/pages/search/search"
         }
       }
     },
@@ -76,21 +76,9 @@
       },
       "_meta": {
         "ui": {
-          "componentPath": "components/goods-detail-card/index"
+          "pagePath": "/pages/goods/goods"
         }
       }
-    }
-  ],
-  "components": [
-    {
-      "path": "components/goods-list-card/index",
-      "relatedPage": "pages/category/category",
-      "expirable": false
-    },
-    {
-      "path": "components/goods-detail-card/index",
-      "relatedPage": "pages/goods/goods",
-      "expirable": false
     }
   ]
 }

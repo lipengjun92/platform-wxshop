@@ -17,7 +17,7 @@ module.exports = async function searchGoods(args) {
         keyword: args.keyword || ''
       })
     }
-    return buildSuccess('已找到匹配的商品。请展示商品列表卡片，并引导用户选择一个继续查看详情。', {
+    return buildSuccess('已找到匹配的商品。请引导用户进入商品列表页，或选择一个商品继续查看详情。', {
       goodsList: records.map((item) => ({
         id: item.id,
         name: item.name,
@@ -28,15 +28,6 @@ module.exports = async function searchGoods(args) {
       total: page.total || records.length,
       pages: page.pages || 1,
       keyword: args.keyword || ''
-    }, {
-      viewItems: records.map((item) => ({
-        id: item.id,
-        name: item.name,
-        goodsBrief: item.goodsBrief || '',
-        retailPrice: item.retailPrice,
-        sales: item.sales || 0,
-        listPicUrl: item.listPicUrl || item.primaryPicUrl || ''
-      }))
     })
   } catch (err) {
     return buildError(err.message)

@@ -18,7 +18,7 @@
       },
       "_meta": {
         "ui": {
-          "componentPath": "components/order-list-card/index"
+          "pagePath": "/pages/ucenter/order/order"
         }
       }
     },
@@ -37,21 +37,9 @@
       },
       "_meta": {
         "ui": {
-          "componentPath": "components/order-detail-card/index"
+          "pagePath": "/pages/ucenter/orderDetail/orderDetail"
         }
       }
-    }
-  ],
-  "components": [
-    {
-      "path": "components/order-list-card/index",
-      "relatedPage": "pages/ucenter/order/order",
-      "expirable": false
-    },
-    {
-      "path": "components/order-detail-card/index",
-      "relatedPage": "pages/ucenter/orderDetail/orderDetail",
-      "expirable": false
     }
   ]
 }

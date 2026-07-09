@@ -32,11 +32,9 @@ module.exports = async function getOrderDetail(args) {
       fullAddress: orderInfo.fullRegion ? (orderInfo.fullRegion + ' ' + (orderInfo.address || '')) : (orderInfo.address || ''),
       orderGoods
     }
-    return buildSuccess('已获取订单详情。请展示订单详情卡片，并根据订单状态给出可执行的下一步操作建议。', {
+    return buildSuccess('已获取订单详情。请根据订单状态给出可执行的下一步操作建议，并引导用户进入订单详情页处理。', {
       orderInfo: view,
       handleOption: (data && data.handleOption) || {}
-    }, {
-      viewOrder: view
     })
   } catch (err) {
     return buildError(err.message)
