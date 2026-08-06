@@ -107,11 +107,22 @@
         </if>
         group by a.id, a.name, a.list_pic_url, a.market_price, a.retail_price, a.goods_brief, b.id
         <choose>
-            <when test="sidx != null and sidx.trim() != ''">
-                order by ${sidx} ${order}
+            <when test="sidx == 'retail_price'">
+                order by a.retail_price
+            </when>
+            <when test="sidx == 'orderNum'">
+                order by orderNum
             </when>
             <otherwise>
-                order by a.id desc
+                order by a.id
+            </otherwise>
+        </choose>
+        <choose>
+            <when test="order != null and order.equalsIgnoreCase('asc')">
+                asc
+            </when>
+            <otherwise>
+                desc
             </otherwise>
         </choose>
         <if test="offset != null and limit != null">
@@ -159,7 +170,7 @@
         </if>
         <choose>
             <when test="sidx != null and sidx.trim() != ''">
-                order by ${sidx} ${order}
+                <include refid="com.platform.common.mapper.SafeOrderByMapper.safeOrderBy"/>
             </when>
             <otherwise>
                 order by id desc

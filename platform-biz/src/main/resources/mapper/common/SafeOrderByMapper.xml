@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.platform.common.mapper.SafeOrderByMapper">
+
+    <sql id="safeOrderBy">
+        order by
+        <choose>
+            <when test="sidx != null and sidx.trim().equalsIgnoreCase('T.id')">T.id</when>
+            <when test="sidx != null and sidx.trim().equalsIgnoreCase('id')">id</when>
+            <when test="sidx != null and sidx.trim().equalsIgnoreCase('T.MSG_ID')">T.MSG_ID</when>
+            <when test="sidx != null and sidx.trim().equalsIgnoreCase('T.SORT_ORDER')">T.SORT_ORDER</when>
+            <when test="sidx != null and sidx.trim().equalsIgnoreCase('T.CREATE_TIME')">T.CREATE_TIME</when>
+            <when test="sidx != null and sidx.trim().equalsIgnoreCase('T.UPDATE_TIME')">T.UPDATE_TIME</when>
+            <when test="sidx != null and sidx.trim().equalsIgnoreCase('T.CREATE_DATE')">T.CREATE_DATE</when>
+            <when test="sidx != null and sidx.trim().equalsIgnoreCase('T.STIME')">T.STIME</when>
+            <when test="sidx != null and sidx.trim().equalsIgnoreCase('D.SORT')">D.SORT</when>
+            <when test="sidx != null and sidx.trim().equalsIgnoreCase('sort_order')">sort_order</when>
+            <when test="sidx != null and sidx.trim().equalsIgnoreCase('new_sort_order')">new_sort_order</when>
+            <when test="sidx != null and sidx.trim().equalsIgnoreCase('f.id')">f.id</when>
+            <when test="sidx != null and sidx.trim().equalsIgnoreCase('s.sort_order')">s.sort_order</when>
+            <when test="sidx != null and sidx.trim().equalsIgnoreCase('nga.id')">nga.id</when>
+            <when test="sidx != null and sidx.trim().equalsIgnoreCase('retail_price')">retail_price</when>
+            <when test="sidx != null and sidx.trim().equalsIgnoreCase('orderNum')">orderNum</when>
+            <when test="sidx != null and sidx.trim().equalsIgnoreCase('add_time')">add_time</when>
+            <when test="sidx != null and sidx.trim().equalsIgnoreCase('a.id')">a.id</when>
+            <when test="sidx != null and sidx.trim().equalsIgnoreCase('c.id')">c.id</when>
+            <when test="sidx != null and sidx.trim().equalsIgnoreCase('gs.id')">gs.id</when>
+            <when test="sidx != null and sidx.trim().equalsIgnoreCase('na.id')">na.id</when>
+            <when test="sidx != null and sidx.trim().equalsIgnoreCase('keyword')">keyword</when>
+            <when test="sidx != null and sidx.trim().equalsIgnoreCase('msg_id')">msg_id</when>
+            <when test="sidx != null and sidx.trim().equalsIgnoreCase('sort')">sort</when>
+            <otherwise>1</otherwise>
+        </choose>
+        <choose>
+            <when test="order != null and order.trim().equalsIgnoreCase('asc')">asc</when>
+            <otherwise>desc</otherwise>
+        </choose>
+    </sql>
+</mapper>

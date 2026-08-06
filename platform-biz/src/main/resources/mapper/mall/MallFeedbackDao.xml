@@ -37,7 +37,7 @@
         select * from mall_feedback
         <choose>
             <when test="sidx != null and sidx.trim() != ''">
-                order by ${sidx} ${order}
+                <include refid="com.platform.common.mapper.SafeOrderByMapper.safeOrderBy"/>
             </when>
             <otherwise>
                 order by msg_id desc

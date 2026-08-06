@@ -30,7 +30,7 @@
         select * from mall_user_level
         <choose>
             <when test="sidx != null and sidx.trim() != ''">
-                order by ${sidx} ${order}
+                <include refid="com.platform.common.mapper.SafeOrderByMapper.safeOrderBy"/>
             </when>
             <otherwise>
                 order by id desc
