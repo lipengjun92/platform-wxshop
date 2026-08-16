@@ -21,7 +21,7 @@ package com.platform.modules.wx.form;
 import lombok.Data;
 import org.hibernate.validator.constraints.Length;
 
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotNull;
 
 /**
  * @author 李鹏军

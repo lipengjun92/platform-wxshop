@@ -19,6 +19,8 @@
 package com.platform.common.annotation;
 
 import com.google.common.util.concurrent.RateLimiter;
+import com.platform.common.exception.BusinessException;
+import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -31,6 +33,7 @@ import org.springframework.stereotype.Component;
  *
  * @author 李鹏军
  */
+@Slf4j
 @Component
 @Scope
 @Aspect
@@ -49,16 +52,11 @@ public class LimitAspect {
     }
 
     @Around("serviceAspect()")
-    public Object around(ProceedingJoinPoint joinPoint) {
-        Boolean flag = rateLimiter.tryAcquire();
-        Object obj = null;
-        try {
-            if (flag) {
-                obj = joinPoint.proceed();
-            }
-        } catch (Throwable e) {
-            e.printStackTrace();
+    public Object around(ProceedingJoinPoint joinPoint) throws Throwable {
+        if (!rateLimiter.tryAcquire()) {
+            log.warn("请求被限流, 方法: {}", joinPoint.getSignature().toShortString());
+            throw new BusinessException("请求过于频繁，请稍后再试", 429);
         }
-        return obj;
+        return joinPoint.proceed();
     }
 }

@@ -124,7 +124,7 @@ public class MallOrderServiceImpl extends ServiceImpl<MallOrderDao, MallOrderEnt
     }
 
     @Override
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public Map<String, Object> submit(JSONObject jsonParam, WxUserEntity loginUser) {
         Map<String, Object> resultObj = new HashMap<String, Object>();
 

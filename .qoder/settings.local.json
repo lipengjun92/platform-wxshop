@@ -1,0 +1,29 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(find . -name \"*.java\" -not -path \"*/target/*\" -exec grep -l \"import javax\\\\.servlet\\\\.\" {} \\\\; | while read f; do sed -i '' 's/import javax\\\\.servlet\\\\./import jakarta.servlet./g' \"$f\"; echo \"  servlet: $f\"; done)",
+      "Bash(find . -name \"*.java\" -not -path \"*/target/*\" -exec grep -l \"import javax\\\\.validation\\\\.\" {} \\\\; | while read f; do sed -i '' 's/import javax\\\\.validation\\\\./import jakarta.validation./g' \"$f\"; echo \"  validation: $f\"; done)",
+      "Bash(find . -name \"*.java\" -not -path \"*/target/*\" -exec grep -l \"import javax\\\\.annotation\\\\.\" {} \\\\; | while read f; do sed -i '' 's/import javax\\\\.annotation\\\\./import jakarta.annotation./g' \"$f\"; echo \"  annotation: $f\"; done)",
+      "Bash(find . -name \"*.java\" -not -path \"*/target/*\" -exec grep -l \"import javax\\\\.mail\\\\.\" {} \\\\; | while read f; do sed -i '' 's/import javax\\\\.mail\\\\./import jakarta.mail./g' \"$f\"; echo \"  mail: $f\"; done)",
+      "Bash(mvn compile -pl platform-common -am --no-transfer-progress 2>&1 | tail -60)",
+      "Bash(mvn compile -pl platform-common -am --no-transfer-progress 2>&1 | tail -40)",
+      "Bash(mvn compile -pl platform-biz -am --no-transfer-progress 2>&1 | tail -40)",
+      "Bash(mvn compile -pl platform-admin,platform-api -am --no-transfer-progress 2>&1 | tail -50)",
+      "Bash(mvn compile -pl platform-admin,platform-api -am --no-transfer-progress 2>&1 | grep -E \"ERROR|BUILD|Reactor Summary\" -A 10 | head -40)",
+      "Bash(git filter-branch --force --index-filter 'git rm --cached --ignore-unmatch platform-admin/src/main/resources/application-prod.yml platform-api/src/main/resources/application-prod.yml platform-admin/src/main/resources/application-dev.yml platform-api/src/main/resources/application-dev.yml platform-admin/src/main/resources/application-test.yml platform-api/src/main/resources/application-test.yml' --prune-empty --tag-name-filter cat -- --all 2>&1)",
+      "Bash(FILTER_BRANCH_SQUELCH_WARNING=1 git filter-branch --force --index-filter 'git rm --cached --ignore-unmatch platform-admin/src/main/resources/application-prod.yml platform-api/src/main/resources/application-prod.yml platform-admin/src/main/resources/application-dev.yml platform-api/src/main/resources/application-dev.yml platform-admin/src/main/resources/application-test.yml platform-api/src/main/resources/application-test.yml' --prune-empty --tag-name-filter cat -- --all 2>&1)",
+      "Bash(tail:*)",
+      "Bash(git for-each-ref --format='%\\(refname\\)' refs/original/ | while read ref; do git update-ref -d \"$ref\"; done 2>&1 && git reflog expire --expire=now --all 2>&1 && git gc --prune=now --aggressive 2>&1)",
+      "Bash(git stash pop 2>&1)",
+      "Bash(git fsck --unreachable --no-reflogs 2>&1 | grep commit | head -20)",
+      "Bash(git status --short 2>&1 | head -20)",
+      "Bash(find . -name \"*.java\" -not -path \"*/target/*\" -exec grep -l \"import javax\\\\.servlet\\\\.\" {} \\\\; | while read f; do sed -i '' 's/import javax\\\\.servlet\\\\./import jakarta.servlet./g' \"$f\"; done && find . -name \"*.java\" -not -path \"*/target/*\" -exec grep -l \"import javax\\\\.validation\\\\.\" {} \\\\; | while read f; do sed -i '' 's/import javax\\\\.validation\\\\./import jakarta.validation./g' \"$f\"; done && find . -name \"*.java\" -not -path \"*/target/*\" -exec grep -l \"import javax\\\\.annotation\\\\.\" {} \\\\; | while read f; do sed -i '' 's/import javax\\\\.annotation\\\\./import jakarta.annotation./g' \"$f\"; done && find . -name \"*.java\" -not -path \"*/target/*\" -exec grep -l \"import javax\\\\.mail\\\\.\" {} \\\\; | while read f; do sed -i '' 's/import javax\\\\.mail\\\\./import jakarta.mail./g' \"$f\"; done && echo \"javax→jakarta migration done\")",
+      "Bash(mvn compile --no-transfer-progress 2>&1 | grep -E \"ERROR|BUILD|Reactor Summary\" -A 10 | head -30)",
+      "Bash(git log --all --full-history -- \"platform-admin/src/main/resources/application-prod.yml\" 2>&1 | head -5)",
+      "Bash(for f in \"platform-admin/src/main/resources/application-prod.yml\" \"platform-api/src/main/resources/application-prod.yml\" \"platform-admin/src/main/resources/application-dev.yml\" \"platform-api/src/main/resources/application-dev.yml\" \"platform-admin/src/main/resources/application-test.yml\" \"platform-api/src/main/resources/application-test.yml\"; do result=$\\(git log --all --full-history -- \"$f\" 2>&1\\); if [ -z \"$result\" ]; then echo \"CLEAN: $f\"; else echo \"STILL EXISTS: $f\"; fi; done)",
+      "Bash(find ~/.m2/repository/com/baomidou/dynamic-datasource-spring-boot3-starter -name \"*.jar\" 2>/dev/null | head -3 && jar tf $\\(find ~/.m2/repository/com/baomidou/dynamic-datasource-spring-boot3-starter -name \"*.jar\" 2>/dev/null | head -1\\) 2>/dev/null | grep -i \"autoconfig\\\\|AutoConfig\" | head -10)",
+      "Bash(grep \"active:\" /Users/pengjun/Code/gitee/platform/platform-api/target/classes/application.yml && echo \"---\" && head -10 /Users/pengjun/Code/gitee/platform/platform-api/target/classes/application-dev.yml)",
+      "Bash(mvn package -DskipTests --no-transfer-progress -q 2>&1 | tail -5 && java -jar /Users/pengjun/Code/gitee/platform/platform-api/target/platform-api.jar 2>&1 | head -60)"
+    ]
+  }
+}

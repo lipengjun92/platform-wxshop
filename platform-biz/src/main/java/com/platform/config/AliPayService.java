@@ -9,7 +9,7 @@ import com.alipay.easysdk.payment.wap.models.AlipayTradeWapPayResponse;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.PostConstruct;
+import jakarta.annotation.PostConstruct;
 
 /**
  * @author 李鹏军

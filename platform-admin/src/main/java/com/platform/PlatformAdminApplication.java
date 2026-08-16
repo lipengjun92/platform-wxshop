@@ -19,7 +19,7 @@
 package com.platform;
 
 import cn.hutool.core.util.URLUtil;
-import com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceAutoConfigure;
+import com.alibaba.druid.spring.boot3.autoconfigure.DruidDataSourceAutoConfigure;
 import com.baomidou.dynamic.datasource.spring.boot.autoconfigure.DynamicDataSourceAutoConfiguration;
 import io.swagger.v3.oas.annotations.Hidden;
 import lombok.RequiredArgsConstructor;

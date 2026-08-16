@@ -21,8 +21,8 @@ package com.platform.config;
 import com.platform.common.exception.BusinessException;
 import lombok.extern.slf4j.Slf4j;
 
-import javax.servlet.*;
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.*;
+import jakarta.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.util.Enumeration;
 
@@ -39,7 +39,7 @@ public class AntiSqlInjectionFilter implements Filter {
     }
 
     @Override
-    public void init(javax.servlet.FilterConfig config) {
+    public void init(jakarta.servlet.FilterConfig config) {
     }
 
     @Override

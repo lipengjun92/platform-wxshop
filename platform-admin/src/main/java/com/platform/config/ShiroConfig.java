@@ -30,7 +30,7 @@ import org.apache.shiro.web.session.mgt.DefaultWebSessionManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import javax.servlet.Filter;
+import jakarta.servlet.Filter;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;

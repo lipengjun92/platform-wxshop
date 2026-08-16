@@ -86,8 +86,8 @@ public class BusinessExceptionHandler {
 
     @ExceptionHandler(Exception.class)
     public RestResponse<String> handleException(Exception e) {
-        log.error(e.getMessage(), e);
-        return RestResponse.fail(e.toString());
+        log.error("未处理异常: ", e);
+        return RestResponse.fail("服务器内部错误，请稍后再试");
     }
 
     @ExceptionHandler(WxErrorException.class)
