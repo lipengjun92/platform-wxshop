@@ -78,7 +78,7 @@ platform
 
 **还没下载项目？** 直接对 AI 说：
 
-> 请帮我启动这个项目：https://raw.giteeusercontent.com/fuyang_lipengjun/platform/raw/master/AGENTS.md
+> 请帮我启动这个项目：https://raw.githubusercontent.com/lipengjun92/platform-wxshop/refs/heads/master/AGENTS.md
 
 AI 会读取启动说明，先克隆项目，再继续配置和启动。链接文件名区分大小写；
 
