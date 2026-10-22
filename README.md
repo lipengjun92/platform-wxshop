@@ -72,6 +72,31 @@ platform
 
 ## 安装教程
 
+### 方式一：把项目丢给 AI 助手（最省事）⭐
+
+本项目自带 AGENTS.md，Claude Code / Codex / Cursor / Trae / Windsurf / Cline 等 AI 编程助手会自动读取它。
+
+**还没下载项目？** 直接对 AI 说：
+
+> 请帮我启动这个项目：https://raw.giteeusercontent.com/fuyang_lipengjun/platform/raw/master/AGENTS.md
+
+AI 会读取启动说明，先克隆项目，再继续配置和启动。链接文件名区分大小写；
+
+**也可以先自己下载项目：**
+
+```bash
+git clone https://gitee.com/fuyang_lipengjun/platform.git
+cd platform
+```
+
+然后把目录丢给你的 AI 助手，说一句：
+
+> 按 AGENTS.md 把这个项目跑起来
+
+它会自动检查运行时、装依赖、引导你填配置、建表、启动、并验证页面能打开。首次配置大约 10 分钟。
+
+### 方式二：自己动手
+
 * 配置环境（推荐Java21、maven3.8、mysql8.0、redis4.0.1）
 * 创建数据库
 * 依次初始化sql脚本 
