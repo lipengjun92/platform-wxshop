@@ -10,14 +10,14 @@ spring:
       primary: master # 设置默认的数据源或者数据源组，默认值即为 master
       datasource:
         master:
-          url: jdbc:mysql://localhost:3306/platform?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&useSSL=false&serverTimezone=Asia/Shanghai
+          url: jdbc:mysql://localhost:3306/platform-mp?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&useSSL=false&serverTimezone=Asia/Shanghai
           username: root
-          password: root1234
+          password: !Jimy120371
           driverClassName: com.mysql.cj.jdbc.Driver
         second:
           url: jdbc:mysql://localhost:3306/platform?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&useSSL=false&serverTimezone=Asia/Shanghai
           username: root
-          password: root1234
+          password: !Jimy120371
           driverClassName: com.mysql.cj.jdbc.Driver
       #dynamic - 公共配置
       druid:
