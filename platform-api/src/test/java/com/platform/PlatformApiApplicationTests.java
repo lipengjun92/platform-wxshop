@@ -10,10 +10,11 @@ import com.github.binarywang.wxpay.exception.WxPayException;
 import com.github.binarywang.wxpay.service.WxPayService;
 import com.platform.common.utils.IpUtils;
 import com.platform.modules.sys.service.MailService;
-import lombok.RequiredArgsConstructor;
 import me.chanjar.weixin.common.error.WxErrorException;
 import org.apache.commons.io.FileUtils;
+import org.junit.jupiter.api.condition.EnabledIfSystemProperty;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.io.File;
@@ -21,13 +22,16 @@ import java.io.File;
 /**
  * Unit test for simple App.
  */
-@RequiredArgsConstructor
 @SpringBootTest
+@EnabledIfSystemProperty(named = "runExternalIntegrationTests", matches = "true")
 public class PlatformApiApplicationTests {
 
-    private final MailService mailService;
-    private final WxPayService payService;
-    private final WxMaService maService;
+    @Autowired
+    private MailService mailService;
+    @Autowired
+    private WxPayService payService;
+    @Autowired
+    private WxMaService maService;
 
     @Test
     public void testHtmlMail() {
