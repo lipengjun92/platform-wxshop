@@ -13,6 +13,7 @@ import com.platform.modules.sys.service.MailService;
 import lombok.RequiredArgsConstructor;
 import me.chanjar.weixin.common.error.WxErrorException;
 import org.apache.commons.io.FileUtils;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -23,6 +24,7 @@ import java.io.File;
  */
 @RequiredArgsConstructor
 @SpringBootTest
+@Disabled("Tests call external email, payment, refund, and WeChat services; run only in an explicitly configured integration environment")
 public class PlatformApiApplicationTests {
 
     private final MailService mailService;
